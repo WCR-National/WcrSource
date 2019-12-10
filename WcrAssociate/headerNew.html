@@ -1,0 +1,678 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <title></title>
+</head>
+<body>
+    <form class="user-info-form">
+        <div class="container" id="divtop">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 toplogo searchbar topsearch ">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-left logo " id="dlogo" style="visibility:visible">
+                        <a href="index.html"> <img src="img/text-logo.png" class="img-responsive" alt=""> </a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" style="visibility:visible">
+                        <a href="index.html" style="text-decoration: none; text-transform: uppercase;">
+                            <div id="Name" style="display: none; margin-top:30px; margin-left:0px;">
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-right topbar dropdown" style="position:relative; padding-top:26px; display:none;" id="divaccount">
+                    <a href="#" data-toggle="modal" data-target="#choose-login"> Sign In </a>
+                    <a href="" data-toggle="modal" data-target="#choose"> Create Account </a>
+                </div>
+                <!--<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 text-right topbar " style="position: relative; display: none;" id="divconsumer">
+                    <input id="btnLogout" type="button" value="Log out" />
+                    <input id="btnMyProfile" type="button" value="Profile" />
+                    <input id="btnMyHistory" type="button" value="My History" />
+                </div>-->
+            </div>
+        </div>
+        <div class="modal fade" id="choose-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"> <span> </span> Login </h4>
+                    </div>
+                    <div class="modal-body form-horizontal">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <!--<div class="form-group">
+                                <input type="radio" name="associate" value="Associate" id="associate" />  <label class="forget-pass">Associate</label> <input type="radio" name="associate" value="consumer" id="consumer" />  <label class="forget-pass">Consumer</label>
+                            </div>-->
+                            <div class="form-group">
+                                <input type="text" id="username" class="form-control" maxlength="50" placeholder="Enter User Name or mobile or email id">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="password" class="form-control" maxlength="10" placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <label class="forget-pass"> <a href="#"> Forgot Password </a> </label>
+                                <input id="btnLogin" type="button" class="btn btn-danger pull-right" value="Login" /><!--<input id="btnConsumerLogin" type="button" class="btn btn-danger pull-right" value="Consumer Login" />-->
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="modal-footer text-center"> Don't Have an Account <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#choose"> Sign Up</a> </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="associate-signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content stepwizard-outer">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 id="myModalLabel" class="modal-title"> <span> Associate </span> Account </h4>
+                        <br /><br />
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="emailAddress" maxlength="50" placeholder="Enter Email Address">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="passwrd" maxlength="10" placeholder="Enter Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="Cpassword" maxlength="10" placeholder="Confirm Password">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="lblAssociateID">
+                                <div class="input-group-btn">
+                                    <input id="btnCancel" data-toggle="modal" data-dismiss="modal" data-target="#choose" data-backdrop="static" data-keyboard="false" type="button" class="btn btn-danger" value="Cancel" /> <input id="btnFstStep" style="margin-left:365px;" type="button" class="btn btn-danger" value="Submit" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--<div class="stepwizard fullrow">
+                            <div class=" setup-panel stepwizard-row ">
+                                <div class="stepwizard-step col-lg-4 col-md-4 col-sm-4 col-xs-12 " id="f">
+                                    <a class="btn btn-circle btn-default btn-primary" type="button" href="#step-1"></a>
+                                    <p>User Profile</p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>-->
+                    </div>
+                    <!--<div class="modal-body form-horizontal">
+                        <div class="fullrow">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row setup-content" id="step-1">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <a href="#" id="coponc" style="text-decoration:none;">Do you have Coupon Code</a>
+                                            <input type="text" class="form-control" id="CouponCode" style="width:220px" placeholder="Enter Coupon Code"> &nbsp;&nbsp;&nbsp;&nbsp;<a id="coponApply" style="text-decoration:none;">Apply</a>
+                                            <label style="visibility: hidden" for="lblcouponCode">0</label><br />
+                                            <label style="visibility: hidden" for="lblDiscount">0</label>
+                                            <label style="visibility: hidden" for="lblDuration">0</label><br />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="FirstName" placeholder="Enter First Name">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="emailAddress" maxlength="50" placeholder="Enter Email Address">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="passwrd" maxlength="10" placeholder="Enter Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="Cpassword" maxlength="10" placeholder="Confirm Password">
+                                        </div>
+
+                                        <div class="form-group text-right">
+                                            <input type="hidden" class="form-control" id="lblAssociateID">
+                                            <div class="input-group-btn"> <!--<a class="btn btn-info"> Step 1 of 3 </a>-->
+                    <!--<a class="btn btn-danger nextBtn"> Next <i class="fa fa-angle-double-right"></i> </a> </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="consumer-signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content stepwizard-outer">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 id="myModalLabel" class="modal-title"> <span> Consumer </span> Account </h4>
+                        <div class="clearfix"></div>
+                        <div class="stepwizard fullrow">
+
+                            <div class=" setup-panel stepwizard-row  ">
+                                <!--<div class="form-group">
+                                    <input type="text" class="form-control" id="ConsmerName" placeholder="Enter Full Name">
+                                </div>-->
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="ConsmerEmail" maxlength="50" placeholder="Enter Email Address">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="ConsmerPass" maxlength="10" placeholder="Enter Password">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="ConsmerCnfPass" maxlength="10" placeholder="Confirm Password">
+                                </div>
+
+                                <div class="form-group text-right">
+                                    <div class="input-group-btn">
+                                        <input id="btnCancelconsumer" data-toggle="modal" data-dismiss="modal" data-target="#choose" data-backdrop="static" data-keyboard="false" type="button" class="btn btn-danger" value="Cancel" />
+
+                                        <input id="btnconsumerSave" style="margin-left:365px;" type="button" class="btn btn-danger" value="Submit" />
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="choose" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"> <span> Would you Like to advertise </span>  </h4>
+                    </div>
+                    <div class="modal-body form-horizontal">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="form-group text-center">
+                                <div class="btn-group">
+                                    <button class="btn btn-success" data-toggle="modal" id="btnYes" data-dismiss="modal" data-target="#associate-signup"> Yes  </button>
+                                    <button class="btn btn-warning" data-toggle="modal" id="btnNo" data-dismiss="modal" data-target="#consumer-signup"> No  </button>
+                                    <label style="visibility: hidden" for="lblRowId"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ca = GetParameterValues('ca');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        if (ca == "0") {
+                            BindConsumerDetail();
+
+                        }
+                        else {
+                            BindAssociateDetail();
+                        }
+                        $("#Name").css("display", "block");
+                        //$("#dlogo").css("display", "block");
+                    }
+                    else {
+                        $("#Name").css("display", "none");
+                        //$("#dlogo").css("display", "block");
+                    }
+                }
+            });
+
+            function BindConsumerDetail() {
+                $.ajax({
+                    type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerDetail", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var xmlDoc = $.parseXML(r.d);
+                            var xml = $(xmlDoc);
+                            var docs = xml.find("FullConsumerDetail");
+                            var cartd = [];
+                            $.each(docs, function (i, docs) {
+                                cartd.push("<h3>");
+                                cartd.push("<span style='font-family:Verdana; font-size:15px;margin-left:10px; color:blue; width:100%;'> " + ($(docs).find("name").text()) + "</span>");
+                                cartd.push("</h3>");
+                            });
+                            $("#Name").html(cartd.join(''));
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }
+            function BindAssociateDetail() {
+                $.ajax({
+                    type: "POST", url: "ws/AssociateRegistration.asmx/ViewAssociateBasicDetails", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var xmlDoc = $.parseXML(r.d);
+                            var xml = $(xmlDoc);
+                            var docs = xml.find("ViewAssociateBasicDetail");
+                            var cartd = [];
+                            $.each(docs, function (i, docs) {
+                                cartd.push("<h3>");
+                                cartd.push("<span style='font-family:Verdana; font-size:15px;margin-left:10px; color:blue; width:100%;'> " + ($(docs).find("FullName").text()) + "</span>");
+                                cartd.push("</h3>");
+                            });
+
+                            $("#Name").html(cartd.join(''));
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }
+
+            //$("#CouponCode").hide();
+            //$("#coponApply").hide();
+            //$("#coponc").click(function () {
+            //    $("#coponApply").show();
+            //    $("#coponc").hide();
+            //    $("#CouponCode").show();
+            //});
+            //$("#coponApply").click(function () {
+            //    var CouponCode1 = CouponCode.value;
+            //    $.ajax({
+            //        type: "POST", url: "ws/CouponCode.asmx/ApplyCouponCode", data: "{'CouponCode':'" + CouponCode1 + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+            //        success: function (r) {
+            //            var xmlDoc = $.parseXML(r.d);
+            //            var xml = $(xmlDoc);
+            //            var docs = xml.find("ccsign");
+            //            $.each(docs, function (i, docs) {
+            //                var ccode = $(docs).find("CouponCode").text();
+            //                if (ccode == CouponCode1) {
+            //                    $("label[for='lblcouponCode']").text(CouponCode1);
+            //                    $("label[for='lblDiscount']").text($(docs).find("Discount").text());
+            //                    $("label[for='lblDuration']").text($(docs).find("Duration").text());
+            //                    $('#CouponCode').attr('readonly', true);
+            //                    alert("Coupon Code Applied");
+            //                }
+            //                else {
+            //                    alert("incorrect coupon code");
+            //                }
+            //            });
+            //        }
+            //    });
+            //});
+
+            var ca = GetParameterValues('ca');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        if (ca == "0") {
+                            BindConsumerDetail();
+                            //$("#divconsumer").css("display", "block");
+                            $("#divaccount").css("display", "none");
+                        }
+                        else {
+                            BindAssociateDetail();
+                            //$("#divconsumer").css("display", "none");
+                            $("#divaccount").css("display", "block");
+                        }
+
+                    }
+                    else {
+                        $("#divconsumer").css("display", "none");
+                        $("#divaccount").css("display", "block");
+                    }
+                }
+            });
+
+
+            $("#btnLogout").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "ws/AssociateSignUp.ashx?action=ConsumerLogout",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    cache: false,
+                    success: function (response) {
+                        if (response == "0") {
+                            window.location.href = 'index.html';
+                        }
+                        else {
+                            alert("OOPS Something goes wrong !");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            });
+            $("#btnMyProfile").click(function () {
+                window.location.href = "MyProfile.html?ca=0";
+            });
+            $("#btnMyHistory").click(function () {
+                window.location.href = "ConsumerHistory.html?ca=0";
+
+            });
+            
+            $("#btnFstStep").click(function () {
+                var check = Valid();
+                if (check == "1") {
+                    var cc = "0"; //$("label[for='lblcouponCode']").text();
+                    var dd = "0";// $("label[for='lblDiscount']").text();
+                    var dt = "0";// $("label[for='lblDuration']").text();
+                    var FullName = "0";// FirstName.value;
+                    var LName = "0";//lstName.value;
+                    var emailID = emailAddress.value;
+                    // var username = "0";//userID.value;
+                    var password = passwrd.value;
+                    //var mobileNo = "0";//mobile.value;
+                    var ZipCode = "0";//zipcode.value;
+                    var licenseState = "0";//licenceState.value;
+                    var licenseID = "0";// licenceID.value;
+                    //var fileUpload = $("#FileUploadAssociate").get(0);
+                    //var files = fileUpload.files;
+                    var RefID = 0;
+                    //var test = new FormData();
+                    //for (var i = 0; i < files.length; i++) {
+                    //    test.append(files[i].name, files[i], mobileNo);
+                    //}
+                    $.ajax({
+                        url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&ZipCode=" + ZipCode + "&LicenseState=" + licenseState + "&LicenseID=" + licenseID + "&Coupcd=" + cc + "&dur=" + dt + "&ddt=" + dd + "&ReferralID=" + RefID + "",
+                        //data: test,
+                        data: "",
+                        contentType: false,
+                        processData: false,
+                        dataType: "json",
+                        async: false,
+                        type: "POST",
+                        cache: false,
+                        success: function (response) {
+                            if (response >= 1) {
+                                $("label[for='lblAssociateID']").text(response);
+
+                                window.location.href = 'Associate/Index.aspx';
+                            }
+                            if (response == "0") {
+                                alert("This EmailID is not available.Please Try another one..");
+                            }
+                            if (response == "-1") {
+                                alert("OOPS Error ! Please try again.");
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response + "Error...");
+                        }
+                    });
+                }
+                else {
+                    alert(check);
+                }
+            });
+
+            $("#btnLogin").click(function (e) {
+                if (username.value == '' && password.value == '') {
+                    alert("EmailID and Password Can't blank.");
+                    return false;
+                }
+                else {
+                    var uname = username.value;
+                    var pass = password.value;
+                    $.ajax({
+                        type: "POST",
+                        url: "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + uname + "&Password=" + pass + "",
+                        data: "{}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: false,
+                        cache: false,
+                        success: function (response) {
+                            if (response > "0") {
+                                window.location.href = 'Associate/Index.aspx';
+                            }
+                            else if (response == '-1') {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + "",
+                                    data: "{}",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    async: false,
+                                    cache: false,
+                                    success: function (response) {
+                                        if (response > "0") {
+                                            window.location.reload();
+                                        }
+                                        else if (response == '-1') {
+                                            alert("Wrong Authentication");
+                                            window.location.reload();
+                                        }
+                                        else {
+                                            alert("OOPS Something goes wrong !");
+                                            window.location.reload();
+
+                                        }
+                                    },
+                                    failure: function (response) {
+                                        alert(response.d + "Fail");
+                                        window.location.reload();
+                                    },
+                                    error: function (response) {
+                                        alert(response.d + "Error...");
+                                        window.location.reload();
+                                    }
+                                });
+                            }
+                            else {
+                                alert(response);
+                                alert("OOPS Something goes wrong !");
+                                window.location.reload();
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response.d + "Fail");
+                            window.location.reload();
+                        },
+                        error: function (response) {
+                            alert(response.d + "Error...");
+                            window.location.reload();
+                        }
+                    });
+
+                    $("#choose-login").hide();
+                    e.preventDefault();
+
+                }
+
+            });
+
+            var navListItems = $('div.setup-panel div a'),
+                    allWells = $('.setup-content'),
+                    allNextBtn = $('.nextBtn');
+            allWells.hide();
+            navListItems.click(function (e) {
+                e.preventDefault();
+                var $target = $($(this).attr('href')),
+                        $item = $(this);
+
+                if (!$item.hasClass('disabled')) {
+                    navListItems.removeClass('btn-primary').addClass('btn-default');
+                    $item.addClass('btn-primary');
+                    allWells.hide();
+                    $target.show();
+                    $target.find('input:eq(0)').focus();
+                }
+            });
+            allNextBtn.click(function () {
+                var curStep = $(this).closest(".setup-content"),
+                    curStepBtn = curStep.attr("id"),
+                    nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
+                    curInputs = curStep.find("input[type='text'],input[type='url']"),
+                    isValid = true;
+
+                $(".form-group").removeClass("has-error");
+                for (var i = 0; i < curInputs.length; i++) {
+                    if (!curInputs[i].validity.valid) {
+                        isValid = false;
+                        $(curInputs[i]).closest(".form-group").addClass("has-error");
+                    }
+                }
+
+                if (isValid)
+                    nextStepWizard.removeAttr('disabled').trigger('click');
+            });
+            $('div.setup-panel div a.btn-primary').trigger('click');
+
+            function ConsumerValid() {
+                var returnValue;
+                var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+
+                if (!filter.test($('#ConsmerEmail').val())) {
+                    returnValue = "Email is not Valid";
+                    $("#ConsmerEmail").focus();
+                }
+                else if (ConsmerPass.value == "") {
+                    returnValue = "Password is Required";
+                    $("#ConsmerPass").focus();
+                }
+                else if (ConsmerCnfPass.value != ConsmerPass.value) {
+                    returnValue = "Password does not match";
+                    $("#passwrd").focus();
+                }
+                else {
+                    returnValue = "1";
+                }
+                return returnValue;
+            }
+
+            $("#btnconsumerSave").click(function () {
+                var check = ConsumerValid();
+                if (check == "1") {
+                    var FullName = "0";//ConsmerName.value;
+                    //var mobileNo = "0";//ConsmerMob.value;
+                    var emailID = ConsmerEmail.value;
+                    var password = ConsmerPass.value;
+                    var Address = "0";//ConsmerAddress.value;
+                    var ZipCode = "0";//ConsmerZipcode.value;
+
+                    $.ajax({
+                        url: "ws/AssociateSignUp.ashx?action=Consumer&Name=" + FullName + "&EmailID=" + emailID + "&Password=" + password + "&address=" + Address + "&ZipCode=" + ZipCode + "",
+                        // data: test,
+                        data: "",
+                        contentType: false,
+                        processData: false,
+                        dataType: "json",
+                        async: false,
+                        type: "POST",
+                        cache: false,
+                        success: function (response) {
+                            if (response >= 1) {
+                                //alert("Register Successfully");
+                                window.location.href = 'index.html';
+                            }
+                            if (response == "0") {
+                                alert("This EmailID is not available.Please Try another one..");
+                            }
+                            if (response == "-1") {
+                                alert("OOPS Error ! Please try again.");
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response + "Error...");
+                        }
+                    });
+                }
+                else {
+                    alert(check);
+                }
+            });
+        });
+
+
+        function Valid() {
+            var returnValue;
+            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+            if (emailAddress.value == "") {
+                returnValue = "Email is Required";
+                $("#emailAddress").focus();
+            }
+            else if (!filter.test($('#emailAddress').val())) {
+                returnValue = "Email is not Valid";
+                $("#emailAddress").focus();
+            }
+            else if (passwrd.value == "") {
+                returnValue = "Password is Required";
+                $("#passwrd").focus();
+            }
+            else if (passwrd.value != Cpassword.value) {
+                returnValue = "Password does not match";
+                $("#Cpassword").focus();
+            }
+            else {
+                returnValue = "1";
+            }
+            return returnValue;
+        }
+
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var windowHeight = $(window).height() - 200;
+            $('.outer-middle').css('height', windowHeight);
+        });
+        $(window).resize(function () {
+            var windowHeight = $(window).height() - 200;
+            $('.outer-middle').css('height', windowHeight);
+        });
+    </script>
+
+</body>
+</html>

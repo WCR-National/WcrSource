@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <form action="multipart/form-data">
+        <div id="preview"><img src="" id="prev_img" width="100%" height='100%'></div>
+        <input type="file" name="file" id="file">
+        <br />
+        Width: <span id='width'></span><br />
+        Height: <span id='height'></span>
+        <h3 id='response'></h3>
+
+
+        <h3>Resize</h3>
+        <p><button type="button" id="resize">Resize</button></p>
+        <p><img src="http://lorempixel.com/400/200" alt="" id="image" /></p>
+    </form>
+</body>
+</html>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var _URL = window.URL || window.webkitURL;
+        $('#file').change(function () {
+            var file = $(this)[0].files[0];
+
+            img = new Image();
+            var imgwidth = 0;
+            var imgheight = 0;
+            var maxwidth = 1280;
+            var maxheight = 720;
+            img.src = _URL.createObjectURL(file);
+            img.onload = function () {
+                imgwidth = this.width;
+                imgheight = this.height;
+                $("#width").text(imgwidth);
+                $("#height").text(imgheight);
+                if (imgwidth <= maxwidth && imgheight <= maxheight)
+                {
+                    var formData = new FormData();
+                    formData.append('fileToUpload', $('#file')[0].files[0]);
+                    //$.ajax({
+                    //    url: 'upload_image.php',
+                    //    type: 'POST',
+                    //    data: formData,
+                    //    processData: false,
+                    //    contentType: false,
+                    //    dataType: 'json',
+                    //    success: function (response) {
+                    //        if (response.status == 1) {
+                    //            // Setting Image for Preview
+                    //            $("#prev_img").attr("src", "upload/" + response.returnText);
+                    //            $("#prev_img").show();
+                    //            $("#response").text("Upload successfully");
+                    //        } else {
+                    //            $("#response").text(response.returnText);
+                    //        }
+                    //    }
+                    //});
+                } else {
+                    $("#response").text("Image size must be " + maxwidth + "X" + maxheight);
+                }
+            };
+            img.onerror = function () {
+                $("#response").text("not a valid file: " + file.type);
+            }
+
+        });
+
+        (function ($) {
+            $.fn.imageResize = function (options)
+            {
+                var settings = {
+                    width: 320,
+                    height: 320
+                };
+                options = $.extend(settings, options);
+                return this.each(function ()
+                {
+                    var $element = $(this);
+                    var maxWidth = options.width;
+                    var maxHeight = options.height;
+                    var ratio = 0;
+                    var width = $element.width();
+                    var height = $element.height();
+                    if (width > maxWidth)
+                    {
+                        ratio = maxWidth / width;
+                        $element.css("width", maxWidth);
+                        $element.css("height", height * ratio);
+                    }
+                    if (height > maxHeight)
+                    {
+                        ratio = maxHeight / height;
+                        $element.css("height", maxHeight);
+                        $element.css("width", width * ratio);
+                    }
+                });
+            };
+        })(jQuery);
+        $(function () {
+            $("#resize").click(function () {
+                $("#image").imageResize();
+            });
+        });
+
+
+
+    });
+</script>

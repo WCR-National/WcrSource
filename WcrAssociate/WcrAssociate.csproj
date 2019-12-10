@@ -1,0 +1,1780 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9A5185F5-7835-40E0-A2C1-7EF843EA0A1D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WcrAssociate</RootNamespace>
+    <AssemblyName>WcrAssociate</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=1.0.20229.20821, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Colonizer\WebColonizer\bin\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="CkEditor">
+      <HintPath>C:\Users\Manoj\Downloads\CkEditor\CkEditor\bin\CkEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="CKEditor.NET">
+      <HintPath>C:\Users\Manoj\Downloads\CkEditor\CkEditor\bin\CKEditor.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="ClsLibrary">
+      <HintPath>..\ClsLibrary\bin\Debug\ClsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.3.0\lib\net451\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.3.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.3.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PayPalKeysLibrary">
+      <HintPath>..\ClsLibrary\bin\Debug\PayPalKeysLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.3.0\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WcrClassLibrary">
+      <HintPath>C:\Users\m\Desktop\WcrClassLibrary\20190710\WcrClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WcrVault">
+      <HintPath>C:\Users\Manoj\Desktop\WcrClassLibrary\20190420\WcrVault.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="aboutus.html" />
+    <Content Include="advertise.html" />
+    <Content Include="AssociatePhoto\0.png" />
+    <Content Include="AssociatePhoto\1.png" />
+    <Content Include="AssociatePhoto\2.png" />
+    <Content Include="AssociatePhoto\3.png" />
+    <Content Include="AssociatePhoto\43.png" />
+    <Content Include="AssociatePhoto\57.png" />
+    <Content Include="AssociatePhoto\67.png" />
+    <Content Include="Associate\accordion.js" />
+    <Content Include="Associate\add_card.html" />
+    <Content Include="Associate\Adv_img\1main.png" />
+    <Content Include="Associate\Adv_img\3first.png" />
+    <Content Include="Associate\Adv_img\3main.png" />
+    <Content Include="Associate\Adv_img\3second.png" />
+    <Content Include="Associate\Adv_img\3third.png" />
+    <Content Include="Associate\Adv_img\6first.png" />
+    <Content Include="Associate\Adv_img\6main.png" />
+    <Content Include="Associate\Adv_img\7first.png" />
+    <Content Include="Associate\Adv_img\7second.png" />
+    <Content Include="Associate\Adv_img\7third.png" />
+    <Content Include="Associate\associate.Master" />
+    <Content Include="Associate\billing-history.html" />
+    <Content Include="Associate\BillingHistory.aspx" />
+    <Content Include="Associate\buyCategory.aspx" />
+    <Content Include="Associate\CategorySales.html" />
+    <Content Include="Associate\checkboxlist.html" />
+    <Content Include="Associate\ClientDetails.aspx" />
+    <Content Include="Associate\CreditCard.aspx" />
+    <Content Include="Associate\css\base.css" />
+    <Content Include="Associate\css\bootstrap.min.css" />
+    <Content Include="Associate\css\font-awesome.min.css" />
+    <Content Include="Associate\css\layout.css" />
+    <Content Include="Associate\css\loader.css" />
+    <Content Include="Associate\css\mCustomScrollbar.css" />
+    <Content Include="Associate\CustomerSupport.aspx" />
+    <Content Include="Associate\Dashboard.aspx" />
+    <Content Include="Associate\Default.aspx" />
+    <Content Include="Associate\defaults.css" />
+    <Content Include="Associate\demo.css" />
+    <Content Include="Associate\dist\css\AdminLTE.css" />
+    <Content Include="Associate\dist\css\AdminLTE.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-black-light.css" />
+    <Content Include="Associate\dist\css\skins\skin-black-light.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-black.css" />
+    <Content Include="Associate\dist\css\skins\skin-black.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-blue-light.css" />
+    <Content Include="Associate\dist\css\skins\skin-blue-light.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-blue.css" />
+    <Content Include="Associate\dist\css\skins\skin-blue.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-green-light.css" />
+    <Content Include="Associate\dist\css\skins\skin-green-light.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-green.css" />
+    <Content Include="Associate\dist\css\skins\skin-green.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-purple-light.css" />
+    <Content Include="Associate\dist\css\skins\skin-purple-light.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-purple.css" />
+    <Content Include="Associate\dist\css\skins\skin-purple.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-red-light.css" />
+    <Content Include="Associate\dist\css\skins\skin-red-light.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-red.css" />
+    <Content Include="Associate\dist\css\skins\skin-red.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-yellow-light.css" />
+    <Content Include="Associate\dist\css\skins\skin-yellow-light.min.css" />
+    <Content Include="Associate\dist\css\skins\skin-yellow.css" />
+    <Content Include="Associate\dist\css\skins\skin-yellow.min.css" />
+    <Content Include="Associate\dist\css\skins\_all-skins.css" />
+    <Content Include="Associate\dist\css\skins\_all-skins.min.css" />
+    <Content Include="Associate\dist\img\default-50x50.gif" />
+    <Content Include="Associate\dist\img\icons.png" />
+    <Content Include="Associate\dist\js\app.js" />
+    <Content Include="Associate\dist\js\app.min.js" />
+    <Content Include="Associate\dist\js\demo.js" />
+    <Content Include="Associate\dist\js\pages\dashboard.js" />
+    <Content Include="Associate\dist\js\pages\dashboard2.js" />
+    <Content Include="Associate\fonts\fontawesome-webfont.eot" />
+    <Content Include="Associate\fonts\fontawesome-webfont.svg" />
+    <Content Include="Associate\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Associate\fonts\fontawesome-webfont.woff" />
+    <Content Include="Associate\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Associate\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Associate\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Associate\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Associate\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Associate\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Associate\img\ajax-loading.gif" />
+    <Content Include="Associate\img\icon_billing_history.png" />
+    <Content Include="Associate\img\icon_client-detail.png" />
+    <Content Include="Associate\img\icon_creadit_Card.png" />
+    <Content Include="Associate\img\icon_customer_support.png" />
+    <Content Include="Associate\img\icon_dashboard.png" />
+    <Content Include="Associate\img\icon_group.png" />
+    <Content Include="Associate\img\icon_group1.png" />
+    <Content Include="Associate\img\icon_group_hover.png" />
+    <Content Include="Associate\img\icon_home.png" />
+    <Content Include="Associate\img\icon_home1.png" />
+    <Content Include="Associate\img\icon_home_hover.png" />
+    <Content Include="Associate\img\icon_land.png" />
+    <Content Include="Associate\img\icon_land1.png" />
+    <Content Include="Associate\img\icon_land_hover.png" />
+    <Content Include="Associate\img\icon_logout.png" />
+    <Content Include="Associate\img\icon_people.png" />
+    <Content Include="Associate\img\icon_post_sale.png" />
+    <Content Include="Associate\img\icon_purchase_zipcode.png" />
+    <Content Include="Associate\img\icon_sale_advertisement.png" />
+    <Content Include="Associate\img\icon_signout.png" />
+    <Content Include="Associate\img\imagebox.jpg" />
+    <Content Include="Associate\img\side-image.png" />
+    <Content Include="Associate\index.aspx" />
+    <Content Include="Associate\index.html" />
+    <Content Include="Associate\InsertCardInfo.aspx" />
+    <Content Include="Associate\js\adsbygoogle.js" />
+    <Content Include="Associate\js\analytics.js" />
+    <Content Include="Associate\js\app.js" />
+    <Content Include="Associate\js\app.min.js" />
+    <Content Include="Associate\js\bootstrap.js" />
+    <Content Include="Associate\js\bootstrap.min.js" />
+    <Content Include="Associate\js\ca-pub-2490016011782126.js" />
+    <Content Include="Associate\js\classie.js" />
+    <Content Include="Associate\js\CustomJs.js" />
+    <Content Include="Associate\js\demo.js" />
+    <Content Include="Associate\js\elastic_grid.min.js" />
+    <Content Include="Associate\js\jquery-1.11.0.min.js" />
+    <Content Include="Associate\js\jquery-2.1.1.min.js" />
+    <Content Include="Associate\js\jQuery-2.1.4.min.js" />
+    <Content Include="Associate\js\jquery.easing.min.js" />
+    <Content Include="Associate\js\jquery.leanModal.min.js" />
+    <Content Include="Associate\js\jquery.min.js" />
+    <Content Include="Associate\js\jquery.mixitup.min.js" />
+    <Content Include="Associate\js\login.js" />
+    <Content Include="Associate\js\mCustomScrollbar.concat.min.js" />
+    <Content Include="Associate\js\megamenu.js" />
+    <Content Include="Associate\js\modernizr.custom.js" />
+    <Content Include="Associate\js\npm.js" />
+    <Content Include="Associate\js\pages\dashboard.js" />
+    <Content Include="Associate\js\pages\dashboard2.js" />
+    <Content Include="Associate\js\pagination.js" />
+    <Content Include="Associate\js\PostAdvertisement.js" />
+    <Content Include="Associate\js\vendor\jquery-1.12.0.min.js" />
+    <Content Include="Associate\js\vendor\modernizr-2.8.3.min.js" />
+    <Content Include="Associate\Master1.Master" />
+    <Content Include="Associate\MembershipType.aspx" />
+    <Content Include="Associate\message.aspx" />
+    <Content Include="Associate\myAccount.aspx" />
+    <Content Include="Associate\needhelp.aspx" />
+    <Content Include="Associate\NewDashboard.aspx" />
+    <Content Include="Associate\NewServices.aspx" />
+    <Content Include="Associate\NoOfClicks.aspx" />
+    <Content Include="Associate\OldPostADvertisement.aspx" />
+    <Content Include="Associate\plugins\bootstrap-slider\bootstrap-slider.js" />
+    <Content Include="Associate\plugins\bootstrap-slider\slider.css" />
+    <Content Include="Associate\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
+    <Content Include="Associate\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.min.js" />
+    <Content Include="Associate\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.css" />
+    <Content Include="Associate\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.min.css" />
+    <Content Include="Associate\plugins\chartjs\Chart.js" />
+    <Content Include="Associate\plugins\chartjs\Chart.min.js" />
+    <Content Include="Associate\plugins\ckeditor\adapters\jquery.js" />
+    <Content Include="Associate\plugins\ckeditor\build-config.js" />
+    <Content Include="Associate\plugins\ckeditor\CHANGES.md" />
+    <Content Include="Associate\plugins\ckeditor\ckeditor.js" />
+    <Content Include="Associate\plugins\ckeditor\config.js" />
+    <Content Include="Associate\plugins\ckeditor\contents.css" />
+    <Content Include="Associate\plugins\ckeditor\lang\af.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ar.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\bg.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\bn.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\bs.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ca.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\cs.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\cy.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\da.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\de.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\el.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\en-au.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\en-ca.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\en-gb.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\en.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\eo.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\es.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\et.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\eu.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\fa.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\fi.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\fo.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\fr-ca.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\fr.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\gl.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\gu.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\he.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\hi.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\hr.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\hu.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\id.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\is.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\it.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ja.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ka.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\km.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ko.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ku.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\lt.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\lv.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\mk.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\mn.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ms.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\nb.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\nl.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\no.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\pl.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\pt-br.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\pt.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ro.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ru.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\si.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\sk.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\sl.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\sq.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\sr-latn.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\sr.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\sv.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\th.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\tr.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\ug.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\uk.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\vi.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\zh-cn.js" />
+    <Content Include="Associate\plugins\ckeditor\lang\zh.js" />
+    <Content Include="Associate\plugins\ckeditor\LICENSE.md" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Associate\plugins\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\fakeobjects\images\spacer.gif" />
+    <Content Include="Associate\plugins\ckeditor\plugins\icons.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Associate\plugins\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Associate\plugins\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Associate\plugins\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Associate\plugins\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Associate\plugins\ckeditor\plugins\wsc\dialogs\tmp.html" />
+    <Content Include="Associate\plugins\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Associate\plugins\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Associate\plugins\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Associate\plugins\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Associate\plugins\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Associate\plugins\ckeditor\README.md" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\dialog.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\dialog_ie.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\dialog_ie7.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\dialog_ie8.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\dialog_iequirks.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\dialog_opera.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\editor.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\editor_gecko.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\editor_ie.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\editor_ie7.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\editor_ie8.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\editor_iequirks.css" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\icons.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\icons_hidpi.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\arrow.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\close.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\hidpi\close.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\hidpi\lock.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\lock-open.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\lock.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\images\refresh.png" />
+    <Content Include="Associate\plugins\ckeditor\skins\moono\readme.md" />
+    <Content Include="Associate\plugins\ckeditor\styles.js" />
+    <Content Include="Associate\plugins\colorpicker\bootstrap-colorpicker.css" />
+    <Content Include="Associate\plugins\colorpicker\bootstrap-colorpicker.js" />
+    <Content Include="Associate\plugins\colorpicker\bootstrap-colorpicker.min.css" />
+    <Content Include="Associate\plugins\colorpicker\bootstrap-colorpicker.min.js" />
+    <Content Include="Associate\plugins\colorpicker\img\alpha-horizontal.png" />
+    <Content Include="Associate\plugins\colorpicker\img\alpha.png" />
+    <Content Include="Associate\plugins\colorpicker\img\hue-horizontal.png" />
+    <Content Include="Associate\plugins\colorpicker\img\hue.png" />
+    <Content Include="Associate\plugins\colorpicker\img\saturation.png" />
+    <Content Include="Associate\plugins\datatables\dataTables.bootstrap.css" />
+    <Content Include="Associate\plugins\datatables\dataTables.bootstrap.js" />
+    <Content Include="Associate\plugins\datatables\dataTables.bootstrap.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.css" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\css\dataTables.autoFill.min.css" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\examples\columns.html" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\examples\complete-callback.html" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\examples\fill-both.html" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\examples\fill-horizontal.html" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\examples\scrolling.html" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\examples\simple.html" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\examples\step-callback.html" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\images\filler.png" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\js\dataTables.autoFill.js" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\js\dataTables.autoFill.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\AutoFill\Readme.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\css\dataTables.colReorder.css" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\css\dataTables.colReorder.min.css" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\alt_insert.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\colvis.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\col_filter.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\fixedcolumns.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\fixedheader.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\jqueryui.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\new_init.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\predefined.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\realtime.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\reset.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\scrolling.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\server_side.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\simple.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\examples\state_save.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\images\insert.png" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\js\dataTables.colReorder.js" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\js\dataTables.colReorder.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\License.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\ColReorder\Readme.md" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\css\dataTables.colVis.css" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\css\dataTables.colvis.jqueryui.css" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\css\dataTables.colVis.min.css" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\button_order.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\exclude_columns.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\group_columns.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\jqueryui.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\mouseover.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\new_init.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\restore.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\simple.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\text.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\title_callback.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\two_tables.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\examples\two_tables_identical.html" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\js\dataTables.colVis.js" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\js\dataTables.colVis.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\License.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\ColVis\Readme.md" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\css\dataTables.fixedColumns.css" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\css\dataTables.fixedColumns.min.css" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\bootstrap.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\colvis.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\col_filter.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\css_size.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\index_column.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\left_right_columns.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\right_column.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\rowspan.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\server-side-processing.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\simple.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\size_fixed.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\size_fluid.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\examples\two_columns.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\js\dataTables.fixedColumns.js" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\js\dataTables.fixedColumns.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\License.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedColumns\Readme.md" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\css\dataTables.fixedHeader.css" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\css\dataTables.fixedHeader.min.css" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\examples\header_footer.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\examples\simple.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\examples\top_left_right.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\examples\two_tables.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\examples\zIndexes.html" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\js\dataTables.fixedHeader.js" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\js\dataTables.fixedHeader.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\FixedHeader\Readme.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\css\dataTables.keyTable.css" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\css\dataTables.keyTable.min.css" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\examples\events.html" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\examples\html.html" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\examples\scrolling.html" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\examples\simple.html" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\js\dataTables.keyTable.js" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\js\dataTables.keyTable.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\KeyTable\Readme.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\css\dataTables.responsive.css" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\css\dataTables.responsive.scss" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\child-rows\column-control.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\child-rows\custom-renderer.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\child-rows\disable-child-rows.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\child-rows\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\child-rows\right-column.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\child-rows\whole-row-control.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\display-control\auto.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\display-control\classes.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\display-control\complexHeader.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\display-control\fixedHeader.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\display-control\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\display-control\init-classes.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\initialisation\ajax.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\initialisation\className.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\initialisation\default.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\initialisation\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\initialisation\new.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\initialisation\option.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\styling\bootstrap.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\styling\compact.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\styling\foundation.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\examples\styling\scrolling.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\js\dataTables.responsive.js" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\js\dataTables.responsive.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\License.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\Responsive\Readme.md" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\css\dataTables.scroller.css" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\css\dataTables.scroller.min.css" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\examples\api_scrolling.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\examples\data\2500.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\examples\data\ssp.php" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\examples\large_js_source.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\examples\server-side_processing.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\examples\simple.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\examples\state_saving.html" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\images\loading-background.png" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\js\dataTables.scroller.js" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\js\dataTables.scroller.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\Scroller\Readme.txt" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\css\dataTables.tableTools.css" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\css\dataTables.tableTools.min.css" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\ajax.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\alter_buttons.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\bootstrap.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\button_text.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\collection.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\defaults.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\index.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\jqueryui.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\multiple_tables.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\multi_instance.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\new_init.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\pdf_message.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\plug-in.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\select_column.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\select_multi.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\select_os.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\select_single.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\simple.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\examples\swf_path.html" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\collection.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\collection_hover.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\copy.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\copy_hover.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\csv.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\csv_hover.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\pdf.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\pdf_hover.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\print.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\print_hover.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\psd\collection.psd" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\psd\copy document.psd" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\psd\file_types.psd" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\psd\printer.psd" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\xls.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\images\xls_hover.png" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\js\dataTables.tableTools.js" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\js\dataTables.tableTools.min.js" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\Readme.md" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\swf\copy_csv_xls.swf" />
+    <Content Include="Associate\plugins\datatables\extensions\TableTools\swf\copy_csv_xls_pdf.swf" />
+    <Content Include="Associate\plugins\datatables\images\sort_asc.png" />
+    <Content Include="Associate\plugins\datatables\images\sort_asc_disabled.png" />
+    <Content Include="Associate\plugins\datatables\images\sort_both.png" />
+    <Content Include="Associate\plugins\datatables\images\sort_desc.png" />
+    <Content Include="Associate\plugins\datatables\images\sort_desc_disabled.png" />
+    <Content Include="Associate\plugins\datatables\jquery.dataTables.css" />
+    <Content Include="Associate\plugins\datatables\jquery.dataTables.js" />
+    <Content Include="Associate\plugins\datatables\jquery.dataTables.min.css" />
+    <Content Include="Associate\plugins\datatables\jquery.dataTables.min.js" />
+    <Content Include="Associate\plugins\datatables\jquery.dataTables_themeroller.css" />
+    <Content Include="Associate\plugins\datepicker\bootstrap-datepicker.js" />
+    <Content Include="Associate\plugins\datepicker\datepicker3.css" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.ar.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.az.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.bg.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.ca.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.cs.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.cy.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.da.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.de.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.el.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.es.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.et.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.fa.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.fi.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.fr.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.gl.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.he.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.hr.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.hu.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.id.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.is.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.it.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.ja.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.ka.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.kk.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.kr.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.lt.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.lv.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.mk.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.ms.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.nb.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.nl-BE.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.nl.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.no.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.pl.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.pt-BR.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.pt.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.ro.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.rs-latin.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.rs.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.ru.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.sk.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.sl.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.sq.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.sv.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.sw.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.th.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.tr.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.ua.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.vi.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.zh-CN.js" />
+    <Content Include="Associate\plugins\datepicker\locales\bootstrap-datepicker.zh-TW.js" />
+    <Content Include="Associate\plugins\daterangepicker\daterangepicker-bs3.css" />
+    <Content Include="Associate\plugins\daterangepicker\daterangepicker.js" />
+    <Content Include="Associate\plugins\daterangepicker\moment.js" />
+    <Content Include="Associate\plugins\daterangepicker\moment.min.js" />
+    <Content Include="Associate\plugins\fastclick\fastclick.js" />
+    <Content Include="Associate\plugins\fastclick\fastclick.min.js" />
+    <Content Include="Associate\plugins\flot\excanvas.js" />
+    <Content Include="Associate\plugins\flot\excanvas.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.colorhelpers.js" />
+    <Content Include="Associate\plugins\flot\jquery.colorhelpers.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.canvas.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.canvas.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.categories.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.categories.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.crosshair.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.crosshair.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.errorbars.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.errorbars.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.image.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.image.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.navigate.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.navigate.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.pie.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.pie.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.resize.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.resize.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.selection.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.selection.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.stack.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.stack.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.symbol.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.symbol.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.threshold.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.threshold.min.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.time.js" />
+    <Content Include="Associate\plugins\flot\jquery.flot.time.min.js" />
+    <Content Include="Associate\plugins\fullcalendar\fullcalendar.css" />
+    <Content Include="Associate\plugins\fullcalendar\fullcalendar.js" />
+    <Content Include="Associate\plugins\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Associate\plugins\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Associate\plugins\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Associate\plugins\iCheck\all.css" />
+    <Content Include="Associate\plugins\iCheck\flat\aero%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\aero.css" />
+    <Content Include="Associate\plugins\iCheck\flat\aero.png" />
+    <Content Include="Associate\plugins\iCheck\flat\blue%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\blue.css" />
+    <Content Include="Associate\plugins\iCheck\flat\blue.png" />
+    <Content Include="Associate\plugins\iCheck\flat\flat%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\flat.css" />
+    <Content Include="Associate\plugins\iCheck\flat\flat.png" />
+    <Content Include="Associate\plugins\iCheck\flat\green%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\green.css" />
+    <Content Include="Associate\plugins\iCheck\flat\green.png" />
+    <Content Include="Associate\plugins\iCheck\flat\grey%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\grey.css" />
+    <Content Include="Associate\plugins\iCheck\flat\grey.png" />
+    <Content Include="Associate\plugins\iCheck\flat\orange%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\orange.css" />
+    <Content Include="Associate\plugins\iCheck\flat\orange.png" />
+    <Content Include="Associate\plugins\iCheck\flat\pink%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\pink.css" />
+    <Content Include="Associate\plugins\iCheck\flat\pink.png" />
+    <Content Include="Associate\plugins\iCheck\flat\purple%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\purple.css" />
+    <Content Include="Associate\plugins\iCheck\flat\purple.png" />
+    <Content Include="Associate\plugins\iCheck\flat\red%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\red.css" />
+    <Content Include="Associate\plugins\iCheck\flat\red.png" />
+    <Content Include="Associate\plugins\iCheck\flat\yellow%402x.png" />
+    <Content Include="Associate\plugins\iCheck\flat\yellow.css" />
+    <Content Include="Associate\plugins\iCheck\flat\yellow.png" />
+    <Content Include="Associate\plugins\iCheck\flat\_all.css" />
+    <Content Include="Associate\plugins\iCheck\futurico\futurico%402x.png" />
+    <Content Include="Associate\plugins\iCheck\futurico\futurico.css" />
+    <Content Include="Associate\plugins\iCheck\futurico\futurico.png" />
+    <Content Include="Associate\plugins\iCheck\icheck.js" />
+    <Content Include="Associate\plugins\iCheck\icheck.min.js" />
+    <Content Include="Associate\plugins\iCheck\line\aero.css" />
+    <Content Include="Associate\plugins\iCheck\line\blue.css" />
+    <Content Include="Associate\plugins\iCheck\line\green.css" />
+    <Content Include="Associate\plugins\iCheck\line\grey.css" />
+    <Content Include="Associate\plugins\iCheck\line\line%402x.png" />
+    <Content Include="Associate\plugins\iCheck\line\line.css" />
+    <Content Include="Associate\plugins\iCheck\line\line.png" />
+    <Content Include="Associate\plugins\iCheck\line\orange.css" />
+    <Content Include="Associate\plugins\iCheck\line\pink.css" />
+    <Content Include="Associate\plugins\iCheck\line\purple.css" />
+    <Content Include="Associate\plugins\iCheck\line\red.css" />
+    <Content Include="Associate\plugins\iCheck\line\yellow.css" />
+    <Content Include="Associate\plugins\iCheck\line\_all.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\aero%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\aero.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\aero.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\blue%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\blue.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\blue.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\green%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\green.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\green.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\grey%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\grey.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\grey.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\minimal%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\minimal.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\minimal.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\orange%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\orange.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\orange.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\pink%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\pink.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\pink.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\purple%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\purple.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\purple.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\red%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\red.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\red.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\yellow%402x.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\yellow.css" />
+    <Content Include="Associate\plugins\iCheck\minimal\yellow.png" />
+    <Content Include="Associate\plugins\iCheck\minimal\_all.css" />
+    <Content Include="Associate\plugins\iCheck\polaris\polaris%402x.png" />
+    <Content Include="Associate\plugins\iCheck\polaris\polaris.css" />
+    <Content Include="Associate\plugins\iCheck\polaris\polaris.png" />
+    <Content Include="Associate\plugins\iCheck\square\aero%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\aero.css" />
+    <Content Include="Associate\plugins\iCheck\square\aero.png" />
+    <Content Include="Associate\plugins\iCheck\square\blue%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\blue.css" />
+    <Content Include="Associate\plugins\iCheck\square\blue.png" />
+    <Content Include="Associate\plugins\iCheck\square\green%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\green.css" />
+    <Content Include="Associate\plugins\iCheck\square\green.png" />
+    <Content Include="Associate\plugins\iCheck\square\grey%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\grey.css" />
+    <Content Include="Associate\plugins\iCheck\square\grey.png" />
+    <Content Include="Associate\plugins\iCheck\square\orange%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\orange.css" />
+    <Content Include="Associate\plugins\iCheck\square\orange.png" />
+    <Content Include="Associate\plugins\iCheck\square\pink%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\pink.css" />
+    <Content Include="Associate\plugins\iCheck\square\pink.png" />
+    <Content Include="Associate\plugins\iCheck\square\purple%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\purple.css" />
+    <Content Include="Associate\plugins\iCheck\square\purple.png" />
+    <Content Include="Associate\plugins\iCheck\square\red%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\red.css" />
+    <Content Include="Associate\plugins\iCheck\square\red.png" />
+    <Content Include="Associate\plugins\iCheck\square\square%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\square.css" />
+    <Content Include="Associate\plugins\iCheck\square\square.png" />
+    <Content Include="Associate\plugins\iCheck\square\yellow%402x.png" />
+    <Content Include="Associate\plugins\iCheck\square\yellow.css" />
+    <Content Include="Associate\plugins\iCheck\square\yellow.png" />
+    <Content Include="Associate\plugins\iCheck\square\_all.css" />
+    <Content Include="Associate\plugins\input-mask\jquery.inputmask.date.extensions.js" />
+    <Content Include="Associate\plugins\input-mask\jquery.inputmask.extensions.js" />
+    <Content Include="Associate\plugins\input-mask\jquery.inputmask.js" />
+    <Content Include="Associate\plugins\input-mask\jquery.inputmask.numeric.extensions.js" />
+    <Content Include="Associate\plugins\input-mask\jquery.inputmask.phone.extensions.js" />
+    <Content Include="Associate\plugins\input-mask\jquery.inputmask.regex.extensions.js" />
+    <Content Include="Associate\plugins\input-mask\phone-codes\phone-be.json" />
+    <Content Include="Associate\plugins\input-mask\phone-codes\phone-codes.json" />
+    <Content Include="Associate\plugins\input-mask\phone-codes\readme.txt" />
+    <Content Include="Associate\plugins\ionslider\img\sprite-skin-flat.png" />
+    <Content Include="Associate\plugins\ionslider\img\sprite-skin-nice.png" />
+    <Content Include="Associate\plugins\ionslider\ion.rangeSlider.css" />
+    <Content Include="Associate\plugins\ionslider\ion.rangeSlider.min.js" />
+    <Content Include="Associate\plugins\ionslider\ion.rangeSlider.skinFlat.css" />
+    <Content Include="Associate\plugins\ionslider\ion.rangeSlider.skinNice.css" />
+    <Content Include="Associate\plugins\jQueryUI\jquery-ui.js" />
+    <Content Include="Associate\plugins\jQueryUI\jquery-ui.min.js" />
+    <Content Include="Associate\plugins\jQuery\jQuery-2.1.4.min.js" />
+    <Content Include="Associate\plugins\jvectormap\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Associate\plugins\jvectormap\jquery-jvectormap-1.2.2.min.js" />
+    <Content Include="Associate\plugins\jvectormap\jquery-jvectormap-world-mill-en.js" />
+    <Content Include="Associate\plugins\knob\jquery.knob.js" />
+    <Content Include="Associate\plugins\morris\morris.css" />
+    <Content Include="Associate\plugins\morris\morris.js" />
+    <Content Include="Associate\plugins\morris\morris.min.js" />
+    <Content Include="Associate\plugins\pace\pace.js" />
+    <Content Include="Associate\plugins\select2\i18n\az.js" />
+    <Content Include="Associate\plugins\select2\i18n\bg.js" />
+    <Content Include="Associate\plugins\select2\i18n\ca.js" />
+    <Content Include="Associate\plugins\select2\i18n\cs.js" />
+    <Content Include="Associate\plugins\select2\i18n\da.js" />
+    <Content Include="Associate\plugins\select2\i18n\de.js" />
+    <Content Include="Associate\plugins\select2\i18n\en.js" />
+    <Content Include="Associate\plugins\select2\i18n\es.js" />
+    <Content Include="Associate\plugins\select2\i18n\et.js" />
+    <Content Include="Associate\plugins\select2\i18n\eu.js" />
+    <Content Include="Associate\plugins\select2\i18n\fa.js" />
+    <Content Include="Associate\plugins\select2\i18n\fi.js" />
+    <Content Include="Associate\plugins\select2\i18n\fr.js" />
+    <Content Include="Associate\plugins\select2\i18n\gl.js" />
+    <Content Include="Associate\plugins\select2\i18n\he.js" />
+    <Content Include="Associate\plugins\select2\i18n\hi.js" />
+    <Content Include="Associate\plugins\select2\i18n\hr.js" />
+    <Content Include="Associate\plugins\select2\i18n\hu.js" />
+    <Content Include="Associate\plugins\select2\i18n\id.js" />
+    <Content Include="Associate\plugins\select2\i18n\is.js" />
+    <Content Include="Associate\plugins\select2\i18n\it.js" />
+    <Content Include="Associate\plugins\select2\i18n\ko.js" />
+    <Content Include="Associate\plugins\select2\i18n\lt.js" />
+    <Content Include="Associate\plugins\select2\i18n\lv.js" />
+    <Content Include="Associate\plugins\select2\i18n\mk.js" />
+    <Content Include="Associate\plugins\select2\i18n\nb.js" />
+    <Content Include="Associate\plugins\select2\i18n\nl.js" />
+    <Content Include="Associate\plugins\select2\i18n\pl.js" />
+    <Content Include="Associate\plugins\select2\i18n\pt-BR.js" />
+    <Content Include="Associate\plugins\select2\i18n\pt.js" />
+    <Content Include="Associate\plugins\select2\i18n\ro.js" />
+    <Content Include="Associate\plugins\select2\i18n\ru.js" />
+    <Content Include="Associate\plugins\select2\i18n\sk.js" />
+    <Content Include="Associate\plugins\select2\i18n\sr.js" />
+    <Content Include="Associate\plugins\select2\i18n\sv.js" />
+    <Content Include="Associate\plugins\select2\i18n\th.js" />
+    <Content Include="Associate\plugins\select2\i18n\tr.js" />
+    <Content Include="Associate\plugins\select2\i18n\uk.js" />
+    <Content Include="Associate\plugins\select2\i18n\vi.js" />
+    <Content Include="Associate\plugins\select2\i18n\zh-CN.js" />
+    <Content Include="Associate\plugins\select2\i18n\zh-TW.js" />
+    <Content Include="Associate\plugins\select2\select2.css" />
+    <Content Include="Associate\plugins\select2\select2.full.js" />
+    <Content Include="Associate\plugins\select2\select2.full.min.js" />
+    <Content Include="Associate\plugins\select2\select2.js" />
+    <Content Include="Associate\plugins\select2\select2.min.css" />
+    <Content Include="Associate\plugins\select2\select2.min.js" />
+    <Content Include="Associate\plugins\slimScroll\jquery.slimscroll.js" />
+    <Content Include="Associate\plugins\slimScroll\jquery.slimscroll.min.js" />
+    <Content Include="Associate\plugins\sparkline\jquery.sparkline.js" />
+    <Content Include="Associate\plugins\sparkline\jquery.sparkline.min.js" />
+    <Content Include="Associate\plugins\timepicker\bootstrap-timepicker.css" />
+    <Content Include="Associate\plugins\timepicker\bootstrap-timepicker.js" />
+    <Content Include="Associate\plugins\timepicker\bootstrap-timepicker.min.css" />
+    <Content Include="Associate\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Associate\post-addvertise.html" />
+    <Content Include="Associate\PostAdverrtisementSales.aspx" />
+    <Content Include="Associate\PostAdverrtisementService.aspx" />
+    <Content Include="Associate\PostAdvertisement-old.aspx" />
+    <Content Include="Associate\PostAdvertisement.aspx" />
+    <Content Include="Associate\PostadvNew.aspx" />
+    <Content Include="Associate\PromoCode.aspx" />
+    <Content Include="Associate\Pstadv.aspx" />
+    <Content Include="Associate\purchase.html" />
+    <Content Include="Associate\PurchaseCategory.aspx" />
+    <Content Include="Associate\PurchaseSalesCategory.aspx" />
+    <Content Include="Associate\PurchaseService.html" />
+    <Content Include="Associate\purchasezip.html" />
+    <Content Include="Associate\PurchaseZipCode.aspx" />
+    <Content Include="Associate\runTimeImageUpload.html" />
+    <Content Include="Associate\sale.aspx" />
+    <Content Include="Associate\SalesCategory.aspx" />
+    <Content Include="Associate\Service.aspx" />
+    <Content Include="Associate\ServiceCategory.aspx" />
+    <Content Include="Associate\UControls\associatefooter.ascx" />
+    <Content Include="Associate\UControls\associateHeader.ascx" />
+    <Content Include="Associate\UControls\associateLeftSidebar.ascx" />
+    <Content Include="Associate\UControls\NewFooter.ascx" />
+    <Content Include="Associate\UControls\NewHeader.ascx" />
+    <Content Include="Associate\UControls\Newleft.ascx" />
+    <Content Include="Associate\UpdateCard.aspx" />
+    <Content Include="Associate\UpdateCardInfo.aspx" />
+    <Content Include="Associate\UploadHandler.ashx" />
+    <Content Include="Associate\VerifyMobileNo.aspx" />
+    <Content Include="Associate\ViewAdvertisement.aspx" />
+    <Content Include="Associate\ViewPostedAdvertisement.aspx" />
+    <Content Include="Associate\ViewProfile.aspx" />
+    <Content Include="Associate\VisitorsInfo.aspx" />
+    <Content Include="Associate\ws\AssociateSubscription.asmx" />
+    <Content Include="Associate\ws\AssociateSupport.asmx" />
+    <Content Include="Associate\ws\BillingHistoryRef.asmx" />
+    <Content Include="Associate\ws\Category.asmx" />
+    <Content Include="Associate\ws\CategoryPurchase.asmx" />
+    <Content Include="Associate\ws\City.asmx" />
+    <Content Include="Associate\ws\Country.asmx" />
+    <Content Include="Associate\ws\CouponCodeCategory.asmx" />
+    <Content Include="Associate\ws\features.asmx" />
+    <Content Include="Associate\ws\InsertPromoCode.asmx" />
+    <Content Include="Associate\ws\JobType.asmx" />
+    <Content Include="Associate\ws\MemberShip.asmx" />
+    <Content Include="Associate\ws\MyCategories.asmx" />
+    <Content Include="Associate\ws\PurchaseCategory.asmx" />
+    <Content Include="Associate\ws\Sale.asmx" />
+    <Content Include="Associate\ws\SendMessage.asmx" />
+    <Content Include="Associate\ws\State.asmx" />
+    <Content Include="Associate\ws\SubCategory.asmx" />
+    <Content Include="Associate\ZipCodePurchase.aspx" />
+    <Content Include="Associate\ZipCodePurchaseOld.aspx" />
+    <Content Include="bin\AjaxControlToolkit.dll" />
+    <Content Include="bin\CkEditor.dll" />
+    <Content Include="bin\CKEditor.NET.dll" />
+    <Content Include="bin\Microsoft.IdentityModel.JsonWebTokens.dll" />
+    <Content Include="bin\Microsoft.IdentityModel.Logging.dll" />
+    <Content Include="bin\Microsoft.IdentityModel.Tokens.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\PayPalKeysLibrary.dll" />
+    <Content Include="bin\System.IdentityModel.Tokens.Jwt.dll" />
+    <Content Include="bin\System.Net.Http.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\WcrClassLibrary.dll" />
+    <Content Include="bin\WcrVault.dll" />
+    <Content Include="bookmark.html" />
+    <Content Include="ConsumerDashboard.html" />
+    <Content Include="consumerFooter.html" />
+    <Content Include="consumerHeader.html" />
+    <Content Include="ConsumerHistory.html" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\landing.css" />
+    <Content Include="css\layout.css" />
+    <Content Include="css\layout1.css" />
+    <Content Include="css\layout_as 2october.css" />
+    <Content Include="css\layout_as_15 november.css" />
+    <Content Include="css\layout_old.css" />
+    <Content Include="css\loader.css" />
+    <Content Include="css\normalize.css" />
+    <Content Include="download.png" />
+    <Content Include="faq.html" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="geolocation.html" />
+    <Content Include="headerNew.html" />
+    <Content Include="headerWithoutLoginforHome.html" />
+    <Content Include="headerWithoutLogin.html" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\icons\btn-close.png" />
+    <Content Include="images\icons\icon_home.png" />
+    <Content Include="images\icons\icon_investment.png" />
+    <Content Include="images\icons\icon_land.png" />
+    <Content Include="images\icons\icon_mortgage.png" />
+    <Content Include="images\icons\icon_multifamily.png" />
+    <Content Include="images\icons\icon_realtor.png" />
+    <Content Include="images\icons\icon_township.png" />
+    <Content Include="images\icons\icon_umbrella.png" />
+    <Content Include="images\icon_video.jpg" />
+    <Content Include="images\innerbackbg.jpg" />
+    <Content Include="images\logo_landing.png" />
+    <Content Include="images\notAvailable.jpg" />
+    <Content Include="images\v-poster.jpg" />
+    <Content Include="images\WCRLandingpagevideo.mp4" />
+    <Content Include="images\yachit.jpg" />
+    <Content Include="imgload.html" />
+    <Content Include="img\11.jpg" />
+    <Content Include="img\ajax-loading.gif" />
+    <Content Include="img\text-logo.png" />
+    <Content Include="img\wcr-logo.png" />
+    <Content Include="img\wcr-logo.svg" />
+    <Content Include="index.html" />
+    <Content Include="innerpagenew.html" />
+    <Content Include="inner_detailnew.html" />
+    <Content Include="InternetSlowdown_Day.gif" />
+    <Content Include="js\customjs.js" />
+    <Content Include="LandingRegistrationPage.html" />
+    <Content Include="LandingRegistrationPage1.html" />
+    <Content Include="LandingRegistrationPage2.html" />
+    <Content Include="LandingRegistrationPage3.html" />
+    <Content Include="LandingRegistrationPage4.html" />
+    <Content Include="LandingRegistrationPage5.html" />
+    <Content Include="passwordvalidation.html" />
+    <Content Include="PostalCodeGeoLocation.html" />
+    <Content Include="Profile.html" />
+    <Content Include="resiezeimage.html" />
+    <Content Include="SalesAdvertisement.html" />
+    <Content Include="SalesAdvertisementList.html" />
+    <Content Include="salesnew.html" />
+    <Content Include="ServiceProfileList.html" />
+    <Content Include="sidebar.html" />
+    <Content Include="support.html" />
+    <Content Include="technologies.html" />
+    <Content Include="terms.html" />
+    <Content Include="topSearch.html" />
+    <Content Include="UserAccountActivation.aspx" />
+    <Content Include="WebForm1.aspx" />
+    <Content Include="Welcome.html" />
+    <Content Include="ws\TopSearch.asmx" />
+    <Content Include="business.html" />
+    <Content Include="images\feature_tabg.png" />
+    <Content Include="images\icon_star.png" />
+    <Content Include="Footer.html" />
+    <Content Include="header.html" />
+    <Content Include="img\icon_send.png" />
+    <Content Include="img\icon_send2.png" />
+    <Content Include="img\logo - Copy.png" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\logo_home.png" />
+    <Content Include="img\logo_icon.png" />
+    <Content Include="img\logo_icons.png" />
+    <Content Include="img\logo_icons2.png" />
+    <Content Include="img\logo_name.png" />
+    <Content Include="img\newtext-logo.png" />
+    <Content Include="img\search_border.png" />
+    <Content Include="innerpageAngular.html" />
+    <Content Include="innerpage.html" />
+    <Content Include="inner_detail.html" />
+    <Content Include="js\jquery-2.1.1.min.js" />
+    <Content Include="MyProfile.html" />
+    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <Content Include="obj\Debug\WcrAssociate.csprojResolveAssemblyReference.cache" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\ionicons.eot" />
+    <Content Include="fonts\ionicons.ttf" />
+    <Content Include="fonts\ionicons.woff" />
+    <Content Include="sales.html" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\DocumentPaging.js" />
+    <Content Include="Scripts\Documents.js" />
+    <Content Include="Scripts\ngDialog.js" />
+    <Content Include="Scripts\pag.js" />
+    <Content Include="Scripts\paginationTest.js" />
+    <Content Include="Scripts\paginationTst.js" />
+    <Content Include="Scripts\ProjectDocument.js" />
+    <Content Include="Services.html" />
+    <Content Include="ws\AssociateRegistration.asmx" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="Associate\UpdateAdvtImages.ashx" />
+    <Content Include="Associate\ws\UpdatePic.ashx" />
+    <Content Include="images\JAIPUR OLD AGE HOME CENTER.pdf" />
+    <Content Include="packages.config" />
+    <Content Include="Associate\UpdateAdvertisementImges.ashx" />
+    <Content Include="Associate\UpdateAdvertisementSecondImage.ashx" />
+    <Content Include="Associate\UpdateThirdImg.ashx" />
+    <Content Include="Associate\UpdateFourthImg.ashx" />
+    <None Include="Properties\PublishProfiles\WcrNational.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include="ws\AssociateSignUp.ashx" />
+    <Content Include="ws\ConsumerComments.asmx" />
+    <Content Include="ws\ConsumerRegistration.asmx" />
+    <Content Include="ws\CouponCode.asmx" />
+    <Content Include="ws\InnerPage.asmx" />
+    <Content Include="ws\LatituteValue.asmx" />
+    <Content Include="ws\ShowSubcategoryIcon.ashx" />
+    <Content Include="ws\ConsumerPhoto.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\ionicons.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="images\add.png" />
+    <Content Include="images\ajax-loader.gif" />
+    <Content Include="images\Calendar_icon.png" />
+    <Content Include="images\cancel.png" />
+    <Content Include="images\delete.png" />
+    <Content Include="images\leftarrow.jpg" />
+    <Content Include="images\rightarrow.png" />
+    <Content Include="images\update.png" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\modernizr.custom.js" />
+    <Content Include="js\npm.js" />
+    <Content Include="obj\Debug\WcrAssociate.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\WcrAssociate.dll" />
+    <Content Include="obj\Debug\WcrAssociate.pdb" />
+    <Content Include="privacy.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Associate\associate.Master.cs">
+      <DependentUpon>associate.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\associate.Master.designer.cs">
+      <DependentUpon>associate.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\BillingHistory.aspx.cs">
+      <DependentUpon>BillingHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\BillingHistory.aspx.designer.cs">
+      <DependentUpon>BillingHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\buyCategory.aspx.cs">
+      <DependentUpon>buyCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\buyCategory.aspx.designer.cs">
+      <DependentUpon>buyCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ClientDetails.aspx.cs">
+      <DependentUpon>ClientDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\ClientDetails.aspx.designer.cs">
+      <DependentUpon>ClientDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\CreditCard.aspx.cs">
+      <DependentUpon>CreditCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\CreditCard.aspx.designer.cs">
+      <DependentUpon>CreditCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\CustomerSupport.aspx.cs">
+      <DependentUpon>CustomerSupport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\CustomerSupport.aspx.designer.cs">
+      <DependentUpon>CustomerSupport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\InsertCardInfo.aspx.cs">
+      <DependentUpon>InsertCardInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\InsertCardInfo.aspx.designer.cs">
+      <DependentUpon>InsertCardInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\Master1.Master.cs">
+      <DependentUpon>Master1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\Master1.Master.designer.cs">
+      <DependentUpon>Master1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\MembershipType.aspx.cs">
+      <DependentUpon>MembershipType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\MembershipType.aspx.designer.cs">
+      <DependentUpon>MembershipType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\message.aspx.cs">
+      <DependentUpon>message.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\message.aspx.designer.cs">
+      <DependentUpon>message.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\myAccount.aspx.cs">
+      <DependentUpon>myAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\myAccount.aspx.designer.cs">
+      <DependentUpon>myAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\needhelp.aspx.cs">
+      <DependentUpon>needhelp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\needhelp.aspx.designer.cs">
+      <DependentUpon>needhelp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\NewDashboard.aspx.cs">
+      <DependentUpon>NewDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\NewDashboard.aspx.designer.cs">
+      <DependentUpon>NewDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\NewServices.aspx.cs">
+      <DependentUpon>NewServices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\NewServices.aspx.designer.cs">
+      <DependentUpon>NewServices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\NoOfClicks.aspx.cs">
+      <DependentUpon>NoOfClicks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\NoOfClicks.aspx.designer.cs">
+      <DependentUpon>NoOfClicks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\OldPostADvertisement.aspx.cs">
+      <DependentUpon>OldPostADvertisement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\OldPostADvertisement.aspx.designer.cs">
+      <DependentUpon>OldPostADvertisement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PostAdverrtisementSales.aspx.cs">
+      <DependentUpon>PostAdverrtisementSales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PostAdverrtisementSales.aspx.designer.cs">
+      <DependentUpon>PostAdverrtisementSales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PostAdverrtisementService.aspx.cs">
+      <DependentUpon>PostAdverrtisementService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PostAdverrtisementService.aspx.designer.cs">
+      <DependentUpon>PostAdverrtisementService.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PostAdvertisement-old.aspx.cs">
+      <DependentUpon>PostAdvertisement-old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PostAdvertisement-old.aspx.designer.cs">
+      <DependentUpon>PostAdvertisement-old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PostAdvertisement.aspx.cs">
+      <DependentUpon>PostAdvertisement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PostAdvertisement.aspx.designer.cs">
+      <DependentUpon>PostAdvertisement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PostadvNew.aspx.cs">
+      <DependentUpon>PostadvNew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PostadvNew.aspx.designer.cs">
+      <DependentUpon>PostadvNew.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PromoCode.aspx.cs">
+      <DependentUpon>PromoCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PromoCode.aspx.designer.cs">
+      <DependentUpon>PromoCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\Pstadv.aspx.cs">
+      <DependentUpon>Pstadv.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\Pstadv.aspx.designer.cs">
+      <DependentUpon>Pstadv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PurchaseCategory.aspx.cs">
+      <DependentUpon>PurchaseCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PurchaseCategory.aspx.designer.cs">
+      <DependentUpon>PurchaseCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PurchaseSalesCategory.aspx.cs">
+      <DependentUpon>PurchaseSalesCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PurchaseSalesCategory.aspx.designer.cs">
+      <DependentUpon>PurchaseSalesCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\PurchaseZipCode.aspx.cs">
+      <DependentUpon>PurchaseZipCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\PurchaseZipCode.aspx.designer.cs">
+      <DependentUpon>PurchaseZipCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\sale.aspx.cs">
+      <DependentUpon>sale.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\sale.aspx.designer.cs">
+      <DependentUpon>sale.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\SalesCategory.aspx.cs">
+      <DependentUpon>SalesCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\SalesCategory.aspx.designer.cs">
+      <DependentUpon>SalesCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\Service.aspx.cs">
+      <DependentUpon>Service.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\Service.aspx.designer.cs">
+      <DependentUpon>Service.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ServiceCategory.aspx.cs">
+      <DependentUpon>ServiceCategory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\ServiceCategory.aspx.designer.cs">
+      <DependentUpon>ServiceCategory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UControls\associatefooter.ascx.cs">
+      <DependentUpon>associatefooter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UControls\associatefooter.ascx.designer.cs">
+      <DependentUpon>associatefooter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UControls\associateHeader.ascx.cs">
+      <DependentUpon>associateHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UControls\associateHeader.ascx.designer.cs">
+      <DependentUpon>associateHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UControls\associateLeftSidebar.ascx.cs">
+      <DependentUpon>associateLeftSidebar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UControls\associateLeftSidebar.ascx.designer.cs">
+      <DependentUpon>associateLeftSidebar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UControls\NewFooter.ascx.cs">
+      <DependentUpon>NewFooter.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UControls\NewFooter.ascx.designer.cs">
+      <DependentUpon>NewFooter.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UControls\NewHeader.ascx.cs">
+      <DependentUpon>NewHeader.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UControls\NewHeader.ascx.designer.cs">
+      <DependentUpon>NewHeader.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UControls\Newleft.ascx.cs">
+      <DependentUpon>Newleft.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UControls\Newleft.ascx.designer.cs">
+      <DependentUpon>Newleft.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UpdateAdvertisementImges.ashx.cs">
+      <DependentUpon>UpdateAdvertisementImges.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UpdateAdvertisementSecondImage.ashx.cs">
+      <DependentUpon>UpdateAdvertisementSecondImage.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UpdateAdvtImages.ashx.cs">
+      <DependentUpon>UpdateAdvtImages.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UpdateCard.aspx.cs">
+      <DependentUpon>UpdateCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UpdateCard.aspx.designer.cs">
+      <DependentUpon>UpdateCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UpdateCardInfo.aspx.cs">
+      <DependentUpon>UpdateCardInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\UpdateCardInfo.aspx.designer.cs">
+      <DependentUpon>UpdateCardInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UpdateFourthImg.ashx.cs">
+      <DependentUpon>UpdateFourthImg.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UpdateThirdImg.ashx.cs">
+      <DependentUpon>UpdateThirdImg.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\UploadHandler.ashx.cs">
+      <DependentUpon>UploadHandler.ashx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Associate\VerifyMobileNo.aspx.cs">
+      <DependentUpon>VerifyMobileNo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\VerifyMobileNo.aspx.designer.cs">
+      <DependentUpon>VerifyMobileNo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ViewAdvertisement.aspx.cs">
+      <DependentUpon>ViewAdvertisement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\ViewAdvertisement.aspx.designer.cs">
+      <DependentUpon>ViewAdvertisement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ViewPostedAdvertisement.aspx.cs">
+      <DependentUpon>ViewPostedAdvertisement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\ViewPostedAdvertisement.aspx.designer.cs">
+      <DependentUpon>ViewPostedAdvertisement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ViewProfile.aspx.cs">
+      <DependentUpon>ViewProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\ViewProfile.aspx.designer.cs">
+      <DependentUpon>ViewProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\VisitorsInfo.aspx.cs">
+      <DependentUpon>VisitorsInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\VisitorsInfo.aspx.designer.cs">
+      <DependentUpon>VisitorsInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ws\AssociateSubscription.asmx.cs">
+      <DependentUpon>AssociateSubscription.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\AssociateSupport.asmx.cs">
+      <DependentUpon>AssociateSupport.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\BillingHistoryRef.asmx.cs">
+      <DependentUpon>BillingHistoryRef.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\Category.asmx.cs">
+      <DependentUpon>Category.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\CategoryPurchase.asmx.cs">
+      <DependentUpon>CategoryPurchase.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\City.asmx.cs">
+      <DependentUpon>City.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\Country.asmx.cs">
+      <DependentUpon>Country.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\CouponCodeCategory.asmx.cs">
+      <DependentUpon>CouponCodeCategory.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\features.asmx.cs">
+      <DependentUpon>features.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\InsertPromoCode.asmx.cs">
+      <DependentUpon>InsertPromoCode.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\JobType.asmx.cs">
+      <DependentUpon>JobType.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\MemberShip.asmx.cs">
+      <DependentUpon>MemberShip.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\MyCategories.asmx.cs">
+      <DependentUpon>MyCategories.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\PurchaseCategory.asmx.cs">
+      <DependentUpon>PurchaseCategory.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\Sale.asmx.cs">
+      <DependentUpon>Sale.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\SendMessage.asmx.cs">
+      <DependentUpon>SendMessage.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\State.asmx.cs">
+      <DependentUpon>State.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\SubCategory.asmx.cs">
+      <DependentUpon>SubCategory.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\UpdatePic.ashx.cs">
+      <DependentUpon>UpdatePic.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ZipCodePurchase.aspx.cs">
+      <DependentUpon>ZipCodePurchase.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\ZipCodePurchase.aspx.designer.cs">
+      <DependentUpon>ZipCodePurchase.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Associate\ZipCodePurchaseOld.aspx.cs">
+      <DependentUpon>ZipCodePurchaseOld.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Associate\ZipCodePurchaseOld.aspx.designer.cs">
+      <DependentUpon>ZipCodePurchaseOld.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserAccountActivation.aspx.cs">
+      <DependentUpon>UserAccountActivation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserAccountActivation.aspx.designer.cs">
+      <DependentUpon>UserAccountActivation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ws\ConsumerPhoto.ashx.cs">
+      <DependentUpon>ConsumerPhoto.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ws\TopSearch.asmx.cs">
+      <DependentUpon>TopSearch.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="ws\AssociateRegistration.asmx.cs">
+      <DependentUpon>AssociateRegistration.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ws\AssociateSignUp.ashx.cs">
+      <DependentUpon>AssociateSignUp.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="ws\ConsumerComments.asmx.cs">
+      <DependentUpon>ConsumerComments.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ws\ConsumerRegistration.asmx.cs">
+      <DependentUpon>ConsumerRegistration.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ws\CouponCode.asmx.cs">
+      <DependentUpon>CouponCode.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ws\InnerPage.asmx.cs">
+      <DependentUpon>InnerPage.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ws\LatituteValue.asmx.cs">
+      <DependentUpon>LatituteValue.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ws\ShowSubcategoryIcon.ashx.cs">
+      <DependentUpon>ShowSubcategoryIcon.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Associate\dist\img\credit\" />
+    <Folder Include="Associate\img\credit\" />
+    <Folder Include="Associate\NewFolder1\" />
+    <Folder Include="Associate\uploads\" />
+    <Folder Include="bower_components\chartist\dist\" />
+    <Folder Include="bower_components\clndr\src\" />
+    <Folder Include="bower_components\d3\" />
+    <Folder Include="bower_components\fitvids\" />
+    <Folder Include="bower_components\handlebars\" />
+    <Folder Include="bower_components\metrics-graphics\dist\" />
+    <Folder Include="bower_components\peity\" />
+    <Folder Include="bower_components\uikit\css\" />
+    <Folder Include="bower_components\uikit\fonts\" />
+    <Folder Include="bower_components\weather-icons\css\" />
+    <Folder Include="bower_components\weather-icons\font\" />
+    <Folder Include="ConsumerPhoto\" />
+    <Folder Include="content-filter\css\" />
+    <Folder Include="content-filter\js\" />
+    <Folder Include="details-page-slider\css\" />
+    <Folder Include="details-page-slider\images\" />
+    <Folder Include="details-page-slider\js\" />
+    <Folder Include="dist\css\skins\" />
+    <Folder Include="dist\img\credit\" />
+    <Folder Include="dist\js\pages\" />
+    <Folder Include="js\vendor\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10422</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10422/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

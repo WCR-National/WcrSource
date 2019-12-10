@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="http://code.jquery.com/jquery-1.10.2.js">
+    </script>
+    <script>
+        $(document).ready(function () {
+            BindleftColumn();
+            BindRightColumn();
+        });
+        function BindleftColumn() {
+            $.ajax({
+                type: "POST", url: "ws/test.asmx/FirstCol", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: true,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("col1");
+                        var cartd = [];
+                        cartd.push("<table width='50px'>");
+
+                        $.each(docs, function (i, docs) {
+                            cartd.push("<tr>");
+                            cartd.push("<td class='circle1'>" + ($(docs).find("fircol").text()) + " </td>");
+                            cartd.push("</tr>");
+                        });
+                        cartd.push("</table>");
+                        $("#t1").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function BindRightColumn() {
+            $.ajax({
+                type: "POST", url: "ws/test.asmx/lastCol", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: true,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("col2");
+                        var cartd = [];
+                        cartd.push("<table width='50px'>");
+
+                        $.each(docs, function (i, docs) {
+                            cartd.push("<tr>");
+                            cartd.push("<td class='circle2'>" + ($(docs).find("scnCol").text()) + "</td>");
+                            cartd.push("</tr>");
+                        });
+                        cartd.push("</table>");
+                        $("#t2").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+
+    </script>
+    <style type="text/css">
+        .circle {
+            border-radius: 50%;
+            width: 50px;
+            height: 20px;
+            background-color: red;
+            color: white;
+        }
+
+        .circle1 {
+            border-radius: 150%;
+            width: 50px;
+            height: 50px;
+            background-color: yellow;
+            color: black;
+        }
+
+        .circle2 {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            background-color: maroon;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div>
+        <table width="50px">
+            <tr>
+                <td>
+
+                    <div id="t1">
+                    </div>
+
+                </td>
+                <td class="circle">
+                    center
+
+                </td>
+                <td>
+                    <div id="t2">
+
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</body>
+</html>

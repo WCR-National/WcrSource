@@ -1,0 +1,1712 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css?ver=5.2.2' type='text/css' media='all' />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title></title>
+</head>
+<body class="innerpage">
+    <div>
+
+    </div>
+    <div>
+
+        <div class="modal fade small-model" id="success-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body form-horizontal no-padding">
+                        <div class="alert alert-success no-radius alert-dismissible no-margin " role="alert">
+                            <button type="button" class="close align-with-two-line" id="btnclose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong> <label id="lblSuccess"></label> </strong>  <br />
+                            <label id="lbldetail" class="running-text"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade small-model" id="fail_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body form-horizontal no-padding">
+                        <div class="alert alert-danger no-radius alert-dismissible no-margin " role="alert">
+                            <button type="button" class="close align-with-two-line" id="btnclosef" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong> <label id="lblFailureTitle"></label> </strong>  <br />
+                            <label id="lblFailureDetail" class="running-text"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-wrap">
+        <div class="header"></div>
+        <div id="pageloader" class="pageloader" style="display:none">
+            <div class="pageloader-inner">
+                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div>
+        <div class="container result">
+            <div class="row">
+                <div class="col-lg-12 searchbar ">
+                    <h3 class="text-center" id="toplogo" style="display:none">
+                        <a href="JavaScript:void(0);" name="wcrServiceLink1">
+                            <img src="img/wcr-logo.png" class="img-responsive logo" alt="">
+                        </a>
+                    </h3>
+
+                    <div style="display:none" id="DivSearchAds">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-sm-offset-1 text-center col-xs-offset-0  col-md-offset-1 col-lg-offset-1 searchbar">
+                                <div id="dlogo">
+                                    <h3>
+                                        <a href="JavaScript:void(0);" name="wcrServiceLink">
+                                            <img src="img/wcr-logo.png" style="margin-bottom:25px;" class="img-responsive" alt="">
+                                        </a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="sales">
+                        </div>
+                        <div class="row" id="Services">
+                        </div>
+                    </div>
+                    <div class="container result" id="divShowAdvertisement" style="display:none;">
+                        <div class="container result" id="search-result">
+                            <div class="row">
+                                <div class="col-sm-12 searchbar ">
+                                    <h3 class="text-center"><a name="logolink" href="JavaScript:void(0);"><img src="img/wcr-logo.png" class="img-responsive logo" alt=""></a></h3>
+                                    <div id="sales1">
+                                    </div>
+                                    <div id="services1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <ul class="nav nav-tabs text-center" role="tablist" id="tabheader" style="display:none">
+                        <li role="presentation" id="first"><a id="fhome" href="#home" aria-controls="home" role="tab" data-toggle="tab">HOME </a></li>
+                        <li role="presentation" id="second"><a id="sprofile" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">TOWN HOME</a></li>
+                        <li role="presentation" id="third"><a href="#messages" id="tmessage" aria-controls="messages" role="tab" data-toggle="tab">MULTI FAMILY</a></li>
+                        <li role="presentation" id="fourth"><a href="#settings" id="tsettings" aria-controls="settings" role="tab" data-toggle="tab">LAND</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-sm-offset-1  col-xs-offset-0  col-md-offset-1 col-lg-offset-1 ">
+                        <div class="tab-content" id="tabcontent" style="display:none">
+
+                            <div role="tabpanel" class="tab-pane active" id="home"><div id="divDetails"></div></div>
+                            <div role="tabpanel" class="tab-pane" id="profile"><div id="divDetails1"></div></div>
+                            <div role="tabpanel" class="tab-pane" id="messages"><div id="divDetails2"></div></div>
+                            <div role="tabpanel" class="tab-pane" id="settings"><div id="divDetails3"></div></div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="choose-consumer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel"> In order to complete this action <br />you must sign-in.</h4>
+                                </div>
+                                <div class="modal-body form-horizontal">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="loader-wrap" id="LoadingImageLoginconsuer" style="display: none;">
+                                            <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <p id="userloginValidation" style="display:none;" class="invalid">Email or password can not be empty.</p>
+                                        <div class="form-group">
+                                            <input type="text" id="EmailAddress" class="form-control" maxlength="50" placeholder="Enter Email Address">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" id="Password" class="form-control" maxlength="20" placeholder="Password">
+                                        </div>
+                                        <p id="loginFailedmsg1" style="display:none;" class="invalid">User Authentication Failed. Please verify your credentials</p>
+                                        <div class="form-group text-center">
+                                            <input id="btnLogin1" type="button" class="btn-primary btn pull-left" value="Submit" />
+                                            <label class="forget-pass"> <a href="#" data-toggle="modal" id="aforgottxt" data-dismiss="modal" data-target="#forgotPassword1"> Forgot Password </a> </label>
+                                            <input id="btnCreateNew" data-toggle="modal" data-dismiss="modal" data-target="#choose-registration" data-backdrop="static" data-keyboard="false" type="button" class="btn-link pull-right " value="Create An Account" />
+
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade " id="forgotPassword1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h3 class="modal-title text-left" id="myModalLabel"> <strong> Forgot your password? </strong> </h3>
+                                    <p> Enter your WCR user email address</p>
+                                    <p id="Notfound1"></p>
+                                    <h5 id="msgforgot" style="display:none; color:red;">Unidentified Email address-Please Re-Enter</h5>
+                                </div>
+                                <div class="modal-body form-horizontal">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="loader-wrap" id="LoadingImageLoginconsuer1" style="display: none;">
+                                            <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input type="text" id="Forgetusername1" class="form-control" maxlength="50" placeholder="Email Address">
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="btnForgotPasswd1" type="button" class="btn btn-primary" value="RESET PASSWORD" />
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="choose-registration" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Please submit the following information.</h4>
+                                </div>
+                                <div id="pageloader1" class="pageloader" style="display:none">
+                                    <div class="pageloader-inner">
+                                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                    </div>
+                                </div>
+                                <div class="modal-body form-horizontal">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <input type="text" id="FirstName" autocomplete="off" class="form-control" maxlength="50" placeholder="First Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <p id="mobvalidataion" style="display:none;"></p>
+                                            <input type="text" id="mobile" autocomplete="off" class="form-control" maxlength="10" placeholder="Enter Mobile Number">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" id="EmailAddressReg" autocomplete="off" class="form-control" maxlength="50" placeholder="Enter Email Address">
+                                            <p id="mailvalidation1" style="display:none;" class="invalid">Email is not in correct format.</p>
+                                            <p id="duplicateEmail" style="display:none; color:red;">This EmailID is not available.Please Try another one.</p>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" id="RPassword" class="form-control" maxlength="20" placeholder="Password">
+                                            <div id="message1" class="alert alert-default" style="display:none;">
+                                                <h5> <strong> Password must contain the following: </strong> </h5>
+                                                <p id="letter1" class="invalid">A lowercase letter</p>
+                                                <div class="clearfix"></div>
+                                                <p id="capital1" class="invalid">A capital (uppercase) letter</p>
+                                                <div class="clearfix"></div>
+                                                <p id="number1" class="invalid">A number</p>
+                                                <div class="clearfix"></div>
+                                                <p id="length1" class="invalid">Minimum of 8 char & a max of 20 char in length</p>
+                                                <div class="clearfix"></div>
+                                                <p id="specialcharacter1" class="invalid">1 special character in ! @ # $ % ^ * _ </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" id="cPassword" class="form-control" maxlength="20" placeholder="Confirm Password">
+                                            <div id="mismatchpass1" class="alert m-t-15 alert-default" style="display:none;">
+                                                <p class="invalid">Passwords Do Not Match </p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="btnRegistration" type="button" class="btn-primary pull-left btn" value="Submit" />
+                                            <input id="btnCancel" data-toggle="modal" data-dismiss="modal" data-target="#choose-consumer" data-backdrop="static" data-keyboard="false" type="button" class="btn-primary btn pull-right" value="Cancel" />
+                                            <input type="hidden" id="logfails" value="0" />
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="hidLogin" />
+                    <input type="hidden" id="hidAdvertisementID" />
+                    <input type="hidden" id="hidAssociateID" />
+                    <input type="hidden" id="hidDataModelID" /> <!--This id will be used when consumer will click either in contact associate(1) button or in Bookmark(2)-->
+                    <input type="hidden" id="hidZipcodeID" />
+                    <input type="hidden" id="hidjobtypeID" />
+                    <input type="hidden" id="hidpanelID" />
+                    <input type="hidden" id="hidbookmarkContactAssociate" />
+                    <div class="modal fade " id="emailVerification1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" id="btnActClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title text-left" id="myModalLabel"> Account Activation </h4>
+                                    <br />
+                                    <span style="font-family:Verdana;">Activation code was sent to the Email address that was supplied for this account</span>
+                                </div>
+                                <div id="pageloaderVerify" class="pageloader" style="display:none">
+                                    <div class="pageloader-inner">
+                                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                    </div>
+                                </div>
+                                <div class="modal-body form-horizontal">
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                        Enter Activation Code:- <input type="text" id="txtEmailVerification1" /> <br /><br />
+                                        Resend New Activation Code: <a href="#" id="btnresend1">Resend</a>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                        <input type="button" id="btnVerification1" value="Verify" class="btn btn-primary" /><br />
+                                        <label id="lblSuccess2" style="color:red"></label>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="completeConsumerProfile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel"> Your Profile is incomplete<br />In order to complete this action, please enter the required information.</h4>
+                                </div>
+                                <div class="modal-body form-horizontal">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group" id="divFname" style="display:none;">
+                                            <input type="text" id="conName" class="form-control" maxlength="50" placeholder="First Name">
+                                        </div>
+                                        <div class="form-group" style="display:none;">
+                                            <input type="text" id="conMobile" class="form-control" maxlength="15" placeholder="Mobile No">
+                                        </div>
+                                        <div class="form-group" style="display:none;">
+                                            <input type="text" id="conEmail" class="form-control" maxlength="15" placeholder="Enter Email Address">
+                                        </div>
+                                        <div class="form-group">
+                                            <input id="btnUpdate" type="button" class="btn-primary btn pull-left" value="Submit" />
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" class="form-control" id="lbluserName1">
+                    <input type="hidden" class="form-control" id="lblpassword1">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+
+</body>
+</html>
+
+<script src="js/customjs.js"></script>
+
+<script>
+    $(function () {
+        ViewDiv();
+        var d = CheckUserLogin();
+        if (d == 0) {
+            hidLogin.value = "0";
+            $('.header').load("headerWithoutLogin.html");
+        }
+        else {
+            hidLogin.value = "1";
+            $('.header').load("consumerHeader.html");
+        }
+        $('.footer').load("consumerFooter.html");
+    });
+    function showLoader() {
+        $("#pageloader").css("display", "block");
+    }
+    function hideLoader() {
+        $("#pageloader").css("display", "none");
+    }
+    $(document).on('keypress', '#txtSearch', function (e) {
+        if (e.keyCode == 13) {  // detect the enter key
+            if (txtSearch.value == "") {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Please enter City, State OR Zip Code.");
+            }
+            else {
+                $("#pageloader").css("display", "block");
+                $("#homeicon").css("display", "inline-block");
+                setTimeout(function () {
+                    Searching();
+                }, 500);
+            }
+        }
+    });
+    $(document).on("click", "a[name='tpsrc']", function (e) {
+        if (txtSearch.value == "") {
+            $("#lblfai").css("display", "block");
+            $("#lblfai").text("Please enter City, State OR Zip Code.");
+        }
+        else {
+            $("#pageloader").css("display", "block");
+            $("#homeicon").css("display", "inline-block");
+            setTimeout(function () {
+                Searching();
+            }, 500);
+        }
+    });
+    function Searching() {
+        $("#lblfai").css("display", "none");
+        if (txtSearch.value == "") {
+            $("#lblfai").css("display", "block");
+            $("#lblfai").text("Please enter City, State OR Zip Code.");
+        }
+        else {
+            $("#divBody").addClass("result");
+            var zipc = txtSearch.value;
+            if ($.isNumeric($('#txtSearch').val())) {
+                HideDiv();
+                $("#DivSearchAds").css("display", "block");
+                $("#divShowAdvertisement").css("display", "none");
+                var sales = BindSalesCategory(zipc);
+                $("#sales").html(sales.join(''));
+                var services1 = BindServiesCategory(zipc);
+                $("#Services").html(services1.join(''));
+            }
+            else {
+                if (zipc.indexOf(',') != -1) {
+                    HideDiv();
+                    var strs;
+                    var State;
+                    var City;
+                    strs = zipc.split(',');
+                    for (var i = 0; i < strs.length; i++) {
+                        if (i == 0) {
+                            City = strs[i];
+                        }
+                        else if (i == 1) {
+                            State = $.trim(strs[i]);
+                        }
+                    }
+                    if (State.length == 2) {
+                        $("#DivSearchAds").css("display", "block");
+                        $("#divShowAdvertisement").css("display", "none");
+                        var sales = BindSalesCategoryCityWise(State, City);
+                        $("#sales").html(sales.join(''));
+                        var services1 = BindServiesCategoryCityWise(State, City);
+                        $("#Services").html(services1.join(''));
+                    }
+                    else if (State.length >= 2) {
+                        $("#lblfai").css("display", "block");
+                        $("#lblfai").text("Please Enter 2 Characters for State.");
+                    }
+                }
+                else {
+                    $("#lblfai").css("display", "block");
+                    $("#lblfai").text("Invalid data entered.  Please enter City, State OR Zip Code.");
+                }
+            }
+
+        }
+        hideLoader();
+    }
+    $(document).on("click", "a[name='wcrServiceLink']", function (e) {
+        $("#divBody").addClass("result");
+        //$("#DivWithoutSearchAds").css("display", "none");
+        $("#DivSearchAds").css("display", "none");
+        $("#divShowAdvertisement").css("display", "block");
+        $("#pageloader").css("display", "block");
+        setTimeout(function () {
+            GetSalesAdts();
+        }, 2500);
+
+    });
+    $(document).on("click", "a[name='wcrServiceLink1']", function (e) {
+        $("#divBody").addClass("result");
+        $("#toplogo").css("display", "none");
+        $("#DivSearchAds").css("display", "none");
+        $("#divDetails").css("display", "none");
+        $("#tabcontent").css("display", "none");
+        $("#tabheader").css("display", "none");
+        $("#divShowAdvertisement").css("display", "block");
+        $("#pageloader").css("display", "block");
+        setTimeout(function () {
+            GetSalesAdts();
+        }, 2500);
+    });
+    function GetSalesAdts() {
+        //showLoader();
+        var _IPAddress;
+        $.get("https://ipinfo.io", function (response) {
+            _IPAddress = response.ip;
+            $.ajax({
+                type: "POST", url: "ws/TopSearch.asmx/GetZipCodeIpAddress", data: "{'_IpAddress':'" + _IPAddress + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var salesn = BindSalesCategory1(r.d);
+                        $("#sales1").html(salesn.join(''));
+                        var servicesn = BindServiesCategory1(r.d);
+                        $("#services1").html(servicesn.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }, "jsonp");
+        hideLoader();
+    }
+    function ViewDiv() {
+        $("#toplogo").css("display", "block");
+        $("#tabheader").css("display", "block");
+        $("#tabcontent").css("display", "block");
+    }
+    function HideDiv() {
+        $("#toplogo").css("display", "none");
+        $("#tabheader").css("display", "none");
+        $("#tabcontent").css("display", "none");
+    }
+</script>
+
+<!--<script>
+    //$('#choose-consumer').on('show.bs.modal', function (e) {
+    //    var parameterValue = e.relatedTarget.dataset.yourparameter;
+    //    hidDataModelID.value = parameterValue;
+    //});
+
+</script>-->
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#EmailAddressReg').prop('disabled', true);
+        $("#mobile").change(function (e) {
+            var Moblength = $("#mobile").val();
+            if (Moblength.length != 10) {
+                $("#mobvalidataion").css({ "display": "block", "color": "red" });
+                $("#mobvalidataion").text("Please enter correct value in Mobile box!");
+                $('#EmailAddressReg').prop('disabled', true);
+                $("#mobile").focus();
+            }
+            else if (!isNaN(mobile.value) == "") {
+                $("#mobvalidataion").css({ "display": "block", "color": "red" });
+                $("#mobile").val("Characters not allowed in Mobile Number!");
+                $('#EmailAddressReg').prop('disabled', true);
+                $("#mobile").focus();
+            }
+            else {
+                $("#mobvalidataion").css("display", "none");
+                $("#mobvalidataion").val(' ');
+                $('#EmailAddressReg').prop('disabled', false);
+                $('#EmailAddressReg').focus();
+            }
+        });
+
+        $("#btnActClose").click(function () {
+            window.location.reload();
+        });
+        function showLoader1() {
+            $("#pageloader1").css("display", "block");
+        }
+        function hideLoader1() {
+            setTimeout(function () {
+                $("#pageloader1").css("display", "none");
+            }, 1500);
+        }
+        $('#btnRegistration').css("background-color", "#808080");
+        $('#btnRegistration').prop('disabled', true);
+        $('#RPassword').prop('disabled', true); //TO DISABLED FORGOT PASSWORD BUTTON
+        $('#cPassword').prop('disabled', true); //TO
+
+        $("#RPassword").focusin(function () {
+            $("#message1").css("display", "block");
+        });
+        $("#RPassword").blur(function () {
+            $("#message1").css("display", "none");
+        });
+        $("#EmailAddressReg").change(function (e) {
+            var emailID = EmailAddressReg.value;
+            var filter1 = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var filter = /^[\w\.]+@/;
+            if (!filter.test(emailID)) {
+                EmailAddressReg.focus();
+                $("#mailvalidation1").text("Invalid special characters are not allowed in user’s email address");
+                $("#mailvalidation1").css('display', 'block');
+                return false;
+            }
+            else if (!filter1.test(emailID)) {
+                EmailAddressReg.focus();
+                $("#mailvalidation1").text("Email is not in correct format.");
+                $("#mailvalidation1").css('display', 'block');
+                return false;
+            }
+            else {
+                $("#mailvalidation1").css('display', 'none');
+                $.ajax({
+                    url: "ws/AssociateSignUp.ashx?action=RecordExists&EmailID=" + emailID + "",
+                    data: "",
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    async: true,
+                    type: "POST",
+                    cache: false,
+                    beforeSend: function () {
+                        showLoader1();
+                    },
+                    success: function (response) {
+                        hideLoader1();
+                        if (response >= 1) {
+                            $("#duplicateEmail").css('display', 'block');
+                            $("#EmailAddressReg").focus();
+                        }
+                        else {
+                            $('#RPassword').prop('disabled', false); //TO DISABLED FORGOT PASSWORD BUTTON
+                            $('#cPassword').prop('disabled', false); //TO
+                            $("#duplicateEmail").css('display', 'none');
+                            $("#RPassword").focus();
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response + "Error...");
+                    }
+                });
+            }
+        });
+        $("#RPassword").keyup(function () {
+            $("#message1").css("display", "block");
+            var lowerCaseLetters = /[a-z]/g;
+            var upperCaseLetters = /[A-Z]/g;
+            var numbers = /[0-9]/g;
+            if (lowerCaseLetters.test(this.value)) {
+                $("#letter1").removeClass("invalid");
+                $("#letter1").addClass("valid");
+            } else {
+                $("#letter1").removeClass("valid");
+                $("#letter1").addClass("invalid");
+            }
+            if (upperCaseLetters.test(this.value)) {
+                $("#capital1").removeClass("invalid");
+                $("#capital1").addClass("valid");
+            }
+            else {
+                $("#capital1").removeClass("valid");
+                $("#capital1").addClass("invalid");
+            }
+            if (numbers.test(this.value)) {
+                $("#number1").removeClass("invalid");
+                $("#number1").addClass("valid");
+            }
+            else {
+                $("#number1").removeClass("valid");
+                $("#number1").addClass("invalid");
+            }
+            if ($("#RPassword").val().length < 8) {
+                $("#length1").removeClass("valid");
+                $("#length1").addClass("invalid");
+            } else {
+                $("#length1").removeClass("invalid");
+                $("#length1").addClass("valid");
+            }
+            var str = $('#RPassword').val();
+            var regex = /[^\w\s]/gi;
+            if (regex.test(str) == true) {
+                $("#specialcharacter1").removeClass("invalid");
+                $("#specialcharacter1").addClass("valid");
+            }
+            else {
+                $("#specialcharacter1").removeClass("valid");
+                $("#specialcharacter1").addClass("invalid");
+            }
+        });
+        $("#cPassword").change(function (e) {
+            if (cPassword.value != RPassword.value) {
+                $("#mismatchpass1").css("display", "block");
+                $('#btnRegistration').css("background-color", "#808080");
+                $('#btnRegistration').prop('disabled', true);
+            }
+            else {
+                $("#mismatchpass1").css("display", "none");
+                $('#btnRegistration').css("background-color", "rgb(33, 150, 243)");
+                $('#btnRegistration').prop('disabled', false);
+            }
+        });
+        $("#cPassword").keyup(function (e) {
+            if (cPassword.value != RPassword.value) {
+                $("#mismatchpass1").css("display", "block");
+                $('#btnRegistration').css("background-color", "#808080");
+                $('#btnRegistration').prop('disabled', true);
+            }
+            else {
+                $("#mismatchpass1").css("display", "none");
+                $('#btnRegistration').css("background-color", "rgb(33, 150, 243)");
+                $('#btnRegistration').prop('disabled', false);
+            }
+        });
+        var id = GetParameterValues('id');
+        if (id == 1) {
+            fst();
+        }
+        else if (id == 2) {
+            snd();
+        }
+        else if (id == 3) {
+            thrd();
+        }
+        else if (id == 4) {
+            fouth();
+        }
+        else { }
+        $("#fhome").click(function () {
+            fst();
+        });
+        $("#sprofile").click(function () {
+            snd();
+        });
+        $("#tmessage").click(function () {
+            thrd();
+        });
+        $("#tsettings").click(function () {
+            fouth();
+        });
+        function fst() {
+            $("#first").addClass("active");
+            $("#second").removeClass("active");
+            $("#third").removeClass("active");
+            $("#fourth").removeClass("active");
+            $("#home").show();
+            $("#profile").hide();
+            $("#messages").hide();
+            $("#settings").hide();
+        }
+        function snd() {
+            $("#first").removeClass("active");
+            $("#second").addClass("active");
+            $("#third").removeClass("active");
+            $("#fourth").removeClass("active");
+            $("#profile").show();
+            $("#home").hide();
+            $("#messages").hide();
+            $("#settings").hide();
+        }
+
+        function thrd() {
+            $("#first").removeClass("active");
+            $("#second").removeClass("active");
+            $("#third").addClass("active");
+            $("#fourth").removeClass("active");
+            $("#messages").show();
+            $("#home").hide();
+            $("#profile").hide();
+            $("#settings").hide();
+        }
+
+        function fouth() {
+            $("#first").removeClass("active");
+            $("#second").removeClass("active");
+            $("#third").removeClass("active");
+            $("#fourth").addClass("active");
+            $("#messages").hide();
+            $("#home").hide();
+            $("#profile").hide();
+            $("#settings").show();
+        }
+        $("#btnCreateNew").click(function () {
+            $("#mailvalidation1").css("display", "none");
+            $("#FirstName").value = "";
+            $("#EmailAddressReg").value = "";
+            $("#RPassword").value = "";
+            $("#cPassword").value = "";
+            $("#duplicateEmail").css("display", "none");
+            $("#mismatchpass1").css("display", "none");
+        });
+
+        function GetParameterValues(param) {
+            var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < url.length; i++) {
+                var urlparam = url[i].split('=');
+                if (urlparam[0] == param) {
+                    return urlparam[1];
+                }
+            }
+        }
+        BindAdvertisements(1, 'divDetails');
+        BindAdvertisements(2, 'divDetails1');
+        BindAdvertisements(3, 'divDetails2');
+        BindAdvertisements(4, 'divDetails3');
+        $("#btnUpdate").click(function (e) {
+            var cc = UpdateConsumerCompulsoryData(conName.value);
+            if (cc >= 1) {
+                hidLogin.value = "1";
+                if (hidDataModelID.value == "1") {
+                    InterestedConsumers(hidAdvertisementID.value + ',' + hidAssociateID.value);
+                }
+                else {
+                    BookMarkInsert(hidAdvertisementID.value);
+                }
+                window.location.reload();
+            }
+
+        });
+        $("#btnclose").click(function () {
+            window.location.reload();
+        });
+        $("#btnclosef").click(function () {
+            var chklogfail = logfails.value;
+            if (chklogfail == 1) {
+                $("#choose-registration").modal('show');
+                $('#fail_message').modal('hide');
+                logfails.value = 0;
+            }
+            else if (chklogfail == 2) {
+                $("#choose-consumer").modal('show');
+                $('#fail_message').modal('hide');
+                logfails.value = 0;
+            }
+        });
+        function Login(uname, pass, utype) {
+            $.ajax({
+                type: "POST",
+                url: "ws/AssociateRegistration.asmx/ConsumerLogin",
+                data: "{'EmailID':'" + uname + "','Password':'" + pass + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    if (response.d.length > 0) {
+                        var xmlDoc1 = $.parseXML(response.d);
+                        var xml1 = $(xmlDoc1);
+                        var docs1 = xml1.find("consumerLogin");
+                        $.each(docs1, function (i, docs1) {
+                            if ($(docs1).find("Id").text() == "-1") {
+                                alert("Wrong Authentication");
+                                return false;
+                            }
+                            else if ($(docs1).find("Flag").text() == "1") {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate",
+                                    data: "{'username':'" + uname + "','assoID':'" + $(docs1).find("Id").text() + "'}",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    async: false,
+                                    success: function (r2) {
+                                        if (r2.d == "1") {
+                                            window.location.href = 'ConsumerDashboard.html';
+                                            window.location.reload();
+                                        }
+                                    }
+                                });
+                            }
+                            else {
+                                $("#lblFailureTitle").text("User Authentication Failed.")
+                                $("#lblFailureDetail").text("Please verify your credentials and retry log-in.")
+                                $('#fail_message').modal('show');
+                                return false;
+
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        $("#Forgetusername1").change(function () {
+            var sEmail = $('#Forgetusername1').val();
+            if ($.trim(sEmail).length == 0) {
+                Forgetusername1.focus();
+                $('#Notfound1').removeClass("valid");
+                $('#Notfound1').addClass("invalid");
+                $("#Notfound1").text("Please enter valid email address.");
+                $('#Notfound1').css("display", "block");
+                //alert('Please enter valid email address');
+                //e.preventDefault();
+            }
+            if (validateEmail(sEmail)) {
+                $('#Notfound1').css("display", "none");
+                $('#btnForgotPasswd1').prop('disabled', false); //TO Enabled
+            }
+            else {
+                Forgetusername.focus();
+                $('#Notfound1').removeClass("valid");
+                $('#Notfound1').addClass("invalid");
+                $("#Notfound1").text("Please enter valid email address.");
+                $('#Notfound1').css("display", "block");
+                //alert('Invalid Email Address');
+                //e.preventDefault();
+            }
+        });
+        function validateEmail(sEmail) {
+            var filter = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (filter.test(sEmail)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        $('#btnForgotPasswd1').click(function (e) {
+            var forgotEmail = $('#Forgetusername1').val();
+            var filter = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (forgotEmail == '') {
+                $('#Notfound1').addClass("invalid");
+                $("#Notfound1").text("Email address required");
+                $("#Notfound1").css("display", "block");
+                $("#Forgetusername1").focus();
+            }
+            else if (!filter.test($('#Forgetusername1').val())) {
+                $('#Notfound1').addClass("invalid");
+                $("#Notfound1").text("Email is not Valid");
+                $("#Notfound1").css("display", "block");
+                $("#Forgetusername1").focus();
+            }
+            else {
+                $("#LoadingImageLoginconsuer1").css("display", "block");
+                setTimeout(function () {
+                    ForgotPass(forgotEmail);
+                }, 1000);
+            }
+
+        });
+        function ForgotPass(forgotEmail) {
+            $.ajax({
+                type: "POST",
+                url: "ws/AssociateRegistration.asmx/AssociateAccountExists",
+                data: "{'EmailID':'" + forgotEmail + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("associateExists");
+                        $.each(docs, function (i, docs) {
+                            if ($(docs).find("AccountId").text() != "0") {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ws/AssociateSignUp.ashx?action=ResetAssociatePassNew&EmailID=" + forgotEmail + "",
+                                    data: "{}",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    async: false,
+                                    success: function (response) {
+                                        if (response == "0") {
+                                            $('#Notfound1').removeClass("invalid");
+                                            $('#Notfound1').addClass("valid");
+                                            $("#Notfound1").text("Please check your registered emailID for new password.");
+                                            $('#Notfound1').css("display", "block");
+                                            $('#Forgetusername1').css("display", "none");
+                                            $('#btnForgotPasswd1').css("display", "none");
+                                            Forgetusername1.value = "";
+                                            $("#LoadingImageLoginconsuer1").css("display", "none");
+                                            return false;
+                                        }
+                                    },
+                                    failure: function (response) {
+                                        alert(response + "Fail");
+                                        //window.location.reload();
+                                    },
+                                    error: function (response) {
+                                        alert(response + "Error...");
+                                        // window.location.reload();
+                                    }
+                                });
+                            }
+                            else {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ws/AssociateRegistration.asmx/ConsumerAccountExists",
+                                    data: "{'EmailID':'" + forgotEmail + "'}",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    async: false,
+                                    success: function (response) {
+                                        if (response.d.length > 0) {
+                                            var xmlDoc1 = $.parseXML(response.d);
+                                            var xml1 = $(xmlDoc1);
+                                            var docs1 = xml1.find("consumerExists");
+                                            $.each(docs1, function (i, docs1) {
+                                                if ($(docs1).find("AccountId").text() == "0") {
+                                                    $('#Notfound1').removeClass("valid");
+                                                    $('#Notfound1').addClass("invalid");
+                                                    $("#Notfound1").text("Please verify your email address and retry again.");
+                                                    $('#Notfound1').css("display", "block");
+                                                    $("#Forgetusername1").focus();
+                                                    $("#LoadingImageLoginconsuer1").css("display", "none");
+                                                    return false;
+                                                }
+                                                else {
+
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "ws/AssociateSignUp.ashx?action=ResetConsumerPassNew&EmailID=" + forgotEmail + "",
+                                                        data: "{}",
+                                                        contentType: "application/json; charset=utf-8",
+                                                        dataType: "json",
+                                                        async: false,
+                                                        cache: false,
+                                                        success: function (r1) {
+                                                            if (r1 == "0") {
+                                                                $('#Notfound1').removeClass("invalid");
+                                                                $('#Notfound1').addClass("valid");
+                                                                $("#Notfound1").text("Please check your registered emailID for new password.");
+                                                                $('#Notfound1').css("display", "block");
+                                                                $('#Forgetusername1').css("display", "none");
+                                                                $('#btnForgotPasswd1').css("display", "none");
+                                                                Forgetusername1.value = "";
+                                                                $("#LoadingImageLoginconsuer1").css("display", "none");
+                                                                return false;
+                                                            }
+                                                        },
+                                                        failure: function (r1) {
+                                                            alert(r1.d + "Fail");
+                                                            //window.location.reload();
+                                                        },
+                                                        error: function (r1) {
+                                                            alert(r1.d + "Error...");
+                                                            // window.location.reload();
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    },
+                                    failure: function (response1) {
+                                        alert(response1 + "Fail");
+                                    },
+                                    error: function (response1) {
+                                        alert(response1 + "Error...");
+                                    }
+                                });
+                            }
+                        });
+                    }
+                },
+                failure: function (response) {
+                    alert(response + "Fail");
+                },
+                error: function (response) {
+                    alert(response + "Error...");
+                }
+            });
+
+            $("#LoadingImageLoginconsuer1").css("display", "none");
+        }
+        function ConsumerValid() {
+            var returnValue;
+            var filter = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            var minLength = 8;
+            var maxLength = 20;
+            var str = $('#RPassword').val();
+            var upper_text = new RegExp('[A-Z]');
+            var lower_text = new RegExp('[a-z]');
+            var number_check = new RegExp('[0-9]');
+            var special_char = new RegExp('[!/\'^�$%&*()}{@#~?><>,|=_+�-\]');
+            var str = RPassword.value;
+            var Moblength = $("#mobile").val();
+            if (FirstName.value == "") {
+                returnValue = "Name required";
+                $("#FirstName").focus();
+            }
+            else if (Moblength.length != 10) {
+                returnValue = "Please enter correct value in Mobile box!";
+                $("#mobile").focus();
+            }
+            else if (!isNaN(mobile.value) == "") {
+                returnValue = "Characters not allowed in Mobile Number!";
+                $("#mobile").focus();
+            }
+            else if (!filter.test($('#EmailAddressReg').val())) {
+                returnValue = "Email is not Valid";
+                $("#EmailAddressReg").focus();
+            }
+            else if (RPassword.value == "") {
+                returnValue = "Password is Required";
+                $("#RPassword").focus();
+            }
+            else if (str.length < minLength) {
+                returnValue = "Password must have a minimum of 8 chanracters.";
+            }
+            else if (str.length > maxLength) {
+                returnValue = "Password must have a maximum of 20 chanracters.";
+            }
+            else if (!str.match(upper_text)) {
+                returnValue = "Must include at least 1 Upper case character.";
+                $("#passwrd").focus();
+            }
+            else if (!str.match(lower_text)) {
+                returnValue = "Must include at least 1 Lower case character.";
+                $("#passwrd").focus();
+            }
+            else if (!str.match(number_check)) {
+                returnValue = "Must include at least 1 Number.";
+                $("#passwrd").focus();
+            }
+            else if (!str.match(special_char)) {
+                returnValue = "Must include at least 1 special character.";
+                $("#passwrd").focus();
+            }
+            else if (cPassword.value != RPassword.value) {
+                returnValue = "Password does not match";
+                $("#cPassword").focus();
+            }
+            else {
+                returnValue = "1";
+            }
+            return returnValue;
+        }
+        function showLoaderLoginCon() {
+            $("#LoadingImageLoginconsuer").css("display", "block");
+        }
+        function hideLoaderLoginCon() {
+            setTimeout(function () {
+                $("#LoadingImageLoginconsuer").css("display", "none");
+            }, 1000);
+        }
+        $("#btnLogin1").click(function (e) {
+            var filter = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+            if (EmailAddress.value == '' || Password.value == '') {
+                $("#userloginValidation").text(" Email or password can not be empty.");
+                $("#userloginValidation").css("display", "block");
+            }
+            else if (!filter.test($('#EmailAddress').val())) {
+                $("#userloginValidation").text("Please Enter Correct Email Address.");
+                $("#userloginValidation").css("display", "block");
+                $("#EmailAddress").focus();
+            }
+            else {
+                $("#userloginValidation").css("display", "none");
+                var uname = EmailAddress.value;
+                var pass = Password.value;
+                $(document).on({
+                    ajaxStart: function () {
+                        showLoaderLoginCon();
+                    },
+                    ajaxStop: function () {
+                        hideLoaderLoginCon();
+                    }
+                });
+                $.ajax({
+                    type: "POST",
+                    url: "ws/AssociateRegistration.asmx/ConsumerAccountExists",
+                    data: "{'EmailID':'" + uname + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (response) {
+                        if (response.d.length > 0) {
+                            var xmlDoc1 = $.parseXML(response.d);
+                            var xml1 = $(xmlDoc1);
+                            var docs1 = xml1.find("consumerExists");
+                            $.each(docs1, function (i, docs1) {
+                                if ($(docs1).find("AccountId").text() == "0") {
+                                    jQuery.noConflict();
+                                    $("#loginFailedmsg1").css("display", "block");
+                                    logfails.value = 2;
+                                    return false;
+                                }
+                                else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
+                                    lblpassword1.value = pass;
+                                    lbluserName1.value = uname;
+                                    jQuery.noConflict();
+                                    $('#emailVerification1').modal({ backdrop: 'static', keyboard: false });
+                                    $('#choose-consumer').modal('hide');
+                                }
+                                else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
+                                    $("#loginFailedmsg1").text("Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331");
+                                    $("#loginFailedmsg1").css("display", "block");
+                                }
+                                else {
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "ws/AssociateRegistration.asmx/ConsumerLogin",
+                                        data: "{'EmailID':'" + uname + "','Password':'" + pass + "'}",
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        async: false,
+                                        success: function (responselog) {
+                                            if (responselog.d.length > 0) {
+                                                var xmlDoclog1 = $.parseXML(responselog.d);
+                                                var xmllog1 = $(xmlDoclog1);
+                                                var docslog1 = xmllog1.find("consumerLogin");
+                                                $.each(docslog1, function (i, docslog1) {
+                                                    if ($(docslog1).find("Id").text() == "-1") {
+                                                        jQuery.noConflict();
+                                                        $("#loginFailedmsg1").css("display", "block");
+                                                        logfails.value = 2;
+                                                        return false;
+                                                    }
+                                                    else if ($(docslog1).find("Flag").text() == "1") {
+                                                        $.ajax({
+                                                            type: "POST",
+                                                            url: "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate",
+                                                            data: "{'username':'" + uname + "','assoID':'" + $(docslog1).find("Id").text() + "'}",
+                                                            contentType: "application/json; charset=utf-8",
+                                                            dataType: "json",
+                                                            async: false,
+                                                            success: function (r2) {
+                                                                if (r2.d == "1") {
+                                                                    $.ajax({
+                                                                        type: "POST", url: "ws/ConsumerRegistration.asmx/SelectConsumerDetail",
+                                                                        data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: true,
+                                                                        success: function (rcd) {
+                                                                            if (rcd.d.length > 0) {
+                                                                                var xmlDoccd = $.parseXML(rcd.d);
+                                                                                var xmlcd = $(xmlDoccd);
+                                                                                var docscd = xmlcd.find("ConsumerDetail");
+                                                                                $.each(docscd, function (i, docscd) {
+                                                                                    if ($(docscd).find("name").text() == "0") {
+                                                                                        e.preventDefault();
+                                                                                        jQuery.noConflict();
+                                                                                        $('#completeConsumerProfile').modal('show');
+                                                                                        $("#divFname").css("display", "block");
+                                                                                    }
+                                                                                    else {
+                                                                                        hidLogin.value = "1";
+                                                                                        if (hidDataModelID.value == "1") {
+                                                                                            InterestedConsumers(hidAdvertisementID.value + ',' + hidAssociateID.value + ',' + 1 + ',' + 0);
+                                                                                            //$("#choose-consumer").modal("hide");
+                                                                                            //alert("A WCR National Associate  will contact you soon.");
+                                                                                            //window.location.reload();
+                                                                                            $("#choose-consumer").modal("hide");
+                                                                                            $("#msg" + hidpanelID.value).css("display", "block");
+                                                                                            // alert("2");
+                                                                                            setTimeout(function () {
+                                                                                                window.location.reload();
+                                                                                            }, 200);
+                                                                                            //
+                                                                                        }
+                                                                                        else {
+                                                                                            $("#choose-consumer").modal("hide");
+                                                                                            BookMarkInsert(hidAdvertisementID.value);
+                                                                                           
+                                                                                            //alert("Advertisement bookmarked successfully.");
+                                                                                            //setTimeout(function () {
+                                                                                            //    window.location.reload();
+                                                                                            //}, 2000);
+                                                                                        }
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        },
+                                                                        failure: function (response) {
+                                                                            alert(response.d + "Fail");
+                                                                        },
+                                                                        error: function (response) {
+                                                                            alert(response.d + "Error...");
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
+                                                        });
+
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    });
+                                }
+
+                            });
+                        }
+                        else {
+                            jQuery.noConflict();
+                            $("#loginFailedmsg1").css("display", "block");
+                            logfails.value = 2;
+                            return false;
+                        }
+                    }
+                });
+            }
+        });
+
+        $("#btnVerification1").click(function () {
+            var uname = lbluserName1.value;
+            var pass = lblpassword1.value;
+            consumerVerification(uname, pass);
+           // $("#pageloaderVerify").css("display", "block");
+            //setTimeout(function () {
+            //    consumerVerification(uname, pass);
+            //}, 200);
+           
+        });
+        $('#btnresend1').click(function () {
+            var emailID = lbluserName1.value;
+            $.ajax({
+                type: "POST", url: "ws/AssociateRegistration.asmx/ResendActivationCode",
+                data: "{'EmailID':'" + emailID + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        if (r.d >= "1") {
+                            $("#lblSuccess2").text("Activation code has been send to your registered Email.");
+                        }
+                        else {
+                        }
+                    }
+                    else {
+
+                    }
+                }
+            });
+        });
+        function consumerVerification(username, pass) {
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/GetActivationCode",
+                data: "{'username':'" + username + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        if (r.d == txtEmailVerification1.value) {
+                            $.ajax({
+                                type: "POST", url: "ws/ConsumerRegistration.asmx/VerifiedAccount",
+                                data: "{'username':'" + username + "'}",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                async: false,
+                                success: function (r1) {
+                                    if (r1.d.length > 0) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "ws/AssociateRegistration.asmx/ConsumerLogin",
+                                            data: "{'EmailID':'" + username + "','Password':'" + pass + "'}",
+                                            contentType: "application/json; charset=utf-8",
+                                            dataType: "json",
+                                            async: false,
+                                            success: function (response) {
+                                                if (response.d.length > 0) {
+                                                    var xmlDoc1 = $.parseXML(response.d);
+                                                    var xml1 = $(xmlDoc1);
+                                                    var docs1 = xml1.find("consumerLogin");
+                                                    $.each(docs1, function (i, docs1) {
+                                                        if ($(docs1).find("Id").text() == "-1") {
+                                                            jQuery.noConflict();
+                                                            $('#choose-login').modal('hide');
+                                                            $("#lblFailureTitle").text("User Authentication Failed.");
+                                                            $("#lblFailureDetail").text("Please verify your credentials and retry log-in.");
+                                                            $('#fail_message').modal('show');
+                                                            return false;
+                                                        }
+                                                        else if ($(docs1).find("Flag").text() == "1") {
+                                                            $.ajax({
+                                                                type: "POST",
+                                                                url: "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate",
+                                                                data: "{'username':'" + username + "','assoID':'" + $(docs1).find("Id").text() + "'}",
+                                                                contentType: "application/json; charset=utf-8",
+                                                                dataType: "json",
+                                                                async: false,
+                                                                success: function (r2) {
+                                                                    if (r2.d == "1") {
+                                                                        $.ajax({
+                                                                            type: "POST",
+                                                                            url: "ws/ConsumerRegistration.asmx/SelectConsumerDetail",
+                                                                            data: "{}",
+                                                                            contentType: "application/json; charset=utf-8",
+                                                                            dataType: "json",
+                                                                            async: true,
+                                                                            success: function (r) {
+                                                                                if (r.d.length > 0) {
+                                                                                    var xmlDoc = $.parseXML(r.d);
+                                                                                    var xml = $(xmlDoc);
+                                                                                    var docs = xml.find("ConsumerDetail");
+                                                                                    $.each(docs, function (i, docs) {
+                                                                                        if ($(docs).find("name").text() == "0") {
+                                                                                            e.preventDefault();
+                                                                                            jQuery.noConflict();
+                                                                                            $('#completeConsumerProfile').modal('show');
+                                                                                            $("#divFname").css("display", "block");
+                                                                                        }
+                                                                                        else {
+                                                                                            $('#emailVerification1').modal('hide');
+                                                                                            hidLogin.value = "1";
+                                                                                            if (hidDataModelID.value == "1") {
+                                                                                                InterestedConsumers(hidAdvertisementID.value + ',' + hidAssociateID.value + ',' + 1 + ',' + 0, hidpanelID.value);
+                                                                                                $("#msg" + hidpanelID.value).css("display", "block");
+                                                                                                setTimeout(function () {
+                                                                                                    window.location.reload();
+                                                                                                }, 2000);
+                                                                                            }
+                                                                                            else {
+                                                                                                BookMarkInsert(hidAdvertisementID.value);
+                                                                                            }
+                                                                                            // window.location.reload();
+
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            },
+                                                                            failure: function (response) {
+                                                                                alert(response.d + "Fail");
+                                                                            },
+                                                                            error: function (response) {
+                                                                                alert(response.d + "Error...");
+                                                                            }
+                                                                        });
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            $('#choose-login').modal('hide');
+                                                            $("#lblFailureTitle").text("User Authentication Failed.");
+                                                            $("#lblFailureDetail").text("Please verify your credentials and retry log-in.");
+                                                            $('#fail_message').modal('show');
+                                                        }
+                                                    });
+                                                }
+                                            },
+                                            failure: function (response) {
+                                                alert(response.d + "Fail");
+                                            },
+                                            error: function (response) {
+                                                alert(response.d + "Error...");
+                                            }
+                                        });
+
+                                    }
+                                    else {
+                                        alert("Verification code does not match. Please Login your registered Email ID to see verification code.");
+                                        return false;
+                                    }
+
+                                },
+                                failure: function (response) {
+                                    alert(response.d + "Fail");
+                                },
+                                error: function (response) {
+                                    alert(response.d + "Error...");
+                                }
+                            });
+                        }
+                        else {
+                            alert("Verification code does not match. Please Login your registered Email ID to see verification code.");
+                            return false;
+                        }
+                    }
+                    else {
+                        alert("Verification code does not match. Please Login your registered Email ID to see verification code.");
+                        return false;
+                    }
+                }
+            });
+            //$("#pageloaderVerify").css("display", "none");
+        }
+        $("#btnRegistration").click(function () {
+            var check = ConsumerValid();
+            if (check == "1") {
+                $(document).on({
+                    ajaxStart: function () {
+                        showLoaderreg();
+                    },
+                    ajaxStop: function () {
+                        hideLoaderreg();
+                    }
+                });
+                var FullName = FirstName.value;
+                var emailID = EmailAddressReg.value;
+                var password = RPassword.value;
+                var mob = mobile.value;
+                var Address = "0";
+                var ZipCode = "0";
+                $.ajax({
+                    url: "ws/AssociateSignUp.ashx?action=Consumer&Name=" + FullName + "&EmailID=" + emailID + "&Password=" + password + "&address=" + Address + "&ZipCode=" + ZipCode + "&mobile=" + mob + "",
+                    data: "",
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    async: true,
+                    type: "POST",
+                    cache: false,
+                    success: function (response) {
+                        if (response >= 1) {
+                            jQuery.noConflict();
+                            lbluserName1.value = emailID;
+                            lblpassword1.value = password;
+                            $('#emailVerification1').modal({ backdrop: 'static', keyboard: false })
+                            $('#choose-registration').modal('hide');
+                        }
+                        if (response == "0") {
+                            jQuery.noConflict();
+                            $('#choose-registration').modal('hide');
+                            $("#lblFailureTitle").text("User Authentication Failed!!");
+                            $("#lblFailureDetail").text("This EmailID is not available.Please Try another one.");
+                            $('#fail_message').modal('show');
+                        }
+                        if (response == "-1") {
+                            jQuery.noConflict();
+                            $('#choose-registration').modal('hide');
+                            $("#lblFailureTitle").text("Failure!!");
+                            $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                            $('#fail_message').modal('show');
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response + "Error...");
+                    }
+                });
+            }
+            else {
+                logfails.value = 1;
+                $("#choose-registration").modal('hide');
+                jQuery.noConflict();
+                $("#lblFailureTitle").text("Alert!!")
+                $("#lblFailureDetail").text(check)
+                $('#fail_message').modal('show');
+            }
+        });
+
+        function showLoaderreg() {
+            $("#pageloader1").css("display", "block");
+        }
+        function hideLoaderreg() {
+            setTimeout(function () {
+                $("#pageloader1").css("display", "none");
+            }, 1000);
+        }
+
+        $(document).on('keypress', '#Password', function (e) {
+            if (e.keyCode == 13) {  // detect the enter key
+                $("#btnLogin1").click();
+            }
+        });
+
+    });
+    function BindAdvertisements(subID, DivID) {
+        var ca = GetParameterValues('ca');
+        var id = subID; //GetParameterValues('id');
+        var zipcode = GetParameterValues('zipcode');
+        var nm = GetParameterValues('name');
+        var jtype = GetParameterValues('jtype');
+        var catName = GetParameterValues('catName');
+        function GetParameterValues(param) {
+            var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < url.length; i++) {
+                var urlparam = url[i].split('=');
+                if (urlparam[0] == param) {
+                    return urlparam[1];
+                }
+            }
+        }
+        if (jtype == 'Services') {
+            $.ajax({
+                type: "POST", url: "Associate/ws/SubCategory.asmx/SelectCatSubCategory",
+                data: "{'flag':1,'Categoryid':" + id + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("CatSubCategories");
+                        $.each(docs, function (i, docs) {
+                            id = ($(docs).find("id").text());
+                        });
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        $.ajax({
+            type: "POST", url: "ws/InnerPage.asmx/ViewHomeAdvertisementsWithParam",
+            data: "{'subCategoryID':" + id + ", 'param':" + zipcode + " }",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (r) {
+                if (r.d.length > 0) {
+                    var cnt = 1;
+                    var xmlDoc = $.parseXML(r.d);
+                    var xml = $(xmlDoc);
+                    var docs = xml.find("HViewAdvertismentsWithParam");
+                    var cartd = [];
+                    cartd.push("<div class='col-sm-12'>");
+                    $.each(docs, function (i, docs) {
+                        var advertisementID = null;
+                        advertisementID = ($(docs).find("advertisementID").text());
+                        hidAdvertisementID.value = advertisementID;
+                        cartd.push("<div class='panel panel-default advertise_list bookmarklist'>");
+                        cartd.push("<div class='panel-body'>");
+                        cartd.push("<p class='text-success text-right text-pos-right' id=msg" + cnt + " style='display:none'> A WCR National Associate  will contact you soon. </p>");
+                        cartd.push("<div class='row'><a href=SalesAdvertisement.html?ca=" + ca + "&id=" + ($(docs).find("advertisementID").text()) + "&zipcode=" + zipcode + "&nm=" + nm + "&jobtype=" + jtype + "&category=" + catName + "&cid=" + id + ">");
+                        cartd.push("<div class='col-sm-3 advertise-thumb'>");
+                        cartd.push("<img height='450px' src='Associate/Adv_img/" + ($(docs).find("advMainImage").text()) + "' alt='' class='img-responsive'>");
+                        cartd.push("</div>");
+                        cartd.push("<div class='col-sm-5'>");
+                        cartd.push("<h4>" + $(docs).find("address").text() + " <br /></h4>");
+                        cartd.push("<h4> " + $(docs).find("City").text() + ",  " + $(docs).find("State").text() + "  " + $(docs).find("ZipCode").text() + " </h4>");
+                        cartd.push("<p class='text-uppercase'>  </p>");
+                        cartd.push("<ul><li>License#:" + $(docs).find("LicenseId").text() + "  </li>");
+                        cartd.push("<li>Advertisement ID:" + $(docs).find("advertisementID").text() + "  </li>");
+                        cartd.push("</ul>");
+                        hidAssociateID.value = $(docs).find("associateID").text();
+                        cartd.push("</div>");
+                        cartd.push("</a>");
+                        cartd.push("<div class='col-sm-3 pos-rel pull-right'>");
+                        cartd.push("<a href='#' id='btnDelete' class='btnclose'><img onclick=DeletePermanent(" + $(docs).find("advertisementID").text() + ")  src='images/icons/btn-close.png' alt='' /> </a>");
+                        cartd.push("<span class='price'>PRICE $ " + $(docs).find("cost").text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + " </span>");
+                        if (hidLogin.value == "0") {
+                            cartd.push("<input type='button' class='btn btn-block btn-primary'     onclick=showinterest1(" + $(docs).find("advertisementID").text() + "," + $(docs).find("associateID").text() + ",1,0," + cnt + ",1) value='Contact Associate'> <button class='btn btn-block btn-primary' onclick=showinterest1(" + $(docs).find("advertisementID").text() + "," + $(docs).find("associateID").text() + ",1,0," + cnt + ",2)><i class='fa fa-bookmark-o'></i>    Bookmark </button> ");
+                        }
+                        else {
+                            cartd.push("<button class='btn btn-block btn-primary'   onclick=InterestedConsumers('" + $(docs).find("advertisementID").text() + "," + $(docs).find("associateID").text() + ",1,0'," + cnt + ") id='btnContactAssociate'> Contact Associate </button>");
+                            cartd.push("<button onclick=BookMarkInsert('" + ($(docs).find("advertisementID").text()) + "') class='btn btn-block btn-default btn-primary'> <i class='fa fa-bookmark-o'></i>  Bookmark </button>");
+                        }
+                        cartd.push("</div>");
+                        cartd.push("</div>");
+                        cartd.push("</div>");
+                        cartd.push("</div>");
+                        cnt = cnt + 1;
+                    });
+                    cartd.push("</div>");
+                    $("#" + DivID).html(cartd.join(''));
+                }
+            },
+            failure: function (response) {
+                alert(response.d + "Fail");
+            },
+            error: function (response) {
+                alert(response.d + "Error...");
+            }
+        });
+    }
+
+    function showinterest1(advId, assID, jobtype, zipcode, pnlID, contactorbookmark) {
+        hidAdvertisementID.value = advId;
+        hidAssociateID.value = assID;
+        hidjobtypeID.value = jobtype;
+        hidZipcodeID.value = zipcode;
+        hidpanelID.value = pnlID;
+        hidDataModelID.value = contactorbookmark;
+        jQuery.noConflict();
+        $('#choose-consumer').modal({ display: 'show', backdrop: 'static', keyboard: false });
+    }
+
+
+    function InterestedConsumers(dyr, pnlID) {
+        var CompulsoryData = CheckConsumerEmailAndMobileExists();
+        if (CompulsoryData == "0") {
+            jQuery.noConflict();
+            $("#lblFailureTitle").text("You cannot contact this Associate at this time");
+            $("#lblFailureDetail").text("Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number");
+            $('#fail_message').modal('show');
+        }
+        else {
+            if (hidLogin.value == "0") {
+            }
+            else if (hidLogin.value == "1") {
+                var dd = ContactAssociate(dyr);
+                if (dd == "1") {
+                    $("#msg" + pnlID).css("display", "block");
+                    setTimeout(function () {
+                        window.location.reload();
+                        //$('#msg' + pnlID).fadeOut('fast');
+                    }, 2000);
+                }
+                else if (dd == "0") {
+                    alert("Already Exists");
+                }
+                else if (dd == "3") {
+                    alert("OOPS Error ! Please try again.");
+                }
+                //      hideLoader();
+                //window.location.reload();
+            }
+            else { }
+        }
+    }
+    function BookMarkInsert(AdvID) {
+        if (hidLogin.value == "0")
+        { }
+        else if (hidLogin.value == "1") {
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        $.ajax({
+                            type: "POST", url: "ws/InnerPage.asmx/InsertSavedAdts", data: "{'AdvertisementID':" + AdvID + ",'zipCode':'0','jtype':'1'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                            success: function (r) {
+                                if (r.d == "0") {
+                                    jQuery.noConflict();
+                                    $("#lblFailureTitle").text("Already Saved");
+                                    $("#lblFailureDetail").text("You have already Save This Advertisement.");
+                                    $('#fail_message').modal('show');
+                                }
+                                else {
+                                   
+                                        jQuery.noConflict();
+                                        $("#lblSuccess").text("Success");
+                                        $("#lbldetail").text("Advertisement bookmarked successfully.");
+                                        $('#success-message').modal('show');
+                                   
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        alert("You need to Sign In");
+                    }
+                }
+            });
+        }
+        else { }
+    }
+    function ShowPopUpNew(StuID) {
+        $.ajax({
+            type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+            success: function (r) {
+                if (r.d > 0) {
+                    $.ajax({
+                        type: "POST", url: "ws/InnerPage.asmx/InsertSavedAdts", data: "{'AdvertisementID':" + StuID + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                        success: function (r) {
+                            if (r.d == "0") {
+                                $("#lblFailureTitle").text("Already bookmarked!!!")
+                                $("#lblFailureDetail").text("");
+                                $('#fail_message').modal('show');
+                            }
+                            else {
+                                $("#lblSuccess").text("Advertisement bookmarked successfully");
+                                $('#success-message').modal('show');
+                            }
+                        }
+                    });
+
+
+                }
+                else {
+                    alert("You need to Sign In");
+
+                }
+            }
+        });
+    }
+</script>

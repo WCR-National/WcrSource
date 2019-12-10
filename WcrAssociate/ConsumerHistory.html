@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="icon" href="../../favicon.ico">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('.header').load("headerNew.html");
+            $('.footer').load("Footer.html");
+        });
+    </script>
+    <title></title>
+</head>
+<body class="innerpage">
+    <div class="page-wrap">
+        <div class="navbar navbar-inverse">
+            <div class="container">
+                <div class="row">
+                    <div class="header"></div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="fullrow inner-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 searchbar">
+                        <!--<div class="input-group">
+                            <input type="text" id="txtSearch" class="form-control" placeholder="City, State, Zip">
+                            <span class="input-group-addon"> <a href="#" id="btnsearch"> Search </a> </span>
+                        </div>-->
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <!--<ul>
+                            <li class="dropdown inner">
+                                <a href="sales.html?zip=&jtype=Sales"> Sales </a>
+                            </li>
+                            <li> <a href="Services.html?zip=&jtype=Services"> Service </a></li>
+                        </ul>-->
+                    </div>
+                    <label style="visibility: hidden" for="lblmainRating"></label>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="divtitle">
+            </div>
+            <div class="row">
+                <div style="margin-top:10px; float:left; width:20%; display:none;" id="divsidebar1">
+                    <br />
+                    <input id="btnMyProfile" type="button" value="Profile" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnMyHistory" type="button" value="My History" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnCustomerSupport" type="button" value="Customer Suport" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnLogout" type="button" value="Log out" style="width:150px" class="btn btn-primary" /><br /><br />
+                </div>
+                <div style="margin-top:0px; float:left;" class=" col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                    <div class="box-body  form-horizontal">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                            <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 add-details'>
+                                <ul class='nav nav-tabs' role='tablist'>
+                                    <li role='presentation' class='active'><a href='#overview' id="defaultOpen" aria-controls='home' role='tab' data-toggle='tab'>Saved history </a></li>
+                                    <li role='presentation'><a href='#Features' id="defaultOpen1" aria-controls='profile' role='tab' data-toggle='tab'>Contact history </a></li>
+                                   
+                                </ul>
+                            </div>
+                            <div class='tab-content' style="margin-left: 15px;">
+                                <div role='tabpanel' class='tab-pane active' id='overview'>
+                                    <div class='fullrow whitebg'>
+                                        <div class='row' style="margin-left: 0px;" id="divDetails">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div role='tabpanel' class='tab-pane' id='Features' style="visibility: visible;">
+                                    <div class='fullrow whitebg'>
+                                        <div class='row' style="margin-left: 0px;" id="divContactHistory">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div style="margin-top:0px; float:right;" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div id="map_canvas" style="width: 400px; height: 400px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {            
+            var ca = GetParameterValues('ca');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            BindAdvertisements();
+            BindData();
+           
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        if (ca == "0") {
+                            $("#divsidebar1").css("display", "block");
+                        }
+                        else {
+                            $("#divsidebar1").css("display", "block");
+                        }
+                    }
+                    else {
+                        $("#divsidebar1").css("display", "none");
+                    }
+                }
+            });           
+        });
+        function BindAdvertisements() {
+            var ca = GetParameterValues('ca');
+            //var id = GetParameterValues('id');
+            //var zipcode = GetParameterValues('zipcode');
+            //var nm = GetParameterValues('name');
+            //var jtype = GetParameterValues('jtype');
+            //var catName = GetParameterValues('catName');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/InnerPage.asmx/ViewConsumerSavedAdvertisements", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("ConsumerAdvertisments");
+                        var cartd = [];
+                        ////cartd.push("<h4 class='text-left'>" + ($(docs).find("categoryName").text()) + " </h4>");
+                        cartd.push(" <div class='row'>");
+                        $.ajax({
+                            type: "POST", url: "ws/InnerPage.asmx/CountAdvertisementsConsumerSaved", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                            success: function (res1) {
+                                if (res1.d.length > 0) {
+                                    var xmlDocR = $.parseXML(res1.d);
+                                    var xmlR = $(xmlDocR);
+                                    var docsR = xmlR.find("CountAdvertismentsConsumer");
+                                    $.each(docsR, function (j, docsR) {
+                                        cartd.push("<div class='col-lg-9 col-md-9 col-sm-9 col-xs-12'> <p>	" + ($(docsR).find("TAdvertisements").text()) + " , Results  </p> </div>");
+                                    });
+                                }
+                            },
+                            failure: function (response) {
+                                alert(response.d + "Fail");
+                            },
+                            error: function (response) {
+                                alert(response.d + "Error...");
+                            }
+                        });
+                        cartd.push("<div class='clearfix'></div>");
+                        var counter = 0;
+                        $.each(docs, function (i, docs) {
+                            var advertisementID = null;
+                            advertisementID = ($(docs).find("advertisementID").text());
+                            if (($(docs).find("isfeatured").text()) == "1") {
+                                cartd.push("<div class='panel panel-default advertise_list feature_add'>");
+                                cartd.push("<span class='feature-tag'>");
+                                cartd.push("<a href=inner_detailnew.html?ca=" + ca + "&id=" + ($(docs).find("advertisementID").text()) + "&zipcode=" + ($(docs).find("ZipCode").text()) + "&nm=" + ($(docs).find("categoryName").text()) + "&jobtype=" + ($(docs).find("jobname").text()) + "&category=" + ($(docs).find("categoryName").text()) + "&cid=" + ($(docs).find("subcategoryID").text()) + "><img src='images/feature_tabg.png' alt=''></a> </span>");
+                            }
+                            else {
+                                cartd.push("<div class='panel panel-default advertise_list'>");
+                            }
+                            cartd.push(" <div class='panel-body'>");
+                            cartd.push("<div class='row'>");
+                            cartd.push("<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12'>");
+                            //cartd.push("<a href=inner_detailnew.html?ca=" + ca + "&id=" + ($(docs).find("advertisementID").text()) + "&zipcode=" + ($(docs).find("ZipCode").text()) + "&nm=" + ($(docs).find("categoryName").text()) + "&jobtype=" + ($(docs).find("jobname").text()) + "&category=" + ($(docs).find("categoryName").text()) + "&cid=" + ($(docs).find("subcategoryID").text()) + "><img src='images/feature_tabg.png' alt=''></a> </span>");
+                            cartd.push("<a href=inner_detailnew.html?ca=" + ca + "&id=" + ($(docs).find("advertisementID").text()) + "&zipcode=" + ($(docs).find("ZipCode").text()) + "&nm=" + ($(docs).find("categoryName").text()) + "&jobtype=" + ($(docs).find("jobname").text()) + "&category=" + ($(docs).find("categoryName").text()) + "&cid=" + ($(docs).find("subcategoryID").text()) + "> <img src='Associate/Adv_img/" + ($(docs).find("advMainImage").text()) + "' alt='' class='img-responsive'> </a> </div>");
+                            cartd.push("<div class='col-lg-9 col-md-9 col-sm-9 col-xs-12'> <h3> " + ($(docs).find("title").text()) + " </h3>");
+                            if (($(docs).find("cost").text()) == "0") {
+                                cartd.push(" <p> <strong>   <span>   </span> </strong>  </p>");
+                            }
+                            else {
+                                cartd.push(" <p> <strong>  <span> $ " + ($(docs).find("cost").text()) + "  </span> </strong>  </p>"); // Need dynamic
+                            }
+                            cartd.push(" <p>" + ($(docs).find("description").text()) + " </p>");
+                            cartd.push("<span class='wishlist'> <a href='#' onclick=ShowPopUpNew('" + ($(docs).find("advertisementID").text()) + "')> <i class='fa fa-heart-o'></i> </a> <a href='#'> <i class='fa fa-envelope'></i> </a> </span>");
+                            cartd.push("<div id='rateYo1'></div>");
+                            $.ajax({
+                                type: "POST", url: "ws/ConsumerComments.asmx/ViewRating", data: "{'advertisementID':" + ($(docs).find("advertisementID").text()) + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                                success: function (res1) {
+                                    if (res1.d.length > 0) {
+                                        var xmlDocR = $.parseXML(res1.d);
+                                        var xmlR = $(xmlDocR);
+                                        var docsR = xmlR.find("RatingComments");
+                                        $.each(docsR, function (j, docsR) {
+                                            $("label[for='lblmainRating']").text(($(docsR).find("TRating").text()));
+                                        });
+                                    }
+                                },
+                                failure: function (response) {
+                                    alert(response.d + "Fail");
+                                },
+                                error: function (response) {
+                                    alert(response.d + "Error...");
+                                }
+                            });
+                            cartd.push("</div>  </div> </div>");
+                            cartd.push("</div>");
+                            counter += 1;
+                        });
+                        $("#divDetails").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function BindData() {
+            $.ajax({
+                type: "POST", url: "ws/InnerPage.asmx/ViewAssociateContactedDetail", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: true,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("ViewAssociateContactedDetails");
+                        var cartd = [];
+                        cartd.push("<table class='table table-condensed'> <tbody>");
+                        cartd.push("<tr><th>Sr.N</th><th>Associate</th><th>Mobile</th><th>Email</th> <th>Property Title</th><th>Date</th>  </tr>");
+                        var count = 1;
+                        $.each(docs, function (i, docs) {
+                            cartd.push("<tr id='dataall'>");
+                            cartd.push("<td>" + (count++) + "</td>");
+                            cartd.push("<td>" + ($(docs).find("fullname").text() + " </td>"));
+                            cartd.push("<td>" + ($(docs).find("mobileno").text() + " </td>"));
+                            cartd.push("<td>" + ($(docs).find("emailID").text() + " </td>"));
+                            cartd.push("<td>" + ($(docs).find("title").text() + " </td>"));
+                            var date = $(docs).find("AddedOn").text();
+                            var split = date.split('T').shift();   // 2016-01-06
+                            var parts = split.split('-');          // [2016, 01, 06]
+                            var parsed1 = parts.reverse().join('-'); // 06-01-2016
+                            cartd.push("<td>" + parsed1 + " </td>");
+                           
+                            cartd.push("</tr>");
+                        });
+                        cartd.push("</table>");
+                        $("#divContactHistory").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+    
+    
+    
+    </script>
+
+
+
+</body>
+
+</html>

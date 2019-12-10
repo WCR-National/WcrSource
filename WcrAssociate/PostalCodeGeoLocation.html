@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/geocode/json?latlng=lattitude,longitude&sensor=true"></script>
+<script>
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        var latlng = new google.maps.LatLng(lat, long);
+
+        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+            $scope.$apply(function () {
+
+                if (status == google.maps.GeocoderStatus.OK) {
+
+
+                    if (results[0]) {
+                        for (var i = 0; i < results[0].address_components.length; i++) {
+                            var postalCode = results[0].address_components[i].types;
+                            alert(postalCode);
+                        }
+                    }
+                }
+            });
+        });
+        //Geocoder geocoder = new Geocoder(this, Locale.ENGLISH);
+        //List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+        //Address address=null;
+        //String addr="";
+        //String zipcode="";
+        //String city="";
+        //String state="";
+        //if (addresses != null && addresses.size() > 0){
+
+        //    addr=addresses.get(0).getAddressLine(0)+"," +addresses.get(0).getSubAdminArea();
+        //    city=addresses.get(0).getLocality();
+        //    state=addresses.get(0).getAdminArea();
+
+        //    for(int i=0 ;i<addresses.size();i++){
+        //        address = addresses.get(i);
+        //        if(address.getPostalCode()!=null){
+        //            zipcode=address.getPostalCode();
+        //            break;
+        //    }
+
+        //}
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

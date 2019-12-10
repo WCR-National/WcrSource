@@ -1,0 +1,638 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css?ver=5.2.2' type='text/css' media='all' />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/loader.css" type="text/css" rel="stylesheet" />
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <title></title>
+</head>
+<body style="background:#f8f8f8;">
+    <div>
+
+        <div class="modal fade small-model" id="success-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body form-horizontal no-padding">
+                        <div class="alert alert-success no-radius alert-dismissible no-margin " role="alert">
+                            <button type="button" class="close align-with-two-line" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong> <label id="lblSuccess"></label> </strong>  <br />
+                            <label id="lbldetail" class="running-text"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade small-model" id="fail_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body form-horizontal no-padding">
+                        <div class="alert alert-danger no-radius alert-dismissible no-margin " role="alert">
+                            <button type="button" class="close align-with-two-line" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong> <label id="lblFailureTitle"></label> </strong>  <br />
+                            
+                            <label id="lblFailureDetail" class="running-text"></label>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+    </div>
+    <div class="page-wrap">
+        <div id="pageloader" class="pageloader" style="display:none">
+            <div class="pageloader-inner">
+                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div>
+        <div class="header"></div>
+        <div class="container result">
+
+            <div class="outer-middle">
+                <div class="middle_colume">
+                    <div class="container" id="DivWithoutSearchAds" style="display:block; ">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-sm-offset-2 text-center col-xs-offset-0  col-md-offset-2 col-lg-offset-2 searchbar" style="position:relative;">
+                                <div id="dlogo">
+                                    <h3>
+                                        <a href="JavaScript:void(0);" name="wcrServiceLink1">
+                                            <img src="img/wcr-logo.png" class="img-responsive" alt="" />
+                                        </a>
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container result" style="display:none" id="DivSearchAds">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-sm-offset-1 text-center col-xs-offset-0  col-md-offset-1 col-lg-offset-1 searchbar">
+                        <div id="Div1">
+                            <h3>  <a href="JavaScript:void(0);" name="wcrServiceLink">    <img src="img/wcr-logo.png" style="margin-bottom:25px;" class="img-responsive" alt="" />  </a> </h3>
+                        </div>
+                        <!-- <div id="Name" style="text-transform: uppercase; margin-bottom: 0px; margin-left:10px; font-weight:bold;">
+                        </div>-->
+                    </div>
+                </div>
+                <div class="row" id="sales">
+                </div>
+                <div class="row" id="Services">
+                </div>
+            </div>
+            <div class="container result" id="divShowAdvertisement" style="display:none;">
+                <div class="container result" id="search-result2">
+                    <div class="row">
+                        <div class="col-sm-12 searchbar ">
+                            <h3 class="text-center"><a name="logolink" href="JavaScript:void(0);"><img src="img/wcr-logo.png" class="img-responsive logo" alt=""></a></h3>
+                            <div id="sales1">
+                            </div>
+                            <div id="services1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="divProfile" style="display:none;">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-sm-offset-1  col-xs-offset-0  col-md-offset-1 col-lg-offset-1 searchbar ">
+                    <h3 class="text-center"><a href="JavaScript:void(0);" name="wcrServiceLink"><img src="img/wcr-logo.png" class="img-responsive logo" alt=""></a></h3>
+                    <div class="row" id="divShowDetails">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12" id="divAdtsDetail">
+
+                        </div>
+                    </div>
+                    <input type="hidden" id="hidAssociateID" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+</body>
+</html>
+
+
+<script src="js/customjs.js"></script>
+<script>
+    $(function () {
+        $('.header').load("consumerHeader.html");
+        $('.footer').load("consumerFooter.html");
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on('keypress', '#txtSearch', function (e) {
+            if (e.keyCode == 13) {  // detect the enter key
+                if (txtSearch.value == "") {
+                    $("#lblfai").css("display", "block");
+                    $("#lblfai").text("Please enter City, State OR Zip Code.");
+                }
+                else {
+                    $("#divProfile").css("display", "none");
+                    $("#pageloader").css("display", "block");
+                    $("#homeicon").css("display", "inline-block");
+                    setTimeout(function () {
+                        Searching();
+                    }, 500);
+                }
+
+            }
+        });
+        function Searching() {
+            $("#lblfai").css("display", "none");
+            if (txtSearch.value == "") {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Please enter City, State OR Zip Code.");
+            }
+            else {
+                $("#divBody").addClass("result");
+                var zipc = txtSearch.value;
+                if ($.isNumeric($('#txtSearch').val())) {
+                    HideDiv();
+                    $("#DivSearchAds").css("display", "block");
+                    $("#divShowAdvertisement").css("display", "none");
+                    var sales = BindSalesCategory(zipc);
+                    $("#sales").html(sales.join(''));
+                    var services1 = BindServiesCategory(zipc);
+                    $("#Services").html(services1.join(''));
+                }
+                else {
+                    if (zipc.indexOf(',') != -1) {
+                        HideDiv();
+                        var strs;
+                        var State;
+                        var City;
+                        strs = zipc.split(',');
+                        for (var i = 0; i < strs.length; i++) {
+                            if (i == 0) {
+                                City = strs[i];
+                            }
+                            else if (i == 1) {
+                                State = strs[i];
+                            }
+                        }
+                        if (State.length == 2) {
+                            $("#DivSearchAds").css("display", "block");
+                            $("#divShowAdvertisement").css("display", "none");
+                            var sales = BindSalesCategoryCityWise(State, City);
+                            $("#sales").html(sales.join(''));
+                            var services1 = BindServiesCategoryCityWise(State, City);
+                            $("#Services").html(services1.join(''));
+                        }
+                        else if (State.length >= 2) {
+                            $("#lblfai").css("display", "block");
+                            $("#lblfai").text("Please Enter 2 Characters for State.");
+                        }
+                    }
+                    else {
+                        $("#lblfai").css("display", "block");
+                        $("#lblfai").text("Invalid data entered.  Please enter City, State OR Zip Code.");
+                    }
+                }
+
+            }
+            hideLoader();
+        }
+
+        $(document).on("click", "a[name='tpsrc']", function (e) {
+            if (txtSearch.value == "") {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Please enter City, State OR Zip Code.");
+            }
+            else {
+                $("#divShowDetails").css("display", "none");
+                $("#pageloader").css("display", "block");
+                $("#homeicon").css("display", "inline-block");
+                setTimeout(function () {
+                    Searching();
+                }, 500);
+            }
+        });
+       
+        function HideDiv() {
+            $("#toplogo").css("display", "none");
+            $("#tabheader").css("display", "none");
+            $("#tabcontent").css("display", "none");
+        }
+        function showLoader() {
+            $("#pageloader").css("display", "block");
+        }
+        function hideLoader() {
+            setTimeout(function () {
+                $("#pageloader").css("display", "none");
+            }, 1500);
+        }
+        $(document).on("click", "a[name='wcrServiceLink']", function (e) {
+            $("#divBody").addClass("result");
+            $("#DivWithoutSearchAds").css("display", "none");
+            $("#DivSearchAds").css("display", "none");
+            $("#divShowAdvertisement").css("display", "block");
+            $("#divProfile").css("display", "none");
+            GetSalesAdts();
+        });
+        function GetSalesAdts() {
+            $("#wait").css("display", "block");
+            var _IPAddress;
+            $.get("https://ipinfo.io", function (response) {
+                _IPAddress = response.ip;
+                $.ajax({
+                    type: "POST",
+                    url: "ws/TopSearch.asmx/GetZipCodeIpAddress",
+                    data: "{'_IpAddress':'" + _IPAddress + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var salesn = BindSalesCategory1(r.d);
+                            $("#sales1").html(salesn.join(''));
+                            var servicesn = BindServiesCategory1(r.d);
+                            $("#services1").html(servicesn.join(''));
+                            $("#wait").css("display", "none");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }, "jsonp");
+        }
+        $(document).on("click", "a[name='wcrServiceLink1']", function (e) {
+            $("#divBody").addClass("result");
+            $("#DivWithoutSearchAds").css("display", "none");
+            $("#DivSearchAds").css("display", "none");
+            $("#divShowAdvertisement").css("display", "block");
+            $("#divProfile").css("display", "none");
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divProfile").css("display", "block");
+        var ca = GetParameterValues('ca');
+        function GetParameterValues(param) {
+            var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < url.length; i++) {
+                var urlparam = url[i].split('=');
+                if (urlparam[0] == param) {
+                    return urlparam[1];                }
+            }
+        }
+        BindAdvertisements();
+        BindServiesList();
+    });
+    function BindAdvertisements() {
+        var ca = 0;// GetParameterValues('ca');
+        function GetParameterValues(param) {
+            var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < url.length; i++) {
+                var urlparam = url[i].split('=');
+                if (urlparam[0] == param) {
+                    return urlparam[1];
+                }
+            }
+        }
+        $.ajax({
+            type: "POST", url: "ws/InnerPage.asmx/ViewConsumerSavedAdvertisements", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+            success: function (r) {
+                if (r.d.length > 0) {
+                    var xmlDoc = $.parseXML(r.d);
+                    var xml = $(xmlDoc);
+                    var docs = xml.find("ConsumerAdvertisments");
+                    var cartd = [];
+                    cartd.push("<div class='col-sm-12'>");
+                    var counter = 0;
+                    $.each(docs, function (i, docs) {
+                        var advertisementID = null;
+                        advertisementID = ($(docs).find("advertisementID").text());
+                        if (($(docs).find("jobtype").text()) == "1")
+                        {
+                            cartd.push("<div class='panel panel-default advertise_list bookmarklist'>");
+                            cartd.push("<div class='panel-body'>");
+                            cartd.push("<p class='text-success text-right text-pos-right' id='msg" + $(docs).find("advertisementID").text() + "' style='display:none'> A WCR National Associate  will contact you soon </p>");
+                            // cartd.push("<div class='row'><a href='SalesAdvertisement.html'>");
+                            cartd.push("<div class='row'><a href=SalesAdvertisement.html?ca=" + ca + "&id=" + ($(docs).find("advertisementID").text()) + "&zipcode=" + ($(docs).find("ZipCode").text()) + "&nm=" + ($(docs).find("name").text()) + "&jobtype=" + ($(docs).find("jobname").text()) + "&category=" + ($(docs).find("categoryName").text()) + "&cid=" + ($(docs).find("jobtype").text()) + ">");
+                            cartd.push("<div class='col-sm-3 advertise-thumb'>");
+                            cartd.push("<img height='450px' src='Associate/Adv_img/" + ($(docs).find("advMainImage").text()) + "' alt='' class='img-responsive'>");
+                            cartd.push("</div>");
+                            cartd.push("<div class='col-sm-5'>");
+                            cartd.push("<h3>" + $(docs).find("address").text() + " <br /></h3>");
+                            //cartd.push("<p class='text-uppercase'> VANCOUNVEER, WA 98841 </p>");
+                            cartd.push("<h3>" + $(docs).find("City").text() + "," + $(docs).find("State").text() + ", " + $(docs).find("ZipCode").text() + "  </h3>");
+                            cartd.push("<ul><li>License#:" + $(docs).find("LicenseId").text() + "  </li>");
+                            cartd.push("<li>Advertisement ID:" + $(docs).find("advertisementID").text() + "  </li>");
+                            cartd.push("<li> <strong> " + ($(docs).find("name").text()) + "  </strong> </li>");
+                            cartd.push("</ul>");
+                            cartd.push("</div>");
+                            cartd.push("</a>");
+                            cartd.push("<div class='col-sm-3 pos-rel pull-right'>");
+                            cartd.push("<a href='#' id='btnDelete' onclick=DeletePermanent(" + $(docs).find("id").text() + ") class='btnclose'><img   src='images/icons/btn-close.png' alt='' /> </a>");
+                            cartd.push("<span class='price'>PRICE $ " + $(docs).find("cost").text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + " </span>");
+                            cartd.push("<button class='btn btn-block btn-primary' onclick=ContactAssociate('" + $(docs).find("advertisementID").text() + "','" + $(docs).find("associateID").text() + "',1,'"+($(docs).find("ZipCode").text())+"') id='btnContactAssociate'> Contact Associate </button>");
+                            cartd.push("<button class='btn btn-block btn-primary btn-default disabled'> <i class='fa fa-bookmark-o'></i>  Bookmark </button>");
+                            cartd.push("</div>");
+                            cartd.push("</div>");
+                            cartd.push("</div>");
+                            cartd.push("</div>");
+                        }
+                        else {
+                            var _lstName;
+                            if (($(docs).find("lastname").text()) == "0") {
+                                _lstName = "";
+                            }
+                            else {
+                                _lstName = ($(docs).find("lastname").text());
+                            }
+                            cartd.push("  <div class='panel panel-default advertise_list bookmarklist bg-service'>");
+                            cartd.push("<div class='panel-body'><p class='text-success text-right text-pos-top-right' id='msg" + $(docs).find("advertisementID").text() + "' style='display:none'>  " + $(docs).find("fullname").text() + " " + _lstName + ",  Has been notified. <br/> ");
+                            cartd.push("For Additional question, please contact 800,123 4567 </p>");
+                            cartd.push("<div class='row'>");
+                            cartd.push("<div class='col-sm-3 advertise-thumb'>");
+                            if (($(docs).find("photo").text()) == "") {
+                                cartd.push("<img src='images/notAvailable.jpg' alt='' class='img-responsive'>");
+                            }
+                            else {
+                                cartd.push("<img src='AssociatePhoto/" + ($(docs).find("photo").text()) + "' alt='' class='img-responsive'>");
+                            }
+                            cartd.push("</div>");
+                            cartd.push("<div class='col-sm-6'><h3> " + ($(docs).find("fullname").text()) + " " + _lstName + " </h3>");
+                            cartd.push(" <h3> " + ($(docs).find("City").text()) + "," + ($(docs).find("State").text()) + "," + ($(docs).find("ZipCode").text()) + "  </h3>");
+                            cartd.push("<ul><li>License#:" + $(docs).find("LicenseId").text() + "  </li>");
+                            cartd.push("<li>Associate ID:" + $(docs).find("associateID").text() + "  </li>");
+                            cartd.push(" </ul>");
+                            cartd.push("<p> " + $(docs).find("categoryName").text() + " Services </p>");
+                            cartd.push("</div>");
+                            cartd.push("<div class='col-sm-3 pos-rel'>");
+                            cartd.push("<a href='#' id='btnDelete' onclick=DeletePermanent(" + $(docs).find("advertisementID").text() + ") class='btnclose'><img   src='images/icons/btn-close.png' alt='' /> </a><span class='price'>&nbsp;</span>");
+                            cartd.push("<button class='btn btn-block btn-primary' onclick=ContactAssociate('" + $(docs).find("advertisementID").text() + "','" + $(docs).find("associateID").text() + "',2,'" + ($(docs).find("ZipCode").text()) + "') id='btnContactAssociate'> Contact Associate </button>");
+                            cartd.push("<button class='btn btn-block btn-primary btn-default'> <i class='fa fa-bookmark-o'></i>  Bookmark </button>");
+                            cartd.push("</div>");
+                            cartd.push("</div>");
+                            cartd.push("</div>");
+                            cartd.push("</div>");
+
+                        }
+
+                    });
+                    cartd.push("</div>");
+                    $("#divShowDetails").html(cartd.join(''));
+                }
+            },
+            failure: function (response) {
+                alert(response.d + "Fail");
+            },
+            error: function (response) {
+                alert(response.d + "Error...");
+            }
+        });
+    }
+
+
+    function BindServiesList() {
+        $.ajax({
+            type: "POST", url: "ws/InnerPage.asmx/ConsumerSavedBookAdvertisementsForServices",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (r1) {
+                if (r1.d.length > 0) {
+                    var cnt = 1;
+                    var xmlDoc1 = $.parseXML(r1.d);
+                    var xml1 = $(xmlDoc1);
+                    var docs = xml1.find("ConsumerBookAdvertisments");
+                    var cartd = [];
+                    $.each(docs, function (i, docs) {
+                        cartd.push("<div class='panel panel-default advertise_list bookmarklist'>");
+                        cartd.push("<div class='panel-body'>");
+                        cartd.push("<div class='row'>");
+                        cartd.push("<a href='#'>");
+                        cartd.push("<div class='col-sm-3 advertise-thumb'>");
+                        cartd.push("<img src='AssociatePhoto/" + ($(docs).find("photo").text()) + "' class='img-responsive'/>");
+                        cartd.push("</div>");
+                        cartd.push("<div class='col-sm-5'>");
+                        var _lstName;
+                        if (($(docs).find("LName").text()) == "0") {
+                            _lstName = "";
+                        }
+                        else {
+                            _lstName = ($(docs).find("LName").text());
+                        }
+                        cartd.push("<h3>" + ($(docs).find("Name").text()) + " " + ($(docs).find("LName").text()) + " </h3>");
+                        cartd.push("<h3> " + ($(docs).find("cityID").text()) + "," + ($(docs).find("StateID").text()) + "," + $(docs).find("zipcode").text() + " </h3>");
+                       // cartd.push("<p class='text-uppercase'> VANCOUNVEER, WA 98841 </p>");
+                        hidAssociateID.value = ($(docs).find("associateid").text());
+                        cartd.push("<ul>");
+                        cartd.push("<li>License # " + ($(docs).find("LicenseId").text()) + "  </li>");
+                        cartd.push("<li> Associate ID : " + ($(docs).find("associateid").text()) + "  </li>");
+                        cartd.push("<li> <strong> " + ($(docs).find("categoryName").text()) + "  Services </strong> </li>");
+                        cartd.push("</ul>");
+                        cartd.push("</div>");
+                        cartd.push("</a>");
+                        cartd.push("<div class='col-sm-3 pos-rel pull-right padd-t50'>");
+                        cartd.push("<a href='#' id='btnDelete' onclick=DeletePermanent(" + $(docs).find("id").text() + ") class='btnclose'><img   src='images/icons/btn-close.png' alt='' /> </a>");
+                        cartd.push(" <p id=msgs" + cnt + " style='display:none' class='text-primary pos-right-message  message-box'>" + ($(docs).find("Name").text()) + " has been notified.<br /> For Additional Questions, please contact <br> support at 800.xxx.xxxx.<br>  </p>");
+                        cartd.push("<span class='price'>Zipcode:- " + $(docs).find("zipcode").text() + " </span>");
+                        cartd.push("<button class='btn btn-block btn-primary' onclick=InterestedConsumers(" + $(docs).find("CategoryID").text() + "," + $(docs).find("associateid").text() + ",2," + $(docs).find("zipcode").text() + ","+cnt+") id='btnContactAssociate'> Contact Associate </button><button  class='btn btn-block btn-primary btn-default disabled'> <i class='fa fa-bookmark-o'></i>  Bookmark </button>");
+                        cartd.push("</div>");
+                        cartd.push("</div>");
+                        cartd.push("</div>");
+                        cartd.push("</div>");
+                        cnt = cnt + 1;
+                    });
+
+                    $("#divAdtsDetail").html(cartd.join(''));
+                }
+            }
+        });
+    }
+    function InterestedConsumers(adverID, associateID, jobtype, zipcode, pnlID) {
+        var CompulsoryData = CheckConsumerEmailAndMobileExists();
+        if (CompulsoryData == "0") {
+            jQuery.noConflict();
+            $("#lblFailureTitle").text("Alert!");
+            $("#lblFailureDetail").text("Please update your profile and enter your phone number.");
+            $('#fail_message').modal('show');
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: "ws/ConsumerComments.asmx/InsertConsumerInterest",
+                data: "{'AdvertisementID':" + adverID + ",'AssociateID':" + associateID + ",'jobType':" + jobtype + ",'zipcode':" + zipcode + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                cache: false,
+                success: function (r) {
+                    if (r.d == "1") {
+                        $.ajax({
+                            type: "POST",
+                            url: "ws/ConsumerComments.asmx/SendConsumerDetail",
+                            data: "{'associateID':" + associateID + ",'advertisementID':" + adverID + ",'jobtype':" + jobtype + ",'zipcode':" + zipcode + "}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: false,
+                            cache: false,
+                            success: function (response) {
+                                $("#btnContactAssociate").css("visibility", "disabled");
+                                $("#msgs" + pnlID).css("display", "block");
+                                setTimeout(function () {
+                                    $('#msgs' + pnlID).fadeOut('fast');
+                                }, 6000);
+                            },
+                            failure: function (response) {
+                                alert(response.d + "Fail");
+                            },
+                            error: function (response) {
+                                alert(response.d + "Error...");
+                            }
+                        });                        
+                    }
+                    if (r.d == "0") {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Failure!");
+                        $("#lblFailureDetail").text("Already Exists.");
+                        $('#fail_message').modal('show');
+                    }
+                    if (r.d == "3") {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Failure!");
+                        $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                        $('#fail_message').modal('show');
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+    }
+
+    function showLoader() {
+        $("#pageloader").css("display", "block");
+    }
+    function hideLoader() {
+        setTimeout(function () {
+            $("#pageloader").css("display", "none");
+        }, 1500);
+    }
+    function ContactAssociate(adverID, associateID, jobtype, zipcode) {
+        var CompulsoryData = CheckConsumerEmailAndMobileExists();        
+        if (CompulsoryData == "0") {
+            jQuery.noConflict();
+            $("#lblFailureTitle").text("Alert!");
+            $("#lblFailureDetail").text("Please update your profile and enter your phone number.");
+            $('#fail_message').modal('show');
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: "ws/ConsumerComments.asmx/InsertConsumerInterest",
+                data: "{'AdvertisementID':" + adverID + ",'AssociateID':" + associateID + ",'jobType':" + jobtype + ",'zipcode':" + zipcode + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                cache: false,
+                success: function (r) {
+                    if (r.d == "1") {
+                        $.ajax({
+                            type: "POST",
+                            url: "ws/ConsumerComments.asmx/SendConsumerDetail",
+                            data: "{'associateID':" + associateID + ",'advertisementID':" + adverID + ",'jobtype':" + jobtype + ",'zipcode':" + zipcode + "}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: false,
+                            cache: false,
+                            success: function (response) {
+                                $("#btnContactAssociate").css("visibility", "disabled");
+                                $("#msg" + adverID).css("display", "block");
+                                setTimeout(function () {
+                                    $('#msg' + adverID).fadeOut('fast');
+                                }, 6000);
+                            },
+                            failure: function (response) {
+                                alert(response.d + "Fail");
+                            },
+                            error: function (response) {
+                                alert(response.d + "Error...");
+                            }
+                        });                       
+                    }
+                    if (r.d == "0") {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Failure!");
+                        $("#lblFailureDetail").text("Already Exists.");
+                        $('#fail_message').modal('show');
+                        
+                    }
+                    if (r.d == "3") {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Failure!");
+                        $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                        $('#fail_message').modal('show');
+                        
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+
+
+    }
+
+    function DeletePermanent(adsID) {
+        //if (confirm("Are you sure? you want to Permanent Delete Record.")) {
+        $(document).on({
+            ajaxStart: function () {
+                showLoader();
+            },
+            ajaxStop: function () {
+                hideLoader();
+            }
+        });
+            $.ajax({
+                type: "POST",
+                url: "ws/InnerPage.asmx/DeleteSavedAdts",
+                data: "{'ID':" + adsID + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: true,
+                success: function (r) {
+                    jQuery.noConflict();
+                    $("#lblFailureTitle").text("Deleted!");
+                    $("#lblFailureDetail").text("Deleted Succesfully.");
+                    $('#fail_message').modal('show');                   
+                    BindAdvertisements();
+                    BindServiesList();
+                }
+            });
+        //}
+    }
+</script>

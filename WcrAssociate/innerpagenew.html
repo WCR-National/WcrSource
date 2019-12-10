@@ -1,0 +1,385 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('.header').load("headerNew.html");
+            $('.footer').load("Footer.html");
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.2.0/jquery.rateyo.min.js">
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8qzg6u0Yh20dcMnAyZ4A8dExFXfzQb_c&sensor=false">
+    </script>
+    <title></title>
+</head>
+<body class="innerpage">
+    <div class="page-wrap">
+        <div class="navbar navbar-inverse">
+            <div class="container">
+                <div class="row">
+                    <div class="header"></div>
+                    <!--<div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 text-left logo " id="dlogo">
+                        <a href="sales.html?ca=0&zip="> <img src="img/text-logo.png" class="img-responsive" alt=""></a>
+                    </div>
+                    <a href="sales.html?ca=0&zip=" style="text-decoration: none; text-transform: uppercase; ">
+                        <div id="Name">
+                        </div>
+                    </a>-->
+                </div>
+            </div>
+        </div>
+        <div class="fullrow inner-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 searchbar">
+                        <div class="input-group">
+                            <input type="text" id="txtSearch" class="form-control" placeholder="City, State, Zip">
+                            <span class="input-group-addon"> <a href="#" id="btnsearch"> Search </a> </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <!--<ul>
+                            <li class="dropdown inner">
+                                <a href="sales.html?zip=&jtype=Sales"> Sales </a>
+                            </li>
+                            <li> <a href="Services.html?zip=&jtype=Services"> Service </a></li>
+                        </ul>-->
+                    </div>
+                    <label style="visibility: hidden" for="lblmainRating"></label>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="divtitle">
+            </div>
+            <div class="row">
+                <div style="margin-top:10px; float:left; width:20%; display:none;" id="divsidebar1">
+                    <br />
+                    <input id="btnMyProfile" type="button" value="Profile" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnMyHistory" type="button" value="My History" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnCustomerSupport" type="button" value="Customer Suport" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnLogout" type="button" value="Log out" style="width:150px" class="btn btn-primary" /><br /><br />
+                </div>
+                <div style="margin-top:0px; float:left;" class=" col-lg-8 col-md-8 col-sm-8 col-xs-12" id="divDetails">
+                </div>
+                <div style="margin-top:0px; float:right;" class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div id="map_canvas" style="width: 400px; height: 400px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+    <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="Stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$("[id$=txtSearch]").autocomplete({
+            //    source: function (request, response) {
+            //        $.ajax({
+            //            type: "POST",
+            //            contentType: "application/json; charset=utf-8",
+            //            url: "ws/TopSearch.asmx/GetCustomers",
+            //            data: "{prefix:'" + request.term + "'}",
+            //            dataType: "json",
+            //            success: function (output) {
+            //                response(output.d);
+            //            },
+            //            error: function (errormsg) {
+            //                alert(errormsg.responseText);
+            //            }
+            //        });
+            //    }
+            //});
+            var ca = GetParameterValues('ca');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        if (ca == "0") {
+                            $("#divsidebar1").css("display", "block");
+                            CheckConsumerDetailExists();
+                        }
+                        else {
+                            $("#divsidebar1").css("display", "block");
+                        }
+                    }
+                    else {
+                        $("#divsidebar1").css("display", "none");
+                    }
+                }
+            });
+
+            function CheckConsumerDetailExists() {
+                $.ajax({
+                    type: "POST", url: "ws/ConsumerRegistration.asmx/SelectConsumerDetail", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var xmlDoc = $.parseXML(r.d);
+                            var xml = $(xmlDoc);
+                            var docs = xml.find("ConsumerDetail");
+                            var cartd = [];
+                            $.each(docs, function (i, docs) {
+                                if (($(docs).find("Mob").text()) == "0") {
+                                    alert("You need to complete Your Profile from Profile Link");
+                                    window.location.href = "MyProfile.html?ca=0";
+
+                                }
+                                else {
+                                    return true;
+                                }
+
+                            });
+
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }
+
+
+            var zipc = GetParameterValues('zipcode');
+            BindAdvertisements();
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/LatituteValue.asmx/GetLatandLongValues", data: "{'zipcode':'" + zipc + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("LatituteLong");
+                        var cartd = [];
+                        $.each(docs, function (i, docs) {
+                            var lat = ($(docs).find("latvalue").text());
+                            var lon = ($(docs).find("longvalue").text());
+                            var myLatlng = new google.maps.LatLng(lat, lon)
+                            var mapOptions = {
+                                center: myLatlng,
+                                zoom: 6,
+                                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                                marker: true
+                            };
+                            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                            var marker = new google.maps.Marker({
+                                position: myLatlng
+                            });
+                            marker.setMap(map);
+
+                        });
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+
+            //var $rateYo = $("#rateYo1").rateYo();
+            //var rating = $("label[for='lblmainRating']").text();//($(docsR).find("TRating").text());//getRandomRating();
+            //$rateYo.rateYo("rating", rating);
+
+            Gettitle();
+        });
+        function Gettitle() {
+            var nm = GetParameterValues('name');
+            var jtype = GetParameterValues('jtype');
+            var catName = GetParameterValues('catName');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            var navigationalHeader = [];
+            navigationalHeader.push(" <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>");
+            navigationalHeader.push("<ol class='breadcrumb'> <li><a href='sales.html?ca=0&zip='><i class='fa fa-home'></i></a></li>");
+            navigationalHeader.push("<li><a href='salesnew.html?ca=0&zip='>" + jtype + "</a></li>");
+            navigationalHeader.push("<li><a href='#'>" + catName + "</a></li>");
+            navigationalHeader.push("</ol></div>");
+            $("#divtitle").html(navigationalHeader.join(''));
+        }
+
+        $("#btnsearch").click(function () {
+            var zipc = txtSearch.value;
+            BindAdvertisements();
+        });
+        function BindAdvertisements() {
+            var ca = GetParameterValues('ca');
+            var id = GetParameterValues('id');
+            var zipcode = GetParameterValues('zipcode');
+            var nm = GetParameterValues('name');
+            var jtype = GetParameterValues('jtype');
+            var catName = GetParameterValues('catName');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/InnerPage.asmx/ViewHomeAdvertisements", data: "{'subCategoryID':" + id + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("HViewAdvertisments");
+                        var cartd = [];
+                        cartd.push("<h4 class='text-left'>" + nm + " </h4>");
+                        cartd.push(" <div class='row'>");
+                        $.ajax({
+                            type: "POST", url: "ws/InnerPage.asmx/CountAdvertisementsH", data: "{'subCategoryID':" + id + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                            success: function (res1) {
+                                if (res1.d.length > 0) {
+                                    var xmlDocR = $.parseXML(res1.d);
+                                    var xmlR = $(xmlDocR);
+                                    var docsR = xmlR.find("CountAdvertismentsH");
+                                    $.each(docsR, function (j, docsR) {
+                                        cartd.push("<div class='col-lg-9 col-md-9 col-sm-9 col-xs-12'> <p>	" + ($(docsR).find("TAdvertisements").text()) + " , Results  </p> </div>");
+                                    });
+                                }
+                            },
+                            failure: function (response) {
+                                alert(response.d + "Fail");
+                            },
+                            error: function (response) {
+                                alert(response.d + "Error...");
+                            }
+                        });
+                        //cartd.push("<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12 form-inline text-right'>");
+                        //cartd.push("<div class='form-group'>");
+                        //cartd.push("<select class='form-control'> <option> Sort By </option> </select> </div></div>");
+                        cartd.push("<div class='clearfix'></div>");
+                        var counter = 0;
+                        $.each(docs, function (i, docs) {
+                            var advertisementID = null;
+                            advertisementID = ($(docs).find("advertisementID").text());
+                            if (($(docs).find("isfeatured").text()) == "1") {
+                                cartd.push("<div class='panel panel-default advertise_list feature_add'>");
+                                cartd.push("<span class='feature-tag'>");
+                                cartd.push("<a href=inner_detailnew.html?ca=" + ca + "&id=" + ($(docs).find("advertisementID").text()) + "&zipcode=" + zipcode + "&nm=" + nm + "&jobtype=" + jtype + "&category=" + catName + "&cid=" + id + "><img src='images/feature_tabg.png' alt=''></a> </span>");
+                            }
+                            else {
+                                cartd.push("<div class='panel panel-default advertise_list'>");
+                            }
+                            cartd.push(" <div class='panel-body'>");
+                            cartd.push("<div class='row'>");
+                            cartd.push("<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12'>");
+                            cartd.push("<a   href=inner_detailnew.html?ca=" + ca + "&id=" + ($(docs).find("advertisementID").text()) + "&zipcode=" + zipcode + "&nm=" + nm + "&jobtype=" + jtype + "&category=" + catName + "&cid=" + id + "> <img src='Associate/Adv_img/" + ($(docs).find("advMainImage").text()) + "' alt='' class='img-responsive'> </a> </div>");
+                            cartd.push("<div class='col-lg-9 col-md-9 col-sm-9 col-xs-12'> <h3> " + ($(docs).find("title").text()) + " </h3>");
+                            if (($(docs).find("cost").text()) == "0") {
+                                cartd.push(" <p> <strong>   <span>   </span> </strong>  </p>");
+                            }
+                            else {
+                                cartd.push(" <p> <strong>  <span> $ " + ($(docs).find("cost").text()) + "  </span> </strong>  </p>"); // Need dynamic
+                            }
+                            cartd.push(" <p>" + ($(docs).find("description").text()) + " </p>");
+                            cartd.push("<span class='wishlist'> <a href='#' onclick=ShowPopUpNew('" + ($(docs).find("advertisementID").text()) + "')> <i class='fa fa-heart-o'></i> </a> <a href='#'> <i class='fa fa-envelope'></i> </a> </span>");
+                            cartd.push("<div id='rateYo1'></div>");
+                            $.ajax({
+                                type: "POST", url: "ws/ConsumerComments.asmx/ViewRating", data: "{'advertisementID':" + ($(docs).find("advertisementID").text()) + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                                success: function (res1) {
+                                    if (res1.d.length > 0) {
+                                        var xmlDocR = $.parseXML(res1.d);
+                                        var xmlR = $(xmlDocR);
+                                        var docsR = xmlR.find("RatingComments");
+                                        $.each(docsR, function (j, docsR) {
+                                            $("label[for='lblmainRating']").text(($(docsR).find("TRating").text()));
+                                        });
+                                    }
+                                },
+                                failure: function (response) {
+                                    alert(response.d + "Fail");
+                                },
+                                error: function (response) {
+                                    alert(response.d + "Error...");
+                                }
+                            });
+                            cartd.push("</div>  </div> </div>");
+                            cartd.push("</div>");
+                            counter += 1;
+                        });
+                        $("#divDetails").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+
+        function ShowPopUpNew(StuID) {
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        $.ajax({
+                            type: "POST", url: "ws/InnerPage.asmx/InsertSavedAdts", data: "{'AdvertisementID':" + StuID + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                            success: function (r) {
+                               
+                                if (r.d == "0") {
+                                    alert("You have already Saved This Advertisement.");
+                                }
+                                else {
+                                    alert("You have Succesfully Saved this Advertisements");
+                                }
+                            }
+                        });
+
+
+                    }
+                    else {
+                        alert("You need to Sign In");
+
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

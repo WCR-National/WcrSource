@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css?ver=5.2.2' type='text/css' media='all' />
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <!--<script src="js/jquery-2.1.1.min.js"></script>-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="css/loader.css" type="text/css" rel="stylesheet" />
+</head>
+<body style="background:#f8f8f8;">
+    <div>
+
+        <div class="modal fade small-model" id="success-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body form-horizontal no-padding">
+                        <div class="alert alert-success no-radius alert-dismissible no-margin " role="alert">
+                            <button type="button" class="close align-with-two-line" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong> <label id="lblSuccess"></label> </strong>  <br />
+                            <label id="lbldetail" class="running-text"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade small-model" id="fail_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body form-horizontal no-padding">
+
+                        <div class="alert alert-danger no-radius alert-dismissible no-margin " role="alert">
+                            <button type="button" class="close align-with-two-line" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong> <label id="lblFailureTitle"></label> </strong>  <br />
+
+                            <label id="lblFailureDetail" class="running-text"></label>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-wrap">
+        <div id="pageloader" class="pageloader" style="display:none">
+            <div class="pageloader-inner">
+                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div>
+        <div class="header"></div>
+        <div class="container result">
+
+            <div class="outer-middle">
+                <div class="middle_colume">
+                    <div class="container" id="DivWithoutSearchAds" style="display:block; ">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-sm-offset-2 text-center col-xs-offset-0  col-md-offset-2 col-lg-offset-2 searchbar" style="position:relative;">
+                                <div id="dlogo">
+                                    <h3>  <a href="JavaScript:void(0);">     <img src="img/wcr-logo.png" class="img-responsive" alt="" />  </a> </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container result" style="display:none" id="DivSearchAds">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-sm-offset-1 text-center col-xs-offset-0  col-md-offset-1 col-lg-offset-1 searchbar">
+                        <div id="Div1">
+                            <h3>  <a href="JavaScript:void(0);" name="wcrServiceLink">    <img src="img/wcr-logo.png" style="margin-bottom:25px;" class="img-responsive" alt="" />  </a> </h3>
+                        </div>
+                        <!-- <div id="Name" style="text-transform: uppercase; margin-bottom: 0px; margin-left:10px; font-weight:bold;">
+                        </div>-->
+                    </div>
+                </div>
+                <div class="row" id="sales">
+                </div>
+                <div class="row" id="Services">
+                </div>
+            </div>
+            <div class="container result" id="divShowAdvertisement" style="display:none;">
+                <div class="container result" id="search-result2">
+                    <div class="row">
+                        <div class="col-sm-12 searchbar ">
+                            <h3 class="text-center"><a name="logolink" href="JavaScript:void(0);"><img src="img/wcr-logo.png" class="img-responsive logo" alt=""></a></h3>
+
+                            <div id="sales1">
+                            </div>
+                            <div id="services1">
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="divProfile" style="display:none;">
+                <div class="col-sm-8  col-sm-offset-2 text-center searchbar ">
+                    <h3><a href="JavaScript:void(0);" name="wcrServiceLink1"><img src="img/wcr-logo.png" class="img-responsive logo" alt=""></a></h3>
+                    <div class="fullrow form-box form-horizontal">
+                        <h3> Customer Support </h3>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                How Can We Assist You?
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea placeholder="Message" id="txtmsg" class="form-control"> </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-sm-4">
+                                <button type="button" id="btnsave" class="btn btn-primary btn-block">Send  </button>
+                                <button type="button" class="btn btn-primary btn-block">Contact Us  </button>
+                                <p class="text-center">USA: 866.456.7331 </p>
+                                <button type="button" class="btn btn-primary btn-block" id="btnCancelAccount">Cancel Account  </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display:none;" id="divCancellation">
+                            <div class="col-sm-6" style="border: solid 2px #bbb; padding-bottom: 15px;">
+                                Please confirm your choice to cancel you WCR Consumer Account<br />
+                                <button type="button" class="btn btn-primary btn-block" id="btnDonotCancel">I Do Not Want To Cancel My Account  </button><br />
+                                <button type="button" id="BtnConfirm" class="btn btn-primary btn-block" style="background-color:red;">I Confirm Cancellation of My Account   </button><br />
+
+                            </div>
+                        </div>
+                        <div class="form-group" style="display:none;" id="divConfirmCancel">
+                            <div class="col-sm-6" style="border:solid 2px #bbb; padding-bottom:15px;">
+                                By Cancelling your WCR Consumer Account you hereby relinquish all rights and services thereto relating the services provided.<br /><br /><br />
+                                Do You Acknowledge?<br /><br />
+
+                                <button type="button" class="btn btn-primary pull-left" id="btnNo">No </button>
+                                <button type="button" class="btn btn-primary pull-right " style="background-color:red;" id="btnYes">YES I ACKNOWLEDGE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+</body>
+</html>
+
+<script src="js/customjs.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnsave').prop('disabled', true);
+        $("#txtmsg").keyup(function (e) {
+            var myLength = $("#txtmsg").val().length;
+            if (myLength >= 2) {
+                $('#btnsave').prop('disabled', false);
+            }
+            else {
+                $('#btnsave').prop('disabled', true);
+            }
+        });
+        $(document).on('keypress', '#txtSearch', function (e) {
+            if (e.keyCode == 13) {  // detect the enter key
+                if (txtSearch.value == "") {
+                    $("#lblfai").css("display", "block");
+                    $("#lblfai").text("Please enter City, State OR Zip Code.");
+                }
+                else {
+                    $("#divProfile").css("display", "none");
+                    $("#pageloader").css("display", "block");
+                    $("#homeicon").css("display", "inline-block");
+                    setTimeout(function () {
+                        Searching();
+                    }, 500);
+                }
+
+            }
+        });
+        function Searching() {
+            $("#lblfai").css("display", "none");
+            if (txtSearch.value == "") {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Please enter City, State OR Zip Code.");
+            }
+            else {
+                $("#divBody").addClass("result");
+                var zipc = txtSearch.value;
+                if ($.isNumeric($('#txtSearch').val())) {
+                    HideDiv();
+                    $("#DivSearchAds").css("display", "block");
+                    $("#divShowAdvertisement").css("display", "none");
+                    var sales = BindSalesCategory(zipc);
+                    $("#sales").html(sales.join(''));
+                    var services1 = BindServiesCategory(zipc);
+                    $("#Services").html(services1.join(''));
+                }
+                else {
+                    if (zipc.indexOf(',') != -1) {
+                        HideDiv();
+                        var strs;
+                        var State;
+                        var City;
+                        strs = zipc.split(',');
+                        for (var i = 0; i < strs.length; i++) {
+                            if (i == 0) {
+                                City = strs[i];
+                            }
+                            else if (i == 1) {
+                                State = strs[i];
+                            }
+                        }
+                        if (State.length == 2) {
+                            $("#DivSearchAds").css("display", "block");
+                            $("#divShowAdvertisement").css("display", "none");
+                            var sales = BindSalesCategoryCityWise(State, City);
+                            $("#sales").html(sales.join(''));
+                            var services1 = BindServiesCategoryCityWise(State, City);
+                            $("#Services").html(services1.join(''));
+                        }
+                        else if (State.length >= 2) {
+                            $("#lblfai").css("display", "block");
+                            $("#lblfai").text("Please Enter 2 Characters for State.");
+                        }
+                    }
+                    else {
+                        $("#lblfai").css("display", "block");
+                        $("#lblfai").text("Invalid data entered.  Please enter City, State OR Zip Code.");
+                    }
+                }
+
+            }
+            hideLoader();
+        }
+
+        $(document).on("click", "a[name='tpsrc']", function (e) {
+            if (txtSearch.value == "") {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Please enter City, State OR Zip Code.");
+            }
+            else {
+                $("#divShowDetails").css("display", "none");
+                $("#pageloader").css("display", "block");
+                $("#homeicon").css("display", "inline-block");
+                setTimeout(function () {
+                    Searching();
+                }, 500);
+            }
+        });
+        function HideDiv() {
+            $("#toplogo").css("display", "none");
+            $("#tabheader").css("display", "none");
+            $("#tabcontent").css("display", "none");
+        }
+        function showLoader() {
+            $("#pageloader").css("display", "block");
+        }
+        function hideLoader() {
+            setTimeout(function () {
+                $("#pageloader").css("display", "none");
+            }, 1500);
+        }
+
+        $(document).on("click", "a[name='wcrServiceLink']", function (e) {
+            $("#divBody").addClass("result");
+            $("#DivWithoutSearchAds").css("display", "none");
+            $("#DivSearchAds").css("display", "none");
+            $("#divShowAdvertisement").css("display", "block");
+            $("#divProfile").css("display", "none");
+            $("#pageloader").css("display", "block");
+            setTimeout(function () {
+                GetSalesAdts();
+            }, 2500);
+        });
+        $(document).on("click", "a[name='wcrServiceLink1']", function (e) {
+            $("#divBody").addClass("result");
+            $("#DivWithoutSearchAds").css("display", "none");
+            $("#DivSearchAds").css("display", "none");
+            $("#divShowAdvertisement").css("display", "block");
+            $("#divProfile").css("display", "none");
+            $("#pageloader").css("display", "block");
+            setTimeout(function () {
+                GetSalesAdts();
+            }, 2500);
+        });
+    });
+    function GetSalesAdts() {
+        var _IPAddress;
+        $.getJSON("http://jsonip.com?callback=?", function (data) {
+            _IPAddress = data.ip;
+            $.ajax({
+                type: "POST", url: "ws/TopSearch.asmx/GetZipCodeIpAddress",
+                data: "{'_IpAddress':'" + _IPAddress + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var salesn = BindSalesCategory1(r.d);
+                        $("#sales1").html(salesn.join(''));
+                        var servicesn = BindServiesCategory1(r.d);
+                        $("#services1").html(servicesn.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        });
+        $("#pageloader").css("display", "none");
+    }
+</script>
+<script>
+    $(function () {
+        $('.header').load("consumerHeader.html");
+        $('.footer').load("consumerFooter.html");
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#divProfile").css("display", "block");
+        $("#btnCancelAccount").click(function () {
+            $("#divCancellation").css("display", "block");
+        });
+
+        $("#btnDonotCancel").click(function () {
+            $("#divCancellation").css("display", "none");
+        });
+        $("#BtnConfirm").click(function () {
+            $("#divCancellation").css("display", "none");
+            $("#divConfirmCancel").css("display", "block");
+        });
+
+        $("#btnNo").click(function () {
+            $("#divCancellation").css("display", "none");
+            $("#divConfirmCancel").css("display", "none");
+        });
+        $("#btnYes").click(function () {
+            if (confirm("Are you sure? you want to Delete Record Permanently.")) {
+                $.ajax({
+                    type: "POST",
+                    url: "ws/ConsumerRegistration.asmx/DeleteConsumer",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (r) {
+                        window.location.href = 'index.html';
+                    }
+                });
+            }
+        });
+
+
+        $("#btnsave").click(function () {
+            $("#pageloader").css("display", "block");          
+            setTimeout(function () {
+                supportMessage();
+            }, 500);
+            
+        });
+        function supportMessage() {
+            $.ajax({
+                type: "POST",
+                url: "ws/ConsumerRegistration.asmx/ConsumerSupport",
+                data: "{'Messg':'" + txtmsg.value + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        txtmsg.value = "";
+                        jQuery.noConflict();
+                        $("#lblSuccess").text("Your Message has been Sent.");
+                        $("#lbldetail").text("Your support issue has been succesfully sent!!!. A support representative will contact you within 24-48 business hours.");
+                        $('#success-message').modal('show');
+                        $("#pageloader").css("display", "none");
+                    }
+                    else {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Something goes wrong. Please Try again.");
+                        $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
+                        $('#fail_message').modal('show');
+                        $("#pageloader").css("display", "none");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+            $("#pageloader").css("display", "none");
+
+        }
+       
+    });
+
+</script>

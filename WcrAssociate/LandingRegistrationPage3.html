@@ -1,0 +1,832 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <link href="css/landing.css" type="text/css" rel="stylesheet">
+    <title></title>
+</head>
+<body style="background:#f6f6f6;">
+    <div class="container-fluid landing-outer">
+
+        <div class="content-frame fullrow">
+
+            <div>
+                <div class="modal fade small-model" id="success-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body form-horizontal no-padding">
+                                <div class="alert alert-success no-radius alert-dismissible no-margin " role="alert">
+                                    <button type="button" class="close align-with-two-line" id="btnclose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong> <label id="lblSuccess"></label> </strong>  <br />
+                                    <label id="lbldetail" class="running-text"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade small-model" id="fail_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body form-horizontal no-padding">
+                                <div class="alert alert-danger no-radius alert-dismissible no-margin " role="alert">
+                                    <button type="button" class="close align-with-two-line" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <strong> <label id="lblFailureTitle"></label> </strong>  <br />
+                                    <label id="lblFailureDetail" class="running-text"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="left-side-block col-sm-5">
+                <div class="left-logo">
+                    WCR National
+                    <span>Consumer Service </span>
+                </div>
+                <div class="left-number">
+                    <a href="tel:18664567331"><i class="fa fa-phone "></i>866-456-7331</a>
+                </div>
+            </div>
+            <div class="col-sm-7  form-horizontal no-padding " id="divbasicinfo">
+                <div class="right-side-block">
+                    <div class="loader-wrap" id="LoadingImage" style="display: none;">
+                        <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+                    </div>
+                    <h4> <label id="lblTitle"></label></h4>
+                    <div id="divStep1" style="display:block">
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="firstName" placeholder="First Name ">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="emailAddress" placeholder="Email Address ">
+                                <p id="mailvalidation" style="display:none;" class="invalid">Email is not in Valid format.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" id="passwordSec">
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="passwrd" maxlength="20" placeholder="Password ">
+                                <div id="message" class="alert alert-info m-t-15 with-form" style="display:none;">
+                                    <h5><strong> Password must contain the following: </strong></h5>
+                                    <p id="letter" class="invalid">A lowercase letter</p>
+                                    <p id="capital" class="invalid">A capital (uppercase) letter</p>
+                                    <p id="number" class="invalid">A number</p>
+                                    <p id="length" class="invalid">Password must have a minimum of 8 characters <br />and a maximum of 20 characters in length</p>
+                                    <p id="specialcharacter" class="invalid">1 special character in ! @ # $ % ^ * _ </p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control" id="Cpassword" maxlength="20" placeholder="Confirm Password ">
+                                <p id="mismatchpass" class="invalid alert alert-info with-form" style="display:none;">Passwords Do Not Match </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group no-margin">
+                        <h4> <label id="lblTitle3">Step 2 <a href="#" data-toggle="modal" data-target="#termsConditions"><strong> WCR Terms &  Conditions </strong>  </a> </label></h4>
+                        <div class="col-sm-12">
+                            <div id="tandcond" style="margin-bottom: 15px; display: block; padding-left:0px;">
+                                <label class="checkbox-inline"> <input type="checkbox" id="chkTermCond" />I Agree to the WCR Terms And Conditions </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group no-margin">
+                        <div class="col-sm-12 text-left">
+                            <div id="createaccount" style="display:block;">
+                                <input type="hidden" class="form-control" id="lblAssociateID">
+                                <input id="btnFstStep" class="btn btn-primary" value="Submit" />
+                                <p id="divText" class="m-t-15" style="display:none">By clicking SUBMIT you agree to advertise as a WCR Associate</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="col-sm-7  form-horizontal no-padding" id="divVerification" style="display:none;">
+                <div class="right-side-block ">
+                    <h4> <label id="lblTitle">Welcome User </label></h4>
+                    <p class="pl-15"> Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <div class="row welcome">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+
+
+
+                            Enter Activation Code:- <input type="text" id="txtEmailVerification" /> <br /><br />
+                            Resend New Activation Code: <a href="#" id="btnresend">Resend</a>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                            <input type="button" id="btnVerification" value="Verify" class="btn btn-primary" /><br />
+                            <label id="lblSuccess1" style="color:red"></label>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal fade " id="termsConditions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title text-left" id="myModalLabel"> WCR Terms & Conditions </h4>
+                        </div>
+                        <div class="modal-body form-horizontal">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <p>
+                                    <b>
+                                        Terms of Use
+
+                                    </b>
+                                </p>
+                                <p>
+                                    <b>
+
+                                        Introduction
+                                    </b>
+                                </p>
+                                <p>
+                                    Access and/or use of this website are subject to the terms and conditions set forth herein and all applicable laws, statutes, and/or regulations.
+                                    WCR National may revise these Terms of Use from time to time without further notice by updating this posting.
+                                    By using this website, you accept these terms and conditions in full and without reservation.
+                                    If you disagree with these terms and conditions or any part of these terms and conditions, you must not use this website.
+                                    You must be at least 18 [eighteen] years of age to use this website. By using this website and by agreeing to these terms and conditions,
+                                    you warrant and represent that you are at least 18 years of age.
+                                </p>
+                                <p>
+                                    <b>
+                                        Disclaimer of Warranties
+                                    </b>
+                                </p>
+                                <p>
+                                    WCR National will use reasonable efforts to include accurate and up-to-date information on this website, but all information is provided "AS IS." WCR National makes no warranties or representations as to the accuracy of information presented on this website and disclaims all warranties, express or implied, including any warranties of merchantability, fitness for a particular purpose, and non-infringement to the full extent permitted by applicable law.
+                                    Without prejudice to the generality of the foregoing paragraph, WCR National does not warrant that:
+                                    this website will be constantly available, or available at all; or
+                                    the information on this website is complete, true, accurate or non-misleading.
+                                    Nothing on this website constitutes, or is meant to constitute, advice of any kind. If you require advice in relation to any legal, financial or medical matter you should consult an appropriate professional.
+
+                                    WCR National shall not be held responsible for any action taken that is based on the information presented on this website, and you agree that all access and use of this website, and any and all content presented on this website, is at your own risk.
+                                    Neither WCR National nor any of its agents or affiliates shall be liable to you for any direct, incidental, consequential, indirect, or punitive damages arising out of your access, use, or inability to use this website, or any errors or omissions in the content of this website.
+                                    By using this website you expressly give permission to WCR National or its affiliates or agents to contact you via text or phone call.
+                                    Payments made to the website from the customer and the services are not guaranteed by WCR National and the money is non-refundable.
+                                </p>
+                                <p>
+                                    <b>
+                                        Limitations of liability
+                                    </b>
+                                </p>
+                                <p>
+                                    WCR National will not be liable to you (whether under the law of contract, the law of torts or otherwise) in relation to the contents of, or use of, or otherwise in connection with, this website:
+                                    to the extent that the website is provided free-of-charge, for any direct loss;
+                                    for any indirect, special or consequential loss; or
+                                    for any business losses, loss of revenue, income, profits or anticipated savings, loss of contracts or business relationships, loss of reputation or goodwill, or loss or corruption of information or data.
+                                </p>
+                                <p>
+                                    <b>
+                                        Exceptions
+                                    </b>
+                                </p>
+                                <p>
+                                    Nothing in this website disclaimer will exclude or limit any warranty implied by law that it would be unlawful to exclude or limit,
+                                </p>
+                                <p>
+                                    <b>
+                                        Reasonableness
+                                    </b>
+                                </p>
+                                <p>
+                                    By using this website, you agree that the exclusions and limitations of liability set out in this website disclaimer are reasonable.
+                                    If you do not think they are reasonable, you must not use this website.
+                                </p>
+                                <p>
+                                    <b>
+                                        Intellectual Property: Copyrights & Trademarks
+                                    </b>
+                                </p>
+                                <p>
+                                    The entire content of this WCR National website, including any images or text, is protected by copyright.
+                                    The WCR National  company name and logo, and all product names, regardless of whether or not they appear in large print or with a trademark symbol, are trademarks of WCR National, its affiliates, related companies, or its licensors or joint venture partners, unless otherwise noted. Use, reproduction, copying, or redistribution of these trademarks, without the written permission of WCR National is prohibited.
+                                    In consideration for your agreement to these terms and conditions, WCR National grants you a personal, non-exclusive, non-transferable license to access and use this website.
+                                    You may download material from this website only for personal, non-commercial use.  You may not copy, distribute, download, modify, reuse, repost or otherwise exploit this website except as provided herein without the express written permission of WCR National.
+                                </p>
+                                <p>
+                                    <b>
+                                        Third Party Websites
+                                    </b>
+                                </p>
+                                <p>
+                                    WCR National's Website may include hyperlinks to websites maintained or controlled by others. WCR National is not responsible for and does not routinely screen, approve, review or endorse the contents of or use of any of the products or services that may be offered at these websites.
+                                </p>
+                                <p>
+                                    <b>
+                                        How to Contact Us:
+                                        <br /><br />
+                                        WCR National, Inc.<br />
+                                        <span style="color:red;"> (State)</span>, USA<br /><br />
+                                        Acceptable use
+                                    </b>
+                                </p>
+                                <p>
+                                    You must not use this website in any way which is unlawful, illegal, fraudulent or harmful, or in connection with any unlawful, illegal, fraudulent or harmful purpose or activity.
+                                    You must not use this website to copy, store, host, transmit, send, use, publish or distribute any material which consists of (or is linked to) any spyware, computer virus, Trojan horse, worm, keystroke logger, rootkit or other malicious computer software.
+                                    You must not conduct any systematic or automated data collection activities on or in relation to this website without WCR National's express written consent.
+                                    This includes:
+                                    <ul>
+                                        <li>    scraping </li>
+                                        <li> data mining</li>
+                                        <li> data extraction</li>
+                                        <li>data harvesting</li>
+                                    </ul>
+                                </p>
+                                <p><b>Restricted access</b></p>
+                                <p>
+                                    Access to certain areas of this website is restricted. WCR National reserves the right to restrict access to certain areas of this website, or at our discretion, this entire website. WCR National may change or modify this policy without notice.
+                                    If WCR National provides you with a user ID and password to enable you to access restricted areas of this website or other content or services, you must ensure that the user ID and password are kept confidential. You alone are responsible for your password and user ID security.
+                                    WCR National may disable your user ID and password at WCR National's sole discretion without notice or explanation.
+                                </p>
+                                <p>
+                                    <b>
+                                        Unenforceable provisions
+                                    </b>
+                                </p>
+                                <p>
+                                    If any provision of this website disclaimer is, or is found to be, unenforceable under applicable law, that will not affect the enforceability of the other provisions of this website disclaimer.
+                                </p>
+                                <p>
+                                    <b>
+                                        Indemnity
+                                    </b>
+                                </p>
+                                <p>
+                                    You hereby indemnify WCR National and undertake to keep WCR National indemnified against any losses, damages, costs, liabilities and expenses (including without limitation legal expenses and any amounts paid by WCR National to a third party in settlement of a claim or dispute on the advice of WCR National's legal advisers) incurred or suffered by WCR National arising out of any breach by you of any provision of these terms and conditions, or arising out of any claim that you have breached any provision of these terms and conditions.
+                                </p>
+                                <p>
+                                    <b>
+                                        Breaches of these terms and conditions
+                                    </b>
+                                </p>
+                                <p>
+                                    Without prejudice to WCR National's other rights under these terms and conditions, if you breach these terms and conditions in any way, WCR National may take such action as WCR National deems appropriate to deal with the breach, including suspending your access to the website, prohibiting you from accessing the website, blocking computers using your IP address from accessing the website, contacting your internet service provider to request that they block your access to the website and/or bringing court proceedings against you.
+                                </p>
+                                <p>
+                                    <b>
+                                        Variation
+                                    </b>
+                                </p>
+                                <p>
+                                    WCR National may revise these terms and conditions from time-to-time. Revised terms and conditions will apply to the use of this website from the date of the publication of the revised terms and conditions on this website. Please check this page regularly to ensure you are familiar with the current version.
+                                </p>
+                                <p>
+                                    <b>
+                                        Assignment
+                                    </b>
+                                </p>
+                                <p>
+                                    WCR National may transfer, sub-contract or otherwise deal with WCR National's rights and/or obligations under these terms and conditions without notifying you or obtaining your consent.
+                                    You may not transfer, sub-contract or otherwise deal with your rights and/or obligations under these terms and conditions.
+                                </p>
+                                <p>
+                                    <b>
+                                        Severability
+                                    </b>
+                                </p>
+                                <p>
+                                    If a provision of these terms and conditions is determined by any court or other competent authority to be unlawful and/or unenforceable, the other provisions will continue in effect. If any unlawful and/or unenforceable provision would be lawful or enforceable if part of it were deleted, that part will be deemed to be deleted, and the rest of the provision will continue in effect.
+                                </p>
+                                <p>
+                                    <b>
+                                        Entire agreement
+                                    </b>
+                                </p>
+                                <p>
+                                    These terms and conditions, together with WCR National's Privacy Policy constitute the entire agreement between you and WCR National in relation to your use of this website, and supersede all previous agreements in respect of your use of this website.
+                                </p>
+                                <p>
+                                    <b>
+                                        Law and jurisdiction
+                                    </b>
+                                </p>
+                                <p>
+                                    These terms and conditions will be governed by and construed in accordance with the laws of <span style="color:red"> (State)</span>, USA,
+                                    and any disputes relating to these terms and conditions will be subject to the exclusive jurisdiction of the courts of <span style="color:red">(State)</span> USA.
+                                </p>
+
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center copyright-text">
+
+                (c)  Copyright  2018 All Rights Reserved
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <script src="js/jquery-2.1.1.min.js"></script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+
+
+
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#chkTermCond').prop('disabled', true);
+        $('#btnFstStep').css("background-color", "#808080");
+        $('#btnFstStep').prop('disabled', true);
+        $('#passwrd').prop('disabled', true);
+        $('#Cpassword').prop('disabled', true);
+        $("#lblTitle").text("Step 1 Enter Your Info");
+        $("#Cpassword").change(function () {
+            var check = Valid();
+            if (check == "1") {
+                var emailID = emailAddress.value;
+                $.ajax({
+                    url: "ws/AssociateSignUp.ashx?action=RecordExists&EmailID=" + emailID + "",
+                    data: "",
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    async: false,
+                    type: "POST",
+                    cache: false,
+                    success: function (response) {
+                        if (response >= 1) {
+                            //e.preventDefault();
+                            //jQuery.noConflict();
+                            alert("This email address is not available. Please Try another Email address.");
+                            emailAddress.focus();
+                            return false;
+
+                        }
+                        else {
+                            // $("#lblTitle").text("Step 2 Would you like to advertise ?");
+                            //$("#divStep1").css("display", "none");
+                            //$("#regButton").css("display", "none");
+                            //$("#divuserRole").css("display", "block");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response + "Error...");
+                    }
+                });
+            }
+            else {
+                alert(check);
+                return false;
+            }
+        });
+
+        $("#emailAddress").change(function (e) {
+            var emailID = emailAddress.value;
+            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            if (!filter.test(emailID)) {
+                emailAddress.focus();
+                $("#mailvalidation").css('display', 'block');
+                return false;
+            }
+            else {
+
+                $.ajax({
+                    url: "ws/AssociateSignUp.ashx?action=RecordExists&EmailID=" + emailID + "",
+                    data: "",
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    async: true,
+                    type: "POST",
+                    cache: false,
+                    beforeSend: function () {
+                        showLoader();
+                    },
+                    success: function (response) {
+                        hideLoader();
+                        //$("#LoadingImage").css("display", "none");
+                        if (response >= 1) {
+                            //e.preventDefault();
+                            //jQuery.noConflict();
+                            passwrd.value = "";
+                            Cpassword.value = "";
+                            $("#mailvalidation").css('display', 'block');
+                            $('#passwrd').prop('disabled', true);
+                            $('#Cpassword').prop('disabled', true);
+
+                        }
+                        else {
+                            $("#mailvalidation").css('display', 'none');
+                            $('#passwrd').prop('disabled', false);
+                            $('#Cpassword').prop('disabled', false);
+                            passwrd.focus();
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response + "Error...");
+                    }
+                });
+
+            }
+        });
+        $('#chkTermCond').change(function () {
+            if (this.checked) {
+                $('#btnFstStep').css("background-color", "rgb(33, 150, 243)");
+                $('#btnFstStep').prop('disabled', false);
+                $("#divText").css("display", "block");
+            }
+            else {
+                $("#divText").css("display", "none");
+                $('#btnFstStep').css("background-color", "#808080");
+                $('#btnFstStep').prop('disabled', true);
+            }
+
+        });
+
+        function showLoader() {
+            $("#LoadingImage").css("display", "block");
+        }
+        function hideLoader() {
+            setTimeout(function () {
+                $("#LoadingImage").css("display", "none");
+            }, 1000);
+        }
+
+        $("#passwrd").focusin(function () {
+            $("#message").css("display", "block");
+        });
+        $("#passwrd").blur(function () {
+            $("#message").css("display", "none");
+        });
+        $("#passwrd").keyup(function () {
+            $("#message").css("display", "block");
+            var lowerCaseLetters = /[a-z]/g;
+            var upperCaseLetters = /[A-Z]/g;
+            var numbers = /[0-9]/g;
+            if (lowerCaseLetters.test(this.value)) {
+                $("#letter").removeClass("invalid");
+                //$("#letter").addClass("valid");
+                $("#letter").css("display", "none");
+            } else {
+                $("#letter").css("display", "block");
+                $("#letter").removeClass("valid");
+                $("#letter").addClass("invalid");
+            }
+            if (upperCaseLetters.test(this.value)) {
+                $("#capital").removeClass("invalid");
+                // $("#capital").addClass("valid");
+                $("#capital").css("display", "none");
+            }
+            else {
+                $("#capital").css("display", "block");
+                // $("#capital").removeClass("valid");
+                $("#capital").addClass("invalid");
+            }
+            if (numbers.test(this.value)) {
+                $("#number").removeClass("invalid");
+                // $("#number").addClass("valid");
+                $("#number").css("display", "none");
+            }
+            else {
+                $("#number").css("display", "block");
+                //  $("#number").removeClass("valid");
+                $("#number").addClass("invalid");
+
+            }
+            if ($("#passwrd").val().length < 8) {
+                // $("#length").removeClass("valid");
+                $("#length").addClass("invalid");
+                $("#length").css("display", "block");
+            } else {
+                $("#length").removeClass("invalid");
+                //$("#length").addClass("valid");
+                $("#length").css("display", "none");
+            }
+            var str = $('#passwrd').val();
+            var regex = /[^\w\s]/gi;
+            if (regex.test(str) == true) {
+                $("#specialcharacter").removeClass("invalid");
+                //$("#specialcharacter").addClass("valid");
+                $("#specialcharacter").css("display", "none");
+            }
+            else {
+                //$("#specialcharacter").removeClass("valid");
+                $("#specialcharacter").addClass("invalid");
+                $("#specialcharacter").css("display", "block");
+            }
+        });
+
+        $("#Cpassword").change(function (e) {
+            if (Cpassword.value != passwrd.value) {
+                $("#mismatchpass").css("display", "block");
+                return false;
+            }
+            else {
+                $("#divuserRole").css('background-color', 'white');
+                $("#mismatchpass").css("display", "none");
+                $('#chkTermCond').prop('disabled', false);
+
+            }
+        });
+        $("#Cpassword").keyup(function (e) {
+            if (Cpassword.value != passwrd.value) {
+
+                $("#mismatchpass").css("display", "block");
+
+            }
+            else {
+
+                $("#mismatchpass").css("display", "none");
+                $('#chkTermCond').prop('disabled', false);
+
+            }
+        });
+
+        $('#chkTermCond').change(function () {
+            if (this.checked) {
+                $("#createaccount").css("display", "block");
+            }
+            else {
+                $("#createaccount").css("display", "none");
+            }
+
+        });
+
+        $("#btnFstStep").click(function () {
+            var check = Valid();
+            if (check == "1") {
+                associateRegistration();
+            }
+            else {
+                alert(check);
+                return false;
+            }
+        });
+
+
+
+        $('#btnresend').click(function () {
+            var emailID = emailAddress.value;
+            $.ajax({
+                type: "POST", url: "ws/AssociateRegistration.asmx/ResendActivationCode",
+                data: "{'EmailID':'" + emailID + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        //if (ca >= "1") {
+                        if (r.d >= "1") {
+                            $("#lblSuccess1").text("Activation code has been send to your registered Email.");
+                        }
+                        else {
+                        }
+                    }
+                    else {
+
+                    }
+                }
+            });
+        });
+
+
+        $('#btnVerification').click(function () {
+            var username = emailAddress.value;
+
+            associateVerification(username);
+
+        });
+
+        function associateVerification(username) {
+            $.ajax({
+                type: "POST", url: "ws/AssociateRegistration.asmx/GetActivationCode",
+                data: "{'username':'" + username + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        if (r.d == txtEmailVerification.value) {
+                            $.ajax({
+                                type: "POST", url: "ws/AssociateRegistration.asmx/VerifiedAccount",
+                                data: "{'username':'" + username + "'}",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                async: false,
+                                success: function (r1) {
+                                    if (r1.d.length > 0) {
+                                        Login(username, passwrd.value);
+                                    }
+                                },
+                                failure: function (response) {
+                                    alert(response.d + "Fail");
+                                },
+                                error: function (response) {
+                                    alert(response.d + "Error...");
+                                }
+                            });
+
+                        }
+                        else {
+                            alert("Verification code does not match. Please Login your registered Email ID to see verification code.");
+                            return false;
+                        }
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+
+
+        function Login(uname, pass) {
+            $.ajax({
+                type: "POST",
+                url: "ws/AssociateRegistration.asmx/AssociateLogin",
+                data: "{'EmailID':'" + uname + "','Password':'" + pass + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("associateLogin");
+                        $.each(docs, function (i, docs) {
+                            if ($(docs).find("AssociateId").text() == "-1") {
+                                jQuery.noConflict();
+                                $("#lblFailureTitle").text("User Authentication Failed.")
+                                $("#lblFailureDetail").text("Please verify your credentials and retry log-in.")
+                                $('#fail_message').modal('show');
+                                return false;
+                            }
+                            else if ($(docs).find("Status").text() == "1") {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "ws/AssociateRegistration.asmx/AssociateLoginSessionActivate",
+                                    data: "{'username':'" + uname + "','assoID':'" + $(docs).find("AssociateId").text() + "'}",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    async: false,
+                                    success: function (r1) {
+                                        if (r1.d == "1") {
+                                            window.location.href = 'Associate/Dashboard.aspx';
+                                        }
+                                    }
+                                });
+                            }
+                            else {
+                                jQuery.noConflict();
+
+                                $("#lblFailureTitle").text("User Authentication Failed.");
+                                $("#lblFailureDetail").text("Please verify your credentials and retry log-in.");
+                                $('#fail_message').modal('show');
+
+                                return false;
+
+                            }
+
+                        });
+                    }
+                }
+            });
+
+        }
+
+
+
+
+    });
+
+
+
+
+
+
+
+    function associateRegistration() {
+        var FullName = firstName.value;
+        var LName = "0";//lstName.value;
+        var emailID = emailAddress.value;
+        // var username = "0";//userID.value;
+        var password = passwrd.value;
+        var mobileNo = "0";//mobile.value;
+        var ZipCode = "0";//zipcode.value;
+        var LicenseState = "0";//licenceState.value;
+        var LicenseID = "0";// licenceID.value;
+        var RefID = 0;
+        $.ajax({
+            url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
+            //data: test,
+            data: "",
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            async: true,
+            type: "POST",
+            cache: false,
+            ////beforeSend: function () {
+            ////    showLoader();
+            ////},
+            success: function (response) {
+                //hideLoader();
+                if (response >= 1) {
+                    //$("#createaccount").css("display", "none");
+                    //$("#lblSuccess").text("Succefully");
+                    //$("#lbldetail").text("Your account has been succesfully created!!");
+                    //$('#success-message').modal('show');
+                    $("#divbasicinfo").css("display", "none");
+                    $("#divVerification").css("display", "block");
+
+                }
+                else if (response == "0") {
+                    $("#lblFailureTitle").text("This EmailID is not available.");
+                    $("#lblFailureDetail").text("This EmailID is not available.Please Try another one.");
+                    $('#fail_message').modal('show');
+
+                }
+                else if (response == "-1") {
+                    $("#lblFailureTitle").text("User Authentication Failed.");
+                    $("#lblFailureDetail").text("Please verify your credentials and retry log-in.");
+                    $('#fail_message').modal('show');
+                    return false;
+                }
+                else {
+
+                }
+            },
+            failure: function (response) {
+                alert(response + "Fail");
+            },
+            error: function (response) {
+                alert(response + "Error...");
+            }
+        });
+    }
+
+    $("#btnclose").click(function () {
+        window.location.href = 'index.html';
+    });
+
+
+    function Valid() {
+        var returnValue;
+        var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if (emailAddress.value == "") {
+            returnValue = "Email is Required";
+            $("#emailAddress").focus();
+        }
+        else if (!filter.test($('#emailAddress').val())) {
+            returnValue = "Email is not Valid";
+            $("#emailAddress").focus();
+        }
+        else if (passwrd.value == "") {
+            returnValue = "Password is Required";
+            $("#passwrd").focus();
+        }
+        else if (passwrd.value != Cpassword.value) {
+            returnValue = "Password does not match";
+            $("#Cpassword").focus();
+        }
+        else {
+            returnValue = "1";
+        }
+        return returnValue;
+    }
+</script>

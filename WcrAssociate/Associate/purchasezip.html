@@ -1,0 +1,1254 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Associate Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.min.css">
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            Bindprofile();
+            CouponCode.value = '1';
+            //$.ajax({
+            //    type: "POST", url: "ws/CategoryPurchase.asmx/AssociateCardExists", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+            //    success: function (r) {
+            //        if (r.d.length > 0) {
+            //            var xmlDoc = $.parseXML(r.d);
+            //            var xml = $(xmlDoc);
+            //            var docs = xml.find("CheckAssoCard");
+            //            if ($(docs).find("id").text() >= 1) {
+            txtZipcode.focus();
+            $("#maindiv").show();
+            $("#divShow").hide();
+            $("#divShow1").hide();
+            $("#divError").hide();
+            $("#divSuccess").hide();
+            $("#Shop").hide();
+            $("#btncheckout").hide();
+            $("#btnSearch").click(function () {
+                $("#maindiv").show();
+                $("#divShow").hide();
+                $("#divShow1").hide();
+                $("#divError").hide();
+                $("#divSuccess").hide();
+                $("#Shop").hide();
+                $("#btncheckout").hide();
+                var check = Valid();
+                if (check == "1") {
+                    $.ajax({
+                        type: "POST", url: "ws/CategoryPurchase.asmx/ZipCodeExists", data: "{'Zipcode':'" + txtZipcode.value + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                        success: function (r) {
+                            if (r.d.length > 0) {
+                                var xmlDoc = $.parseXML(r.d);
+                                var xml = $(xmlDoc);
+                                var docs = xml.find("ZipcodeExists");
+                                if ($(docs).find("ID").text() >= 1) {
+                                    $("#divShow").show();
+                                    $("#divShow1").show();
+                                    $("#divError").hide();
+                                    $("#divSuccess").hide();
+                                    $("#Shop").hide();
+                                    $("#btncheckout").show();
+                                    $("label[id='lblSellHome']").text($(docs).find("SellHome").text());
+                                    $("label[id='lblMortgage']").text($(docs).find("Mortgage").text());
+                                    $("label[id='lblInsurance']").text($(docs).find("Insurance").text());
+                                    $("label[id='lblFinancial']").text($(docs).find("Financial").text());
+                                    BindMembership();
+                                    BindServiceCategory();
+                                }
+                                else {
+                                    $("#maindiv").show();
+                                    $("#divShow").hide();
+                                    $("#divShow1").hide();
+                                    $("#divError").hide();
+                                    $("#divSuccess").hide();
+                                    $("#Shop").hide();
+                                    $("#btncheckout").hide();
+                                    alert("This Zipcode is not available into the database");
+                                    txtZipcode.focus();
+                                }
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response.d + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response.d + "Error...");
+                        }
+                    });
+                }
+                else {
+                    $("#maindiv").show();
+                    $("#divShow").hide();
+                    $("#divShow1").hide();
+                    $("#divError").hide();
+                    $("#divSuccess").hide();
+                    $("#Shop").hide();
+                    $("#btncheckout").hide();
+                    alert(check);
+                }
+            });
+            $("#btncheckout").click(function () {
+                var check = Valid();
+                if (check == "1") {
+                    PurchaseServicesCategory();
+                    $("#Shop").show();
+                    $("#divShow").hide();
+                    $("#divShow1").hide();
+                    $("#divError").hide();
+                    $("#divSuccess").hide();
+                    $("#btncheckout").hide();
+                    $.ajax({
+                        type: "POST", url: "ws/CategoryPurchase.asmx/SelectCartData", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                        success: function (r) {
+                            if (r.d.length > 0) {
+                                var xmlDoc = $.parseXML(r.d);
+                                var xml = $(xmlDoc);
+                                var docs = xml.find("Table1");
+                                var cartd = [];
+                                cartd.push("<table width='210'  class='table table-condensed'>");
+                                cartd.push("<tr><td colspan=4>Your Selected Categories</td><td style='visibility:hidden'></td></tr>");
+                                cartd.push("<tr>");
+                                cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'><strong>Sr.No.</strong></td>");
+                                cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'><strong>Category</strong></td>");
+                                cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'> ZipCode </td>");
+                                cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'> Price </td>");
+                                cartd.push("<td style='color: white; background-color: skyblue; visibility:hidden' class='uk-width-2-10 uk-text-center'><strong>Category</strong></td>");
+                                cartd.push("</tr>");
+                                var count = 1;
+                                var Totalamount = 0;
+                                $.each(docs, function (i, docs) {
+                                    cartd.push("<tr>");
+                                    cartd.push("<td class='uk-text-center'>" + (count++) + "</td>");
+                                    cartd.push("<td class='uk-text-center'> " + ($(docs).find("Name").text() + " </td>"));
+                                    cartd.push("<td class='uk-text-center'> " + ($(docs).find("Zipcode").text() + " </td>"));
+                                    cartd.push("<td class='uk-text-center'>" + ($(docs).find("Price").text() + "$ </td>"));
+                                    cartd.push("<td class='uk-text-center' style='visibility:hidden'> " + ($(docs).find("CategoryID").text() + " </td>"));
+                                    cartd.push("</tr>");
+                                    var a = $(docs).find("Price").text();
+                                    Totalamount = parseInt(Totalamount) + parseInt(a);
+                                });
+                                cartd.push("<tr> <td colspan='3' class='uk-text-center'></td>   <td style='float:right;'><b> Total Amount:-" + Totalamount + "</b></td><td  class='uk-text-center'></td></tr>");
+                                $("label[for='lblRowId']").text(Totalamount);
+
+                                cartd.push("</table>");
+                                $("#viewCart").html(cartd.join(''));
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response.d + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response.d + "Error...");
+                        }
+                    });
+                }
+                else {
+                    alert(check);
+                }
+            });
+            $(function () {
+                $("#MemberShip").change(function () {
+                    var MonthValue = MemberShip.value;
+                    var totalAmount = $("label[for='lblRowId']").text();
+                    $("label[for='lblToalAmount']").text("Total Amount:-" + MonthValue * totalAmount + "$");
+                    $.ajax({
+                        type: "POST", url: "ws/CouponCodeCategory.asmx/CheckCouponCode", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                        success: function (r1) {
+                            if (r1.d.length > 0) {
+                                var xmlDoc1 = $.parseXML(r1.d);
+                                var xml1 = $(xmlDoc1);
+                                var docs1 = xml1.find("ViewCouponCodeCat");
+                                $.each(docs1, function (i, docs1) {
+                                    //$("#coponApply").show();
+                                    $("label[for='lblcode']").text($(docs1).find("CouponCode").text());
+                                    $("label[for='lblprice']").text($(docs1).find("Discount").text());
+                                    $("label[for='lbldur']").text($(docs1).find("Duration").text());
+                                    $("#CouponCode").show();
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+            $("#save").click(function () {
+                if (CouponCode.value == 1) {
+                    var a = 0;
+                    var b = 0;
+                    var c = 0;
+                    $.ajax({
+                        type: "POST", url: "../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                        success: function (r1) {
+                            if (r1.d.length > 0) {
+                                var xmlDoc1 = $.parseXML(r1.d);
+                                var xml1 = $(xmlDoc1);
+                                var docs1 = xml1.find("ViewAssociateBasicDetail");
+                                $.each(docs1, function (i, docs1) {
+                                    a = $(docs1).find("CouponCode").text();
+                                    b = $(docs1).find("Discount").text();
+                                    c = $(docs1).find("ForMonths").text();
+                                });
+                            }
+                        }
+                    });
+                    ApplycoponCode(a, b, c);
+                }
+                else if ($("label[for='lblcode']").text() == CouponCode.value) {
+                    ApplycoponCode($("label[for='lblcode']").text(), $("label[for='lblprice']").text(), $("label[for='lbldur']").text());
+                }
+                else if (confirm(" Coupon code does not match.Are you sure to submit without Coupon code?")) {
+                    ApplycoponCode(a, b, c);
+                }
+                else {
+                }
+            });
+            //}
+            //else {
+            //    window.location.href = 'InsertCardInfo.aspx';
+            //}
+            //    }
+            //},
+            //    failure: function (response) {
+            //        alert(response.d + "Fail");
+            //    },
+            //    error: function (response) {
+            //        alert(response.d + "Error...");
+            //    }
+            //});
+        });
+
+        function Bindprofile() {
+            $.ajax({
+                type: "POST", url: "../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: true,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("ViewAssociateBasicDetail");
+                        var cartd = [];
+                        $.each(docs, function (i, docs) {
+                            cartd.push("<div class='pull-left image'>");
+                            var sd = [];
+                            cartd.push("<img class='img-circle' alt='User Image' src='../AssociatePhoto/" + $(docs).find("Photo").text() + "'/> ");
+                            $("#cartd").html(sd.join(''));
+                            cartd.push("</div>");
+                            cartd.push("<div class='pull-left info'><p>");
+                            cartd.push("Welcome   " + $(docs).find("FullName").text());
+                            cartd.push("</p><a href='#'><i class='fa fa-circle text-success'></i>Online</a></div>");
+                        });
+                        $("#userProfile").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function Valid() {
+            var returnValue;
+            if (txtZipcode.value == "") {
+                returnValue = "Zipcode required";
+                $("#txtZipcode").focus();
+            }
+            else {
+                returnValue = "1";
+            }
+            return returnValue;
+        }
+        function ApplycoponCode(ccode, disc, duration) {
+            if (MemberShip.value == 0) {
+                alert("Select Membership Plan");
+            }
+            else {
+                var teamlist = [];
+                var zipcodelist = [];
+                var PriceValues = [];
+                var CatIdValue = [];
+                $.ajax({
+                    type: "POST", url: "ws/CategoryPurchase.asmx/SelectCartData", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var xmlDoc = $.parseXML(r.d);
+                            var xml = $(xmlDoc);
+                            var docs = xml.find("Table1");
+                            $.each(docs, function (i, docs) {
+                                teamlist.push($(docs).find("CategoryID").text());
+                                zipcodelist.push($(docs).find("Zipcode").text());
+                                PriceValues.push($(docs).find("Price").text());
+                                CatIdValue.push($(docs).find("CategoryID").text());
+                            });
+                        }
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "ws/CategoryPurchase.asmx/InsertCategory",
+                    data: "{'categoryID':'" + CatIdValue + "','SubcategoryID':'" + teamlist + "','PlanID':'" + MemberShip.value + "','pricevalues':'" + PriceValues + "','zipcodeID':'" + zipcodelist + "','Couponcode':'" + ccode + "','Discount':'" + disc + "','Duration':'" + duration + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    cache: false,
+                    success: function (r) {
+                        if (r.d == "1") {
+                            //write a webservice which will send amount
+                            var MonthValue = MemberShip.value;
+                            var totalAmount = $("label[for='lblRowId']").text();
+                            $.ajax({
+                                type: "POST",
+                                url: "ws/CategoryPurchase.asmx/InsertAmount",
+                                data: "{'amount':'" + MonthValue * totalAmount + "'}",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                async: false,
+                                cache: false,
+                                success: function (r) {
+                                    if (r.d == "1") {
+                                        $("#btncheckout").css({ "visibility": "visible" });
+                                        $("#divSuccess").show();
+                                        setTimeout(function () { $('#divSuccess').fadeOut('fast'); }, 2000);
+                                    }
+                                    if (r.d == "0") {
+                                        alert("Already Exists");
+                                    }
+                                    if (r.d == "3") {
+                                        alert("OOPS Error ! Please try again.");
+                                    }
+                                },
+                                failure: function (response) {
+                                    alert(response.d + "Fail");
+                                },
+                                error: function (response) {
+                                    alert(response.d + "Error...");
+                                }
+                            });
+                            //end here
+
+                            $("#btncheckout").css({ "visibility": "visible" });
+                            $("#divSuccess").show();
+                            setTimeout(function () { $('#divSuccess').fadeOut('fast'); }, 2000);
+                        }
+                        if (r.d == "0") {
+                            alert("Already Exists");
+                        }
+                        if (r.d == "3") {
+                            alert("OOPS Error ! Please try again.");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }
+
+        }
+        function PurchaseServicesCategory() {
+            var CatNames = [];
+            var teamlist = [];
+            var checkboxValue = [];
+            var priceCategory = [];
+            var totalAmount = 0;
+            $("#divShow1 input[id*='chk']:checked").each(function () {
+                var aa = $(this).val();
+                var bb = aa.split('(');
+                teamlist.push(bb[0]);
+                checkboxValue.push($(this).attr('name'));
+                CatNames.push(bb[1]);
+            });
+            if (teamlist == 0) {
+                alert("Please Select at least one Category");
+                return false;
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    url: "ws/CategoryPurchase.asmx/InsertD",
+                    data: "{'EmpId':'" + teamlist + "','TeamID':'2','catName':'" + checkboxValue + "','zipcode':'" + txtZipcode.value + "','price':'" + checkboxValue + "','Name':'" + CatNames + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    cache: false,
+                    success: function (r) {
+                        if (r.d == "1") {
+                            0
+                            $("label[for='lblselected']").text(($("label[for='lblselected']").text()) + "," + teamlist);
+                            $("#btncheckout").css({ "visibility": "visible" });
+                            $("#divSuccess").show();
+                            setTimeout(function () { $('#divSuccess').fadeOut('fast'); }, 2000);
+                        }
+                        if (r.d == "0") {
+                            alert("Already Exists");
+                        }
+                        if (r.d == "3") {
+                            alert("OOPS Error ! Please try again.");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }
+        }
+        function BindServiceCategory() {
+            var zpcode = txtZipcode.value;
+            $.ajax({
+                type: "POST", url: "ws/Category.asmx/AvailableCategory", data: "{'jobtype':'2','zip':'" + zpcode + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("AvailCategories");
+                        var cartd = [];
+                        cartd.push("<table class='table table-condensed'>");
+                        cartd.push("<tr><td colspan=4><b>SERVICE</b></td></tr>");
+                        cartd.push("<tr>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'><strong>Sr.No.</strong></td>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'><strong>Name</strong></td>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'> Click to Purchase </td>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'><strong>Status</strong></td>");
+                        cartd.push("</tr>");
+                        var count = 1;
+                        $.each(docs, function (i, docs) {
+                            cartd.push("<tr>");
+                            cartd.push("<td class='uk-text-center'>" + (count++) + "</td>");
+                            cartd.push("<td class='uk-text-center'>" + ($(docs).find("CategoryName").text() + " </td>"));
+                            if ($(docs).find("CategoryStatus").text() == "1") {
+                                cartd.push("<td class='uk-text-center'><input type='checkbox' disabled='disabled'  value='" + $(docs).find("CateID").text() + "'  name=" + $(docs).find("CategoryName").text() + "    class='checkbox' id='chk' /></td>");
+                                cartd.push("<td class='uk-text-center'>Sold Out</td>");
+                            }
+                            else {
+
+                                if (count == 2) {
+                                    cartd.push("<td class='uk-text-center'><input type='checkbox'  value='" + $(docs).find("CateID").text() + "(" + $(docs).find("CategoryName").text() + "'  name=" + $(docs).find("Financial").text() + "    class='checkbox' id='chk' />" + $(docs).find("Financial").text() + "</td>");
+                                }
+                                else if (count == 3) {
+                                    cartd.push("<td class='uk-text-center'><input type='checkbox'  value='" + $(docs).find("CateID").text() + "(" + $(docs).find("CategoryName").text() + "'  name=" + $(docs).find("Insurance").text() + "    class='checkbox' id='chk' />" + $(docs).find("Insurance").text() + "</td>");
+                                }
+                                else if (count == 4) {
+                                    cartd.push("<td class='uk-text-center'><input type='checkbox'  value='" + $(docs).find("CateID").text() + "(" + $(docs).find("CategoryName").text() + "'  name=" + $(docs).find("Mortgage").text() + "    class='checkbox' id='chk' />" + $(docs).find("Mortgage").text() + "</td>");
+                                }
+                                else if (count == 5) {
+                                    cartd.push("<td class='uk-text-center'><input type='checkbox'  value='" + $(docs).find("CateID").text() + "(" + $(docs).find("CategoryName").text() + "'  name=" + $(docs).find("SellHome").text() + "    class='checkbox' id='chk' />" + $(docs).find("SellHome").text() + "</td>");
+                                }
+                                cartd.push("<td class='uk-text-center'>Available</td>");
+
+                            }
+                            cartd.push("</tr>");
+
+                        });
+                        cartd.push("</table>");
+                        $("#divShow1").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function BindMembership() {
+            $.ajax({
+                type: "POST", url: "ws/MemberShip.asmx/SelectMemberShip", data: "{'flag':'1'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("MemberShipPlan");
+                        var cartd = [];
+                        cartd.push("<option value=0>Select</option>")
+                        $.each(docs, function (i, docs) {
+                            cartd.push(" <option value='" + $(docs).find("mDuration").text() + "'>" + $(docs).find("PlanName").text() + "</option>");
+                        });
+                        $("#MemberShip").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+    </script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini">WCR National</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>WCR </b> National</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"><span class="sr-only">Toggle navigation</span> </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown messages-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="label label-success">4</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 4 messages</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- start message -->
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <%-- <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">--%>
+                                                </div>
+                                                <h4>
+                                                    Support Team
+                                                    <small><i class="fa fa-clock-o"></i>5 mins</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <!-- end message -->
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <%-- <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">--%>
+                                                </div>
+                                                <h4>
+                                                    Wcr Team
+                                                    <small><i class="fa fa-clock-o"></i>2 hours</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <%--<img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">--%>
+                                                </div>
+                                                <h4>
+                                                    Developers
+                                                    <small><i class="fa fa-clock-o"></i>Today</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <%--  <img src="../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">--%>
+                                                </div>
+                                                <h4>
+                                                    Sales Department
+                                                    <small><i class="fa fa-clock-o"></i>Yesterday</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <div class="pull-left">
+                                                    <%--<img src="../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">--%>
+                                                </div>
+                                                <h4>
+                                                    Reviewers
+                                                    <small><i class="fa fa-clock-o"></i>2 days</small>
+                                                </h4>
+                                                <p>Why not buy a new awesome theme?</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">See All Messages</a></li>
+                            </ul>
+                        </li>
+                        <!-- Notifications: style can be found in dropdown.less -->
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning">10</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 10 notifications</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users text-aqua"></i>5 new members joined today
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-warning text-yellow"></i>Very long description here that may not fit into the page and may cause design problems
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-users text-red"></i>5 new members joined
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-shopping-cart text-green"></i>25 sales made
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-user text-red"></i>You changed your username
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                        </li>
+                        <!-- Tasks: style can be found in dropdown.less -->
+                        <li class="dropdown tasks-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-flag-o"></i>
+                                <span class="label label-danger">9</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have 9 tasks</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    Design some buttons
+                                                    <small class="pull-right">20%</small>
+                                                </h3>
+                                                <div class="progress xs">
+                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">20% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                        <li>
+                                            <!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    Create a nice theme
+                                                    <small class="pull-right">40%</small>
+                                                </h3>
+                                                <div class="progress xs">
+                                                    <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">40% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                        <li>
+                                            <!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    Some task I need to do
+                                                    <small class="pull-right">60%</small>
+                                                </h3>
+                                                <div class="progress xs">
+                                                    <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">60% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                        <li>
+                                            <!-- Task item -->
+                                            <a href="#">
+                                                <h3>
+                                                    Make beautiful transitions
+                                                    <small class="pull-right">80%</small>
+                                                </h3>
+                                                <div class="progress xs">
+                                                    <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                        <span class="sr-only">80% Complete</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <!-- end task item -->
+                                    </ul>
+                                </li>
+                                <li class="footer">
+                                    <a href="#">View all tasks</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                                    <p id="uprofile">
+                                        Alexander Pierce - Web Developer
+
+                                        <small>Member since Nov. 2012</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="row">
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Followers</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Sales</a>
+                                        </div>
+                                        <div class="col-xs-4 text-center">
+                                            <a href="#">Friends</a>
+                                        </div>
+                                    </div>
+                                    <!-- /.row -->
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                        </li>
+                        <!-- User Account: style can be found in dropdown.less -->
+
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 searchtop">
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <span class="input-group-addon"><a href="#">Search </a></span>
+                    </div>
+                </div>
+            </nav>
+            <!--<nav class="navbar navbar-static-top" role="navigation">
+               
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span> </a>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 searchtop">
+
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <span class="input-group-addon"> <a href="#"> Search </a> </span>
+                    </div>
+                </div>
+            </nav>-->
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel" id="userProfile">
+                </div>
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" style="margin-top:0px;">
+                    <li class="active"><a href="index.aspx"><i class="fa fa-dashboard"></i><span>Dashboard</span> </a></li>
+                    <li class="treeview"><a href="ViewProfile.aspx"><i class="fa fa-dashboard"></i><span>Profile</span> </a></li>
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-pie-chart"></i><span>My Account</span> <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu" style="display: none;">
+                            <li><a href="VerifyMobileNo.aspx"><i class="fa fa-circle-o"></i>Verify Mobile</a></li>
+                            <li><a href="UpdateCard.aspx"><i class="fa fa-circle-o"></i>Credit Card </a></li>
+                           
+                            <li><a href="BillingHistory.aspx"><i class="fa fa-circle-o"></i>Billing History</a></li>
+                            <li><a href="PromoCode.aspx"><i class="fa fa-pie-chart"></i>Promotional Code</a></li>
+
+                        </ul>
+                    </li>
+                    
+                    <li class="treeview">
+                        <a href="#"><i class="fa fa-pie-chart"></i><span>Post Advertisement </span><i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu" style="display: none;">
+                            <li class="treeview">
+                                <a href="#"><i class="fa fa-circle-o"></i><span>Sales </span><i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="treeview-menu" style="display: none;">
+                                    <li><a href="PurchaseCategory.aspx">Purchase category </a></li>
+                                    <li><a href="PostAdvertisement.aspx?pid=1">Post Sales Advertisement  </a></li>
+                                </ul>
+                            </li>
+                            <li class="treeview">
+                                <a href="#"><i class="fa fa-circle-o"></i><span>Services </span><i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="treeview-menu" style="display: none;">
+                                    <li><a href="purchasezip.html">Purchase Zip code</a></li>
+                                   
+                                    <li><a href="PostAdvertisement.aspx?pid=2">Post Services Advertisement </a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="ViewPostedAdvertisement.aspx"><i class="fa fa-circle-o"></i>View My  Advertisements </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-pie-chart"></i>Invite</a>  </li>
+
+
+
+                    <li><a href="VisitorsInfo.aspx"><i class="fa fa-pie-chart"></i>Consumer Interest</a></li>
+                   
+                    <li class="treeview">
+                        <a href="needhelp.aspx"><i class="fa fa-pie-chart"></i><span>Customer Support</span> <i class="fa fa-angle-left pull-right"></i></a>
+                    </li>
+                    <li class="treeview"><a href="#" id="btnLogout"><i class="fa fa-pie-chart"></i>Logout <i class="fa fa-angle-left pull-right"></i></a></li>
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+
+            <section class="content">
+                <!-- Small boxes (Stat box) -->
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 ">
+                        <div class="box customebox">
+                            <!--<div class="box-header">
+                                <h3 class="box-title">Zip Code</h3>
+                            </div>-->
+                            <div class="box-body  form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <label class="col-lg-3 col-md-3 col-sm-3 col-xs-12 control-label">
+                                            Enter Zip Code
+                                        </label>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
+                                            <input id="txtZipcode"  class="form-control" type="text" />
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <input class="btn btn-primary"  type="submit" value="Search Categories" id="btnSearch" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="box-header">
+                                    <h3 class="box-title">Service </h3>
+                                </div>-->
+                                <div>
+                                    <label style="visibility: hidden;" id="lblSellHome"></label>
+                                    <label style="visibility: hidden;" id="lblMortgage"></label>
+                                    <label style="visibility: hidden;" id="lblInsurance"></label>
+                                    <label style="visibility: hidden;" id="lblFinancial"></label>
+                                    <div class="uk-overflow-container" id="divShow">
+                                    </div>
+                                    <div class="uk-overflow-container" id="divShow1">
+                                    </div>
+                                    &nbsp;&nbsp;<input id="btncheckout" class="btn btn-primary" type="button" value="Save" />
+                                    <div id="Shop">
+                                        <table style="width: 100%">
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div id="viewCart"></div>
+                                                    Membership Plan:-
+                                                    <select name="select" id="MemberShip"></select>
+                                                    <br />
+                                                    <label style="visibility: hidden" for="lblRowId"></label>
+                                                    <br />
+                                                    <label for="lblToalAmount"></label>
+                                                    <br />
+                                                    <input type="text" id="CouponCode" placeholder="Do you have Coupon Code" style="display: none; width: 200px;" /><br />
+                                                    <label style="visibility: hidden;" for="lblcode"></label>
+                                                    <br />
+                                                    <label style="visibility: hidden" for="lblprice"></label>
+                                                    <br />
+                                                    <label style="visibility: hidden" for="lbldur"></label>
+                                                    <br />
+                                                    <input type="submit" class="btn btn-primary" id="save" value="Checkout" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 ">
+                        <div class="box customebox">
+
+                            <div role="alert" id="divSuccess" class="alert alert-success">
+                                <strong>Category Added to Cart Succesfully</strong>
+                            </div>
+                            <div role="alert" id="divError" class="alert alert-danger">
+                                <strong>Oh snap!</strong> Change a few things up and try submitting again.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </section>
+
+
+        </div>
+        <footer class="main-footer"> <strong>Copyright 2016 </strong> All rights reserved. </footer>
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Home tab content -->
+                <div class="tab-pane" id="control-sidebar-home-tab">
+                    <h3 class="control-sidebar-heading">Recent Activity</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                                    <p>Will be 23 on April 24th</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-user bg-yellow"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                                    <p>New phone +1(800)555-1234</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
+                                    <p>nora@example.com</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <i class="menu-icon fa fa-file-code-o bg-green"></i>
+                                <div class="menu-info">
+                                    <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
+                                    <p>Execution time 5 seconds</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+                    <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                    <ul class="control-sidebar-menu">
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading"> Custom Template Design <span class="label label-danger pull-right">70%</span> </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading"> Update Resume <span class="label label-success pull-right">95%</span> </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading"> Laravel Integration <span class="label label-warning pull-right">50%</span> </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript::;">
+                                <h4 class="control-sidebar-subheading"> Back End Framework <span class="label label-primary pull-right">68%</span> </h4>
+                                <div class="progress progress-xxs">
+                                    <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- /.control-sidebar-menu -->
+                </div>
+                <!-- /.tab-pane -->
+                <!-- Stats tab content -->
+                <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+                <!-- /.tab-pane -->
+                <!-- Settings tab content -->
+                <div class="tab-pane" id="control-sidebar-settings-tab">
+                    <form method="post">
+                        <h3 class="control-sidebar-heading">General Settings</h3>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Report panel usage
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+                            <p> Some information about this general settings option </p>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Allow mail redirect
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+                            <p> Other sets of options are available </p>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Expose author name in posts
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+                            <p> Allow the user to show his name in blog posts </p>
+                        </div>
+                        <!-- /.form-group -->
+                        <h3 class="control-sidebar-heading">Chat Settings</h3>
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Show me as online
+                                <input type="checkbox" class="pull-right" checked>
+                            </label>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading">
+                                Turn off notifications
+                                <input type="checkbox" class="pull-right">
+                            </label>
+                        </div>
+                        <!-- /.form-group -->
+                        <div class="form-group">
+                            <label class="control-sidebar-subheading"> Delete chat history <a href="javascript::;" class="text-red pull-right"><i class="fa fa-trash-o"></i></a> </label>
+                        </div>
+                        <!-- /.form-group -->
+                    </form>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+                 immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery 2.1.4 -->
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- daterangepicker -->
+    <!-- Bootstrap WYSIHTML5 -->
+    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <!-- Slimscroll -->
+    <!-- FastClick -->
+    <!-- AdminLTE App -->
+    <script src="js/app.min.js"></script>
+    <script src="../dist/js/demo.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="plugins/fullcalendar/fullcalendar.min.js"></script>
+
+    <script>
+        $(function () {
+
+            /* initialize the external events
+             -----------------------------------------------------------------*/
+            function ini_events(ele) {
+                ele.each(function () {
+
+                    // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+                    // it doesn't need to have a start or end
+                    var eventObject = {
+                        title: $.trim($(this).text()) // use the element's text as the event title
+                    };
+
+                    // store the Event Object in the DOM element so we can get to it later
+                    $(this).data('eventObject', eventObject);
+
+                    // make the event draggable using jQuery UI
+                    $(this).draggable({
+                        zIndex: 1070,
+                        revert: true, // will cause the event to go back to its
+                        revertDuration: 0  //  original position after the drag
+                    });
+
+                });
+            }
+            ini_events($('#external-events div.external-event'));
+
+            /* initialize the calendar
+             -----------------------------------------------------------------*/
+            //Date for the calendar events (dummy data)
+            var date = new Date();
+            var d = date.getDate(),
+                    m = date.getMonth(),
+                    y = date.getFullYear();
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                buttonText: {
+                    today: 'today',
+                    month: 'month',
+                    week: 'week',
+                    day: 'day'
+                },
+                //Random default events
+                events: [
+                  {
+                      title: 'All Day Event',
+                      start: new Date(y, m, 1),
+                      backgroundColor: "#f56954", //red
+                      borderColor: "#f56954" //red
+                  },
+                  {
+                      title: 'Long Event',
+                      start: new Date(y, m, d - 5),
+                      end: new Date(y, m, d - 2),
+                      backgroundColor: "#f39c12", //yellow
+                      borderColor: "#f39c12" //yellow
+                  },
+                  {
+                      title: 'Meeting',
+                      start: new Date(y, m, d, 10, 30),
+                      allDay: false,
+                      backgroundColor: "#0073b7", //Blue
+                      borderColor: "#0073b7" //Blue
+                  },
+                  {
+                      title: 'Lunch',
+                      start: new Date(y, m, d, 12, 0),
+                      end: new Date(y, m, d, 14, 0),
+                      allDay: false,
+                      backgroundColor: "#00c0ef", //Info (aqua)
+                      borderColor: "#00c0ef" //Info (aqua)
+                  },
+                  {
+                      title: 'Birthday Party',
+                      start: new Date(y, m, d + 1, 19, 0),
+                      end: new Date(y, m, d + 1, 22, 30),
+                      allDay: false,
+                      backgroundColor: "#00a65a", //Success (green)
+                      borderColor: "#00a65a" //Success (green)
+                  },
+                  {
+                      title: 'Click for Google',
+                      start: new Date(y, m, 28),
+                      end: new Date(y, m, 29),
+                      url: 'http://google.com/',
+                      backgroundColor: "#3c8dbc", //Primary (light-blue)
+                      borderColor: "#3c8dbc" //Primary (light-blue)
+                  }
+                ],
+                editable: true,
+                droppable: true, // this allows things to be dropped onto the calendar !!!
+                drop: function (date, allDay) { // this function is called when something is dropped
+
+                    // retrieve the dropped element's stored Event Object
+                    var originalEventObject = $(this).data('eventObject');
+
+                    // we need to copy it, so that multiple events don't have a reference to the same object
+                    var copiedEventObject = $.extend({}, originalEventObject);
+
+                    // assign it the date that was reported
+                    copiedEventObject.start = date;
+                    copiedEventObject.allDay = allDay;
+                    copiedEventObject.backgroundColor = $(this).css("background-color");
+                    copiedEventObject.borderColor = $(this).css("border-color");
+
+                    // render the event on the calendar
+                    // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+                    $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+                    // is the "remove after drop" checkbox checked?
+                    if ($('#drop-remove').is(':checked')) {
+                        // if so, remove the element from the "Draggable Events" list
+                        $(this).remove();
+                    }
+
+                }
+            });
+
+            /* ADDING EVENTS */
+            var currColor = "#3c8dbc"; //Red by default
+            //Color chooser button
+            var colorChooser = $("#color-chooser-btn");
+            $("#color-chooser > li > a").click(function (e) {
+                e.preventDefault();
+                //Save color
+                currColor = $(this).css("color");
+                //Add color effect to button
+                $('#add-new-event').css({ "background-color": currColor, "border-color": currColor });
+            });
+            $("#add-new-event").click(function (e) {
+                e.preventDefault();
+                //Get value and make sure it is not null
+                var val = $("#new-event").val();
+                if (val.length == 0) {
+                    return;
+                }
+
+                //Create events
+                var event = $("<div />");
+                event.css({ "background-color": currColor, "border-color": currColor, "color": "#fff" }).addClass("external-event");
+                event.html(val);
+                $('#external-events').prepend(event);
+
+                //Add draggable funtionality
+                ini_events(event);
+
+                //Remove event from text input
+                $("#new-event").val("");
+            });
+        });
+    </script>
+</body>
+</html>

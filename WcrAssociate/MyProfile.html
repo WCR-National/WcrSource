@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <title>Home</title>
+    <script>
+        $(function () {
+            $('.header').load("headerNew.html");
+            $('.footer').load("Footer.html");
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#btnEditProf").click(function () {
+                $("#divEditProfile").css("visibility", "visible");
+                $.ajax({
+                    type: "POST", url: "ws/ConsumerRegistration.asmx/SelectConsumerDetail", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: true,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var xmlDoc = $.parseXML(r.d);
+                            var xml = $(xmlDoc);
+                            var docs = xml.find("ConsumerDetail");
+                            $.each(docs, function (i, docs) {
+                                txtName.value = $(docs).find("name").text();
+                                txtAddress.value = $(docs).find("address").text();
+                                txtMobile.value = $(docs).find("Mob").text();
+                                txtEmail.value = $(docs).find("userName").text();
+                            });
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            });
+
+            $("#btnUpdate").click(function () {
+                var check = ConsumerValid();
+                if (check == "1") {
+                    var FullName = txtName.value;
+                    var Address = txtAddress.value;
+                    var mobileNo = txtMobile.value;
+                    var userName = txtEmail.value;
+                    $.ajax({
+                        type: "POST", url: "ws/ConsumerRegistration.asmx/UpdateConsumer", data: "{'FullName':'" + FullName + "','Address':'" + Address + "','MobileNo':'" + mobileNo + "','userName':'" + userName + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: false,
+                        success: function (r) {
+                            if (r.d >= 1) {
+                                alert("Updated Succesfully.");
+                                $("#divEditProfile").css("visibility", "hidden");
+                                BindData();
+                               
+                            }
+                            if (r.d == "0") {
+                                alert("This Email Id  or Mobile No Already Exists! Please Try another one..");
+                            }
+                            if (r.d == "-1") {
+                                alert("OOPS Error ! Please try again.");
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response + "Error...");
+                        }
+                    });
+                }
+                else {
+                    alert(check);
+                }
+            });
+
+
+
+            function ConsumerValid() {
+                var returnValue;               
+                if (txtName.value == "") {
+                    returnValue = "Name required";
+                    $("#txtName").focus();
+                }
+                else if (txtEmail.value == "") {
+                    returnValue = "Email required";
+                    $("#txtEmail").focus();
+                }                
+                else if (txtAddress.value == "") {
+                    returnValue = "Address is Required";
+                    $("#txtAddress").focus();
+                }
+                else if (txtMobile.value == "") {
+                    returnValue = "Mobile is Required";
+                    $("#txtMobile").focus();
+                }
+                else {
+                    returnValue = "1";
+                }
+                return returnValue;
+            }
+            BindData();
+            var ca = GetParameterValues('ca');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        if (ca == "0") {
+                            $("#divsidebar1").css("display", "block");
+                        }
+                        else {
+                            $("#divsidebar1").css("display", "none");
+                        }
+                    }
+                    else {
+                    }
+                }
+            });
+            $("#flupload").on('change', function () {
+                if (typeof (FileReader) != "undefined") {
+                    var image_holder = $("#image-holder");
+                    image_holder.empty();
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("<img />", {
+                            "src": e.target.result,
+                            "class": "thumb-image", "width": "75px", "height": "75px"
+                        }).appendTo(image_holder);
+                    }
+                    image_holder.show();
+                    reader.readAsDataURL($(this)[0].files[0]);
+                    $('#updimg').css("visibility", "visible");
+
+                } else {
+                    alert("This browser does not support FileReader.");
+                }
+            });
+
+            //$(document).on("click", "a[name='sales']", function (e) {
+            //    var zipc = txtSearch.value;
+            //    var jobName = $("label[for='lbljobName']").text();
+            //    var categoryName = $("label[for='lblcategoryName']").text();
+            //    window.location.href = "sales1.html?zip=" + zipc + "&jtype=" + jobName + "";
+            //});
+
+            $("#updimg").click(function () {
+                var fileUpload = $("#flupload").get(0);
+                var files = fileUpload.files;
+                var test = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    if ($("#FileUpload1").val() == '') {
+                    }
+                    else {
+                        test.append(files[i].name, files[i]);
+                    }
+                }
+                $.ajax({
+                    url: "ws/ConsumerPhoto.ashx",
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    data: test,
+                    async: false,
+                    success: function (result) {
+                      
+                        $("#flupload").val("");
+                        $("#editImg").css("display", "none");
+                       
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                    }
+                });
+                BindData();
+            });
+        });
+
+        function BindData() {
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/SelectConsumerDetail", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: true,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("ConsumerDetail");
+                        var cartd = [];
+                        cartd.push("<table class='table table-condensed' style='width:50%'>");
+                        cartd.push("<tr><th class='uk-width-2-10'></th><th class='uk-width-2-10'></th> </tr>");
+                        var count = 1;
+                        $.each(docs, function (i, docs) {
+                            cartd.push("<tr>");
+                            cartd.push("<td>Name</td>");
+                            cartd.push("<td>" + ($(docs).find("name").text()) + " </td>");
+                            cartd.push("</tr>");
+
+                            cartd.push("<tr>");
+                            cartd.push("<td>Address</td>");
+                            cartd.push("<td>" + ($(docs).find("address").text()) + " </td>");
+                            cartd.push("</tr>");
+
+                            cartd.push("<tr>");
+                            cartd.push("<td>Mobile</td>");
+                            cartd.push("<td>" + ($(docs).find("Mob").text()) + " </td>");
+                            cartd.push("</tr>");
+
+
+                            cartd.push("<tr>");
+                            cartd.push("<td>EmailID</td>");
+                            cartd.push("<td>" + ($(docs).find("EmailID").text()) + " </td>");
+                            cartd.push("</tr>");
+
+                            cartd.push("<tr>");
+                            cartd.push("<td></td>");
+                            cartd.push("<td><img Width='100px' Height='100px' src='ConsumerPhoto/" + ($(docs).find("ConsumerPhoto").text()) + "'/> <input type='button' onclick=EditImg() value='Edit Image'> </td>");
+                            cartd.push("</tr>");
+                        });
+                        cartd.push("</table>");
+                        $("#divShow").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function EditImg() {
+            $("#editImg").css("display", "block");
+        }
+    </script>
+</head>
+<body>
+    <div class="page-wrap">
+        <div class="navbar navbar-inverse">
+            <div class="container">
+                <div class="row">
+                    <div class="header"></div>
+                </div>
+            </div>
+        </div>
+        <div class="fullrow inner-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 searchbar">
+
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row" id="divtitle">
+            </div>
+            <div class="row">
+                <div style="margin-top:10px; float:left; width:15%; display:none;" id="divsidebar1">
+                    <br />
+                    <input id="btnMyProfile" type="button" value="Profile" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnMyHistory" type="button" value="My History" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnCustomerSupport" type="button" value="Customer Suport" style="width:150px" class="btn btn-primary" /><br /><br />
+                    <input id="btnLogout" type="button" value="Log out" style="width:150px" class="btn btn-primary" /><br /><br />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" id="divShow">
+                </div><div style="text-align: left; float: right;">
+                    <br /><input type="button" class="btn btn-primary" value="Edit Profile" id="btnEditProf" /><br />
+                    <div id="divEditProfile" style="visibility:hidden; ">
+                        <table style="width:100%; margin-top:15px;">
+                            <tr>
+                                <td>Name </td>
+                                <td>
+                                    <input type="text" id="txtName" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Address </td>
+                                <td>
+                                    <textarea cols="20" rows="4" id="txtAddress"></textarea>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Mobile </td>
+                                <td>
+                                    <input type="text" id="txtMobile" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>UserName </td>
+                                <td>
+                                    <input type="text" id="txtEmail" />
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td>
+                                    <br />
+                                    <input type="button" id="btnUpdate" class="btn btn-primary" value="UPDATE" />
+
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="editImg" style="display: none; margin-left: 376px;">
+                    <input type='file' id='flupload' />
+                    <div id='image-holder'></div>
+                    <input type="button" value="UPDATE" id="updimg" class="btn btn-primary" style="visibility:hidden;" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+</body>
+</html>

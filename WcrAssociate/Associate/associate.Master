@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="associate.master.cs" Inherits="WcrAssociate.Associate.associate" %>
+
+<%@ Register Src="~/Associate/UControls/associateHeader.ascx" TagPrefix="uc1" TagName="associateHeader" %>
+<%@ Register Src="~/Associate/UControls/associateLeftSidebar.ascx" TagPrefix="uc1" TagName="associateLeftSidebar" %>
+<%@ Register Src="~/Associate/UControls/associatefooter.ascx" TagPrefix="uc1" TagName="associatefooter" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <script src="http://code.jquery.com/jquery-1.10.2.js">        
+    </script>
+    <title>Associate</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <form id="form1" runat="server">
+
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div class="wrapper">
+            <div class="header">
+                <uc1:associateHeader runat="server" ID="associateHeader" />
+            </div>
+            <div class="leftsidebar">
+                <uc1:associateLeftSidebar runat="server" ID="associateLeftSidebar" />
+            </div>
+            <div class="content-wrapper">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <div class="footer">
+                <uc1:associatefooter runat="server" ID="associatefooter" />
+            </div>
+        </div>
+    </form>
+</body>
+</html>

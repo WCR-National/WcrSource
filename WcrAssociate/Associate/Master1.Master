@@ -1,0 +1,220 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master1.master.cs" Inherits="WcrAssociate.Associate.Master1" %>
+
+<%@ Register Src="~/Associate/UControls/NewHeader.ascx" TagPrefix="uc1" TagName="NewHeader" %>
+<%--<%@ Register Src="~/Associate/UControls/Newleft.ascx" TagPrefix="uc1" TagName="Newleft" %>--%>
+<%@ Register Src="~/Associate/UControls/NewFooter.ascx" TagPrefix="uc1" TagName="NewFooter" %>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <script src="http://code.jquery.com/jquery-1.10.2.js">        
+    </script>
+    <script src="js/jQuery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnLogout").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "../ws/AssociateSignUp.ashx?action=AssociateLogout",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    cache: false,
+                    success: function (response) {
+                        if (response == "0") {
+                            window.location.href = '../../index.html';
+                        }
+                        else {
+                            alert("OOPS Something goes wrong !");
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.min.css" />
+    <link rel="stylesheet" href="plugins/fullcalendar/fullcalendar.print.css" media="print" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+    <%--<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"/>--%>
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css" />
+    <link href="css/mCustomScrollbar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <title>Associate</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div class="header">
+            <uc1:NewHeader runat="server" ID="NewHeader" />
+        </div>
+        <div class="leftsidebar">
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <%-- <div class="user-panel" id="userProfile">
+                    </div>--%>
+                    <ul class="sidebar-menu" style="margin-top: 0px;">
+                        <li id="dashclick"><a href="Dashboard.aspx"><i>
+                            <img src="img/icon_dashboard.png" alt="" />
+                        </i><span>Dashboard</span> </a></li>
+                        <li id="profileclick" class="treeview"><a href="ViewProfile.aspx"><i>
+                            <img src="img/icon_people.png" alt="" />
+                        </i><span>Profile</span> </a></li>
+                        <li id="clientdetailclick" class="treeview"><a href="ClientDetails.aspx"><i>
+                            <img src="img/icon_client-detail.png" alt="" />
+                        </i><span>Client Details</span></a></li>
+                        <li id="crdclick" class="treeview"><a href="CreditCard.aspx"><i>
+                            <img src="img/icon_creadit_Card.png" alt="" />
+                        </i><span>Credit Card </span></a></li>
+                        <li id="billingclick" class="treeview"><a href="BillingHistory.aspx"><i>
+                            <img src="img/icon_billing_history.png" alt="" />
+                        </i><span>Billing History </span></a></li>
+                        <li id="postadtsclick" class="treeview"><a href="PostAdvertisement.aspx?pid=1"><i>
+                            <img src="img/icon_sale_advertisement.png" alt="" />
+                        </i><span>List Your Property </span></a></li>
+                        <li id="zipcodeclick" class="treeview"><a href="ZipCodePurchase.aspx"><i>
+                            <img src="img/icon_purchase_zipcode.png" alt="" />
+                        </i><span>Purchase Zip code </span></a></li>
+                        <li id="customerclick" class="treeview"><a href="CustomerSupport.aspx"><i>
+                            <img src="img/icon_customer_support.png" alt="" />
+                        </i><span>Customer Support </span></a>
+                        </li>
+                        <li class="treeview"><a href="#" id="btnLogout">
+                            <img src="img/icon_signout.png" alt="" /><%--<i class="fa fa-sign-out"></i>--%>
+                            <span>Logout </span></a></li>
+
+                        <li style="height: 25px;"></li>
+                        <%-- <li style="margin-left:20px;"><span id="siteseal" style="width:500px">
+                            <script type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=ebrvcZVazv3RT1GRqHRp6NdWArek3ZU6l9YpHiLnacgzPkPNDBkzcRSRI1g4"></script>
+                        </span></li>--%>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+        </div>
+        <div class="content-wrapper">
+            <section class="content">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </section>
+            <div class="footer">
+                <uc1:NewFooter runat="server" ID="NewFooter" />
+            </div>
+        </div>
+    </form>
+</body>
+<script src="js/jQuery-2.1.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST", url: "../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails",
+            data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+            success: function (r) {
+                if (r.d.length > 0) {
+                    var xmlDoc = $.parseXML(r.d);
+                    var xml = $(xmlDoc);
+                    var docs = xml.find("ViewAssociateBasicDetail");
+                    $.each(docs, function (i, docs) {
+                        if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
+                            for (var j = 2; j < 7; j++) {
+                                $(".sidebar-menu li").eq(j).addClass("diable-sidelink");
+                            }
+                        }
+                        else {
+                            
+                        }
+                    });
+                }
+            },
+            failure: function (response) {
+                alert(response.d + "Fail");
+            },
+            error: function (response) {
+                alert(response.d + "Error...");
+            }
+        });
+        //for (var j = 2; j <= 8; j++)
+        //{
+        //    $(".sidebar-menu li").eq(j).addClass("diable-sidelink");
+        //}
+        // $('#clientdetailclick').addClass('disabled');
+        setTimeout(function () {
+            //   $('#msg' + pnlID).fadeOut('fast');
+            var contentRight = $(".content-wrapper").height();
+            $('.main-sidebar').css('min-height', contentRight);
+            $('.content').css('min-height', contentRight);
+        }, 9000);
+
+
+        $(window).resize(function () {
+            setTimeout(function () {
+                //   $('#msg' + pnlID).fadeOut('fast');
+                var contentRight = $(".content-wrapper").height();
+                $('.main-sidebar').css('min-height', contentRight);
+                $('.content').css('min-height', contentRight);
+            }, 9000);
+        });
+
+
+
+    });
+    ////$(window).resize(function () {
+    ////    setTimeout(function () {
+    ////        //   $('#msg' + pnlID).fadeOut('fast');
+    ////        var contentRight = $(".content-wrapper").height();
+    ////        $('.main-sidebar').css('min-height', contentRight);
+    ////        $('.content').css('min-height', contentRight);
+    ////    }, 9000);
+    ////});
+    //function Bindprofile() {
+    //    $.ajax({
+    //        type: "POST", url: "../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: true,
+    //        success: function (r) {
+    //            if (r.d.length > 0) {
+    //                var xmlDoc = $.parseXML(r.d);
+    //                var xml = $(xmlDoc);
+    //                var docs = xml.find("ViewAssociateBasicDetail");
+    //                var cartd = [];
+    //                $.each(docs, function (i, docs) {
+    //                    cartd.push("<div class='pull-left image'>");
+    //                    var sd = [];
+    //                    cartd.push("<img class='img-circle' alt='User Image' src='../AssociatePhoto/" + $(docs).find("Photo").text() + "'/> ");
+    //                    $("#cartd").html(sd.join(''));
+    //                    cartd.push("</div>");
+    //                    cartd.push("<div class='pull-left info'><p>");
+    //                    cartd.push("Welcome   " + $(docs).find("FullName").text());
+    //                    cartd.push("</p><a href='#'><i class='fa fa-circle text-success'></i>Online</a></div>");
+    //                });
+    //                $("#userProfile").html(cartd.join(''));
+    //            }
+    //        },
+    //        failure: function (response) {
+    //            alert(response.d + "Fail");
+    //        },
+    //        error: function (response) {
+    //            alert(response.d + "Error...");
+    //        }
+    //    });
+    //}
+</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="js/app.min.js"></script>
+<%--<script src="../dist/js/demo.js"></script>--%>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+<script src="plugins/fullcalendar/fullcalendar.min.js"></script>
+<script src="js/mCustomScrollbar.concat.min.js"></script>
+</html>

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Sales</title>
+</head>
+<body class="innerpage">
+   
+    <div class="input-group">
+        <input type="text" id="txtSearch" style="text-align:left;" placeholder="City, State OR  Zip Code" class="form-control" />
+        <span class="input-group-addon" style="border-left:0px;"> <a href="JavaScript:Void(0);" name="tpsrc"> <i class="fa fa-search"></i></a> </span>
+    </div>
+
+    
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+<!--<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#txtSearch").autocomplete({
+            source: function (request, response) {
+                var param = $('#txtSearch').val();             
+                $.ajax({
+                    url: "ws/AssociateRegistration.asmx/CitiesInfo",
+                    data: "{'prefixText':'" + param + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) {
+                        return data;
+                    },
+                    success: function (data) {
+                        console.log(JSON.stringify(data));
+                        response($.map(data.d, function (item) {                            
+                            return {
+                                value: item.EmpName
+                            }
+                        }))
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        var err = eval("(" + XMLHttpRequest.responseText + ")");
+                        alert(err.Message)                      
+                    }
+                });
+            },
+            minLength: 2 
+        });
+    });
+</script>-->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtSearch").autocomplete({
+            source: function (request, responce) {
+                var param = $('#txtSearch').val();
+                $.ajax({
+                    url: "ws/AssociateRegistration.asmx/CitiesInfo",
+                    method: "post",
+                    contentType: "application/json;charset=utf-8",
+                    data: "{'prefixText':'" + param + "'}",
+                    dataType: 'json',
+                    success: function (data) {
+                        responce(data.d);
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                });
+            }
+        });
+    });
+</script> 

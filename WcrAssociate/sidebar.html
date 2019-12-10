@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right topbar " style="position:relative" id="divconsumer1">
+        <input id="btnLogout" type="button" class="btn btn-primary" value="Log out" />
+        <input id="btnMyProfile" type="button" class="btn btn-primary" value="Profile" />
+        <input id="btnMyHistory" type="button" class="btn btn-primary" value="My History" />
+    </div>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ca = GetParameterValues('ca');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param)
+                    {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        if (ca == "0") {
+                            $("#divconsumer1").show();
+                        }
+                        else {
+                            $("#divconsumer1").hide();
+                        }
+                    }
+                    else {
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

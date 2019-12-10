@@ -1,0 +1,575 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css?ver=5.2.2' type='text/css' media='all' />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/loader.css" type="text/css" rel="stylesheet" />
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+</head>
+<body style="background:#f8f8f8;">
+    <div>
+        <div class="modal fade small-model" id="success-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body form-horizontal no-padding">
+                        <div class="alert alert-success no-radius alert-dismissible no-margin " role="alert">
+                            <button type="button" class="close align-with-two-line" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong> <label id="lblSuccess"></label> </strong>  <br />
+                            <label id="lbldetail" class="running-text"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade small-model" id="fail_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body form-horizontal no-padding">
+                        <div class="alert alert-danger no-radius alert-dismissible no-margin " role="alert">
+                            <button type="button" class="close align-with-two-line" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong> <label id="lblFailureTitle"></label> </strong>  <br />
+                            <label id="lblFailureDetail" class="running-text"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-wrap">
+        <div id="pageloader" class="pageloader" style="display:none">
+            <div class="pageloader-inner">
+                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            </div>
+        </div>
+        <div class="header"></div>
+        <div class="container result">
+            <div class="outer-middle">
+                <div class="middle_colume">
+                    <div class="container" id="DivWithoutSearchAds" style="display:block; ">
+                        <div class="row">
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-sm-offset-2 text-center col-xs-offset-0  col-md-offset-2 col-lg-offset-2 searchbar" style="position:relative;">
+                                <div id="dlogo">
+                                    <h3>  <a href="JavaScript:void(0);">     <img src="img/wcr-logo.png" class="img-responsive" alt="" />  </a> </h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container result" style="display:none" id="DivSearchAds">
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-sm-offset-1 text-center col-xs-offset-0  col-md-offset-1 col-lg-offset-1 searchbar">
+                        <div id="Div1">
+                            <h3>  <a href="JavaScript:void(0);" name="wcrServiceLink">    <img src="img/wcr-logo.png" style="margin-bottom:25px;" class="img-responsive" alt="" />  </a> </h3>
+                        </div>
+                        <!-- <div id="Name" style="text-transform: uppercase; margin-bottom: 0px; margin-left:10px; font-weight:bold;">
+                        </div>-->
+                    </div>
+                </div>
+                <div class="row" id="sales">
+                </div>
+                <div class="row" id="Services">
+                </div>
+            </div>
+            <div class="container result" id="divShowAdvertisement" style="display:none;">
+                <div class="container result" id="search-result2">
+                    <div class="row">
+                        <div class="col-sm-12 searchbar "> 
+                            <h3 class="text-center"><a name="logolink" href="JavaScript:void(0);"><img src="img/wcr-logo.png" class="img-responsive logo" alt=""></a></h3>
+                            <div id="sales1">
+                            </div>
+                            <div id="services1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="divProfile" style="display:block;">
+                <div class="col-sm-8  col-sm-offset-2 text-center searchbar ">
+                    <h3><a href="JavaScript:void(0);" name="wcrServiceLink1"><img src="img/wcr-logo.png" class="img-responsive logo" alt=""></a></h3>
+                    <div class="fullrow form-box form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label> First Name <span class="mandatory">*</span> </label>
+                                <input type="text" id="txtFirstName" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label> Last Name <span class="mandatory"></span> </label>
+                                <input type="text" id="txtLastName" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label> Email<span class="mandatory">*</span> </label>
+                                <input type="text" id="txtEmail" readonly class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label> Password <span class="mandatory">*</span>  </label>
+                                <input type="text" id="txtPassword" maxlength="20" title="Password must have a minimum of 8 characters and a maximum of 20 characters in length and must include at least 1 Upper case letter, 1 lower case letter, 1 number and 1 special character in ! @ # $ % ^ * _ " class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label> Street Address </label>
+                                <input type="text" id="txtAddress" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label> Unit #, APT # ,ETC <span class="mandatory"></span>  </label>
+                                <input type="text" id="txtUnit" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label> City </label>
+                                <input type="text" id="txtCity" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label>State<span class="mandatory"></span>  </label>
+                                <input type="text" id="txtState" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label> Zipcode </label>
+                                <input type="text" id="txtZipcode" class="form-control">
+                            </div>
+                            <div class="col-sm-6">
+                                <label> Mobile Number <span class="mandatory">*</span> </label>
+                                <input type="text" id="txtMobile" maxlength="10" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <label style="color:red;"> <span>*</span> Required </label>
+                            </div>
+                            <div class="col-sm-6">
+                            </div>
+                        </div>
+                        <div class="form-group btn-container">
+                            <div class="col-sm-3">
+                                <button type="button" id="btnReset" class="btn btn-default btn-block">Reset </button>
+                            </div>
+                            <div class="col-sm-3">
+                                <button type="button" id="btnCancel" class="btn btn-default btn-block">Cancel </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" id="btnUpdate" class="btn btn-primary btn-block"> Submit  </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+</body>
+</html>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/customjs.js"></script>
+<script>
+    $(function () {
+        $(function () {
+            $('.header').load("consumerHeader.html");
+            $('.footer').load("consumerFooter.html");
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on('keypress', '#txtSearch', function (e) {
+            if (e.keyCode == 13) {  // detect the enter key
+                if (txtSearch.value == "") {
+                    $("#lblfai").css("display", "block");
+                    $("#lblfai").text("Please enter City, State OR Zip Code.");
+                }
+                else {
+                    $("#divProfile").css("display", "none");
+                    $("#pageloader").css("display", "block");
+                    $("#homeicon").css("display", "inline-block");
+                    setTimeout(function () {
+                        Searching();
+                    }, 500);
+                }
+
+            }
+        });
+        function Searching() {
+            $("#lblfai").css("display", "none");
+            if (txtSearch.value == "") {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Please enter City, State OR Zip Code.");
+            }
+            else {
+                $("#divBody").addClass("result");
+                var zipc = txtSearch.value;
+                if ($.isNumeric($('#txtSearch').val())) {
+                    HideDiv();
+                    $("#DivSearchAds").css("display", "block");
+                    $("#divShowAdvertisement").css("display", "none");
+                    var sales = BindSalesCategory(zipc);
+                    $("#sales").html(sales.join(''));
+                    var services1 = BindServiesCategory(zipc);
+                    $("#Services").html(services1.join(''));
+                }
+                else {
+                    if (zipc.indexOf(',') != -1) {
+                        HideDiv();
+                        var strs;
+                        var State;
+                        var City;
+                        strs = zipc.split(',');
+                        for (var i = 0; i < strs.length; i++) {
+                            if (i == 0) {
+                                City = strs[i];
+                            }
+                            else if (i == 1) {
+                                State = strs[i];
+                            }
+                        }
+                        if (State.length == 2) {
+                            $("#DivSearchAds").css("display", "block");
+                            $("#divShowAdvertisement").css("display", "none");
+                            var sales = BindSalesCategoryCityWise(State, City);
+                            $("#sales").html(sales.join(''));
+                            var services1 = BindServiesCategoryCityWise(State, City);
+                            $("#Services").html(services1.join(''));
+                        }
+                        else if (State.length >= 2) {
+                            $("#lblfai").css("display", "block");
+                            $("#lblfai").text("Please Enter 2 Characters for State.");
+                        }
+                    }
+                    else {
+                        $("#lblfai").css("display", "block");
+                        $("#lblfai").text("Invalid data entered.  Please enter City, State OR Zip Code.");
+                    }
+                }
+
+            }
+            hideLoader();
+        }
+
+        $(document).on("click", "a[name='tpsrc']", function (e) {
+            if (txtSearch.value == "") {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Please enter City, State OR Zip Code.");
+            }
+            else {
+                $("#divProfile").css("display", "none");
+                $("#pageloader").css("display", "block");
+                $("#homeicon").css("display", "inline-block");
+                setTimeout(function () {
+                    Searching();
+                }, 500);
+            }
+        });
+        function showLoader() {
+            setTimeout(function () {
+                $("#pageloader").css("display", "block");
+            }, 500);
+        }
+        function hideLoader() {
+          $("#pageloader").css("display", "none");
+        }
+        function ViewDiv() {
+            $("#toplogo").css("display", "block");
+            $("#tabheader").css("display", "block");
+            $("#tabcontent").css("display", "block");
+        }
+        function HideDiv() {
+            $("#toplogo").css("display", "none");
+            $("#tabheader").css("display", "none");
+            $("#tabcontent").css("display", "none");
+        }
+
+        $(document).on("click", "a[name='wcrServiceLink']", function (e) {
+            $("#divBody").addClass("result");
+            $("#DivSearchAds").css("display", "none");
+            $("#divShowAdvertisement").css("display", "block");
+            $("#pageloader").css("display", "block");
+            setTimeout(function () {
+                GetSalesAdts();
+            }, 2500);
+        });
+        $(document).on("click", "a[name='wcrServiceLink1']", function (e) {
+            $("#homeicon").css("display", "inline-block");
+            $("#divBody").addClass("result");
+            $("#toplogo").css("display", "none");
+            $("#DivSearchAds").css("display", "none");
+            $("#divDetails").css("display", "none");
+            $("#tabcontent").css("display", "none");
+            $("#tabheader").css("display", "none");
+            $("#divProfile").css("display", "none");            
+            $("#divShowAdvertisement").css("display", "block");
+            $("#pageloader").css("display", "block");
+            setTimeout(function () {
+                GetSalesAdts();
+            }, 2500);
+
+        });
+        function GetSalesAdts() {
+            var _IPAddress;
+            $.getJSON("http://jsonip.com?callback=?", function (data) {
+                _IPAddress = data.ip;
+                $.ajax({
+                    type: "POST", url: "ws/TopSearch.asmx/GetZipCodeIpAddress",
+                    data: "{'_IpAddress':'" + _IPAddress + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var salesn = BindSalesCategory1(r.d);
+                            $("#sales1").html(salesn.join(''));
+                            var servicesn = BindServiesCategory1(r.d);
+                            $("#services1").html(servicesn.join(''));
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            });
+            hideLoader();
+        }
+        
+      //  $("#divProfile").css("display", "block");
+        ViewDetail();
+        $("#btnUpdate").click(function () {
+            var check = ConsumerValid();
+            if (check == "1") {
+                $("#pageloader").css("display", "block");
+                setTimeout(function () {
+                    UpdateProfileData();
+                }, 2500);
+               
+            }
+            else {
+                alert(check);
+            }
+          
+        });
+        function UpdateProfileData()
+        {
+            var firstName = txtFirstName.value;
+            var lastName = txtLastName.value;
+            var email = txtEmail.value;
+            var mobile = txtMobile.value;
+            var userName = "n"; //txtUserName.value;
+            var password = txtPassword.value;
+            var address = txtAddress.value;
+            var unitApt = txtUnit.value;
+            var city = txtCity.value;
+            var state = txtState.value;
+            var zipcode = txtZipcode.value;
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/UpdateConsumer",
+                data: "{'FirstName':'" + firstName + "','Address':'" + address + "','MobileNo':'" + mobile + "','userName':'" + userName + "','password':'" + password + "','emailID':'" + email + "','ZipCode':'" + zipcode + "','lastName':'" + lastName + "','Unit_Apt':'" + unitApt + "','city':'" + city + "','stateID':'" + state + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (r) {
+                    if (r.d >= 1) {
+                        jQuery.noConflict();
+                        $("#lblSuccess").text("Success");
+                        $("#lbldetail").text("Profile Data Saved.");
+                        $('#success-message').modal('show');
+                    }
+                    if (r.d == "0") {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Failure");
+                        $("#lblFailureDetail").text("This Email Id  or Mobile No Already Exists! Please Try another one.");
+                        $('#fail_message').modal('show');
+                        return false;
+                    }
+                    if (r.d == "-1") {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Failure");
+                        $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                        $('#fail_message').modal('show');
+                        return false;
+                    }
+                },
+                failure: function (response) {
+                    alert(response + "Fail");
+                },
+                error: function (response) {
+                    alert(response + "Error...");
+                }
+            });
+            hideLoader();
+        }
+        function ConsumerValid() {
+            var minLength = 8;
+            var maxLength = 20;
+            var returnValue;
+            var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+            var str = $('#txtPassword').val();
+            var upper_text = new RegExp('[A-Z]');
+            var lower_text = new RegExp('[a-z]');
+            var number_check = new RegExp('[0-9]');
+            var special_char = new RegExp('[!/\'^�$%&*()}{@#~?><>,|=_+�-\]');
+            var str = txtPassword.value;
+            var namelength = txtFirstName.value;
+            var Moblength = txtMobile.value;
+            if (txtFirstName.value == "") {
+                returnValue = "Name required";
+                $("#txtFirstName").focus();
+            }
+            else if (namelength.length <= 1) {
+                returnValue = "Please enter correct value in name box!";
+                $("#txtFirstName").focus();
+            }
+            else if (txtMobile.value == "") {
+                returnValue = "Mobile Can't be blank!";
+                $("#txtMobile").focus();
+            }
+            else if (Moblength.length != 10) {
+                returnValue = "Please enter correct value in Mobile box!";
+                $("#txtMobile").focus();
+            }
+            else if (!isNaN(txtMobile.value) == "") {
+                returnValue = "Characters not allowed in Mobile Number!";
+                $("#txtMobile").focus();
+            }
+            else if (!isNaN(txtZipcode.value) == "") {
+                returnValue = "Characters not allowed in Zipcode!";
+                $("#txtZipcode").focus();
+            }
+            else if (txtEmail.value == "") {
+                returnValue = "Email required";
+                $("#txtEmail").focus();
+            }
+            else if (!filter.test($('#txtEmail').val())) {
+                returnValue = "Email is not Valid.";
+                $("#txtEmail").focus();
+            }
+            else if (txtPassword.value == "") {
+                returnValue = "Password is Required";
+                $("#txtPassword").focus();
+            }
+            else if (str.length < minLength) {
+                returnValue = "Password must have a minimum of 8 chanracters.";
+            }
+            else if (str.length > maxLength) {
+                returnValue = "Password must have a maximum of 20 chanracters.";
+            }
+            else if (!str.match(upper_text)) {
+                returnValue = "Must include at least 1 Upper case character.";
+                $("#txtPassword").focus();
+            }
+            else if (!str.match(lower_text)) {
+                returnValue = "Must include at least 1 Lower case character.";
+                $("#txtPassword").focus();
+            }
+            else if (!str.match(number_check)) {
+                returnValue = "Must include at least 1 Number.";
+                $("#txtPassword").focus();
+            }
+            else if (!str.match(special_char)) {
+                returnValue = "Must include at least 1 special character.";
+                $("#txtPassword").focus();
+            }
+
+            else {
+                returnValue = "1";
+            }
+            return returnValue;
+
+        }
+        $("#btnCancel").click(function () {
+            //txtFirstName.value = "";
+            //txtLastName.value = "";
+            //txtEmail.value = "";
+            //txtMobile.value = "";
+            //txtUserName.value = "";
+            //txtPassword.value = "";
+            //txtAddress.value = "";
+            //txtUnit.value = "";
+            //txtCity.value = "";
+            //txtState.value = "";
+            //txtZipcode.value = "";
+            window.location.href = "index.html";
+            //$.ajax({
+            //    type: "POST",
+            //    url: "ws/AssociateSignUp.ashx?action=ConsumerLogout",
+            //    data: "{}",
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    async: false,
+            //    cache: false,
+            //    success: function (response) {
+            //        if (response == "0") {
+            //            window.location.href = 'index.html';
+            //        }
+            //        else {
+            //            alert("OOPS Something goes wrong !");
+            //        }
+            //    },
+            //    failure: function (response) {
+            //        alert(response.d + "Fail");
+            //    },
+            //    error: function (response) {
+            //        alert(response.d + "Error...");
+            //    }
+            //});
+        });
+
+        $("#btnReset").click(function () {
+            ViewDetail();
+        });
+
+    });
+</script>
+<script type="text/javascript">
+
+
+    function ViewDetail() {
+        $.ajax({
+            type: "POST", url: "ws/ConsumerRegistration.asmx/SelectConsumerDetail",
+            data: "{}", contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: true,
+            success: function (r) {
+                if (r.d.length > 0) {
+                    var xmlDoc = $.parseXML(r.d);
+                    var xml = $(xmlDoc);
+                    var docs = xml.find("ConsumerDetail");
+                    $.each(docs, function (i, docs) {
+                        $("#divProfile").css("display", "block");
+                        txtFirstName.value = $(docs).find("Name").text();
+                        txtLastName.value = $(docs).find("LastName").text();
+                        txtEmail.value = $(docs).find("EmailId").text();
+                        txtMobile.value = $(docs).find("Mob").text();
+                        //txtUserName.value = $(docs).find("UserName").text();
+                        txtPassword.value = $(docs).find("Password").text();
+                        txtAddress.value = $(docs).find("Address").text();
+                        txtUnit.value = $(docs).find("Unit_Apt").text();
+                        txtCity.value = $(docs).find("City").text();
+                        txtState.value = $(docs).find("StateId").text();
+                        txtZipcode.value = $(docs).find("ZipCode").text();
+                    });
+                }
+            },
+            failure: function (response) {
+                alert(response.d + "Fail");
+            },
+            error: function (response) {
+                alert(response.d + "Error...");
+            }
+        });
+    }
+</script>

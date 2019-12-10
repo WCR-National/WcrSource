@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="icon" href="../../favicon.ico">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/layout.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+        $(function () {
+            $('.header').load("header.html");
+            $('.footer').load("Footer.html");
+        });
+    </script>
+
+   
+    <title></title>
+</head>
+<body class="innerpage">
+    <div class="page-wrap">
+        <div class="navbar navbar-inverse">
+            <div class="container">
+                <div class="row">
+                    <div class="header"></div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12 text-left logo " id="dlogo">
+                        <a href="index.html"> <img src="img/text-logo.png" class="img-responsive" alt=""></a>
+                    </div>
+                    <a href="index.html" style="text-decoration: none; text-transform: uppercase; ">
+                        <div id="Name">
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="fullrow inner-title">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <!--<ul>
+                            <li class="dropdown inner">
+                                <a href="sales.html?zip=&jtype=Sales"> Sales </a>
+                            </li>
+                            <li> <a href="Services.html?zip=&jtype=Services"> Service </a></li>
+                        </ul>-->
+                    </div>
+                    <label style="visibility: hidden" for="lblmainRating"></label>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row" id="divtitle">
+
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" id="divDetails">
+                    
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d > 0) {
+                        BindConsumerDetail();
+                        $("#Name").show();
+                        $("#dlogo").hide();
+                    }
+                    else {
+                        $("#Name").hide();
+                        $("#dlogo").show();
+                    }
+                }
+            });
+
+            function BindConsumerDetail() {
+                $.ajax({
+                    type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerDetail", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var xmlDoc = $.parseXML(r.d);
+                            var xml = $(xmlDoc);
+                            var docs = xml.find("FullConsumerDetail");
+                            var cartd = [];
+                            $.each(docs, function (i, docs) {
+                                cartd.push("<h3>");
+                                cartd.push("<span style='font-family:Verdana; font-size:30px; color:blue;'> " + ($(docs).find("name").text()) + "</span>");
+                                cartd.push("</h3>");
+                            });
+                            $("#Name").html(cartd.join(''));
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }
+            BindAdvertisements();
+            var zipc = GetParameterValues('zipcode');
+            function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+           
+        });
+       
+        function BindAdvertisements() {
+            var zipcode = GetParameterValues('zipcode');
+               function GetParameterValues(param) {
+                var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < url.length; i++) {
+                    var urlparam = url[i].split('=');
+                    if (urlparam[0] == param) {
+                        return urlparam[1];
+                    }
+                }
+            }
+            $.ajax({
+                type: "POST", url: "ws/TopSearch.asmx/ViewTopRecords", data: "{'zipcode':'" + zipcode + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("topSearch");
+                        var cartd = [];
+                        //cartd.push("<h4 class='text-left'>" + nm + " </h4>");
+                        cartd.push(" <div class='row'>");                        
+                        cartd.push("<div class='clearfix'></div>");
+                        var counter = 0;
+                        $.each(docs, function (i, docs) {                          
+                                cartd.push("<div class='panel panel-default advertise_list'>");                           
+                            cartd.push(" <div class='panel-body'>");
+                            cartd.push("<div class='row'>");
+                            cartd.push("<div class='col-lg-3 col-md-3 col-sm-3 col-xs-12'><img src='Associate/Adv_img/" + ($(docs).find("advmainimage").text()) + "' alt='' class='img-responsive'>");
+                           // cartd.push("<a   href=inner_detail.html?id=" + ($(docs).find("advertisementID").text()) + "&zipcode=" + zipcode + "&nm=" + nm + "&jobtype=" + jtype + "&category=" + catName + "> <img src='Associate/Adv_img/" + ($(docs).find("advMainImage").text()) + "' alt='' class='img-responsive'> </a>");
+                            cartd.push("</div><div class='col-lg-9 col-md-9 col-sm-9 col-xs-12'> <h3> " + ($(docs).find("title").text()) + " </h3>");
+                            cartd.push("</div>  </div> </div>");
+                            cartd.push("<a href=#>View More</a></div>");
+                            counter += 1;
+                        });
+                        $("#divDetails").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+    </script>
+
+
+</body>
+</html>

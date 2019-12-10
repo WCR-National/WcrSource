@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>   
+    <title></title>
+</head>
+<body>  
+        <div class="fullrow" style="background:#fff; padding:5px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 toplogo searchbar topsearch afterlogin ">
+                        <div class="input-group">                            
+                            <input type="text" id="txtSearch" autocomplete="off" style="text-align:left;" placeholder="City, State OR  Zip Code" class="form-control">                       
+                            <span class="input-group-addon" style="border-left:0px;"> <a href="JavaScript:void(0);" name="tpsrc"> <i class="fa fa-search"></i></a> </span>
+                        </div>
+                        <span id="lblprogressmsg" style="color:red; display:none;">Please wait......</span>
+                        <label id="lblfai" style="color: red; display: none"></label>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-right topbar afterlogin" style="position:relative; padding-top:15px;">
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav pull-right">
+                                <li id="liprofile"><a href="index.html"> <i class="fa fa-home"></i> Home </a></li>
+                                <li id="liprofile"><a href="Profile.html"> <i class="fa fa-user"></i> Profile </a></li>
+                                <li id="libookmark"><a href="bookmark.html"><i class="fa  fa-bookmark-o"></i> Bookmarks</a></li>
+                                <li id="lisupport"><a href="support.html"><i class="fa  fa-question-circle"></i>  Support</a></li>
+                                <li id="lilogout"><a href="#" id="btnLogout"><i class="fa fa-sign-out"></i>  Logout</a></li>
+                               
+                            </ul>
+                            <div id="homeicon"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+</body>
+</html>
+<script src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+       
+      
+
+        $("#btnLogout").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "ws/AssociateSignUp.ashx?action=ConsumerLogout",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                cache: false,
+                success: function (response) {
+                    if (response == "0") {
+                        window.location.href = 'index.html';
+                    }
+                    else {
+                        alert("OOPS Something goes wrong !");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        });
+    });
+    </script>

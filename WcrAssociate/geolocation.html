@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Get Zipcode</title>
+
+    <script src="js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+
+
+    <script>
+        var _IPAddress;
+        $.get("https://ipinfo.io", function (response) {
+            _IPAddress = response.ip;
+        
+            $.ajax({
+                type: "POST", url: "ws/TopSearch.asmx/GetZipCodeIpAddress", data: "{'_IpAddress':'" + _IPAddress + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+
+
+        }, "jsonp");
+      
+        
+
+
+
+
+
+    </script>
+
+</body>
+</html>
