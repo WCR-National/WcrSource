@@ -1127,14 +1127,14 @@
     <Content Include="salesnew.html" />
     <Content Include="ServiceProfileList.html" />
     <Content Include="sidebar.html" />
-    <Content Include="src\app\app.component.css" />
-    <Content Include="src\app\app.component.html" />
-    <Content Include="src\app\category\category.component.css" />
-    <Content Include="src\app\category\category.component.html" />
-    <Content Include="src\favicon.ico" />
+    <Content Include="AngularAssociate\app\app.component.css" />
+    <Content Include="AngularAssociate\app\app.component.html" />
+    <Content Include="AngularAssociate\app\components\home\home.component.css" />
+    <Content Include="AngularAssociate\app\components\home\home.component.html" />
+    <Content Include="AngularAssociate\favicon.ico" />
     <Content Include="index.html" />
-    <Content Include="src\karma.conf.js" />
-    <Content Include="src\styles.css" />
+    <Content Include="AngularAssociate\karma.conf.js" />
+    <Content Include="AngularAssociate\styles.css" />
     <Content Include="support.html" />
     <Content Include="technologies.html" />
     <Content Include="terms.html" />
@@ -1203,11 +1203,11 @@
     <None Include="Properties\PublishProfiles\WcrNational.pubxml" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
-    <Content Include="src\assets\.gitkeep" />
-    <Content Include="src\browserslist" />
-    <Content Include="src\tsconfig.app.json" />
-    <Content Include="src\tsconfig.spec.json" />
-    <Content Include="src\tslint.json" />
+    <Content Include="AngularAssociate\assets\.gitkeep" />
+    <Content Include="AngularAssociate\browserslist" />
+    <Content Include="AngularAssociate\tsconfig.app.json" />
+    <Content Include="AngularAssociate\tsconfig.spec.json" />
+    <Content Include="AngularAssociate\tslint.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1761,23 +1761,23 @@
     <Folder Include="dist\img\credit\" />
     <Folder Include="dist\js\pages\" />
     <Folder Include="js\vendor\" />
-    <Folder Include="src\app\services\home\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="src\app\app-routing.module.ts" />
-    <TypeScriptCompile Include="src\app\app.component.ts" />
-    <TypeScriptCompile Include="src\app\app.module.ts" />
-    <TypeScriptCompile Include="src\app\category.service.ts" />
-    <TypeScriptCompile Include="src\app\category.ts" />
-    <TypeScriptCompile Include="src\app\category\category.component.ts" />
-    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
-    <TypeScriptCompile Include="src\environments\environment.ts" />
-    <TypeScriptCompile Include="src\main.ts" />
-    <TypeScriptCompile Include="src\polyfills.ts" />
-    <TypeScriptCompile Include="src\test.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\app.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\app.module.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\entities\location.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\home\home.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\entities\user.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\components\home\home.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="AngularAssociate\environments\environment.ts" />
+    <TypeScriptCompile Include="AngularAssociate\main.ts" />
+    <TypeScriptCompile Include="AngularAssociate\polyfills.ts" />
+    <TypeScriptCompile Include="AngularAssociate\test.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
