@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -21,6 +22,8 @@
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+    <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -100,10 +103,10 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WcrClassLibrary">
-      <HintPath>C:\Users\m\Desktop\WcrClassLibrary\20190710\WcrClassLibrary.dll</HintPath>
+      <HintPath>..\ClsLibrary\Dependencies\WcrClassLibrary.dll</HintPath>
     </Reference>
     <Reference Include="WcrVault">
-      <HintPath>C:\Users\Manoj\Desktop\WcrClassLibrary\20190420\WcrVault.dll</HintPath>
+      <HintPath>..\ClsLibrary\Dependencies\WcrVault.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1104,7 +1107,7 @@
     <Content Include="img\text-logo.png" />
     <Content Include="img\wcr-logo.png" />
     <Content Include="img\wcr-logo.svg" />
-    <Content Include="index.html" />
+    <Content Include="index_old.html" />
     <Content Include="innerpagenew.html" />
     <Content Include="inner_detailnew.html" />
     <Content Include="InternetSlowdown_Day.gif" />
@@ -1124,6 +1127,14 @@
     <Content Include="salesnew.html" />
     <Content Include="ServiceProfileList.html" />
     <Content Include="sidebar.html" />
+    <Content Include="src\app\app.component.css" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\category\category.component.css" />
+    <Content Include="src\app\category\category.component.html" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="index.html" />
+    <Content Include="src\karma.conf.js" />
+    <Content Include="src\styles.css" />
     <Content Include="support.html" />
     <Content Include="technologies.html" />
     <Content Include="terms.html" />
@@ -1187,7 +1198,16 @@
     <Content Include="Associate\UpdateAdvertisementSecondImage.ashx" />
     <Content Include="Associate\UpdateThirdImg.ashx" />
     <Content Include="Associate\UpdateFourthImg.ashx" />
+    <Content Include="angular.json" />
+    <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\WcrNational.pubxml" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tslint.json" />
+    <Content Include="src\assets\.gitkeep" />
+    <Content Include="src\browserslist" />
+    <Content Include="src\tsconfig.app.json" />
+    <Content Include="src\tsconfig.spec.json" />
+    <Content Include="src\tslint.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1741,15 +1761,33 @@
     <Folder Include="dist\img\credit\" />
     <Folder Include="dist\js\pages\" />
     <Folder Include="js\vendor\" />
+    <Folder Include="src\app\services\home\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\category.service.ts" />
+    <TypeScriptCompile Include="src\app\category.ts" />
+    <TypeScriptCompile Include="src\app\category\category.component.ts" />
+    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="src\environments\environment.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\test.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>

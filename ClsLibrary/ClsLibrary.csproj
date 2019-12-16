@@ -74,10 +74,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WcrClassLibrary">
-      <HintPath>C:\Users\m\Desktop\WcrClassLibrary\20190710\WcrClassLibrary.dll</HintPath>
+      <HintPath>Dependencies\WcrClassLibrary.dll</HintPath>
     </Reference>
     <Reference Include="WcrVault">
-      <HintPath>C:\Users\Manoj\Desktop\WcrClassLibrary\20190420\WcrVault.dll</HintPath>
+      <HintPath>Dependencies\WcrVault.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +194,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dependencies\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
