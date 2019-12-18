@@ -112,6 +112,9 @@
   <ItemGroup>
     <Content Include="aboutus.html" />
     <Content Include="advertise.html" />
+    <Content Include="AngularAssociate\app\errors\error_400.component.html" />
+    <Content Include="AngularAssociate\app\errors\error_500.component.html" />
+    <Content Include="AngularAssociate\app\errors\error_permission.component.html" />
     <Content Include="AssociatePhoto\0.png" />
     <Content Include="AssociatePhoto\1.png" />
     <Content Include="AssociatePhoto\2.png" />
@@ -1770,6 +1773,14 @@
     <TypeScriptCompile Include="AngularAssociate\app\app.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\app.module.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\location.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\errors\error_400.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\errors\error_500.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\errors\error_permission.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\authentication\auth-guard.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\authentication\auth.config.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\authentication\auth.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\authentication\page.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\authentication\permission.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\home\home.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\user.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\home\home.component.ts" />

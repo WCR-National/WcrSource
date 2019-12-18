@@ -3,18 +3,19 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 import { Observable, from, of } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { CategoryService } from '../category.service';
-import { Category, CityStateZip, PurchaseEntry } from '../category';
+import { CategoryService } from '../../services/home.service';
+import { Category, CityStateZip, PurchaseEntry } from '../../entities/location';
+
 import * as $ from 'jquery';
 import { Local } from 'protractor/built/driverProviders';
 
 @Component({
-    selector: 'app-category',
-    templateUrl: './category.component.html',
-    styleUrls: ['./category.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
-export class CategoryComponent implements OnInit {
+export class HomeComponent implements OnInit {
     dataSaved = false;
     purchaseForm: FormGroup;
     allCategoriesObservable: Observable<Category[]>;

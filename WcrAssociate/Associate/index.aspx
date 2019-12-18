@@ -314,6 +314,7 @@
                 }
             });
         }
+
         function CountSalesCategory(jobtype, divID) {
             $.ajax({
                 type: "POST", url: "ws/MyCategories.asmx/CountPurchasedCategories", data: "{'jobtype':'" + jobtype + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
@@ -343,6 +344,7 @@
                 }
             });
         }
+
         function CountAllCategory() {
             $.ajax({
                 type: "POST", url: "ws/MyCategories.asmx/CountAllPurchasedCategories", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
@@ -367,6 +369,7 @@
                 }
             });
         }
+
         function CountInterestedConsumer() {
             $.ajax({
                 type: "POST", url: "ws/Sale.asmx/CountTotalVisitors", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
@@ -394,6 +397,7 @@
                 }
             });
         }
+
         function CountAssociateCategory() {
             $.ajax({
                 type: "POST", url: "ws/Sale.asmx/CountAssociateCategories", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
@@ -418,6 +422,7 @@
                 }
             });
         }
+
     </script>
 
 

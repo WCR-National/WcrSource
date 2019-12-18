@@ -4,7 +4,7 @@ import { HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Observable, from, of } from 'rxjs';
 
-import { Category, CityStateZip, PurchaseEntry } from './category';
+import { Category, CityStateZip, PurchaseEntry } from '../../entities/location';
 
 
 @Injectable({
