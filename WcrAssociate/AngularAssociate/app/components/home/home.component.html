@@ -1,88 +1,74 @@
 <!--<p>Category works</p>-->
 <!--<app-category></app-category>-->
 
-<!--<div class="container">
-    <mat-card-content>
-        <div class="row">
-            <form class="col s12" [formGroup]="purchaseForm" (ngSubmit)="onFormSubmit(purchaseForm.value)">
-                <div class="row">
 
-                    <div class="input-field col s6 m6">
-                        <mat-form-field>
-                            <mat-label>Select Category</mat-label>
-                            <mat-select formControlName="CategoryID">
-                                <mat-option *ngFor="let category of allCategoriesObservable | async" value='{{category.CategoryID}},{{category.CategoryName}},{{category.CategoryPrice}}'>
-                                    {{category.CategoryName}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
+<div class="page-wrap">
 
-                    <div class="input-field col s6 m6">
-                        <mat-form-field>
-                            <mat-label>Select City/State</mat-label>
-                            <mat-select formControlName="Location">
-                                <mat-option *ngFor="let cityObj of allCityStateZipCodeData | async" value='{{cityObj.City}},{{cityObj.State}}'>
-                                    {{cityObj.City}} , {{cityObj.State}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="input-field col s6 m6">
-                        <mat-form-field>
-                            <mat-label>Select ZipCode</mat-label>
-                            <mat-select formControlName="ZipCode">
-
-                                <mat-option *ngFor="let zipCode of allCityStateZipCodeData | async" value='{{zipCode.Zip}}'>
-                                    {{zipCode.Zip}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col s12">
-                        <button class="btn waves-effect waves-button-input" type="submit" name="action" [disabled]="!purchaseForm.valid">
-                            Submit
-                        </button>
-
-                        <button type="reset" class="btn waves-effect waves-gray" style="margin-left:5px;" color="accent" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>
-                        <p *ngIf="dataSaved" style="color:rgb(0, 128, 0);font-size:20px;font-weight:bold" Class="success" align="left">
-                            {{massage}}
-                        </p>
-                    </div>
-
-                </div>
-            </form>
+    <div id="pageloader" class="pageloader" style="display:none">
+        <div class="pageloader-inner">
+            <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
         </div>
-        <hr>
+    </div>
 
-        <form>
-            <table class="table striped">
-                <tr ngclass="btn-primary">
-                    <th class="tbl2">Category ID</th>
-                    <th class="tbl2">Category Name</th>
-                    <th class="tbl2">Zip Code</th>
-                    <th class="tbl2">City</th>
-                    <th class="tbl2">State</th>
-                    <th class="tbl2">Charge Amount</th>
-                </tr>
-                <tr *ngFor="let purchase of allPurchases | async">
-                    <td class="tbl2">{{purchase.CategoryID}}</td>
-                    <td class="tbl2">{{purchase.CategoryName}}</td>
-                    <td class="tbl2">{{purchase.ZipCode}}</td>
-                    <td class="tbl2">{{purchase.City}}</td>
-                    <td class="tbl2">{{purchase.State}}</td>
-                    <td class="tbl2">{{purchase.ChargeAmount}}</td>
+    <div class="header"></div>
 
-                </tr>
-            </table>
-        </form>
-    </mat-card-content>
+    <div class="outer-middle">
+        <div class="middle_colume">
+            <div class="container" id="DivWithoutSearchAds" style="display:block; ">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12 col-sm-offset-2 text-center col-xs-offset-0  col-md-offset-2 col-lg-offset-2 searchbar" style="position:relative;">
+                        <div id="dlogo1">
+                            <h3>
+                                <a href="JavaScript:void(0);" name="wcrServiceLink1">
+                                    <img src="img/wcr-logo.png" class="img-responsive" alt="" />
+                                </a>
+                            </h3>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container result" style="display:none" id="DivSearchAds">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12 col-sm-offset-1 text-center col-xs-offset-0  col-md-offset-1 col-lg-offset-1 searchbar">
+                <div id="dlogo">
+                    <h3>
+                        <a href="JavaScript:void(0);" name="wcrServiceLink">
+                            <img src="img/wcr-logo.png" style="margin-bottom:25px;" class="img-responsive" alt="">
+                        </a>
+
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="sales">
+        </div>
+        <div class="row" id="Services">
+        </div>
+    </div>
+
+    <div class="container result" id="divShowAdvertisement" style="display:none;">
+        <div class="container result" id="search-result">
+            <div class="row">
+                <div class="col-sm-12 searchbar ">
+                    <h3 class="text-center">
+                        <a name="logolink" href="JavaScript:void(0);">
+                            <img src="img/wcr-logo.png" class="img-responsive logo" alt="" />
+                        </a>
+                    </h3>
+                    <div id="sales1">
+                    </div>
+                    <div id="services1">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
-<br><br>-->
 
-
-<!--(ngSubmit)="onFormSubmit(employeeForm.value)"-->
+<input type="hidden" id="hidLogin" />
+<div class="footer"></div>

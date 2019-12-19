@@ -1,4 +1,6 @@
-﻿var ca = GetParameterValues('ca');
+﻿
+
+var ca = GetParameterValues('ca');
 function GetParameterValues(param) {
     var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for (var i = 0; i < url.length; i++) {
@@ -15,7 +17,11 @@ function GetParameterValues(param) {
 function CheckUserLogin() {
     var a = 0;
     $.ajax({
-        type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+        type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin",
+        data: "{}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
         success: function (r) {
             if (r.d > 0) {
                 if (ca == "0") {
@@ -489,7 +495,7 @@ function BindServiesCategory(zipc) {
         }
     });
     return cartd;
-}
+} 
 function BindSalesCategoryCityWisennn(State, City) {
     var cartd = [];
     $.ajax({
@@ -602,7 +608,11 @@ function BindSalesCategoryCityWise(State, City) {
 function BindServiesCategoryCityWise(State, City) {
     var cartd = [];
     $.ajax({
-        type: "POST", url: "Associate/ws/Category.asmx/JobtypeWiseCategory", data: "{'flag':'1','jobtype':'2'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+        type: "POST",
+        url: "Associate/ws/Category.asmx/JobtypeWiseCategory",
+        data: "{'flag':'1','jobtype':'2'}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json", async: false,
         success: function (r) {
             if (r.d.length > 0) {
                 var xmlDoc = $.parseXML(r.d);
@@ -637,9 +647,6 @@ function BindServiesCategoryCityWise(State, City) {
                     else {
                         cartd.push("<a href='ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=0&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate'>");
                         cartd.push("<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span></a></div></div>");
-
-
-
                     }
                 });
                 // $("#Services").html(cartd.join(''));

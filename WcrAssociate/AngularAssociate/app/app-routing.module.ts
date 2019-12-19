@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { CategoryComponent } from './category/category.component';  
+import { HomeComponent } from '.././app/components/home/home.component';  
 
 const routes: Routes = [
     {
-        path: '', component: CategoryComponent, pathMatch: 'prefix',
+        path: '', component: HomeComponent, pathMatch: 'prefix',
         //children: [
         //    { path: '', component: SiteCalculatorComponent },
         //    { path: 'site-notice', component: SiteSiteNoticeComponent }

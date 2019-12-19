@@ -11,7 +11,7 @@ import { Category, CityStateZip, PurchaseEntry } from '../../entities/location';
     providedIn: 'root'
 })
 
-export class CategoryService {
+export class HomeService {
 
     url = 'http://localhost:44371';
 

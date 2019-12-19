@@ -1,10 +1,10 @@
 import * as tslib_1 from "tslib";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CategoryComponent } from './category/category.component';
+import { HomeComponent } from '.././app/components/home/home.component';
 var routes = [
     {
-        path: '', component: CategoryComponent, pathMatch: 'prefix',
+        path: '', component: HomeComponent, pathMatch: 'prefix',
     }
     //{
     //    path: 'app', component: AppComponent
