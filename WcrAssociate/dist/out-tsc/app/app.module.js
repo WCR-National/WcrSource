@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HeaderComponent } from './components/header/header.component';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -19,6 +20,7 @@ var AppModule = /** @class */ (function () {
         NgModule({
             declarations: [
                 AppComponent,
+                HeaderComponent,
                 HomeComponent,
                 LoginComponent,
                 RegisterComponent

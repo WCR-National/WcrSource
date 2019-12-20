@@ -51,7 +51,7 @@ var RegisterComponent = /** @class */ (function () {
         });
     };
     RegisterComponent = tslib_1.__decorate([
-        Component({ templateUrl: 'register.component.html' }),
+        Component({ selector: 'app-register', templateUrl: 'register.component.html' }),
         tslib_1.__metadata("design:paramtypes", [FormBuilder,
             Router,
             AuthenticationService,

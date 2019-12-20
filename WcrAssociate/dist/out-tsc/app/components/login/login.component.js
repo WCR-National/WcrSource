@@ -50,7 +50,7 @@ var LoginComponent = /** @class */ (function () {
         });
     };
     LoginComponent = tslib_1.__decorate([
-        Component({ templateUrl: 'login.component.html' }),
+        Component({ selector: 'app-login', templateUrl: 'login.component.html' }),
         tslib_1.__metadata("design:paramtypes", [FormBuilder,
             ActivatedRoute,
             Router,

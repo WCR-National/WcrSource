@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
@@ -17,39 +17,18 @@ import { debug } from 'util';
 })
 
 export class HomeComponent implements OnInit {
+     isOnLogin: Boolean = true;
+     isOnRegister: Boolean = true;
+     displayBlock = 'block';
+     displayNone = 'none';
+
+
     ngOnInit() {
         this.initializeEventsAndControls();
-        debugger;
-        this.inlineCSS();
         this.parallaxBG();
-
-        //this.fullscreenFix();
-
-
-        ////$(window).resize(backgroundResize);
-        ////$(window).focus(backgroundResize);
-        //this.backgroundResize();
-
-        ////if (!$("html").hasClass("touch")) {
-        ////    //$(window).resize(parallaxPosition);
-        ////    //$(window).focus(parallaxPosition);
-        ////    //$(window).scroll(parallaxPosition);
-
-        ////}
-        ////this.parallaxPosition();
-
-
-        //// Jumping background fix for IE
-        //if (navigator.userAgent.match(/Trident\/7\./)) { // if IE
-        //    $('body').on("mousewheel", function () {
-        //        event.preventDefault();
-
-        //        //var wheelDelta = event.wheelDelta;
-        //        var currentScrollPosition = window.pageYOffset;
-        //        window.scrollTo(0, currentScrollPosition - wheelDelta);
-        //    });
-        //}
     }
+
+
 
     initializeEventsAndControls() {
 
@@ -59,32 +38,7 @@ export class HomeComponent implements OnInit {
 
     }
 
-
-    /*----------------------------------------------------*/
-	/*  Inline CSS replacement for backgrounds etc.
-	/*----------------------------------------------------*/
-    inlineCSS() {
-
-        // Common Inline CSS
-        $(".some-classes, section.fullwidth, .img-box-background, .flip-banner, .property-slider .item, .fullwidth-property-slider .item, .fullwidth-home-slider .item, .address-container").each(function () {
-
-            debugger;
-            var attrImageBG = $(this).attr('data-background-image');
-            var attrColorBG = $(this).attr('data-background-color');
-
-            if (attrImageBG !== undefined) {
-                $(this).css('background-image', 'url(' + attrImageBG + ')');
-            }
-
-            if (attrColorBG !== undefined) {
-                $(this).css('background', '' + attrColorBG + '');
-            }
-        });
-
-    }
-
     // Init
-
     parallaxBG() {
 
         $('.parallax').prepend('<div class="parallax-overlay"></div>');
