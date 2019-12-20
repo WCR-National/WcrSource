@@ -1,19 +1,7 @@
-var Category = /** @class */ (function () {
-    function Category() {
+var User = /** @class */ (function () {
+    function User() {
     }
-    return Category;
+    return User;
 }());
-export { Category };
-var CityStateZip = /** @class */ (function () {
-    function CityStateZip() {
-    }
-    return CityStateZip;
-}());
-export { CityStateZip };
-var PurchaseEntry = /** @class */ (function () {
-    function PurchaseEntry() {
-    }
-    return PurchaseEntry;
-}());
-export { PurchaseEntry };
+export { User };
 //# sourceMappingURL=user.js.map

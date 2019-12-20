@@ -9,7 +9,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CategoryComponent } from './category/category.component';
+import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -17,7 +19,9 @@ var AppModule = /** @class */ (function () {
         NgModule({
             declarations: [
                 AppComponent,
-                CategoryComponent
+                HomeComponent,
+                LoginComponent,
+                RegisterComponent
             ],
             imports: [
                 BrowserModule,

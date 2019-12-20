@@ -36,7 +36,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "Scripts/libs",
-            "index": "AngularAssociate/index.html",
+            "index": "index.html",
             "main": "AngularAssociate/main.ts",
             "polyfills": "AngularAssociate/polyfills.ts",
             "tsConfig": "AngularAssociate/tsconfig.app.json",
@@ -45,7 +45,9 @@
               "AngularAssociate/assets"
             ],
             "styles": [
-              "AngularAssociate/styles.css"
+              //"AngularAssociate/styles.css",
+              "AngularAssociate/assets/style.css",
+              "AngularAssociate/assets/color.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -102,7 +104,9 @@
             "tsConfig": "AngularAssociate/tsconfig.spec.json",
             "karmaConfig": "AngularAssociate/karma.conf.js",
             "styles": [
-              "AngularAssociate/styles.css"
+              //"AngularAssociate/styles.css",
+              "AngularAssociate/assets/style.css",
+              "AngularAssociate/assets/color.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js"

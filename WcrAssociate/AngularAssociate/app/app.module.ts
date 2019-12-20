@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CategoryService } from './category.service';  
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';  
-
 
 import {
     MatButtonModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, MatIconModule, MatCardModule, MatSidenavModule, MatFormFieldModule,
@@ -18,7 +16,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CategoryComponent } from './category/category.component';  
+import { HomeComponent } from './components/home/home.component';  
+import { LoginComponent } from './components/login/login.component';  
+import { RegisterComponent } from './components/register/register.component';  
+
+
 
 
 
@@ -26,7 +28,10 @@ import { CategoryComponent } from './category/category.component';
 @NgModule({
   declarations: [
         AppComponent,
-        CategoryComponent
+        HomeComponent,
+        LoginComponent,
+        RegisterComponent
+
   ],
   imports: [
       BrowserModule,
