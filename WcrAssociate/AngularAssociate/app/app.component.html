@@ -1,3 +1,12 @@
+<!--<app-header [isOnLogin]="isOnLogin" [displayNone]="displayNone" [displayBlock]="displayBlock"></app-header>
+
+<app-home [style.display]="(isOnLandingPage)  ? displayNone : displayBlock" ></app-home>
+
+<app-login [style.display]="isOnLogin ? displayNone : displayBlock" *ngIf="!IsLoggedIn"></app-login>
+
+<app-register [style.display]="isOnRegister ? displayNone : displayBlock" *ngIf="!IsLoggedIn"></app-register>-->
 
 
-<app-home></app-home>
+<app-layout-header></app-layout-header>
+<router-outlet></router-outlet>
+<app-layout-footer></app-layout-footer>

@@ -11,6 +11,7 @@ var HeaderComponent = /** @class */ (function () {
         this.IsLoggedIn = false;
         this.isOnLogin = true;
         this.isOnRegister = true;
+        this.isOnLandingPage = false;
         this.displayBlock = 'block';
         this.displayNone = 'none';
         this.currentUserSubscription = this.authenticationService.currentUser.subscribe(function (user) {
@@ -25,27 +26,33 @@ var HeaderComponent = /** @class */ (function () {
     }
     HeaderComponent.prototype.ngOnInit = function () { };
     HeaderComponent.prototype.OnLoginEvent = function () {
-        debugger;
         alert('found');
         if (this.isOnLogin) {
             this.displayBlock = 'block';
             this.isOnLogin = false;
+            this.isOnRegister = true;
+            this.isOnLandingPage = true;
         }
         else {
             this.displayNone = 'none';
             this.isOnLogin = true;
+            this.isOnRegister = true;
+            this.isOnLandingPage = false;
         }
     };
     HeaderComponent.prototype.OnRegisterEvent = function () {
-        debugger;
         alert('found');
         if (this.isOnRegister) {
             this.displayBlock = 'block';
             this.isOnRegister = false;
+            this.isOnLogin = true;
+            this.isOnLandingPage = true;
         }
         else {
             this.displayNone = 'none';
             this.isOnRegister = true;
+            this.isOnLogin = true;
+            this.isOnLandingPage = false;
         }
     };
     HeaderComponent.prototype.increment = function () {
@@ -63,6 +70,10 @@ var HeaderComponent = /** @class */ (function () {
         Input(),
         tslib_1.__metadata("design:type", Boolean)
     ], HeaderComponent.prototype, "isOnRegister", void 0);
+    tslib_1.__decorate([
+        Input(),
+        tslib_1.__metadata("design:type", Object)
+    ], HeaderComponent.prototype, "isOnLandingPage", void 0);
     tslib_1.__decorate([
         Input(),
         tslib_1.__metadata("design:type", Object)

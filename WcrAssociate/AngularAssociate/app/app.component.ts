@@ -2,18 +2,24 @@ import { Component, OnInit, OnDestroy, ViewChild, ViewContainerRef, ComponentFac
 import { Subscription, Observable, from, of } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { UserService } from './services/auth';
+
+
 @Component({
   selector: 'wcr-Associate-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-    //constructor(private categoryService: CategoryService) { }
+    constructor(
+        private userService: UserService
+    ) { }
 
     ngOnInit() {
-
+        this.userService.populate();
     }
+
 
 }

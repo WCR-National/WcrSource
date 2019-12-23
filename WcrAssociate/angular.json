@@ -45,7 +45,7 @@
               "AngularAssociate/assets"
             ],
             "styles": [
-              //"AngularAssociate/styles.css",
+              "AngularAssociate/styles.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css"
             ],
@@ -104,7 +104,7 @@
             "tsConfig": "AngularAssociate/tsconfig.spec.json",
             "karmaConfig": "AngularAssociate/karma.conf.js",
             "styles": [
-              //"AngularAssociate/styles.css",
+              "AngularAssociate/styles.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css"
             ],

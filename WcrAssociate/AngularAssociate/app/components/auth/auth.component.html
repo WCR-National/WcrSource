@@ -1,0 +1,64 @@
+<div class="auth-page">
+    <div class="container page">
+        <div class="row mg-t-50">
+            <div class="col-md-6 offset-md-3 col-xs-12 card pd-40">
+                <div class="row">
+                    <h1 class="text-xs-center">{{ title }}</h1>
+                    <p class="text-xs-center">
+
+                        <a [routerLink]="['/login']" *ngIf="authType == 'register'">Don't have an account? Sign up now!</a>
+                        <a [routerLink]="['/register']" *ngIf="authType == 'login'">Already have an account? Sign in!</a>
+                    </p>
+                    <app-list-errors [errors]="errors"></app-list-errors>
+                    <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+                        <fieldset [disabled]="isSubmitting">[]
+                            <fieldset class="form-group">
+
+                                <div class="form-group" *ngIf="authType == 'register'" >
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email />
+                                    <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+                                        <div *ngIf="email.errors.required">Email is required</div>
+                                        <div *ngIf="email.errors.email">Email must be a valid email address</div>
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                            <fieldset class="form-group">
+                                <input formControlName="password"
+                                       placeholder="Password"
+                                       class="form-control form-control-lg"
+                                       type="password" />
+                            </fieldset>
+                            <fieldset class="form-group">
+                                <input  formControlName="confirmPassword"
+                                       placeholder="Confirm Password"
+                                       class="form-control form-control-lg"
+                                       type="text" />
+                            </fieldset>
+
+                            <!--  -->
+                            <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="authType == 'register'" type="submit" [disabled]="!authForm.valid">
+                                CREATE AN ACCOUNT
+                            </button>
+                            <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="authType != 'register'" type="submit" [disabled]="!authForm.valid">
+                                SIGN TO MY ACCOUNT
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="row mg-t-60">
+                    <a [routerLink]="['/resetPassword']" class="text-xs-right" *ngIf="authType != 'register'"> <i class="fa fa-key"></i>Reset my password</a>
+                </div>
+                <div class="row mg-t-60 text-center" *ngIf="authType == 'register'">
+                    <small>
+                        By clicking the "Create an Account" button you agree with our
+                        <button [routerLink]="['/resetPassword']" class="btn waves-ripple blue-grey lighten-5 blue-grey-text text-accent-4" >Terms And Conditions</button>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

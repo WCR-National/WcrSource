@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';  
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';  
 
 import {
     MatButtonModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, MatIconModule, MatCardModule, MatSidenavModule, MatFormFieldModule,
@@ -17,13 +17,27 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';  
-import { LoginComponent } from './components/login/login.component';  
-import { RegisterComponent } from './components/register/register.component';
-import { HeaderComponent } from './components/header/header.component';  
+//import { LoginComponent } from './components/login/login.component';  
+import { EmailValidator, PasswordValidator, ParentErrorStateMatcher } from '../app/_helpers/validators';
+import { AuthComponent } from './components/auth/auth.component';
+import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 
+import {
+    FooterComponent,
+    HeaderComponent,
+    SharedModule
+} from '../app/shared';
 
+import {
+    ApiService,
+    AuthGuard,
+    JwtService,
+    ProfilesService,
+    UserService,
+    HomeAuthResolver,
+    NoAuthGuard
 
-
+} from './services/auth';
 
 
 @NgModule({
@@ -31,8 +45,11 @@ import { HeaderComponent } from './components/header/header.component';
         AppComponent,
         HeaderComponent,
         HomeComponent,
-        LoginComponent,
-        RegisterComponent
+        //LoginComponent,
+        //RegisterComponent,
+        FooterComponent,
+        HeaderComponent,
+        AuthComponent
           ],
   imports: [
       BrowserModule,
@@ -53,9 +70,24 @@ import { HeaderComponent } from './components/header/header.component';
       MatTooltipModule,
       MatToolbarModule,
       MatSelectModule,
-      AppRoutingModule
-  ],
-    providers: [HttpClientModule],
+      AppRoutingModule,
+      SharedModule
+    ],
+    providers: [
+        HttpClientModule,
+        { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+        ApiService,
+        AuthGuard,
+        JwtService,
+        ProfilesService,
+        UserService,
+        HomeAuthResolver,
+        NoAuthGuard,
+        EmailValidator,
+        PasswordValidator,
+        ParentErrorStateMatcher
+
+    ],
     bootstrap: [AppComponent]  
 })
 export class AppModule { }
