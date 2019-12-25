@@ -18,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';  
 //import { LoginComponent } from './components/login/login.component';  
-import { EmailValidator, PasswordValidator, ParentErrorStateMatcher } from '../app/_helpers/validators';
+import {  PasswordValidator, ParentErrorStateMatcher } from '../app/_helpers/validators';
 import { AuthComponent } from './components/auth/auth.component';
 import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 
@@ -83,7 +83,6 @@ import {
         UserService,
         HomeAuthResolver,
         NoAuthGuard,
-        EmailValidator,
         PasswordValidator,
         ParentErrorStateMatcher
 

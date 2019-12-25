@@ -1,95 +1,330 @@
 import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/auth';
-import { EmailValidator, PasswordValidator } from '../../_helpers/validators';
 import * as $ from 'jquery';
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent(route, router, userService, fb, emailValidator, passwordValidator) {
+    function AuthComponent(route, router, userService, fb) {
         this.route = route;
         this.router = router;
         this.userService = userService;
         this.fb = fb;
-        this.emailValidator = emailValidator;
-        this.passwordValidator = passwordValidator;
         this.authType = '';
         this.title = '';
         this.errors = { errors: {} };
         this.isSubmitting = false;
-        this.account_validation_messages = {
-            'username': [
-                { type: 'required', message: 'Email is required' },
-                { type: 'minlength', message: 'Username must be at least 5 characters long' },
-                { type: 'maxlength', message: 'Username cannot be more than 25 characters long' },
-                { type: 'pattern', message: 'Your username must contain only numbers and letters' },
-                { type: 'validUsername', message: 'Your username has already been taken' }
-            ],
-            'email': [
-                { type: 'required', message: 'Email is required' },
-                { type: 'pattern', message: 'Enter a valid email' },
-                { type: 'emalInUse', message: 'This Email address is not available. Please Try another email address.' }
-            ],
-            'confirm_password': [
-                { type: 'required', message: 'Confirm password is required' },
-                { type: 'areEqual', message: 'Password mismatch' }
-            ],
-            'password': [
-                { type: 'required', message: 'Password is required' },
-                { type: 'minlength', message: 'Minimum of 8 char & a max of 20 char in length' },
-                { type: 'pattern', message: 'Must contain at least one uppercase, one lowercase, one number and 1 special character in ! @ # $ % ^ * _ ' }
-            ],
-            'terms': [
-                { type: 'pattern', message: 'You must accept terms and conditions' }
-            ]
+        this.showLoadingGif = false;
+        this.validationMessages = {
+            'email': {
+                'required': 'Email is required',
+                'email': 'Email is not in correct format.',
+                'emalInUse': 'This Email address is not available. Please Try another email address.'
+            },
+            'passowrd': {
+                'required': 'Password is required',
+                'minlength': 'Minimum of 8 char & a max of 20 char in length',
+                //'pattern': 'Must contain at least one uppercase, one lowercase, one number and 1 special character in ! @ # $ % ^ * _ ',
+                'number': 'At least one number.',
+                'lowerLetter': 'At least one lowercase.',
+                'upperLetter': 'At least one uppercase.',
+                'special Character': 'At least one special character.'
+            },
+            'confirmPassword': {
+                'required': 'Confirm password is required',
+            },
+            'passwordGroup': {
+                'passwordMismatch': 'Password and Confirm password does not match.'
+            },
+            'activationCode': {
+                'required': 'Activation code is required',
+                'notValidCode': 'Activation code is not valid',
+            },
+            'terms': {
+                'required': 'You must accept terms and conditions'
+            },
+            'loginCredentials': {
+                'error': 'User Authentication Failed. Please verify your credentials'
+            }
         };
-        // use FormBuilder to create a form group
-        this.authForm = this.fb.group({
-            email: new FormControl('', Validators.compose([
-                Validators.required,
-                Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
-                emailValidator.checkEmail.bind(emailValidator)
-            ])),
-            'password': [''],
-            //confirmPassword: this.matching_passwords_group,
-            terms: new FormControl(false, Validators.pattern('true'))
-        });
-        $("#passwrd").focusin(function () {
-            $("#message").css("display", "block");
-        });
-        $("#passwrd").blur(function () {
-            $("#message").css("display", "none");
-        });
-        $("#btnforclose").click(function () {
-            window.location.reload();
-        });
+        this.formErrors = {
+            'email': '',
+            'passowrd': '',
+            'confirmPassword': '',
+            'passwordGroup': '',
+            'associate': '',
+            'consumer': '',
+            'activationCode': '',
+            'terms': '',
+            'loginCredentials': ''
+        };
     }
     AuthComponent.prototype.ngOnInit = function () {
+        this.setValidationOnform();
+        this.setSignInOrSignUpOrActivateOrReset();
+        this.changeValuesOfFormsEvents();
+    };
+    AuthComponent.prototype.changeValuesOfFormsEvents = function () {
+        var _this = this;
+        this.authForm.valueChanges.subscribe(function (data) {
+            _this.logValidationErrors(_this.authForm);
+        });
+        this.authForm.get('associate').valueChanges.subscribe(function (data) {
+            if (data == "true") {
+                _this.authForm.get('terms').enable();
+            }
+            else if (data == "false" && _this.authForm.get('consumer').value == "false") {
+                _this.authForm.get('terms').disable();
+            }
+        });
+        this.authForm.get('consumer').valueChanges.subscribe(function (data) {
+            if (data == "true") {
+                _this.authForm.get('terms').enable();
+            }
+            else if (data == "false" && _this.authForm.get('associate').value == "false") {
+                _this.authForm.get('terms').disable();
+            }
+        });
+    };
+    AuthComponent.prototype.logValidationErrors = function (group) {
+        var _this = this;
+        if (group === void 0) { group = this.authForm; }
+        Object.keys(group.controls).forEach(function (key) {
+            var abstractControl = group.get(key);
+            _this.formErrors[key] = '';
+            if (abstractControl && !abstractControl.valid
+                && (abstractControl.touched || abstractControl.dirty)) {
+                var messages = _this.validationMessages[key];
+                for (var errorKey in abstractControl.errors) {
+                    if (errorKey) {
+                        _this.formErrors[key] += messages[errorKey] + ' ';
+                    }
+                }
+            }
+            if (abstractControl instanceof FormGroup) {
+                _this.logValidationErrors(abstractControl);
+            }
+        });
+    };
+    AuthComponent.prototype.setValidationOnform = function () {
+        // use FormBuilder to create a form group
+        this.authForm = this.fb.group({
+            email: ['', [Validators.required, Validators.email, isEmailExist]],
+            passwordGroup: this.fb.group({
+                password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
+                        regexValidator(new RegExp('^[0-9]+$'), { 'number': '' }),
+                        regexValidator(new RegExp('/[a-z]/g'), { 'lowerLetter': '' }),
+                        regexValidator(new RegExp('/[A-Z]/g'), { 'upperLetter': '' }),
+                        regexValidator(new RegExp('/[^\w\s]/gi'), { 'special Character': '' })
+                    ]],
+                confirmPassword: ['', [Validators.required,]],
+            }, { validator: matchPasswords }),
+            associate: [''],
+            consumer: [''],
+            terms: ['', Validators.required],
+            activationCode: ['', Validators.required],
+            submitButton: ['']
+        });
+    };
+    AuthComponent.prototype.setSignInOrSignUpOrActivateOrReset = function () {
         var _this = this;
         this.route.url.subscribe(function (data) {
             // Get the last piece of the URL (it's either 'login' or 'register')
             _this.authType = data[data.length - 1].path;
             // Set a title for the page accordingly
-            _this.title = (_this.authType === 'login') ? 'Sign in' : 'Sign up';
-            // add form control for username if this is the register page
-            if (_this.authType === 'register') {
-                _this.authForm.addControl('username', new FormControl());
+            if (_this.authType === 'login') {
+                _this.title = 'Sign in';
+                _this.authForm.get('email').clearValidators();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('email').setValidators([Validators.required, Validators.email]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required]);
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                _this.authForm.get('associate').clearValidators();
+                _this.authForm.get('associate').updateValueAndValidity();
+                _this.authForm.get('consumer').clearValidators();
+                _this.authForm.get('consumer').updateValueAndValidity();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('activationCode').updateValueAndValidity();
+            }
+            else if (_this.authType === 'register') {
+                _this.authForm.get('email').setValidators([Validators.required, Validators.email, isEmailExist]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20)]);
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').setValidators([matchPasswords]);
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').setValidators([Validators.required]);
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                _this.authForm.get('terms').setValidators([Validators.required]);
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').disable();
+                _this.authForm.get('passwordGroup').get('password').disable();
+                _this.authForm.get('passwordGroup').get('confirmPassword').disable();
+                _this.authForm.get('associate').disable();
+                _this.authForm.get('consumer').disable();
+                _this.authForm.get('terms').disable();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.title = 'Sign up';
+            }
+            else if (_this.authType === 'activate') {
+                _this.authForm.get('email').clearValidators();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').clearValidators();
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                //this.authForm.get('associate').clearValidators();
+                //this.authForm.get('consumer').clearValidators();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').setValidators([Validators.required]);
+                _this.authForm.get('activationCode').updateValueAndValidity();
+                _this.title = 'Account Activation';
+            }
+            else if (_this.authType === 'resetPassword') {
+                _this.authForm.get('email').enable();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('email').setValidators([Validators.required, Validators.email]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').clearValidators();
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                //this.authForm.get('associate').clearValidators();
+                //this.authForm.get('associate').updateValueAndValidity();
+                //this.authForm.get('consumer').clearValidators();
+                //this.authForm.get('associate').updateValueAndValidity();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('activationCode').updateValueAndValidity();
+                _this.title = 'Reset Password';
             }
         });
     };
-    AuthComponent.prototype.submitForm = function () {
+    AuthComponent.prototype.submitLoginForm = function (email, password) {
         var _this = this;
+        if (email === void 0) { email = ""; }
+        if (password === void 0) { password = ""; }
         this.isSubmitting = true;
-        this.errors = { errors: {} };
+        //this.errors = { errors: {} };
+        if (email != "" && password != "") {
+            this.router.navigateByUrl('/');
+        }
         var credentials = this.authForm.value;
         this.userService
             .attemptAuth(this.authType, credentials)
-            .subscribe(function (data) { return _this.router.navigateByUrl('/'); }, function (err) {
-            _this.errors = err;
+            .subscribe(function (data) {
+            if (data > '0') {
+                _this.router.navigateByUrl('/Associate');
+            }
+            else if (data == '-1') {
+                _this.userService
+                    .attemptConsumerAuth(_this.authType, credentials)
+                    .subscribe(function (data) {
+                    if (data > '0') {
+                        _this.router.navigateByUrl('/Consumer');
+                    }
+                    else {
+                        _this.formErrors.loginCredentials = _this.validationMessages['loginCredentials']['error'];
+                        _this.isSubmitting = false;
+                    }
+                }, function (err) {
+                    _this.formErrors.loginCredentials = _this.validationMessages['loginCredentials']['error'];
+                    _this.isSubmitting = false;
+                });
+            }
+            else {
+                _this.formErrors.loginCredentials = _this.validationMessages['loginCredentials']['error'];
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.formErrors.loginCredentials = _this.validationMessages['loginCredentials']['error'];
             _this.isSubmitting = false;
         });
     };
-    // When the user starts to type something inside the password field
+    AuthComponent.prototype.submitRegistrationForm = function () {
+        var _this = this;
+        this.isSubmitting = true;
+        //this.errors = { errors: {} };
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptRegister(this.authType, credentials)
+            .subscribe(function (data) {
+            if (data > 1) {
+                _this.router.navigateByUrl('/Activate');
+            }
+            else {
+                _this.formErrors.activationCode = _this.validationMessages['activationCode']['message'];
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.formErrors.activationCode = _this.validationMessages['activationCode']['message'];
+            _this.isSubmitting = false;
+        });
+    };
+    AuthComponent.prototype.submitActivationForm = function () {
+        var _this = this;
+        this.isSubmitting = true;
+        //this.errors = { errors: {} };
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptActivateCode(this.authType, credentials)
+            .subscribe(function (data) {
+            if (data.d == credentials.activationCode) {
+                _this.userService
+                    .attemptVerfiedActivationCode(_this.authType, _this.globalEmail)
+                    .subscribe(function (data) {
+                    if (data.d.length > 0) {
+                        _this.submitLoginForm(_this.globalEmail, _this.globalPassword);
+                    }
+                    else {
+                        _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+                        _this.isSubmitting = false;
+                    }
+                }, function (err) {
+                    _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+                    _this.isSubmitting = false;
+                });
+            }
+            else {
+                _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+            _this.isSubmitting = false;
+        });
+    };
+    AuthComponent.prototype.onClickResendVerificationCode = function () {
+        var _this = this;
+        this.userService
+            .attemptResendActivateCode(this.globalEmail)
+            .subscribe(function (data) {
+            if (data.d > 0 && data.d > "1") {
+                _this.resentCode = true;
+            }
+            else {
+                _this.resentCode = false;
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.resentCode = false;
+            _this.isSubmitting = false;
+        });
+    };
     AuthComponent.prototype.onKeyup = function (event) {
         $("#message").css("display", "block");
         var lowerCaseLetters = /[a-z]/g;
@@ -143,14 +378,69 @@ var AuthComponent = /** @class */ (function () {
             selector: 'app-auth-page',
             templateUrl: './auth.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute,
-            Router,
-            UserService,
-            FormBuilder,
-            EmailValidator,
-            PasswordValidator])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder])
     ], AuthComponent);
     return AuthComponent;
 }());
 export { AuthComponent };
+function isEmailExist(control) {
+    var _this = this;
+    clearTimeout(this.debouncer);
+    return new Promise(function (resolve) {
+        _this.debouncer = setTimeout(function () {
+            _this.userService.validateEmail(control.value).subscribe(function (data) {
+                if (data >= 1) {
+                    return null;
+                }
+                else {
+                    return { 'emalInUse': true };
+                }
+            }, function (err) {
+                return { 'emalInUse': true };
+            });
+        }, 1000);
+    });
+    //const email: string = control.value;
+    //const emailFromDB = this.userService.validateEmail(email); //getUserEmailFromDB();
+    //if (emailFromDB === '' || emailFromDB === email) {
+    //    return null;
+    //} else {
+    //    this.authForm.get('passwordGroup').enable();
+    //    this.authForm.get('passwordGroup').get('password').enable();
+    //    this.authForm.get('passwordGroup').get('confirmPassword').enable();
+    //    return { 'emalInUse': true };
+    //}
+}
+function matchPasswords(group) {
+    var passwordControl = group.get('password');
+    var confirmPasswordControl = group.get('confirmPassword');
+    if (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine) {
+        this.authForm.get('associate').disable();
+        this.authForm.get('consumer').disable();
+        return null;
+    }
+    else {
+        this.authForm.get('associate').enable();
+        this.authForm.get('consumer').enable();
+        return { 'passwordMismatch': true };
+    }
+}
+function regexValidator(regex, error) {
+    return function (control) {
+        if (!control.value) {
+            return null;
+        }
+        var valid = regex.test(control.value);
+        return valid ? null : error;
+    };
+}
+//$("#passwrd").focusin(function () {
+//    $("#message").css("display", "block");
+//});
+//$("#passwrd").blur(function () {
+//    $("#message").css("display", "none");
+//});
+//$("#btnforclose").click(function () {
+//    window.location.reload();
+//});
 //# sourceMappingURL=auth.component.js.map

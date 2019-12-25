@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
+import { environment } from '../../../environments/environment';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 var UserService = /** @class */ (function () {
     function UserService(apiService, http, jwtService) {
@@ -47,10 +48,57 @@ var UserService = /** @class */ (function () {
     };
     UserService.prototype.attemptAuth = function (type, credentials) {
         var _this = this;
-        var route = (type === 'login') ? '/login' : '';
-        return this.apiService.post('/users' + route, { user: credentials })
+        var urlToSignUp = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.password + "";
+        return this.apiService.post(environment.apiEndPoint + urlToSignUp, {})
+            .pipe(map(function (data) {
+            if (data > '0') {
+                _this.setAuth(data.user);
+            }
+            return data;
+        }));
+    };
+    UserService.prototype.attemptConsumerAuth = function (type, credentials) {
+        var _this = this;
+        //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
+        var urlToSignIn = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.password + "";
+        return this.apiService.post(environment.apiEndPoint + urlToSignIn, {})
             .pipe(map(function (data) {
             _this.setAuth(data.user);
+            return data;
+        }));
+    };
+    UserService.prototype.attemptRegister = function (type, credentials) {
+        var urlToSignUp = "ws/AssociateSignUp.ashx?action=AssociateData";
+        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        return this.apiService.post(environment.apiEndPoint + urlToSignUp, { user: credentials })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    };
+    UserService.prototype.attemptActivateCode = function (type, credentials) {
+        var urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
+        return this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: credentials.email })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    };
+    UserService.prototype.attemptVerfiedActivationCode = function (type, email) {
+        var urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
+        return this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: email })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    };
+    UserService.prototype.attemptResendActivateCode = function (email) {
+        var urlToResendActivationCode = "ws/AssociateRegistration.asmx/ResendActivationCode";
+        return this.apiService.post(environment.apiEndPoint + urlToResendActivationCode, { EmailID: email })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    };
+    //"
+    UserService.prototype.validateEmail = function (email) {
+        return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email).pipe(map(function (data) {
             return data;
         }));
     };
@@ -67,9 +115,6 @@ var UserService = /** @class */ (function () {
             _this.currentUserSubject.next(data.user);
             return data.user;
         }));
-    };
-    UserService.prototype.validateEmail = function (email) {
-        return this.http.get(+'auth/validate-username/' + username).map(function (res) { return res.json(); });
     };
     UserService = tslib_1.__decorate([
         Injectable(),

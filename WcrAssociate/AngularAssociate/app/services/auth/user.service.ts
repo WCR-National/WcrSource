@@ -5,6 +5,8 @@ import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
+import { environment } from '../../../environments/environment';
+
 import { map, distinctUntilChanged } from 'rxjs/operators';
 
 
@@ -15,7 +17,6 @@ export class UserService {
 
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
-
     constructor(
         private apiService: ApiService,
         private http: HttpClient,
@@ -56,15 +57,113 @@ export class UserService {
         this.isAuthenticatedSubject.next(false);
     }
 
-    attemptAuth(type, credentials): Observable<User> {
-        const route = (type === 'login') ? '/login' : '';
-        return this.apiService.post('/users' + route, { user: credentials })
+    attemptAuth(type, credentials): Observable<any> {
+
+        let urlToSignUp: String = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.password + ""
+        return this.apiService.post(environment.apiEndPoint + urlToSignUp, {})
+            .pipe(map(
+                data => {
+                    if (data > '0') {
+                        this.setAuth(data.user);
+                    }
+                    return data;
+                }
+            ));
+    }
+
+    attemptConsumerAuth(type, credentials): Observable<any> {
+        //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
+        let urlToSignIn: String = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.password + "";
+        return this.apiService.post(environment.apiEndPoint + urlToSignIn, {})
             .pipe(map(
                 data => {
                     this.setAuth(data.user);
                     return data;
                 }
             ));
+    }
+
+    attemptRegister(type, credentials): Observable<number> {
+
+        let urlToSignUp: String = "ws/AssociateSignUp.ashx?action=AssociateData";
+        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+
+        return this.apiService.post(environment.apiEndPoint + urlToSignUp, { user: credentials })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
+
+    attemptActivateCode(type, credentials): Observable<any> {
+
+        let urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
+        return this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: credentials.email })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
+
+    attemptVerfiedActivationCode(type, email): Observable<any> {
+
+        let urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
+        return this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: email })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
+
+    attemptResendActivateCode(email): Observable<any> {
+
+        let urlToResendActivationCode = "ws/AssociateRegistration.asmx/ResendActivationCode";
+        return this.apiService.post(environment.apiEndPoint + urlToResendActivationCode, { EmailID: email })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
+
+    attemptResetPassword(email): Observable<any> {
+
+        return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email).pipe(map(
+            data => {
+                return data;
+            }
+        ));
+    }
+
+    attemptResetAssociatePassword(email): Observable<any> {
+
+        return this.http.get(environment.apiEndPoint + "ws/AssociateSignUp.ashx?action=ResetAssociatePassNew&EmailID=" + email + "").pipe(map(
+            data => {
+                return data;
+            }
+        ));
+    }
+
+    attemptResetConsumerPassword(email): Observable<any> {
+
+        return this.http.get(environment.apiEndPoint + "ws/AssociateSignUp.ashx?action=ResetConsumerPassNew&EmailID=" + email + "").pipe(map(
+            data => {
+                return data;
+            }
+        ));
+    }
+
+    //
+
+    validateEmail(email) {
+        return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email).pipe(map(
+            data => {
+                return data;
+            }
+        ));
     }
 
     getCurrentUser(): User {
@@ -81,9 +180,4 @@ export class UserService {
                 return data.user;
             }));
     }
-
-    validateEmail(email) {
-        return this.http.get( + 'auth/validate-username/' + username).map(res => res.json());
-    }
-
 }

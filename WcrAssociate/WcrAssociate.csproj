@@ -1902,7 +1902,6 @@
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\validators\must-match.directive.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\validators\must-match.validator.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\validators\password.validator.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\_helpers\validators\email.validator.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\validators\username.validator.ts" />
     <TypeScriptCompile Include="AngularAssociate\environments\environment.local.ts" />
     <TypeScriptCompile Include="AngularAssociate\environments\environment.prod.ts" />

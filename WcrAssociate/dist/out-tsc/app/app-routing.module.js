@@ -26,6 +26,16 @@ var routes = [
         path: 'register',
         component: AuthComponent,
         canActivate: [NoAuthGuard]
+    },
+    {
+        path: 'activate',
+        component: AuthComponent,
+        canActivate: [NoAuthGuard]
+    },
+    {
+        path: 'resetPassword',
+        component: AuthComponent,
+        canActivate: [NoAuthGuard]
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
