@@ -24,6 +24,7 @@ export class AuthComponent implements OnInit {
     private resentCode: boolean = false;
     private resetPassword: boolean = false;
     authForm: FormGroup;
+
     validationMessages = {
         'email': {
             'required': 'Email is required',

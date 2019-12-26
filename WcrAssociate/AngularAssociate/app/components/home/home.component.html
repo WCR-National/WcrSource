@@ -1,5 +1,3 @@
-
-
 <div  class="parallax" data-background="../../../assets/images/home-parallax-2.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
 
     <div class="container">
@@ -13,16 +11,13 @@
 
                     <!-- Row With Forms -->
                     <div class="row with-forms">
-
-
                         <!-- Main Search Input -->
                         <div class="col-md-6">
                             <div class="main-search-input">
-                                <input type="text" placeholder="Enter address e.g. street, city or state" value="" />
+                                <input type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter) = "onEnterSearch()" />
                                 <button class="button"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
-
                     </div>
                     <!-- Row With Forms / End -->
                     <!-- Browse Jobs -->
@@ -39,7 +34,102 @@
 
             </div>
         </div>
+
     </div>
 
 </div>
 
+
+<!-- Fullwidth Section -->
+<section class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" style='background-color:#fff' #divSalesServices>
+
+    <!-- Content -->
+    <div class="container">
+        <div class="row" [innerHTML]="innerHtmlSales" [style.display]="showSales">
+
+            <div class="col-md-4">
+                <!-- Icon Box -->
+                <div class="icon-box-1 alternative">
+
+                    <div class="icon-container">
+                        <i class="im im-icon-Checked-User"></i>
+                    </div>
+
+                    <h3>Agent Finder</h3>
+                    <p>See who specializes in your area, has the most reviews and the right experience to meet your needs.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Icon Box -->
+                <div class="icon-box-1 alternative">
+
+                    <div class="icon-container">
+                        <i class="im im-icon-Cloud-Computer"></i>
+                    </div>
+
+                    <h3>Modern Technology</h3>
+                    <p>More than 10,000 customers buy or sell a home with us each year. We help people and homes find each together.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Icon Box -->
+                <div class="icon-box-1 alternative">
+
+                    <div class="icon-container">
+                        <i class="im im-icon-Idea"></i>
+                    </div>
+
+                    <h3>Home Designs Ideas</h3>
+                    <p>Our specialists can help you get started on that home project. Find paint colors, that perfect tile and more. </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" [innerHTML]="innerHtmlServices" [style.display]="showServices">
+
+            <div class="col-md-4">
+                <!-- Icon Box -->
+                <div class="icon-box-1 alternative">
+
+                    <div class="icon-container">
+                        <i class="im im-icon-Checked-User"></i>
+                    </div>
+
+                    <h3>Agent Finder</h3>
+                    <p>See who specializes in your area, has the most reviews and the right experience to meet your needs.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Icon Box -->
+                <div class="icon-box-1 alternative">
+
+                    <div class="icon-container">
+                        <i class="im im-icon-Cloud-Computer"></i>
+                    </div>
+
+                    <h3>Modern Technology</h3>
+                    <p>More than 10,000 customers buy or sell a home with us each year. We help people and homes find each together.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Icon Box -->
+                <div class="icon-box-1 alternative">
+
+                    <div class="icon-container">
+                        <i class="im im-icon-Idea"></i>
+                    </div>
+
+                    <h3>Home Designs Ideas</h3>
+                    <p>Our specialists can help you get started on that home project. Find paint colors, that perfect tile and more. </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<!-- Fullwidth Section / End -->

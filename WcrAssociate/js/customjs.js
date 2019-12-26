@@ -458,7 +458,10 @@ function BindServiesCategory(zipc) {
                     //cartd.push("<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("categoryName").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "'><i>");
                     cartd.push(" <h3>" + ($(docs).find("categoryName").text()) + " </h3>");
                     $.ajax({
-                        type: "POST", url: "ws/TopSearch.asmx/ViewAdvanceSearchForServices", data: "{'zipcode':" + zipc + ",'Category':" + ($(docs).find("ID").text()) + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                        type: "POST",
+                        url: "ws/TopSearch.asmx/ViewAdvanceSearchForServices",
+                        data: "{'zipcode':" + zipc + ",'Category':" + ($(docs).find("ID").text()) + "}",
+                        contentType: "application/json; charset=utf-8", dataType: "json", async: false,
                         success: function (r1) {
                             if (r1.d.length > 0) {
                                 var xmlDoc1 = $.parseXML(r1.d);
@@ -550,10 +553,12 @@ function BindSalesCategoryCityWisennn(State, City) {
     });
     return cartd;
 }
+
 function BindSalesCategoryCityWise(State, City) {
     var cartd = [];
     $.ajax({
-        type: "POST", url: "Associate/ws/subCategory.asmx/SubCategories",
+        type: "POST",
+        url: "Associate/ws/subCategory.asmx/SubCategories",
         data: "{'Categoryid':1}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -569,7 +574,10 @@ function BindSalesCategoryCityWise(State, City) {
                     cartd.push(" <div class='fullrow innerblock'>");
                     cartd.push(" <h3>" + ($(docs).find("name").text()) + " </h3>");
                     $.ajax({
-                        type: "POST", url: "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise", data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                        type: "POST",
+                        url: "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise",
+                        data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}",
+                        contentType: "application/json; charset=utf-8", dataType: "json", async: false,
                         success: function (r1) {
                             if (r1.d.length > 0) {
                                 var xmlDoc1 = $.parseXML(r1.d);

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { HomeService } from '../../services/home/home.service';
+import { HomeLandingService } from '../../services/auth';
 import { Category, CityStateZip, PurchaseEntry } from '../../entities/location';
 
 import * as $ from 'jquery';
@@ -16,15 +16,98 @@ import { debug } from 'util';
 })
 
 export class HomeComponent implements OnInit {
+    isSearchingStart: boolean = false;
+    searchForm: FormGroup;
+    homeLandingService: HomeLandingService;
+    showSales: boolean = false;
+    showServices: boolean = false;
+
+    @ViewChild('divSalesServices') divSalesServices: ElementRef;
+    @ViewChild('divSales') divSales: ElementRef;
+    @ViewChild('divServices') divServices: ElementRef;
+
+    innerHtmlSales: string = '';
+    innerHtmlServices: string = '';
 
 
+    constructor(private fb: FormBuilder, private renderer: Renderer2) { }
 
     ngOnInit() {
         this.initializeEventsAndControls();
         this.parallaxBG();
+
+        this.searchForm = this.fb.group({
+            search: [''],
+        });
+
     }
 
+    onEnterSearch() {
 
+        this.searching();
+
+        //if (txtSearch.value == "") {
+        //    $("#lblfai").css("display", "block");
+        //    $("#lblfai").text("Please enter City, State OR Zip Code.");
+        //}
+        //else {
+        //$("#pageloader").css("display", "block");
+        //$("#homeicon").css("display", "inline-block");
+        //setTimeout(function () {
+        // }, 500);
+        //}
+    }
+
+    onClickSearch() {
+        this.searching();
+    }
+
+    searching() {
+        this.isSearchingStart = true;
+        //focus the div which will show the result
+        //show the loading icon
+        this.divSalesServices.nativeElement.focusIn();
+        let searchValue: string = this.searchForm.get('txtSearch').value;
+        if ($.isNumeric(searchValue)) {
+
+        }
+        else {
+            if (searchValue.indexOf(',') != -1) {
+                let State;
+                let City;
+                let salesHtml;
+                let servicesHtml;
+                let strSearchValue = searchValue.split(',');
+                for (var i = 0; i < strSearchValue.length; i++) {
+                    if (i == 0) {
+                        City = strSearchValue[i];
+                    }
+                    else if (i == 1) {
+                        State = $.trim(strSearchValue[i]);
+                    }
+                }
+
+                if (State.length == 2) {
+                    $("#DivSearchAds").css("display", "block");
+                    $("#divShowAdvertisement").css("display", "none");
+
+                    salesHtml = this.bindSalesCategoryCityWise(State, City);
+                    this.innerHtmlSales = salesHtml;
+
+                    servicesHtml = this.bindServiesCategoryCityWise(State, City);
+                    this.innerHtmlServices = servicesHtml;
+                }
+                else if (State.length >= 2) {
+                    $("#lblfai").css("display", "block");
+                    $("#lblfai").text("Please Enter 2 Characters for State.");
+                }
+            }
+            else {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Invalid data entered.  Please enter City, State OR Zip Code.");
+            }
+        }
+    }
 
     initializeEventsAndControls() {
 
@@ -59,7 +142,67 @@ export class HomeComponent implements OnInit {
         });
     }
 
+    bindSalesCategoryCityWise(state, city) {
+        var innerHtmlSales = "";
+        let thisHomePage = this;
 
+        thisHomePage.homeLandingService
+            .attemptGetSalesCategoryCityWise(state, city)
+            .subscribe(
+                data => {
+                    if (data.d.length > 1) {
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("subCategories");
+
+
+                        $.each(docs, function (i, docs) {
+                            var flag = 0;
+                            innerHtmlSales += " <div class='col-sm-3 text-center block'>";
+                            innerHtmlSales += " <div class='fullrow innerblock'>";
+                            innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+                            var subCategoryId = $(docs).find("id").text();
+                            thisHomePage.homeLandingService
+                                .attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId)
+                                .subscribe(
+                                    data => {
+                                        if (data.d.length > 0) {
+                                            var xmlDoc1 = $.parseXML(data.d);
+                                            var xml1 = $(xmlDoc1);
+                                            var docs1 = xml1.find("GetCategoriesinfoCity");
+                                            $.each(docs1, function (i, docs1) {
+                                                if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
+                                                    let urlToSalesAdvertisement: string = 'SalesAdvertisementList.html?ca=0&id="' + ($(docs).find("id").text()) + '"&zipcode="' + $(docs1).find("Zipcode").text() + '"&name="' + ($(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
+                                                    innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
+                                                    innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a></div></div>";
+                                                    flag = 1;
+                                                }
+                                                else { }
+                                            });
+                                        }
+                                        else { }
+                                    },
+                                    err => {
+                                        thisHomePage.isSearchingStart = false;
+                                    }
+                                );
+
+                            if (flag == 1) { }
+                            else {
+                                innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
+                                innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'/></i></span>";
+                                innerHtmlSales += "</a></div></div>";
+                            }
+                        });
+                    }
+                    else { }
+                },
+                err => { thisHomePage.isSearchingStart = false; }
+            );
+    }
+
+    bindServiesCategoryCityWise(state, city) {
+    }
     /*----------------------------------------------------*/
 	/*  Parallax
 	/*----------------------------------------------------*/
@@ -307,4 +450,5 @@ export class HomeComponent implements OnInit {
     //    this.dataSaved = false;
     //}
 
-}  
+}
+
