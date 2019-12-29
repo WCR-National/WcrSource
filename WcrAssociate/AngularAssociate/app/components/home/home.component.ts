@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit {
     innerHtmlSales: string = '';
     innerHtmlServices: string = '';
 
-
     constructor(private fb: FormBuilder, private renderer: Renderer2, private homeLandingService: HomeLandingService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
     ngOnInit() {
