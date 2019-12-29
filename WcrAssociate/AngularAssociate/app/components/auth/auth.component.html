@@ -13,8 +13,6 @@
                         <a [routerLink]="['/login']" *ngIf="authType == 'register'">Don't have an account? Sign up now!</a>
                         <a [routerLink]="['/register']" *ngIf="authType == 'login'">Already have an account? Sign in!</a>
                     <p> Activation code was sent to the Email address that was supplied for this account</p>
-
-                    </p>
                     <form [formGroup]="authForm" (ngSubmit)="submitForm()">
                         <fieldset [disabled]="isSubmitting">
 
@@ -60,7 +58,7 @@
                                 </div>
                             </div>
 
-                            <div formGroupName="emailGroup">
+                            <div formGroupName="passwordGroup">
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.password}"
                                      *ngIf="(authType == 'register' || authType == 'login') ">
                                     <div class="col-sm-12">
@@ -135,11 +133,11 @@
                                 SIGN TO MY ACCOUNT
                             </button>
 
-                            <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType != 'activate')" type="submit" [disabled]="!authForm.valid">
+                            <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'activate')" type="submit" [disabled]="!authForm.valid">
                                 VERIFY
                             </button>
 
-                            <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType != 'resetPassword')" type="submit" [disabled]="!authForm.valid">
+                            <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'resetPassword')" type="submit" [disabled]="!authForm.valid">
                                 RESET PASSWORD
                             </button>
                         </fieldset>

@@ -263,7 +263,8 @@
            
         });
 
-        function GetSalesAdts() {            
+        function GetSalesAdts() {
+            debugger;
             var _IPAddress;          
             $.getJSON("http://jsonip.com?callback=?", function (data) {               
                 _IPAddress = data.ip;
@@ -274,6 +275,7 @@
                     dataType: "json",
                     async: false,
                     success: function (r) {
+                        debugger;
                         if (r.d.length > 0) {
                             var salesn = BindSalesCategory1(r.d);
                             $("#sales1").html(salesn.join(''));

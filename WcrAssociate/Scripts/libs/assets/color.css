@@ -1,40 +1,40 @@
 /* ------------------------------------------------------------------- */
-/* Main #455a64
+/* Main #0e3a6b
 ---------------------------------------------------------------------- */
 .csm-trigger,
 .csm-content h4,
 #backtotop a,
 #top-bar {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .custom-zoom-in:hover:before,
 .custom-zoom-out:hover:before,
 .infoBox-close:hover {
-    -webkit-text-stroke: 1px #455a64
+    -webkit-text-stroke: 1px #0e3a6b
 }
 
 .list-4 li:before,
 .list-3 li:before,
 .list-2 li:before,
 .list-1 li:before {
-    color: #455a64;
+    color: #0e3a6b;
 }
 
 .numbered.color ol > li::before {
-    border: 1px solid #455a64;
-    color: #455a64;
+    border: 1px solid #0e3a6b;
+    color: #0e3a6b;
 }
 
 .numbered.color.filled ol > li::before {
-    border: 1px solid #455a64;
-    background-color: #455a64;
+    border: 1px solid #0e3a6b;
+    background-color: #0e3a6b;
 }
 
 .change-photo-btn:hover,
 table.manage-table th,
 mark.color {
-    background-color: #455a64;
+    background-color: #0e3a6b;
 }
 
 .user-menu ul li a:hover,
@@ -84,16 +84,16 @@ a.button.border.white:hover {
 }
 
 #header-container.top-border {
-    border-top: 4px solid #455a64
+    border-top: 4px solid #0e3a6b
 }
 
 #navigation.style-1 .current {
     background-color: transparent;
-    border: 1px solid #455a64
+    border: 1px solid #0e3a6b
 }
 
 #navigation.style-1 ul li:hover {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 #navigation.style-2 {
@@ -102,39 +102,39 @@ a.button.border.white:hover {
 
 .menu-responsive i {
     background: linear-gradient(to bottom, rgba(255, 255, 255, .07) 0, transparent);
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .checkboxes input[type=checkbox]:checked+label:before,
 .range-slider .ui-widget-header,
 .search-type label.active,
 .search-type label:hover {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .range-slider .ui-slider .ui-slider-handle {
-    border: 2px solid #455a64
+    border: 2px solid #0e3a6b
 }
 
 .agent-avatar a:before {
-    background: #455a64;
-    background: linear-gradient(to bottom, transparent 50%, #455a64)
+    background: #0e3a6b;
+    background: linear-gradient(to bottom, transparent 50%, #0e3a6b)
 }
 
 .view-profile-btn {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .listing-img-container:after {
-    background: linear-gradient(to bottom, transparent 60%, #455a64)
+    background: linear-gradient(to bottom, transparent 60%, #0e3a6b)
 }
 
 .listing-badges .featured {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .list-layout .listing-img-container:after {
-    background: linear-gradient(to bottom, transparent 55%, #455a64)
+    background: linear-gradient(to bottom, transparent 55%, #0e3a6b)
 }
 
 #titlebar.property-titlebar span.property-badge,
@@ -150,29 +150,29 @@ a.button.border.white:hover {
 .pagination ul li a:hover,
 .pagination-next-prev ul li a:hover,
 .property-features.checkboxes li:before {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .post-img:after,
 .tip {
-    background: #455a64
+    background: #0e3a6b
 }
 
 .property-slider-nav .item.slick-current.slick-active:before {
-    border-color: #455a64
+    border-color: #0e3a6b
 }
 
 .post-img:after {
-    background: linear-gradient(to bottom, transparent 40%, #455a64)
+    background: linear-gradient(to bottom, transparent 40%, #0e3a6b)
 }
 
 .comment-by a.reply:hover,
 .post-img:before {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .map-box .listing-img-container:after {
-    background: linear-gradient(to bottom, transparent 50%, #455a64)
+    background: linear-gradient(to bottom, transparent 50%, #0e3a6b)
 }
 
 #geoLocation:hover,
@@ -190,25 +190,25 @@ a.button.border.white:hover {
 .listing-carousel.owl-theme.outer .owl-controls .owl-prev:hover::before,
 .slick-next:after,
 .slick-prev:after {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .cluster div:before {
-    border: 7px solid #455a64;
-    box-shadow: inset 0 0 0 4px #455a64
+    border: 7px solid #0e3a6b;
+    box-shadow: inset 0 0 0 4px #0e3a6b
 }
 
 .mfp-arrow:hover {
-    background: #455a64
+    background: #0e3a6b
 }
 
 .dropzone:hover {
-    border: 2px dashed #455a64
+    border: 2px dashed #0e3a6b
 }
 
 .dropzone:before {
     background: linear-gradient(to bottom, rgba(255, 255, 255, .95), rgba(255, 255, 255, .9));
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .chosen-container .chosen-results li.highlighted,
@@ -219,112 +219,112 @@ a.button.border:hover,
 button.button,
 input[type=button],
 input[type=submit] {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .dropzone:hover .dz-message,
 .sort-by .chosen-container-single .chosen-default,
 .sort-by .chosen-container-single .chosen-single div b:after {
-    color: #455a64
+    color: #0e3a6b
 }
 
 a.button.border {
-    border: 1px solid #455a64
+    border: 1px solid #0e3a6b
 }
 
 .plan.featured .plan-price {
     background: linear-gradient(to bottom, rgba(255, 255, 255, .1) 0, transparent);
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .fp-accordion .accordion h3.ui-accordion-header-active,
 .trigger.active a,
 .ui-accordion .ui-accordion-header-active,
 .ui-accordion .ui-accordion-header-active:hover {
-    background-color: #455a64;
-    border-color: #455a64
+    background-color: #0e3a6b;
+    border-color: #0e3a6b
 }
 
 .tabs-nav li a:hover,
 .tabs-nav li.active a {
-    border-color: #455a64
+    border-color: #0e3a6b
 }
 
 .style-3 .tabs-nav li a:hover,
 .style-3 .tabs-nav li.active a {
-    border-color: #455a64;
-    background-color: #455a64
+    border-color: #0e3a6b;
+    background-color: #0e3a6b
 }
 
 .style-4 .tabs-nav li.active a,
 .style-5 .tabs-nav li.active a,
 table.basic-table th {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .info-box {
-    border-top: 2px solid #455a64;
+    border-top: 2px solid #0e3a6b;
     background: linear-gradient(to bottom, rgba(255, 255, 255, .98), rgba(255, 255, 255, .95));
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .info-box.no-border {
     background: linear-gradient(to bottom, rgba(255, 255, 255, .96), rgba(255, 255, 255, .93));
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 .icon-box-1 .icon-container {
-    background-color: #455a64
+    background-color: #0e3a6b
 }
 
 
 .qtyTotal {
-  background-color: #455a64;
+  background-color: #0e3a6b;
 }
 
 .daterangepicker td.available:hover, .daterangepicker th.available:hover {
-  background-color: #455a64;
+  background-color: #0e3a6b;
 }
 
 .daterangepicker td.in-range {
   background-color: rgba(39, 74, 187,0.07);
-  color: #455a64;
+  color: #0e3a6b;
 }
 .daterangepicker td.active, .daterangepicker td.active:hover {
-  background-color: #455a64;
+  background-color: #0e3a6b;
 }
 
 .daterangepicker .drp-buttons button.applyBtn,
 .daterangepicker .drp-buttons button.cancelBtn {
-  background-color: #455a64;
+  background-color: #0e3a6b;
 }
 .daterangepicker .drp-buttons button.applyBtn {
-  background-color: #455a64;
+  background-color: #0e3a6b;
 }
 
 #booking-date-range:hover {
-  color: #455a64;
+  color: #0e3a6b;
 }
 
 #booking-date-range span:after {
-    color: #455a64;
+    color: #0e3a6b;
 }
 
 .daterangepicker .ranges li.active {
-  background-color: #455a64;
+  background-color: #0e3a6b;
   color: #fff;
 }
 .panel-dropdown a:after {
-  color: #455a64;
+  color: #0e3a6b;
 }
 .time-slot input ~ label:hover {
-  color: #455a64;
+  color: #0e3a6b;
   background-color: rgba(39, 74, 187,0.06);
 }
 
 .time-slot input:checked ~ label {
-  background-color: #455a64;
+  background-color: #0e3a6b;
 }
 .time-slot label:hover span {
-  color: #455a64;
+  color: #0e3a6b;
 }

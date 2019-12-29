@@ -42,7 +42,8 @@ function CheckUserLogin() {
 function CheckUserLogininHome() {
     var a = 0;
     $.ajax({
-        type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+        type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8",
+        dataType: "json", async: false,
         success: function (r) {
             ca = "0";//Because in index page we can not set parameters in url
             if (r.d > 0) {
@@ -176,7 +177,10 @@ function BindSalesCategory(zipc) {
 function BindSalesCategory1(zipc) {
     var cartd = [];
     $.ajax({
-        type: "POST", url: "Associate/ws/subCategory.asmx/SubCategories", data: "{'Categoryid':1}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+        type: "POST", url: "Associate/ws/subCategory.asmx/SubCategories", data: "{'Categoryid':1}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        async: false,
         success: function (r) {
             if (r.d.length > 0) {
                 var xmlDoc = $.parseXML(r.d);
@@ -463,7 +467,7 @@ function BindServiesCategory(zipc) {
                             if (r1.d.length > 0) {
                                 var xmlDoc1 = $.parseXML(r1.d);
                                 var xml1 = $(xmlDoc1);
-                                var docs1 = xml1.find("GetCategoriesinfoservices");
+                                var docs1 = xml1.find("GetCategoriesinfoservices"); 
                                 $.each(docs1, function (i, docs1) {
                                     if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
                                         cartd.push("<a href='ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "'>");
@@ -550,6 +554,8 @@ function BindSalesCategoryCityWisennn(State, City) {
     });
     return cartd;
 }
+
+
 function BindSalesCategoryCityWise(State, City) {
     var cartd = [];
     $.ajax({

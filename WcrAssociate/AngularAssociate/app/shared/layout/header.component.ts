@@ -2,24 +2,45 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../../services/auth';
 import { User } from '../../entities/user';
-
+import { ActivatedRoute, Router } from '@angular/router';
+import { debug } from 'util';
 
 @Component({
-  selector: 'app-layout-header',
-  templateUrl: './header.component.html'
+    selector: 'app-layout-header',
+    templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-  constructor(
-    private userService: UserService
-  ) {}
+    constructor(private route: ActivatedRoute, private router: Router,
+        private userService: UserService
+    ) { }
 
-  currentUser: User;
+    currentUser: User;
+    ngOnInit() {
+        this.userService.currentUser.subscribe(
+            (userData) => {
+                this.currentUser = userData;
+            }
+        );
+    }
 
-  ngOnInit() {
-    this.userService.currentUser.subscribe(
-      (userData) => {
-        this.currentUser = userData;
-      }
-    );
-  }
+    onClickLogout() {
+        this.userService
+            .attemptLogout()
+            .subscribe(
+                data => {
+                    if (data == "0") {
+                        this.router.navigateByUrl('/home');
+                    }
+                    else {
+                        alert("OOPS Something goes wrong !");
+                    }
+                },
+                err => {
+                    alert("OOPS Something goes wrong !");
+                }
+            );
+
+    }
+
+
 }

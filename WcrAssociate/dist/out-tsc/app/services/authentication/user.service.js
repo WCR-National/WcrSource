@@ -15,9 +15,9 @@ var UserService = /** @class */ (function () {
     UserService.prototype.register = function (user) {
         return this.http.post(environment.apiEndPoint + "/users/register", user);
     };
-    UserService.prototype.update = function (user) {
-        return this.http.put(environment.apiEndPoint + "/users/" + user.id, user);
-    };
+    //update(user: User) {
+    //    return this.http.put(`${environment.apiEndPoint}/users/${user.id}`, user);
+    //}
     UserService.prototype.delete = function (id) {
         return this.http.delete(environment.apiEndPoint + "/users/" + id);
     };

@@ -20,9 +20,9 @@ export class UserService {
         return this.http.post(`${environment.apiEndPoint}/users/register`, user);
     }
 
-    update(user: User) {
-        return this.http.put(`${environment.apiEndPoint}/users/${user.id}`, user);
-    }
+    //update(user: User) {
+    //    return this.http.put(`${environment.apiEndPoint}/users/${user.id}`, user);
+    //}
 
     delete(id: number) {
         return this.http.delete(`${environment.apiEndPoint}/users/${id}`);

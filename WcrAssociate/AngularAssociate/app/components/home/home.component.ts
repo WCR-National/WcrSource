@@ -1,14 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, retry } from 'rxjs/operators';
 
-import { HomeService } from '../../services/home/home.service';
+import { HomeLandingService } from '../../services/auth';
 import { Category, CityStateZip, PurchaseEntry } from '../../entities/location';
 
 import * as $ from 'jquery';
 import { Local } from 'protractor/built/driverProviders';
 import { debug } from 'util';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
     selector: 'app-home',
@@ -16,22 +17,114 @@ import { debug } from 'util';
 })
 
 export class HomeComponent implements OnInit {
+    isSearchingStart: boolean = false;
+    searchForm: FormGroup;
+    resultContent: boolean = false;
+    @ViewChild('salesServicesFocus') divSalesServices: ElementRef;
+
+    innerHtmlSales: string = '';
+    innerHtmlServices: string = '';
 
 
+    constructor(private fb: FormBuilder, private renderer: Renderer2, private homeLandingService: HomeLandingService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
     ngOnInit() {
-        this.initializeEventsAndControls();
         this.parallaxBG();
+        this.GetSalesAdts();
+        this.searchForm = this.fb.group({
+            txtSearch: [''],
+        });
+
     }
 
+    onEnterSearch() {
 
+        this.searching();
 
-    initializeEventsAndControls() {
-
+        //if (txtSearch.value == "") {
+        //    $("#lblfai").css("display", "block");
+        //    $("#lblfai").text("Please enter City, State OR Zip Code.");
+        //}
+        //else {
+        //$("#pageloader").css("display", "block");
+        //$("#homeicon").css("display", "inline-block");
+        //setTimeout(function () {
+        // }, 500);
+        //}
     }
 
-    searchBasedOnLocation() {
+    onClickSearch() {
+        this.searching();
+    }
 
+    searching() {
+        this.resultContent = false;
+        this.isSearchingStart = true;
+
+        if (isPlatformBrowser(this.platformId)) {
+            this.divSalesServices.nativeElement.focus();
+            //this.myInput.nativeElement.focus();
+        }
+        
+
+        //focus the div which will show the result
+        //show the loading icon
+        debugger;
+        let searchValue: string = this.searchForm.get('txtSearch').value;
+        if ($.isNumeric(searchValue)) {
+            // HideDiv();
+            //$("#DivSearchAds").css("display", "block");
+            //$("#divShowAdvertisement").css("display", "none");
+            //$("#sales").html(sales.join(''));
+            //$("#Services").html(services1.join(''));
+            let salesHtml;
+            let servicesHtml;
+            salesHtml = this.bindSalesCategory(searchValue);
+            servicesHtml = this.bindServiesCategory(searchValue);
+            this.innerHtmlSales = salesHtml;
+            this.innerHtmlServices = servicesHtml;
+            console.log(this.innerHtmlSales);
+            console.log(this.innerHtmlServices);
+
+        }
+        else {
+            if (searchValue.indexOf(',') != -1) {
+                let State;
+                let City;
+                let salesHtml;
+                let servicesHtml;
+                let strSearchValue = searchValue.split(',');
+                for (var i = 0; i < strSearchValue.length; i++) {
+                    if (i == 0) {
+                        City = strSearchValue[i];
+                    }
+                    else if (i == 1) {
+                        State = $.trim(strSearchValue[i]);
+                    }
+                }
+
+                if (State.length == 2) {
+                    $("#DivSearchAds").css("display", "block");
+                    $("#divShowAdvertisement").css("display", "none");
+
+                    salesHtml = this.bindSalesCategoryCityWise(State, City);
+                    servicesHtml = this.bindServiesCategoryCityWise(State, City);
+
+                    //this.innerHtmlSales = salesHtml;
+                    //this.innerHtmlServices = servicesHtml;
+                    //console.log(this.innerHtmlSales);
+                    //console.log(this.innerHtmlServices);
+                }
+                else if (State.length >= 2) {
+                    $("#lblfai").css("display", "block");
+                    $("#lblfai").text("Please Enter 2 Characters for State.");
+                }
+            }
+            else {
+                $("#lblfai").css("display", "block");
+                $("#lblfai").text("Invalid data entered.  Please enter City, State OR Zip Code.");
+            }
+        }
     }
 
     // Init
@@ -60,6 +153,464 @@ export class HomeComponent implements OnInit {
     }
 
 
+    bindSalesCategory(zipc, searchByIpOrtxtSearch = "txtSearch") {
+        var innerHtmlSales = "";
+        let thisHomePage = this;
+
+        thisHomePage.homeLandingService
+            .attemptGetSalesCategoryByZip(zipc)
+            .subscribe(
+                data => {
+                    if (data.d.length > 1) {
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("subCategories");
+
+                        $.each(docs, function (i, docs) {
+                            var flag = 0;
+                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12'>";
+                            innerHtmlSales += " <div class='fullrow innerblock card pd-40'>";
+                            innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+
+                            var subCategoryId = $(docs).find("id").text();
+
+                            thisHomePage.homeLandingService
+                                .attemptGetAdvanceSearchByZipc(zipc, subCategoryId)
+                                .then(
+                                    (data: any) => {
+                                        if (data.d.length > 0) {
+
+                                            var xmlDoc1 = $.parseXML(data.d);
+                                            var xml1 = $(xmlDoc1);
+                                            var docs1 = xml1.find("GetCategoriesinfo1");
+
+                                            $.each(docs1, function (i, docs1) {
+                                                if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+
+                                                    if (searchByIpOrtxtSearch == "ip") {
+                                                        debugger;
+                                                        innerHtmlSales = "<p>" + ($(docs).find("name").text()) + "  </p>";
+                                                        let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + $(docs1).find("Zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                                        innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+
+                                                    }
+                                                    else {
+                                                        debugger;
+
+                                                        let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + $(docs1).find("Zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                                        innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+                                                        innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
+                                                        innerHtmlSales = "<p class='grey-text'>" + ($(docs).find("detail").text()) + "  </p></div></div>";
+                                                    }
+                                                    flag = 1;
+                                                }
+                                                else { }
+                                            });
+                                        }
+                                        else { }
+                                    },
+                                    err => {
+                                        thisHomePage.isSearchingStart = false;
+                                    }
+                                );
+
+                            if (flag == 1) { }
+                            else {
+                                if (searchByIpOrtxtSearch == "ip") {
+                                    innerHtmlSales = "<p>" + ($(docs).find("name").text()) + "  </p>";
+                                    innerHtmlSales = "<p>" + ($(docs).find("detail").text()) + "  </p>";
+                                    let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                    innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+
+                                }
+                                else {
+                                    innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
+                                    innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'  alt=''/></i></span></a></div></div>";
+
+                                }
+                            }
+                        });
+                        thisHomePage.innerHtmlSales = innerHtmlSales;
+                        thisHomePage.resultContent = true;
+                    }
+                    else { }
+
+                    thisHomePage.isSearchingStart = false;
+
+                },
+                err => { thisHomePage.isSearchingStart = false; }
+            );
+
+    }
+
+    bindServiesCategory(zipc, searchByIpOrtxtSearch = "txtSearch") {
+        var innerHtmlServices = "";
+        let thisHomePage = this;
+
+        thisHomePage.homeLandingService
+            .attemptGetJobtypeWiseCategory()
+            .subscribe(
+                data => {
+                    if (data.d.length > 1) {
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("JobCategories");
+
+                        $.each(docs, function (i, docs) {
+                            var flag = 0;
+                            innerHtmlServices += " <div class='col-sm-3 text-center block '>";
+                            innerHtmlServices += " <div class='fullrow innerblock card pd-40'>";
+                            innerHtmlServices += " <h3>" + ($(docs).find("categoryName").text()) + " </h3>";
+
+                            var categoryId = $(docs).find("ID").text();
+
+                            thisHomePage.homeLandingService
+                                .attemptGetViewAdvanceSearchForServices(categoryId, zipc)
+                                .then(
+                                    (data: any) => {
+                                        if (data.d.length > 0) {
+
+                                            var xmlDoc1 = $.parseXML(data.d);
+                                            var xml1 = $(xmlDoc1);
+                                            var docs1 = xml1.find("GetCategoriesinfoservices");
+
+                                            $.each(docs1, function (i, docs1) {
+                                                if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+
+
+                                                    if (searchByIpOrtxtSearch == "ip") {
+                                                        console.log('entered in ' + searchByIpOrtxtSearch);
+                                                        innerHtmlServices = "<p>" + ($(docs).find("categoryName").text()) + "  </p>";
+                                                        innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
+                                                        let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                                        innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+
+                                                    }
+                                                    else {
+                                                        console.log('entered in ' + searchByIpOrtxtSearch);
+
+                                                        let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                                        innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                        innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span></a></div></div>";
+                                                    }
+
+                                                    flag = 1;
+                                                }
+                                                else { }
+                                            });
+                                        }
+                                        else { }
+                                    },
+                                    err => {
+                                        thisHomePage.isSearchingStart = false;
+                                    }
+                                );
+
+                            if (flag == 1) { }
+                            else {
+                                if (searchByIpOrtxtSearch == "ip") {
+                                    innerHtmlServices = "<p>" + ($(docs).find("categoryName").text()) + "  </p>";
+                                    innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
+                                    let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                    innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+
+                                }
+                                else {
+                                    innerHtmlServices += "<a href='ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate'>";
+                                    innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span></a></div></div>";
+                                }
+                            }
+                            thisHomePage.innerHtmlServices = innerHtmlServices;
+                            thisHomePage.resultContent = true;
+                        });
+                    }
+                    else { }
+                    thisHomePage.isSearchingStart = false;
+
+                },
+                err => { thisHomePage.isSearchingStart = false; }
+            );
+    }
+
+
+    bindSalesCategoryCityWise(state, city) {
+        var innerHtmlSales = "";
+        let thisHomePage = this;
+
+        thisHomePage.homeLandingService
+            .attemptGetSalesCategoryCityWise(state, city)
+            .subscribe(
+                data => {
+                    if (data.d.length > 1) {
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("subCategories");
+
+
+                        $.each(docs, function (i, docs) {
+                            var flag = 0;
+                            innerHtmlSales += " <div class='col-sm-3 text-center block '>";
+                            innerHtmlSales += " <div class='fullrow innerblock card pd-40'>";
+                            innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+
+                            var subCategoryId = $(docs).find("id").text();
+                            thisHomePage.homeLandingService
+                                .attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId)
+                                .then(
+                                    (data: any) => {
+                                        if (data.d.length > 0) {
+                                            var xmlDoc1 = $.parseXML(data.d);
+                                            var xml1 = $(xmlDoc1);
+                                            var docs1 = xml1.find("GetCategoriesinfoCity");
+                                            $.each(docs1, function (i, docs1) {
+                                                if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
+                                                    let urlToSalesAdvertisement: string = 'SalesAdvertisementList.html?ca=0&id="' + ($(docs).find("id").text()) + '"&zipcode="' + $(docs1).find("Zipcode").text() + '"&name="' + ($(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
+                                                    innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
+                                                    innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a></div></div>";
+                                                    flag = 1;
+                                                }
+                                                else { }
+                                            });
+                                        }
+                                        else { }
+                                    },
+                                    err => {
+                                        thisHomePage.isSearchingStart = false;
+                                    }
+                                );
+
+                            if (flag == 1) { }
+                            else {
+                                innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
+                                innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'/></i></span>";
+                                innerHtmlSales += "</a></div></div>";
+                            }
+                        });
+                        thisHomePage.innerHtmlSales = innerHtmlSales;
+                        thisHomePage.resultContent = true;
+                    }
+                    else { }
+                    thisHomePage.isSearchingStart = false;
+
+                },
+                err => {
+                    thisHomePage.isSearchingStart = false;
+                }
+            );
+    }
+
+    bindServiesCategoryCityWise(state, city) {
+        var innerHtmlSales = "";
+        let thisHomePage = this;
+
+        thisHomePage.homeLandingService
+            .attemptGetServicesCategoryCityWise(state, city)
+            .subscribe(
+                data => {
+                    if (data.d.length > 1) {
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("JobCategories");
+
+                        $.each(docs, function (i, docs) {
+                            var flag = 0;
+                            innerHtmlSales += " <div class=' col-sm-3 text-center block '>";
+                            innerHtmlSales += " <div class='fullrow innerblock card pd-40'>";
+                            innerHtmlSales += " <h3>" + ($(docs).find("categoryName").text()) + " </h3>";
+                            var subCategoryId = $(docs).find("ID").text();
+
+
+                            thisHomePage.homeLandingService
+                                .attemptGetAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
+                                .then(
+                                    (data: any) => {
+                                        if (data.d.length > 0) {
+                                            var xmlDoc1 = $.parseXML(data.d);
+                                            var xml1 = $(xmlDoc1);
+                                            var docs1 = xml1.find("GetsubCategoriesinfoservices");
+
+                                            $.each(docs1, function (i, docs1) {
+                                                if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+                                                    let urlToSalesAdvertisement: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                                    innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
+                                                    innerHtmlSales += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span></a></div></div>";
+                                                    flag = 1;
+                                                }
+                                                else { }
+                                            });
+                                        }
+                                        else { }
+                                    },
+                                    err => {
+                                        thisHomePage.isSearchingStart = false;
+                                    }
+                                );
+
+                            if (flag == 1) { }
+                            else {
+                                innerHtmlSales += "<a href='ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=0&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate'>";
+                                innerHtmlSales += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'/></i></span>";
+                                innerHtmlSales += "</a></div></div>";
+                            }
+                        });
+                        thisHomePage.innerHtmlSales = innerHtmlSales;
+                        thisHomePage.resultContent = true;
+                    }
+                    else { }
+                    thisHomePage.isSearchingStart = false;
+                },
+                err => { thisHomePage.isSearchingStart = false; }
+            );
+    }
+
+
+    GetSalesAdts() {
+
+        this.homeLandingService
+            .attemptGetSalesAdts()
+            .subscribe(
+                data => {
+                    if (data.d.length > 0) {
+                        let salesn = this.bindSalesCategory(data.d, "ip");
+                        let servicesn = this.bindServiesCategory(data.d, "ip");
+                    }
+                    else {
+                        return null;
+                    }
+                    this.isSearchingStart = false;
+                    this.resultContent = true;
+
+                },
+                err => {
+                    this.isSearchingStart = false;
+
+                    return null;
+                }
+            );
+    }
+
+    //bindSalesCategory1(zipc) {
+    //    var innerHtmlSales = "";
+    //    let thisHomePage = this;
+    //    thisHomePage.homeLandingService
+    //        .attemptGetSalesCategoryByZip(zipc)
+    //        .subscribe(
+    //            data => {
+    //                if (data.d.length > 0) {
+    //                    var xmlDoc = $.parseXML(data.d);
+    //                    var xml = $(xmlDoc);
+    //                    var docs = xml.find("subCategories");
+
+    //                    $.each(docs, function (i, docs) {
+    //                        var flag = 0;
+    //                        innerHtmlSales += " <div class='col-sm-3 text-center block'>";
+    //                        innerHtmlSales += " <div class='fullrow innerblock'>";
+    //                        innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+
+    //                        var subCategoryId = $(docs).find("id").text();
+
+    //                        thisHomePage.homeLandingService
+    //                            .attemptGetAdvanceSearchByZipc(zipc, subCategoryId)
+    //                            .subscribe(
+    //                                data => {
+    //                                    if (data.d.length > 0) {
+
+    //                                        var xmlDoc1 = $.parseXML(data.d);
+    //                                        var xml1 = $(xmlDoc1);
+    //                                        var docs1 = xml1.find("GetCategoriesinfo1");
+
+    //                                        $.each(docs1, function (i, docs1) {
+    //                                            if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+    //                                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + $(docs1).find("Zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+    //                                                innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+    //                                                innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a></div></div>";
+    //                                                flag = 1;
+    //                                            }
+    //                                            else { }
+    //                                        });
+    //                                    }
+    //                                    else { }
+    //                                },
+    //                                err => {
+    //                                    thisHomePage.isSearchingStart = false;
+    //                                }
+    //                            );
+
+    //                        if (flag == 1) { }
+    //                        else {
+    //                            innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
+    //                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'  alt=''/></i></span></a></div></div>";
+    //                        }
+    //                    });
+    //                }
+    //                else { }
+    //            },
+    //            err => { thisHomePage.isSearchingStart = false; }
+    //    );
+    //    return innerHtmlSales;
+    //}
+
+    //bindServiesCategory1(zipc) {
+    //    var innerHtmlSales = "";
+    //    let thisHomePage = this;
+
+    //    thisHomePage.homeLandingService
+    //        .attemptGetJobtypeWiseCategory()
+    //        .subscribe(
+    //            data => {
+    //                if (data.d.length > 1) {
+    //                    var xmlDoc = $.parseXML(data.d);
+    //                    var xml = $(xmlDoc);
+    //                    var docs = xml.find("JobCategories");
+
+    //                    $.each(docs, function (i, docs) {
+    //                        var flag = 0;
+    //                        innerHtmlSales += " <div class='col-sm-3 text-center block'>";
+    //                        innerHtmlSales += " <div class='fullrow innerblock'>";
+    //                        innerHtmlSales += " <h3>" + ($(docs).find("categoryName").text()) + " </h3>";
+
+    //                        var jobTypeId = $(docs).find("ID").text();
+
+    //                        thisHomePage.homeLandingService
+    //                            .attemptGetViewAdvanceSearchForServices(jobTypeId, zipc)
+    //                            .subscribe(
+    //                                data => {
+    //                                    if (data.d.length > 0) {
+
+    //                                        var xmlDoc1 = $.parseXML(data.d);
+    //                                        var xml1 = $(xmlDoc1);
+    //                                        var docs1 = xml1.find("GetCategoriesinfoservices");
+
+    //                                        $.each(docs1, function (i, docs1) {
+    //                                            if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+    //                                                let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+    //                                                innerHtmlSales += "<a href='" + urlToServiceProfileList + "'>";
+    //                                                innerHtmlSales += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span></a></div></div>";
+    //                                                flag = 1;
+    //                                            }
+    //                                            else { }
+    //                                        });
+    //                                    }
+    //                                    else { }
+    //                                },
+    //                                err => {
+    //                                    thisHomePage.isSearchingStart = false;
+    //                                }
+    //                            );
+
+    //                        if (flag == 1) { }
+    //                        else {
+    //                            innerHtmlSales += "<a href='ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate'>";
+    //                            innerHtmlSales += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span></a></div></div>";
+    //                        }
+    //                    });
+    //                }
+    //                else { }
+    //            },
+    //            err => { thisHomePage.isSearchingStart = false; }
+    //    );
+    //    return innerHtmlSales;
+    //}
     /*----------------------------------------------------*/
 	/*  Parallax
 	/*----------------------------------------------------*/
@@ -307,4 +858,5 @@ export class HomeComponent implements OnInit {
     //    this.dataSaved = false;
     //}
 
-}  
+}
+

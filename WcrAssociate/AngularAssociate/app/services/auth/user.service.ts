@@ -8,6 +8,7 @@ import { User } from '../../entities/user';
 import { environment } from '../../../environments/environment';
 
 import { map, distinctUntilChanged } from 'rxjs/operators';
+import { debug } from 'util';
 
 
 @Injectable()
@@ -17,18 +18,18 @@ export class UserService {
 
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
-    constructor(
-        private apiService: ApiService,
-        private http: HttpClient,
-        private jwtService: JwtService
-    ) { }
+ 
+    constructor(private user: User = null,
+        private apiService: ApiService = null,
+        private http: HttpClient = null,
+        private jwtService: JwtService = null) {  }
 
-    // Verify JWT in localstorage with server & load user's info.
-    // This runs once on application startup.
+    //// Verify JWT in localstorage with server & load user's info.
+    //// This runs once on application startup.
     populate() {
         // If JWT detected, attempt to get & store user's info
         if (this.jwtService.getToken()) {
-            this.apiService.get('/user')
+            this.apiService.get('/')
                 .subscribe(
                     data => this.setAuth(data.user),
                     err => this.purgeAuth()
@@ -57,14 +58,26 @@ export class UserService {
         this.isAuthenticatedSubject.next(false);
     }
 
+    rand() {
+        return Math.random().toString(36).substr(2); // remove `0.`
+    }
+
+    token() {
+        return this.rand() + this.rand(); // to make it longer
+    }
+
     attemptAuth(type, credentials): Observable<any> {
 
+        debugger;
         let urlToSignUp: String = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.password + ""
         return this.apiService.post(environment.apiEndPoint + urlToSignUp, {})
             .pipe(map(
                 data => {
                     if (data > '0') {
-                        this.setAuth(data.user);
+                        this.user.email = credentials.email;
+                        this.user.password = credentials.password;
+                        this.user.token = this.token();
+                        this.setAuth(this.user);
                     }
                     return data;
                 }
@@ -72,12 +85,28 @@ export class UserService {
     }
 
     attemptConsumerAuth(type, credentials): Observable<any> {
+        debugger;
         //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
         let urlToSignIn: String = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.password + "";
         return this.apiService.post(environment.apiEndPoint + urlToSignIn, {})
             .pipe(map(
                 data => {
-                    this.setAuth(data.user);
+                    debugger;
+                    this.user.email = credentials.email;
+                    this.user.password = credentials.password;
+                    this.user.token = this.token();
+                    this.setAuth(this.user);
+                    return data;
+                }
+            ));
+    }
+
+    attemptLogout() {
+        let urlToLogout: String = "ws/AssociateSignUp.ashx?action=ConsumerLogout";
+        return this.apiService.post(environment.apiEndPoint + urlToLogout, {})
+            .pipe(map(
+                data => {
+                    this.purgeAuth();
                     return data;
                 }
             ));
@@ -159,6 +188,7 @@ export class UserService {
     //
 
     validateEmail(email) {
+
         return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email).pipe(map(
             data => {
                 return data;

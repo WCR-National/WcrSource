@@ -6,6 +6,9 @@ import { UserService } from '../../services/auth';
 import * as $ from 'jquery';
 
 import { Errors } from '../../entities/errors.model';
+import { window } from 'rxjs/operators';
+import { debug } from 'util';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -24,6 +27,7 @@ export class AuthComponent implements OnInit {
     private resentCode: boolean = false;
     private resetPassword: boolean = false;
     authForm: FormGroup;
+
     validationMessages = {
         'email': {
             'required': 'Email is required',
@@ -71,6 +75,7 @@ export class AuthComponent implements OnInit {
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder) { }
 
     ngOnInit() {
+
         this.setValidationOnform();
         this.setSignInOrSignUpOrActivateOrReset();
         this.changeValuesOfFormsEvents();
@@ -125,7 +130,7 @@ export class AuthComponent implements OnInit {
     setValidationOnform() {
         // use FormBuilder to create a form group
         this.authForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email, isEmailExist]],
+            email: ['', [Validators.required, Validators.email, isEmailExist(this.userService)]],
             passwordGroup: this.fb.group({
                 password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
                 regexValidator(new RegExp('^[0-9]+$'), { 'number': '' }),
@@ -180,7 +185,7 @@ export class AuthComponent implements OnInit {
 
             }
             else if (this.authType === 'register') {
-                this.authForm.get('email').setValidators([Validators.required, Validators.email, isEmailExist]);
+                this.authForm.get('email').setValidators([Validators.required, Validators.email, isEmailExist(this.userService)]);
                 this.authForm.get('email').updateValueAndValidity();
 
 
@@ -285,7 +290,8 @@ export class AuthComponent implements OnInit {
             .subscribe(
                 data => {
                     if (data > '0') {
-                        this.router.navigateByUrl('/Associate');
+                        //this.router.navigateByUrl('/Associate');
+                        $(location).attr('href', 'https://wcrnational.com/Associate/ViewProfile.aspx')
                     }
                     else if (data == '-1') {
                         this.userService
@@ -294,7 +300,9 @@ export class AuthComponent implements OnInit {
                                 data => {
                                     if (data > '0') {
                                         this.isSubmitting = false;
-                                        this.router.navigateByUrl('/Consumer');
+                                        //this.router.navigateByUrl('/Consumer');
+                                        $(location).attr('href', 'http://wcrSevice/index.html')
+
                                     }
                                     else {
                                         this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
@@ -411,7 +419,7 @@ export class AuthComponent implements OnInit {
             .attemptResetPassword(this.globalEmail)
             .subscribe(
                 data => {
-                    if (data >= 1) {}
+                    if (data >= 1) { }
                     else { //Email exist in db password can be changed
                         this.userService
                             .attemptResetAssociatePassword(this.globalEmail) // Reset for associate
@@ -506,15 +514,35 @@ export class AuthComponent implements OnInit {
 
 }
 
-function isEmailExist(control: AbstractControl): { [key: string]: any } | null {
+function emailDomain(domainName: string) {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+        const email: string = control.value;
+        const domain = email.substring(email.lastIndexOf('@') + 1);
+        if (email === '' || domain.toLowerCase() === domainName.toLowerCase()) {
+            return null;
+        } else {
+            return { 'emailDomain': true };
+        }
+    };
+}
 
-    clearTimeout(this.debouncer);
+function isEmailExist(userService: UserService) {
 
-    return new Promise(resolve => {
-        this.debouncer = setTimeout(() => {
-            this.userService.validateEmail(control.value).subscribe(
+    return (control: AbstractControl): { [key: string]: any } | null => {
+        //clearTimeout(this.debouncer);
+        setTimeout(() => {
+            userService.validateEmail(control.value).subscribe(
                 (data) => {
                     if (data >= 1) {
+                        debugger;
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+
+                        control.parent.get('associate').enable();
+                        control.parent.get('consumer').enable();
+
+                        control.parent.get('terms').enable();
                         return null;
                     }
                     else {
@@ -527,32 +555,27 @@ function isEmailExist(control: AbstractControl): { [key: string]: any } | null {
 
         }, 1000);
 
-    });
+        return null;
+    }
 
-    //const email: string = control.value;
-    //const emailFromDB = this.userService.validateEmail(email); //getUserEmailFromDB();
-    //if (emailFromDB === '' || emailFromDB === email) {
-    //    return null;
-    //} else {
-    //    this.authForm.get('passwordGroup').enable();
-    //    this.authForm.get('passwordGroup').get('password').enable();
-    //    this.authForm.get('passwordGroup').get('confirmPassword').enable();
-    //    return { 'emalInUse': true };
-    //}
 }
 
 function matchPasswords(group: AbstractControl): { [key: string]: any } | null {
     const passwordControl = group.get('password');
     const confirmPasswordControl = group.get('confirmPassword');
-
-    if (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine) {
-        this.authForm.get('associate').disable();
-        this.authForm.get('consumer').disable();
+    if (group.parent !== undefined) {
+        if (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine) {
+            group.parent.get('associate').disable();
+            group.parent.get('consumer').disable();
+            return null;
+        } else {
+            group.parent.get('associate').enable();
+            group.parent.get('consumer').enable();
+            return { 'passwordMismatch': true };
+        }
+    }
+    else {
         return null;
-    } else {
-        this.authForm.get('associate').enable();
-        this.authForm.get('consumer').enable();
-        return { 'passwordMismatch': true };
     }
 }
 
@@ -565,6 +588,18 @@ function regexValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
         return valid ? null : error;
     };
 }
+
+
+    //const email: string = control.value;
+    //const emailFromDB = this.userService.validateEmail(email); //getUserEmailFromDB();
+    //if (emailFromDB === '' || emailFromDB === email) {
+    //    return null;
+    //} else {
+    //    this.authForm.get('passwordGroup').enable();
+    //    this.authForm.get('passwordGroup').get('password').enable();
+    //    this.authForm.get('passwordGroup').get('confirmPassword').enable();
+    //    return { 'emalInUse': true };
+    //}
 
 //$("#passwrd").focusin(function () {
 //    $("#message").css("display", "block");

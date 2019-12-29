@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from '.././app/components/home/home.component';
 import { AuthComponent } from '.././app/components/auth/auth.component';
-import { NoAuthGuard, HomeAuthResolver } from './services/auth';
+import { NoAuthGuard } from './services/auth';
 var routes = [
     //{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
     //{ path: 'login', component: LoginComponent },
@@ -12,10 +12,11 @@ var routes = [
     //{ path: '**', redirectTo: '' }
     {
         path: '',
-        component: HomeComponent,
-        resolve: {
-            isAuthenticated: HomeAuthResolver
-        }
+        component: HomeComponent
+        //,
+        //resolve: {
+        //    isAuthenticated: HomeAuthResolver
+        //}
     },
     {
         path: 'login',

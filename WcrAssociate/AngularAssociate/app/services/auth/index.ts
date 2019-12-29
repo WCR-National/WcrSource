@@ -6,3 +6,4 @@ export * from './jwt.service';
 export * from './profiles.service';
 export * from './user.service';
 export * from './home-auth-resolver.service';
+export * from './home_landing.service';

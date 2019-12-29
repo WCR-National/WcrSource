@@ -85,7 +85,7 @@
 
 /* Common Styles */
 #top-bar {
-    background-color: #455a64;
+    background-color: #0e3a6b;
     color: #fff;
     padding: 0;
     position: relative;
@@ -255,12 +255,11 @@ img.footer-logo {
     }
 
 .sign-in {
-    /*position: relative;
+    position: relative;
     top: 10px;
-    margin-right: 200px;
-    vertical-align: top;
-    margin-top: 12px;
-    padding-left: 29px;*/
+    color: #333;
+    margin-right: 40px;
+    vertical-align: top    
 }
 
 .header-widget .sign-in i {
@@ -2334,7 +2333,7 @@ em.mm-counter {
     .search-container .main-search-input input {
         font-weight: 500;
         font-size: 17px;
-        height: 57px !important;
+        height: 69px !important;
         float: left;
         box-sizing: border-box;
         border: none;
@@ -2355,7 +2354,7 @@ em.mm-counter {
         position: relative;
         margin-left: 20px;
         flex: 0 auto;
-        height: 57px;
+        height: 69px;
     }
 
         .search-container .main-search-input button.button i {
@@ -42376,4 +42375,29 @@ body .pac-container {
     .mg-xl-t--1 {
         margin-top: -1px;
     }
+}
+.search-background {
+    display: block;
+    margin: 0 auto;
+    clear: both;
+    width: 100%;
+    max-width: 760px;
+    padding: 13px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 5px;
+    z-index: 3;
+    margin: 0 auto !important;
+    text-align: center;
+    float: none;
+}
+.theme-text-color {
+    color: #0e3a6b;
+}
+.them-back-color {
+    background-color: #0e3a6b;
+}
+.div-center {
+    float: none;
+    margin: 0 auto;
+    height: 300px;
 }

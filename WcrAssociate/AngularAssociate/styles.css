@@ -2012,11 +2012,11 @@
 }
 
 .blue-grey.darken-2 {
-    background-color: #455a64 !important;
+    background-color: #0e3a6b !important;
 }
 
 .blue-grey-text.text-darken-2 {
-    color: #455a64 !important;
+    color: #0e3a6b !important;
 }
 
 .blue-grey.darken-3 {
@@ -2719,6 +2719,9 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus {
     text-transform: uppercase;
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
+    padding: 2px 26px;
+    margin-top: 3px;
+    color: #fff;
 }
 
     .btn.disabled, .disabled.btn-large, .disabled.btn-small,
@@ -2791,13 +2794,13 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus {
 
     .btn:focus, .btn-large:focus, .btn-small:focus,
     .btn-floating:focus {
-        background-color: #2c4a47;
+        background-color: #0a2d54;
     }
 
 .btn, .btn-large, .btn-small {
     text-decoration: none;
     color: #fff;
-    background-color: #455a64;
+    background-color: #0e3a6b;
     text-align: center;
     letter-spacing: .5px;
     -webkit-transition: background-color .2s ease-out;
@@ -2806,8 +2809,8 @@ body.keyboard-focused .select-dropdown.dropdown-content li:focus {
 }
 
     .btn:hover, .btn-large:hover, .btn-small:hover {
-        background-color: #637882;
-        ;
+        background-color: #386ba4;
+        color: #fff;
     }
 
 .btn-floating {
@@ -3470,4 +3473,140 @@ button.btn-floating {
 
 select:focus {
     outline: 1px solid #c9f3ef;
+}
+/**
+ * 1. Add the correct display in IE 9-.
+ * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+    display: inline-block;
+    /* 1 */
+    vertical-align: baseline;
+    /* 2 */
+}
+
+/**
+ * Remove the default vertical scrollbar in IE.
+ */
+textarea {
+    overflow: auto;
+}
+
+.progress {
+    position: relative;
+    height: 4px;
+    display: block;
+    width: 100%;
+    background-color: #889eb78c;
+    border-radius: 2px;
+    margin: 0.5rem 0 1rem 0;
+    overflow: hidden;
+}
+
+    .progress .determinate {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #26a69a;
+        -webkit-transition: width .3s linear;
+        transition: width .3s linear;
+    }
+
+    .progress .indeterminate {
+        background-color: #0e3a6b;
+    }
+
+        .progress .indeterminate:before {
+            content: '';
+            position: absolute;
+            background-color: inherit;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            will-change: left, right;
+            -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+            animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+        }
+
+        .progress .indeterminate:after {
+            content: '';
+            position: absolute;
+            background-color: inherit;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            will-change: left, right;
+            -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+            animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+            -webkit-animation-delay: 1.15s;
+            animation-delay: 1.15s;
+        }
+
+@-webkit-keyframes indeterminate {
+    0% {
+        left: -35%;
+        right: 100%;
+    }
+
+    60% {
+        left: 100%;
+        right: -90%;
+    }
+
+    100% {
+        left: 100%;
+        right: -90%;
+    }
+}
+
+@keyframes indeterminate {
+    0% {
+        left: -35%;
+        right: 100%;
+    }
+
+    60% {
+        left: 100%;
+        right: -90%;
+    }
+
+    100% {
+        left: 100%;
+        right: -90%;
+    }
+}
+
+@-webkit-keyframes indeterminate-short {
+    0% {
+        left: -200%;
+        right: 100%;
+    }
+
+    60% {
+        left: 107%;
+        right: -8%;
+    }
+
+    100% {
+        left: 107%;
+        right: -8%;
+    }
+}
+
+@keyframes indeterminate-short {
+    0% {
+        left: -200%;
+        right: 100%;
+    }
+
+    60% {
+        left: 107%;
+        right: -8%;
+    }
+
+    100% {
+        left: 107%;
+        right: -8%;
+    }
 }

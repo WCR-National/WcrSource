@@ -23,10 +23,11 @@ const routes: Routes = [
     //{ path: '**', redirectTo: '' }
     {
         path: '',
-        component: HomeComponent,
-        resolve: {
-            isAuthenticated: HomeAuthResolver
-        }
+        component: HomeComponent
+        //,
+        //resolve: {
+        //    isAuthenticated: HomeAuthResolver
+        //}
     },
     {
         path: 'login',

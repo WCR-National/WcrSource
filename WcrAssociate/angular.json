@@ -109,7 +109,8 @@
               "AngularAssociate/assets/color.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "AngularAssociate/assets/js/materialize.min.js"
             ],
             "assets": [
               "AngularAssociate/favicon.ico",

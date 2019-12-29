@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { UserService } from '../services/auth';
+import { UserService } from '../../app/services/auth';
 var ShowAuthedDirective = /** @class */ (function () {
     function ShowAuthedDirective(templateRef, userService, viewContainer) {
         this.templateRef = templateRef;

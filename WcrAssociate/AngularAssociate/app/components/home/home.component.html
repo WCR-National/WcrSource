@@ -1,45 +1,82 @@
-
-
-<div  class="parallax" data-background="../../../assets/images/home-parallax-2.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
-
+<div class="parallax" data-background="AngularAssociate/assets/images/home-parallax-2.jpg" data-color="#0e3a6b" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+    <!--  ../../../assets/images/home-parallax-2.jpg -->
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" style="text-align:center;">
 
                 <div class="search-container">
 
                     <!-- Form -->
-                    <h2>Find New Home</h2>
+                    <h2> Grow Your Business</h2>
+                    <div class="adv-search-btn">
+                        Wcr Organisation is the best solution to make you succeed online. <br>
+                        Starting with online advertising or managing monthly.
+                    </div>
 
                     <!-- Row With Forms -->
-                    <div class="row with-forms">
-
-
+                    <div class="row with-forms search-background">
                         <!-- Main Search Input -->
-                        <div class="col-md-6">
+                        <div class="col-md-12" [formGroup]="searchForm" style="margin: 0 auto; text-align:center; align-item:center; float:none;">
+
                             <div class="main-search-input">
-                                <input type="text" placeholder="Enter address e.g. street, city or state" value="" />
-                                <button class="button"><i class="fa fa-search"></i></button>
+                                <input type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter)="onEnterSearch()" />
+                                <button class="button waves-effect waves-light btn" (click)="onClickSearch()"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
-
                     </div>
                     <!-- Row With Forms / End -->
                     <!-- Browse Jobs -->
-                    <div class="adv-search-btn">
-                        Need more search options? <a href="listings-list-full-width.html">Advanced Search</a>
-                    </div>
-
                     <!-- Announce -->
                     <div class="announce">
-                        We’ve 1000 properties for you!
+                        We’ve 1000s of ads!
                     </div>
 
                 </div>
 
             </div>
         </div>
+
     </div>
 
 </div>
 
+
+<!-- Fullwidth Section -->
+<section class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" style='background-color:#fff' #divSalesServices>
+
+    <!-- Content -->
+    <div class="container" #salesServicesFocus>
+
+        <!---->
+        <div class="row" [style.display]="isSearchingStart ? 'block':'none' ">
+            <div class="col-md-12">
+                <div class="col-xs-3 col-md-4 div-center">
+                    <div class="progress" style="top:50%;">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="row" [style.display]="ifError"></div>-->
+        <div class="row mg-t-40" [style.display]="resultContent ? 'block':'none' ">
+            <div class="col-md-12">
+
+                <div class="row text-xs-center text-center mg-b-30">
+                    <div class="col-md-12">
+                        <h2 class="theme-text-color text-center">GET ACCESS TO WCR SALES AND SERVICES</h2>
+                        <p class="grey-text">
+                            This is just a simple text made for this unique and awesome template, you can replace it with any text.
+                        </p>
+                    </div>
+                </div>
+                <div class="row" [innerHTML]="innerHtmlSales"> </div>
+                <div class="row" [innerHTML]="innerHtmlServices"></div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!-- Fullwidth Section / End -->

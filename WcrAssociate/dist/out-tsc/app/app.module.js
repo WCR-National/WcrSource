@@ -14,8 +14,10 @@ import { HomeComponent } from './components/home/home.component';
 import { PasswordValidator, ParentErrorStateMatcher } from '../app/_helpers/validators';
 import { AuthComponent } from './components/auth/auth.component';
 import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
+import { User } from '../app/entities/user';
+import { ShowAuthedDirective } from './shared/show-authed.directive';
 import { FooterComponent, HeaderComponent, SharedModule } from '../app/shared';
-import { ApiService, AuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, NoAuthGuard } from './services/auth';
+import { ApiService, AuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, NoAuthGuard, HomeLandingService } from './services/auth';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -29,7 +31,8 @@ var AppModule = /** @class */ (function () {
                 //RegisterComponent,
                 FooterComponent,
                 HeaderComponent,
-                AuthComponent
+                AuthComponent,
+                ShowAuthedDirective
             ],
             imports: [
                 BrowserModule,
@@ -61,10 +64,12 @@ var AppModule = /** @class */ (function () {
                 JwtService,
                 ProfilesService,
                 UserService,
+                HomeLandingService,
                 HomeAuthResolver,
                 NoAuthGuard,
                 PasswordValidator,
-                ParentErrorStateMatcher
+                ParentErrorStateMatcher,
+                User
             ],
             bootstrap: [AppComponent]
         })
