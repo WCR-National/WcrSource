@@ -25,6 +25,9 @@ export class AuthComponent implements OnInit {
     private globalEmail: string;
     private globalPassword: string;
     private resentCode: boolean = false;
+    private activationSent: boolean = false;
+
+    
     private resetPassword: boolean = false;
     authForm: FormGroup;
 
@@ -373,6 +376,7 @@ export class AuthComponent implements OnInit {
                                     else {
                                         this.formErrors.activationCode = this.validationMessages['activationCode']['notValidCode'];
                                         this.isSubmitting = false;
+                                        this.activationSent = true;
                                     }
                                 },
                                 err => {

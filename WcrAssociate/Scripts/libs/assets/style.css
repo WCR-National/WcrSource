@@ -259,7 +259,9 @@ img.footer-logo {
     top: 10px;
     color: #333;
     margin-right: 40px;
-    vertical-align: top    
+    vertical-align: top;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .header-widget .sign-in i {
@@ -652,7 +654,6 @@ ul.footer-links {
 .copyrights {
     color: #707070;
     border-top: 1px solid rgba(0,0,0,0.09);
-    margin-top: 60px;
     text-align: center;
     padding: 40px 0;
     display: inline-block;
@@ -42400,4 +42401,13 @@ body .pac-container {
     float: none;
     margin: 0 auto;
     height: 300px;
+}
+.elipsis-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 20px;
+    text-align:left;
 }

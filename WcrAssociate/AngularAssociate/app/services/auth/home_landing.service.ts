@@ -141,25 +141,21 @@ export class HomeLandingService {
     }
 
     //For IPAddress
-    attemptGetSalesAdts(): Observable<any> {
+    attemptGetSalesAdts() {
 
-
-        let urlToGetIP: string = "http://jsonip.com";
-        //  {'State':'" + State + "','City':'" + City + "','Category':" + ($(docs).find("ID").text()) + "}
-
+        let urlToGetIP: string = "http://jsonip.com?=callback";
         return this.http.get<any>(urlToGetIP)
             .pipe(map(
                 data => {
-                    debugger;
                     let _ipAddress = data.ip;
-                    let urlToGetZipCodeByIpAddress = "ws/TopSearch.asmx/GetZipCodeIpAddress";
-                    return this.apiService.post( urlToGetZipCodeByIpAddress, { _IpAddress: _ipAddress })
-                        .pipe(map(
-                            data => {
-                                return data;
-                            }
-                        ));
+                    this.attemptGetZipCodeByIPAddress(_ipAddress);
+                  
                 }
             ));
+    }
+
+    async attemptGetZipCodeByIPAddress(_ipAddress) {
+        let urlToGetZipCodeByIpAddress = "ws/TopSearch.asmx/GetZipCodeIpAddress";
+        return await this.apiService.post(urlToGetZipCodeByIpAddress, { _IpAddress: _ipAddress }).toPromise();
     }
 }

@@ -238,8 +238,9 @@ img.footer-logo {
 #header {
     position: relative;
     z-index: 999;
-    padding: 25px 0 14px 0;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+    padding: 13px 0 4px 0;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    background: #fff;
 }
 
 /* Header Widget */
@@ -259,7 +260,9 @@ img.footer-logo {
     top: 10px;
     color: #333;
     margin-right: 40px;
-    vertical-align: top    
+    vertical-align: top;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 .header-widget .sign-in i {
@@ -652,7 +655,6 @@ ul.footer-links {
 .copyrights {
     color: #707070;
     border-top: 1px solid rgba(0,0,0,0.09);
-    margin-top: 60px;
     text-align: center;
     padding: 40px 0;
     display: inline-block;
@@ -14315,7 +14317,7 @@ body {
 }
 
 #wrapper {
-    background-color: #fff;
+    background-color: #fbfbfb;
 }
 
 /* Main Font */
@@ -42399,5 +42401,13 @@ body .pac-container {
 .div-center {
     float: none;
     margin: 0 auto;
-    height: 300px;
+}
+.elipsis-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 20px;
+    text-align:left;
 }
