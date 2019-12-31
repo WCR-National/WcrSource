@@ -27,7 +27,7 @@ export class AuthComponent implements OnInit {
     private resentCode: boolean = false;
     private activationSent: boolean = false;
 
-    
+
     private resetPassword: boolean = false;
     authForm: FormGroup;
 
@@ -35,12 +35,11 @@ export class AuthComponent implements OnInit {
         'email': {
             'required': 'Email is required',
             'email': 'Email is not in correct format.',
-            'emalInUse': 'This Email address is not available. Please Try another email address.'
+            'emailInUse': 'This Email address is not available. Please Try another email address.'
         },
-        'passowrd': {
+        'password': {
             'required': 'Password is required',
             'minlength': 'Minimum of 8 char & a max of 20 char in length',
-            //'pattern': 'Must contain at least one uppercase, one lowercase, one number and 1 special character in ! @ # $ % ^ * _ ',
             'number': 'At least one number.',
             'lowerLetter': 'At least one lowercase.',
             'upperLetter': 'At least one uppercase.',
@@ -65,7 +64,7 @@ export class AuthComponent implements OnInit {
     }
     formErrors = {
         'email': '',
-        'passowrd': '',
+        'password': '',
         'confirmPassword': '',
         'passwordGroup': '',
         'associate': '',
@@ -117,9 +116,12 @@ export class AuthComponent implements OnInit {
             if (abstractControl && !abstractControl.valid
                 && (abstractControl.touched || abstractControl.dirty)) {
                 const messages = this.validationMessages[key];
-                for (const errorKey in abstractControl.errors) {
-                    if (errorKey) {
-                        this.formErrors[key] += messages[errorKey] + ' ';
+                if (abstractControl.errors != null) {
+                    debugger;
+                    for (const errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            this.formErrors[key] += messages[errorKey] + ' ';
+                        }
                     }
                 }
             }
@@ -136,10 +138,10 @@ export class AuthComponent implements OnInit {
             email: ['', [Validators.required, Validators.email, isEmailExist(this.userService)]],
             passwordGroup: this.fb.group({
                 password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
-                regexValidator(new RegExp('^[0-9]+$'), { 'number': '' }),
-                regexValidator(new RegExp('/[a-z]/g'), { 'lowerLetter': '' }),
-                regexValidator(new RegExp('/[A-Z]/g'), { 'upperLetter': '' }),
-                regexValidator(new RegExp('/[^\w\s]/gi'), { 'special Character': '' })
+                regexValidatorNumbers(new RegExp('^[0-9]+$'), this),
+                regexValidatorLower(new RegExp('/[a-z]/g'), this),
+                regexValidatorCapital(new RegExp('/[A-Z]/g'), this),
+                regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
                 ]],
                 confirmPassword: ['', [Validators.required,]],
             }, { validator: matchPasswords }),
@@ -168,7 +170,12 @@ export class AuthComponent implements OnInit {
                 this.authForm.get('passwordGroup').clearValidators();
                 this.authForm.get('passwordGroup').updateValueAndValidity();
 
-                this.authForm.get('passwordGroup').get('password').setValidators([Validators.required]);
+                this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
+                regexValidatorNumbers(new RegExp('^[0-9]+$'), this),
+                regexValidatorLower(new RegExp('/[a-z]/g'), this),
+                regexValidatorCapital(new RegExp('/[A-Z]/g'), this),
+                regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
+                ]);
                 this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
 
                 this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
@@ -192,7 +199,12 @@ export class AuthComponent implements OnInit {
                 this.authForm.get('email').updateValueAndValidity();
 
 
-                this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20)]);
+                this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
+                regexValidatorNumbers(new RegExp('^[0-9]+$'), this),
+                regexValidatorLower(new RegExp('/[a-z]/g'), this),
+                regexValidatorCapital(new RegExp('/[A-Z]/g'), this),
+                regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
+                ]);
                 this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
 
 
@@ -531,33 +543,33 @@ function emailDomain(domainName: string) {
 }
 
 function isEmailExist(userService: UserService) {
-
+    debugger;
     return (control: AbstractControl): { [key: string]: any } | null => {
         //clearTimeout(this.debouncer);
-        setTimeout(() => {
-            userService.validateEmail(control.value).subscribe(
-                (data) => {
-                    if (data >= 1) {
-                        debugger;
-                        control.parent.get('passwordGroup').enable();
-                        control.parent.get('passwordGroup').get('password').enable();
-                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+        return { 'emailInUse': true };
+        userService.validateEmail(control.value).subscribe(
+            (data) => {
+                debugger;
+                
+                if (data >= 1) {
 
-                        control.parent.get('associate').enable();
-                        control.parent.get('consumer').enable();
+                    control.parent.get('passwordGroup').enable();
+                    control.parent.get('passwordGroup').get('password').enable();
+                    control.parent.get('passwordGroup').get('confirmPassword').enable();
 
-                        control.parent.get('terms').enable();
-                        return null;
-                    }
-                    else {
-                        return { 'emalInUse': true };
-                    }
+                    control.parent.get('associate').enable();
+                    control.parent.get('consumer').enable();
+
+                    control.parent.get('terms').enable();
+                    return null;
                 }
-                , (err) => {
-                    return { 'emalInUse': true };
-                });
-
-        }, 1000);
+                else {
+                    return { 'emailInUse': true };
+                }
+            }
+            , (err) => {
+                return { 'emailInUse': true };
+            });
 
         return null;
     }
@@ -583,16 +595,44 @@ function matchPasswords(group: AbstractControl): { [key: string]: any } | null {
     }
 }
 
-function regexValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
+
+function regexValidatorNumbers(regex: RegExp, authComp: AuthComponent): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
         if (!control.value) {
             return null;
         }
         const valid = regex.test(control.value);
-        return valid ? null : error;
+        return valid ? null : { 'number': 'At least one number.' };
     };
 }
-
+function regexValidatorLower(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+        if (!control.value) {
+            return null;
+        }
+        const valid = regex.test(control.value);
+        return valid ? null : { 'lowerLetter': 'At least one lowercase.' };
+        return valid ? null : {};
+    };
+}
+function regexValidatorCapital(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+        if (!control.value) {
+            return null;
+        }
+        const valid = regex.test(control.value);
+        return valid ? null : { 'upperLetter': 'At least one uppercase.' };
+    };
+}
+function regexValidatorSpecial(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+        if (!control.value) {
+            return null;
+        }
+        const valid = regex.test(control.value);
+        return valid ? null : { 'special Character': 'At least one special character.' };
+    };
+}
 
     //const email: string = control.value;
     //const emailFromDB = this.userService.validateEmail(email); //getUserEmailFromDB();

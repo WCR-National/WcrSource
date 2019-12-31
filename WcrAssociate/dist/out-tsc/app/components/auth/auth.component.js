@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/auth';
+import { CustomValidator } from '../../shared/validators';
 import * as $ from 'jquery';
 var AuthComponent = /** @class */ (function () {
     function AuthComponent(route, router, userService, fb) {
@@ -16,6 +17,7 @@ var AuthComponent = /** @class */ (function () {
         this.isSubmitting = false;
         this.showLoadingGif = false;
         this.resentCode = false;
+        this.activationSent = false;
         this.resetPassword = false;
         this.validationMessages = {
             'email': {
@@ -23,10 +25,9 @@ var AuthComponent = /** @class */ (function () {
                 'email': 'Email is not in correct format.',
                 'emalInUse': 'This Email address is not available. Please Try another email address.'
             },
-            'passowrd': {
+            'password': {
                 'required': 'Password is required',
                 'minlength': 'Minimum of 8 char & a max of 20 char in length',
-                //'pattern': 'Must contain at least one uppercase, one lowercase, one number and 1 special character in ! @ # $ % ^ * _ ',
                 'number': 'At least one number.',
                 'lowerLetter': 'At least one lowercase.',
                 'upperLetter': 'At least one uppercase.',
@@ -51,7 +52,7 @@ var AuthComponent = /** @class */ (function () {
         };
         this.formErrors = {
             'email': '',
-            'passowrd': '',
+            'password': '',
             'confirmPassword': '',
             'passwordGroup': '',
             'associate': '',
@@ -97,9 +98,11 @@ var AuthComponent = /** @class */ (function () {
             if (abstractControl && !abstractControl.valid
                 && (abstractControl.touched || abstractControl.dirty)) {
                 var messages = _this.validationMessages[key];
-                for (var errorKey in abstractControl.errors) {
-                    if (errorKey) {
-                        _this.formErrors[key] += messages[errorKey] + ' ';
+                if (abstractControl.errors != null) {
+                    for (var errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            _this.formErrors[key] += messages[errorKey] + ' ';
+                        }
                     }
                 }
             }
@@ -111,16 +114,16 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.setValidationOnform = function () {
         // use FormBuilder to create a form group
         this.authForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email, isEmailExist(this.userService)]],
+            email: ['', [Validators.required, Validators.email, CustomValidator.isEmailExist(this.userService)]],
             passwordGroup: this.fb.group({
                 password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
-                        regexValidator(new RegExp('^[0-9]+$'), { 'number': '' }),
-                        regexValidator(new RegExp('/[a-z]/g'), { 'lowerLetter': '' }),
-                        regexValidator(new RegExp('/[A-Z]/g'), { 'upperLetter': '' }),
-                        regexValidator(new RegExp('/[^\w\s]/gi'), { 'special Character': '' })
+                        CustomValidator.regexValidator(new RegExp('^[0-9]+$'), { 'number': '' }),
+                        CustomValidator.regexValidator(new RegExp('/[a-z]/g'), { 'lowerLetter': '' }),
+                        CustomValidator.regexValidator(new RegExp('/[A-Z]/g'), { 'upperLetter': '' }),
+                        CustomValidator.regexValidator(new RegExp('/[^\w\s]/gi'), { 'special Character': '' })
                     ]],
                 confirmPassword: ['', [Validators.required,]],
-            }, { validator: matchPasswords }),
+            }, { validator: CustomValidator.matchPasswords }),
             associate: [''],
             consumer: [''],
             terms: ['', Validators.required],
@@ -142,7 +145,12 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').clearValidators();
                 _this.authForm.get('passwordGroup').updateValueAndValidity();
-                _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required]);
+                _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
+                    CustomValidator.regexValidator(new RegExp('^[0-9]+$'), { 'number': '' }),
+                    CustomValidator.regexValidator(new RegExp('/[a-z]/g'), { 'lowerLetter': '' }),
+                    CustomValidator.regexValidator(new RegExp('/[A-Z]/g'), { 'upperLetter': '' }),
+                    CustomValidator.regexValidator(new RegExp('/[^\w\s]/gi'), { 'special Character': '' })
+                ]);
                 _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
                 _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
@@ -156,11 +164,16 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('activationCode').updateValueAndValidity();
             }
             else if (_this.authType === 'register') {
-                _this.authForm.get('email').setValidators([Validators.required, Validators.email, isEmailExist(_this.userService)]);
+                _this.authForm.get('email').setValidators([Validators.required, Validators.email, CustomValidator.isEmailExist(_this.userService)]);
                 _this.authForm.get('email').updateValueAndValidity();
-                _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20)]);
+                _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
+                    CustomValidator.regexValidator(new RegExp('^[0-9]+$'), { 'number': '' }),
+                    CustomValidator.regexValidator(new RegExp('/[a-z]/g'), { 'lowerLetter': '' }),
+                    CustomValidator.regexValidator(new RegExp('/[A-Z]/g'), { 'upperLetter': '' }),
+                    CustomValidator.regexValidator(new RegExp('/[^\w\s]/gi'), { 'special Character': '' })
+                ]);
                 _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
-                _this.authForm.get('passwordGroup').setValidators([matchPasswords]);
+                _this.authForm.get('passwordGroup').setValidators([CustomValidator.matchPasswords]);
                 _this.authForm.get('passwordGroup').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').get('confirmPassword').setValidators([Validators.required]);
                 _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
@@ -299,6 +312,7 @@ var AuthComponent = /** @class */ (function () {
                     else {
                         _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
                         _this.isSubmitting = false;
+                        _this.activationSent = true;
                     }
                 }, function (err) {
                     _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
@@ -430,71 +444,6 @@ var AuthComponent = /** @class */ (function () {
     return AuthComponent;
 }());
 export { AuthComponent };
-function emailDomain(domainName) {
-    return function (control) {
-        var email = control.value;
-        var domain = email.substring(email.lastIndexOf('@') + 1);
-        if (email === '' || domain.toLowerCase() === domainName.toLowerCase()) {
-            return null;
-        }
-        else {
-            return { 'emailDomain': true };
-        }
-    };
-}
-function isEmailExist(userService) {
-    return function (control) {
-        //clearTimeout(this.debouncer);
-        setTimeout(function () {
-            userService.validateEmail(control.value).subscribe(function (data) {
-                if (data >= 1) {
-                    debugger;
-                    control.parent.get('passwordGroup').enable();
-                    control.parent.get('passwordGroup').get('password').enable();
-                    control.parent.get('passwordGroup').get('confirmPassword').enable();
-                    control.parent.get('associate').enable();
-                    control.parent.get('consumer').enable();
-                    control.parent.get('terms').enable();
-                    return null;
-                }
-                else {
-                    return { 'emalInUse': true };
-                }
-            }, function (err) {
-                return { 'emalInUse': true };
-            });
-        }, 1000);
-        return null;
-    };
-}
-function matchPasswords(group) {
-    var passwordControl = group.get('password');
-    var confirmPasswordControl = group.get('confirmPassword');
-    if (group.parent !== undefined) {
-        if (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine) {
-            group.parent.get('associate').disable();
-            group.parent.get('consumer').disable();
-            return null;
-        }
-        else {
-            group.parent.get('associate').enable();
-            group.parent.get('consumer').enable();
-            return { 'passwordMismatch': true };
-        }
-    }
-    else {
-        return null;
-    }
-}
-function regexValidator(regex, error) {
-    return function (control) {
-        if (!control.value) {
-            return null;
-        }
-        var valid = regex.test(control.value);
-        return valid ? null : error;
-    };
-}
 //const email: string = control.value;
 //const emailFromDB = this.userService.validateEmail(email); //getUserEmailFromDB();
 //if (emailFromDB === '' || emailFromDB === email) {

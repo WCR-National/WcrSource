@@ -4,7 +4,7 @@
             <div class="col-md-5 offset-md-3 col-xs-12 card pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center">
                 <div class="row">
                     <h1 class="text-xs-center">{{ title }}</h1>
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:center;">
+                    <div class="col-lg-12 col-md-12 col-sm-12 mg-b-20 col-xs-12" style="text-align:center;">
                         <div class="loader-wrap" id="LoadingImageLogin" [hidden]="!isSubmitting">
                             <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
                         </div>
@@ -20,7 +20,7 @@
 
                             <div class="form-group" [ngClass]="{'has-error': formErrors.activationCode}"
                                  *ngIf="authType == 'activate'">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mg-b-20">
                                     <input id="activationCode" type="text" class="form-control" formControlName="activationCode" (blur)="logValidationErrors()">
                                     <span class="invalid-data" *ngIf="formErrors.activationCode">
                                         {{formErrors.activationCode}}
@@ -50,15 +50,15 @@
                             <div class="form-group" [ngClass]="{'has-error': formErrors.email}"
                                  *ngIf="(authType == 'register' || authType == 'login' || authType == 'activate' || authType == 'resetPassword')"
                                  [style.display]="resetPassword ? 'none': 'display'">
-                                <div class="col-sm-12">
-                                    <input id="email" type="text" class="form-control" formControlName="email" (blur)="logValidationErrors()" placeholder="Email">
+                                <div class="col-sm-12 mg-b-20">
+                                    <input id="email" type="text" class="form-control" formControlName="email" placeholder="Email">
                                     <span *ngIf="formErrors.email">
                                         {{formErrors.email}}
                                     </span>
                                 </div>
                             </div>
 
-                            <div formGroupName="passwordGroup">
+                            <div  formGroupName="passwordGroup">
                                 <div class="col-sm-12" *ngIf="authType == 'login'">
                                     <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-3"> <i class="fa fa-key"></i>Forgot password</a>
                                 </div>
@@ -74,7 +74,7 @@
 
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.confirmPassword || formErrors.passwordGroup}"
                                      *ngIf="(authType == 'register') ">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 mg-b-20">
                                         <input id="confirmPassword" type="text" class="form-control"
                                                formControlName="confirmPassword" (blur)="logValidationErrors()">
                                         <span class="invalid-data"
@@ -86,7 +86,7 @@
                             </div>
 
                             <div class="form-group" [ngClass]="{'has-error': formErrors.associate}" *ngIf="authType == 'register'  ">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mg-b-20">
                                     <label>
                                         <input type="checkbox" class="filled-in" formControlName="associate" (blur)="logValidationErrors()" checked="checked" />
                                         <span>Yes- I want to advertise</span>
@@ -98,7 +98,7 @@
                             </div>
 
                             <div class="form-group" [ngClass]="{'has-error': formErrors.consumer}" *ngIf="authType == 'register'  ">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mg-b-20">
                                     <label>
                                         <input type="checkbox" class="filled-in" formControlName="consumer" (blur)="logValidationErrors()" checked="checked" />
                                         <span>No- I do not</span>
@@ -110,7 +110,7 @@
                             </div>
 
                             <div class="form-group" [ngClass]="{'has-error': formErrors.terms}" *ngIf="(authType == 'register') ">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mg-b-20">
                                     <label>
                                         <input type="checkbox" class="filled-in" formControlName="terms" (blur)="logValidationErrors()" checked="checked" />
                                         <span>I agree with terms and conditions<a></a></span>
@@ -129,7 +129,7 @@
 
                             <!--  -->
                             <div class="form-group">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 mg-b-20">
                                     <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'register')" type="submit" [disabled]="!authForm.valid">
                                         CREATE AN ACCOUNT
                                     </button>

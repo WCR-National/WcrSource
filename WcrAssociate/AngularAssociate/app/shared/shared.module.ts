@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
+import { CustomValidator } from './validators';
+
 //import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
 //import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 //import { ShowAuthedDirective } from './show-authed.directive';
@@ -22,7 +24,11 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-      RouterModule
-  ]
+    RouterModule
+    ],
+    providers: [
+        HttpClientModule,
+        CustomValidator
+    ]
 })
 export class SharedModule {}

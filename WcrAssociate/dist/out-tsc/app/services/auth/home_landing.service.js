@@ -125,18 +125,25 @@ var HomeLandingService = /** @class */ (function () {
     //For IPAddress
     HomeLandingService.prototype.attemptGetSalesAdts = function () {
         var _this = this;
-        var urlToGetIP = "http://jsonip.com";
-        //  {'State':'" + State + "','City':'" + City + "','Category':" + ($(docs).find("ID").text()) + "}
+        var urlToGetIP = "http://jsonip.com?=callback";
         return this.http.get(urlToGetIP)
             .pipe(map(function (data) {
-            debugger;
             var _ipAddress = data.ip;
-            var urlToGetZipCodeByIpAddress = "ws/TopSearch.asmx/GetZipCodeIpAddress";
-            return _this.apiService.post(urlToGetZipCodeByIpAddress, { _IpAddress: _ipAddress })
-                .pipe(map(function (data) {
-                return data;
-            }));
+            _this.attemptGetZipCodeByIPAddress(_ipAddress);
         }));
+    };
+    HomeLandingService.prototype.attemptGetZipCodeByIPAddress = function (_ipAddress) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToGetZipCodeByIpAddress;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToGetZipCodeByIpAddress = "ws/TopSearch.asmx/GetZipCodeIpAddress";
+                        return [4 /*yield*/, this.apiService.post(urlToGetZipCodeByIpAddress, { _IpAddress: _ipAddress }).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
     };
     HomeLandingService = tslib_1.__decorate([
         Injectable(),

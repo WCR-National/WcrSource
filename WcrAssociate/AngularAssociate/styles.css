@@ -3635,3 +3635,6 @@ textarea {
 .valid-data {
     color: #a21318 !important;
 }
+input, input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea, select {
+    margin-bottom:0px !important;
+}
