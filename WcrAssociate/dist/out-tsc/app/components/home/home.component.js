@@ -3,7 +3,6 @@ import { Component, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from
 import { FormBuilder } from '@angular/forms';
 import { HomeLandingService } from '../../services/auth';
 import * as $ from 'jquery';
-import { isPlatformBrowser } from '@angular/common';
 var HomeComponent = /** @class */ (function () {
     function HomeComponent(fb, renderer, homeLandingService, platformId) {
         this.fb = fb;
@@ -41,10 +40,12 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.searching = function () {
         this.resultContent = false;
         this.isSearchingStart = true;
-        if (isPlatformBrowser(this.platformId)) {
-            this.divSalesServices.nativeElement.focus();
-            //this.myInput.nativeElement.focus();
-        }
+        //if (isPlatformBrowser(this.platformId)) {
+        //    this.divSalesServices.nativeElement.focus();
+        //    //this.myInput.nativeElement.focus();
+        //}
+        $; //('#salesServicesDivId').focusin();
+        $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
         //focus the div which will show the result
         //show the loading icon
         debugger;

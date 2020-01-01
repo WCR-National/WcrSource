@@ -280,7 +280,7 @@ html {
 }
 body {
   font-size: 15px;
-  line-height: 27px;
+  /*line-height: 27px;*/
   background-color: #ffffff;
 }
 input,

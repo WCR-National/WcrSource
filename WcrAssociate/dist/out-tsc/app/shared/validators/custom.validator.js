@@ -21,30 +21,6 @@ var CustomValidator = /** @class */ (function () {
     //        }
     //    };
     //}
-    CustomValidator.isEmailExist = function (userService) {
-        debugger;
-        return function (control) {
-            //clearTimeout(this.debouncer);
-            userService.validateEmail(control.value).subscribe(function (data) {
-                debugger;
-                if (data >= 1) {
-                    control.parent.get('passwordGroup').enable();
-                    control.parent.get('passwordGroup').get('password').enable();
-                    control.parent.get('passwordGroup').get('confirmPassword').enable();
-                    control.parent.get('associate').enable();
-                    control.parent.get('consumer').enable();
-                    control.parent.get('terms').enable();
-                    return null;
-                }
-                else {
-                    return { 'emalInUse': true };
-                }
-            }, function (err) {
-                return { 'emalInUse': true };
-            });
-            return null;
-        };
-    };
     CustomValidator.matchPasswords = function (group) {
         var passwordControl = group.get('password');
         var confirmPasswordControl = group.get('confirmPassword');

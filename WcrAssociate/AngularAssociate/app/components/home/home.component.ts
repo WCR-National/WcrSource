@@ -57,14 +57,18 @@ export class HomeComponent implements OnInit {
     }
 
     searching() {
+
         this.resultContent = false;
         this.isSearchingStart = true;
 
-        if (isPlatformBrowser(this.platformId)) {
-            this.divSalesServices.nativeElement.focus();
-            //this.myInput.nativeElement.focus();
-        }
-        
+        //if (isPlatformBrowser(this.platformId)) {
+        //    this.divSalesServices.nativeElement.focus();
+
+        //    //this.myInput.nativeElement.focus();
+        //}
+        $//('#salesServicesDivId').focusin();
+        $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
+
 
         //focus the div which will show the result
         //show the loading icon
