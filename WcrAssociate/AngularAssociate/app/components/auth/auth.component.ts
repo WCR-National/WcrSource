@@ -44,7 +44,7 @@ export class AuthComponent implements OnInit {
             'number': 'At least one number.',
             'lowerLetter': 'At least one lowercase.',
             'upperLetter': 'At least one uppercase.',
-            'special Character': 'At least one special character.'
+            'hasSpecialCharacters': 'At least one special character.'
         },
         'confirmPassword': {
             'required': 'Confirm password is required',
@@ -88,6 +88,16 @@ export class AuthComponent implements OnInit {
 
         this.authForm.valueChanges.subscribe((data) => {
             this.logValidationErrors(this.authForm);
+        });
+
+
+        this.authForm.get('associate').valueChanges.subscribe((data: string) => {
+            if (data == "true") {
+                this.authForm.get('terms').enable();
+            }
+            else if (data == "false" && this.authForm.get('consumer').value == "false") {
+                this.authForm.get('terms').disable();
+            }
         });
 
         this.authForm.get('associate').valueChanges.subscribe((data: string) => {
@@ -145,7 +155,7 @@ export class AuthComponent implements OnInit {
                 patternValidator(/\d/, { number: true }),
                 patternValidator(/[A-Z]/, { upperLetter: true }),
                 patternValidator(/[a-z]/, { lowerLetter: true }),
-                patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { lowerLetter: true })
+                patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
 
 
 
@@ -185,7 +195,7 @@ export class AuthComponent implements OnInit {
                 patternValidator(/\d/, { number: true }),
                 patternValidator(/[A-Z]/, { upperLetter: true }),
                 patternValidator(/[a-z]/, { lowerLetter: true }),
-                patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { lowerLetter: true })
+                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
 
                     //regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
                 ]);
@@ -216,7 +226,7 @@ export class AuthComponent implements OnInit {
                 patternValidator(/\d/, { number: true }),
                 patternValidator(/[A-Z]/, { upperLetter: true }),
                 patternValidator(/[a-z]/, { lowerLetter: true }),
-                patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { lowerLetter: true })
+                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
 
                 ]);
                 this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
@@ -613,12 +623,12 @@ function matchPasswords(group: AbstractControl): { [key: string]: any } | null {
     const confirmPasswordControl = group.get('confirmPassword');
     if (group.parent !== undefined) {
         if (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine) {
-            group.parent.get('associate').disable();
-            group.parent.get('consumer').disable();
-            return null;
-        } else {
             group.parent.get('associate').enable();
             group.parent.get('consumer').enable();
+            return null;
+        } else {
+            group.parent.get('associate').disable();
+            group.parent.get('consumer').disable();
             return { 'passwordMismatch': true };
         }
     }

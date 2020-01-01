@@ -116,9 +116,9 @@
                                                     Must contain at least 1 Letter in Small Case!
                                                 </label>
 
-                                                <label class="col" [ngClass]="authForm.controls['password'].hasError('required') || authForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
                                                     <i class="material-icons">
-                                                        {{ authForm.controls['password'].hasError('required') || authForm.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
                                                     </i>
                                                     Must contain at least 1 Special Character!
                                                 </label>
