@@ -70,19 +70,16 @@
 /* ------------------------------------------------------------------- */
 /* 01. Import Section
 ---------------------------------------------------------------------- */
-@import url("bootstrap.css"); /* Default Reset, Typography, Forms, Responsive Grid etc. */
-@import url("icons.css"); /* Webfont Icons: FontAwesome, Line, Simple Line */
-@import url("http://fonts.googleapis.com/css?family=Varela+Round");
-
-
-/* ------------------------------------------------------------------- */
+/*@import url("bootstrap.css"); /* Default Reset, Typography, Forms, Responsive Grid etc. */*/
+/*@import url("icons.css"); /* Webfont Icons: FontAwesome, Line, Simple Line */
+*/
+/*@import url("http://fonts.googleapis.com/css?family=Varela+Round");*/
+ ------------------------------------------------------------------- 
 /*  02. Layout Components
 ---------------------------------------------------------------------- */
-
 /* ---------------------------------- */
 /* Topbar
 ------------------------------------- */
-
 /* Common Styles */
 #top-bar {
     background-color: #0e3a6b;
@@ -257,7 +254,7 @@ img.footer-logo {
 
 .sign-in {
     position: relative;
-    top: 10px;
+    top: 14px;
     color: #333;
     margin-right: 40px;
     vertical-align: top;
@@ -266,9 +263,9 @@ img.footer-logo {
 }
 
 .header-widget .sign-in i {
-    padding-right: 4px;
+    padding-right: 3px;
     vertical-align: top;
-    padding-top: 5px;
+    padding-top: 1px;
 }
 
 .sign-in i.fa.fa-user:before {

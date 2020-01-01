@@ -3632,6 +3632,7 @@ textarea {
         border-color: #a21318 !important;
         box-shadow: inset 0 0 5px rgba(0,0,0,.3);
     }
+
     .has-error input {
         color: #a21318 !important;
         border: 1px solid #a21318 !important;
@@ -3659,11 +3660,22 @@ button[disabled], html input[disabled]:hover, input[disabled]:focus {
 .form-group {
     position: relative;
 }
-.preloader-wrapper {
+
+.preloader-wrapper-input {
     position: absolute;
     top: 25%;
     right: 35px;
 }
+
+.preloader-wrapper-button {
+    position: absolute;
+    top: 25%;
+}
+
+.spinner-white, .spinner-white-only {
+    color: #ffffff;
+}
+
 span.fa {
     position: absolute !important;
     top: 32% !important;
@@ -3673,6 +3685,7 @@ span.fa {
     font-size: 18px !important;
     color: #008329;
 }
+
 .has-error span.fa {
     position: absolute !important;
     top: 25% !important;
@@ -3771,7 +3784,7 @@ label {
 
 .spinner-green,
 .spinner-green-only {
-    border-color: #0f9d58;
+    border-color: #008329;
 }
 
 /**
@@ -4334,6 +4347,7 @@ label {
             .slider .indicators .indicator-item.active {
                 background-color: #4CAF50;
             }
+
 .material-icons {
     text-rendering: optimizeLegibility;
     -webkit-font-feature-settings: 'liga';
@@ -4362,4 +4376,7 @@ label {
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
+}
+input[disabled]+span.fa {
+    color: #949494;
 }

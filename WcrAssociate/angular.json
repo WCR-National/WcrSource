@@ -42,10 +42,12 @@
             "tsConfig": "AngularAssociate/tsconfig.app.json",
             "assets": [
               "AngularAssociate/favicon.ico",
-              "AngularAssociate/assets"
+              "AngularAssociate/assets/fonts"
             ],
             "styles": [
               "AngularAssociate/styles.css",
+              "AngularAssociate/assets/bootstrap.css",
+              "AngularAssociate/assets/icons.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css"
             ],
@@ -105,6 +107,8 @@
             "karmaConfig": "AngularAssociate/karma.conf.js",
             "styles": [
               "AngularAssociate/styles.css",
+              "AngularAssociate/assets/bootstrap.css",
+              "AngularAssociate/assets/icons.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css"
             ],
@@ -114,7 +118,8 @@
             ],
             "assets": [
               "AngularAssociate/favicon.ico",
-              "AngularAssociate/assets"
+              "AngularAssociate/assets/fonts"
+
             ]
           }
         },

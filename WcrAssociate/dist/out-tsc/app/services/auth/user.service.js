@@ -113,11 +113,29 @@ var UserService = /** @class */ (function () {
         }));
     };
     UserService.prototype.attemptVerfiedActivationCode = function (type, email) {
-        var urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
-        return this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: email })
-            .pipe(map(function (data) {
-            return data;
-        }));
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToGetActivationCode;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
+                        return [4 /*yield*/, this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: email }).toPromise()
+                            //.pipe(map(
+                            //    data => {
+                            //        return data;
+                            //    }
+                            //));
+                        ];
+                    case 1: return [2 /*return*/, _a.sent()
+                        //.pipe(map(
+                        //    data => {
+                        //        return data;
+                        //    }
+                        //));
+                    ];
+                }
+            });
+        });
     };
     UserService.prototype.attemptResendActivateCode = function (email) {
         var urlToResendActivationCode = "ws/AssociateRegistration.asmx/ResendActivationCode";

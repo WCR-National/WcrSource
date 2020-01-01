@@ -18,11 +18,11 @@ export class UserService {
 
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
- 
+
     constructor(private user: User = null,
         private apiService: ApiService = null,
         private http: HttpClient = null,
-        private jwtService: JwtService = null) {  }
+        private jwtService: JwtService = null) { }
 
     //// Verify JWT in localstorage with server & load user's info.
     //// This runs once on application startup.
@@ -66,29 +66,85 @@ export class UserService {
         return this.rand() + this.rand(); // to make it longer
     }
 
-    attemptAuth(type, credentials): Observable<any> {
+    attemptAssociateAccountExists(type, credentials): Observable<any> {
 
-        debugger;
-        let urlToSignUp: String = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.password + ""
-        return this.apiService.post(environment.apiEndPoint + urlToSignUp, {})
+
+        let urlToSignUp: string = "ws/AssociateRegistration.asmx/AssociateAccountExists";// + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
+        return this.apiService.post(urlToSignUp, { EmailID: credentials.email })
             .pipe(map(
                 data => {
-                    if (data > '0') {
-                        this.user.email = credentials.email;
-                        this.user.password = credentials.password;
-                        this.user.token = this.token();
-                        this.setAuth(this.user);
-                    }
+                    debugger;
+
+                    //if (data.d.length > 0) {
+                    //    this.user.email = credentials.email;
+                    //    this.user.password = credentials.password;
+                    //    this.user.token = this.token();
+                    //    this.setAuth(this.user);
+                    //}
                     return data;
                 }
             ));
+
+        //let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
+        //return this.apiService.post( urlToSignUp, {})
+        //    .pipe(map(
+        //        data => {
+        //            debugger;
+
+        //            if (data > '0') {
+        //                this.user.email = credentials.email;
+        //                this.user.password = credentials.password;
+        //                this.user.token = this.token();
+        //                this.setAuth(this.user);
+        //            }
+        //            return data;
+        //        }
+        //    ));
     }
 
-    attemptConsumerAuth(type, credentials): Observable<any> {
+    async attempConsumerAccountExists(type, credentials) {
+
+        let urlToSignUp: string = "ws/AssociateRegistration.asmx/ConsumerAccountExists";// + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
+        return await this.apiService.post(urlToSignUp, { EmailID: credentials.email }).toPromise();
+            //.pipe(map(
+            //    data => {
+            //        return data;
+            //    }
+            //));
+    }
+
+
+    async attemptAssociateAuth(type, credentials) {
+        debugger;
+
+        let urlToSignIn: string = "ws/AssociateRegistration.asmx/AssociateLogin";
+        return await this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            )).toPromise();
+
+        //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
+        //let urlToSignIn: string = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "";
+        //return await this.apiService.post(urlToSignIn, {})
+        //    .pipe(map(
+        //        data => {
+        //            debugger;
+        //            this.user.email = credentials.email;
+        //            this.user.password = credentials.password;
+        //            this.user.token = this.token();
+        //            this.setAuth(this.user);
+        //            return data;
+        //        }
+        //    )).toPromise();
+    }
+
+    async attemptConsumerAuth(type, credentials) {
         debugger;
         //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
-        let urlToSignIn: String = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.password + "";
-        return this.apiService.post(environment.apiEndPoint + urlToSignIn, {})
+        let urlToSignIn: string = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "";
+        return await this.apiService.post(urlToSignIn, {})
             .pipe(map(
                 data => {
                     debugger;
@@ -98,12 +154,12 @@ export class UserService {
                     this.setAuth(this.user);
                     return data;
                 }
-            ));
+            )).toPromise();
     }
 
     attemptLogout() {
-        let urlToLogout: String = "ws/AssociateSignUp.ashx?action=ConsumerLogout";
-        return this.apiService.post(environment.apiEndPoint + urlToLogout, {})
+        let urlToLogout: string = "ws/AssociateSignUp.ashx?action=ConsumerLogout";
+        return this.apiService.post(urlToLogout, {})
             .pipe(map(
                 data => {
                     this.purgeAuth();
@@ -114,10 +170,10 @@ export class UserService {
 
     attemptRegister(type, credentials): Observable<number> {
 
-        let urlToSignUp: String = "ws/AssociateSignUp.ashx?action=AssociateData";
-        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateData";
+        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
 
-        return this.apiService.post(environment.apiEndPoint + urlToSignUp, { user: credentials })
+        return this.apiService.post(urlToSignUp, { user: credentials })
             .pipe(map(
                 data => {
                     return data;
@@ -128,7 +184,7 @@ export class UserService {
     attemptActivateCode(type, credentials): Observable<any> {
 
         let urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
-        return this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: credentials.email })
+        return this.apiService.post(urlToGetActivationCode, { username: credentials.email })
             .pipe(map(
                 data => {
                     return data;
@@ -136,21 +192,21 @@ export class UserService {
             ));
     }
 
-    attemptVerfiedActivationCode(type, email): Observable<any> {
+    async attemptVerfiedActivationCode(type, email) {
 
         let urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
-        return this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: email })
-            .pipe(map(
-                data => {
-                    return data;
-                }
-            ));
+        return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
+        //.pipe(map(
+        //    data => {
+        //        return data;
+        //    }
+        //));
     }
 
     attemptResendActivateCode(email): Observable<any> {
 
         let urlToResendActivationCode = "ws/AssociateRegistration.asmx/ResendActivationCode";
-        return this.apiService.post(environment.apiEndPoint + urlToResendActivationCode, { EmailID: email })
+        return this.apiService.post(urlToResendActivationCode, { EmailID: email })
             .pipe(map(
                 data => {
                     return data;

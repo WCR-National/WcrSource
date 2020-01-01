@@ -30,6 +30,7 @@ export class AuthComponent implements OnInit {
     private showErrorsPassword: boolean = false;
     private resetPassword: boolean = false;
     authForm: FormGroup;
+    FormFilledSuccessfully: boolean = false;
 
     validationMessages = {
         'email': {
@@ -91,32 +92,44 @@ export class AuthComponent implements OnInit {
         });
 
 
-        this.authForm.get('associate').valueChanges.subscribe((data: string) => {
-            if (data == "true") {
+        this.authForm.get('associate').valueChanges.subscribe((data) => {
+            debugger;
+            if (data == true) {
                 this.authForm.get('terms').enable();
             }
-            else if (data == "false" && this.authForm.get('consumer').value == "false") {
+            else if (data == false && this.authForm.get('consumer').value == false) {
                 this.authForm.get('terms').disable();
             }
         });
 
-        this.authForm.get('associate').valueChanges.subscribe((data: string) => {
-            if (data == "true") {
+        this.authForm.get('consumer').valueChanges.subscribe((data) => {
+            debugger;
+            if (data == true) {
                 this.authForm.get('terms').enable();
             }
-            else if (data == "false" && this.authForm.get('consumer').value == "false") {
+            else if (data == false && this.authForm.get('associate').value == false) {
                 this.authForm.get('terms').disable();
             }
         });
 
-        this.authForm.get('consumer').valueChanges.subscribe((data: string) => {
-            if (data == "true") {
-                this.authForm.get('terms').enable();
+        this.authForm.get('terms').valueChanges.subscribe((data) => {
+            debugger;
+            if (data == false) {
+                this.FormFilledSuccessfully = false;
             }
-            else if (data == "false" && this.authForm.get('associate').value == "false") {
-                this.authForm.get('terms').disable();
+            else {
+                this.FormFilledSuccessfully = true;
             }
         });
+
+        //this.authForm.get('terms').valueChanges.subscribe((data) => {
+        //    if (data == true) {
+        //        this.authForm.;
+        //    }
+        //    else if (data == "false" && this.authForm.get('associate').value == "false") {
+        //        this.authForm.get('terms').disable();
+        //    }
+        //});
     }
 
     logValidationErrors(group: FormGroup = this.authForm): void {
@@ -191,14 +204,7 @@ export class AuthComponent implements OnInit {
                 this.authForm.get('passwordGroup').clearValidators();
                 this.authForm.get('passwordGroup').updateValueAndValidity();
 
-                this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
-                patternValidator(/\d/, { number: true }),
-                patternValidator(/[A-Z]/, { upperLetter: true }),
-                patternValidator(/[a-z]/, { lowerLetter: true }),
-                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
-
-                    //regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
-                ]);
+                this.authForm.get('passwordGroup').get('password').setValidators([Validators.required]);
                 this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
 
                 this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
@@ -226,7 +232,7 @@ export class AuthComponent implements OnInit {
                 patternValidator(/\d/, { number: true }),
                 patternValidator(/[A-Z]/, { upperLetter: true }),
                 patternValidator(/[a-z]/, { lowerLetter: true }),
-                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
+                patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
 
                 ]);
                 this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
@@ -316,48 +322,101 @@ export class AuthComponent implements OnInit {
         });
     }
 
+    //submitForm(value: string) {
+    //    alert('found ' + value);
+    //}
     submitLoginForm(email = "", password = "") {
         this.isSubmitting = true;
-
+        debugger;
         //this.errors = { errors: {} };
         if (email != "" && password != "") {
             this.router.navigateByUrl('/');
         }
+        let thisStatus = this;
         const credentials = this.authForm.value;
         this.userService
-            .attemptAuth(this.authType, credentials)
+            .attemptAssociateAccountExists(this.authType, credentials)
             .subscribe(
                 data => {
-                    if (data > '0') {
-                        //this.router.navigateByUrl('/Associate');
-                        $(location).attr('href', 'https://wcrnational.com/Associate/ViewProfile.aspx')
-                    }
-                    else if (data == '-1') {
-                        this.userService
-                            .attemptConsumerAuth(this.authType, credentials)
-                            .subscribe(
-                                data => {
-                                    if (data > '0') {
-                                        this.isSubmitting = false;
-                                        //this.router.navigateByUrl('/Consumer');
-                                        $(location).attr('href', 'http://wcrSevice/index.html')
+                    var xmlDoc = $.parseXML(data.d);
+                    var xml = $(xmlDoc);
+                    var docs = xml.find("associateExists");
+                    $.each(docs, function (i, docs) {
+                        if ($(docs).find("AccountId").text() == "0") {
+                            //for consumer Login
 
+                            thisStatus.userService.attempConsumerAccountExists(thisStatus.authType, credentials)
+                                .then((data1: any) => {
+                                    if (data1.d.length > 0) {
+                                        var xmlDoc1 = $.parseXML(data1.d);
+                                        var xml1 = $(xmlDoc1);
+                                        var docs1 = xml1.find("consumerExists");
+                                        $.each(docs1, function (i, docs1) {
+                                            if ($(docs1).find("AccountId").text() == "0") {
+
+                                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials"
+                                            }
+                                            else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
+
+                                            }
+                                            else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
+
+                                                thisStatus.formErrors.loginCredentials = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                                            }
+                                            else {
+                                                thisStatus.LoginAssociateOrConsumer(credentials, 2); //Associate
+                                            }
+                                        });
                                     }
-                                    else {
-                                        this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-                                        this.isSubmitting = false;
-                                    }
-                                },
-                                err => {
-                                    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-                                    this.isSubmitting = false;
-                                }
-                            );
-                    }
-                    else {
-                        this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-                        this.isSubmitting = false;
-                    }
+                                });
+
+                        }
+                        else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "0") {
+
+                            // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
+                        }
+                        else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "1") {
+
+                            thisStatus.formErrors.loginCredentials = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                            return false;
+                        }
+                        else {
+                            thisStatus.LoginAssociateOrConsumer(credentials, 1);//Consumer
+                        }
+
+                    });
+
+
+                    //if (data > '0') {
+                    //    //this.router.navigateByUrl('/Associate');
+                    //    $(location).attr('href', 'Associate/ViewProfile.aspx')
+                    //}
+                    //else if (data == '-1') {
+                    //    this.userService
+                    //        .attemptConsumerAuth(this.authType, credentials)
+                    //        .then(
+                    //            (data: any) => {
+                    //                if (data > '0') {
+                    //                    this.isSubmitting = false;
+                    //                    //this.router.navigateByUrl('/Consumer');
+                    //                    $(location).attr('href', '/index.html')
+
+                    //                }
+                    //                else {
+                    //                    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+                    //                    this.isSubmitting = false;
+                    //                }
+                    //            },
+                    //            err => {
+                    //                this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+                    //                this.isSubmitting = false;
+                    //            }
+                    //        );
+                    //}
+                    //else {
+                    //    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+                    //    this.isSubmitting = false;
+                    //}
                 },
                 err => {
                     this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
@@ -366,8 +425,58 @@ export class AuthComponent implements OnInit {
             );
     }
 
+    LoginAssociateOrConsumer(credentials, uType) {
+
+        if (uType == 2) {
+            this.userService
+                .attemptAssociateAuth(this.authType, credentials)
+                .then(
+                    (data: any) => {
+                        if (data > 1) {
+                            this.isSubmitting = false;
+                            this.router.navigateByUrl('/Activate');
+                        }
+                        else {
+                            this.showErrorsPassword = true;
+                            //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                            this.isSubmitting = false;
+                        }
+                    },
+                    err => {
+                        this.showErrorsPassword = true;
+                        //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                        this.isSubmitting = false;
+                    }
+                );
+        }
+        else if (uType == 1) {
+            this.userService
+                .attemptAssociateAuth(this.authType, credentials)
+                .then(
+                    (data: any) => {
+                        if (data > 1) {
+                            this.isSubmitting = false;
+                            this.router.navigateByUrl('/Activate');
+                        }
+                        else {
+                            this.showErrorsPassword = true;
+                            //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                            this.isSubmitting = false;
+                        }
+                    },
+                    err => {
+                        this.showErrorsPassword = true;
+                        //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                        this.isSubmitting = false;
+                    }
+                );
+        }
+
+    }
+
     submitRegistrationForm() {
         this.isSubmitting = true;
+
 
         //this.errors = { errors: {} };
 
@@ -381,12 +490,14 @@ export class AuthComponent implements OnInit {
                         this.router.navigateByUrl('/Activate');
                     }
                     else {
-                        this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                        this.showErrorsPassword = true;
+                        //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
                         this.isSubmitting = false;
                     }
                 },
                 err => {
-                    this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                    this.showErrorsPassword = true;
+                    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
                     this.isSubmitting = false;
                 }
             );
@@ -394,6 +505,8 @@ export class AuthComponent implements OnInit {
 
     submitActivationForm() {
         this.isSubmitting = true;
+
+
         //this.errors = { errors: {} };
 
         const credentials = this.authForm.value;
@@ -404,8 +517,8 @@ export class AuthComponent implements OnInit {
                     if (data.d == credentials.activationCode) {
                         this.userService
                             .attemptVerfiedActivationCode(this.authType, this.globalEmail)
-                            .subscribe(
-                                data => {
+                            .then(
+                                (data: any) => {
                                     if (data.d.length > 0) {
                                         this.submitLoginForm(this.globalEmail, this.globalPassword);
                                     }
@@ -434,6 +547,7 @@ export class AuthComponent implements OnInit {
     }
 
     onClickResendVerificationCode() {
+
         this.userService
             .attemptResendActivateCode(this.globalEmail)
             .subscribe(
@@ -506,10 +620,12 @@ export class AuthComponent implements OnInit {
     showErrors() {
         this.showErrorsPassword = true;
     }
+
     hideErrors() {
         this.showErrorsPassword = false;
 
     }
+
     //showPreloaderIcon() {
     //    debugger;
     //    this.showOnValidateEmail = true;
@@ -602,6 +718,8 @@ function isEmailExist(userService: UserService, authComp: AuthComponent) {
 
                         //control.parent.get('terms').enable();
                         authComp.showOnValidateEmail = false;
+                        authComp.FormFilledSuccessfully = false;
+
                         return null;
                     }
                     else {
@@ -622,7 +740,7 @@ function matchPasswords(group: AbstractControl): { [key: string]: any } | null {
     const passwordControl = group.get('password');
     const confirmPasswordControl = group.get('confirmPassword');
     if (group.parent !== undefined) {
-        if (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine) {
+        if (passwordControl.value != "" && (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine)) {
             group.parent.get('associate').enable();
             group.parent.get('consumer').enable();
             return null;

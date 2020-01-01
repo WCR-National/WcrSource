@@ -33,7 +33,7 @@ var AuthComponent = /** @class */ (function () {
                 'number': 'At least one number.',
                 'lowerLetter': 'At least one lowercase.',
                 'upperLetter': 'At least one uppercase.',
-                'special Character': 'At least one special character.'
+                'hasSpecialCharacters': 'At least one special character.'
             },
             'confirmPassword': {
                 'required': 'Confirm password is required',
@@ -73,6 +73,14 @@ var AuthComponent = /** @class */ (function () {
         var _this = this;
         this.authForm.valueChanges.subscribe(function (data) {
             _this.logValidationErrors(_this.authForm);
+        });
+        this.authForm.get('associate').valueChanges.subscribe(function (data) {
+            if (data == "true") {
+                _this.authForm.get('terms').enable();
+            }
+            else if (data == "false" && _this.authForm.get('consumer').value == "false") {
+                _this.authForm.get('terms').disable();
+            }
         });
         this.authForm.get('associate').valueChanges.subscribe(function (data) {
             if (data == "true") {
@@ -125,7 +133,7 @@ var AuthComponent = /** @class */ (function () {
                         patternValidator(/\d/, { number: true }),
                         patternValidator(/[A-Z]/, { upperLetter: true }),
                         patternValidator(/[a-z]/, { lowerLetter: true }),
-                        patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { lowerLetter: true })
+                        patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
                         //regexValidatorNumbers(new RegExp('^[0-9]+$'), this),
                         //regexValidatorLower(new RegExp('/[a-z]/g'), this),
                         //regexValidatorCapital(new RegExp('/[A-Z]/g'), this),
@@ -154,13 +162,7 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').clearValidators();
                 _this.authForm.get('passwordGroup').updateValueAndValidity();
-                _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
-                    patternValidator(/\d/, { number: true }),
-                    patternValidator(/[A-Z]/, { upperLetter: true }),
-                    patternValidator(/[a-z]/, { lowerLetter: true }),
-                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { lowerLetter: true })
-                    //regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
-                ]);
+                _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required]);
                 _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
                 _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
@@ -180,7 +182,7 @@ var AuthComponent = /** @class */ (function () {
                     patternValidator(/\d/, { number: true }),
                     patternValidator(/[A-Z]/, { upperLetter: true }),
                     patternValidator(/[a-z]/, { lowerLetter: true }),
-                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { lowerLetter: true })
+                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
                 ]);
                 _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').setValidators([matchPasswords]);
@@ -254,7 +256,7 @@ var AuthComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data > '0') {
                 //this.router.navigateByUrl('/Associate');
-                $(location).attr('href', 'https://wcrnational.com/Associate/ViewProfile.aspx');
+                $(location).attr('href', 'Associate/ViewProfile.aspx');
             }
             else if (data == '-1') {
                 _this.userService
@@ -263,7 +265,7 @@ var AuthComponent = /** @class */ (function () {
                     if (data > '0') {
                         _this.isSubmitting = false;
                         //this.router.navigateByUrl('/Consumer');
-                        $(location).attr('href', 'http://wcrSevice/index.html');
+                        $(location).attr('href', '/index.html');
                     }
                     else {
                         _this.formErrors.loginCredentials = _this.validationMessages['loginCredentials']['error'];
@@ -296,11 +298,13 @@ var AuthComponent = /** @class */ (function () {
                 _this.router.navigateByUrl('/Activate');
             }
             else {
-                _this.formErrors.activationCode = _this.validationMessages['activationCode']['message'];
+                _this.showErrorsPassword = true;
+                //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
                 _this.isSubmitting = false;
             }
         }, function (err) {
-            _this.formErrors.activationCode = _this.validationMessages['activationCode']['message'];
+            _this.showErrorsPassword = true;
+            //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
             _this.isSubmitting = false;
         });
     };
@@ -315,7 +319,7 @@ var AuthComponent = /** @class */ (function () {
             if (data.d == credentials.activationCode) {
                 _this.userService
                     .attemptVerfiedActivationCode(_this.authType, _this.globalEmail)
-                    .subscribe(function (data) {
+                    .then(function (data) {
                     if (data.d.length > 0) {
                         _this.submitLoginForm(_this.globalEmail, _this.globalPassword);
                     }
@@ -459,13 +463,13 @@ function matchPasswords(group) {
     var confirmPasswordControl = group.get('confirmPassword');
     if (group.parent !== undefined) {
         if (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine) {
-            group.parent.get('associate').disable();
-            group.parent.get('consumer').disable();
+            group.parent.get('associate').enable();
+            group.parent.get('consumer').enable();
             return null;
         }
         else {
-            group.parent.get('associate').enable();
-            group.parent.get('consumer').enable();
+            group.parent.get('associate').disable();
+            group.parent.get('consumer').disable();
             return { 'passwordMismatch': true };
         }
     }
