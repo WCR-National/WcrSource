@@ -40,7 +40,7 @@ const routes: Routes = [
         canActivate: [NoAuthGuard]
     },
     {
-        path: 'activate',
+        path: 'activate/:id',
         component: AuthComponent,
         canActivate: [NoAuthGuard]
     }

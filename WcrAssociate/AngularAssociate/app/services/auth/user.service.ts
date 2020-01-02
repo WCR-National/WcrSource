@@ -106,11 +106,11 @@ export class UserService {
 
         let urlToSignUp: string = "ws/AssociateRegistration.asmx/ConsumerAccountExists";// + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
         return await this.apiService.post(urlToSignUp, { EmailID: credentials.email }).toPromise();
-            //.pipe(map(
-            //    data => {
-            //        return data;
-            //    }
-            //));
+        //.pipe(map(
+        //    data => {
+        //        return data;
+        //    }
+        //));
     }
 
 
@@ -143,15 +143,34 @@ export class UserService {
     async attemptConsumerAuth(type, credentials) {
         debugger;
         //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
-        let urlToSignIn: string = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "";
-        return await this.apiService.post(urlToSignIn, {})
+        let urlToSignIn: string = "ws/AssociateRegistration.asmx/ConsumerLogin";
+        return await this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
             .pipe(map(
                 data => {
-                    debugger;
-                    this.user.email = credentials.email;
-                    this.user.password = credentials.password;
-                    this.user.token = this.token();
-                    this.setAuth(this.user);
+                    return data;
+                }
+            )).toPromise();
+    }
+
+    async consumerLoginSessionActivate(type, credentials, associateID) {
+
+        debugger;
+        let urlToSignInSessionActivation: string = "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate";
+        return await this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            )).toPromise();
+    }
+
+    async associateLoginSessionActivate(type, credentials, associateID) {
+        //{'username':'" + uname + "','assoID':'" + $(docs).find("AssociateId").text() + "
+        debugger;
+        let urlToSignInSessionActivation: string = "ws/AssociateRegistration.asmx/AssociateLoginSessionActivate";
+        return await this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
+            .pipe(map(
+                data => {
                     return data;
                 }
             )).toPromise();
@@ -168,7 +187,9 @@ export class UserService {
             ));
     }
 
-    attemptRegister(type, credentials): Observable<number> {
+    attemptRegisterAssociate(type, credentials): Observable<number> {
+
+        //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
 
         let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateData";
         urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
@@ -181,10 +202,14 @@ export class UserService {
             ));
     }
 
-    attemptActivateCode(type, credentials): Observable<any> {
+    attemptRegisterConsumer(type, credentials): Observable<number> {
 
-        let urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
-        return this.apiService.post(urlToGetActivationCode, { username: credentials.email })
+        //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
+
+        let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=Consumer";
+        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+
+        return this.apiService.post(urlToSignUp, { user: credentials })
             .pipe(map(
                 data => {
                     return data;
@@ -192,15 +217,49 @@ export class UserService {
             ));
     }
 
-    async attemptVerfiedActivationCode(type, email) {
+    //attemptActivateCode(type, credentials): Observable<any> {
 
-        let urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
+    //    let urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
+    //    return this.apiService.post(urlToGetActivationCode, { username: credentials.email })
+    //        .pipe(map(
+    //            data => {
+    //                return data;
+    //            }
+    //        ));
+    //}
+
+    getAttemptVerifiedActivationCodeAssociate(type, email) {
+
+        let urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
+        return this.apiService.post(urlToGetActivationCode, { username: email })//.toPromise()
+        .pipe(map(
+            data => {
+                return data;
+            }
+        ));
+    }
+
+    async attemptVerifiedActivationCodeAssociate(type, email) {
+
+        let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
         return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
-        //.pipe(map(
-        //    data => {
-        //        return data;
-        //    }
-        //));
+    }
+    
+    getAttemptVerifiedActivationCodeConsumer(type, email) {
+
+        let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
+        return this.apiService.post (urlToGetActivationCode, { username: email })//.toPromise()
+        .pipe(map(
+            data => {
+                return data;
+            }
+        ));
+    }
+
+    async AttemptVerifiedActivationCodeConsumer(type, email) {
+
+        let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
+        return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
     }
 
     attemptResendActivateCode(email): Observable<any> {

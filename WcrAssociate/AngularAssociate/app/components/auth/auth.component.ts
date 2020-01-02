@@ -322,9 +322,13 @@ export class AuthComponent implements OnInit {
         });
     }
 
-    //submitForm(value: string) {
-    //    alert('found ' + value);
-    //}
+
+    /**
+     * *************************************************
+     * LOGIN Module Start
+     * *************************************************
+    **/
+
     submitLoginForm(email = "", password = "") {
         this.isSubmitting = true;
         debugger;
@@ -369,7 +373,6 @@ export class AuthComponent implements OnInit {
                                         });
                                     }
                                 });
-
                         }
                         else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "0") {
 
@@ -381,9 +384,8 @@ export class AuthComponent implements OnInit {
                             return false;
                         }
                         else {
-                            thisStatus.LoginAssociateOrConsumer(credentials, 1);//Consumer
+                            thisStatus.LoginAssociateOrConsumer(credentials, 1);//associate
                         }
-
                     });
 
 
@@ -426,37 +428,85 @@ export class AuthComponent implements OnInit {
     }
 
     LoginAssociateOrConsumer(credentials, uType) {
-
-        if (uType == 2) {
+        let thisStatus = this;
+        if (uType == 1) {
             this.userService
                 .attemptAssociateAuth(this.authType, credentials)
                 .then(
                     (data: any) => {
+
                         if (data > 1) {
-                            this.isSubmitting = false;
-                            this.router.navigateByUrl('/Activate');
+
+                            if (data.d.length > 0) {
+                                var xmlDoc1 = $.parseXML(data.d);
+                                var xml1 = $(xmlDoc1);
+                                var docs1 = xml1.find("associateLogin");
+                                $.each(docs1, function (i, docs1) {
+
+                                    if ($(docs1).find("AssociateId").text() == "-1") {
+                                        thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
+                                        return;
+                                    }
+                                    else if ($(docs1).find("Status").text() == "1") {
+
+                                        thisStatus.associateLoginSessionActivate(docs1);
+                                        return;
+                                    }
+                                    else {
+                                        thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
+                                        return;
+                                    }
+                                });
+                            }
                         }
                         else {
-                            this.showErrorsPassword = true;
                             //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
                             this.isSubmitting = false;
                         }
+
+                        //if (data > 1) {
+                        //    this.isSubmitting = false;
+                        //    this.router.navigateByUrl('/');
+                        //}
+                        //else {
+                        //    this.showErrorsPassword = true;
+                        //    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                        //    this.isSubmitting = false;
+                        //}
                     },
                     err => {
-                        this.showErrorsPassword = true;
                         //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
                         this.isSubmitting = false;
                     }
                 );
         }
-        else if (uType == 1) {
+        else if (uType == 2) {
             this.userService
-                .attemptAssociateAuth(this.authType, credentials)
+                .attemptConsumerAuth(this.authType, credentials)
                 .then(
                     (data: any) => {
                         if (data > 1) {
-                            this.isSubmitting = false;
-                            this.router.navigateByUrl('/Activate');
+
+                            if (data.d.length > 0) {
+                                var xmlDoc1 = $.parseXML(data.d);
+                                var xml1 = $(xmlDoc1);
+                                var docs1 = xml1.find("consumerLogin");
+                                $.each(docs1, function (i, docs1) {
+
+                                    if ($(docs1).find("Id").text() == "-1") {
+                                        thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
+                                    }
+                                    else if ($(docs1).find("Flag").text() == "1") {
+
+                                        thisStatus.consumerLoginSessionActivate(docs1);
+                                        return;
+                                    }
+                                    else {
+                                        thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
+                                        return false;
+                                    }
+                                });
+                            }
                         }
                         else {
                             this.showErrorsPassword = true;
@@ -474,59 +524,164 @@ export class AuthComponent implements OnInit {
 
     }
 
-    submitRegistrationForm() {
-        this.isSubmitting = true;
-
-
-        //this.errors = { errors: {} };
+    consumerLoginSessionActivate(docs) {
 
         const credentials = this.authForm.value;
         this.userService
-            .attemptRegister(this.authType, credentials)
-            .subscribe(
-                data => {
-                    if (data > 1) {
-                        this.isSubmitting = false;
-                        this.router.navigateByUrl('/Activate');
-                    }
-                    else {
-                        this.showErrorsPassword = true;
-                        //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
-                        this.isSubmitting = false;
+            .consumerLoginSessionActivate(this.authType, credentials, $(docs).find("Id").text())
+            .then(
+                (data: any) => {
+                    if (data.d == "1") {
+                        $(location).attr('href', '/ConsumerDashboard.html');
                     }
                 },
                 err => {
-                    this.showErrorsPassword = true;
+                    this.isSubmitting = false;
+                }
+            );
+
+    }
+
+    associateLoginSessionActivate(docs) {
+
+        const credentials = this.authForm.value;
+        this.userService
+            .associateLoginSessionActivate(this.authType, credentials, $(docs).find("AssociateId").text())
+            .then(
+                (data: any) => {
+                    if (data.d == "1") {
+
+                        if ($(docs).find("Mobile").text() == '') {
+                            $(location).attr('href', 'Associate/ViewProfile.aspx');
+                        }
+                        else {
+                            $(location).attr('href', 'Associate/Dashboard.aspx');
+                        }
+                    }
+                },
+                err => {
                     //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
                     this.isSubmitting = false;
                 }
             );
     }
 
-    submitActivationForm() {
+    /**
+     * *************************************************
+     * LOGIN Module END
+     * *************************************************
+    **/
+
+    submitRegistrationForm() {
         this.isSubmitting = true;
 
-
+        if (this.authForm.get('associate').value == true) {
+            this.associateRegister();
+        }
+        else if (this.authForm.get('consumer').value == true) {
+            this.consumerRegister();
+        }
         //this.errors = { errors: {} };
+
+        //const credentials = this.authForm.value;
+        //this.userService
+        //    .attemptRegister(this.authType, credentials)
+        //    .subscribe(
+        //        data => {
+        //            if (data > 1) {
+        //                this.isSubmitting = false;
+        //                this.router.navigateByUrl('/Activate');
+        //            }
+        //            else {
+        //                this.showErrorsPassword = true;
+        //                //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+        //                this.isSubmitting = false;
+        //            }
+        //        },
+        //        err => {
+        //            this.showErrorsPassword = true;
+        //            //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+        //            this.isSubmitting = false;
+        //        }
+        //    );
+    }
+
+    associateRegister() {
 
         const credentials = this.authForm.value;
         this.userService
-            .attemptActivateCode(this.authType, credentials)
+            .attemptRegisterAssociate(this.authType, credentials)
+            .subscribe(
+                data => {
+                    if (data >= 1) {
+                        this.isSubmitting = false;
+                        this.router.navigate(['/Activate', '1']);
+                    }
+                    else { 
+                        this.isSubmitting = false;
+                    }
+                },
+                err => {
+                    this.isSubmitting = false;
+                }
+            );
+    }
+
+    consumerRegister() {
+
+        const credentials = this.authForm.value;
+        this.userService
+            .attemptRegisterConsumer(this.authType, credentials)
+            .subscribe(
+                data => {
+                    if (data >= 1) {
+                        this.isSubmitting = false;
+                        this.router.navigate(['/Activate','2']);
+                    }
+                    else {
+                        this.isSubmitting = false;
+                    }
+                },
+                err => {
+                    this.isSubmitting = false;
+                }
+            );
+
+    }
+
+
+    submitActivationForm() {
+
+        this.isSubmitting = true;
+        const credentials = this.authForm.value;
+
+        let splitCurrentUrl = this.router.url.split('/');
+        let userType = splitCurrentUrl[splitCurrentUrl.length - 1];
+
+        if (userType == "1") {
+            this.associateActivationCode(credentials);
+        }
+        else if (userType == "2") {
+            this.consumerActivationCode(credentials);
+        }
+    }
+
+    associateActivationCode(credentials) {
+
+        this.userService
+            .getAttemptVerifiedActivationCodeAssociate(this.authType, credentials)
             .subscribe(
                 data => {
                     if (data.d == credentials.activationCode) {
                         this.userService
-                            .attemptVerfiedActivationCode(this.authType, this.globalEmail)
+                            .attemptVerifiedActivationCodeAssociate(this.authType, this.globalEmail)
                             .then(
                                 (data: any) => {
                                     if (data.d.length > 0) {
                                         this.submitLoginForm(this.globalEmail, this.globalPassword);
                                     }
-                                    else {
-                                        this.formErrors.activationCode = this.validationMessages['activationCode']['notValidCode'];
-                                        this.isSubmitting = false;
-                                        this.activationSent = true;
-                                    }
+                                    this.isSubmitting = false;
+
                                 },
                                 err => {
                                     this.formErrors.activationCode = this.validationMessages['activationCode']['notValidCode'];
@@ -535,8 +690,46 @@ export class AuthComponent implements OnInit {
                             );
                     }
                     else {
-                        this.formErrors.activationCode = this.validationMessages['activationCode']['notValidCode'];
+
+                        this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
                         this.isSubmitting = false;
+                        this.activationSent = true;
+                    }
+                },
+                err => {
+                    this.formErrors.activationCode = this.validationMessages['activationCode']['notValidCode'];
+                    this.isSubmitting = false;
+                }
+            );
+    }
+
+    consumerActivationCode(credentials) {
+        this.userService
+            .getAttemptVerifiedActivationCodeConsumer(this.authType, credentials)
+            .subscribe(
+                data => {
+                    if (data.d == credentials.activationCode) {
+                        this.userService
+                            .AttemptVerifiedActivationCodeConsumer(this.authType, this.globalEmail)
+                            .then(
+                                (data: any) => {
+                                    if (data.d.length > 0) {
+                                        this.submitLoginForm(this.globalEmail, this.globalPassword);
+                                    }
+                                    this.isSubmitting = false;
+
+                                },
+                                err => {
+                                    this.formErrors.activationCode = "Verification code does not completed due to some error.";
+                                    this.isSubmitting = false;
+                                }
+                            );
+                    }
+                    else {
+
+                        this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
+                        this.isSubmitting = false;
+                        this.activationSent = true;
                     }
                 },
                 err => {
@@ -548,6 +741,7 @@ export class AuthComponent implements OnInit {
 
     onClickResendVerificationCode() {
 
+        this.resentCode = false;
         this.userService
             .attemptResendActivateCode(this.globalEmail)
             .subscribe(
@@ -568,7 +762,7 @@ export class AuthComponent implements OnInit {
             );
     }
 
-    onCliclResetPassword() {
+    onClickResetPassword() {
         this.userService
             .attemptResetPassword(this.globalEmail)
             .subscribe(
