@@ -28,6 +28,7 @@ export class AuthComponent implements OnInit {
     private activationSent: boolean = false;
     showOnValidateEmail: boolean = false;
     private showErrorsPassword: boolean = false;
+    private showActivationDiv: boolean = false;
     private resetPassword: boolean = false;
     authForm: FormGroup;
     FormFilledSuccessfully: boolean = false;
@@ -190,7 +191,11 @@ export class AuthComponent implements OnInit {
     setSignInOrSignUpOrActivateOrReset() {
         this.route.url.subscribe(data => {
             // Get the last piece of the URL (it's either 'login' or 'register')
-            this.authType = data[data.length - 1].path;
+            debugger;
+
+            this.authType = data[0].path;
+
+           
             // Set a title for the page accordingly
             if (this.authType === 'login') {
                 this.title = 'Sign in';
@@ -288,6 +293,7 @@ export class AuthComponent implements OnInit {
                 this.title = 'Account Activation';
             }
             else if (this.authType === 'resetPassword') {
+                //this.resetPassword = true;
                 this.authForm.get('email').enable();
                 this.authForm.get('email').updateValueAndValidity();
 
@@ -668,10 +674,15 @@ export class AuthComponent implements OnInit {
 
         this.isSubmitting = true;
         const credentials = this.authForm.value;
-
+        let urlComponent: string;
         let splitCurrentUrl = this.router.url.split('/');
-        let userType = splitCurrentUrl[splitCurrentUrl.length - 1];
-
+        this.route.url.subscribe(data => {
+            // Get the last piece of the URL (it's either 'login' or 'register')
+            debugger;
+            urlComponent = data[0].path;
+        });
+        let userType = urlComponent;
+        console.log(userType);
         if (userType == "1") {
             this.associateActivationCode(credentials);
         }
@@ -679,6 +690,8 @@ export class AuthComponent implements OnInit {
             this.consumerActivationCode(credentials);
         }
     }
+
+
 
     associateActivationCode(credentials) {
 
@@ -785,6 +798,7 @@ export class AuthComponent implements OnInit {
     submitFormResetPassword() {
         let thisStatus = this;
         const credentials = this.authForm.value;
+        this.resetPassword = true;
         this.userService
             .attemptAssociateAccountExists(this.authType, credentials)
             .subscribe(
@@ -801,7 +815,6 @@ export class AuthComponent implements OnInit {
                                         //show message : "Please check your registered emailID for new password."
                                     }
                                 });
-
                         }
                         else {
 

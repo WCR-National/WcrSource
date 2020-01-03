@@ -41,6 +41,7 @@
             "polyfills": "AngularAssociate/polyfills.ts",
             "tsConfig": "AngularAssociate/tsconfig.app.json",
             "assets": [
+              "AngularAssociate/assets",
               "AngularAssociate/favicon.ico",
               "AngularAssociate/assets/fonts"
             ],
@@ -117,6 +118,7 @@
               "AngularAssociate/assets/js/materialize.min.js"
             ],
             "assets": [
+              "AngularAssociate/assets",
               "AngularAssociate/favicon.ico",
               "AngularAssociate/assets/fonts"
 
