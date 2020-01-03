@@ -347,7 +347,7 @@ export class AuthComponent implements OnInit {
                     var docs = xml.find("associateExists");
                     $.each(docs, function (i, docs) {
                         if ($(docs).find("AccountId").text() == "0") {
-                            //for consumer Login
+                            //for associate Login
 
                             thisStatus.userService.attempConsumerAccountExists(thisStatus.authType, credentials)
                                 .then((data1: any) => {
@@ -572,6 +572,11 @@ export class AuthComponent implements OnInit {
      * *************************************************
     **/
 
+    /**
+    * *************************************************
+    * SIGN UP Module END
+    * *************************************************
+    **/
     submitRegistrationForm() {
         this.isSubmitting = true;
 
@@ -617,7 +622,7 @@ export class AuthComponent implements OnInit {
                         this.isSubmitting = false;
                         this.router.navigate(['/Activate', '1']);
                     }
-                    else { 
+                    else {
                         this.isSubmitting = false;
                     }
                 },
@@ -636,7 +641,7 @@ export class AuthComponent implements OnInit {
                 data => {
                     if (data >= 1) {
                         this.isSubmitting = false;
-                        this.router.navigate(['/Activate','2']);
+                        this.router.navigate(['/Activate', '2']);
                     }
                     else {
                         this.isSubmitting = false;
@@ -648,8 +653,17 @@ export class AuthComponent implements OnInit {
             );
 
     }
+    /**
+    * *************************************************
+    * SIGNUP Module END
+    * *************************************************
+    **/
 
-
+    /**
+    * *************************************************
+    * ACTIVATION Module END
+    * *************************************************
+    **/
     submitActivationForm() {
 
         this.isSubmitting = true;
@@ -710,7 +724,7 @@ export class AuthComponent implements OnInit {
                 data => {
                     if (data.d == credentials.activationCode) {
                         this.userService
-                            .AttemptVerifiedActivationCodeConsumer(this.authType, this.globalEmail)
+                            .attemptVerifiedActivationCodeConsumer(this.authType, this.globalEmail)
                             .then(
                                 (data: any) => {
                                     if (data.d.length > 0) {
@@ -762,47 +776,61 @@ export class AuthComponent implements OnInit {
             );
     }
 
-    onClickResetPassword() {
+    /**
+    * *************************************************
+    * ACTIVATION Module END
+    * *************************************************
+    **/
+
+    submitFormResetPassword() {
+        let thisStatus = this;
+        const credentials = this.authForm.value;
         this.userService
-            .attemptResetPassword(this.globalEmail)
+            .attemptAssociateAccountExists(this.authType, credentials)
             .subscribe(
                 data => {
-                    if (data >= 1) { }
-                    else { //Email exist in db password can be changed
-                        this.userService
-                            .attemptResetAssociatePassword(this.globalEmail) // Reset for associate
-                            .subscribe(
-                                data => {
-                                    if (data == "0") {
-                                        this.resetPassword = true;
+                    var xmlDoc = $.parseXML(data.d);
+                    var xml = $(xmlDoc);
+                    var docs = xml.find("associateExists");
+                    $.each(docs, function (i, docs) {
+                        if ($(docs).find("AccountId").text() != "0") {
+                            thisStatus.userService
+                                .attemptResetAssociatePassword(credentials.email)
+                                .then((data1: any) => {
+                                    if (data1 == "0") {
+                                        //show message : "Please check your registered emailID for new password."
                                     }
-                                    else {
-                                        this.userService
-                                            .attemptResetConsumerPassword(this.globalEmail) //Reset for consumer
-                                            .subscribe(
-                                                data => {
-                                                    if (data == "0") {
-                                                        this.resetPassword = true;
-                                                        this.isSubmitting = false;
-                                                    }
-                                                    else {
-                                                        this.formErrors.activationCode = this.validationMessages['email']['emailInUse'];
-                                                        this.isSubmitting = false;
-                                                    }
-                                                },
-                                                err => {
-                                                    this.formErrors.activationCode = this.validationMessages['email']['emailInUse'];
-                                                    this.isSubmitting = false;
-                                                }
-                                            );
+                                });
+
+                        }
+                        else {
+
+
+                            thisStatus.userService
+                                .attempConsumerAccountExists(thisStatus.authType, credentials)
+                                .then((data1: any) => {
+                                    if (data1.d.length > 0) {
+                                        var xmlDoc1 = $.parseXML(data1.d);
+                                        var xml1 = $(xmlDoc1);
+                                        var docs1 = xml1.find("consumerExists");
+                                        $.each(docs1, function (i, docs1) {
+                                            if ($(docs1).find("AccountId").text() == "0") {
+                                                //Please verify your email address and retry again.
+                                            }
+                                            else {
+                                                thisStatus.userService
+                                                    .attemptResetConsumerPassword(credentials.email)
+                                                    .then((data2: any) => {
+                                                        if (data2 == "0") {
+                                                            //show message : "Please check your registered emailID for new password."
+                                                        }
+                                                    });
+                                            }
+                                        });
                                     }
-                                },
-                                err => {
-                                    this.formErrors.activationCode = this.validationMessages['email']['emailInUse'];
-                                    this.isSubmitting = false;
-                                }
-                            );
-                    }
+                                });
+                        }
+                    });
                 },
                 err => {
                     this.resentCode = false;

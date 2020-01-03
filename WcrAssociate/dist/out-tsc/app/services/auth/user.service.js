@@ -58,88 +58,196 @@ var UserService = /** @class */ (function () {
     UserService.prototype.token = function () {
         return this.rand() + this.rand(); // to make it longer
     };
-    UserService.prototype.attemptAuth = function (type, credentials) {
-        var _this = this;
-        debugger;
-        var urlToSignUp = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.password + "";
-        return this.apiService.post(environment.apiEndPoint + urlToSignUp, {})
-            .pipe(map(function (data) {
-            if (data > '0') {
-                _this.user.email = credentials.email;
-                _this.user.password = credentials.password;
-                _this.user.token = _this.token();
-                _this.setAuth(_this.user);
-            }
-            return data;
-        }));
-    };
-    UserService.prototype.attemptConsumerAuth = function (type, credentials) {
-        var _this = this;
-        debugger;
-        //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
-        var urlToSignIn = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.password + "";
-        return this.apiService.post(environment.apiEndPoint + urlToSignIn, {})
+    UserService.prototype.attemptAssociateAccountExists = function (type, credentials) {
+        var urlToSignUp = "ws/AssociateRegistration.asmx/AssociateAccountExists"; // + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
+        return this.apiService.post(urlToSignUp, { EmailID: credentials.email })
             .pipe(map(function (data) {
             debugger;
-            _this.user.email = credentials.email;
-            _this.user.password = credentials.password;
-            _this.user.token = _this.token();
-            _this.setAuth(_this.user);
+            //if (data.d.length > 0) {
+            //    this.user.email = credentials.email;
+            //    this.user.password = credentials.password;
+            //    this.user.token = this.token();
+            //    this.setAuth(this.user);
+            //}
             return data;
         }));
+        //let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
+        //return this.apiService.post( urlToSignUp, {})
+        //    .pipe(map(
+        //        data => {
+        //            debugger;
+        //            if (data > '0') {
+        //                this.user.email = credentials.email;
+        //                this.user.password = credentials.password;
+        //                this.user.token = this.token();
+        //                this.setAuth(this.user);
+        //            }
+        //            return data;
+        //        }
+        //    ));
+    };
+    UserService.prototype.attempConsumerAccountExists = function (type, credentials) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToSignUp;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToSignUp = "ws/AssociateRegistration.asmx/ConsumerAccountExists";
+                        return [4 /*yield*/, this.apiService.post(urlToSignUp, { EmailID: credentials.email }).toPromise()];
+                    case 1: // + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
+                    return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.prototype.attemptAssociateAuth = function (type, credentials) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToSignIn;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        debugger;
+                        urlToSignIn = "ws/AssociateRegistration.asmx/AssociateLogin";
+                        return [4 /*yield*/, this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
+                                .pipe(map(function (data) {
+                                return data;
+                            })).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.prototype.attemptConsumerAuth = function (type, credentials) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToSignIn;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        debugger;
+                        urlToSignIn = "ws/AssociateRegistration.asmx/ConsumerLogin";
+                        return [4 /*yield*/, this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
+                                .pipe(map(function (data) {
+                                return data;
+                            })).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.prototype.consumerLoginSessionActivate = function (type, credentials, associateID) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToSignInSessionActivation;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        debugger;
+                        urlToSignInSessionActivation = "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate";
+                        return [4 /*yield*/, this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
+                                .pipe(map(function (data) {
+                                return data;
+                            })).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.prototype.associateLoginSessionActivate = function (type, credentials, associateID) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToSignInSessionActivation;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        //{'username':'" + uname + "','assoID':'" + $(docs).find("AssociateId").text() + "
+                        debugger;
+                        urlToSignInSessionActivation = "ws/AssociateRegistration.asmx/AssociateLoginSessionActivate";
+                        return [4 /*yield*/, this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
+                                .pipe(map(function (data) {
+                                return data;
+                            })).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
     };
     UserService.prototype.attemptLogout = function () {
         var _this = this;
         var urlToLogout = "ws/AssociateSignUp.ashx?action=ConsumerLogout";
-        return this.apiService.post(environment.apiEndPoint + urlToLogout, {})
+        return this.apiService.post(urlToLogout, {})
             .pipe(map(function (data) {
             _this.purgeAuth();
             return data;
         }));
     };
-    UserService.prototype.attemptRegister = function (type, credentials) {
+    UserService.prototype.attemptRegisterAssociate = function (type, credentials) {
+        //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
         var urlToSignUp = "ws/AssociateSignUp.ashx?action=AssociateData";
-        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
-        return this.apiService.post(environment.apiEndPoint + urlToSignUp, { user: credentials })
+        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        return this.apiService.post(urlToSignUp, { user: credentials })
             .pipe(map(function (data) {
             return data;
         }));
     };
-    UserService.prototype.attemptActivateCode = function (type, credentials) {
+    UserService.prototype.attemptRegisterConsumer = function (type, credentials) {
+        //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
+        var urlToSignUp = "ws/AssociateSignUp.ashx?action=Consumer";
+        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        return this.apiService.post(urlToSignUp, { user: credentials })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    };
+    //attemptActivateCode(type, credentials): Observable<any> {
+    //    let urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
+    //    return this.apiService.post(urlToGetActivationCode, { username: credentials.email })
+    //        .pipe(map(
+    //            data => {
+    //                return data;
+    //            }
+    //        ));
+    //}
+    UserService.prototype.getAttemptVerifiedActivationCodeAssociate = function (type, email) {
         var urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
-        return this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: credentials.email })
+        return this.apiService.post(urlToGetActivationCode, { username: email }) //.toPromise()
             .pipe(map(function (data) {
             return data;
         }));
     };
-    UserService.prototype.attemptVerfiedActivationCode = function (type, email) {
+    UserService.prototype.attemptVerifiedActivationCodeAssociate = function (type, email) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetActivationCode;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
-                        return [4 /*yield*/, this.apiService.post(environment.apiEndPoint + urlToGetActivationCode, { username: email }).toPromise()
-                            //.pipe(map(
-                            //    data => {
-                            //        return data;
-                            //    }
-                            //));
-                        ];
-                    case 1: return [2 /*return*/, _a.sent()
-                        //.pipe(map(
-                        //    data => {
-                        //        return data;
-                        //    }
-                        //));
-                    ];
+                        urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
+                        return [4 /*yield*/, this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    UserService.prototype.getAttemptVerifiedActivationCodeConsumer = function (type, email) {
+        var urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
+        return this.apiService.post(urlToGetActivationCode, { username: email }) //.toPromise()
+            .pipe(map(function (data) {
+            return data;
+        }));
+    };
+    UserService.prototype.attemptVerifiedActivationCodeConsumer = function (type, email) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToGetActivationCode;
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
+                        return [4 /*yield*/, this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
     UserService.prototype.attemptResendActivateCode = function (email) {
         var urlToResendActivationCode = "ws/AssociateRegistration.asmx/ResendActivationCode";
-        return this.apiService.post(environment.apiEndPoint + urlToResendActivationCode, { EmailID: email })
+        return this.apiService.post(urlToResendActivationCode, { EmailID: email })
             .pipe(map(function (data) {
             return data;
         }));
@@ -150,14 +258,26 @@ var UserService = /** @class */ (function () {
         }));
     };
     UserService.prototype.attemptResetAssociatePassword = function (email) {
-        return this.http.get(environment.apiEndPoint + "ws/AssociateSignUp.ashx?action=ResetAssociatePassNew&EmailID=" + email + "").pipe(map(function (data) {
-            return data;
-        }));
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiService.post("ws/AssociateSignUp.ashx?action=ResetAssociatePassNew&EmailID=" + email + "", {}).pipe(map(function (data) {
+                            return data;
+                        })).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
     };
     UserService.prototype.attemptResetConsumerPassword = function (email) {
-        return this.http.get(environment.apiEndPoint + "ws/AssociateSignUp.ashx?action=ResetConsumerPassNew&EmailID=" + email + "").pipe(map(function (data) {
-            return data;
-        }));
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            return tslib_1.__generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.apiService.post("ws/AssociateSignUp.ashx?action=ResetConsumerPassNew&EmailID=" + email + "").toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
     };
     //
     UserService.prototype.validateEmail = function (email) {

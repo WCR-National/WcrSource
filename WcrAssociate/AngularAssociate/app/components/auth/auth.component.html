@@ -202,7 +202,7 @@
                                 <div class="form-group">
                                     <div class="col-sm-12 mg-b-20">
                                         <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'register')" type="submit" [disabled]="!FormFilledSuccessfully">
-                                            <span [style.display]="!isSubmitting ? 'block': 'none'">CREATE AN ACCOUNT</span>
+                                            <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitRegistrationForm()">CREATE AN ACCOUNT</span>
                                             <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'block': 'none'">
                                                 <div class="spinner-layer spinner-white-only">
                                                     <div class="circle-clipper left">
@@ -232,7 +232,7 @@
                                         </button>
 
                                         <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'activate')" type="submit" [disabled]="!authForm.valid">
-                                            <span [style.display]="!isSubmitting ? 'block': 'none'">VERIFY</span>
+                                            <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitActivationForm()">VERIFY</span>
                                             <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'block': 'none'">
                                                 <div class="spinner-layer spinner-white-only">
                                                     <div class="circle-clipper left">
@@ -247,7 +247,7 @@
                                         </button>
 
                                         <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'resetPassword')" type="submit" [disabled]="!authForm.valid">
-                                            <span [style.display]="!isSubmitting ? 'block': 'none'">RESET PASSWORD</span>
+                                            <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitFormResetPassword()">RESET PASSWORD</span>
                                             <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'block': 'none'">
                                                 <div class="spinner-layer spinner-white-only">
                                                     <div class="circle-clipper left">

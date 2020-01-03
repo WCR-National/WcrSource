@@ -68,7 +68,6 @@ export class UserService {
 
     attemptAssociateAccountExists(type, credentials): Observable<any> {
 
-
         let urlToSignUp: string = "ws/AssociateRegistration.asmx/AssociateAccountExists";// + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
         return this.apiService.post(urlToSignUp, { EmailID: credentials.email })
             .pipe(map(
@@ -256,7 +255,7 @@ export class UserService {
         ));
     }
 
-    async AttemptVerifiedActivationCodeConsumer(type, email) {
+    async attemptVerifiedActivationCodeConsumer(type, email) {
 
         let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
         return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
@@ -282,22 +281,18 @@ export class UserService {
         ));
     }
 
-    attemptResetAssociatePassword(email): Observable<any> {
+    async attemptResetAssociatePassword(email) {
 
-        return this.http.get(environment.apiEndPoint + "ws/AssociateSignUp.ashx?action=ResetAssociatePassNew&EmailID=" + email + "").pipe(map(
+        return await this.apiService.post("ws/AssociateSignUp.ashx?action=ResetAssociatePassNew&EmailID=" + email + "", {}).pipe(map(
             data => {
                 return data;
             }
-        ));
+        )).toPromise();
     }
 
-    attemptResetConsumerPassword(email): Observable<any> {
+    async attemptResetConsumerPassword(email) {
 
-        return this.http.get(environment.apiEndPoint + "ws/AssociateSignUp.ashx?action=ResetConsumerPassNew&EmailID=" + email + "").pipe(map(
-            data => {
-                return data;
-            }
-        ));
+        return await this.apiService.post("ws/AssociateSignUp.ashx?action=ResetConsumerPassNew&EmailID=" + email + "").toPromise();
     }
 
     //
