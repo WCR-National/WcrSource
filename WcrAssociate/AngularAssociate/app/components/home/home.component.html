@@ -1,4 +1,4 @@
-<div class="parallax" data-background="AngularAssociate/assets/images/home-parallax-2.jpg" data-color="#0e3a6b" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+<div id="divLandingPage" class="parallax" data-background="AngularAssociate/assets/images/background.jpg" data-color="#0e3a6b" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
     <!--  ../../../assets/images/home-parallax-2.jpg -->
     <div class="container">
         <div class="row">
@@ -20,7 +20,8 @@
 
                             <div class="main-search-input">
                                 <input type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter)="onEnterSearch()" />
-                                <button class="button waves-effect waves-light btn" (click)="onClickSearch()"><i class="large material-icons form-control-feedback">email</i> </button>
+                                <button class="button waves-effect waves-light btn" (click)="onClickSearch()">
+                                <i class="large material-icons form-control-feedback text-xs-27 pd-t-9-force">search</i> </button>
                             </div>
                         </div>
                     </div>
@@ -49,7 +50,7 @@
 
         <!---->
         <div class="row" [style.display]="isSearchingStart ? 'block':'none' ">
-            <div class="col-md-12">
+            <div class="col-md-12" style="height:400px; padding-top: 150px;">
                 <div class="col-xs-3 col-md-4 div-center">
                     <div class="progress" style="top:50%;">
                         <div class="indeterminate"></div>
@@ -60,18 +61,27 @@
 
 
         <!--<div class="row" [style.display]="ifError"></div>-->
-        <div class="row mg-t-40" [style.display]="resultContent ? 'block':'none' ">
+        <div class="row" [style.display]="resultContent ? 'block':'none' ">
             <div class="col-md-12">
 
-                <div class="row text-xs-center text-center mg-b-30">
+                <div class="row text-xs-center text-center mg-t-30 mg-b-50">
                     <div class="col-md-12">
-                        <h2 class="theme-text-color text-center">GET ACCESS TO WCR SALES AND SERVICES</h2>
+                        <h2 class="theme-text-color text-center">GET ACCESS TO WCR SALES</h2>
                         <p class="grey-text">
                             This is just a simple text made for this unique and awesome template, you can replace it with any text.
                         </p>
                     </div>
                 </div>
                 <div class="row" [innerHTML]="innerHtmlSales"> </div>
+
+                <div class="row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30" style="border-top: 1px solid #eee;">
+                    <div class="col-md-12">
+                        <h2 class="theme-text-color text-center">GET ACCESS TO WCR SERVICES</h2>
+                        <p class="grey-text">
+                            This is just a simple text made for this unique and awesome template, you can replace it with any text.
+                        </p>
+                    </div>
+                </div>
                 <div class="row" [innerHTML]="innerHtmlServices"></div>
             </div>
         </div>

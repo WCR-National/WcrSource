@@ -19,6 +19,7 @@ var AuthComponent = /** @class */ (function () {
         this.activationSent = false;
         this.showOnValidateEmail = false;
         this.showErrorsPassword = false;
+        this.showActivationDiv = false;
         this.resetPassword = false;
         this.FormFilledSuccessfully = false;
         this.validationMessages = {
@@ -164,7 +165,8 @@ var AuthComponent = /** @class */ (function () {
         var _this = this;
         this.route.url.subscribe(function (data) {
             // Get the last piece of the URL (it's either 'login' or 'register')
-            _this.authType = data[data.length - 1].path;
+            debugger;
+            _this.authType = data[0].path;
             // Set a title for the page accordingly
             if (_this.authType === 'login') {
                 _this.title = 'Sign in';
@@ -231,6 +233,7 @@ var AuthComponent = /** @class */ (function () {
                 _this.title = 'Account Activation';
             }
             else if (_this.authType === 'resetPassword') {
+                //this.resetPassword = true;
                 _this.authForm.get('email').enable();
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('email').setValidators([Validators.required, Validators.email]);
@@ -548,8 +551,15 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.submitActivationForm = function () {
         this.isSubmitting = true;
         var credentials = this.authForm.value;
+        var urlComponent;
         var splitCurrentUrl = this.router.url.split('/');
-        var userType = splitCurrentUrl[splitCurrentUrl.length - 1];
+        this.route.url.subscribe(function (data) {
+            // Get the last piece of the URL (it's either 'login' or 'register')
+            debugger;
+            urlComponent = data[0].path;
+        });
+        var userType = urlComponent;
+        console.log(userType);
         if (userType == "1") {
             this.associateActivationCode(credentials);
         }
@@ -641,6 +651,7 @@ var AuthComponent = /** @class */ (function () {
         var _this = this;
         var thisStatus = this;
         var credentials = this.authForm.value;
+        this.resetPassword = true;
         this.userService
             .attemptAssociateAccountExists(this.authType, credentials)
             .subscribe(function (data) {

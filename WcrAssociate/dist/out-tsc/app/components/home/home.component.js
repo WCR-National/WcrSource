@@ -108,8 +108,9 @@ var HomeComponent = /** @class */ (function () {
             var attrImage = $(this).attr('data-background');
             var attrColor = $(this).attr('data-color');
             var attrOpacity = $(this).attr('data-color-opacity');
+            debugger;
             if (attrImage !== undefined) {
-                $(this).css('background-image', 'url(' + attrImage + ')');
+                $(this).find(".parallax-overlay").css('background-image', 'url(' + attrImage + ')');
             }
             if (attrColor !== undefined) {
                 $(this).find(".parallax-overlay").css('background-color', '' + attrColor + '');
@@ -134,8 +135,8 @@ var HomeComponent = /** @class */ (function () {
                 $.each(docs, function (i, docs) {
                     var flag = 0;
                     innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                    innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+                    innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
                     var subCategoryId = $(docs).find("id").text();
                     thisHomePage.homeLandingService
                         .attemptGetAdvanceSearchByZipc(zipc, subCategoryId)
@@ -206,7 +207,7 @@ var HomeComponent = /** @class */ (function () {
                     var flag = 0;
                     innerHtmlServices += " <div class='col-sm-3 text-center block '>";
                     innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                    innerHtmlServices += " <h3>" + ($(docs).find("categoryName").text()) + " </h3>";
+                    innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                     var categoryId = $(docs).find("ID").text();
                     thisHomePage.homeLandingService
                         .attemptGetViewAdvanceSearchForServices(categoryId, zipc)
@@ -281,7 +282,7 @@ var HomeComponent = /** @class */ (function () {
                     var flag = 0;
                     innerHtmlSales += " <div class='col-sm-3 text-center block '>";
                     innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                    innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+                    innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
                     var subCategoryId = $(docs).find("id").text();
                     thisHomePage.homeLandingService
                         .attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId)
@@ -338,7 +339,7 @@ var HomeComponent = /** @class */ (function () {
                     var flag = 0;
                     innerHtmlServices += " <div class=' col-sm-3 text-center block '>";
                     innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                    innerHtmlServices += " <h3>" + ($(docs).find("categoryName").text()) + " </h3>";
+                    innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                     var subCategoryId = $(docs).find("ID").text();
                     thisHomePage.homeLandingService
                         .attemptGetAdvanceSearchServicesCityStateWise(state, city, subCategoryId)

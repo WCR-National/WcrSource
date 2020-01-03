@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
     constructor(private fb: FormBuilder, private renderer: Renderer2, private homeLandingService: HomeLandingService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
     ngOnInit() {
+        $('#divLandingPage').focus();
         this.parallaxBG();
         this.GetSalesAdts();
         this.searchForm = this.fb.group({
@@ -139,18 +140,15 @@ export class HomeComponent implements OnInit {
             var attrImage = $(this).attr('data-background');
             var attrColor = $(this).attr('data-color');
             var attrOpacity = $(this).attr('data-color-opacity');
-
+            debugger;
             if (attrImage !== undefined) {
-                $(this).css('background-image', 'url(' + attrImage + ')');
+                $(this).find(".parallax-overlay").css('background-image', 'url(' + attrImage + ')');
             }
 
             if (attrColor !== undefined) {
                 $(this).find(".parallax-overlay").css('background-color', '' + attrColor + '');
             }
 
-            if (attrOpacity !== undefined) {
-                $(this).find(".parallax-overlay").css('opacity', '' + attrOpacity + '');
-            }
 
         });
     }
@@ -172,8 +170,8 @@ export class HomeComponent implements OnInit {
                         $.each(docs, function (i, docs) {
                             var flag = 0;
                             innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                            innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                            innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+                            innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+                            innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
 
                             var subCategoryId = $(docs).find("id").text();
 
@@ -264,7 +262,7 @@ export class HomeComponent implements OnInit {
                             var flag = 0;
                             innerHtmlServices += " <div class='col-sm-3 text-center block '>";
                             innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                            innerHtmlServices += " <h3>" + ($(docs).find("categoryName").text()) + " </h3>";
+                            innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
 
                             var categoryId = $(docs).find("ID").text();
 
@@ -367,7 +365,7 @@ export class HomeComponent implements OnInit {
                             var flag = 0;
                             innerHtmlSales += " <div class='col-sm-3 text-center block '>";
                             innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                            innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+                            innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
 
                             var subCategoryId = $(docs).find("id").text();
                             thisHomePage.homeLandingService
@@ -438,7 +436,7 @@ export class HomeComponent implements OnInit {
                             var flag = 0;
                             innerHtmlServices += " <div class=' col-sm-3 text-center block '>";
                             innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                            innerHtmlServices += " <h3>" + ($(docs).find("categoryName").text()) + " </h3>";
+                            innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                             var subCategoryId = $(docs).find("ID").text();
 
 

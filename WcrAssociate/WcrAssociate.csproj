@@ -132,6 +132,7 @@
     <Content Include="AngularAssociate\assets\images\agent-03.jpg" />
     <Content Include="AngularAssociate\assets\images\agent-04.jpg" />
     <Content Include="AngularAssociate\assets\images\agent-avatar.jpg" />
+    <Content Include="AngularAssociate\assets\images\background.jpg" />
     <Content Include="AngularAssociate\assets\images\blog-post-01.jpg" />
     <Content Include="AngularAssociate\assets\images\blog-post-01a.jpg" />
     <Content Include="AngularAssociate\assets\images\blog-post-02.jpg" />

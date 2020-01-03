@@ -4,7 +4,7 @@
     </div>
 </div>-->
 
-<div class="auth-page">
+<div class="auth-page mg-b-60-force">
     <div class="container page">
         <div class="row mg-t-50">
             <div class="col-md-5 offset-md-3 col-xs-12 card pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center">
@@ -14,24 +14,30 @@
                     </div>
 
                     <p class="text-xs-center">
-                        <a [routerLink]="['/login']" *ngIf="authType == 'login'" class="green-text text-darken-1">Don't have an account? Sign up now!</a>
-                        <a [routerLink]="['/register']" *ngIf="authType == 'register'" class="green-text text-darken-1">Already have an account? Sign in!</a>
+                        <a routerLink="/register" *ngIf="authType == 'login'" class="green-text text-darken-1">Don't have an account? Sign up now!</a>
+                        <a routerLink="/login" *ngIf="authType == 'register'" class="green-text text-darken-1">Already have an account? Sign in!</a>
                     </p>
                     <form [formGroup]="authForm" (ngSubmit)="submitForm()">
                         <fieldset [disabled]="isSubmitting">
 
                             <div class="form-group mg-t-40" [ngClass]="{'has-error': formErrors.activationCode}"
-                                 *ngIf="authType == 'activate'" >
+                                 *ngIf="authType == 'activate'">
+                                <div class="col-sm-12">
+                                    <span class="text-teal text-darken-4" *ngIf="authType == 'activate'">
+                                        Activation code was sent to the Email address that was supplied for this account.
+                                    </span>
+                                </div>
                                 <div class="col-sm-12 mg-b-20">
+
+
+
                                     <input placeholder="Activation code" id="activationCode" type="text" class="form-control pd-l-45-force" formControlName="activationCode" (blur)="logValidationErrors()">
-                                    <span class="large material-icons form-control-feedback icon" >vpn_key</span>
+                                    <span class="large material-icons form-control-feedback icon">vpn_key</span>
                                     <div class="invalid-data" *ngIf="formErrors.activationCode">
                                         {{formErrors.activationCode}}
                                     </div>
                                     <span class="text-teal text-darken-4" *ngIf="authType == 'activate'" [style.display]="activationSent ? 'block':'none'">Activation code has been send to your registered Email.</span>
-                                    <span class="text-teal text-darken-4" *ngIf="authType == 'activate'" [style.display]="resentCode ? 'block':'none'">
-                                        Activation code was sent to the Email address that was supplied for this account
-                                    </span>
+
                                 </div>
 
                                 <div class="col-sm-12" *ngIf="authType == 'activate'">
@@ -45,7 +51,7 @@
 
                             </div>
 
-                            
+
                             <div class="form-group">
                                 <div class="col-sm-12">
                                     <span [style.display]="resetPassword ? 'block':'none'">
@@ -53,7 +59,7 @@
                                     </span>
                                 </div>
                             </div>
-                           
+
 
                             <div class="form-group" [ngClass]="{'has-error': formErrors.email}"
                                  *ngIf="(authType == 'register' || authType == 'login' || authType == 'resetPassword')"
@@ -62,7 +68,7 @@
                                 <div class="col-sm-12 mg-b-20">
                                     <!--(blur)="showPreloaderIcon();"-->
                                     <input id="email" type="text" class="form-control pd-l-45-force" formControlName="email" placeholder="Email">
-                                    <span class="large material-icons form-control-feedback icon">email</span> 
+                                    <span class="large material-icons form-control-feedback icon">email</span>
 
 
                                     <div class="preloader-wrapper preloader-wrapper-input small active"
@@ -87,17 +93,14 @@
                             <div class="col-sm-12 pd-l-0-force pd-r-0-force">
                                 <div formGroupName="passwordGroup">
                                     <div class="col-sm-12" *ngIf="authType == 'login'">
-                                        <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-3"> <i class="fa fa-key"></i>Forgot password</a>
+                                        <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-3"> <i class="material-icons form-control-feedback pd-b-4-force" style="font-size:15px;">vpn_key</i>Forgot password</a>
                                     </div>
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.password}"
                                          *ngIf="(authType == 'register' || authType == 'login' ) ">
-                                        <div class="col-sm-12  mg-b-20" >
-                                            <input id="password" placeholder="Password" type="password" class="form-control pd-l-45-force" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"  
+                                        <div class="col-sm-12  mg-b-20">
+                                            <input id="password" placeholder="Password" type="password" class="form-control pd-l-45-force" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
                                                    autocomplete="new-password">
                                             <span class="large material-icons form-control-feedback icon">lock</span>
-
-
-                                            <span class="fa fa-lock form-control-feedback"></span>
 
                                             <div class="col-sm-12" *ngIf="(authType == 'register')" [style.display]="showErrorsPassword ? 'block':'none'">
                                                 <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
