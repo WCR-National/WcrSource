@@ -15,6 +15,7 @@ var HomeComponent = /** @class */ (function () {
         this.innerHtmlServices = '';
     }
     HomeComponent.prototype.ngOnInit = function () {
+        $('#divLandingPage').focus();
         this.parallaxBG();
         this.GetSalesAdts();
         this.searchForm = this.fb.group({
@@ -114,9 +115,6 @@ var HomeComponent = /** @class */ (function () {
             }
             if (attrColor !== undefined) {
                 $(this).find(".parallax-overlay").css('background-color', '' + attrColor + '');
-            }
-            if (attrOpacity !== undefined) {
-                $(this).find(".parallax-overlay").css('opacity', '' + attrOpacity + '');
             }
         });
     };

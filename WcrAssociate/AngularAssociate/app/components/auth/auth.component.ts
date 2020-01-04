@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { UserService } from '../../services/auth';
+import { UserService, encrypt_decrypt } from '../../services/auth';
+
 import * as $ from 'jquery';
+import * as CryptoJS from 'crypto-js';
 
 import { Errors } from '../../entities/errors.model';
-import { window } from 'rxjs/operators';
-import { debug } from 'util';
 import { HttpClient } from '@angular/common/http';
+import { map, debounceTime, take, switchMap } from 'rxjs/operators';
+import { environment } from 'AngularAssociate/environments/environment';
+import { Observable, of } from 'rxjs';
+
 
 
 @Component({
@@ -32,6 +36,15 @@ export class AuthComponent implements OnInit {
     private resetPassword: boolean = false;
     authForm: FormGroup;
     FormFilledSuccessfully: boolean = false;
+    showEmailVerification: boolean = false;
+    tokenFromUI: string = "7061737323313233";
+    encrypted: any = "";
+    decrypted: string;
+
+    request: string;
+    responce: string;
+
+    loginErrorMessage: string = "";
 
     validationMessages = {
         'email': {
@@ -60,10 +73,11 @@ export class AuthComponent implements OnInit {
         },
         'terms': {
             'required': 'You must accept terms and conditions'
-        },
-        'loginCredentials': {
-            'error': 'User Authentication Failed. Please verify your credentials'
         }
+        //,
+        //'loginCredentials': {
+        //    'error': 'User Authentication Failed. Please verify your credentials'
+        //}
     }
     formErrors = {
         'email': '',
@@ -73,13 +87,20 @@ export class AuthComponent implements OnInit {
         'associate': '',
         'consumer': '',
         'activationCode': '',
-        'terms': '',
-        'loginCredentials': ''
+        'terms': ''
+        //,
+        //'loginCredentials': ''
     };
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder) { }
+    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder, private http: HttpClient
+    ) { }
 
     ngOnInit() {
+
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //console.log(this.encrypted);
+        //this.router.navigate(['activate', '2', this.encrypted]);
 
         this.setValidationOnform();
         this.setSignInOrSignUpOrActivateOrReset();
@@ -94,7 +115,6 @@ export class AuthComponent implements OnInit {
 
 
         this.authForm.get('associate').valueChanges.subscribe((data) => {
-            debugger;
             if (data == true) {
                 this.authForm.get('terms').enable();
             }
@@ -104,7 +124,6 @@ export class AuthComponent implements OnInit {
         });
 
         this.authForm.get('consumer').valueChanges.subscribe((data) => {
-            debugger;
             if (data == true) {
                 this.authForm.get('terms').enable();
             }
@@ -114,7 +133,6 @@ export class AuthComponent implements OnInit {
         });
 
         this.authForm.get('terms').valueChanges.subscribe((data) => {
-            debugger;
             if (data == false) {
                 this.FormFilledSuccessfully = false;
             }
@@ -134,6 +152,11 @@ export class AuthComponent implements OnInit {
     }
 
     logValidationErrors(group: FormGroup = this.authForm): void {
+
+        if (this.authType == "login") {
+            this.loginErrorMessage = "";
+        }
+        this.showEmailVerification = false;
         Object.keys(group.controls).forEach((key: string) => {
             const abstractControl = group.get(key);
             this.formErrors[key] = '';
@@ -145,7 +168,9 @@ export class AuthComponent implements OnInit {
                 if (abstractControl.errors != null) {
                     for (const errorKey in abstractControl.errors) {
                         if (errorKey) {
-                            this.formErrors[key] += messages[errorKey] + ' ';
+                            if (messages[errorKey] !== undefined) {
+                                this.formErrors[key] += messages[errorKey] + ' ';
+                            }
                         }
                     }
                     //if (key == "password") {
@@ -163,7 +188,7 @@ export class AuthComponent implements OnInit {
     setValidationOnform() {
         // use FormBuilder to create a form group
         this.authForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email, isEmailExist(this.userService, this)]],
+            email: ['', [Validators.required, Validators.email], [this.emailAlreadyTaken()]],
             passwordGroup: this.fb.group({
                 password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
                 patternValidator(/\d/, { number: true }),
@@ -191,11 +216,10 @@ export class AuthComponent implements OnInit {
     setSignInOrSignUpOrActivateOrReset() {
         this.route.url.subscribe(data => {
             // Get the last piece of the URL (it's either 'login' or 'register')
-            debugger;
 
             this.authType = data[0].path;
 
-           
+
             // Set a title for the page accordingly
             if (this.authType === 'login') {
                 this.title = 'Sign in';
@@ -204,6 +228,7 @@ export class AuthComponent implements OnInit {
                 this.authForm.get('email').updateValueAndValidity();
 
                 this.authForm.get('email').setValidators([Validators.required, Validators.email]);
+                this.authForm.get('email').setAsyncValidators([this.emailAlreadyTaken()]);
                 this.authForm.get('email').updateValueAndValidity();
 
                 this.authForm.get('passwordGroup').clearValidators();
@@ -221,6 +246,7 @@ export class AuthComponent implements OnInit {
                 this.authForm.get('consumer').clearValidators();
                 this.authForm.get('consumer').updateValueAndValidity();
 
+
                 this.authForm.get('terms').clearValidators();
                 this.authForm.get('terms').updateValueAndValidity();
 
@@ -229,8 +255,8 @@ export class AuthComponent implements OnInit {
 
             }
             else if (this.authType === 'register') {
-                this.authForm.get('email').setValidators([Validators.required, Validators.email, isEmailExist(this.userService, this)]);
-                this.authForm.get('email').updateValueAndValidity();
+                //this.authForm.get('email').setValidators([[Validators.required, Validators.email]]);
+                //this.authForm.get('email').updateValueAndValidity();
 
 
                 this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
@@ -337,7 +363,7 @@ export class AuthComponent implements OnInit {
 
     submitLoginForm(email = "", password = "") {
         this.isSubmitting = true;
-        debugger;
+        this.loginErrorMessage = "";
         //this.errors = { errors: {} };
         if (email != "" && password != "") {
             this.router.navigateByUrl('/');
@@ -361,20 +387,21 @@ export class AuthComponent implements OnInit {
                                         var xmlDoc1 = $.parseXML(data1.d);
                                         var xml1 = $(xmlDoc1);
                                         var docs1 = xml1.find("consumerExists");
+
                                         $.each(docs1, function (i, docs1) {
                                             if ($(docs1).find("AccountId").text() == "0") {
 
-                                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials"
+                                                thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials"
                                             }
                                             else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
 
                                             }
                                             else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
 
-                                                thisStatus.formErrors.loginCredentials = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                                                thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
                                             }
                                             else {
-                                                thisStatus.LoginAssociateOrConsumer(credentials, 2); //Associate
+                                                thisStatus.LoginAssociateOrConsumer(credentials, 2); //Consumer
                                             }
                                         });
                                     }
@@ -386,13 +413,13 @@ export class AuthComponent implements OnInit {
                         }
                         else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "1") {
 
-                            thisStatus.formErrors.loginCredentials = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
-                            return false;
+                            thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
                         }
                         else {
                             thisStatus.LoginAssociateOrConsumer(credentials, 1);//associate
                         }
                     });
+                    this.isSubmitting = false;
 
 
                     //if (data > '0') {
@@ -427,7 +454,7 @@ export class AuthComponent implements OnInit {
                     //}
                 },
                 err => {
-                    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+                    //this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
                     this.isSubmitting = false;
                 }
             );
@@ -441,33 +468,30 @@ export class AuthComponent implements OnInit {
                 .then(
                     (data: any) => {
 
-                        if (data > 1) {
 
-                            if (data.d.length > 0) {
-                                var xmlDoc1 = $.parseXML(data.d);
-                                var xml1 = $(xmlDoc1);
-                                var docs1 = xml1.find("associateLogin");
-                                $.each(docs1, function (i, docs1) {
+                        if (data.d.length > 0) {
+                            var xmlDoc1 = $.parseXML(data.d);
+                            var xml1 = $(xmlDoc1);
+                            var docs1 = xml1.find("associateLogin");
+                            $.each(docs1, function (i, docs1) {
 
-                                    if ($(docs1).find("AssociateId").text() == "-1") {
-                                        thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                        return;
-                                    }
-                                    else if ($(docs1).find("Status").text() == "1") {
+                                if ($(docs1).find("AssociateId").text() == "-1") {
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                                    return;
+                                }
+                                else if ($(docs1).find("Status").text() == "1") {
 
-                                        thisStatus.associateLoginSessionActivate(docs1);
-                                        return;
-                                    }
-                                    else {
-                                        thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                        return;
-                                    }
-                                });
-                            }
+                                    thisStatus.associateLoginSessionActivate(docs1);
+                                    return;
+                                }
+                                else {
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                                    return;
+                                }
+                            });
                         }
                         else {
                             //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
-                            this.isSubmitting = false;
                         }
 
                         //if (data > 1) {
@@ -479,6 +503,7 @@ export class AuthComponent implements OnInit {
                         //    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
                         //    this.isSubmitting = false;
                         //}
+
                     },
                     err => {
                         //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
@@ -491,28 +516,24 @@ export class AuthComponent implements OnInit {
                 .attemptConsumerAuth(this.authType, credentials)
                 .then(
                     (data: any) => {
-                        if (data > 1) {
 
-                            if (data.d.length > 0) {
-                                var xmlDoc1 = $.parseXML(data.d);
-                                var xml1 = $(xmlDoc1);
-                                var docs1 = xml1.find("consumerLogin");
-                                $.each(docs1, function (i, docs1) {
+                        if (data.d.length > 0) {
+                            var xmlDoc1 = $.parseXML(data.d);
+                            var xml1 = $(xmlDoc1);
+                            var docs1 = xml1.find("consumerLogin");
+                            $.each(docs1, function (i, docs1) {
 
-                                    if ($(docs1).find("Id").text() == "-1") {
-                                        thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                    }
-                                    else if ($(docs1).find("Flag").text() == "1") {
+                                if ($(docs1).find("Id").text() == "-1") {
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                                }
+                                else if ($(docs1).find("Flag").text() == "1") {
 
-                                        thisStatus.consumerLoginSessionActivate(docs1);
-                                        return;
-                                    }
-                                    else {
-                                        thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                        return false;
-                                    }
-                                });
-                            }
+                                    thisStatus.consumerLoginSessionActivate(docs1);
+                                }
+                                else {
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                                }
+                            });
                         }
                         else {
                             this.showErrorsPassword = true;
@@ -542,10 +563,10 @@ export class AuthComponent implements OnInit {
                     }
                 },
                 err => {
+                    this.loginErrorMessage = "Some internal error occurred.";
                     this.isSubmitting = false;
                 }
             );
-
     }
 
     associateLoginSessionActivate(docs) {
@@ -566,6 +587,7 @@ export class AuthComponent implements OnInit {
                     }
                 },
                 err => {
+                    this.loginErrorMessage = "Some internal error occurred.";
                     //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
                     this.isSubmitting = false;
                 }
@@ -583,8 +605,153 @@ export class AuthComponent implements OnInit {
     * SIGN UP Module END
     * *************************************************
     **/
+
+    isEmailExist(control: AbstractControl) {
+
+        //clearTimeout(this.debouncer);
+        //return { 'emailInUse': true };
+        let thisUserService = this.userService;
+
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(String(control.value).toLowerCase())) {
+            this.showOnValidateEmail = true;
+
+            setTimeout(() => {
+
+                return thisUserService.validateEmail(control.value).subscribe(
+                    data => {
+                        if (Number(data) >= 1) {
+                            console.log("Email validate" + data);
+
+                            this.showOnValidateEmail = false;
+                            this.FormFilledSuccessfully = false;
+                        }
+                        else {
+                            this.showEmailVerification = false;
+
+                            console.log("Email validate" + data);
+
+                            control.parent.get('passwordGroup').enable();
+                            control.parent.get('passwordGroup').get('password').enable();
+                            control.parent.get('passwordGroup').get('confirmPassword').enable();
+
+                            //control.parent.get('associate').enable();
+                            //control.parent.get('consumer').enable();
+
+                            //this.parent.get('terms').enable();
+                            this.showOnValidateEmail = false;
+                            this.FormFilledSuccessfully = false;
+
+                            return null;
+                        }
+                    },
+                    (err) => {
+                        this.showOnValidateEmail = false;
+                        this.FormFilledSuccessfully = false;
+                        return { 'emailInUse': true };
+                    });
+            }, 1000);
+
+        }
+    }
+
+
+    isEmailTaken(): boolean {
+        this.logValidationErrors();
+        return this.authForm.get('email').hasError('emailInUse');
+    }
+
+    emailAlreadyTaken(): AsyncValidatorFn {
+
+        return (control: AbstractControl):
+            | Promise<{ [key: string]: any } | null>
+            | Observable<{ [key: string]: any } | null> => {
+
+            let thisUserService = this.userService;
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (re.test(String(control.value).toLowerCase())) {
+                this.showOnValidateEmail = true;
+
+                return this.userService
+                    .emailAlreadyTaken(control.value)
+                    .pipe(
+                        map(data => {
+                            if (data > 1) {
+                                this.showOnValidateEmail = false;
+                                this.FormFilledSuccessfully = false;
+                                $('#validateEmailDiv').addClass('has-error');
+                                $('#validateEmailDiv').attr('style', 'top: 19% !important');
+
+
+                                return { emailInUse: true };
+                            }
+                            else {
+                                this.showOnValidateEmail = false;
+                                control.parent.get('passwordGroup').enable();
+                                control.parent.get('passwordGroup').get('password').enable();
+                                control.parent.get('passwordGroup').get('confirmPassword').enable();
+                                $('#validateEmailDiv').removeAttr('style');
+
+                                //control.parent.get('associate').enable();
+                                //control.parent.get('consumer').enable();
+
+                                //this.parent.get('terms').enable();
+                                this.FormFilledSuccessfully = false;
+
+                                return of(null);
+                            }
+                        })
+
+                    );
+
+                //return thisUserService.emailAlreadyTaken(control.value)
+                //    .subscribe(
+                //        (data) => {
+                //            debugger;
+                //            if (Number(data) >= 1) {
+                //                console.log("Email validate" + data);
+
+                //                this.showOnValidateEmail = false;
+                //                this.FormFilledSuccessfully = false;
+                //                return { 'emailTaken': true };
+                //            }
+                //            else {
+                //                this.showEmailVerification = false;
+
+                //                console.log("Email validate" + data);
+
+                //                control.parent.get('passwordGroup').enable();
+                //                control.parent.get('passwordGroup').get('password').enable();
+                //                control.parent.get('passwordGroup').get('confirmPassword').enable();
+
+                //                //control.parent.get('associate').enable();
+                //                //control.parent.get('consumer').enable();
+
+                //                //this.parent.get('terms').enable();
+                //                this.FormFilledSuccessfully = false;
+
+                //                return of(null);
+                //            }
+                //        },
+                //        (err) => {
+                //            this.showOnValidateEmail = false;
+                //            this.FormFilledSuccessfully = false;
+                //            return of(null);
+                //        });
+            }
+        }
+
+    }
+
     submitRegistrationForm() {
+
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+
+        //this.router.navigate(['activate', '2', this.encrypted]);
+
         this.isSubmitting = true;
+        this.FormFilledSuccessfully = true;
 
         if (this.authForm.get('associate').value == true) {
             this.associateRegister();
@@ -592,6 +759,8 @@ export class AuthComponent implements OnInit {
         else if (this.authForm.get('consumer').value == true) {
             this.consumerRegister();
         }
+
+
         //this.errors = { errors: {} };
 
         //const credentials = this.authForm.value;
@@ -626,7 +795,17 @@ export class AuthComponent implements OnInit {
                 data => {
                     if (data >= 1) {
                         this.isSubmitting = false;
-                        this.router.navigate(['/Activate', '1']);
+                        this.request = credentials.email;
+                        this.encryptUsingAES256()
+                        credentials.email = this.encrypted;
+                        credentials.email.replace('/', '~');
+
+                        this.request = credentials.passwordGroup.password;
+                        this.encryptUsingAES256()
+                        credentials.passwordGroup.password = this.encrypted;
+                        credentials.passwordGroup.password.replace('/', '~');
+
+                        this.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
                     }
                     else {
                         this.isSubmitting = false;
@@ -647,7 +826,19 @@ export class AuthComponent implements OnInit {
                 data => {
                     if (data >= 1) {
                         this.isSubmitting = false;
-                        this.router.navigate(['/Activate', '2']);
+
+                        this.request = credentials.email;
+                        this.encryptUsingAES256()
+                        credentials.email = this.encrypted;
+                        credentials.email.replace('/', '~');
+
+                        this.request = credentials.passwordGroup.password;
+                        this.encryptUsingAES256()
+                        credentials.passwordGroup.password = this.encrypted;
+                        credentials.passwordGroup.password.replace('/', '~');
+
+
+                        this.router.navigate(['activate', '2', credentials.email, credentials.passwordGroup.password]);
                     }
                     else {
                         this.isSubmitting = false;
@@ -671,18 +862,46 @@ export class AuthComponent implements OnInit {
     * *************************************************
     **/
     submitActivationForm() {
-
         this.isSubmitting = true;
         const credentials = this.authForm.value;
         let urlComponent: string;
-        let splitCurrentUrl = this.router.url.split('/');
+
+        let encryptedPassword: string;
+        let encryptedEmail: string;
         this.route.url.subscribe(data => {
-            // Get the last piece of the URL (it's either 'login' or 'register')
-            debugger;
-            urlComponent = data[0].path;
+
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[0].path;
+                encryptedEmail = data[2].path;
+                encryptedPassword = data[3].path;
+                this.isSubmitting = false;
+
+            }
+            else {
+                //page  not found
+                this.isSubmitting = false;
+            }
         });
+
+
         let userType = urlComponent;
-        console.log(userType);
+        encryptedEmail.replace('~', '/');
+
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        credentials.email = this.decrypted;
+
+        console.log(this.decrypted);
+
+        encryptedPassword.replace('~', '/');
+
+        this.encrypted = encryptedPassword;
+        this.decryptUsingAES256();
+        credentials.passwordGroup.password = this.decrypted;
+
+        console.log(this.decrypted);
+
         if (userType == "1") {
             this.associateActivationCode(credentials);
         }
@@ -690,8 +909,6 @@ export class AuthComponent implements OnInit {
             this.consumerActivationCode(credentials);
         }
     }
-
-
 
     associateActivationCode(credentials) {
 
@@ -701,11 +918,11 @@ export class AuthComponent implements OnInit {
                 data => {
                     if (data.d == credentials.activationCode) {
                         this.userService
-                            .attemptVerifiedActivationCodeAssociate(this.authType, this.globalEmail)
+                            .attemptVerifiedActivationCodeAssociate(this.authType, credentials.email)
                             .then(
                                 (data: any) => {
                                     if (data.d.length > 0) {
-                                        this.submitLoginForm(this.globalEmail, this.globalPassword);
+                                        this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
                                     this.isSubmitting = false;
 
@@ -737,11 +954,11 @@ export class AuthComponent implements OnInit {
                 data => {
                     if (data.d == credentials.activationCode) {
                         this.userService
-                            .attemptVerifiedActivationCodeConsumer(this.authType, this.globalEmail)
+                            .attemptVerifiedActivationCodeConsumer(this.authType, credentials.email)
                             .then(
                                 (data: any) => {
                                     if (data.d.length > 0) {
-                                        this.submitLoginForm(this.globalEmail, this.globalPassword);
+                                        this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
                                     this.isSubmitting = false;
 
@@ -768,13 +985,38 @@ export class AuthComponent implements OnInit {
 
     onClickResendVerificationCode() {
 
-        this.resentCode = false;
+        let email: string;
+        let urlComponent;
+        let encryptedEmail: string;
+        this.route.url.subscribe(data => {
+
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[0].path;
+                encryptedEmail = data[2].path;
+            }
+            else {
+                //page  not found
+            }
+        });
+
+
+        let userType = urlComponent;
+
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        email = this.decrypted;
+        email.replace('~', '/');
+
+        console.log(this.decrypted);
+
+        this.resentCode = true;
         this.userService
-            .attemptResendActivateCode(this.globalEmail)
+            .attemptResendActivateCode(email)
             .subscribe(
                 data => {
                     if (data.d > 0 && data.d > "1") {
-                        this.resentCode = true;
+                        this.resentCode = false;
                         this.isSubmitting = false;
                     }
                     else {
@@ -794,6 +1036,32 @@ export class AuthComponent implements OnInit {
     * ACTIVATION Module END
     * *************************************************
     **/
+
+    encryptUsingAES256() {
+        let _key = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        let _iv = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        let encrypted = CryptoJS.AES.encrypt(
+            JSON.stringify(this.request), _key, {
+                keySize: 16,
+                iv: _iv,
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7
+            });
+        this.encrypted = encrypted.toString();
+    }
+
+    decryptUsingAES256() {
+        let _key = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        let _iv = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+
+        this.decrypted = CryptoJS.AES.decrypt(
+            this.encrypted, _key, {
+                keySize: 16,
+                iv: _iv,
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7
+            }).toString(CryptoJS.enc.Utf8);
+    }
 
     submitFormResetPassword() {
         let thisStatus = this;
@@ -862,7 +1130,6 @@ export class AuthComponent implements OnInit {
     }
 
     //showPreloaderIcon() {
-    //    debugger;
     //    this.showOnValidateEmail = true;
     //}
 
@@ -929,47 +1196,54 @@ function emailDomain(domainName: string) {
     };
 }
 
-function isEmailExist(userService: UserService, authComp: AuthComponent) {
+//function isEmailExist(userService: UserService, authComp: AuthComponent) {
 
-    return (control: AbstractControl): { [key: string]: any } | null => {
-        //clearTimeout(this.debouncer);
-        //return { 'emailInUse': true };
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (re.test(String(control.value).toLowerCase())) {
-            authComp.showOnValidateEmail = true;
-        }
-        setTimeout(() => {
-            userService.validateEmail(control.value).subscribe(
-                (data) => {
+//    return (control: AbstractControl): { [key: string]: any } | null => {
+//        //clearTimeout(this.debouncer);
+//        //return { 'emailInUse': true };
+//        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//        if (re.test(String(control.value).toLowerCase())) {
+//            authComp.showOnValidateEmail = true;
+//            setTimeout(() => {
+//                userService.validateEmail(control.value).subscribe(
+//                    (data) => {
+//                        if (data >= 1) {
+//                            console.log("Email validate" + data);
 
-                    if (data >= 1) {
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return { 'emailInUse': true };
+//                        }
+//                        else {
+//                            console.log("Email validate" + data);
 
-                        control.parent.get('passwordGroup').enable();
-                        control.parent.get('passwordGroup').get('password').enable();
-                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+//                            control.parent.get('passwordGroup').enable();
+//                            control.parent.get('passwordGroup').get('password').enable();
+//                            control.parent.get('passwordGroup').get('confirmPassword').enable();
 
-                        //control.parent.get('associate').enable();
-                        //control.parent.get('consumer').enable();
+//                            //control.parent.get('associate').enable();
+//                            //control.parent.get('consumer').enable();
 
-                        //control.parent.get('terms').enable();
-                        authComp.showOnValidateEmail = false;
-                        authComp.FormFilledSuccessfully = false;
+//                            //control.parent.get('terms').enable();
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
 
-                        return null;
-                    }
-                    else {
-                        return { 'emailInUse': true };
-                    }
-                },
-                (err) => {
-                    return { 'emailInUse': true };
-                });
+//                            return null;
+//                        }
+//                    },
+//                    (err) => {
+//                        authComp.showOnValidateEmail = false;
+//                        authComp.FormFilledSuccessfully = false;
+//                        return { 'emailInUse': true };
+//                    });
+//            }, 500);
+//        }
+//        console.log('outside');
 
-        }, 1000);
-        return null;
-    }
+//        return { 'emailInUse': true };
 
-}
+//    }
+//}
 
 function matchPasswords(group: AbstractControl): { [key: string]: any } | null {
     const passwordControl = group.get('password');

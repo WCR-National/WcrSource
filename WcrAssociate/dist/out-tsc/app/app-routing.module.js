@@ -29,7 +29,7 @@ var routes = [
         canActivate: [NoAuthGuard]
     },
     {
-        path: 'activate/:id',
+        path: 'activate/:id/:email/:password',
         component: AuthComponent,
         canActivate: [NoAuthGuard]
     },

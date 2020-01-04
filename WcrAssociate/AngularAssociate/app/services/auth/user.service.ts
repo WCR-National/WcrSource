@@ -7,8 +7,8 @@ import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
 import { environment } from '../../../environments/environment';
 
-import { map, distinctUntilChanged } from 'rxjs/operators';
-import { debug } from 'util';
+
+import { map, distinctUntilChanged, delay } from 'rxjs/operators';
 
 
 @Injectable()
@@ -186,31 +186,33 @@ export class UserService {
             ));
     }
 
-    attemptRegisterAssociate(type, credentials): Observable<number> {
-
+    attemptRegisterAssociate(type, credentials): Observable<any> {
+        debugger;
         //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
 
         let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateData";
-        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        urlToSignUp += "&FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
 
-        return this.apiService.post(urlToSignUp, { user: credentials })
+        return this.apiService.post(urlToSignUp, {})
             .pipe(map(
                 data => {
+                    console.log(data);
                     return data;
                 }
             ));
     }
 
-    attemptRegisterConsumer(type, credentials): Observable<number> {
+    attemptRegisterConsumer(type, credentials): Observable<any> {
 
         //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
 
         let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=Consumer";
-        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        urlToSignUp += "&FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
 
-        return this.apiService.post(urlToSignUp, { user: credentials })
+        return this.apiService.post(urlToSignUp, {})
             .pipe(map(
                 data => {
+                    console.log(data);
                     return data;
                 }
             ));
@@ -231,11 +233,11 @@ export class UserService {
 
         let urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
         return this.apiService.post(urlToGetActivationCode, { username: email })//.toPromise()
-        .pipe(map(
-            data => {
-                return data;
-            }
-        ));
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
     }
 
     async attemptVerifiedActivationCodeAssociate(type, email) {
@@ -243,16 +245,16 @@ export class UserService {
         let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
         return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
     }
-    
+
     getAttemptVerifiedActivationCodeConsumer(type, email) {
 
         let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
-        return this.apiService.post (urlToGetActivationCode, { username: email })//.toPromise()
-        .pipe(map(
-            data => {
-                return data;
-            }
-        ));
+        return this.apiService.post(urlToGetActivationCode, { username: email })//.toPromise()
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
     }
 
     async attemptVerifiedActivationCodeConsumer(type, email) {
@@ -299,12 +301,19 @@ export class UserService {
 
     validateEmail(email) {
 
-        return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email).pipe(map(
-            data => {
-                return data;
-            }
-        ));
+        return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email)
+            .pipe(
+                map(
+                    (data) => { return data;})
+                );
     }
+
+    emailAlreadyTaken(email) {
+
+        return this.http.post(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email, {})
+            .pipe(delay(500));
+    }
+
 
     getCurrentUser(): User {
         return this.currentUserSubject.value;

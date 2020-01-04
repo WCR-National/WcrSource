@@ -1,4 +1,4 @@
-<!--<div class="col-lg-12 col-md-12 col-sm-12 mg-b-20 col-xs-12" style="text-align:center;">
+﻿<!--<div class="col-lg-12 col-md-12 col-sm-12 mg-b-20 col-xs-12" style="text-align:center;">
     <div class="loader-wrap" id="LoadingImageLogin" [hidden]="!isSubmitting">
         <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
     </div>
@@ -7,67 +7,110 @@
 <div class="auth-page mg-b-60-force">
     <div class="container page">
         <div class="row mg-t-50">
-            <div class="col-md-5 offset-md-3 col-xs-12 card pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center">
+            <div class="col-md-5 offset-md-3 col-xs-12 card pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center" style="border-top: 5px solid #0e3a6b;">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h2 class="text-xs-center" [style.text-align]="authType == 'activate' ? 'left':'center'">{{ title }}</h2>
+                        <h2 class="text-xs-center" [style.text-align]="authType == 'activate' || authType == 'resetPassword' ? 'left':'center'">{{ title }}</h2>
                     </div>
 
                     <p class="text-xs-center">
                         <a routerLink="/register" *ngIf="authType == 'login'" class="green-text text-darken-1">Don't have an account? Sign up now!</a>
                         <a routerLink="/login" *ngIf="authType == 'register'" class="green-text text-darken-1">Already have an account? Sign in!</a>
                     </p>
-                    <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+                    <form [formGroup]="authForm" (ngSubmit)="submitForm()" autocomplete="off">
                         <fieldset [disabled]="isSubmitting">
 
-                            <div class="form-group mg-t-40" [ngClass]="{'has-error': formErrors.activationCode}"
+                            <div class="form-group" [ngClass]="{'has-error': formErrors.activationCode}"
                                  *ngIf="authType == 'activate'">
-                                <div class="col-sm-12">
-                                    <span class="text-teal text-darken-4" *ngIf="authType == 'activate'">
+                                <div class="col-sm-12 mg-b-35 mg-t-10">
+                                    <p class="grey-text text-darken-1 tx-medium" *ngIf="authType == 'activate'">
                                         Activation code was sent to the Email address that was supplied for this account.
-                                    </span>
+                                    </p>
                                 </div>
                                 <div class="col-sm-12 mg-b-20">
-
-
-
                                     <input placeholder="Activation code" id="activationCode" type="text" class="form-control pd-l-45-force" formControlName="activationCode" (blur)="logValidationErrors()">
                                     <span class="large material-icons form-control-feedback icon">vpn_key</span>
                                     <div class="invalid-data" *ngIf="formErrors.activationCode">
                                         {{formErrors.activationCode}}
                                     </div>
-                                    <span class="text-teal text-darken-4" *ngIf="authType == 'activate'" [style.display]="activationSent ? 'block':'none'">Activation code has been send to your registered Email.</span>
+                                    <span class="grey-text text-darken-1 tx-medium" *ngIf="authType == 'activate'" [style.display]="activationSent ? 'block':'none'">Activation code has been resend to your registered Email.</span>
 
                                 </div>
 
-                                <div class="col-sm-12" *ngIf="authType == 'activate'">
-                                    <span *ngIf="formErrors.loginCredentials">
-                                        Resend New Activation Code: <button (click)="onClickResendVerificationCode()">Resend</button>
+                                <div class="col-sm-12">
+                                    <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'activate')" type="submit" [disabled]="!authForm.valid">
+                                        <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitActivationForm()">VERIFY</span>
+                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                            <div class="spinner-layer spinner-blue-only">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div><div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div><div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+
+
+                                <div class="col-sm-12">
+                                    <!--*ngIf="formErrors.loginCredentials"-->
+                                    <div class="pd-t-30 mg-b-5">
+                                        Resend New Activation Code: <a class="blue-text text-darken-4 tx-medium" (click)="onClickResendVerificationCode()" style="cursor: pointer;">Resend</a>
+                                        <div class="preloader-wrapper preloader-wrapper-button small active size-16" [style.display]="resentCode ? 'block': 'none'">
+                                            <div class="spinner-layer spinner-blue-only spinner-blue">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grey-text text-darken-1 tx-medium">
                                         If you experience problems activating your account,
                                         please forward your activation code email to support@wcrnational.com
                                         Our support team will complete your account activation within 24-48 hours.
-                                    </span>
+                                    </div>
                                 </div>
 
                             </div>
 
-
-                            <div class="form-group">
+                            <div class="form-group" *ngIf="authType == 'login'">
                                 <div class="col-sm-12">
-                                    <span [style.display]="resetPassword ? 'block':'none'">
-                                        Please check your registered emailID for new password.
-                                    </span>
+                                    <div class="red-text text-darken-4" >
+                                        {{ loginErrorMessage }}
+                                    </div>
                                 </div>
                             </div>
 
+                            <div class="form-group" *ngIf="authType == 'resetPassword'">
+                                <div class="col-sm-12 mg-t-40 mg-b-40">
+                                    <div class="green-text text-darken-4 tx-medium" [style.display]="resetPassword ? 'block':'none'">
+                                        <i class="material-icons">  check_circle </i>
+                                        Please check your registered Email for new password.
+                                        <div class="grey-text text-darken-1 tx-medium mg-t-20">
+                                            If you experience problems activating your account,
+                                            please forward your reset password email to support@wcrnational.com
+                                            Our support team will complete your account activation within 24-48 hours.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                            <div class="form-group" [ngClass]="{'has-error': formErrors.email}"
+                            <div id="validateEmailDiv" class="form-group" [ngClass]="{'has-error': formErrors.email}"
                                  *ngIf="(authType == 'register' || authType == 'login' || authType == 'resetPassword')"
                                  [style.display]="resetPassword ? 'none': 'block'">
 
                                 <div class="col-sm-12 mg-b-20">
                                     <!--(blur)="showPreloaderIcon();"-->
-                                    <input id="email" type="text" class="form-control pd-l-45-force" formControlName="email" placeholder="Email">
+                                    <input id="email" type="text" class="form-control pd-l-45-force" formControlName="email" placeholder="Email" (blur)="logValidationErrors()"  />
                                     <span class="large material-icons form-control-feedback icon">email</span>
 
 
@@ -84,8 +127,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 pd-l-0-force" *ngIf="formErrors.email">
+                                    <div class="col-sm-12 pd-l-0-force" *ngIf="formErrors.email || isEmailTaken()">
                                         {{formErrors.email}}
+                                    </div>
+                                    <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force" *ngIf="(authType == 'register')" [style.display]="showEmailVerification ? 'block':'none'">
+                                        Email is already in use.
+                                    </div>
+
+                                    <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force" *ngIf="(authType == 'resetPassword')" [style.display]="showEmailVerification ? 'block':'none'">
+                                        Please make sure email is correct.
                                     </div>
                                 </div>
                             </div>
@@ -98,12 +148,12 @@
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.password}"
                                          *ngIf="(authType == 'register' || authType == 'login' ) ">
                                         <div class="col-sm-12  mg-b-20">
-                                            <input id="password" placeholder="Password" type="password" class="form-control pd-l-45-force" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
+                                            <input id="password" placeholder="Password" type="password" class="password form-control pd-l-45-force" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
                                                    autocomplete="new-password">
                                             <span class="large material-icons form-control-feedback icon">lock</span>
 
-                                            <div class="col-sm-12" *ngIf="(authType == 'register')" [style.display]="showErrorsPassword ? 'block':'none'">
-                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+                                            <div class="col-sm-12 pd-l-0" *ngIf="(authType == 'register')" [style.display]="showErrorsPassword ? 'block':'none'">
+                                                <label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
                                                     <i class="material-icons">
                                                         {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}
                                                     </i>
@@ -158,6 +208,7 @@
 
                                             <div class="col-sm-12 pd-l-0-force"
                                                  *ngIf="formErrors.confirmPassword || formErrors.passwordGroup">
+
                                                 {{  formErrors.confirmPassword ? formErrors.confirmPassword : formErrors.passwordGroup  }}
                                             </div>
                                         </div>
@@ -221,7 +272,7 @@
                                     <div class="col-sm-12 mg-b-20">
                                         <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'register')" type="submit" [disabled]="!FormFilledSuccessfully">
                                             <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitRegistrationForm()">CREATE AN ACCOUNT</span>
-                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'block': 'none'">
+                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
                                                 <div class="spinner-layer spinner-white-only">
                                                     <div class="circle-clipper left">
                                                         <div class="circle"></div>
@@ -236,8 +287,8 @@
 
                                         <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'login')" type="submit" [disabled]="!authForm.valid ">
                                             <span [style.display]="!isSubmitting ? 'block': 'none' " (click)="submitLoginForm()">SIGN TO MY ACCOUNT</span>
-                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'block': 'none'">
-                                                <div class="spinner-layer spinner-white-only">
+                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                <div class="spinner-layer spinner-blue-only">
                                                     <div class="circle-clipper left">
                                                         <div class="circle"></div>
                                                     </div><div class="gap-patch">
@@ -249,25 +300,12 @@
                                             </div>
                                         </button>
 
-                                        <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'activate')" type="submit" [disabled]="!authForm.valid">
-                                            <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitActivationForm()">VERIFY</span>
-                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'block': 'none'">
-                                                <div class="spinner-layer spinner-white-only">
-                                                    <div class="circle-clipper left">
-                                                        <div class="circle"></div>
-                                                    </div><div class="gap-patch">
-                                                        <div class="circle"></div>
-                                                    </div><div class="circle-clipper right">
-                                                        <div class="circle"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </button>
+
 
                                         <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'resetPassword')" type="submit" [disabled]="!authForm.valid">
                                             <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitFormResetPassword()">RESET PASSWORD</span>
-                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'block': 'none'">
-                                                <div class="spinner-layer spinner-white-only">
+                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                <div class="spinner-layer spinner-blue-only">
                                                     <div class="circle-clipper left">
                                                         <div class="circle"></div>
                                                     </div><div class="gap-patch">

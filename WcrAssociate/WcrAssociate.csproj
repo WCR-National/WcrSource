@@ -2010,6 +2010,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\shared\shared.module.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\show-authed.directive.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_guards\auth.guard.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\auth\encrypt_decrypt.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_guards\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\error.interceptor.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\fake-backend.ts" />

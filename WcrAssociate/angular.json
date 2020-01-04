@@ -52,7 +52,10 @@
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/crypto-js/crypto-js.js"
+
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -115,6 +118,7 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/crypto-js/crypto-js.js",
               "AngularAssociate/assets/js/materialize.min.js"
             ],
             "assets": [

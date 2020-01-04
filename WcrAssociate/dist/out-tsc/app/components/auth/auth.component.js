@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/auth';
 import * as $ from 'jquery';
+import * as CryptoJS from 'crypto-js';
 var AuthComponent = /** @class */ (function () {
     function AuthComponent(route, router, userService, fb) {
         this.route = route;
@@ -22,6 +23,9 @@ var AuthComponent = /** @class */ (function () {
         this.showActivationDiv = false;
         this.resetPassword = false;
         this.FormFilledSuccessfully = false;
+        this.showEmailVerification = false;
+        this.tokenFromUI = "7061737323313233";
+        this.encrypted = "";
         this.validationMessages = {
             'email': {
                 'required': 'Email is required',
@@ -67,6 +71,10 @@ var AuthComponent = /** @class */ (function () {
         };
     }
     AuthComponent.prototype.ngOnInit = function () {
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //console.log(this.encrypted);
+        //this.router.navigate(['activate', '2', this.encrypted]);
         this.setValidationOnform();
         this.setSignInOrSignUpOrActivateOrReset();
         this.changeValuesOfFormsEvents();
@@ -77,7 +85,6 @@ var AuthComponent = /** @class */ (function () {
             _this.logValidationErrors(_this.authForm);
         });
         this.authForm.get('associate').valueChanges.subscribe(function (data) {
-            debugger;
             if (data == true) {
                 _this.authForm.get('terms').enable();
             }
@@ -86,7 +93,6 @@ var AuthComponent = /** @class */ (function () {
             }
         });
         this.authForm.get('consumer').valueChanges.subscribe(function (data) {
-            debugger;
             if (data == true) {
                 _this.authForm.get('terms').enable();
             }
@@ -95,7 +101,6 @@ var AuthComponent = /** @class */ (function () {
             }
         });
         this.authForm.get('terms').valueChanges.subscribe(function (data) {
-            debugger;
             if (data == false) {
                 _this.FormFilledSuccessfully = false;
             }
@@ -140,7 +145,7 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.setValidationOnform = function () {
         // use FormBuilder to create a form group
         this.authForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email, isEmailExist(this.userService, this)]],
+            email: ['', [Validators.required, Validators.email, this.isEmailExist.bind(this)]],
             passwordGroup: this.fb.group({
                 password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
                         patternValidator(/\d/, { number: true }),
@@ -165,7 +170,6 @@ var AuthComponent = /** @class */ (function () {
         var _this = this;
         this.route.url.subscribe(function (data) {
             // Get the last piece of the URL (it's either 'login' or 'register')
-            debugger;
             _this.authType = data[0].path;
             // Set a title for the page accordingly
             if (_this.authType === 'login') {
@@ -190,7 +194,7 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('activationCode').updateValueAndValidity();
             }
             else if (_this.authType === 'register') {
-                _this.authForm.get('email').setValidators([Validators.required, Validators.email, isEmailExist(_this.userService, _this)]);
+                _this.authForm.get('email').setValidators([Validators.required, Validators.email, _this.isEmailExist.bind(_this)]);
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
                     patternValidator(/\d/, { number: true }),
@@ -473,8 +477,49 @@ var AuthComponent = /** @class */ (function () {
     * SIGN UP Module END
     * *************************************************
     **/
+    AuthComponent.prototype.isEmailExist = function (control) {
+        var _this = this;
+        //clearTimeout(this.debouncer);
+        //return { 'emailInUse': true };
+        var thisUserService = this.userService;
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(String(control.value).toLowerCase())) {
+            this.showOnValidateEmail = true;
+            setTimeout(function () {
+                return thisUserService.validateEmail(control.value).subscribe(function (data) {
+                    if (Number(data) >= 1) {
+                        console.log("Email validate" + data);
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        _this.showEmailVerification = true;
+                    }
+                    else {
+                        _this.showEmailVerification = false;
+                        console.log("Email validate" + data);
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+                        //control.parent.get('associate').enable();
+                        //control.parent.get('consumer').enable();
+                        //this.parent.get('terms').enable();
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        return null;
+                    }
+                }, function (err) {
+                    _this.showOnValidateEmail = false;
+                    _this.FormFilledSuccessfully = false;
+                    return { 'emailInUse': true };
+                });
+            }, 1000);
+        }
+    };
     AuthComponent.prototype.submitRegistrationForm = function () {
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //this.router.navigate(['activate', '2', this.encrypted]);
         this.isSubmitting = true;
+        this.FormFilledSuccessfully = true;
         if (this.authForm.get('associate').value == true) {
             this.associateRegister();
         }
@@ -512,7 +557,15 @@ var AuthComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data >= 1) {
                 _this.isSubmitting = false;
-                _this.router.navigate(['/Activate', '1']);
+                _this.request = credentials.email;
+                _this.encryptUsingAES256();
+                credentials.email = _this.encrypted;
+                credentials.email.replace('/', '~');
+                _this.request = credentials.password;
+                _this.encryptUsingAES256();
+                credentials.password = _this.encrypted;
+                credentials.password.replace('/', '~');
+                _this.router.navigate(['activate', '1', credentials.email, credentials.password]);
             }
             else {
                 _this.isSubmitting = false;
@@ -529,7 +582,15 @@ var AuthComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data >= 1) {
                 _this.isSubmitting = false;
-                _this.router.navigate(['/Activate', '2']);
+                _this.request = credentials.email;
+                _this.encryptUsingAES256();
+                credentials.email = _this.encrypted;
+                credentials.email.replace('/', '~');
+                _this.request = credentials.password;
+                _this.encryptUsingAES256();
+                credentials.password = _this.encrypted;
+                credentials.password.replace('/', '~');
+                _this.router.navigate(['activate', '2', credentials.email, credentials.password]);
             }
             else {
                 _this.isSubmitting = false;
@@ -552,14 +613,32 @@ var AuthComponent = /** @class */ (function () {
         this.isSubmitting = true;
         var credentials = this.authForm.value;
         var urlComponent;
-        var splitCurrentUrl = this.router.url.split('/');
+        var encryptedPassword;
+        var encryptedEmail;
         this.route.url.subscribe(function (data) {
-            // Get the last piece of the URL (it's either 'login' or 'register')
             debugger;
-            urlComponent = data[0].path;
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[0].path;
+                encryptedEmail = data[2].path;
+                encryptedPassword = data[3].path;
+            }
+            else {
+                //page  not found
+            }
         });
         var userType = urlComponent;
-        console.log(userType);
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        credentials.email = this.decrypted;
+        credentials.email.replace('~', '/');
+        console.log(this.decrypted);
+        this.encrypted = encryptedPassword;
+        this.decryptUsingAES256();
+        credentials.password = this.decrypted;
+        credentials.password.replace('~', '/');
+        console.log(this.decrypted);
+        debugger;
         if (userType == "1") {
             this.associateActivationCode(credentials);
         }
@@ -573,11 +652,12 @@ var AuthComponent = /** @class */ (function () {
             .getAttemptVerifiedActivationCodeAssociate(this.authType, credentials)
             .subscribe(function (data) {
             if (data.d == credentials.activationCode) {
+                debugger;
                 _this.userService
-                    .attemptVerifiedActivationCodeAssociate(_this.authType, _this.globalEmail)
+                    .attemptVerifiedActivationCodeAssociate(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this.submitLoginForm(_this.globalEmail, _this.globalPassword);
+                        _this.submitLoginForm(credentials.email, credentials.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
@@ -602,10 +682,10 @@ var AuthComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data.d == credentials.activationCode) {
                 _this.userService
-                    .attemptVerifiedActivationCodeConsumer(_this.authType, _this.globalEmail)
+                    .attemptVerifiedActivationCodeConsumer(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this.submitLoginForm(_this.globalEmail, _this.globalPassword);
+                        _this.submitLoginForm(credentials.email, credentials.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
@@ -625,12 +705,32 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.onClickResendVerificationCode = function () {
         var _this = this;
-        this.resentCode = false;
+        var email;
+        var urlComponent;
+        var encryptedEmail;
+        this.route.url.subscribe(function (data) {
+            debugger;
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[0].path;
+                encryptedEmail = data[2].path;
+            }
+            else {
+                //page  not found
+            }
+        });
+        var userType = urlComponent;
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        email = this.decrypted;
+        email.replace('~', '/');
+        console.log(this.decrypted);
+        this.resentCode = true;
         this.userService
-            .attemptResendActivateCode(this.globalEmail)
+            .attemptResendActivateCode(email)
             .subscribe(function (data) {
             if (data.d > 0 && data.d > "1") {
-                _this.resentCode = true;
+                _this.resentCode = false;
                 _this.isSubmitting = false;
             }
             else {
@@ -647,6 +747,27 @@ var AuthComponent = /** @class */ (function () {
     * ACTIVATION Module END
     * *************************************************
     **/
+    AuthComponent.prototype.encryptUsingAES256 = function () {
+        var _key = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        var _iv = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        var encrypted = CryptoJS.AES.encrypt(JSON.stringify(this.request), _key, {
+            keySize: 16,
+            iv: _iv,
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        this.encrypted = encrypted.toString();
+    };
+    AuthComponent.prototype.decryptUsingAES256 = function () {
+        var _key = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        var _iv = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        this.decrypted = CryptoJS.AES.decrypt(this.encrypted, _key, {
+            keySize: 16,
+            iv: _iv,
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString(CryptoJS.enc.Utf8);
+    };
     AuthComponent.prototype.submitFormResetPassword = function () {
         var _this = this;
         var thisStatus = this;
@@ -727,37 +848,46 @@ function emailDomain(domainName) {
         }
     };
 }
-function isEmailExist(userService, authComp) {
-    return function (control) {
-        //clearTimeout(this.debouncer);
-        //return { 'emailInUse': true };
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (re.test(String(control.value).toLowerCase())) {
-            authComp.showOnValidateEmail = true;
-        }
-        setTimeout(function () {
-            userService.validateEmail(control.value).subscribe(function (data) {
-                if (data >= 1) {
-                    control.parent.get('passwordGroup').enable();
-                    control.parent.get('passwordGroup').get('password').enable();
-                    control.parent.get('passwordGroup').get('confirmPassword').enable();
-                    //control.parent.get('associate').enable();
-                    //control.parent.get('consumer').enable();
-                    //control.parent.get('terms').enable();
-                    authComp.showOnValidateEmail = false;
-                    authComp.FormFilledSuccessfully = false;
-                    return null;
-                }
-                else {
-                    return { 'emailInUse': true };
-                }
-            }, function (err) {
-                return { 'emailInUse': true };
-            });
-        }, 1000);
-        return null;
-    };
-}
+//function isEmailExist(userService: UserService, authComp: AuthComponent) {
+//    return (control: AbstractControl): { [key: string]: any } | null => {
+//        //clearTimeout(this.debouncer);
+//        //return { 'emailInUse': true };
+//        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//        if (re.test(String(control.value).toLowerCase())) {
+//            authComp.showOnValidateEmail = true;
+//            setTimeout(() => {
+//                userService.validateEmail(control.value).subscribe(
+//                    (data) => {
+//                        if (data >= 1) {
+//                            console.log("Email validate" + data);
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return { 'emailInUse': true };
+//                        }
+//                        else {
+//                            console.log("Email validate" + data);
+//                            control.parent.get('passwordGroup').enable();
+//                            control.parent.get('passwordGroup').get('password').enable();
+//                            control.parent.get('passwordGroup').get('confirmPassword').enable();
+//                            //control.parent.get('associate').enable();
+//                            //control.parent.get('consumer').enable();
+//                            //control.parent.get('terms').enable();
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return null;
+//                        }
+//                    },
+//                    (err) => {
+//                        authComp.showOnValidateEmail = false;
+//                        authComp.FormFilledSuccessfully = false;
+//                        return { 'emailInUse': true };
+//                    });
+//            }, 500);
+//        }
+//        console.log('outside');
+//        return { 'emailInUse': true };
+//    }
+//}
 function matchPasswords(group) {
     var passwordControl = group.get('password');
     var confirmPasswordControl = group.get('confirmPassword');

@@ -22,10 +22,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 import { User } from '../app/entities/user';
+
 import { ShowAuthedDirective } from './shared/show-authed.directive';
-
-
-
 
 import {
     FooterComponent,
@@ -40,8 +38,8 @@ import {
     ProfilesService,
     UserService,
     HomeAuthResolver,
-    NoAuthGuard,
-    HomeLandingService
+    NoAuthGuard,    HomeLandingService,
+    encrypt_decrypt
 
 } from './services/auth';
 
@@ -91,7 +89,8 @@ import {
         HomeLandingService,
         HomeAuthResolver,
         NoAuthGuard,
-        User
+        User,
+        encrypt_decrypt
     ],
     bootstrap: [AppComponent]
 })

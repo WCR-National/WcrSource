@@ -70,7 +70,7 @@ var routes = [
         canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_5__["NoAuthGuard"]]
     },
     {
-        path: 'activate/:id',
+        path: 'activate/:id/:email/:password',
         component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
         canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_5__["NoAuthGuard"]]
     },
@@ -253,7 +253,8 @@ var AppModule = /** @class */ (function () {
                 _services_auth__WEBPACK_IMPORTED_MODULE_17__["HomeLandingService"],
                 _services_auth__WEBPACK_IMPORTED_MODULE_17__["HomeAuthResolver"],
                 _services_auth__WEBPACK_IMPORTED_MODULE_17__["NoAuthGuard"],
-                _app_entities_user__WEBPACK_IMPORTED_MODULE_14__["User"]
+                _app_entities_user__WEBPACK_IMPORTED_MODULE_14__["User"],
+                _services_auth__WEBPACK_IMPORTED_MODULE_17__["encrypt_decrypt"]
             ],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"]]
         })
@@ -272,7 +273,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<div class=\"col-lg-12 col-md-12 col-sm-12 mg-b-20 col-xs-12\" style=\"text-align:center;\">\r\n    <div class=\"loader-wrap\" id=\"LoadingImageLogin\" [hidden]=\"!isSubmitting\">\r\n        <div class=\"loader\"><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span></div>\r\n    </div>\r\n</div>-->\r\n\r\n<div class=\"auth-page mg-b-60-force\">\r\n    <div class=\"container page\">\r\n        <div class=\"row mg-t-50\">\r\n            <div class=\"col-md-5 offset-md-3 col-xs-12 card pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-12\">\r\n                        <h2 class=\"text-xs-center\" [style.text-align]=\"authType == 'activate' ? 'left':'center'\">{{ title }}</h2>\r\n                    </div>\r\n\r\n                    <p class=\"text-xs-center\">\r\n                        <a routerLink=\"/register\" *ngIf=\"authType == 'login'\" class=\"green-text text-darken-1\">Don't have an account? Sign up now!</a>\r\n                        <a routerLink=\"/login\" *ngIf=\"authType == 'register'\" class=\"green-text text-darken-1\">Already have an account? Sign in!</a>\r\n                    </p>\r\n                    <form [formGroup]=\"authForm\" (ngSubmit)=\"submitForm()\">\r\n                        <fieldset [disabled]=\"isSubmitting\">\r\n\r\n                            <div class=\"form-group mg-t-40\" [ngClass]=\"{'has-error': formErrors.activationCode}\"\r\n                                 *ngIf=\"authType == 'activate'\" >\r\n                                <div class=\"col-sm-12 mg-b-20\">\r\n                                    <input placeholder=\"Activation code\" id=\"activationCode\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"activationCode\" (blur)=\"logValidationErrors()\">\r\n                                    <span class=\"large material-icons form-control-feedback icon\" >vpn_key</span>\r\n                                    <div class=\"invalid-data\" *ngIf=\"formErrors.activationCode\">\r\n                                        {{formErrors.activationCode}}\r\n                                    </div>\r\n                                    <span class=\"text-teal text-darken-4\" *ngIf=\"authType == 'activate'\" [style.display]=\"activationSent ? 'block':'none'\">Activation code has been send to your registered Email.</span>\r\n                                    <span class=\"text-teal text-darken-4\" *ngIf=\"authType == 'activate'\" [style.display]=\"resentCode ? 'block':'none'\">\r\n                                        Activation code was sent to the Email address that was supplied for this account.\r\n                                    </span>\r\n                                </div>\r\n\r\n                                <div class=\"col-sm-12\" *ngIf=\"authType == 'activate'\">\r\n                                    <span *ngIf=\"formErrors.loginCredentials\">\r\n                                        Resend New Activation Code: <button (click)=\"onClickResendVerificationCode()\">Resend</button>\r\n                                        If you experience problems activating your account,\r\n                                        please forward your activation code email to support@wcrnational.com\r\n                                        Our support team will complete your account activation within 24-48 hours.\r\n                                    </span>\r\n                                </div>\r\n\r\n                            </div>\r\n\r\n                            \r\n                            <div class=\"form-group\">\r\n                                <div class=\"col-sm-12\">\r\n                                    <span [style.display]=\"resetPassword ? 'block':'none'\">\r\n                                        Please check your registered emailID for new password.\r\n                                    </span>\r\n                                </div>\r\n                            </div>\r\n                           \r\n\r\n                            <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.email}\"\r\n                                 *ngIf=\"(authType == 'register' || authType == 'login' || authType == 'resetPassword')\"\r\n                                 [style.display]=\"resetPassword ? 'none': 'block'\">\r\n\r\n                                <div class=\"col-sm-12 mg-b-20\">\r\n                                    <!--(blur)=\"showPreloaderIcon();\"-->\r\n                                    <input id=\"email\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"email\" placeholder=\"Email\">\r\n                                    <span class=\"large material-icons form-control-feedback icon\">email</span> \r\n\r\n\r\n                                    <div class=\"preloader-wrapper preloader-wrapper-input small active\"\r\n                                         *ngIf=\"(authType == 'register')\">\r\n                                        <div class=\"spinner-layer spinner-green-only\"\r\n                                             [style.display]=\"showOnValidateEmail ? 'block': 'none'\">\r\n                                            <div class=\"circle-clipper left\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div><div class=\"gap-patch\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div><div class=\"circle-clipper right\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.email\">\r\n                                        {{formErrors.email}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div formGroupName=\"passwordGroup\">\r\n                                    <div class=\"col-sm-12\" *ngIf=\"authType == 'login'\">\r\n                                        <a [routerLink]=\"['/resetPassword']\" class=\"text-xs-left blue-text text-darken-3\"> <i class=\"material-icons form-control-feedback pd-b-4-force\" style=\"font-size:15px;\">vpn_key</i>Forgot password</a>\r\n                                    </div>\r\n                                    <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.password}\"\r\n                                         *ngIf=\"(authType == 'register' || authType == 'login' ) \">\r\n                                        <div class=\"col-sm-12  mg-b-20\" >\r\n                                            <input id=\"password\" placeholder=\"Password\" type=\"password\" class=\"form-control pd-l-45-force\" formControlName=\"password\" (focus)=\"showErrors()\" (focusout)=\"hideErrors()\"  \r\n                                                   autocomplete=\"new-password\">\r\n                                            <span class=\"large material-icons form-control-feedback icon\">lock</span>\r\n\r\n                                            <div class=\"col-sm-12\" *ngIf=\"(authType == 'register')\" [style.display]=\"showErrorsPassword ? 'block':'none'\">\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be at least 8 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be less than 20 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}\r\n                                                    </i>\r\n                                                    Must contain at least 1 number!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 in Capital Case!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Letter in Small Case!\r\n                                                </label>\r\n\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Special Character!\r\n                                                </label>\r\n                                                <!--<div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.password\">\r\n                                                    {{formErrors.password}}\r\n                                                </div>-->\r\n\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                    <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.confirmPassword || formErrors.passwordGroup}\"\r\n                                         *ngIf=\"(authType == 'register') \">\r\n                                        <div class=\"col-sm-12 mg-b-20\">\r\n                                            <input id=\"confirmPassword\" type=\"password\" class=\"form-control pd-l-45-force\"\r\n                                                   formControlName=\"confirmPassword\" (blur)=\"logValidationErrors()\" placeholder=\"Confirm Password\" autocomplete=\"new-password\">\r\n                                            <span class=\"large material-icons form-control-feedback icon\">lock</span>\r\n\r\n                                            <div class=\"col-sm-12 pd-l-0-force\"\r\n                                                 *ngIf=\"formErrors.confirmPassword || formErrors.passwordGroup\">\r\n                                                {{  formErrors.confirmPassword ? formErrors.confirmPassword : formErrors.passwordGroup  }}\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.associate}\" *ngIf=\"authType == 'register'  \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"associate\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>Yes- I want to advertise</span>\r\n                                        </label>\r\n                                        <div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.associate\">\r\n                                            {{formErrors.associate}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.consumer}\" *ngIf=\"authType == 'register'  \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"consumer\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>No- I do not</span>\r\n                                        </label>\r\n                                        <div class=\"invalid-data\" *ngIf=\"formErrors.consumer\">\r\n                                            {{formErrors.consumer}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.terms}\" *ngIf=\"(authType == 'register') \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"terms\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>I agree with terms and conditions<a></a></span>\r\n                                        </label>\r\n                                        <div class=\"invalid-data\" *ngIf=\"formErrors.terms\">\r\n                                            {{formErrors.terms}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" *ngIf=\"authType == 'login'\">\r\n                                    <div class=\"invalid-data\" *ngIf=\"formErrors.credentials\">\r\n                                        {{formErrors.loginCredentials}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'register')\" type=\"submit\" [disabled]=\"!FormFilledSuccessfully\">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitRegistrationForm()\">CREATE AN ACCOUNT</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-white-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n\r\n                                        <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'login')\" type=\"submit\" [disabled]=\"!authForm.valid \">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none' \" (click)=\"submitLoginForm()\">SIGN TO MY ACCOUNT</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-white-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n\r\n                                        <button class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'activate')\" type=\"submit\" [disabled]=\"!authForm.valid\">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitActivationForm()\">VERIFY</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-white-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n\r\n                                        <button class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'resetPassword')\" type=\"submit\" [disabled]=\"!authForm.valid\">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitFormResetPassword()\">RESET PASSWORD</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-white-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </div>\r\n\r\n                            <!--  -->\r\n\r\n\r\n                        </fieldset>\r\n                    </form>\r\n                </div>\r\n\r\n                <!--<div class=\"row mg-t-60 text-center\" *ngIf=\"authType == 'register'\">\r\n                    <small>\r\n                        By clicking the \"Create an Account\" button you agree with our\r\n                        <button [routerLink]=\"['/resetPassword']\" class=\"btn waves-ripple blue-grey lighten-5 blue-grey-text text-accent-4\">Terms And Conditions</button>\r\n                    </small>\r\n                </div>-->\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<!--<div class=\"col-lg-12 col-md-12 col-sm-12 mg-b-20 col-xs-12\" style=\"text-align:center;\">\r\n    <div class=\"loader-wrap\" id=\"LoadingImageLogin\" [hidden]=\"!isSubmitting\">\r\n        <div class=\"loader\"><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span></div>\r\n    </div>\r\n</div>-->\r\n\r\n<div class=\"auth-page mg-b-60-force\">\r\n    <div class=\"container page\">\r\n        <div class=\"row mg-t-50\">\r\n            <div class=\"col-md-5 offset-md-3 col-xs-12 card pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center\" style=\"border-top: 5px solid #0e3a6b;\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-12\">\r\n                        <h2 class=\"text-xs-center\" [style.text-align]=\"authType == 'activate' || authType == 'resetPassword' ? 'left':'center'\">{{ title }}</h2>\r\n                    </div>\r\n\r\n                    <p class=\"text-xs-center\">\r\n                        <a routerLink=\"/register\" *ngIf=\"authType == 'login'\" class=\"green-text text-darken-1\">Don't have an account? Sign up now!</a>\r\n                        <a routerLink=\"/login\" *ngIf=\"authType == 'register'\" class=\"green-text text-darken-1\">Already have an account? Sign in!</a>\r\n                    </p>\r\n                    <form [formGroup]=\"authForm\" (ngSubmit)=\"submitForm()\" autocomplete=\"off\">\r\n                        <fieldset [disabled]=\"isSubmitting\">\r\n\r\n                            <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.activationCode}\"\r\n                                 *ngIf=\"authType == 'activate'\">\r\n                                <div class=\"col-sm-12 mg-b-35 mg-t-10\">\r\n                                    <p class=\"grey-text text-darken-1 tx-medium\" *ngIf=\"authType == 'activate'\">\r\n                                        Activation code was sent to the Email address that was supplied for this account.\r\n                                    </p>\r\n                                </div>\r\n                                <div class=\"col-sm-12 mg-b-20\">\r\n                                    <input placeholder=\"Activation code\" id=\"activationCode\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"activationCode\" (blur)=\"logValidationErrors()\">\r\n                                    <span class=\"large material-icons form-control-feedback icon\">vpn_key</span>\r\n                                    <div class=\"invalid-data\" *ngIf=\"formErrors.activationCode\">\r\n                                        {{formErrors.activationCode}}\r\n                                    </div>\r\n                                    <span class=\"grey-text text-darken-1 tx-medium\" *ngIf=\"authType == 'activate'\" [style.display]=\"activationSent ? 'block':'none'\">Activation code has been resend to your registered Email.</span>\r\n\r\n                                </div>\r\n\r\n                                <div class=\"col-sm-12\">\r\n                                    <button class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'activate')\" type=\"submit\" [disabled]=\"!authForm.valid\">\r\n                                        <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitActivationForm()\">VERIFY</span>\r\n                                        <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                            <div class=\"spinner-layer spinner-blue-only\">\r\n                                                <div class=\"circle-clipper left\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div><div class=\"gap-patch\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div><div class=\"circle-clipper right\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </button>\r\n                                </div>\r\n\r\n\r\n                                <div class=\"col-sm-12\">\r\n                                    <!--*ngIf=\"formErrors.loginCredentials\"-->\r\n                                    <div class=\"pd-t-30 mg-b-5\">\r\n                                        Resend New Activation Code: <a class=\"blue-text text-darken-4 tx-medium\" (click)=\"onClickResendVerificationCode()\" style=\"cursor: pointer;\">Resend</a>\r\n                                        <div class=\"preloader-wrapper preloader-wrapper-button small active size-16\" [style.display]=\"resentCode ? 'block': 'none'\">\r\n                                            <div class=\"spinner-layer spinner-blue-only spinner-blue\">\r\n                                                <div class=\"circle-clipper left\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div>\r\n                                                <div class=\"gap-patch\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div>\r\n                                                <div class=\"circle-clipper right\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"grey-text text-darken-1 tx-medium\">\r\n                                        If you experience problems activating your account,\r\n                                        please forward your activation code email to support@wcrnational.com\r\n                                        Our support team will complete your account activation within 24-48 hours.\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n\r\n                            <div class=\"form-group\" *ngIf=\"authType == 'login'\">\r\n                                <div class=\"col-sm-12\">\r\n                                    <div class=\"red-text text-darken-4\" >\r\n                                        {{ loginErrorMessage }}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"form-group\" *ngIf=\"authType == 'resetPassword'\">\r\n                                <div class=\"col-sm-12 mg-t-40 mg-b-40\">\r\n                                    <div class=\"green-text text-darken-4 tx-medium\" [style.display]=\"resetPassword ? 'block':'none'\">\r\n                                        <i class=\"material-icons\">  check_circle </i>\r\n                                        Please check your registered Email for new password.\r\n                                        <div class=\"grey-text text-darken-1 tx-medium mg-t-20\">\r\n                                            If you experience problems activating your account,\r\n                                            please forward your reset password email to support@wcrnational.com\r\n                                            Our support team will complete your account activation within 24-48 hours.\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div id=\"validateEmailDiv\" class=\"form-group\" [ngClass]=\"{'has-error': formErrors.email}\"\r\n                                 *ngIf=\"(authType == 'register' || authType == 'login' || authType == 'resetPassword')\"\r\n                                 [style.display]=\"resetPassword ? 'none': 'block'\">\r\n\r\n                                <div class=\"col-sm-12 mg-b-20\">\r\n                                    <!--(blur)=\"showPreloaderIcon();\"-->\r\n                                    <input id=\"email\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"email\" placeholder=\"Email\" (blur)=\"logValidationErrors()\"  />\r\n                                    <span class=\"large material-icons form-control-feedback icon\">email</span>\r\n\r\n\r\n                                    <div class=\"preloader-wrapper preloader-wrapper-input small active\"\r\n                                         *ngIf=\"(authType == 'register')\">\r\n                                        <div class=\"spinner-layer spinner-green-only\"\r\n                                             [style.display]=\"showOnValidateEmail ? 'block': 'none'\">\r\n                                            <div class=\"circle-clipper left\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div><div class=\"gap-patch\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div><div class=\"circle-clipper right\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.email || isEmailTaken()\">\r\n                                        {{formErrors.email}}\r\n                                    </div>\r\n                                    <div style=\"color:#a21318 !important\" class=\"col-sm-12 pd-l-0-force\" *ngIf=\"(authType == 'register')\" [style.display]=\"showEmailVerification ? 'block':'none'\">\r\n                                        Email is already in use.\r\n                                    </div>\r\n\r\n                                    <div style=\"color:#a21318 !important\" class=\"col-sm-12 pd-l-0-force\" *ngIf=\"(authType == 'resetPassword')\" [style.display]=\"showEmailVerification ? 'block':'none'\">\r\n                                        Please make sure email is correct.\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div formGroupName=\"passwordGroup\">\r\n                                    <div class=\"col-sm-12\" *ngIf=\"authType == 'login'\">\r\n                                        <a [routerLink]=\"['/resetPassword']\" class=\"text-xs-left blue-text text-darken-3\"> <i class=\"material-icons form-control-feedback pd-b-4-force\" style=\"font-size:15px;\">vpn_key</i>Forgot password</a>\r\n                                    </div>\r\n                                    <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.password}\"\r\n                                         *ngIf=\"(authType == 'register' || authType == 'login' ) \">\r\n                                        <div class=\"col-sm-12  mg-b-20\">\r\n                                            <input id=\"password\" placeholder=\"Password\" type=\"password\" class=\"password form-control pd-l-45-force\" formControlName=\"password\" (focus)=\"showErrors()\" (focusout)=\"hideErrors()\"\r\n                                                   autocomplete=\"new-password\">\r\n                                            <span class=\"large material-icons form-control-feedback icon\">lock</span>\r\n\r\n                                            <div class=\"col-sm-12 pd-l-0\" *ngIf=\"(authType == 'register')\" [style.display]=\"showErrorsPassword ? 'block':'none'\">\r\n                                                <label class=\"col mg-t-5\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be at least 8 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be less than 20 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}\r\n                                                    </i>\r\n                                                    Must contain at least 1 number!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 in Capital Case!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Letter in Small Case!\r\n                                                </label>\r\n\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Special Character!\r\n                                                </label>\r\n                                                <!--<div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.password\">\r\n                                                    {{formErrors.password}}\r\n                                                </div>-->\r\n\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                    <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.confirmPassword || formErrors.passwordGroup}\"\r\n                                         *ngIf=\"(authType == 'register') \">\r\n                                        <div class=\"col-sm-12 mg-b-20\">\r\n                                            <input id=\"confirmPassword\" type=\"password\" class=\"form-control pd-l-45-force\"\r\n                                                   formControlName=\"confirmPassword\" (blur)=\"logValidationErrors()\" placeholder=\"Confirm Password\" autocomplete=\"new-password\">\r\n                                            <span class=\"large material-icons form-control-feedback icon\">lock</span>\r\n\r\n                                            <div class=\"col-sm-12 pd-l-0-force\"\r\n                                                 *ngIf=\"formErrors.confirmPassword || formErrors.passwordGroup\">\r\n\r\n                                                {{  formErrors.confirmPassword ? formErrors.confirmPassword : formErrors.passwordGroup  }}\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.associate}\" *ngIf=\"authType == 'register'  \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"associate\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>Yes- I want to advertise</span>\r\n                                        </label>\r\n                                        <div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.associate\">\r\n                                            {{formErrors.associate}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.consumer}\" *ngIf=\"authType == 'register'  \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"consumer\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>No- I do not</span>\r\n                                        </label>\r\n                                        <div class=\"invalid-data\" *ngIf=\"formErrors.consumer\">\r\n                                            {{formErrors.consumer}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.terms}\" *ngIf=\"(authType == 'register') \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"terms\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>I agree with terms and conditions<a></a></span>\r\n                                        </label>\r\n                                        <div class=\"invalid-data\" *ngIf=\"formErrors.terms\">\r\n                                            {{formErrors.terms}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" *ngIf=\"authType == 'login'\">\r\n                                    <div class=\"invalid-data\" *ngIf=\"formErrors.credentials\">\r\n                                        {{formErrors.loginCredentials}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'register')\" type=\"submit\" [disabled]=\"!FormFilledSuccessfully\">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitRegistrationForm()\">CREATE AN ACCOUNT</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-white-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n\r\n                                        <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'login')\" type=\"submit\" [disabled]=\"!authForm.valid \">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none' \" (click)=\"submitLoginForm()\">SIGN TO MY ACCOUNT</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-blue-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n\r\n\r\n\r\n                                        <button class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'resetPassword')\" type=\"submit\" [disabled]=\"!authForm.valid\">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitFormResetPassword()\">RESET PASSWORD</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-blue-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </div>\r\n\r\n                            <!--  -->\r\n\r\n\r\n                        </fieldset>\r\n                    </form>\r\n                </div>\r\n\r\n                <!--<div class=\"row mg-t-60 text-center\" *ngIf=\"authType == 'register'\">\r\n                    <small>\r\n                        By clicking the \"Create an Account\" button you agree with our\r\n                        <button [routerLink]=\"['/resetPassword']\" class=\"btn waves-ripple blue-grey lighten-5 blue-grey-text text-accent-4\">Terms And Conditions</button>\r\n                    </small>\r\n                </div>-->\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -293,6 +294,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var crypto_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! crypto-js */ "./node_modules/crypto-js/index.js");
+/* harmony import */ var crypto_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(crypto_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
+
+
 
 
 
@@ -300,11 +310,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent(route, router, userService, fb) {
+    function AuthComponent(route, router, userService, fb, http) {
         this.route = route;
         this.router = router;
         this.userService = userService;
         this.fb = fb;
+        this.http = http;
         this.authType = '';
         this.title = '';
         this.errors = { errors: {} };
@@ -317,6 +328,10 @@ var AuthComponent = /** @class */ (function () {
         this.showActivationDiv = false;
         this.resetPassword = false;
         this.FormFilledSuccessfully = false;
+        this.showEmailVerification = false;
+        this.tokenFromUI = "7061737323313233";
+        this.encrypted = "";
+        this.loginErrorMessage = "";
         this.validationMessages = {
             'email': {
                 'required': 'Email is required',
@@ -344,10 +359,11 @@ var AuthComponent = /** @class */ (function () {
             },
             'terms': {
                 'required': 'You must accept terms and conditions'
-            },
-            'loginCredentials': {
-                'error': 'User Authentication Failed. Please verify your credentials'
             }
+            //,
+            //'loginCredentials': {
+            //    'error': 'User Authentication Failed. Please verify your credentials'
+            //}
         };
         this.formErrors = {
             'email': '',
@@ -357,11 +373,16 @@ var AuthComponent = /** @class */ (function () {
             'associate': '',
             'consumer': '',
             'activationCode': '',
-            'terms': '',
-            'loginCredentials': ''
+            'terms': ''
+            //,
+            //'loginCredentials': ''
         };
     }
     AuthComponent.prototype.ngOnInit = function () {
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //console.log(this.encrypted);
+        //this.router.navigate(['activate', '2', this.encrypted]);
         this.setValidationOnform();
         this.setSignInOrSignUpOrActivateOrReset();
         this.changeValuesOfFormsEvents();
@@ -372,7 +393,6 @@ var AuthComponent = /** @class */ (function () {
             _this.logValidationErrors(_this.authForm);
         });
         this.authForm.get('associate').valueChanges.subscribe(function (data) {
-            debugger;
             if (data == true) {
                 _this.authForm.get('terms').enable();
             }
@@ -381,7 +401,6 @@ var AuthComponent = /** @class */ (function () {
             }
         });
         this.authForm.get('consumer').valueChanges.subscribe(function (data) {
-            debugger;
             if (data == true) {
                 _this.authForm.get('terms').enable();
             }
@@ -390,7 +409,6 @@ var AuthComponent = /** @class */ (function () {
             }
         });
         this.authForm.get('terms').valueChanges.subscribe(function (data) {
-            debugger;
             if (data == false) {
                 _this.FormFilledSuccessfully = false;
             }
@@ -410,6 +428,10 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.logValidationErrors = function (group) {
         var _this = this;
         if (group === void 0) { group = this.authForm; }
+        if (this.authType == "login") {
+            this.loginErrorMessage = "";
+        }
+        this.showEmailVerification = false;
         Object.keys(group.controls).forEach(function (key) {
             var abstractControl = group.get(key);
             _this.formErrors[key] = '';
@@ -420,7 +442,9 @@ var AuthComponent = /** @class */ (function () {
                 if (abstractControl.errors != null) {
                     for (var errorKey in abstractControl.errors) {
                         if (errorKey) {
-                            _this.formErrors[key] += messages[errorKey] + ' ';
+                            if (messages[errorKey] !== undefined) {
+                                _this.formErrors[key] += messages[errorKey] + ' ';
+                            }
                         }
                     }
                     //if (key == "password") {
@@ -435,7 +459,7 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.setValidationOnform = function () {
         // use FormBuilder to create a form group
         this.authForm = this.fb.group({
-            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email, isEmailExist(this.userService, this)]],
+            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email], [this.emailAlreadyTaken()]],
             passwordGroup: this.fb.group({
                 password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(20),
                         patternValidator(/\d/, { number: true }),
@@ -460,7 +484,6 @@ var AuthComponent = /** @class */ (function () {
         var _this = this;
         this.route.url.subscribe(function (data) {
             // Get the last piece of the URL (it's either 'login' or 'register')
-            debugger;
             _this.authType = data[0].path;
             // Set a title for the page accordingly
             if (_this.authType === 'login') {
@@ -468,6 +491,7 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('email').clearValidators();
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('email').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]);
+                _this.authForm.get('email').setAsyncValidators([_this.emailAlreadyTaken()]);
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').clearValidators();
                 _this.authForm.get('passwordGroup').updateValueAndValidity();
@@ -485,8 +509,8 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('activationCode').updateValueAndValidity();
             }
             else if (_this.authType === 'register') {
-                _this.authForm.get('email').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email, isEmailExist(_this.userService, _this)]);
-                _this.authForm.get('email').updateValueAndValidity();
+                //this.authForm.get('email').setValidators([[Validators.required, Validators.email]]);
+                //this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').get('password').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(20),
                     patternValidator(/\d/, { number: true }),
                     patternValidator(/[A-Z]/, { upperLetter: true }),
@@ -561,7 +585,7 @@ var AuthComponent = /** @class */ (function () {
         if (email === void 0) { email = ""; }
         if (password === void 0) { password = ""; }
         this.isSubmitting = true;
-        debugger;
+        this.loginErrorMessage = "";
         //this.errors = { errors: {} };
         if (email != "" && password != "") {
             this.router.navigateByUrl('/');
@@ -585,15 +609,15 @@ var AuthComponent = /** @class */ (function () {
                             var docs1 = xml1.find("consumerExists");
                             jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
                                 if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AccountId").text() == "0") {
-                                    thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
                                 }
                                 else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("IsEmailVerified").text() == "0") {
                                 }
                                 else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("IsEmailVerified").text() == "1") {
-                                    thisStatus.formErrors.loginCredentials = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
                                 }
                                 else {
-                                    thisStatus.LoginAssociateOrConsumer(credentials, 2); //Associate
+                                    thisStatus.LoginAssociateOrConsumer(credentials, 2); //Consumer
                                 }
                             });
                         }
@@ -603,13 +627,13 @@ var AuthComponent = /** @class */ (function () {
                     // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
                 }
                 else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("IsEmailVerified").text() == "1") {
-                    thisStatus.formErrors.loginCredentials = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
-                    return false;
+                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
                 }
                 else {
                     thisStatus.LoginAssociateOrConsumer(credentials, 1); //associate
                 }
             });
+            _this.isSubmitting = false;
             //if (data > '0') {
             //    //this.router.navigateByUrl('/Associate');
             //    $(location).attr('href', 'Associate/ViewProfile.aspx')
@@ -640,7 +664,7 @@ var AuthComponent = /** @class */ (function () {
             //    this.isSubmitting = false;
             //}
         }, function (err) {
-            _this.formErrors.loginCredentials = _this.validationMessages['loginCredentials']['error'];
+            //this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
             _this.isSubmitting = false;
         });
     };
@@ -651,30 +675,27 @@ var AuthComponent = /** @class */ (function () {
             this.userService
                 .attemptAssociateAuth(this.authType, credentials)
                 .then(function (data) {
-                if (data > 1) {
-                    if (data.d.length > 0) {
-                        var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
-                        var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
-                        var docs1 = xml1.find("associateLogin");
-                        jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
-                            if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AssociateId").text() == "-1") {
-                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                return;
-                            }
-                            else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "1") {
-                                thisStatus.associateLoginSessionActivate(docs1);
-                                return;
-                            }
-                            else {
-                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                return;
-                            }
-                        });
-                    }
+                if (data.d.length > 0) {
+                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                    var docs1 = xml1.find("associateLogin");
+                    jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                        if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AssociateId").text() == "-1") {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                            return;
+                        }
+                        else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "1") {
+                            thisStatus.associateLoginSessionActivate(docs1);
+                            return;
+                        }
+                        else {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                            return;
+                        }
+                    });
                 }
                 else {
                     //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
-                    _this.isSubmitting = false;
                 }
                 //if (data > 1) {
                 //    this.isSubmitting = false;
@@ -694,25 +715,21 @@ var AuthComponent = /** @class */ (function () {
             this.userService
                 .attemptConsumerAuth(this.authType, credentials)
                 .then(function (data) {
-                if (data > 1) {
-                    if (data.d.length > 0) {
-                        var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
-                        var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
-                        var docs1 = xml1.find("consumerLogin");
-                        jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
-                            if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Id").text() == "-1") {
-                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                            }
-                            else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Flag").text() == "1") {
-                                thisStatus.consumerLoginSessionActivate(docs1);
-                                return;
-                            }
-                            else {
-                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                return false;
-                            }
-                        });
-                    }
+                if (data.d.length > 0) {
+                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                    var docs1 = xml1.find("consumerLogin");
+                    jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                        if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Id").text() == "-1") {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                        }
+                        else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Flag").text() == "1") {
+                            thisStatus.consumerLoginSessionActivate(docs1);
+                        }
+                        else {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                        }
+                    });
                 }
                 else {
                     _this.showErrorsPassword = true;
@@ -736,6 +753,7 @@ var AuthComponent = /** @class */ (function () {
                 jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', '/ConsumerDashboard.html');
             }
         }, function (err) {
+            _this.loginErrorMessage = "Some internal error occurred.";
             _this.isSubmitting = false;
         });
     };
@@ -754,6 +772,7 @@ var AuthComponent = /** @class */ (function () {
                 }
             }
         }, function (err) {
+            _this.loginErrorMessage = "Some internal error occurred.";
             //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
             _this.isSubmitting = false;
         });
@@ -768,8 +787,113 @@ var AuthComponent = /** @class */ (function () {
     * SIGN UP Module END
     * *************************************************
     **/
+    AuthComponent.prototype.isEmailExist = function (control) {
+        var _this = this;
+        //clearTimeout(this.debouncer);
+        //return { 'emailInUse': true };
+        var thisUserService = this.userService;
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(String(control.value).toLowerCase())) {
+            this.showOnValidateEmail = true;
+            setTimeout(function () {
+                return thisUserService.validateEmail(control.value).subscribe(function (data) {
+                    if (Number(data) >= 1) {
+                        console.log("Email validate" + data);
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                    }
+                    else {
+                        _this.showEmailVerification = false;
+                        console.log("Email validate" + data);
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+                        //control.parent.get('associate').enable();
+                        //control.parent.get('consumer').enable();
+                        //this.parent.get('terms').enable();
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        return null;
+                    }
+                }, function (err) {
+                    _this.showOnValidateEmail = false;
+                    _this.FormFilledSuccessfully = false;
+                    return { 'emailInUse': true };
+                });
+            }, 1000);
+        }
+    };
+    AuthComponent.prototype.isEmailTaken = function () {
+        this.logValidationErrors();
+        return this.authForm.get('email').hasError('emailInUse');
+    };
+    AuthComponent.prototype.emailAlreadyTaken = function () {
+        var _this = this;
+        return function (control) {
+            var thisUserService = _this.userService;
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (re.test(String(control.value).toLowerCase())) {
+                _this.showOnValidateEmail = true;
+                return _this.userService
+                    .emailAlreadyTaken(control.value)
+                    .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) {
+                    if (data > 1) {
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').addClass('has-error');
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').attr('style', 'top: 19% !important');
+                        return { emailInUse: true };
+                    }
+                    else {
+                        _this.showOnValidateEmail = false;
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').removeAttr('style');
+                        //control.parent.get('associate').enable();
+                        //control.parent.get('consumer').enable();
+                        //this.parent.get('terms').enable();
+                        _this.FormFilledSuccessfully = false;
+                        return Object(rxjs__WEBPACK_IMPORTED_MODULE_9__["of"])(null);
+                    }
+                }));
+                //return thisUserService.emailAlreadyTaken(control.value)
+                //    .subscribe(
+                //        (data) => {
+                //            debugger;
+                //            if (Number(data) >= 1) {
+                //                console.log("Email validate" + data);
+                //                this.showOnValidateEmail = false;
+                //                this.FormFilledSuccessfully = false;
+                //                return { 'emailTaken': true };
+                //            }
+                //            else {
+                //                this.showEmailVerification = false;
+                //                console.log("Email validate" + data);
+                //                control.parent.get('passwordGroup').enable();
+                //                control.parent.get('passwordGroup').get('password').enable();
+                //                control.parent.get('passwordGroup').get('confirmPassword').enable();
+                //                //control.parent.get('associate').enable();
+                //                //control.parent.get('consumer').enable();
+                //                //this.parent.get('terms').enable();
+                //                this.FormFilledSuccessfully = false;
+                //                return of(null);
+                //            }
+                //        },
+                //        (err) => {
+                //            this.showOnValidateEmail = false;
+                //            this.FormFilledSuccessfully = false;
+                //            return of(null);
+                //        });
+            }
+        };
+    };
     AuthComponent.prototype.submitRegistrationForm = function () {
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //this.router.navigate(['activate', '2', this.encrypted]);
         this.isSubmitting = true;
+        this.FormFilledSuccessfully = true;
         if (this.authForm.get('associate').value == true) {
             this.associateRegister();
         }
@@ -807,7 +931,15 @@ var AuthComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data >= 1) {
                 _this.isSubmitting = false;
-                _this.router.navigate(['/Activate', '1']);
+                _this.request = credentials.email;
+                _this.encryptUsingAES256();
+                credentials.email = _this.encrypted;
+                credentials.email.replace('/', '~');
+                _this.request = credentials.passwordGroup.password;
+                _this.encryptUsingAES256();
+                credentials.passwordGroup.password = _this.encrypted;
+                credentials.passwordGroup.password.replace('/', '~');
+                _this.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
             }
             else {
                 _this.isSubmitting = false;
@@ -824,7 +956,15 @@ var AuthComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data >= 1) {
                 _this.isSubmitting = false;
-                _this.router.navigate(['/Activate', '2']);
+                _this.request = credentials.email;
+                _this.encryptUsingAES256();
+                credentials.email = _this.encrypted;
+                credentials.email.replace('/', '~');
+                _this.request = credentials.passwordGroup.password;
+                _this.encryptUsingAES256();
+                credentials.passwordGroup.password = _this.encrypted;
+                credentials.passwordGroup.password.replace('/', '~');
+                _this.router.navigate(['activate', '2', credentials.email, credentials.passwordGroup.password]);
             }
             else {
                 _this.isSubmitting = false;
@@ -844,17 +984,36 @@ var AuthComponent = /** @class */ (function () {
     * *************************************************
     **/
     AuthComponent.prototype.submitActivationForm = function () {
+        var _this = this;
         this.isSubmitting = true;
         var credentials = this.authForm.value;
         var urlComponent;
-        var splitCurrentUrl = this.router.url.split('/');
+        var encryptedPassword;
+        var encryptedEmail;
         this.route.url.subscribe(function (data) {
-            // Get the last piece of the URL (it's either 'login' or 'register')
-            debugger;
-            urlComponent = data[0].path;
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[0].path;
+                encryptedEmail = data[2].path;
+                encryptedPassword = data[3].path;
+                _this.isSubmitting = false;
+            }
+            else {
+                //page  not found
+                _this.isSubmitting = false;
+            }
         });
         var userType = urlComponent;
-        console.log(userType);
+        encryptedEmail.replace('~', '/');
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        credentials.email = this.decrypted;
+        console.log(this.decrypted);
+        encryptedPassword.replace('~', '/');
+        this.encrypted = encryptedPassword;
+        this.decryptUsingAES256();
+        credentials.passwordGroup.password = this.decrypted;
+        console.log(this.decrypted);
         if (userType == "1") {
             this.associateActivationCode(credentials);
         }
@@ -869,10 +1028,10 @@ var AuthComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data.d == credentials.activationCode) {
                 _this.userService
-                    .attemptVerifiedActivationCodeAssociate(_this.authType, _this.globalEmail)
+                    .attemptVerifiedActivationCodeAssociate(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this.submitLoginForm(_this.globalEmail, _this.globalPassword);
+                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
@@ -897,10 +1056,10 @@ var AuthComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data.d == credentials.activationCode) {
                 _this.userService
-                    .attemptVerifiedActivationCodeConsumer(_this.authType, _this.globalEmail)
+                    .attemptVerifiedActivationCodeConsumer(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this.submitLoginForm(_this.globalEmail, _this.globalPassword);
+                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
@@ -920,12 +1079,31 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.onClickResendVerificationCode = function () {
         var _this = this;
-        this.resentCode = false;
+        var email;
+        var urlComponent;
+        var encryptedEmail;
+        this.route.url.subscribe(function (data) {
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[0].path;
+                encryptedEmail = data[2].path;
+            }
+            else {
+                //page  not found
+            }
+        });
+        var userType = urlComponent;
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        email = this.decrypted;
+        email.replace('~', '/');
+        console.log(this.decrypted);
+        this.resentCode = true;
         this.userService
-            .attemptResendActivateCode(this.globalEmail)
+            .attemptResendActivateCode(email)
             .subscribe(function (data) {
             if (data.d > 0 && data.d > "1") {
-                _this.resentCode = true;
+                _this.resentCode = false;
                 _this.isSubmitting = false;
             }
             else {
@@ -942,6 +1120,27 @@ var AuthComponent = /** @class */ (function () {
     * ACTIVATION Module END
     * *************************************************
     **/
+    AuthComponent.prototype.encryptUsingAES256 = function () {
+        var _key = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var _iv = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var encrypted = crypto_js__WEBPACK_IMPORTED_MODULE_6__["AES"].encrypt(JSON.stringify(this.request), _key, {
+            keySize: 16,
+            iv: _iv,
+            mode: crypto_js__WEBPACK_IMPORTED_MODULE_6__["mode"].ECB,
+            padding: crypto_js__WEBPACK_IMPORTED_MODULE_6__["pad"].Pkcs7
+        });
+        this.encrypted = encrypted.toString();
+    };
+    AuthComponent.prototype.decryptUsingAES256 = function () {
+        var _key = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var _iv = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        this.decrypted = crypto_js__WEBPACK_IMPORTED_MODULE_6__["AES"].decrypt(this.encrypted, _key, {
+            keySize: 16,
+            iv: _iv,
+            mode: crypto_js__WEBPACK_IMPORTED_MODULE_6__["mode"].ECB,
+            padding: crypto_js__WEBPACK_IMPORTED_MODULE_6__["pad"].Pkcs7
+        }).toString(crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8);
+    };
     AuthComponent.prototype.submitFormResetPassword = function () {
         var _this = this;
         var thisStatus = this;
@@ -1005,7 +1204,7 @@ var AuthComponent = /** @class */ (function () {
             selector: 'app-auth-page',
             template: __webpack_require__(/*! ./auth.component.html */ "./AngularAssociate/app/components/auth/auth.component.html")
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_auth__WEBPACK_IMPORTED_MODULE_4__["UserService"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_auth__WEBPACK_IMPORTED_MODULE_4__["UserService"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]])
     ], AuthComponent);
     return AuthComponent;
 }());
@@ -1022,37 +1221,46 @@ function emailDomain(domainName) {
         }
     };
 }
-function isEmailExist(userService, authComp) {
-    return function (control) {
-        //clearTimeout(this.debouncer);
-        //return { 'emailInUse': true };
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (re.test(String(control.value).toLowerCase())) {
-            authComp.showOnValidateEmail = true;
-        }
-        setTimeout(function () {
-            userService.validateEmail(control.value).subscribe(function (data) {
-                if (data >= 1) {
-                    control.parent.get('passwordGroup').enable();
-                    control.parent.get('passwordGroup').get('password').enable();
-                    control.parent.get('passwordGroup').get('confirmPassword').enable();
-                    //control.parent.get('associate').enable();
-                    //control.parent.get('consumer').enable();
-                    //control.parent.get('terms').enable();
-                    authComp.showOnValidateEmail = false;
-                    authComp.FormFilledSuccessfully = false;
-                    return null;
-                }
-                else {
-                    return { 'emailInUse': true };
-                }
-            }, function (err) {
-                return { 'emailInUse': true };
-            });
-        }, 1000);
-        return null;
-    };
-}
+//function isEmailExist(userService: UserService, authComp: AuthComponent) {
+//    return (control: AbstractControl): { [key: string]: any } | null => {
+//        //clearTimeout(this.debouncer);
+//        //return { 'emailInUse': true };
+//        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//        if (re.test(String(control.value).toLowerCase())) {
+//            authComp.showOnValidateEmail = true;
+//            setTimeout(() => {
+//                userService.validateEmail(control.value).subscribe(
+//                    (data) => {
+//                        if (data >= 1) {
+//                            console.log("Email validate" + data);
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return { 'emailInUse': true };
+//                        }
+//                        else {
+//                            console.log("Email validate" + data);
+//                            control.parent.get('passwordGroup').enable();
+//                            control.parent.get('passwordGroup').get('password').enable();
+//                            control.parent.get('passwordGroup').get('confirmPassword').enable();
+//                            //control.parent.get('associate').enable();
+//                            //control.parent.get('consumer').enable();
+//                            //control.parent.get('terms').enable();
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return null;
+//                        }
+//                    },
+//                    (err) => {
+//                        authComp.showOnValidateEmail = false;
+//                        authComp.FormFilledSuccessfully = false;
+//                        return { 'emailInUse': true };
+//                    });
+//            }, 500);
+//        }
+//        console.log('outside');
+//        return { 'emailInUse': true };
+//    }
+//}
 function matchPasswords(group) {
     var passwordControl = group.get('password');
     var confirmPasswordControl = group.get('confirmPassword');
@@ -1151,7 +1359,7 @@ function patternValidator(regex, error) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"divLandingPage\" class=\"parallax\" data-background=\"AngularAssociate/assets/images/background.jpg\" data-color=\"#0e3a6b\" data-color-opacity=\"0.5\" data-img-width=\"2500\" data-img-height=\"1600\">\r\n    <!--  ../../../assets/images/home-parallax-2.jpg -->\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\" style=\"text-align:center;\">\r\n\r\n                <div class=\"search-container\">\r\n\r\n                    <!-- Form -->\r\n                    <h2> Grow Your Business</h2>\r\n                    <div class=\"adv-search-btn\">\r\n                        Wcr Organisation is the best solution to make you succeed online. <br>\r\n                        Starting with online advertising or managing monthly.\r\n                    </div>\r\n\r\n                    <!-- Row With Forms -->\r\n                    <div class=\"row with-forms search-background\">\r\n                        <!-- Main Search Input -->\r\n                        <div class=\"col-md-12\" [formGroup]=\"searchForm\" style=\"margin: 0 auto; text-align:center; align-item:center; float:none;\">\r\n\r\n                            <div class=\"main-search-input\">\r\n                                <input type=\"text\" formControlName=\"txtSearch\" placeholder=\"Enter address e.g. street, city or state\" value=\"\" (keyup.enter)=\"onEnterSearch()\" />\r\n                                <button class=\"button waves-effect waves-light btn\" (click)=\"onClickSearch()\">\r\n                                <i class=\"large material-icons form-control-feedback text-xs-27 pd-t-9-force\">search</i> </button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!-- Row With Forms / End -->\r\n                    <!-- Browse Jobs -->\r\n                    <!-- Announce -->\r\n                    <div class=\"announce\">\r\n                        We�ve 1000s of ads!\r\n                    </div>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n<!-- Fullwidth Section -->\r\n<section id=\"salesServicesDivId\" class=\"fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50\" style='background-color:#fff' #divSalesServices>\r\n\r\n    <!-- Content -->\r\n    <div class=\"container\" >\r\n\r\n        <!---->\r\n        <div class=\"row\" [style.display]=\"isSearchingStart ? 'block':'none' \">\r\n            <div class=\"col-md-12\" style=\"height:400px; padding-top: 150px;\">\r\n                <div class=\"col-xs-3 col-md-4 div-center\">\r\n                    <div class=\"progress\" style=\"top:50%;\">\r\n                        <div class=\"indeterminate\"></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--<div class=\"row\" [style.display]=\"ifError\"></div>-->\r\n        <div class=\"row\" [style.display]=\"resultContent ? 'block':'none' \">\r\n            <div class=\"col-md-12\">\r\n\r\n                <div class=\"row text-xs-center text-center mg-t-30 mg-b-50\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SALES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlSales\"> </div>\r\n\r\n                <div class=\"row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30\" style=\"border-top: 1px solid #eee;\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SERVICES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlServices\"></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</section>\r\n<!-- Fullwidth Section / End -->"
+module.exports = "<div id=\"divLandingPage\" class=\"parallax\" data-background=\"AngularAssociate/assets/images/background.jpg\" data-color=\"#0e3a6b\" data-color-opacity=\"0.5\" data-img-width=\"2500\" data-img-height=\"1600\">\r\n    <!--  ../../../assets/images/home-parallax-2.jpg -->\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\" style=\"text-align:center;\">\r\n\r\n                <div class=\"search-container\">\r\n\r\n                    <!-- Form -->\r\n                    <h2> Grow Your Business</h2>\r\n                    <div class=\"adv-search-btn\">\r\n                        Wcr Organisation is the best solution to make you succeed online. <br>\r\n                        Starting with online advertising or managing monthly.\r\n                    </div>\r\n\r\n                    <!-- Row With Forms -->\r\n                    <div class=\"row with-forms search-background\">\r\n                        <!-- Main Search Input -->\r\n                        <div class=\"col-md-12\" [formGroup]=\"searchForm\" style=\"margin: 0 auto; text-align:center; align-item:center; float:none;\">\r\n\r\n                            <div class=\"main-search-input\">\r\n                                <input type=\"text\" formControlName=\"txtSearch\" placeholder=\"Enter address e.g. street, city or state\" value=\"\" (keyup.enter)=\"onEnterSearch()\" />\r\n                                <button class=\"button waves-effect waves-light btn\" (click)=\"onClickSearch()\">\r\n                                <i class=\"large material-icons form-control-feedback text-xs-27 pd-t-9-force\">search</i> </button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!-- Row With Forms / End -->\r\n                    <!-- Browse Jobs -->\r\n                    <!-- Announce -->\r\n                    <div class=\"announce\">\r\n                        We�ve 1000s of ads!\r\n                    </div>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n<!-- Fullwidth Section -->\r\n<section id=\"salesServicesDivId\" class=\"fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50\" style='background-color:#fff;border-top: 5px solid #0e3a6b;' #divSalesServices>\r\n\r\n    <!-- Content -->\r\n    <div class=\"container\" >\r\n\r\n        <!---->\r\n        <div class=\"row\" [style.display]=\"isSearchingStart ? 'block':'none' \">\r\n            <div class=\"col-md-12\" style=\"height:400px; padding-top: 150px;\">\r\n                <div class=\"col-xs-3 col-md-4 div-center\">\r\n                    <div class=\"progress\" style=\"top:50%;\">\r\n                        <div class=\"indeterminate\"></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--<div class=\"row\" [style.display]=\"ifError\"></div>-->\r\n        <div class=\"row\" [style.display]=\"resultContent ? 'block':'none' \">\r\n            <div class=\"col-md-12\">\r\n\r\n                <div class=\"row text-xs-center text-center mg-t-30 mg-b-50\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SALES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlSales\"> </div>\r\n\r\n                <div class=\"row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30\" style=\"border-top: 1px solid #eee;\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SERVICES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlServices\"></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</section>\r\n<!-- Fullwidth Section / End -->"
 
 /***/ }),
 
@@ -1753,6 +1961,36 @@ var AuthGuard = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./AngularAssociate/app/services/auth/encrypt_decrypt.ts":
+/*!***************************************************************!*\
+  !*** ./AngularAssociate/app/services/auth/encrypt_decrypt.ts ***!
+  \***************************************************************/
+/*! exports provided: encrypt_decrypt */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "encrypt_decrypt", function() { return encrypt_decrypt; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var encrypt_decrypt = /** @class */ (function () {
+    function encrypt_decrypt() {
+        this.Base64 = "";
+        this._keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+    }
+    encrypt_decrypt = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], encrypt_decrypt);
+    return encrypt_decrypt;
+}());
+
+
+
+/***/ }),
+
 /***/ "./AngularAssociate/app/services/auth/home-auth-resolver.service.ts":
 /*!**************************************************************************!*\
   !*** ./AngularAssociate/app/services/auth/home-auth-resolver.service.ts ***!
@@ -1974,7 +2212,7 @@ var HomeLandingService = /** @class */ (function () {
 /*!*****************************************************!*\
   !*** ./AngularAssociate/app/services/auth/index.ts ***!
   \*****************************************************/
-/*! exports provided: ApiService, AuthGuard, NoAuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, HomeLandingService */
+/*! exports provided: ApiService, AuthGuard, NoAuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, HomeLandingService, encrypt_decrypt */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2002,6 +2240,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _home_landing_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home_landing.service */ "./AngularAssociate/app/services/auth/home_landing.service.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HomeLandingService", function() { return _home_landing_service__WEBPACK_IMPORTED_MODULE_7__["HomeLandingService"]; });
+
+/* harmony import */ var _encrypt_decrypt__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./encrypt_decrypt */ "./AngularAssociate/app/services/auth/encrypt_decrypt.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "encrypt_decrypt", function() { return _encrypt_decrypt__WEBPACK_IMPORTED_MODULE_8__["encrypt_decrypt"]; });
+
 
 
 
@@ -2334,20 +2576,23 @@ var UserService = /** @class */ (function () {
         }));
     };
     UserService.prototype.attemptRegisterAssociate = function (type, credentials) {
+        debugger;
         //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
         var urlToSignUp = "ws/AssociateSignUp.ashx?action=AssociateData";
-        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
-        return this.apiService.post(urlToSignUp, { user: credentials })
+        urlToSignUp += "&FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        return this.apiService.post(urlToSignUp, {})
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) {
+            console.log(data);
             return data;
         }));
     };
     UserService.prototype.attemptRegisterConsumer = function (type, credentials) {
         //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
         var urlToSignUp = "ws/AssociateSignUp.ashx?action=Consumer";
-        urlToSignUp += "FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
-        return this.apiService.post(urlToSignUp, { user: credentials })
+        urlToSignUp += "&FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        return this.apiService.post(urlToSignUp, {})
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) {
+            console.log(data);
             return data;
         }));
     };
@@ -2436,9 +2681,12 @@ var UserService = /** @class */ (function () {
     };
     //
     UserService.prototype.validateEmail = function (email) {
-        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) {
-            return data;
-        }));
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) { return data; }));
+    };
+    UserService.prototype.emailAlreadyTaken = function (email) {
+        return this.http.post(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email, {})
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["delay"])(500));
     };
     UserService.prototype.getCurrentUser = function () {
         return this.currentUserSubject.value;
@@ -2503,7 +2751,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"footer\" class=\"sticky-footer\">\r\n    <!-- Main -->\r\n    <div class=\"container-fluid\">\r\n        <!-- Copyright -->\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"copyrights\">� 2019 WCR Organisation. <a href=\"/privacy.html\">Privacy and Terms</a></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>"
+module.exports = "<div id=\"footer\" class=\"sticky-footer\">\r\n    <!-- Main -->\r\n    <div class=\"container-fluid\">\r\n        <!-- Copyright -->\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"copyrights\">� 2019 WCR Organisation. <a href=\"/privacy.html\" class=\"tx-medium blue-text text-darken-4\" style=\"cursor:pointer;\">Privacy and Terms</a></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>"
 
 /***/ }),
 

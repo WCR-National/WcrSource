@@ -2280,11 +2280,12 @@
     display: inline-block;
     height: 25px;
     line-height: 25px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    font-weight:500;
 }
 
     [type="checkbox"] + span:not(.lever):before,
@@ -3670,10 +3671,11 @@ button[disabled], html input[disabled]:hover, input[disabled]:focus {
 .preloader-wrapper-button {
     position: absolute;
     top: 25%;
+
 }
 
 .spinner-white, .spinner-white-only {
-    color: #ffffff;
+    color: #ffffff !important;
 }
 
 span.fa {
@@ -3692,6 +3694,20 @@ span.fa {
     left: 35px !important;
     /* -webkit-transform: translateY(-50%) !important; */
     /* transform: translateY(-133%) !important; */
+    font-size: 18px !important;
+    color: #008329;
+}
+.password:focus+span.fa {
+    position: absolute !important;
+    top: 10% !important;
+    left: 35px !important;
+    font-size: 18px !important;
+    color: #008329;
+}
+.has-error .password+span.fa {
+    position: absolute !important;
+    top: 10% !important;
+    left: 35px !important;
     font-size: 18px !important;
     color: #008329;
 }
@@ -3769,7 +3785,7 @@ label {
 
 .spinner-blue,
 .spinner-blue-only {
-    border-color: #4285f4;
+    border-color: #0e3a6b;
 }
 
 .spinner-red,
@@ -4377,7 +4393,7 @@ label {
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
 }
-input[disabled]+span.fa {
+input[disabled]+span.icon {
     color: #949494;
 }
 
@@ -4399,4 +4415,32 @@ span.icon {
     /* transform: translateY(-133%) !important; */
     font-size: 18px !important;
     color: #008329;
+}
+
+.password:focus+span.icon {
+    position: absolute !important;
+    top: 10% !important;
+    left: 35px !important;
+    font-size: 18px !important;
+    color: #008329;
+}
+
+.has-error .password+span.icon {
+    position: absolute !important;
+    top: 30% !important;
+    left: 35px !important;
+    font-size: 18px !important;
+    color: #008329;
+}
+.has-error .password:focus + span.icon {
+    position: absolute !important;
+    top: 10% !important;
+    left: 35px !important;
+    font-size: 18px !important;
+    color: #008329;
+}
+
+. size-16 {
+    width:16px;
+    height:16px;
 }
