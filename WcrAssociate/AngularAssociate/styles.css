@@ -3696,20 +3696,22 @@ span.fa {
     /* transform: translateY(-133%) !important; */
     font-size: 18px !important;
     color: #008329;
+    color: #a21318;
 }
-.password:focus+span.fa {
+.password:focus + span.fa {
     position: absolute !important;
     top: 10% !important;
     left: 35px !important;
     font-size: 18px !important;
     color: #008329;
+    color: #a21318;
 }
-.has-error .password+span.fa {
+.has-error .password + span.fa {
     position: absolute !important;
     top: 10% !important;
     left: 35px !important;
     font-size: 18px !important;
-    color: #008329;
+    color: #a21318 ;
 }
 
 label {
@@ -4397,15 +4399,6 @@ input[disabled]+span.icon {
     color: #949494;
 }
 
-.has-error span.icon {
-    position: absolute !important;
-    top: 25% !important;
-    left: 35px !important;
-    /* -webkit-transform: translateY(-50%) !important; */
-    /* transform: translateY(-133%) !important; */
-    font-size: 18px !important;
-    color: #008329;
-}
 
 span.icon {
     position: absolute !important;
@@ -4425,19 +4418,30 @@ span.icon {
     color: #008329;
 }
 
-.has-error .password+span.icon {
+
+.has-error span.icon {
+    position: absolute !important;
+    top: 25% !important;
+    left: 35px !important;
+    /* -webkit-transform: translateY(-50%) !important; */
+    /* transform: translateY(-133%) !important; */
+    font-size: 18px !important;
+    color: #b61318;
+}
+
+.has-error .password + span.icon {
     position: absolute !important;
     top: 30% !important;
     left: 35px !important;
     font-size: 18px !important;
-    color: #008329;
+    color: #b61318;
 }
 .has-error .password:focus + span.icon {
     position: absolute !important;
     top: 10% !important;
     left: 35px !important;
     font-size: 18px !important;
-    color: #008329;
+    color: #b61318;
 }
 
 . size-16 {

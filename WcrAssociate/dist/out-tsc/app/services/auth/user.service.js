@@ -6,7 +6,7 @@ import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
 import { environment } from '../../../environments/environment';
-import { map, distinctUntilChanged } from 'rxjs/operators';
+import { map, distinctUntilChanged, delay } from 'rxjs/operators';
 var UserService = /** @class */ (function () {
     function UserService(user, apiService, http, jwtService) {
         if (user === void 0) { user = null; }
@@ -286,6 +286,10 @@ var UserService = /** @class */ (function () {
     UserService.prototype.validateEmail = function (email) {
         return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email)
             .pipe(map(function (data) { return data; }));
+    };
+    UserService.prototype.emailAlreadyTaken = function (email) {
+        return this.http.post(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email, {})
+            .pipe(delay(300));
     };
     UserService.prototype.getCurrentUser = function () {
         return this.currentUserSubject.value;

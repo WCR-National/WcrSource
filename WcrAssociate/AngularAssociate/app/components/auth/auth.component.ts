@@ -225,10 +225,12 @@ export class AuthComponent implements OnInit {
                 this.title = 'Sign in';
 
                 this.authForm.get('email').clearValidators();
+                this.authForm.get('email').clearAsyncValidators();
                 this.authForm.get('email').updateValueAndValidity();
 
+
+
                 this.authForm.get('email').setValidators([Validators.required, Validators.email]);
-                this.authForm.get('email').setAsyncValidators([this.emailAlreadyTaken()]);
                 this.authForm.get('email').updateValueAndValidity();
 
                 this.authForm.get('passwordGroup').clearValidators();
@@ -255,8 +257,9 @@ export class AuthComponent implements OnInit {
 
             }
             else if (this.authType === 'register') {
-                //this.authForm.get('email').setValidators([[Validators.required, Validators.email]]);
-                //this.authForm.get('email').updateValueAndValidity();
+                this.authForm.get('email').setValidators([Validators.required, Validators.email]);
+                this.authForm.get('email').setAsyncValidators([this.emailAlreadyTaken()]);
+                this.authForm.get('email').updateValueAndValidity();
 
 
                 this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
@@ -296,6 +299,7 @@ export class AuthComponent implements OnInit {
             else if (this.authType === 'activate') {
 
                 this.authForm.get('email').clearValidators();
+                this.authForm.get('email').clearAsyncValidators();
                 this.authForm.get('email').updateValueAndValidity();
 
                 this.authForm.get('passwordGroup').clearValidators();
@@ -323,6 +327,7 @@ export class AuthComponent implements OnInit {
                 this.authForm.get('email').enable();
                 this.authForm.get('email').updateValueAndValidity();
 
+                this.authForm.get('email').clearAsyncValidators();
                 this.authForm.get('email').setValidators([Validators.required, Validators.email]);
                 this.authForm.get('email').updateValueAndValidity();
 
@@ -350,7 +355,6 @@ export class AuthComponent implements OnInit {
 
                 this.title = 'Reset Password';
             }
-
         });
     }
 
@@ -1064,9 +1068,9 @@ export class AuthComponent implements OnInit {
     }
 
     submitFormResetPassword() {
+        debugger;
         let thisStatus = this;
         const credentials = this.authForm.value;
-        this.resetPassword = true;
         this.userService
             .attemptAssociateAccountExists(this.authType, credentials)
             .subscribe(
@@ -1080,7 +1084,8 @@ export class AuthComponent implements OnInit {
                                 .attemptResetAssociatePassword(credentials.email)
                                 .then((data1: any) => {
                                     if (data1 == "0") {
-                                        //show message : "Please check your registered emailID for new password."
+                                        thisStatus.resetPassword = true;
+                                        thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
                                     }
                                 });
                         }
@@ -1097,13 +1102,15 @@ export class AuthComponent implements OnInit {
                                         $.each(docs1, function (i, docs1) {
                                             if ($(docs1).find("AccountId").text() == "0") {
                                                 //Please verify your email address and retry again.
+                                                thisStatus.showEmailVerification = true;
                                             }
                                             else {
                                                 thisStatus.userService
                                                     .attemptResetConsumerPassword(credentials.email)
                                                     .then((data2: any) => {
                                                         if (data2 == "0") {
-                                                            //show message : "Please check your registered emailID for new password."
+                                                            thisStatus.resetPassword = true;
+                                                            thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
                                                         }
                                                     });
                                             }
@@ -1114,7 +1121,8 @@ export class AuthComponent implements OnInit {
                     });
                 },
                 err => {
-                    this.resentCode = false;
+                    this.showEmailVerification = true;
+                    this.resetPassword = false;
                     this.isSubmitting = false;
                 }
             );

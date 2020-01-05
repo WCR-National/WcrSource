@@ -5,12 +5,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/auth';
 import * as $ from 'jquery';
 import * as CryptoJS from 'crypto-js';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { of } from 'rxjs';
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent(route, router, userService, fb) {
+    function AuthComponent(route, router, userService, fb, http) {
         this.route = route;
         this.router = router;
         this.userService = userService;
         this.fb = fb;
+        this.http = http;
         this.authType = '';
         this.title = '';
         this.errors = { errors: {} };
@@ -26,6 +30,7 @@ var AuthComponent = /** @class */ (function () {
         this.showEmailVerification = false;
         this.tokenFromUI = "7061737323313233";
         this.encrypted = "";
+        this.loginErrorMessage = "";
         this.validationMessages = {
             'email': {
                 'required': 'Email is required',
@@ -53,10 +58,11 @@ var AuthComponent = /** @class */ (function () {
             },
             'terms': {
                 'required': 'You must accept terms and conditions'
-            },
-            'loginCredentials': {
-                'error': 'User Authentication Failed. Please verify your credentials'
             }
+            //,
+            //'loginCredentials': {
+            //    'error': 'User Authentication Failed. Please verify your credentials'
+            //}
         };
         this.formErrors = {
             'email': '',
@@ -66,8 +72,9 @@ var AuthComponent = /** @class */ (function () {
             'associate': '',
             'consumer': '',
             'activationCode': '',
-            'terms': '',
-            'loginCredentials': ''
+            'terms': ''
+            //,
+            //'loginCredentials': ''
         };
     }
     AuthComponent.prototype.ngOnInit = function () {
@@ -120,6 +127,10 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.logValidationErrors = function (group) {
         var _this = this;
         if (group === void 0) { group = this.authForm; }
+        if (this.authType == "login") {
+            this.loginErrorMessage = "";
+        }
+        this.showEmailVerification = false;
         Object.keys(group.controls).forEach(function (key) {
             var abstractControl = group.get(key);
             _this.formErrors[key] = '';
@@ -130,7 +141,9 @@ var AuthComponent = /** @class */ (function () {
                 if (abstractControl.errors != null) {
                     for (var errorKey in abstractControl.errors) {
                         if (errorKey) {
-                            _this.formErrors[key] += messages[errorKey] + ' ';
+                            if (messages[errorKey] !== undefined) {
+                                _this.formErrors[key] += messages[errorKey] + ' ';
+                            }
                         }
                     }
                     //if (key == "password") {
@@ -145,7 +158,7 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.setValidationOnform = function () {
         // use FormBuilder to create a form group
         this.authForm = this.fb.group({
-            email: ['', [Validators.required, Validators.email, this.isEmailExist.bind(this)]],
+            email: ['', [Validators.required, Validators.email], [this.emailAlreadyTaken()]],
             passwordGroup: this.fb.group({
                 password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
                         patternValidator(/\d/, { number: true }),
@@ -177,6 +190,7 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('email').clearValidators();
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('email').setValidators([Validators.required, Validators.email]);
+                _this.authForm.get('email').setAsyncValidators([_this.emailAlreadyTaken()]);
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').clearValidators();
                 _this.authForm.get('passwordGroup').updateValueAndValidity();
@@ -194,8 +208,8 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('activationCode').updateValueAndValidity();
             }
             else if (_this.authType === 'register') {
-                _this.authForm.get('email').setValidators([Validators.required, Validators.email, _this.isEmailExist.bind(_this)]);
-                _this.authForm.get('email').updateValueAndValidity();
+                //this.authForm.get('email').setValidators([[Validators.required, Validators.email]]);
+                //this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
                     patternValidator(/\d/, { number: true }),
                     patternValidator(/[A-Z]/, { upperLetter: true }),
@@ -270,7 +284,7 @@ var AuthComponent = /** @class */ (function () {
         if (email === void 0) { email = ""; }
         if (password === void 0) { password = ""; }
         this.isSubmitting = true;
-        debugger;
+        this.loginErrorMessage = "";
         //this.errors = { errors: {} };
         if (email != "" && password != "") {
             this.router.navigateByUrl('/');
@@ -294,15 +308,15 @@ var AuthComponent = /** @class */ (function () {
                             var docs1 = xml1.find("consumerExists");
                             $.each(docs1, function (i, docs1) {
                                 if ($(docs1).find("AccountId").text() == "0") {
-                                    thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
                                 }
                                 else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
                                 }
                                 else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
-                                    thisStatus.formErrors.loginCredentials = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
                                 }
                                 else {
-                                    thisStatus.LoginAssociateOrConsumer(credentials, 2); //Associate
+                                    thisStatus.LoginAssociateOrConsumer(credentials, 2); //Consumer
                                 }
                             });
                         }
@@ -312,13 +326,13 @@ var AuthComponent = /** @class */ (function () {
                     // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
                 }
                 else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "1") {
-                    thisStatus.formErrors.loginCredentials = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
-                    return false;
+                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
                 }
                 else {
                     thisStatus.LoginAssociateOrConsumer(credentials, 1); //associate
                 }
             });
+            _this.isSubmitting = false;
             //if (data > '0') {
             //    //this.router.navigateByUrl('/Associate');
             //    $(location).attr('href', 'Associate/ViewProfile.aspx')
@@ -349,7 +363,7 @@ var AuthComponent = /** @class */ (function () {
             //    this.isSubmitting = false;
             //}
         }, function (err) {
-            _this.formErrors.loginCredentials = _this.validationMessages['loginCredentials']['error'];
+            //this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
             _this.isSubmitting = false;
         });
     };
@@ -360,30 +374,27 @@ var AuthComponent = /** @class */ (function () {
             this.userService
                 .attemptAssociateAuth(this.authType, credentials)
                 .then(function (data) {
-                if (data > 1) {
-                    if (data.d.length > 0) {
-                        var xmlDoc1 = $.parseXML(data.d);
-                        var xml1 = $(xmlDoc1);
-                        var docs1 = xml1.find("associateLogin");
-                        $.each(docs1, function (i, docs1) {
-                            if ($(docs1).find("AssociateId").text() == "-1") {
-                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                return;
-                            }
-                            else if ($(docs1).find("Status").text() == "1") {
-                                thisStatus.associateLoginSessionActivate(docs1);
-                                return;
-                            }
-                            else {
-                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                return;
-                            }
-                        });
-                    }
+                if (data.d.length > 0) {
+                    var xmlDoc1 = $.parseXML(data.d);
+                    var xml1 = $(xmlDoc1);
+                    var docs1 = xml1.find("associateLogin");
+                    $.each(docs1, function (i, docs1) {
+                        if ($(docs1).find("AssociateId").text() == "-1") {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                            return;
+                        }
+                        else if ($(docs1).find("Status").text() == "1") {
+                            thisStatus.associateLoginSessionActivate(docs1);
+                            return;
+                        }
+                        else {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                            return;
+                        }
+                    });
                 }
                 else {
                     //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
-                    _this.isSubmitting = false;
                 }
                 //if (data > 1) {
                 //    this.isSubmitting = false;
@@ -403,25 +414,21 @@ var AuthComponent = /** @class */ (function () {
             this.userService
                 .attemptConsumerAuth(this.authType, credentials)
                 .then(function (data) {
-                if (data > 1) {
-                    if (data.d.length > 0) {
-                        var xmlDoc1 = $.parseXML(data.d);
-                        var xml1 = $(xmlDoc1);
-                        var docs1 = xml1.find("consumerLogin");
-                        $.each(docs1, function (i, docs1) {
-                            if ($(docs1).find("Id").text() == "-1") {
-                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                            }
-                            else if ($(docs1).find("Flag").text() == "1") {
-                                thisStatus.consumerLoginSessionActivate(docs1);
-                                return;
-                            }
-                            else {
-                                thisStatus.formErrors.loginCredentials = "User Authentication Failed. Please verify your credentials";
-                                return false;
-                            }
-                        });
-                    }
+                if (data.d.length > 0) {
+                    var xmlDoc1 = $.parseXML(data.d);
+                    var xml1 = $(xmlDoc1);
+                    var docs1 = xml1.find("consumerLogin");
+                    $.each(docs1, function (i, docs1) {
+                        if ($(docs1).find("Id").text() == "-1") {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                        }
+                        else if ($(docs1).find("Flag").text() == "1") {
+                            thisStatus.consumerLoginSessionActivate(docs1);
+                        }
+                        else {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                        }
+                    });
                 }
                 else {
                     _this.showErrorsPassword = true;
@@ -445,6 +452,7 @@ var AuthComponent = /** @class */ (function () {
                 $(location).attr('href', '/ConsumerDashboard.html');
             }
         }, function (err) {
+            _this.loginErrorMessage = "Some internal error occurred.";
             _this.isSubmitting = false;
         });
     };
@@ -463,6 +471,7 @@ var AuthComponent = /** @class */ (function () {
                 }
             }
         }, function (err) {
+            _this.loginErrorMessage = "Some internal error occurred.";
             //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
             _this.isSubmitting = false;
         });
@@ -491,7 +500,6 @@ var AuthComponent = /** @class */ (function () {
                         console.log("Email validate" + data);
                         _this.showOnValidateEmail = false;
                         _this.FormFilledSuccessfully = false;
-                        _this.showEmailVerification = true;
                     }
                     else {
                         _this.showEmailVerification = false;
@@ -513,6 +521,71 @@ var AuthComponent = /** @class */ (function () {
                 });
             }, 1000);
         }
+    };
+    AuthComponent.prototype.isEmailTaken = function () {
+        this.logValidationErrors();
+        return this.authForm.get('email').hasError('emailInUse');
+    };
+    AuthComponent.prototype.emailAlreadyTaken = function () {
+        var _this = this;
+        return function (control) {
+            var thisUserService = _this.userService;
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (re.test(String(control.value).toLowerCase())) {
+                _this.showOnValidateEmail = true;
+                return _this.userService
+                    .emailAlreadyTaken(control.value)
+                    .pipe(map(function (data) {
+                    if (data > 1) {
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        $('#validateEmailDiv').addClass('has-error');
+                        $('#validateEmailDiv').attr('style', 'top: 19% !important');
+                        return { emailInUse: true };
+                    }
+                    else {
+                        _this.showOnValidateEmail = false;
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+                        $('#validateEmailDiv').removeAttr('style');
+                        //control.parent.get('associate').enable();
+                        //control.parent.get('consumer').enable();
+                        //this.parent.get('terms').enable();
+                        _this.FormFilledSuccessfully = false;
+                        return of(null);
+                    }
+                }));
+                //return thisUserService.emailAlreadyTaken(control.value)
+                //    .subscribe(
+                //        (data) => {
+                //            debugger;
+                //            if (Number(data) >= 1) {
+                //                console.log("Email validate" + data);
+                //                this.showOnValidateEmail = false;
+                //                this.FormFilledSuccessfully = false;
+                //                return { 'emailTaken': true };
+                //            }
+                //            else {
+                //                this.showEmailVerification = false;
+                //                console.log("Email validate" + data);
+                //                control.parent.get('passwordGroup').enable();
+                //                control.parent.get('passwordGroup').get('password').enable();
+                //                control.parent.get('passwordGroup').get('confirmPassword').enable();
+                //                //control.parent.get('associate').enable();
+                //                //control.parent.get('consumer').enable();
+                //                //this.parent.get('terms').enable();
+                //                this.FormFilledSuccessfully = false;
+                //                return of(null);
+                //            }
+                //        },
+                //        (err) => {
+                //            this.showOnValidateEmail = false;
+                //            this.FormFilledSuccessfully = false;
+                //            return of(null);
+                //        });
+            }
+        };
     };
     AuthComponent.prototype.submitRegistrationForm = function () {
         //this.request = "ali87613@yahoo.com";
@@ -561,11 +634,11 @@ var AuthComponent = /** @class */ (function () {
                 _this.encryptUsingAES256();
                 credentials.email = _this.encrypted;
                 credentials.email.replace('/', '~');
-                _this.request = credentials.password;
+                _this.request = credentials.passwordGroup.password;
                 _this.encryptUsingAES256();
-                credentials.password = _this.encrypted;
-                credentials.password.replace('/', '~');
-                _this.router.navigate(['activate', '1', credentials.email, credentials.password]);
+                credentials.passwordGroup.password = _this.encrypted;
+                credentials.passwordGroup.password.replace('/', '~');
+                _this.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
             }
             else {
                 _this.isSubmitting = false;
@@ -586,11 +659,11 @@ var AuthComponent = /** @class */ (function () {
                 _this.encryptUsingAES256();
                 credentials.email = _this.encrypted;
                 credentials.email.replace('/', '~');
-                _this.request = credentials.password;
+                _this.request = credentials.passwordGroup.password;
                 _this.encryptUsingAES256();
-                credentials.password = _this.encrypted;
-                credentials.password.replace('/', '~');
-                _this.router.navigate(['activate', '2', credentials.email, credentials.password]);
+                credentials.passwordGroup.password = _this.encrypted;
+                credentials.passwordGroup.password.replace('/', '~');
+                _this.router.navigate(['activate', '2', credentials.email, credentials.passwordGroup.password]);
             }
             else {
                 _this.isSubmitting = false;
@@ -610,35 +683,36 @@ var AuthComponent = /** @class */ (function () {
     * *************************************************
     **/
     AuthComponent.prototype.submitActivationForm = function () {
+        var _this = this;
         this.isSubmitting = true;
         var credentials = this.authForm.value;
         var urlComponent;
         var encryptedPassword;
         var encryptedEmail;
         this.route.url.subscribe(function (data) {
-            debugger;
             if (data.length <= 4) {
                 // Get the last piece of the URL (it's either 'login' or 'register')
                 urlComponent = data[0].path;
                 encryptedEmail = data[2].path;
                 encryptedPassword = data[3].path;
+                _this.isSubmitting = false;
             }
             else {
                 //page  not found
+                _this.isSubmitting = false;
             }
         });
         var userType = urlComponent;
+        encryptedEmail.replace('~', '/');
         this.encrypted = encryptedEmail;
         this.decryptUsingAES256();
         credentials.email = this.decrypted;
-        credentials.email.replace('~', '/');
         console.log(this.decrypted);
+        encryptedPassword.replace('~', '/');
         this.encrypted = encryptedPassword;
         this.decryptUsingAES256();
-        credentials.password = this.decrypted;
-        credentials.password.replace('~', '/');
+        credentials.passwordGroup.password = this.decrypted;
         console.log(this.decrypted);
-        debugger;
         if (userType == "1") {
             this.associateActivationCode(credentials);
         }
@@ -652,12 +726,11 @@ var AuthComponent = /** @class */ (function () {
             .getAttemptVerifiedActivationCodeAssociate(this.authType, credentials)
             .subscribe(function (data) {
             if (data.d == credentials.activationCode) {
-                debugger;
                 _this.userService
                     .attemptVerifiedActivationCodeAssociate(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this.submitLoginForm(credentials.email, credentials.password);
+                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
@@ -685,7 +758,7 @@ var AuthComponent = /** @class */ (function () {
                     .attemptVerifiedActivationCodeConsumer(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this.submitLoginForm(credentials.email, credentials.password);
+                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
@@ -709,7 +782,6 @@ var AuthComponent = /** @class */ (function () {
         var urlComponent;
         var encryptedEmail;
         this.route.url.subscribe(function (data) {
-            debugger;
             if (data.length <= 4) {
                 // Get the last piece of the URL (it's either 'login' or 'register')
                 urlComponent = data[0].path;
@@ -831,7 +903,7 @@ var AuthComponent = /** @class */ (function () {
             selector: 'app-auth-page',
             templateUrl: './auth.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder, HttpClient])
     ], AuthComponent);
     return AuthComponent;
 }());

@@ -311,7 +311,7 @@ export class UserService {
     emailAlreadyTaken(email) {
 
         return this.http.post(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email, {})
-            .pipe(delay(500));
+            .pipe(delay(300));
     }
 
 

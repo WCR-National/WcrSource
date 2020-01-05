@@ -17,7 +17,7 @@
                         <a routerLink="/register" *ngIf="authType == 'login'" class="green-text text-darken-1">Don't have an account? Sign up now!</a>
                         <a routerLink="/login" *ngIf="authType == 'register'" class="green-text text-darken-1">Already have an account? Sign in!</a>
                     </p>
-                    <form [formGroup]="authForm" (ngSubmit)="submitForm()" autocomplete="off">
+                    <form [formGroup]="authForm" (ngSubmit)="submitForm()" autocomplete="off" class="pd-t-20">
                         <fieldset [disabled]="isSubmitting">
 
                             <div class="form-group" [ngClass]="{'has-error': formErrors.activationCode}"
@@ -84,7 +84,7 @@
 
                             <div class="form-group" *ngIf="authType == 'login'">
                                 <div class="col-sm-12">
-                                    <div class="red-text text-darken-4" >
+                                    <div class="red-text text-darken-4 tx-medium pd-b-30" >
                                         {{ loginErrorMessage }}
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                 <div class="col-sm-12 mg-t-40 mg-b-40">
                                     <div class="green-text text-darken-4 tx-medium" [style.display]="resetPassword ? 'block':'none'">
                                         <i class="material-icons">  check_circle </i>
-                                        Please check your registered Email for new password.
+                                        {{loginErrorMessage}}
                                         <div class="grey-text text-darken-1 tx-medium mg-t-20">
                                             If you experience problems activating your account,
                                             please forward your reset password email to support@wcrnational.com
@@ -142,15 +142,22 @@
 
                             <div class="col-sm-12 pd-l-0-force pd-r-0-force">
                                 <div formGroupName="passwordGroup">
-                                    <div class="col-sm-12" *ngIf="authType == 'login'">
-                                        <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-3"> <i class="material-icons form-control-feedback pd-b-4-force" style="font-size:15px;">vpn_key</i>Forgot password</a>
+                                    <div class="col-sm-12 pd-b-7" *ngIf="authType == 'login'">
+                                        <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-4 tx-medium "> <i class="material-icons form-control-feedback pd-b-4-force" style="font-size:15px;">vpn_key</i>Forgot password</a>
                                     </div>
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.password}"
                                          *ngIf="(authType == 'register' || authType == 'login' ) ">
                                         <div class="col-sm-12  mg-b-20">
-                                            <input id="password" placeholder="Password" type="password" class="password form-control pd-l-45-force" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
+                                            <input id="password" placeholder="Password" type="password" class=" form-control pd-l-45-force" [ngClass]="{'password': (authType == 'register')}" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
                                                    autocomplete="new-password">
                                             <span class="large material-icons form-control-feedback icon">lock</span>
+
+                                            <!--<label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required')  ? 'text-danger' : 'text-success'">
+                                                <i class="material-icons">
+                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ? 'cancel' :  'check_circle' }}
+                                                </i>
+                                                Password is required
+                                            </label>-->
 
                                             <div class="col-sm-12 pd-l-0" *ngIf="(authType == 'register')" [style.display]="showErrorsPassword ? 'block':'none'">
                                                 <label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
@@ -191,8 +198,8 @@
                                                     Must contain at least 1 Special Character!
                                                 </label>
                                                 <!--<div class="col-sm-12 pd-l-0-force" *ngIf="formErrors.password">
-                                                    {{formErrors.password}}
-                                                </div>-->
+            {{formErrors.password}}
+        </div>-->
 
                                             </div>
 
@@ -302,7 +309,7 @@
 
 
 
-                                        <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'resetPassword')" type="submit" [disabled]="!authForm.valid">
+                                        <button [style.display]="resetPassword ? 'none': 'block'" class="btn btn-lg btn-primary pull-xs-right form-submit-button"  *ngIf="(authType == 'resetPassword')" type="submit" [disabled]="!authForm.valid">
                                             <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitFormResetPassword()">RESET PASSWORD</span>
                                             <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
                                                 <div class="spinner-layer spinner-blue-only">
