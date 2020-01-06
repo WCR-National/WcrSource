@@ -188,9 +188,9 @@ var AuthComponent = /** @class */ (function () {
             if (_this.authType === 'login') {
                 _this.title = 'Sign in';
                 _this.authForm.get('email').clearValidators();
+                _this.authForm.get('email').clearAsyncValidators();
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('email').setValidators([Validators.required, Validators.email]);
-                _this.authForm.get('email').setAsyncValidators([_this.emailAlreadyTaken()]);
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').clearValidators();
                 _this.authForm.get('passwordGroup').updateValueAndValidity();
@@ -208,8 +208,9 @@ var AuthComponent = /** @class */ (function () {
                 _this.authForm.get('activationCode').updateValueAndValidity();
             }
             else if (_this.authType === 'register') {
-                //this.authForm.get('email').setValidators([[Validators.required, Validators.email]]);
-                //this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('email').setValidators([Validators.required, Validators.email]);
+                _this.authForm.get('email').setAsyncValidators([_this.emailAlreadyTaken()]);
+                _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').get('password').setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(20),
                     patternValidator(/\d/, { number: true }),
                     patternValidator(/[A-Z]/, { upperLetter: true }),
@@ -235,6 +236,7 @@ var AuthComponent = /** @class */ (function () {
             }
             else if (_this.authType === 'activate') {
                 _this.authForm.get('email').clearValidators();
+                _this.authForm.get('email').clearAsyncValidators();
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').clearValidators();
                 _this.authForm.get('passwordGroup').updateValueAndValidity();
@@ -254,6 +256,7 @@ var AuthComponent = /** @class */ (function () {
                 //this.resetPassword = true;
                 _this.authForm.get('email').enable();
                 _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('email').clearAsyncValidators();
                 _this.authForm.get('email').setValidators([Validators.required, Validators.email]);
                 _this.authForm.get('email').updateValueAndValidity();
                 _this.authForm.get('passwordGroup').clearValidators();
@@ -842,9 +845,9 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.submitFormResetPassword = function () {
         var _this = this;
+        debugger;
         var thisStatus = this;
         var credentials = this.authForm.value;
-        this.resetPassword = true;
         this.userService
             .attemptAssociateAccountExists(this.authType, credentials)
             .subscribe(function (data) {
@@ -857,7 +860,8 @@ var AuthComponent = /** @class */ (function () {
                         .attemptResetAssociatePassword(credentials.email)
                         .then(function (data1) {
                         if (data1 == "0") {
-                            //show message : "Please check your registered emailID for new password."
+                            thisStatus.resetPassword = true;
+                            thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
                         }
                     });
                 }
@@ -872,13 +876,15 @@ var AuthComponent = /** @class */ (function () {
                             $.each(docs1, function (i, docs1) {
                                 if ($(docs1).find("AccountId").text() == "0") {
                                     //Please verify your email address and retry again.
+                                    thisStatus.showEmailVerification = true;
                                 }
                                 else {
                                     thisStatus.userService
                                         .attemptResetConsumerPassword(credentials.email)
                                         .then(function (data2) {
                                         if (data2 == "0") {
-                                            //show message : "Please check your registered emailID for new password."
+                                            thisStatus.resetPassword = true;
+                                            thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
                                         }
                                     });
                                 }
@@ -888,7 +894,8 @@ var AuthComponent = /** @class */ (function () {
                 }
             });
         }, function (err) {
-            _this.resentCode = false;
+            _this.showEmailVerification = true;
+            _this.resetPassword = false;
             _this.isSubmitting = false;
         });
     };

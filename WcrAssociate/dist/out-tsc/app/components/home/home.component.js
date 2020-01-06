@@ -11,15 +11,20 @@ var HomeComponent = /** @class */ (function () {
         this.platformId = platformId;
         this.isSearchingStart = false;
         this.resultContent = false;
+        this.errorMessage = "";
         this.innerHtmlSales = '';
         this.innerHtmlServices = '';
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
         $('#divLandingPage').focus();
         this.parallaxBG();
         this.GetSalesAdts();
         this.searchForm = this.fb.group({
             txtSearch: [''],
+        });
+        this.searchForm.get('txtSearch').valueChanges.subscribe(function (data) {
+            _this.errorMessage = "";
         });
     };
     HomeComponent.prototype.onEnterSearch = function () {
@@ -92,13 +97,14 @@ var HomeComponent = /** @class */ (function () {
                     //console.log(this.innerHtmlServices);
                 }
                 else if (State.length >= 2) {
-                    $("#lblfai").css("display", "block");
-                    $("#lblfai").text("Please Enter 2 Characters for State.");
+                    this.errorMessage = "Please Enter 2 Characters for State.";
+                    this.isSearchingStart = false;
                 }
             }
             else {
                 $("#lblfai").css("display", "block");
-                $("#lblfai").text("Invalid data entered.  Please enter City, State OR Zip Code.");
+                this.errorMessage = "Invalid data entered.  Please enter City, State OR Zip Code.";
+                this.isSearchingStart = false;
             }
         }
     };
@@ -165,6 +171,7 @@ var HomeComponent = /** @class */ (function () {
                             });
                         }
                         else { }
+                        thisHomePage.isSearchingStart = false;
                     }, function (err) {
                         thisHomePage.isSearchingStart = false;
                     });

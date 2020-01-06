@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
     isSearchingStart: boolean = false;
     searchForm: FormGroup;
     resultContent: boolean = false;
+    errorMessage: string = "";
     @ViewChild('salesServicesFocus') divSalesServices: ElementRef;
 
     innerHtmlSales: string = '';
@@ -35,6 +36,10 @@ export class HomeComponent implements OnInit {
             txtSearch: [''],
         });
 
+
+        this.searchForm.get('txtSearch').valueChanges.subscribe((data) => {
+            this.errorMessage = "";
+        });
     }
 
     onEnterSearch() {
@@ -120,13 +125,16 @@ export class HomeComponent implements OnInit {
                     //console.log(this.innerHtmlServices);
                 }
                 else if (State.length >= 2) {
-                    $("#lblfai").css("display", "block");
-                    $("#lblfai").text("Please Enter 2 Characters for State.");
+                    this.errorMessage = "Please Enter 2 Characters for State.";
+                    this.isSearchingStart = false;
+
                 }
             }
             else {
                 $("#lblfai").css("display", "block");
-                $("#lblfai").text("Invalid data entered.  Please enter City, State OR Zip Code.");
+                this.errorMessage = "Invalid data entered.  Please enter City, State OR Zip Code.";
+                this.isSearchingStart = false;
+
             }
         }
     }
@@ -211,6 +219,8 @@ export class HomeComponent implements OnInit {
                                             });
                                         }
                                         else { }
+                                        thisHomePage.isSearchingStart = false;
+
                                     },
                                     err => {
                                         thisHomePage.isSearchingStart = false;

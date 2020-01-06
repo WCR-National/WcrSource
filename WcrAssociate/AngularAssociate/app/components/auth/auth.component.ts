@@ -23,7 +23,7 @@ export class AuthComponent implements OnInit {
     authType: String = '';
     title: String = '';
     errors: Errors = { errors: {} };
-    private isSubmitting = false;
+    isSubmitting = false;
     private showLoadingGif = false;
     private debouncer: any;
     private globalEmail: string;

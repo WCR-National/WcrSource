@@ -17,7 +17,7 @@
                         <a routerLink="/register" *ngIf="authType == 'login'" class="green-text text-darken-1">Don't have an account? Sign up now!</a>
                         <a routerLink="/login" *ngIf="authType == 'register'" class="green-text text-darken-1">Already have an account? Sign in!</a>
                     </p>
-                    <form [formGroup]="authForm" (ngSubmit)="submitForm()" autocomplete="off" class="pd-t-20">
+                    <form [formGroup]="authForm" autocomplete="off" class="pd-t-20">
                         <fieldset [disabled]="isSubmitting">
 
                             <div class="form-group" [ngClass]="{'has-error': formErrors.activationCode}"
