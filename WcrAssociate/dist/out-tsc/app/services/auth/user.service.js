@@ -208,9 +208,10 @@ var UserService = /** @class */ (function () {
     //            }
     //        ));
     //}
-    UserService.prototype.getAttemptVerifiedActivationCodeAssociate = function (type, email) {
+    UserService.prototype.getAttemptVerifiedActivationCodeAssociate = function (type, credentials) {
+        credentials.email = credentials.email.replace(/^"(.*)"$/, '$1');
         var urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
-        return this.apiService.post(urlToGetActivationCode, { username: email }) //.toPromise()
+        return this.apiService.post(urlToGetActivationCode, { username: credentials.email }) //.toPromise()
             .pipe(map(function (data) {
             return data;
         }));
@@ -221,16 +222,17 @@ var UserService = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
+                        urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
                         return [4 /*yield*/, this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
     };
-    UserService.prototype.getAttemptVerifiedActivationCodeConsumer = function (type, email) {
+    UserService.prototype.getAttemptVerifiedActivationCodeConsumer = function (type, credentials) {
+        credentials.email = credentials.email.replace(/^"(.*)"$/, '$1');
         var urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
-        return this.apiService.post(urlToGetActivationCode, { username: email }) //.toPromise()
+        return this.apiService.post(urlToGetActivationCode, { username: credentials.email }) //.toPromise()
             .pipe(map(function (data) {
             return data;
         }));
@@ -241,7 +243,7 @@ var UserService = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
+                        urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
                         return [4 /*yield*/, this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }

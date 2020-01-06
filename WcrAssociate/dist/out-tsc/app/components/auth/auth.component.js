@@ -695,7 +695,7 @@ var AuthComponent = /** @class */ (function () {
         this.route.url.subscribe(function (data) {
             if (data.length <= 4) {
                 // Get the last piece of the URL (it's either 'login' or 'register')
-                urlComponent = data[0].path;
+                urlComponent = data[1].path;
                 encryptedEmail = data[2].path;
                 encryptedPassword = data[3].path;
                 _this.isSubmitting = false;
@@ -710,11 +710,13 @@ var AuthComponent = /** @class */ (function () {
         this.encrypted = encryptedEmail;
         this.decryptUsingAES256();
         credentials.email = this.decrypted;
+        //credentials.email = credentials.emaild.replace(/^"(.*)"$/, '$1');
         console.log(this.decrypted);
         encryptedPassword.replace('~', '/');
         this.encrypted = encryptedPassword;
         this.decryptUsingAES256();
         credentials.passwordGroup.password = this.decrypted;
+        //credentials.passwordGroup.password = credentials.passwordGroup.password.replace(/^"(.*)"$/, '$1');
         console.log(this.decrypted);
         if (userType == "1") {
             this.associateActivationCode(credentials);

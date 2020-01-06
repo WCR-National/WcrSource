@@ -229,10 +229,10 @@ export class UserService {
     //        ));
     //}
 
-    getAttemptVerifiedActivationCodeAssociate(type, email) {
-
+    getAttemptVerifiedActivationCodeAssociate(type, credentials) {
+        credentials.email = credentials.email.replace(/^"(.*)"$/, '$1');
         let urlToGetActivationCode = "ws/AssociateRegistration.asmx/GetActivationCode";
-        return this.apiService.post(urlToGetActivationCode, { username: email })//.toPromise()
+        return this.apiService.post(urlToGetActivationCode, { username: credentials.email })//.toPromise()
             .pipe(map(
                 data => {
                     return data;
@@ -242,14 +242,14 @@ export class UserService {
 
     async attemptVerifiedActivationCodeAssociate(type, email) {
 
-        let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
+        let urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
         return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
     }
 
-    getAttemptVerifiedActivationCodeConsumer(type, email) {
-
+    getAttemptVerifiedActivationCodeConsumer(type, credentials) {
+        credentials.email = credentials.email.replace(/^"(.*)"$/, '$1');
         let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
-        return this.apiService.post(urlToGetActivationCode, { username: email })//.toPromise()
+        return this.apiService.post(urlToGetActivationCode, { username: credentials.email })//.toPromise()
             .pipe(map(
                 data => {
                     return data;
@@ -259,7 +259,7 @@ export class UserService {
 
     async attemptVerifiedActivationCodeConsumer(type, email) {
 
-        let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/GetActivationCode";
+        let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
         return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
     }
 

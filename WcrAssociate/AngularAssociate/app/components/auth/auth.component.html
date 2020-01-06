@@ -256,7 +256,7 @@
                                     <div class="col-sm-12 mg-b-20">
                                         <label>
                                             <input type="checkbox" class="filled-in" formControlName="terms" (blur)="logValidationErrors()" checked="checked" />
-                                            <span>I agree with terms and conditions<a></a></span>
+                                            <span>I agree with <a class="blue-text text-darken-4" style="font-size:13px; font-weight:600; text-decoration: underline;" href="/privacy.html">Terms and Conditions</a></span>
                                         </label>
                                         <div class="invalid-data" *ngIf="formErrors.terms">
                                             {{formErrors.terms}}

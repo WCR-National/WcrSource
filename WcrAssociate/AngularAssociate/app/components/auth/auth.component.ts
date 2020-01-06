@@ -876,7 +876,7 @@ export class AuthComponent implements OnInit {
 
             if (data.length <= 4) {
                 // Get the last piece of the URL (it's either 'login' or 'register')
-                urlComponent = data[0].path;
+                urlComponent = data[1].path;
                 encryptedEmail = data[2].path;
                 encryptedPassword = data[3].path;
                 this.isSubmitting = false;
@@ -895,15 +895,16 @@ export class AuthComponent implements OnInit {
         this.encrypted = encryptedEmail;
         this.decryptUsingAES256();
         credentials.email = this.decrypted;
+        //credentials.email = credentials.emaild.replace(/^"(.*)"$/, '$1');
 
         console.log(this.decrypted);
 
         encryptedPassword.replace('~', '/');
-
         this.encrypted = encryptedPassword;
         this.decryptUsingAES256();
         credentials.passwordGroup.password = this.decrypted;
 
+        //credentials.passwordGroup.password = credentials.passwordGroup.password.replace(/^"(.*)"$/, '$1');
         console.log(this.decrypted);
 
         if (userType == "1") {
@@ -926,7 +927,8 @@ export class AuthComponent implements OnInit {
                             .then(
                                 (data: any) => {
                                     if (data.d.length > 0) {
-                                        this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                                        this.router.navigateByUrl('/login');
+                                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
                                     this.isSubmitting = false;
 
@@ -962,7 +964,8 @@ export class AuthComponent implements OnInit {
                             .then(
                                 (data: any) => {
                                     if (data.d.length > 0) {
-                                        this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                                        this.router.navigateByUrl('/login');
+                                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
                                     this.isSubmitting = false;
 
