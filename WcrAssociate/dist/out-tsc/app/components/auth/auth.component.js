@@ -735,7 +735,9 @@ var AuthComponent = /** @class */ (function () {
                     .attemptVerifiedActivationCodeAssociate(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                        $(location).attr('href', 'Associate/ViewProfile.aspx');
+                        //this.router.navigateByUrl('/login');
+                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
@@ -763,7 +765,9 @@ var AuthComponent = /** @class */ (function () {
                     .attemptVerifiedActivationCodeConsumer(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                        //this.router.navigateByUrl('/login');
+                        $(location).attr('href', '/ConsumerDashboard.html');
+                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {

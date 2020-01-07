@@ -10,6 +10,8 @@ import { HomeComponent } from '.././app/components/home/home.component';
 import { AuthGuard } from '../app/_guards/auth.guard';
 
 import { AuthComponent } from '.././app/components/auth/auth.component';
+import { TermsComponent } from '.././app/components/terms/terms.component';
+
 import { NoAuthGuard, HomeAuthResolver } from './services/auth';
 
 
@@ -43,11 +45,15 @@ const routes: Routes = [
         path: 'activate/:id/:email/:password',
         component: AuthComponent,
         canActivate: [NoAuthGuard]
-    }
-    ,
+    },
     {
         path: 'resetPassword',
         component: AuthComponent,
+        canActivate: [NoAuthGuard]
+    },
+    {
+        path: 'terms',
+        component: TermsComponent,
         canActivate: [NoAuthGuard]
     }
 ];

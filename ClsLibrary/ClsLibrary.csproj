@@ -186,6 +186,8 @@
     <Content Include="bin\Release\System.IdentityModel.Tokens.Jwt.dll" />
     <Content Include="bin\Release\System.Net.Http.Formatting.dll" />
     <Content Include="bin\Release\WcrVault.dll" />
+    <Content Include="Dependencies\WcrClassLibrary.dll" />
+    <Content Include="Dependencies\WcrVault.dll" />
     <Content Include="obj\Debug\ClsLibrary.csproj.FileListAbsolute.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +196,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dependencies\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

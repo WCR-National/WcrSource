@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
+import { TermsComponent } from '.././app/components/terms/terms.component';
+
 //import { LoginComponent } from './components/login/login.component';  
 //import { PasswordValidator, ParentErrorStateMatcher } from '../app/_helpers/validators';
 import { AuthComponent } from './components/auth/auth.component';
@@ -54,6 +56,7 @@ import {
         FooterComponent,
         HeaderComponent,
         AuthComponent,
+        TermsComponent,
         ShowAuthedDirective
     ],
     imports: [

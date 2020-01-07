@@ -926,8 +926,10 @@ export class AuthComponent implements OnInit {
                             .attemptVerifiedActivationCodeAssociate(this.authType, credentials.email)
                             .then(
                                 (data: any) => {
-                                    if (data.d.length > 0) {
-                                        this.router.navigateByUrl('/login');
+                                    if (data.d.length > 0)
+                                    {
+                                        $(location).attr('href', 'Associate/ViewProfile.aspx');
+                                        //this.router.navigateByUrl('/login');
                                         //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
                                     this.isSubmitting = false;
@@ -964,7 +966,9 @@ export class AuthComponent implements OnInit {
                             .then(
                                 (data: any) => {
                                     if (data.d.length > 0) {
-                                        this.router.navigateByUrl('/login');
+                                        //this.router.navigateByUrl('/login');
+                                        $(location).attr('href', '/ConsumerDashboard.html');
+
                                         //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
                                     this.isSubmitting = false;

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from '.././app/components/home/home.component';
 import { AuthComponent } from '.././app/components/auth/auth.component';
+import { TermsComponent } from '.././app/components/terms/terms.component';
 import { NoAuthGuard } from './services/auth';
 var routes = [
     //{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -36,6 +37,11 @@ var routes = [
     {
         path: 'resetPassword',
         component: AuthComponent,
+        canActivate: [NoAuthGuard]
+    },
+    {
+        path: 'terms',
+        component: TermsComponent,
         canActivate: [NoAuthGuard]
     }
 ];
