@@ -911,6 +911,7 @@ var AuthComponent = /** @class */ (function () {
             this.associateRegister();
         }
         else if (this.authForm.get('consumer').value == true) {
+            debugger;
             this.consumerRegister();
         }
         //this.errors = { errors: {} };
@@ -963,10 +964,12 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.consumerRegister = function () {
         var _this = this;
+        debugger;
         var credentials = this.authForm.value;
         this.userService
             .attemptRegisterConsumer(this.authType, credentials)
             .subscribe(function (data) {
+            debugger;
             if (data >= 1) {
                 _this.isSubmitting = false;
                 _this.request = credentials.email;
@@ -2666,7 +2669,7 @@ var UserService = /** @class */ (function () {
     UserService.prototype.attemptRegisterConsumer = function (type, credentials) {
         //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
         var urlToSignUp = "ws/AssociateSignUp.ashx?action=Consumer";
-        urlToSignUp += "&FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+        urlToSignUp += "&Name=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&address=" + "0" + "&ZipCode=" + "0" + "&mobile=" + "0" + "";
         return this.apiService.post(urlToSignUp, {})
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) {
             console.log(data);

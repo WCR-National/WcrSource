@@ -761,6 +761,7 @@ export class AuthComponent implements OnInit {
             this.associateRegister();
         }
         else if (this.authForm.get('consumer').value == true) {
+            debugger;
             this.consumerRegister();
         }
 
@@ -822,13 +823,16 @@ export class AuthComponent implements OnInit {
     }
 
     consumerRegister() {
+        debugger;
 
         const credentials = this.authForm.value;
         this.userService
             .attemptRegisterConsumer(this.authType, credentials)
             .subscribe(
                 data => {
+                    debugger;
                     if (data >= 1) {
+
                         this.isSubmitting = false;
 
                         this.request = credentials.email;
