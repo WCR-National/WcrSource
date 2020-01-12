@@ -680,7 +680,7 @@ export class AuthComponent implements OnInit {
                     .emailAlreadyTaken(control.value)
                     .pipe(
                         map(data => {
-                            if (data > 1) {
+                            if (data >= 1) {
                                 this.showOnValidateEmail = false;
                                 this.FormFilledSuccessfully = false;
                                 $('#validateEmailDiv').addClass('has-error');
