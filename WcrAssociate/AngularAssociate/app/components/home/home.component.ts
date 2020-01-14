@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Observable, from, of } from 'rxjs';
 import { map, filter, retry } from 'rxjs/operators';
 
@@ -25,24 +25,44 @@ export class HomeComponent implements OnInit {
 
     innerHtmlSales: string = '';
     innerHtmlServices: string = '';
-
+    validationMessages = {
+        'txtSearch': {
+            'required': 'Please enter City, State OR Zip Code.',
+            'invalid': 'Invalid data entered.  Please enter City, State OR Zip Code.',
+            'zipCode': 'Maximum length of zip code is 5 digit',
+            'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
+            'statePattern': 'Please enter 2 Characters for State like "TX".',
+            'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
+        }
+    }
+    formErrors = {
+        'txtSearch': ''
+    };
     constructor(private fb: FormBuilder, private renderer: Renderer2, private homeLandingService: HomeLandingService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
     ngOnInit() {
         $('#divLandingPage').focus();
         this.parallaxBG();
         this.GetSalesAdts();
-        this.searchForm = this.fb.group({
-            txtSearch: [''],
-        });
+        this.initializeFormsAndEvents();
+    }
 
+    initializeFormsAndEvents() {
+
+        this.searchForm = this.fb.group({
+            txtSearch: ['', Validators.required],
+        });
 
         this.searchForm.get('txtSearch').valueChanges.subscribe((data) => {
             this.errorMessage = "";
         });
+
+        this.searchForm.valueChanges.subscribe((data) => {
+            this.logValidationErrors(this.searchForm);
+        });
     }
 
-    onEnterSearch() {
+    onPressEnterSearchData() {
 
         this.searching();
 
@@ -57,6 +77,46 @@ export class HomeComponent implements OnInit {
         // }, 500);
         //}
     }
+
+    logValidationErrors(group: FormGroup = this.searchForm): void {
+
+        Object.keys(group.controls).forEach((key: string) => {
+            const abstractControl = group.get(key);
+            this.formErrors[key] = '';
+
+            if (abstractControl && !abstractControl.valid
+                && (abstractControl.touched || abstractControl.dirty)) {
+                this.formErrors[key] = "";
+                const messages = this.validationMessages[key];
+                if (abstractControl.errors != null) {
+                    for (const errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            if (messages[errorKey] !== undefined) {
+                                this.formErrors[key] += messages[errorKey] + ' ';
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (abstractControl instanceof FormGroup) {
+                this.logValidationErrors(abstractControl);
+            }
+        });
+    }
+
+    validateSearchZipCode(control: AbstractControl, error: ValidationErrors)
+    {
+        const email: string = control.value;
+        const domain = email.substring(email.lastIndexOf('@') + 1);
+        if (email === '' || domain.toLowerCase() === "".toLowerCase()) {
+            return null;
+        } else {
+            return { 'emailDomain': true };
+        }
+    }
+
+
 
     onClickSearch() {
         this.searching();
@@ -507,7 +567,7 @@ export class HomeComponent implements OnInit {
         this.homeLandingService
             .attemptGetSalesAdts()
             .subscribe(
-                (data:any ) => {
+                (data: any) => {
                     if (data.d.length > 0) {
                         let salesn = this.bindSalesCategory(data.d, "ip");
                         let servicesn = this.bindServiesCategory(data.d, "ip");

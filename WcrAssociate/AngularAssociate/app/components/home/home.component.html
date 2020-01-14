@@ -19,11 +19,24 @@
                         <div class="col-md-12" [formGroup]="searchForm" style="margin: 0 auto; text-align:center; align-item:center; float:none;">
 
                             <div class="main-search-input">
-                                <input type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter)="onEnterSearch()" />
+                                <input type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter)="onPressEnterSearchData()" />
                                 <button class="button waves-effect waves-light btn" (click)="onClickSearch()">
-                                <i class="large material-icons form-control-feedback text-xs-27 pd-t-9-force">search</i> </button>
+                                    <i class="large material-icons form-control-feedback text-xs-27 pd-t-9-force">search</i>
+                                </button>
+                            </div>
+                            <div class="invalid-data" *ngIf="formErrors.txtSearch">
+                                {{formErrors.txtSearch}}
                             </div>
                         </div>
+                        <!--<div class="col-sm-12 mg-b-20">
+                            <input placeholder="Activation code" id="activationCode" type="text" class="form-control pd-l-45-force" formControlName="activationCode" (blur)="logValidationErrors()">
+                            <span class="large material-icons form-control-feedback icon">vpn_key</span>
+                            <div class="invalid-data" *ngIf="formErrors.activationCode">
+                                {{formErrors.activationCode}}
+                            </div>
+                            <span class="grey-text text-darken-1 tx-medium" *ngIf="authType == 'activate'" [style.display]="activationSent ? 'block':'none'">Activation code has been resend to your registered Email.</span>
+
+                        </div>-->
                     </div>
                     <!-- Row With Forms / End -->
                     <!-- Browse Jobs -->
@@ -46,7 +59,7 @@
 <section id="salesServicesDivId" class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" style='background-color:#fff;border-top: 5px solid #0e3a6b;' #divSalesServices>
 
     <!-- Content -->
-    <div class="container" >
+    <div class="container">
 
         <!---->
         <div class="row" [style.display]="isSearchingStart ? 'block':'none' ">
