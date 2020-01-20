@@ -1,15 +1,10 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Observable, from, of } from 'rxjs';
-import { map, filter, retry } from 'rxjs/operators';
-
-import { HomeLandingService } from '../../services/auth';
-import { Category, CityStateZip, PurchaseEntry } from '../../entities/location';
 
 import * as $ from 'jquery';
-import { Local } from 'protractor/built/driverProviders';
-import { debug } from 'util';
-import { isPlatformBrowser } from '@angular/common';
+
+import { SearchService } from '../../services/search';
+
 
 @Component({
     selector: 'app-home',
@@ -26,19 +21,17 @@ export class HomeComponent implements OnInit {
     innerHtmlSales: string = '';
     innerHtmlServices: string = '';
     validationMessages = {
-        'txtSearch': {
-            'required': 'Please enter City, State OR Zip Code.',
-            'invalid': 'Invalid data entered.  Please enter City, State OR Zip Code.',
-            'zipCode': 'Maximum length of zip code is 5 digit',
-            'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
-            'statePattern': 'Please enter 2 Characters for State like "TX".',
-            'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
-        }
+        'required': 'Please enter City, State OR Zip Code.',
+        'invalidData': 'Invalid data entered.  Please enter City, State OR Zip Code.',
+        'zipCode': 'Maximum length of zip code is 5 digit',
+        'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
+        'statePattern': 'Please enter 2 Characters for State like "TX".',
+        'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
     }
     formErrors = {
         'txtSearch': ''
     };
-    constructor(private fb: FormBuilder, private renderer: Renderer2, private homeLandingService: HomeLandingService, @Inject(PLATFORM_ID) private platformId: Object) { }
+    constructor(private fb: FormBuilder, private renderer: Renderer2, private searchService: SearchService, @Inject(PLATFORM_ID) private platformId: Object) { }
 
     ngOnInit() {
         $('#divLandingPage').focus();
@@ -50,7 +43,7 @@ export class HomeComponent implements OnInit {
     initializeFormsAndEvents() {
 
         this.searchForm = this.fb.group({
-            txtSearch: ['', Validators.required],
+            txtSearch: ['', Validators.required, this.validateSearchZipCode()],
         });
 
         this.searchForm.get('txtSearch').valueChanges.subscribe((data) => {
@@ -105,14 +98,59 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    validateSearchZipCode(control: AbstractControl, error: ValidationErrors)
-    {
-        const email: string = control.value;
-        const domain = email.substring(email.lastIndexOf('@') + 1);
-        if (email === '' || domain.toLowerCase() === "".toLowerCase()) {
-            return null;
-        } else {
-            return { 'emailDomain': true };
+
+    //'required': 'Please enter City, State OR Zip Code.',
+    //'invalid': 'Invalid data entered.  Please enter City, State OR Zip Code.',
+    //'zipCode': 'Maximum length of zip code is 5 digit',
+    //'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
+    //'statePattern': 'Please enter 2 Characters for State like "TX".',
+    //'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
+
+    validateSearchZipCode(): ValidatorFn {
+
+        return (control: AbstractControl): { [key: string]: any } => {
+            const value: string = control.value;
+            var regFirstLetters = new RegExp('^[0-9]{2}$');
+            var regFirstDigits = new RegExp('^[a-9zA-Z]{2}$');
+            if (value.length <= 5 && value.match(regFirstDigits)) {
+                var reg = /\b\d{5}\b/g;
+                if (value.match(reg)) {
+                    return null;
+                }
+                else {
+                    return { 'zipCode': true };
+                }
+            }
+            else if (value.match(regFirstLetters)) {
+                if (/^[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
+                    if (/\s/.test(value)) {
+                        // It has any kind of whitespace
+                        var listOfValues = value.split(' ');
+                        if (listOfValues.length > 2)
+                        {
+                            return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                        }
+                        else
+                        {
+                            if (listOfValues[1] !== undefined) {
+                                if (listOfValues[1].length > 2) {
+                                    return { 'statePattern': true };
+                                }
+                            }
+                            else {
+                                return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                            }
+                        }
+                    }
+                }
+                else {
+                    return { 'cityStatePattern': true };
+                }
+            }
+            else {
+                return { 'invalidData': true };
+                
+            }
         }
     }
 
@@ -223,11 +261,12 @@ export class HomeComponent implements OnInit {
 
     //managed both in these both functions: By IPAddrss zipCode and user entered zipCode in search
     bindSalesCategory(zipc, searchByIpOrtxtSearch = "txtSearch") {
+
         var innerHtmlSales = "";
         let thisHomePage = this;
 
-        thisHomePage.homeLandingService
-            .attemptGetSalesCategoryByZip(zipc)
+        thisHomePage.searchService
+            .subCategoriesByZip(zipc)
             .subscribe(
                 data => {
                     if (data.d.length > 1) {
@@ -243,8 +282,8 @@ export class HomeComponent implements OnInit {
 
                             var subCategoryId = $(docs).find("id").text();
 
-                            thisHomePage.homeLandingService
-                                .attemptGetAdvanceSearchByZipc(zipc, subCategoryId)
+                            thisHomePage.searchService
+                                .viewAdvanceSearchByZipc(zipc, subCategoryId)
                                 .then(
                                     (data: any) => {
                                         if (data.d.length > 0) {
@@ -319,7 +358,7 @@ export class HomeComponent implements OnInit {
         var innerHtmlServices = "";
         let thisHomePage = this;
 
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetJobtypeWiseCategory()
             .subscribe(
                 data => {
@@ -336,7 +375,7 @@ export class HomeComponent implements OnInit {
 
                             var categoryId = $(docs).find("ID").text();
 
-                            thisHomePage.homeLandingService
+                            thisHomePage.searchService
                                 .attemptGetViewAdvanceSearchForServices(categoryId, zipc)
                                 .then(
                                     (data: any) => {
@@ -421,7 +460,7 @@ export class HomeComponent implements OnInit {
         var innerHtmlSales = "";
         let thisHomePage = this;
 
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetSalesCategoryCityWise(state, city)
             .subscribe(
                 data => {
@@ -438,7 +477,7 @@ export class HomeComponent implements OnInit {
                             innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
 
                             var subCategoryId = $(docs).find("id").text();
-                            thisHomePage.homeLandingService
+                            thisHomePage.searchService
                                 .attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId)
                                 .then(
                                     (data: any) => {
@@ -493,7 +532,7 @@ export class HomeComponent implements OnInit {
         var innerHtmlServices = "";
         let thisHomePage = this;
 
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetServicesCategoryCityWise(state, city)
             .subscribe(
                 data => {
@@ -510,7 +549,7 @@ export class HomeComponent implements OnInit {
                             var subCategoryId = $(docs).find("ID").text();
 
 
-                            thisHomePage.homeLandingService
+                            thisHomePage.searchService
                                 .attemptGetAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
                                 .then(
                                     (data: any) => {
@@ -564,7 +603,7 @@ export class HomeComponent implements OnInit {
 
     GetSalesAdts() {
 
-        this.homeLandingService
+        this.searchService
             .attemptGetSalesAdts()
             .subscribe(
                 (data: any) => {
@@ -590,7 +629,7 @@ export class HomeComponent implements OnInit {
     //bindSalesCategory1(zipc) {
     //    var innerHtmlSales = "";
     //    let thisHomePage = this;
-    //    thisHomePage.homeLandingService
+    //    thisHomePage.searchService
     //        .attemptGetSalesCategoryByZip(zipc)
     //        .subscribe(
     //            data => {
@@ -607,7 +646,7 @@ export class HomeComponent implements OnInit {
 
     //                        var subCategoryId = $(docs).find("id").text();
 
-    //                        thisHomePage.homeLandingService
+    //                        thisHomePage.searchService
     //                            .attemptGetAdvanceSearchByZipc(zipc, subCategoryId)
     //                            .subscribe(
     //                                data => {
@@ -652,7 +691,7 @@ export class HomeComponent implements OnInit {
     //    var innerHtmlSales = "";
     //    let thisHomePage = this;
 
-    //    thisHomePage.homeLandingService
+    //    thisHomePage.searchService
     //        .attemptGetJobtypeWiseCategory()
     //        .subscribe(
     //            data => {
@@ -669,7 +708,7 @@ export class HomeComponent implements OnInit {
 
     //                        var jobTypeId = $(docs).find("ID").text();
 
-    //                        thisHomePage.homeLandingService
+    //                        thisHomePage.searchService
     //                            .attemptGetViewAdvanceSearchForServices(jobTypeId, zipc)
     //                            .subscribe(
     //                                data => {

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Component, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HomeLandingService } from '../../services/auth';
 import * as $ from 'jquery';
 var HomeComponent = /** @class */ (function () {
@@ -14,20 +14,39 @@ var HomeComponent = /** @class */ (function () {
         this.errorMessage = "";
         this.innerHtmlSales = '';
         this.innerHtmlServices = '';
+        this.validationMessages = {
+            'txtSearch': {
+                'required': 'Please enter City, State OR Zip Code.',
+                'invalid': 'Invalid data entered.  Please enter City, State OR Zip Code.',
+                'zipCode': 'Maximum length of zip code is 5 digit',
+                'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
+                'statePattern': 'Please enter 2 Characters for State like "TX".',
+                'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
+            }
+        };
+        this.formErrors = {
+            'txtSearch': ''
+        };
     }
     HomeComponent.prototype.ngOnInit = function () {
-        var _this = this;
         $('#divLandingPage').focus();
         this.parallaxBG();
         this.GetSalesAdts();
+        this.initializeFormsAndEvents();
+    };
+    HomeComponent.prototype.initializeFormsAndEvents = function () {
+        var _this = this;
         this.searchForm = this.fb.group({
-            txtSearch: [''],
+            txtSearch: ['', Validators.required],
         });
         this.searchForm.get('txtSearch').valueChanges.subscribe(function (data) {
             _this.errorMessage = "";
         });
+        this.searchForm.valueChanges.subscribe(function (data) {
+            _this.logValidationErrors(_this.searchForm);
+        });
     };
-    HomeComponent.prototype.onEnterSearch = function () {
+    HomeComponent.prototype.onPressEnterSearchData = function () {
         this.searching();
         //if (txtSearch.value == "") {
         //    $("#lblfai").css("display", "block");
@@ -39,6 +58,41 @@ var HomeComponent = /** @class */ (function () {
         //setTimeout(function () {
         // }, 500);
         //}
+    };
+    HomeComponent.prototype.logValidationErrors = function (group) {
+        var _this = this;
+        if (group === void 0) { group = this.searchForm; }
+        Object.keys(group.controls).forEach(function (key) {
+            var abstractControl = group.get(key);
+            _this.formErrors[key] = '';
+            if (abstractControl && !abstractControl.valid
+                && (abstractControl.touched || abstractControl.dirty)) {
+                _this.formErrors[key] = "";
+                var messages = _this.validationMessages[key];
+                if (abstractControl.errors != null) {
+                    for (var errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            if (messages[errorKey] !== undefined) {
+                                _this.formErrors[key] += messages[errorKey] + ' ';
+                            }
+                        }
+                    }
+                }
+            }
+            if (abstractControl instanceof FormGroup) {
+                _this.logValidationErrors(abstractControl);
+            }
+        });
+    };
+    HomeComponent.prototype.validateSearchZipCode = function (control, error) {
+        var email = control.value;
+        var domain = email.substring(email.lastIndexOf('@') + 1);
+        if (email === '' || domain.toLowerCase() === "".toLowerCase()) {
+            return null;
+        }
+        else {
+            return { 'emailDomain': true };
+        }
     };
     HomeComponent.prototype.onClickSearch = function () {
         this.searching();

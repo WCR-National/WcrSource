@@ -3,7 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable ,  throwError } from 'rxjs';
 
-import { JwtService } from './jwt.service';
+import { JwtService } from '../auth';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()

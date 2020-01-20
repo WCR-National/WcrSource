@@ -1340,6 +1340,9 @@ button.widget-button {
     .user-menu .user-name {
         max-width: 110px;
     }
+    #header {
+        padding: 4px 0 4px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1239px) {

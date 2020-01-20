@@ -3115,6 +3115,7 @@ button.btn-floating {
     z-index: 1;
     -webkit-transition: .3s ease-out;
     transition: .3s ease-out;
+    padding-top:0px;
 }
 
     .waves-effect .waves-ripple {
