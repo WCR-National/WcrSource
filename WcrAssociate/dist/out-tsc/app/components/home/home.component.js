@@ -1,28 +1,32 @@
 import * as tslib_1 from "tslib";
 import { Component, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HomeLandingService } from '../../services/auth';
 import * as $ from 'jquery';
+import { SearchService } from '../../services/search';
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(fb, renderer, homeLandingService, platformId) {
+    function HomeComponent(fb, renderer, searchService, platformId) {
         this.fb = fb;
         this.renderer = renderer;
-        this.homeLandingService = homeLandingService;
+        this.searchService = searchService;
         this.platformId = platformId;
         this.isSearchingStart = false;
         this.resultContent = false;
         this.errorMessage = "";
         this.innerHtmlSales = '';
         this.innerHtmlServices = '';
+        //'required': 'Please enter City, State OR Zip Code.',
+        //'invalidData': 'Invalid data entered.  Please enter City, State OR Zip Code.',
+        //'zipCode': 'Maximum length of zip code is 5 digit',
+        //'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
+        //'statePattern': 'Please enter 2 Characters for State like "TX".',
+        //'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
         this.validationMessages = {
-            'txtSearch': {
-                'required': 'Please enter City, State OR Zip Code.',
-                'invalid': 'Invalid data entered.  Please enter City, State OR Zip Code.',
-                'zipCode': 'Maximum length of zip code is 5 digit',
-                'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
-                'statePattern': 'Please enter 2 Characters for State like "TX".',
-                'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
-            }
+            'required': 'Please enter City, State OR Zip Code.',
+            'invalidData': 'Invalid data entered.  Please enter City, State OR Zip Code.',
+            'zipCode': 'Maximum length of zip code is 5 digit',
+            'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
+            'statePattern': 'Please enter 2 Characters for State like "TX".',
+            'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
         };
         this.formErrors = {
             'txtSearch': ''
@@ -37,7 +41,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.initializeFormsAndEvents = function () {
         var _this = this;
         this.searchForm = this.fb.group({
-            txtSearch: ['', Validators.required],
+            txtSearch: ['', Validators.required, this.validateSearchZipCode()],
         });
         this.searchForm.get('txtSearch').valueChanges.subscribe(function (data) {
             _this.errorMessage = "";
@@ -65,10 +69,9 @@ var HomeComponent = /** @class */ (function () {
         Object.keys(group.controls).forEach(function (key) {
             var abstractControl = group.get(key);
             _this.formErrors[key] = '';
-            if (abstractControl && !abstractControl.valid
-                && (abstractControl.touched || abstractControl.dirty)) {
+            if (abstractControl && !abstractControl.valid && (abstractControl.touched || abstractControl.dirty)) {
                 _this.formErrors[key] = "";
-                var messages = _this.validationMessages[key];
+                var messages = _this.validationMessages;
                 if (abstractControl.errors != null) {
                     for (var errorKey in abstractControl.errors) {
                         if (errorKey) {
@@ -84,15 +87,53 @@ var HomeComponent = /** @class */ (function () {
             }
         });
     };
-    HomeComponent.prototype.validateSearchZipCode = function (control, error) {
-        var email = control.value;
-        var domain = email.substring(email.lastIndexOf('@') + 1);
-        if (email === '' || domain.toLowerCase() === "".toLowerCase()) {
-            return null;
-        }
-        else {
-            return { 'emailDomain': true };
-        }
+    HomeComponent.prototype.validateSearchZipCode = function () {
+        return function (control) {
+            var value = control.value;
+            var regFirstLetters = new RegExp('^[0-9]{2}$');
+            var regFirstDigits = new RegExp('^[a-9zA-Z]{2}$');
+            if (value.length <= 5 && value.match(regFirstDigits)) {
+                var reg = /\b\d{5}\b/g;
+                if (value.match(reg)) {
+                    return null;
+                }
+                else {
+                    return { 'zipCode': true };
+                }
+            }
+            else if (value.match(regFirstLetters)) {
+                if (/^[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
+                    if (/\s/.test(value)) {
+                        // It has any kind of whitespace
+                        var listOfValues = value.split(' ');
+                        if (listOfValues.length > 2) {
+                            return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                        }
+                        else {
+                            if (listOfValues[1] !== undefined) {
+                                if (listOfValues[1].length > 2) {
+                                    return { 'statePattern': true };
+                                }
+                            }
+                            else {
+                                return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                            }
+                        }
+                    }
+                }
+                else {
+                    return { 'cityStatePattern': true };
+                }
+            }
+            else {
+                if (value.match(regFirstDigits)) {
+                    return { 'invalidZipCode': true };
+                }
+                else {
+                    return { 'invalidData': true };
+                }
+            }
+        };
     };
     HomeComponent.prototype.onClickSearch = function () {
         this.searching();
@@ -111,19 +152,12 @@ var HomeComponent = /** @class */ (function () {
         debugger;
         var searchValue = this.searchForm.get('txtSearch').value;
         if ($.isNumeric(searchValue)) {
-            // HideDiv();
-            //$("#DivSearchAds").css("display", "block");
-            //$("#divShowAdvertisement").css("display", "none");
-            //$("#sales").html(sales.join(''));
-            //$("#Services").html(services1.join(''));
             var salesHtml = void 0;
             var servicesHtml = void 0;
             salesHtml = this.bindSalesCategory(searchValue);
             servicesHtml = this.bindServiesCategory(searchValue);
-            this.innerHtmlSales = salesHtml;
-            this.innerHtmlServices = servicesHtml;
-            console.log(this.innerHtmlSales);
-            console.log(this.innerHtmlServices);
+            //this.innerHtmlSales = salesHtml;
+            //this.innerHtmlServices = servicesHtml;
         }
         else {
             if (searchValue.indexOf(',') != -1) {
@@ -141,8 +175,6 @@ var HomeComponent = /** @class */ (function () {
                     }
                 }
                 if (State.length == 2) {
-                    $("#DivSearchAds").css("display", "block");
-                    $("#divShowAdvertisement").css("display", "none");
                     salesHtml = this.bindSalesCategoryCityWise(State, City);
                     servicesHtml = this.bindServiesCategoryCityWise(State, City);
                     //this.innerHtmlSales = salesHtml;
@@ -151,12 +183,11 @@ var HomeComponent = /** @class */ (function () {
                     //console.log(this.innerHtmlServices);
                 }
                 else if (State.length >= 2) {
-                    this.errorMessage = "Please Enter 2 Characters for State.";
+                    this.errorMessage = "Please enter 2 Characters for State.";
                     this.isSearchingStart = false;
                 }
             }
             else {
-                $("#lblfai").css("display", "block");
                 this.errorMessage = "Invalid data entered.  Please enter City, State OR Zip Code.";
                 this.isSearchingStart = false;
             }
@@ -183,8 +214,8 @@ var HomeComponent = /** @class */ (function () {
         if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
         var innerHtmlSales = "";
         var thisHomePage = this;
-        thisHomePage.homeLandingService
-            .attemptGetSalesCategoryByZip(zipc)
+        thisHomePage.searchService
+            .subCategoriesByZipcode(zipc)
             .subscribe(function (data) {
             if (data.d.length > 1) {
                 var xmlDoc = $.parseXML(data.d);
@@ -196,8 +227,8 @@ var HomeComponent = /** @class */ (function () {
                     innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
                     innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
                     var subCategoryId = $(docs).find("id").text();
-                    thisHomePage.homeLandingService
-                        .attemptGetAdvanceSearchByZipc(zipc, subCategoryId)
+                    thisHomePage.searchService
+                        .viewAdvanceSearchByZipcode(zipc, subCategoryId)
                         .then(function (data) {
                         if (data.d.length > 0) {
                             var xmlDoc1 = $.parseXML(data.d);
@@ -255,7 +286,7 @@ var HomeComponent = /** @class */ (function () {
         if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
         var innerHtmlServices = "";
         var thisHomePage = this;
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetJobtypeWiseCategory()
             .subscribe(function (data) {
             if (data.d.length > 1) {
@@ -268,7 +299,7 @@ var HomeComponent = /** @class */ (function () {
                     innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
                     innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                     var categoryId = $(docs).find("ID").text();
-                    thisHomePage.homeLandingService
+                    thisHomePage.searchService
                         .attemptGetViewAdvanceSearchForServices(categoryId, zipc)
                         .then(function (data) {
                         if (data.d.length > 0) {
@@ -330,7 +361,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.bindSalesCategoryCityWise = function (state, city) {
         var innerHtmlSales = "";
         var thisHomePage = this;
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetSalesCategoryCityWise(state, city)
             .subscribe(function (data) {
             if (data.d.length > 1) {
@@ -343,7 +374,7 @@ var HomeComponent = /** @class */ (function () {
                     innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
                     innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
                     var subCategoryId = $(docs).find("id").text();
-                    thisHomePage.homeLandingService
+                    thisHomePage.searchService
                         .attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId)
                         .then(function (data) {
                         if (data.d.length > 0) {
@@ -387,7 +418,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.bindServiesCategoryCityWise = function (state, city) {
         var innerHtmlServices = "";
         var thisHomePage = this;
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetServicesCategoryCityWise(state, city)
             .subscribe(function (data) {
             if (data.d.length > 1) {
@@ -400,7 +431,7 @@ var HomeComponent = /** @class */ (function () {
                     innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
                     innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                     var subCategoryId = $(docs).find("ID").text();
-                    thisHomePage.homeLandingService
+                    thisHomePage.searchService
                         .attemptGetAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
                         .then(function (data) {
                         if (data.d.length > 0) {
@@ -442,7 +473,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.GetSalesAdts = function () {
         var _this = this;
-        this.homeLandingService
+        this.searchService
             .attemptGetSalesAdts()
             .subscribe(function (data) {
             if (data.d.length > 0) {
@@ -469,7 +500,7 @@ var HomeComponent = /** @class */ (function () {
             templateUrl: './home.component.html'
         }),
         tslib_1.__param(3, Inject(PLATFORM_ID)),
-        tslib_1.__metadata("design:paramtypes", [FormBuilder, Renderer2, HomeLandingService, Object])
+        tslib_1.__metadata("design:paramtypes", [FormBuilder, Renderer2, SearchService, Object])
     ], HomeComponent);
     return HomeComponent;
 }());

@@ -45,6 +45,7 @@ import {
     NoAuthGuard,    encrypt_decrypt
 
 } from './services/auth';
+import { SearchService } from './services/search';
 
 
 @NgModule({
