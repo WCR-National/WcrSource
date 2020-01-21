@@ -539,7 +539,7 @@ var AuthComponent = /** @class */ (function () {
                 return _this.userService
                     .emailAlreadyTaken(control.value)
                     .pipe(map(function (data) {
-                    if (data > 1) {
+                    if (data >= 1) {
                         _this.showOnValidateEmail = false;
                         _this.FormFilledSuccessfully = false;
                         $('#validateEmailDiv').addClass('has-error');
@@ -600,6 +600,7 @@ var AuthComponent = /** @class */ (function () {
             this.associateRegister();
         }
         else if (this.authForm.get('consumer').value == true) {
+            debugger;
             this.consumerRegister();
         }
         //this.errors = { errors: {} };
@@ -652,10 +653,12 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.consumerRegister = function () {
         var _this = this;
+        debugger;
         var credentials = this.authForm.value;
         this.userService
             .attemptRegisterConsumer(this.authType, credentials)
             .subscribe(function (data) {
+            debugger;
             if (data >= 1) {
                 _this.isSubmitting = false;
                 _this.request = credentials.email;

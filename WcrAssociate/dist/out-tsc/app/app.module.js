@@ -18,7 +18,8 @@ import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 import { User } from '../app/entities/user';
 import { ShowAuthedDirective } from './shared/show-authed.directive';
 import { FooterComponent, HeaderComponent, SharedModule } from '../app/shared';
-import { ApiService, AuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, NoAuthGuard, HomeLandingService, encrypt_decrypt } from './services/auth';
+import { ApiService, AuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, NoAuthGuard, encrypt_decrypt } from './services/auth';
+import { SearchService } from './services/search';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -66,7 +67,7 @@ var AppModule = /** @class */ (function () {
                 JwtService,
                 ProfilesService,
                 UserService,
-                HomeLandingService,
+                SearchService,
                 HomeAuthResolver,
                 NoAuthGuard,
                 User,

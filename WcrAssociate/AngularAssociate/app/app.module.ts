@@ -40,10 +40,10 @@ import {
     ProfilesService,
     UserService,
     HomeAuthResolver,
-    NoAuthGuard,    HomeLandingService,
-    encrypt_decrypt
+    NoAuthGuard,    encrypt_decrypt
 
 } from './services/auth';
+import { SearchService } from './services/search';
 
 
 @NgModule({
@@ -89,7 +89,7 @@ import {
         JwtService,
         ProfilesService,
         UserService,
-        HomeLandingService,
+        SearchService,
         HomeAuthResolver,
         NoAuthGuard,
         User,

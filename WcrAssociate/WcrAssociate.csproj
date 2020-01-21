@@ -1831,7 +1831,6 @@
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\home-auth-resolver.service.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\services\auth\home_landing.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\no-auth-guard.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\errors.model.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\location.ts" />
@@ -1851,7 +1850,8 @@
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\jwt.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\profiles.service.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\services\auth\home_landing.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\search\index.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\search\search.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\user.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\user.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\home\home.component.ts" />
