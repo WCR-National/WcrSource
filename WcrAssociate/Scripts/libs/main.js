@@ -192,6 +192,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_show_authed_directive__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./shared/show-authed.directive */ "./AngularAssociate/app/shared/show-authed.directive.ts");
 /* harmony import */ var _app_shared__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../app/shared */ "./AngularAssociate/app/shared/index.ts");
 /* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/search */ "./AngularAssociate/app/services/search/index.ts");
 
 
 
@@ -207,6 +208,7 @@ __webpack_require__.r(__webpack_exports__);
 
 //import { LoginComponent } from './components/login/login.component';  
 //import { PasswordValidator, ParentErrorStateMatcher } from '../app/_helpers/validators';
+
 
 
 
@@ -260,7 +262,7 @@ var AppModule = /** @class */ (function () {
                 _services_auth__WEBPACK_IMPORTED_MODULE_18__["JwtService"],
                 _services_auth__WEBPACK_IMPORTED_MODULE_18__["ProfilesService"],
                 _services_auth__WEBPACK_IMPORTED_MODULE_18__["UserService"],
-                _services_auth__WEBPACK_IMPORTED_MODULE_18__["HomeLandingService"],
+                _services_search__WEBPACK_IMPORTED_MODULE_19__["SearchService"],
                 _services_auth__WEBPACK_IMPORTED_MODULE_18__["HomeAuthResolver"],
                 _services_auth__WEBPACK_IMPORTED_MODULE_18__["NoAuthGuard"],
                 _app_entities_user__WEBPACK_IMPORTED_MODULE_15__["User"],
@@ -850,7 +852,7 @@ var AuthComponent = /** @class */ (function () {
                 return _this.userService
                     .emailAlreadyTaken(control.value)
                     .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) {
-                    if (data > 1) {
+                    if (data >= 1) {
                         _this.showOnValidateEmail = false;
                         _this.FormFilledSuccessfully = false;
                         jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').addClass('has-error');
@@ -1385,7 +1387,7 @@ function patternValidator(regex, error) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"divLandingPage\" class=\"parallax\" data-background=\"AngularAssociate/assets/images/background.jpg\" data-color=\"#0e3a6b\" data-color-opacity=\"0.5\" data-img-width=\"2500\" data-img-height=\"1600\">\r\n    <!--  ../../../assets/images/home-parallax-2.jpg -->\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\" style=\"text-align:center;\">\r\n\r\n                <div class=\"search-container\">\r\n\r\n                    <!-- Form -->\r\n                    <h2> Grow Your Business</h2>\r\n                    <div class=\"adv-search-btn\">\r\n                        Wcr Organisation is the best solution to make you succeed online. <br>\r\n                        Starting with online advertising or managing monthly.\r\n                    </div>\r\n\r\n                    <!-- Row With Forms -->\r\n                    <div class=\"row with-forms search-background\">\r\n                        <!-- Main Search Input -->\r\n                        <div class=\"col-md-12\" [formGroup]=\"searchForm\" style=\"margin: 0 auto; text-align:center; align-item:center; float:none;\">\r\n\r\n                            <div class=\"main-search-input\">\r\n                                <input type=\"text\" formControlName=\"txtSearch\" placeholder=\"Enter address e.g. street, city or state\" value=\"\" (keyup.enter)=\"onEnterSearch()\" />\r\n                                <button class=\"button waves-effect waves-light btn\" (click)=\"onClickSearch()\">\r\n                                <i class=\"large material-icons form-control-feedback text-xs-27 pd-t-9-force\">search</i> </button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!-- Row With Forms / End -->\r\n                    <!-- Browse Jobs -->\r\n                    <!-- Announce -->\r\n                    <div class=\"announce\">\r\n                        We�ve 1000s of ads!\r\n                    </div>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n<!-- Fullwidth Section -->\r\n<section id=\"salesServicesDivId\" class=\"fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50\" style='background-color:#fff;border-top: 5px solid #0e3a6b;' #divSalesServices>\r\n\r\n    <!-- Content -->\r\n    <div class=\"container\" >\r\n\r\n        <!---->\r\n        <div class=\"row\" [style.display]=\"isSearchingStart ? 'block':'none' \">\r\n            <div class=\"col-md-12\" style=\"height:400px; padding-top: 150px;\">\r\n                <div class=\"col-xs-3 col-md-4 div-center\">\r\n                    <div class=\"progress\" style=\"top:50%;\">\r\n                        <div class=\"indeterminate\"></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--<div class=\"row\" [style.display]=\"ifError\"></div>-->\r\n        <div class=\"row\" [style.display]=\"resultContent ? 'block':'none' \">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"col-sm-12 text-center\">\r\n                    <div class=\"red-text text-darken-4 tx-medium\" style=\"float:none;\">{{errorMessage}}</div>\r\n                </div>\r\n                <div class=\"row text-xs-center text-center mg-t-30 mg-b-50\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SALES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlSales\"> </div>\r\n\r\n                <div class=\"row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30\" style=\"border-top: 1px solid #eee;\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SERVICES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlServices\"></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</section>\r\n<!-- Fullwidth Section / End -->"
+module.exports = "<div id=\"divLandingPage\" class=\"parallax\" data-background=\"AngularAssociate/assets/images/background.jpg\" data-color=\"#0e3a6b\" data-color-opacity=\"0.5\" data-img-width=\"2500\" data-img-height=\"1600\">\r\n    <!--  ../../../assets/images/home-parallax-2.jpg -->\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\" style=\"text-align:center;\">\r\n\r\n                <div class=\"search-container\">\r\n\r\n                    <!-- Form -->\r\n                    <h2> Grow Your Business</h2>\r\n                    <div class=\"adv-search-btn\">\r\n                        Wcr Organisation is the best solution to make you succeed online. <br>\r\n                        Starting with online advertising or managing monthly.\r\n                    </div>\r\n\r\n                    <!-- Row With Forms -->\r\n                    <div class=\"row with-forms search-background\">\r\n                        <!-- Main Search Input -->\r\n                        <div class=\"col-md-12\" [formGroup]=\"searchForm\" style=\"margin: 0 auto; text-align:center; align-item:center; float:none;\">\r\n\r\n                            <div class=\"main-search-input\">\r\n                                <input type=\"text\" formControlName=\"txtSearch\" placeholder=\"Enter address e.g. street, city or state\" value=\"\" (keyup.enter)=\"onPressEnterSearchData()\" />\r\n                                <button class=\"button waves-effect waves-light btn\" (click)=\"onClickSearch()\">\r\n                                    <i class=\"large material-icons form-control-feedback text-xs-27 pd-t-9-force\">search</i>\r\n                                </button>\r\n                            </div>\r\n                            <div class=\"invalid-data\" *ngIf=\"formErrors.txtSearch\" [ngClass]=\"{'has-error': formErrors.txtSearch}\" style=\"font-weight: 700; float: left;    padding-top: 7px;\">\r\n                                {{formErrors.txtSearch}}\r\n                            </div>\r\n                        </div>\r\n                        <!--<div class=\"col-sm-12 mg-b-20\">\r\n                            <input placeholder=\"Activation code\" id=\"activationCode\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"activationCode\" (blur)=\"logValidationErrors()\">\r\n                            <span class=\"large material-icons form-control-feedback icon\">vpn_key</span>\r\n                            <div class=\"invalid-data\" *ngIf=\"formErrors.activationCode\">\r\n                                {{formErrors.activationCode}}\r\n                            </div>\r\n                            <span class=\"grey-text text-darken-1 tx-medium\" *ngIf=\"authType == 'activate'\" [style.display]=\"activationSent ? 'block':'none'\">Activation code has been resend to your registered Email.</span>\r\n\r\n                        </div>-->\r\n                    </div>\r\n                    <!-- Row With Forms / End -->\r\n                    <!-- Browse Jobs -->\r\n                    <!-- Announce -->\r\n                    <div class=\"announce\">\r\n                        We�ve 1000s of ads!\r\n                    </div>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n<!-- Fullwidth Section -->\r\n<section id=\"salesServicesDivId\" class=\"fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50\" style='background-color:#fff;border-top: 5px solid #0e3a6b;' #divSalesServices>\r\n\r\n    <!-- Content -->\r\n    <div class=\"container\">\r\n\r\n        <!---->\r\n        <div class=\"row\" [style.display]=\"isSearchingStart ? 'block':'none' \">\r\n            <div class=\"col-md-12\" style=\"height:400px; padding-top: 150px;\">\r\n                <div class=\"col-xs-3 col-md-4 div-center\">\r\n                    <div class=\"progress\" style=\"top:50%;\">\r\n                        <div class=\"indeterminate\"></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--<div class=\"row\" [style.display]=\"ifError\"></div>-->\r\n        <div class=\"row\" [style.display]=\"resultContent ? 'block':'none' \">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"col-sm-12 text-center\">\r\n                    <div class=\"red-text text-darken-4 tx-medium\" style=\"float:none;\">{{errorMessage}}</div>\r\n                </div>\r\n                <div class=\"row text-xs-center text-center mg-t-30 mg-b-50\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SALES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlSales\"> </div>\r\n\r\n                <div class=\"row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30\" style=\"border-top: 1px solid #eee;\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SERVICES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlServices\"></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</section>\r\n<!-- Fullwidth Section / End -->"
 
 /***/ }),
 
@@ -1402,40 +1404,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/search */ "./AngularAssociate/app/services/search/index.ts");
 
 
 
 
 
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(fb, renderer, homeLandingService, platformId) {
+    function HomeComponent(fb, renderer, searchService, platformId) {
         this.fb = fb;
         this.renderer = renderer;
-        this.homeLandingService = homeLandingService;
+        this.searchService = searchService;
         this.platformId = platformId;
         this.isSearchingStart = false;
         this.resultContent = false;
         this.errorMessage = "";
         this.innerHtmlSales = '';
         this.innerHtmlServices = '';
+        this.errorExist = false;
+        //'required': 'Please enter City, State OR Zip Code.',
+        //'invalidData': 'Invalid data entered.  Please enter City, State OR Zip Code.',
+        //'zipCode': 'Maximum length of zip code is 5 digit',
+        //'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
+        //'statePattern': 'Please enter 2 Characters for State like "TX".',
+        //'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
+        this.validationMessages = {
+            'required': 'Please enter City, State OR Zip Code.',
+            'invalidData': 'Invalid data entered.  Please enter city, state OR zip code.',
+            'zipCode': 'Please enter 5 digit zip code',
+            'invalidZipCode': 'Please enter valid zip code (digits only for zip code)',
+            'statePattern': 'Please enter 2 characters for state like "TX".',
+            'cityStatePattern': 'Please enter valid format like "Dallas, TX" OR "Dallas, Texas"'
+        };
+        this.formErrors = {
+            'txtSearch': ''
+        };
     }
     HomeComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        jquery__WEBPACK_IMPORTED_MODULE_4__('#divLandingPage').focus();
+        jquery__WEBPACK_IMPORTED_MODULE_3__('#divLandingPage').focus();
         this.parallaxBG();
         this.GetSalesAdts();
+        this.initializeFormsAndEvents();
+    };
+    HomeComponent.prototype.initializeFormsAndEvents = function () {
+        var _this = this;
         this.searchForm = this.fb.group({
-            txtSearch: [''],
+            txtSearch: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, validateSearchZipCode]],
         });
         this.searchForm.get('txtSearch').valueChanges.subscribe(function (data) {
             _this.errorMessage = "";
         });
+        this.searchForm.valueChanges.subscribe(function (data) {
+            _this.logValidationErrors(_this.searchForm);
+        });
     };
-    HomeComponent.prototype.onEnterSearch = function () {
-        this.searching();
+    HomeComponent.prototype.logValidationErrors = function (group) {
+        var _this = this;
+        if (group === void 0) { group = this.searchForm; }
+        debugger;
+        this.errorExist = false;
+        Object.keys(group.controls).forEach(function (key) {
+            var abstractControl = group.get(key);
+            _this.formErrors[key] = '';
+            if (abstractControl && !abstractControl.valid && (abstractControl.touched || abstractControl.dirty)) {
+                _this.formErrors[key] = "";
+                var messages = _this.validationMessages;
+                if (abstractControl.errors != null) {
+                    for (var errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            if (messages[errorKey] !== undefined) {
+                                _this.formErrors[key] += messages[errorKey] + ' ';
+                                _this.errorExist = true;
+                            }
+                        }
+                    }
+                }
+            }
+            if (abstractControl instanceof _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]) {
+                _this.logValidationErrors(abstractControl);
+            }
+        });
+    };
+    HomeComponent.prototype.onPressEnterSearchData = function () {
+        if (!this.errorExist) {
+            this.searching();
+        }
         //if (txtSearch.value == "") {
         //    $("#lblfai").css("display", "block");
         //    $("#lblfai").text("Please enter City, State OR Zip Code.");
@@ -1448,7 +1503,9 @@ var HomeComponent = /** @class */ (function () {
         //}
     };
     HomeComponent.prototype.onClickSearch = function () {
-        this.searching();
+        if (!this.errorExist) {
+            this.searching();
+        }
     };
     HomeComponent.prototype.searching = function () {
         this.resultContent = false;
@@ -1457,26 +1514,19 @@ var HomeComponent = /** @class */ (function () {
         //    this.divSalesServices.nativeElement.focus();
         //    //this.myInput.nativeElement.focus();
         //}
-        jquery__WEBPACK_IMPORTED_MODULE_4__; //('#salesServicesDivId').focusin();
-        jquery__WEBPACK_IMPORTED_MODULE_4__('html, body').animate({ scrollTop: jquery__WEBPACK_IMPORTED_MODULE_4__('#salesServicesDivId').offset().top }, 'slow');
+        jquery__WEBPACK_IMPORTED_MODULE_3__; //('#salesServicesDivId').focusin();
+        jquery__WEBPACK_IMPORTED_MODULE_3__('html, body').animate({ scrollTop: jquery__WEBPACK_IMPORTED_MODULE_3__('#salesServicesDivId').offset().top }, 'slow');
         //focus the div which will show the result
         //show the loading icon
         debugger;
         var searchValue = this.searchForm.get('txtSearch').value;
-        if (jquery__WEBPACK_IMPORTED_MODULE_4__["isNumeric"](searchValue)) {
-            // HideDiv();
-            //$("#DivSearchAds").css("display", "block");
-            //$("#divShowAdvertisement").css("display", "none");
-            //$("#sales").html(sales.join(''));
-            //$("#Services").html(services1.join(''));
+        if (jquery__WEBPACK_IMPORTED_MODULE_3__["isNumeric"](searchValue)) {
             var salesHtml = void 0;
             var servicesHtml = void 0;
             salesHtml = this.bindSalesCategory(searchValue);
             servicesHtml = this.bindServiesCategory(searchValue);
-            this.innerHtmlSales = salesHtml;
-            this.innerHtmlServices = servicesHtml;
-            console.log(this.innerHtmlSales);
-            console.log(this.innerHtmlServices);
+            //this.innerHtmlSales = salesHtml;
+            //this.innerHtmlServices = servicesHtml;
         }
         else {
             if (searchValue.indexOf(',') != -1) {
@@ -1490,12 +1540,10 @@ var HomeComponent = /** @class */ (function () {
                         City = strSearchValue[i];
                     }
                     else if (i == 1) {
-                        State = jquery__WEBPACK_IMPORTED_MODULE_4__["trim"](strSearchValue[i]);
+                        State = jquery__WEBPACK_IMPORTED_MODULE_3__["trim"](strSearchValue[i]);
                     }
                 }
                 if (State.length == 2) {
-                    jquery__WEBPACK_IMPORTED_MODULE_4__("#DivSearchAds").css("display", "block");
-                    jquery__WEBPACK_IMPORTED_MODULE_4__("#divShowAdvertisement").css("display", "none");
                     salesHtml = this.bindSalesCategoryCityWise(State, City);
                     servicesHtml = this.bindServiesCategoryCityWise(State, City);
                     //this.innerHtmlSales = salesHtml;
@@ -1504,12 +1552,12 @@ var HomeComponent = /** @class */ (function () {
                     //console.log(this.innerHtmlServices);
                 }
                 else if (State.length >= 2) {
-                    this.errorMessage = "Please Enter 2 Characters for State.";
+                    jquery__WEBPACK_IMPORTED_MODULE_3__('html, body').animate({ scrollTop: jquery__WEBPACK_IMPORTED_MODULE_3__('#divLandingPage').offset().top }, 'slow');
+                    this.errorMessage = "Please enter 2 Characters for State.";
                     this.isSearchingStart = false;
                 }
             }
             else {
-                jquery__WEBPACK_IMPORTED_MODULE_4__("#lblfai").css("display", "block");
                 this.errorMessage = "Invalid data entered.  Please enter City, State OR Zip Code.";
                 this.isSearchingStart = false;
             }
@@ -1517,17 +1565,17 @@ var HomeComponent = /** @class */ (function () {
     };
     // Init
     HomeComponent.prototype.parallaxBG = function () {
-        jquery__WEBPACK_IMPORTED_MODULE_4__('.parallax').prepend('<div class="parallax-overlay"></div>');
-        jquery__WEBPACK_IMPORTED_MODULE_4__(".parallax").each(function () {
-            var attrImage = jquery__WEBPACK_IMPORTED_MODULE_4__(this).attr('data-background');
-            var attrColor = jquery__WEBPACK_IMPORTED_MODULE_4__(this).attr('data-color');
-            var attrOpacity = jquery__WEBPACK_IMPORTED_MODULE_4__(this).attr('data-color-opacity');
+        jquery__WEBPACK_IMPORTED_MODULE_3__('.parallax').prepend('<div class="parallax-overlay"></div>');
+        jquery__WEBPACK_IMPORTED_MODULE_3__(".parallax").each(function () {
+            var attrImage = jquery__WEBPACK_IMPORTED_MODULE_3__(this).attr('data-background');
+            var attrColor = jquery__WEBPACK_IMPORTED_MODULE_3__(this).attr('data-color');
+            var attrOpacity = jquery__WEBPACK_IMPORTED_MODULE_3__(this).attr('data-color-opacity');
             debugger;
             if (attrImage !== undefined) {
-                jquery__WEBPACK_IMPORTED_MODULE_4__(this).find(".parallax-overlay").css('background-image', 'url(' + attrImage + ')');
+                jquery__WEBPACK_IMPORTED_MODULE_3__(this).find(".parallax-overlay").css('background-image', 'url(' + attrImage + ')');
             }
             if (attrColor !== undefined) {
-                jquery__WEBPACK_IMPORTED_MODULE_4__(this).find(".parallax-overlay").css('background-color', '' + attrColor + '');
+                jquery__WEBPACK_IMPORTED_MODULE_3__(this).find(".parallax-overlay").css('background-color', '' + attrColor + '');
             }
         });
     };
@@ -1536,40 +1584,46 @@ var HomeComponent = /** @class */ (function () {
         if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
         var innerHtmlSales = "";
         var thisHomePage = this;
-        thisHomePage.homeLandingService
-            .attemptGetSalesCategoryByZip(zipc)
+        thisHomePage.searchService
+            .subCategoriesByZipcode(zipc)
             .subscribe(function (data) {
             if (data.d.length > 1) {
-                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
-                var xml = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc);
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
                 var docs = xml.find("subCategories");
-                jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs, function (i, docs) {
+                thisHomePage.searchService
+                    .viewAdvanceSearchByZipcode(zipc, "1")
+                    .then(function (data1) {
+                    console.log('data found');
+                });
+                debugger;
+                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
                     var flag = 0;
                     innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
                     innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
-                    innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + " </h3>";
-                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text();
-                    thisHomePage.homeLandingService
-                        .attemptGetAdvanceSearchByZipc(zipc, subCategoryId)
-                        .then(function (data) {
-                        if (data.d.length > 0) {
-                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
-                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc1);
+                    innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + " </h3>";
+                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text();
+                    thisHomePage.searchService
+                        .viewAdvanceSearchByZipcode(zipc, subCategoryId)
+                        .then(function (data12) {
+                        if (data12.d.length > 0) {
+                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data12.d);
+                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
                             var docs1 = xml1.find("GetCategoriesinfo1");
-                            jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs1, function (i, docs1) {
-                                if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("categoryid").text()) {
+                            jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
+                                if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
                                     if (searchByIpOrtxtSearch == "ip") {
-                                        innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "  </p>";
-                                        var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("Zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                        innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "  </p>";
+                                        var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                                         //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("detail").text()) + "  </p>";
+                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "  </p>";
                                         innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
                                     }
                                     else {
-                                        var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("Zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                        var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                                         //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                        innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
-                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("detail").text()) + "  </p>";
+                                        innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
+                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "  </p>";
                                         innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
                                     }
                                     flag = 1;
@@ -1585,15 +1639,15 @@ var HomeComponent = /** @class */ (function () {
                     if (flag == 1) { }
                     else {
                         if (searchByIpOrtxtSearch == "ip") {
-                            innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "  </p>";
-                            var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("detail").text()) + "  </p>";
+                            innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "  </p>";
+                            var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "  </p>";
                             innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
                         }
                         else {
-                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text()) + "'  alt=''/></i></span></a>";
-                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("detail").text()) + "  </p>";
-                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
+                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "'  alt=''/></i></span></a>";
+                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "  </p>";
+                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
                         }
                     }
                 });
@@ -1608,42 +1662,42 @@ var HomeComponent = /** @class */ (function () {
         if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
         var innerHtmlServices = "";
         var thisHomePage = this;
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetJobtypeWiseCategory()
             .subscribe(function (data) {
             if (data.d.length > 1) {
-                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
-                var xml = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc);
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
                 var docs = xml.find("JobCategories");
-                jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs, function (i, docs) {
+                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
                     var flag = 0;
                     innerHtmlServices += " <div class='col-sm-3 text-center block '>";
                     innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                    innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("categoryName").text()) + " </h3>";
-                    var categoryId = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text();
-                    thisHomePage.homeLandingService
+                    innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
+                    var categoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
+                    thisHomePage.searchService
                         .attemptGetViewAdvanceSearchForServices(categoryId, zipc)
                         .then(function (data) {
                         if (data.d.length > 0) {
-                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
-                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc1);
+                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
                             var docs1 = xml1.find("GetCategoriesinfoservices");
-                            jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs1, function (i, docs1) {
-                                if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("categoryid").text()) {
+                            jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
+                                if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
                                     if (searchByIpOrtxtSearch == "ip") {
                                         console.log('entered in ' + searchByIpOrtxtSearch);
-                                        innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("categoryName").text()) + "</p>";
-                                        var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("categoryName").text()) + "";
+                                        innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "</p>";
+                                        var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
                                         //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Detail").text()) + "</p>";
+                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
                                         innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
                                     }
                                     else {
                                         console.log('entered in ' + searchByIpOrtxtSearch);
-                                        var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("categoryName").text()) + "";
+                                        var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
                                         //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                        innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("photo").text()) + "'  alt=''/></i></span>";
-                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Detail").text()) + "  </p>";
+                                        innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("photo").text()) + "'  alt=''/></i></span>";
+                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
                                         innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
                                     }
                                     flag = 1;
@@ -1658,17 +1712,17 @@ var HomeComponent = /** @class */ (function () {
                     if (flag == 1) { }
                     else {
                         if (searchByIpOrtxtSearch == "ip") {
-                            innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("categoryName").text()) + "  </p>";
+                            innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "  </p>";
                             //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
-                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("categoryName").text()) + "";
+                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
                             //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Detail").text()) + "  </p>";
+                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
                             innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
                         }
                         else {
-                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
-                            innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("catImages").text()) + "'  alt=''/></i></span>";
-                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Detail").text()) + "</p>";
+                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
+                            innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'  alt=''/></i></span>";
+                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
                             innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
                         }
                     }
@@ -1683,32 +1737,32 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.bindSalesCategoryCityWise = function (state, city) {
         var innerHtmlSales = "";
         var thisHomePage = this;
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetSalesCategoryCityWise(state, city)
             .subscribe(function (data) {
             if (data.d.length > 1) {
-                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
-                var xml = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc);
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
                 var docs = xml.find("subCategories");
-                jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs, function (i, docs) {
+                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
                     var flag = 0;
                     innerHtmlSales += " <div class='col-sm-3 text-center block '>";
                     innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                    innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + " </h3>";
-                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text();
-                    thisHomePage.homeLandingService
+                    innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + " </h3>";
+                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text();
+                    thisHomePage.searchService
                         .attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId)
                         .then(function (data) {
                         if (data.d.length > 0) {
-                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
-                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc1);
+                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
                             var docs1 = xml1.find("GetCategoriesinfoCity");
-                            jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs1, function (i, docs1) {
-                                if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text() == jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("Subcategoryid").text()) {
-                                    var urlToSalesAdvertisement = 'SalesAdvertisementList.html?ca=0&id="' + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text()) + '"&zipcode="' + jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("Zipcode").text() + '"&name="' + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
+                            jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
+                                if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Subcategoryid").text()) {
+                                    var urlToSalesAdvertisement = 'SalesAdvertisementList.html?ca=0&id="' + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + '"&zipcode="' + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Zipcode").text() + '"&name="' + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
                                     //innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
-                                    innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("advMainImage").text()) + "'  alt=''/></i></span>";
-                                    innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("detail").text()) + "</p></div></div>";
+                                    innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("advMainImage").text()) + "'  alt=''/></i></span>";
+                                    innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p></div></div>";
                                     innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
                                     flag = 1;
                                 }
@@ -1721,10 +1775,10 @@ var HomeComponent = /** @class */ (function () {
                     });
                     if (flag == 1) { }
                     else {
-                        var urlToSalesAdvertisement = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text()) + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                        var urlToSalesAdvertisement = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                         //innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
-                        innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("id").text()) + "'/></i></span>";
-                        innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("detail").text()) + " </p>";
+                        innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "'/></i></span>";
+                        innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + " </p>";
                         innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
                     }
                 });
@@ -1740,32 +1794,32 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.bindServiesCategoryCityWise = function (state, city) {
         var innerHtmlServices = "";
         var thisHomePage = this;
-        thisHomePage.homeLandingService
+        thisHomePage.searchService
             .attemptGetServicesCategoryCityWise(state, city)
             .subscribe(function (data) {
             if (data.d.length > 1) {
-                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
-                var xml = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc);
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
                 var docs = xml.find("JobCategories");
-                jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs, function (i, docs) {
+                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
                     var flag = 0;
                     innerHtmlServices += " <div class=' col-sm-3 text-center block '>";
                     innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                    innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("categoryName").text()) + " </h3>";
-                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text();
-                    thisHomePage.homeLandingService
+                    innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
+                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
+                    thisHomePage.searchService
                         .attemptGetAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
                         .then(function (data) {
                         if (data.d.length > 0) {
-                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
-                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc1);
+                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
                             var docs1 = xml1.find("GetsubCategoriesinfoservices");
-                            jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs1, function (i, docs1) {
-                                if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("categoryid").text()) {
-                                    var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("categoryName").text()) + "";
+                            jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
+                                if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
+                                    var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
                                     innerHtmlServices += "<a href='" + urlToSalesAdvertisement + "'>";
-                                    innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs1).find("photo").text()) + "'  alt=''/></i></span></a>";
-                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("detail").text()) + "</p>";
+                                    innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("photo").text()) + "'  alt=''/></i></span></a>";
+                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p>";
                                     innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
                                     flag = 1;
                                 }
@@ -1778,11 +1832,11 @@ var HomeComponent = /** @class */ (function () {
                     });
                     if (flag == 1) { }
                     else {
-                        var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("ID").text()) + "&zipcode=0&name=" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
+                        var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=0&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
                         //innerHtmlSales += "<a href=''>";
-                        innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("catImages").text()) + "'/></i></span>";
+                        innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'/></i></span>";
                         innerHtmlServices += "</a>";
-                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("detail").text()) + "</p>";
+                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p>";
                         innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
                     }
                 });
@@ -1795,7 +1849,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.GetSalesAdts = function () {
         var _this = this;
-        this.homeLandingService
+        this.searchService
             .attemptGetSalesAdts()
             .subscribe(function (data) {
             if (data.d.length > 0) {
@@ -1822,11 +1876,76 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./AngularAssociate/app/components/home/home.component.html")
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](3, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_angular_core__WEBPACK_IMPORTED_MODULE_1__["PLATFORM_ID"])),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["Renderer2"], _services_auth__WEBPACK_IMPORTED_MODULE_3__["HomeLandingService"], Object])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["Renderer2"], _services_search__WEBPACK_IMPORTED_MODULE_4__["SearchService"], Object])
     ], HomeComponent);
     return HomeComponent;
 }());
 
+function validateSearchZipCode(control) {
+    var value = control.value;
+    var regFirstDigits = new RegExp('^[0-9]{2}$');
+    var regFirstLetters = new RegExp('^[a-zA-Z]{2}$');
+    var regLetters = new RegExp('^[a-zA-Z]$');
+    if (/^[0-9]{2}/.test(value)) {
+        var reg = /\b\d\b/g;
+        var regFiveDig = /\b\d{5}\b/g;
+        if (/^[0-9]/.test(value)) {
+            if (value.match(regFiveDig) && value.length <= 5) {
+                return null;
+            }
+            else {
+                return { 'zipCode': true };
+            }
+        }
+        else {
+            return { 'invalidZipCode': true };
+        }
+    }
+    else if (/^[a-zA-Z]{2}/.test(value) || /^[a-zA-Z]/.test(value)) {
+        debugger;
+        if (/^[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
+            debugger;
+            if (/\s/.test(value)) {
+                debugger;
+                // It has any kind of whitespace
+                var listOfValues = value.split(' ');
+                if (listOfValues.length > 2) {
+                    debugger;
+                    return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                }
+                else {
+                    debugger;
+                    if (listOfValues[1] !== undefined) {
+                        if (listOfValues[1].length != 2) {
+                            return { 'statePattern': true };
+                        }
+                    }
+                    else {
+                        if (value.length >= 5) {
+                            return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if (!(/^[a-zA-Z]*$/.test(value))) {
+                return { 'cityStatePattern': true };
+            }
+            if (value.length >= 5) {
+                return { 'cityStatePattern': true };
+            }
+        }
+    }
+    else {
+        if (value.match(regFirstDigits)) {
+            return { 'invalidZipCode': true };
+        }
+        else {
+            //return { 'invalidData': true };
+        }
+    }
+}
 
 
 /***/ }),
@@ -2111,188 +2230,11 @@ var HomeAuthResolver = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./AngularAssociate/app/services/auth/home_landing.service.ts":
-/*!********************************************************************!*\
-  !*** ./AngularAssociate/app/services/auth/home_landing.service.ts ***!
-  \********************************************************************/
-/*! exports provided: HomeLandingService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeLandingService", function() { return HomeLandingService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./api.service */ "./AngularAssociate/app/services/auth/api.service.ts");
-/* harmony import */ var _jwt_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./jwt.service */ "./AngularAssociate/app/services/auth/jwt.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-
-
-
-
-
-
-
-var HomeLandingService = /** @class */ (function () {
-    function HomeLandingService(apiService, http, jwtService) {
-        this.apiService = apiService;
-        this.http = http;
-        this.jwtService = jwtService;
-        this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]({});
-        this.currentUser = this.currentUserSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["distinctUntilChanged"])());
-        this.isAuthenticatedSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
-        this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
-    }
-    //For sales
-    HomeLandingService.prototype.attemptGetSalesCategoryByZip = function (zipc) {
-        var urlToSubCategories = "Associate/ws/subCategory.asmx/SubCategories";
-        return this.apiService.post(urlToSubCategories, { Categoryid: 1 })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
-            return data;
-        }));
-    };
-    HomeLandingService.prototype.attemptGetAdvanceSearchByZipc = function (zipc, subCategoryId) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var urlToAdvanceSearch;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearch1";
-                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).toPromise()];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    //For services
-    HomeLandingService.prototype.attemptGetJobtypeWiseCategory = function () {
-        var urlToJobTypeWiseCategory = "Associate/ws/Category.asmx/JobtypeWiseCategory";
-        return this.apiService.post(urlToJobTypeWiseCategory, { flag: 1, jobtype: 2 })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
-            return data;
-        }));
-    };
-    HomeLandingService.prototype.attemptGetViewAdvanceSearchForServices = function (categoryId, zipc) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var urlToJobTypeWiseCategory;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        urlToJobTypeWiseCategory = "ws/TopSearch.asmx/ViewAdvanceSearchForServices";
-                        return [4 /*yield*/, this.http.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise()];
-                    case 1: 
-                    //return this.apiService.post( urlToJobTypeWiseCategory, { zipcode: zipc, Category: subCategoryId })
-                    //    .pipe(map(
-                    //        data => {
-                    //            return data;
-                    //        }
-                    //    ));
-                    return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    //For sales
-    HomeLandingService.prototype.attemptGetSalesCategoryCityWise = function (state, city) {
-        var urlToSubCategories = "Associate/ws/subCategory.asmx/SubCategories";
-        return this.apiService.post(urlToSubCategories, { Categoryid: 1 })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
-            return data;
-        }));
-    };
-    HomeLandingService.prototype.attemptGetAdvanceSearchCityStateWise = function (state, city, subCategoryId) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var urlToAdvanceSearch;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
-                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise()];
-                    case 1: 
-                    //    data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}"
-                    //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId })
-                    //    .pipe(map(
-                    //        data => {
-                    //            return data;
-                    //        }
-                    //    ));
-                    return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    //For services
-    HomeLandingService.prototype.attemptGetServicesCategoryCityWise = function (state, city) {
-        var urlToServiceCategory = "Associate/ws/Category.asmx/JobtypeWiseCategory";
-        return this.apiService.post(urlToServiceCategory, { flag: 1, jobtype: 2 })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
-            return data;
-        }));
-    };
-    HomeLandingService.prototype.attemptGetAdvanceSearchServicesCityStateWise = function (state, city, subCategoryId) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var urlToAdvanceSearch;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchServicesCityStateWise";
-                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise()];
-                    case 1: 
-                    //  {'State':'" + State + "','City':'" + City + "','Category':" + ($(docs).find("ID").text()) + "}
-                    //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId })
-                    //    .pipe(map(
-                    //        data => {
-                    //            return data;
-                    //        }
-                    //    ));
-                    return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    //For IPAddress
-    HomeLandingService.prototype.attemptGetSalesAdts = function () {
-        var _this = this;
-        var urlToGetIP = "http://jsonip.com?=callback";
-        return this.http.get(urlToGetIP)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
-            var _ipAddress = data.ip;
-            _this.attemptGetZipCodeByIPAddress(_ipAddress);
-        }));
-    };
-    HomeLandingService.prototype.attemptGetZipCodeByIPAddress = function (_ipAddress) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var urlToGetZipCodeByIpAddress;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        urlToGetZipCodeByIpAddress = "ws/TopSearch.asmx/GetZipCodeIpAddress";
-                        return [4 /*yield*/, this.apiService.post(urlToGetZipCodeByIpAddress, { _IpAddress: _ipAddress }).toPromise()];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
-    };
-    HomeLandingService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
-            _jwt_service__WEBPACK_IMPORTED_MODULE_5__["JwtService"]])
-    ], HomeLandingService);
-    return HomeLandingService;
-}());
-
-
-
-/***/ }),
-
 /***/ "./AngularAssociate/app/services/auth/index.ts":
 /*!*****************************************************!*\
   !*** ./AngularAssociate/app/services/auth/index.ts ***!
   \*****************************************************/
-/*! exports provided: ApiService, AuthGuard, NoAuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, HomeLandingService, encrypt_decrypt */
+/*! exports provided: ApiService, AuthGuard, NoAuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, encrypt_decrypt */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2318,12 +2260,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_auth_resolver_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./home-auth-resolver.service */ "./AngularAssociate/app/services/auth/home-auth-resolver.service.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HomeAuthResolver", function() { return _home_auth_resolver_service__WEBPACK_IMPORTED_MODULE_6__["HomeAuthResolver"]; });
 
-/* harmony import */ var _home_landing_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home_landing.service */ "./AngularAssociate/app/services/auth/home_landing.service.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HomeLandingService", function() { return _home_landing_service__WEBPACK_IMPORTED_MODULE_7__["HomeLandingService"]; });
-
-/* harmony import */ var _encrypt_decrypt__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./encrypt_decrypt */ "./AngularAssociate/app/services/auth/encrypt_decrypt.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "encrypt_decrypt", function() { return _encrypt_decrypt__WEBPACK_IMPORTED_MODULE_8__["encrypt_decrypt"]; });
-
+/* harmony import */ var _encrypt_decrypt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./encrypt_decrypt */ "./AngularAssociate/app/services/auth/encrypt_decrypt.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "encrypt_decrypt", function() { return _encrypt_decrypt__WEBPACK_IMPORTED_MODULE_7__["encrypt_decrypt"]; });
 
 
 
@@ -2798,6 +2736,202 @@ var UserService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./AngularAssociate/app/services/search/index.ts":
+/*!*******************************************************!*\
+  !*** ./AngularAssociate/app/services/search/index.ts ***!
+  \*******************************************************/
+/*! exports provided: SearchService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _search_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./search.service */ "./AngularAssociate/app/services/search/search.service.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SearchService", function() { return _search_service__WEBPACK_IMPORTED_MODULE_0__["SearchService"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/services/search/search.service.ts":
+/*!****************************************************************!*\
+  !*** ./AngularAssociate/app/services/search/search.service.ts ***!
+  \****************************************************************/
+/*! exports provided: SearchService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchService", function() { return SearchService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
+
+
+
+
+
+var SearchService = /** @class */ (function () {
+    function SearchService(apiService, http, jwtService) {
+        this.apiService = apiService;
+        this.http = http;
+        this.jwtService = jwtService;
+        this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]({});
+        this.currentUser = this.currentUserSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["distinctUntilChanged"])());
+        this.isAuthenticatedSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
+    }
+    //For sales
+    SearchService.prototype.subCategoriesByZipcode = function (zipc) {
+        var urlToSubCategories = "Associate/ws/subCategory.asmx/SubCategories";
+        return this.apiService.post(urlToSubCategories, { Categoryid: 1 })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
+            return data;
+        }));
+    };
+    SearchService.prototype.viewAdvanceSearchByZipcode = function (zipc, subCategoryId) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var urlToAdvanceSearch;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearch1";
+                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
+                                debugger;
+                                return data;
+                            })).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    //For services
+    SearchService.prototype.attemptGetJobtypeWiseCategory = function () {
+        var urlToJobTypeWiseCategory = "Associate/ws/Category.asmx/JobtypeWiseCategory";
+        return this.apiService.post(urlToJobTypeWiseCategory, { flag: 1, jobtype: 2 })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
+            return data;
+        }));
+    };
+    SearchService.prototype.attemptGetViewAdvanceSearchForServices = function (categoryId, zipc) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var urlToJobTypeWiseCategory;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToJobTypeWiseCategory = "ws/TopSearch.asmx/ViewAdvanceSearchForServices";
+                        return [4 /*yield*/, this.http.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise()];
+                    case 1: 
+                    //return this.apiService.post( urlToJobTypeWiseCategory, { zipcode: zipc, Category: subCategoryId })
+                    //    .pipe(map(
+                    //        data => {
+                    //            return data;
+                    //        }
+                    //    ));
+                    return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    //For sales
+    SearchService.prototype.attemptGetSalesCategoryCityWise = function (state, city) {
+        var urlToSubCategories = "Associate/ws/subCategory.asmx/SubCategories";
+        return this.apiService.post(urlToSubCategories, { Categoryid: 1 })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
+            return data;
+        }));
+    };
+    SearchService.prototype.attemptGetAdvanceSearchCityStateWise = function (state, city, subCategoryId) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var urlToAdvanceSearch;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
+                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise()];
+                    case 1: 
+                    //    data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}"
+                    //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId })
+                    //    .pipe(map(
+                    //        data => {
+                    //            return data;
+                    //        }
+                    //    ));
+                    return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    //For services
+    SearchService.prototype.attemptGetServicesCategoryCityWise = function (state, city) {
+        var urlToServiceCategory = "Associate/ws/Category.asmx/JobtypeWiseCategory";
+        return this.apiService.post(urlToServiceCategory, { flag: 1, jobtype: 2 })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
+            return data;
+        }));
+    };
+    SearchService.prototype.attemptGetAdvanceSearchServicesCityStateWise = function (state, city, subCategoryId) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var urlToAdvanceSearch;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchServicesCityStateWise";
+                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise()];
+                    case 1: 
+                    //  {'State':'" + State + "','City':'" + City + "','Category':" + ($(docs).find("ID").text()) + "}
+                    //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId })
+                    //    .pipe(map(
+                    //        data => {
+                    //            return data;
+                    //        }
+                    //    ));
+                    return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    //For IPAddress
+    SearchService.prototype.attemptGetSalesAdts = function () {
+        var _this = this;
+        var urlToGetIP = "http://jsonip.com?=callback";
+        return this.http.get(urlToGetIP)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
+            var _ipAddress = data.ip;
+            _this.attemptGetZipCodeByIPAddress(_ipAddress);
+        }));
+    };
+    SearchService.prototype.attemptGetZipCodeByIPAddress = function (_ipAddress) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var urlToGetZipCodeByIpAddress;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        urlToGetZipCodeByIpAddress = "ws/TopSearch.asmx/GetZipCodeIpAddress";
+                        return [4 /*yield*/, this.apiService.post(urlToGetZipCodeByIpAddress, { _IpAddress: _ipAddress }).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
+    };
+    SearchService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_auth__WEBPACK_IMPORTED_MODULE_4__["ApiService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _auth__WEBPACK_IMPORTED_MODULE_4__["JwtService"]])
+    ], SearchService);
+    return SearchService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./AngularAssociate/app/shared/index.ts":
 /*!**********************************************!*\
   !*** ./AngularAssociate/app/shared/index.ts ***!
@@ -3226,7 +3360,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
+module.exports = __webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
 
 
 /***/ })

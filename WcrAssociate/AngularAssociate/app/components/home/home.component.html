@@ -24,7 +24,7 @@
                                     <i class="large material-icons form-control-feedback text-xs-27 pd-t-9-force">search</i>
                                 </button>
                             </div>
-                            <div class="invalid-data" *ngIf="formErrors.txtSearch">
+                            <div class="invalid-data" *ngIf="formErrors.txtSearch" [ngClass]="{'has-error': formErrors.txtSearch}" style="font-weight: 700; float: left;    padding-top: 7px;">
                                 {{formErrors.txtSearch}}
                             </div>
                         </div>

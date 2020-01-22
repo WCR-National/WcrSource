@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
-import { ApiService } from '../api_service';
+import { ApiService } from '../auth';
 import { JwtService } from '../auth';
 import { User } from '../../entities/user';
 import { environment } from '../../../environments/environment';
 
-import { map, distinctUntilChanged, debounce } from 'rxjs/operators';
+import { map, distinctUntilChanged, debounce, delay } from 'rxjs/operators';
+import { pipe } from '@angular/core/src/render3';
 
 
 @Injectable()
 export class SearchService {
-
     private currentUserSubject = new BehaviorSubject<User>({} as User);
     public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
@@ -39,7 +39,22 @@ export class SearchService {
     async viewAdvanceSearchByZipcode(zipc, subCategoryId) {
 
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearch1";
-        return await this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).toPromise();           
+
+        return await this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).pipe(
+            map(
+                data => {
+                    debugger;
+                return data;
+            }
+        )).toPromise();
+
+
+            //.pipe(map(
+            //    data => {
+            //        return data;
+            //    }
+            //))
+           
     }
 
     //For services

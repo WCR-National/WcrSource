@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, Vali
 import * as $ from 'jquery';
 
 import { SearchService } from '../../services/search';
+import { debug } from 'util';
 
 
 @Component({
@@ -20,13 +21,22 @@ export class HomeComponent implements OnInit {
 
     innerHtmlSales: string = '';
     innerHtmlServices: string = '';
+    errorExist = false;
+
+    //'required': 'Please enter City, State OR Zip Code.',
+    //'invalidData': 'Invalid data entered.  Please enter City, State OR Zip Code.',
+    //'zipCode': 'Maximum length of zip code is 5 digit',
+    //'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
+    //'statePattern': 'Please enter 2 Characters for State like "TX".',
+    //'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
+
     validationMessages = {
         'required': 'Please enter City, State OR Zip Code.',
-        'invalidData': 'Invalid data entered.  Please enter City, State OR Zip Code.',
-        'zipCode': 'Maximum length of zip code is 5 digit',
-        'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
-        'statePattern': 'Please enter 2 Characters for State like "TX".',
-        'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
+        'invalidData': 'Invalid data entered.  Please enter city, state OR zip code.',
+        'zipCode': 'Please enter 5 digit zip code',
+        'invalidZipCode': 'Please enter valid zip code (digits only for zip code)',
+        'statePattern': 'Please enter 2 characters for state like "TX".',
+        'cityStatePattern': 'Please enter valid format like "Dallas, TX" OR "Dallas, Texas"'
     }
     formErrors = {
         'txtSearch': ''
@@ -43,7 +53,7 @@ export class HomeComponent implements OnInit {
     initializeFormsAndEvents() {
 
         this.searchForm = this.fb.group({
-            txtSearch: ['', Validators.required, this.validateSearchZipCode()],
+            txtSearch: ['', [Validators.required, validateSearchZipCode]],
         });
 
         this.searchForm.get('txtSearch').valueChanges.subscribe((data) => {
@@ -55,37 +65,25 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    onPressEnterSearchData() {
 
-        this.searching();
-
-        //if (txtSearch.value == "") {
-        //    $("#lblfai").css("display", "block");
-        //    $("#lblfai").text("Please enter City, State OR Zip Code.");
-        //}
-        //else {
-        //$("#pageloader").css("display", "block");
-        //$("#homeicon").css("display", "inline-block");
-        //setTimeout(function () {
-        // }, 500);
-        //}
-    }
 
     logValidationErrors(group: FormGroup = this.searchForm): void {
+        debugger;
+        this.errorExist = false;
 
         Object.keys(group.controls).forEach((key: string) => {
             const abstractControl = group.get(key);
             this.formErrors[key] = '';
 
-            if (abstractControl && !abstractControl.valid
-                && (abstractControl.touched || abstractControl.dirty)) {
+            if (abstractControl && !abstractControl.valid && (abstractControl.touched || abstractControl.dirty)) {
                 this.formErrors[key] = "";
-                const messages = this.validationMessages[key];
+                const messages = this.validationMessages;
                 if (abstractControl.errors != null) {
                     for (const errorKey in abstractControl.errors) {
                         if (errorKey) {
                             if (messages[errorKey] !== undefined) {
                                 this.formErrors[key] += messages[errorKey] + ' ';
+                                this.errorExist = true;
                             }
                         }
                     }
@@ -98,66 +96,27 @@ export class HomeComponent implements OnInit {
         });
     }
 
+    onPressEnterSearchData() {
+        if (!this.errorExist) {
 
-    //'required': 'Please enter City, State OR Zip Code.',
-    //'invalid': 'Invalid data entered.  Please enter City, State OR Zip Code.',
-    //'zipCode': 'Maximum length of zip code is 5 digit',
-    //'invalidZipCode': 'Please enter valid zip code (digits Only for zip Code)',
-    //'statePattern': 'Please enter 2 Characters for State like "TX".',
-    //'cityStatePattern': 'Please enter valid city state like "Dallas, TX" OR "Dallas, Texas"'
-
-    validateSearchZipCode(): ValidatorFn {
-
-        return (control: AbstractControl): { [key: string]: any } => {
-            const value: string = control.value;
-            var regFirstLetters = new RegExp('^[0-9]{2}$');
-            var regFirstDigits = new RegExp('^[a-9zA-Z]{2}$');
-            if (value.length <= 5 && value.match(regFirstDigits)) {
-                var reg = /\b\d{5}\b/g;
-                if (value.match(reg)) {
-                    return null;
-                }
-                else {
-                    return { 'zipCode': true };
-                }
-            }
-            else if (value.match(regFirstLetters)) {
-                if (/^[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
-                    if (/\s/.test(value)) {
-                        // It has any kind of whitespace
-                        var listOfValues = value.split(' ');
-                        if (listOfValues.length > 2)
-                        {
-                            return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
-                        }
-                        else
-                        {
-                            if (listOfValues[1] !== undefined) {
-                                if (listOfValues[1].length > 2) {
-                                    return { 'statePattern': true };
-                                }
-                            }
-                            else {
-                                return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
-                            }
-                        }
-                    }
-                }
-                else {
-                    return { 'cityStatePattern': true };
-                }
-            }
-            else {
-                return { 'invalidData': true };
-                
-            }
+            this.searching();
         }
+        //if (txtSearch.value == "") {
+        //    $("#lblfai").css("display", "block");
+        //    $("#lblfai").text("Please enter City, State OR Zip Code.");
+        //}
+        //else {
+        //$("#pageloader").css("display", "block");
+        //$("#homeicon").css("display", "inline-block");
+        //setTimeout(function () {
+        // }, 500);
+        //}
     }
 
-
-
     onClickSearch() {
-        this.searching();
+        if (!this.errorExist) {
+            this.searching();
+        }
     }
 
     searching() {
@@ -179,19 +138,12 @@ export class HomeComponent implements OnInit {
         debugger;
         let searchValue: string = this.searchForm.get('txtSearch').value;
         if ($.isNumeric(searchValue)) {
-            // HideDiv();
-            //$("#DivSearchAds").css("display", "block");
-            //$("#divShowAdvertisement").css("display", "none");
-            //$("#sales").html(sales.join(''));
-            //$("#Services").html(services1.join(''));
             let salesHtml;
             let servicesHtml;
             salesHtml = this.bindSalesCategory(searchValue);
             servicesHtml = this.bindServiesCategory(searchValue);
-            this.innerHtmlSales = salesHtml;
-            this.innerHtmlServices = servicesHtml;
-            console.log(this.innerHtmlSales);
-            console.log(this.innerHtmlServices);
+            //this.innerHtmlSales = salesHtml;
+            //this.innerHtmlServices = servicesHtml;
 
         }
         else {
@@ -211,8 +163,6 @@ export class HomeComponent implements OnInit {
                 }
 
                 if (State.length == 2) {
-                    $("#DivSearchAds").css("display", "block");
-                    $("#divShowAdvertisement").css("display", "none");
 
                     salesHtml = this.bindSalesCategoryCityWise(State, City);
                     servicesHtml = this.bindServiesCategoryCityWise(State, City);
@@ -223,13 +173,14 @@ export class HomeComponent implements OnInit {
                     //console.log(this.innerHtmlServices);
                 }
                 else if (State.length >= 2) {
-                    this.errorMessage = "Please Enter 2 Characters for State.";
+                    $('html, body').animate({ scrollTop: $('#divLandingPage').offset().top }, 'slow');
+
+                    this.errorMessage = "Please enter 2 Characters for State.";
                     this.isSearchingStart = false;
 
                 }
             }
             else {
-                $("#lblfai").css("display", "block");
                 this.errorMessage = "Invalid data entered.  Please enter City, State OR Zip Code.";
                 this.isSearchingStart = false;
 
@@ -273,7 +224,13 @@ export class HomeComponent implements OnInit {
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("subCategories");
-
+                        thisHomePage.searchService
+                            .viewAdvanceSearchByZipcode(zipc, "1")
+                            .then(
+                                (data1: any) => {
+                                    console.log('data found');
+                                });
+                        debugger;
                         $.each(docs, function (i, docs) {
                             var flag = 0;
                             innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
@@ -287,44 +244,50 @@ export class HomeComponent implements OnInit {
                                 .then(
                                     (data: any) => {
                                         if (data.d.length > 0) {
+                                thisHomePage.searchService
+                                    .viewAdvanceSearchByZipcode(zipc, subCategoryId)
+                                    .then(
+                                        (data12: any) => {
+                                            if (data12.d.length > 0) {
 
-                                            var xmlDoc1 = $.parseXML(data.d);
-                                            var xml1 = $(xmlDoc1);
-                                            var docs1 = xml1.find("GetCategoriesinfo1");
+                                                var xmlDoc1 = $.parseXML(data12.d);
+                                                var xml1 = $(xmlDoc1);
+                                                var docs1 = xml1.find("GetCategoriesinfo1");
 
-                                            $.each(docs1, function (i, docs1) {
-                                                if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+                                                $.each(docs1, function (i, docs1) {
+                                                    if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
 
-                                                    if (searchByIpOrtxtSearch == "ip") {
-                                                        innerHtmlSales = "<p>" + ($(docs).find("name").text()) + "  </p>";
-                                                        let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + $(docs1).find("Zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                                        //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "  </p>";
-                                                        innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                                                        if (searchByIpOrtxtSearch == "ip") {
+                                                            innerHtmlSales = "<p>" + ($(docs).find("name").text()) + "  </p>";
+                                                            let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + $(docs1).find("Zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                                            //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+                                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "  </p>";
+                                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
 
+                                                        }
+                                                        else {
+
+                                                            let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + $(docs1).find("Zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                                            //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+                                                            innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
+                                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "  </p>";
+                                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+
+                                                        }
+                                                        flag = 1;
                                                     }
-                                                    else {
+                                                    else { }
+                                                });
+                                            }
+                                            else { }
+                                            thisHomePage.isSearchingStart = false;
 
-                                                        let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + $(docs1).find("Zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                                        //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                                        innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
-                                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "  </p>";
-                                                        innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-
-                                                    }
-                                                    flag = 1;
-                                                }
-                                                else { }
-                                            });
+                                        },
+                                        err => {
+                                            thisHomePage.isSearchingStart = false;
                                         }
-                                        else { }
-                                        thisHomePage.isSearchingStart = false;
+                                    );
 
-                                    },
-                                    err => {
-                                        thisHomePage.isSearchingStart = false;
-                                    }
-                                );
 
                             if (flag == 1) { }
                             else {
@@ -997,3 +960,72 @@ export class HomeComponent implements OnInit {
 
 }
 
+function validateSearchZipCode(control: AbstractControl): { [key: string]: any } | null {
+    const value: string = control.value;
+    var regFirstDigits = new RegExp('^[0-9]{2}$');
+    var regFirstLetters = new RegExp('^[a-zA-Z]{2}$');
+    var regLetters = new RegExp('^[a-zA-Z]$');
+
+    if (/^[0-9]{2}/.test(value)) {
+        var reg = /\b\d\b/g;
+        var regFiveDig = /\b\d{5}\b/g;
+
+        if (/^[0-9]/.test(value)) {
+            if (value.match(regFiveDig) && value.length <= 5) {
+                return null;
+            }
+            else {
+                return { 'zipCode': true };
+            }
+        }
+        else {
+            return { 'invalidZipCode': true };
+        }
+    }
+    else if (/^[a-zA-Z]{2}/.test(value) || /^[a-zA-Z]/.test(value)) {
+        debugger;
+        if (/^[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
+            debugger;
+
+            if (/\s/.test(value)) {
+                debugger;
+
+                // It has any kind of whitespace
+                var listOfValues = value.split(' ');
+                if (listOfValues.length > 2) {
+                    debugger;
+                    return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                }
+                else {
+                    debugger;
+                    if (listOfValues[1] !== undefined) {
+                        if (listOfValues[1].length != 2) {
+                            return { 'statePattern': true };
+                        }
+                    }
+                    else {
+                        if (value.length >= 5) {
+                            return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            if (!(/^[a-zA-Z]*$/.test(value))) {
+                return { 'cityStatePattern': true };
+            }
+            if (value.length >= 5) {
+                return { 'cityStatePattern': true };
+            }
+        }
+    }
+    else {
+        if (value.match(regFirstDigits)) {
+            return { 'invalidZipCode': true };
+        }
+        else {
+            //return { 'invalidData': true };
+        }
+    }
+}
