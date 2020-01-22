@@ -1387,7 +1387,7 @@ function patternValidator(regex, error) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"divLandingPage\" class=\"parallax\" data-background=\"AngularAssociate/assets/images/background.jpg\" data-color=\"#0e3a6b\" data-color-opacity=\"0.5\" data-img-width=\"2500\" data-img-height=\"1600\">\r\n    <!--  ../../../assets/images/home-parallax-2.jpg -->\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\" style=\"text-align:center;\">\r\n\r\n                <div class=\"search-container\">\r\n\r\n                    <!-- Form -->\r\n                    <h2> Grow Your Business</h2>\r\n                    <div class=\"adv-search-btn\">\r\n                        Wcr Organisation is the best solution to make you succeed online. <br>\r\n                        Starting with online advertising or managing monthly.\r\n                    </div>\r\n\r\n                    <!-- Row With Forms -->\r\n                    <div class=\"row with-forms search-background\">\r\n                        <!-- Main Search Input -->\r\n                        <div class=\"col-md-12\" [formGroup]=\"searchForm\" style=\"margin: 0 auto; text-align:center; align-item:center; float:none;\">\r\n\r\n                            <div class=\"main-search-input\">\r\n                                <input type=\"text\" formControlName=\"txtSearch\" placeholder=\"Enter address e.g. street, city or state\" value=\"\" (keyup.enter)=\"onPressEnterSearchData()\" />\r\n                                <button class=\"button waves-effect waves-light btn\" (click)=\"onClickSearch()\">\r\n                                    <i class=\"large material-icons form-control-feedback text-xs-27 pd-t-9-force\">search</i>\r\n                                </button>\r\n                            </div>\r\n                            <div class=\"invalid-data\" *ngIf=\"formErrors.txtSearch\" [ngClass]=\"{'has-error': formErrors.txtSearch}\" style=\"font-weight: 700; float: left;    padding-top: 7px;\">\r\n                                {{formErrors.txtSearch}}\r\n                            </div>\r\n                        </div>\r\n                        <!--<div class=\"col-sm-12 mg-b-20\">\r\n                            <input placeholder=\"Activation code\" id=\"activationCode\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"activationCode\" (blur)=\"logValidationErrors()\">\r\n                            <span class=\"large material-icons form-control-feedback icon\">vpn_key</span>\r\n                            <div class=\"invalid-data\" *ngIf=\"formErrors.activationCode\">\r\n                                {{formErrors.activationCode}}\r\n                            </div>\r\n                            <span class=\"grey-text text-darken-1 tx-medium\" *ngIf=\"authType == 'activate'\" [style.display]=\"activationSent ? 'block':'none'\">Activation code has been resend to your registered Email.</span>\r\n\r\n                        </div>-->\r\n                    </div>\r\n                    <!-- Row With Forms / End -->\r\n                    <!-- Browse Jobs -->\r\n                    <!-- Announce -->\r\n                    <div class=\"announce\">\r\n                        We�ve 1000s of ads!\r\n                    </div>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n<!-- Fullwidth Section -->\r\n<section id=\"salesServicesDivId\" class=\"fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50\" style='background-color:#fff;border-top: 5px solid #0e3a6b;' #divSalesServices>\r\n\r\n    <!-- Content -->\r\n    <div class=\"container\">\r\n\r\n        <!---->\r\n        <div class=\"row\" [style.display]=\"isSearchingStart ? 'block':'none' \">\r\n            <div class=\"col-md-12\" style=\"height:400px; padding-top: 150px;\">\r\n                <div class=\"col-xs-3 col-md-4 div-center\">\r\n                    <div class=\"progress\" style=\"top:50%;\">\r\n                        <div class=\"indeterminate\"></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--<div class=\"row\" [style.display]=\"ifError\"></div>-->\r\n        <div class=\"row\" [style.display]=\"resultContent ? 'block':'none' \">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"col-sm-12 text-center\">\r\n                    <div class=\"red-text text-darken-4 tx-medium\" style=\"float:none;\">{{errorMessage}}</div>\r\n                </div>\r\n                <div class=\"row text-xs-center text-center mg-t-30 mg-b-50\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SALES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlSales\"> </div>\r\n\r\n                <div class=\"row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30\" style=\"border-top: 1px solid #eee;\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SERVICES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" [innerHTML]=\"innerHtmlServices\"></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</section>\r\n<!-- Fullwidth Section / End -->"
+module.exports = "<div id=\"divLandingPage\" class=\"parallax\" data-background=\"AngularAssociate/assets/images/background.jpg\" data-color=\"#0e3a6b\" data-color-opacity=\"0.5\" data-img-width=\"2500\" data-img-height=\"1600\">\r\n    <!--  ../../../assets/images/home-parallax-2.jpg -->\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12\" style=\"text-align:center;\">\r\n\r\n                <div class=\"search-container\">\r\n\r\n                    <!-- Form -->\r\n                    <h2> Grow Your Business</h2>\r\n                    <div class=\"adv-search-btn\">\r\n                        Wcr Organisation is the best solution to make you succeed online. <br>\r\n                        Starting with online advertising or managing monthly.\r\n                    </div>\r\n\r\n                    <!-- Row With Forms -->\r\n                    <div class=\"row with-forms search-background\">\r\n                        <!-- Main Search Input -->\r\n                        <div class=\"col-md-12\" [formGroup]=\"searchForm\" style=\"margin: 0 auto; text-align:center; align-item:center; float:none;\">\r\n\r\n                            <div class=\"main-search-input\">\r\n                                <input type=\"text\" formControlName=\"txtSearch\" placeholder=\"Enter address e.g. street, city or state\" value=\"\" (keyup.enter)=\"onPressEnterSearchData()\" />\r\n                                <button class=\"button waves-effect waves-light btn\" (click)=\"onClickSearch()\">\r\n                                    <i class=\"large material-icons form-control-feedback text-xs-27 pd-t-9-force\">search</i>\r\n                                </button>\r\n                            </div>\r\n                            <div class=\"invalid-data\" *ngIf=\"formErrors.txtSearch\" [ngClass]=\"{'has-error': formErrors.txtSearch}\" style=\"font-weight: 700; float: left;    padding-top: 7px;\">\r\n                                {{formErrors.txtSearch}}\r\n                            </div>\r\n                        </div>\r\n                        <!--<div class=\"col-sm-12 mg-b-20\">\r\n                            <input placeholder=\"Activation code\" id=\"activationCode\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"activationCode\" (blur)=\"logValidationErrors()\">\r\n                            <span class=\"large material-icons form-control-feedback icon\">vpn_key</span>\r\n                            <div class=\"invalid-data\" *ngIf=\"formErrors.activationCode\">\r\n                                {{formErrors.activationCode}}\r\n                            </div>\r\n                            <span class=\"grey-text text-darken-1 tx-medium\" *ngIf=\"authType == 'activate'\" [style.display]=\"activationSent ? 'block':'none'\">Activation code has been resend to your registered Email.</span>\r\n\r\n                        </div>-->\r\n                    </div>\r\n                    <!-- Row With Forms / End -->\r\n                    <!-- Browse Jobs -->\r\n                    <!-- Announce -->\r\n                    <div class=\"announce\">\r\n                        We�ve 1000s of ads!\r\n                    </div>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n<!-- Fullwidth Section -->\r\n<section id=\"salesServicesDivId\" class=\"fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50\" style='background-color:#fff;border-top: 5px solid #0e3a6b;' #divSalesServices>\r\n\r\n    <!-- Content -->\r\n    <div class=\"container\">\r\n\r\n        <!---->\r\n        <div class=\"row\" [style.display]=\"isSearchingStart ? 'block':'none' \">\r\n            <div class=\"col-md-12\" style=\"height:400px; padding-top: 150px;\">\r\n                <div class=\"col-xs-3 col-md-4 div-center\">\r\n                    <div class=\"progress\" style=\"top:50%;\">\r\n                        <div class=\"indeterminate\"></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n\r\n        <!--<div class=\"row\" [style.display]=\"ifError\"></div>-->\r\n        <div class=\"row\" [style.display]=\"resultContent ? 'block':'none' \">\r\n            <div class=\"col-md-12\">\r\n                <div class=\"col-sm-12 text-center\">\r\n                    <div class=\"red-text text-darken-4 tx-medium\" style=\"float:none;\">{{errorMessage}}</div>\r\n                </div>\r\n                <div class=\"row text-xs-center text-center mg-t-30 mg-b-50\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SALES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" id=\"innerHtmlSales\"> </div>\r\n\r\n                <div class=\"row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30\" style=\"border-top: 1px solid #eee;\">\r\n                    <div class=\"col-md-12\">\r\n                        <h2 class=\"theme-text-color text-center\">GET ACCESS TO WCR SERVICES</h2>\r\n                        <p class=\"grey-text\">\r\n                            This is just a simple text made for this unique and awesome template, you can replace it with any text.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n                <div class=\"row\" id=\"innerHtmlServices\"></div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n\r\n</section>\r\n<!-- Fullwidth Section / End -->"
 
 /***/ }),
 
@@ -1582,163 +1582,188 @@ var HomeComponent = /** @class */ (function () {
     //managed both in these both functions: By IPAddrss zipCode and user entered zipCode in search
     HomeComponent.prototype.bindSalesCategory = function (zipc, searchByIpOrtxtSearch) {
         if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
-        var innerHtmlSales = "";
-        var thisHomePage = this;
-        thisHomePage.searchService
-            .subCategoriesByZipcode(zipc)
-            .subscribe(function (data) {
-            if (data.d.length > 1) {
-                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
-                var docs = xml.find("subCategories");
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var innerHtmlSales, thisHomePage;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                innerHtmlSales = "";
+                thisHomePage = this;
+                console.log('executed');
                 thisHomePage.searchService
-                    .viewAdvanceSearchByZipcode(zipc, "1")
-                    .then(function (data1) {
-                    console.log('data found');
-                });
-                debugger;
-                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
-                    var flag = 0;
-                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
-                    innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + " </h3>";
-                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text();
-                    thisHomePage.searchService
-                        .viewAdvanceSearchByZipcode(zipc, subCategoryId)
-                        .then(function (data12) {
-                        if (data12.d.length > 0) {
-                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data12.d);
-                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
-                            var docs1 = xml1.find("GetCategoriesinfo1");
-                            jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
-                                if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
-                                    if (searchByIpOrtxtSearch == "ip") {
-                                        innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "  </p>";
-                                        var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                        //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "  </p>";
-                                        innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                    }
+                    .subCategoriesByZipcode(zipc)
+                    .subscribe(function (data) {
+                    if (data.d.length > 1) {
+                        //var json = this.xml2json(xmlDoc,"");
+                        //var docs = JSON.parse(json).NewDataSet.subCategories;
+                        var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                        var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
+                        var docs = xml.find("subCategories");
+                        jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, doc) {
+                            //for (const doc in docs) {
+                            var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text();
+                            console.log(subCategoryId);
+                            thisHomePage.searchService
+                                .viewAdvanceSearchByZipcode(zipc, subCategoryId)
+                                .then(function (data) {
+                                if (data.d.length > 0) {
+                                    debugger;
+                                    var flag = 0;
+                                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+                                    innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + " </h3>";
+                                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
+                                    var docs1 = xml1.find("GetCategoriesinfo1");
+                                    console.log('executed');
+                                    jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, doc1) {
+                                        debugger;
+                                        console.log(jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text() + "=" + jquery__WEBPACK_IMPORTED_MODULE_3__(doc1).find("categoryid").text());
+                                        console.log();
+                                        if (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(doc1).find("categoryid").text()) {
+                                            debugger;
+                                            if (searchByIpOrtxtSearch == "ip") {
+                                                innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "  </p>";
+                                                var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(doc1).find("Zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+                                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("detail").text()) + "  </p>";
+                                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                                            }
+                                            else {
+                                                debugger;
+                                                var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(doc1).find("Zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+                                                innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
+                                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("detail").text()) + "  </p>";
+                                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                                            }
+                                            flag = 1;
+                                        }
+                                        else { }
+                                    });
+                                    if (flag == 1) { }
                                     else {
-                                        var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                        //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                        innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
-                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "  </p>";
-                                        innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                                        if (searchByIpOrtxtSearch == "ip") {
+                                            innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "  </p>";
+                                            var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("detail").text()) + "  </p>";
+                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                                        }
+                                        else {
+                                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "'  alt=''/></i></span></a>";
+                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("detail").text()) + "  </p>";
+                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
+                                        }
                                     }
-                                    flag = 1;
                                 }
                                 else { }
+                                thisHomePage.isSearchingStart = false;
+                                console.log(innerHtmlSales);
+                                jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlSales').html(innerHtmlSales);
+                            }, function (err) {
+                                thisHomePage.isSearchingStart = false;
                             });
-                        }
-                        else { }
-                        thisHomePage.isSearchingStart = false;
-                    }, function (err) {
-                        thisHomePage.isSearchingStart = false;
-                    });
-                    if (flag == 1) { }
-                    else {
-                        if (searchByIpOrtxtSearch == "ip") {
-                            innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "  </p>";
-                            var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "  </p>";
-                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                        }
-                        else {
-                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "'  alt=''/></i></span></a>";
-                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "  </p>";
-                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
-                        }
+                        });
+                        thisHomePage.innerHtmlSales = innerHtmlSales;
+                        thisHomePage.resultContent = true;
                     }
-                });
-                thisHomePage.innerHtmlSales = innerHtmlSales;
-                thisHomePage.resultContent = true;
-            }
-            else { }
-            thisHomePage.isSearchingStart = false;
-        }, function (err) { thisHomePage.isSearchingStart = false; });
+                    else { }
+                    thisHomePage.isSearchingStart = false;
+                }, function (err) { thisHomePage.isSearchingStart = false; });
+                return [2 /*return*/];
+            });
+        });
     };
     HomeComponent.prototype.bindServiesCategory = function (zipc, searchByIpOrtxtSearch) {
         if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
-        var innerHtmlServices = "";
-        var thisHomePage = this;
-        thisHomePage.searchService
-            .attemptGetJobtypeWiseCategory()
-            .subscribe(function (data) {
-            if (data.d.length > 1) {
-                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
-                var docs = xml.find("JobCategories");
-                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
-                    var flag = 0;
-                    innerHtmlServices += " <div class='col-sm-3 text-center block '>";
-                    innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                    innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
-                    var categoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
-                    thisHomePage.searchService
-                        .attemptGetViewAdvanceSearchForServices(categoryId, zipc)
-                        .then(function (data) {
-                        if (data.d.length > 0) {
-                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
-                            var docs1 = xml1.find("GetCategoriesinfoservices");
-                            jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
-                                if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
-                                    if (searchByIpOrtxtSearch == "ip") {
-                                        console.log('entered in ' + searchByIpOrtxtSearch);
-                                        innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "</p>";
-                                        var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
-                                        //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
-                                        innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                    }
-                                    else {
-                                        console.log('entered in ' + searchByIpOrtxtSearch);
-                                        var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
-                                        //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                        innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("photo").text()) + "'  alt=''/></i></span>";
-                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
-                                        innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                    }
-                                    flag = 1;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var innerHtmlServices, thisHomePage;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        innerHtmlServices = "";
+                        thisHomePage = this;
+                        return [4 /*yield*/, thisHomePage.searchService
+                                .getJobtypeWiseCategoryByZipcode()
+                                .subscribe(function (data) {
+                                if (data.d.length > 1) {
+                                    var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                    var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
+                                    var docs = xml.find("JobCategories");
+                                    jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
+                                        var flag = 0;
+                                        innerHtmlServices += " <div class='col-sm-3 text-center block '>";
+                                        innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                        innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
+                                        var categoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
+                                        thisHomePage.searchService
+                                            .getViewAdvanceSearchForServices(categoryId, zipc)
+                                            .then(function (data) {
+                                            if (data.d.length > 0) {
+                                                var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                                var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
+                                                var docs1 = xml1.find("GetCategoriesinfoservices");
+                                                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
+                                                    if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
+                                                        if (searchByIpOrtxtSearch == "ip") {
+                                                            console.log('entered in ' + searchByIpOrtxtSearch);
+                                                            innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "</p>";
+                                                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
+                                                            //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
+                                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                                        }
+                                                        else {
+                                                            console.log('entered in ' + searchByIpOrtxtSearch);
+                                                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
+                                                            //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                            innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("photo").text()) + "'  alt=''/></i></span>";
+                                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
+                                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                                        }
+                                                        flag = 1;
+                                                    }
+                                                    else { }
+                                                });
+                                            }
+                                            else { }
+                                        }, function (err) {
+                                            thisHomePage.isSearchingStart = false;
+                                        });
+                                        if (flag == 1) { }
+                                        else {
+                                            if (searchByIpOrtxtSearch == "ip") {
+                                                innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "  </p>";
+                                                //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
+                                                var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
+                                                //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
+                                                innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                            }
+                                            else {
+                                                var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
+                                                innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'  alt=''/></i></span>";
+                                                innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
+                                                innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                            }
+                                        }
+                                        thisHomePage.innerHtmlServices = innerHtmlServices;
+                                        thisHomePage.resultContent = true;
+                                    });
                                 }
                                 else { }
-                            });
-                        }
-                        else { }
-                    }, function (err) {
-                        thisHomePage.isSearchingStart = false;
-                    });
-                    if (flag == 1) { }
-                    else {
-                        if (searchByIpOrtxtSearch == "ip") {
-                            innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "  </p>";
-                            //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
-                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
-                            //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
-                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                        }
-                        else {
-                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
-                            innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'  alt=''/></i></span>";
-                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
-                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                        }
-                    }
-                    thisHomePage.innerHtmlServices = innerHtmlServices;
-                    thisHomePage.resultContent = true;
-                });
-            }
-            else { }
-            thisHomePage.isSearchingStart = false;
-        }, function (err) { thisHomePage.isSearchingStart = false; });
+                                thisHomePage.isSearchingStart = false;
+                            }, function (err) { thisHomePage.isSearchingStart = false; })];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     HomeComponent.prototype.bindSalesCategoryCityWise = function (state, city) {
         var innerHtmlSales = "";
         var thisHomePage = this;
         thisHomePage.searchService
-            .attemptGetSalesCategoryCityWise(state, city)
+            .getSalesCategoryCityWise(state, city)
             .subscribe(function (data) {
             if (data.d.length > 1) {
                 var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
@@ -1751,7 +1776,7 @@ var HomeComponent = /** @class */ (function () {
                     innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + " </h3>";
                     var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text();
                     thisHomePage.searchService
-                        .attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId)
+                        .getAdvanceSearchCityStateWise(state, city, subCategoryId)
                         .then(function (data) {
                         if (data.d.length > 0) {
                             var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
@@ -1795,7 +1820,7 @@ var HomeComponent = /** @class */ (function () {
         var innerHtmlServices = "";
         var thisHomePage = this;
         thisHomePage.searchService
-            .attemptGetServicesCategoryCityWise(state, city)
+            .getServicesCategoryCityWise(state, city)
             .subscribe(function (data) {
             if (data.d.length > 1) {
                 var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
@@ -1808,7 +1833,7 @@ var HomeComponent = /** @class */ (function () {
                     innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
                     var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
                     thisHomePage.searchService
-                        .attemptGetAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
+                        .getAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
                         .then(function (data) {
                         if (data.d.length > 0) {
                             var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
@@ -1865,6 +1890,158 @@ var HomeComponent = /** @class */ (function () {
             _this.isSearchingStart = false;
             return null;
         });
+    };
+    HomeComponent.prototype.xml2json = function (xml, tab) {
+        var X = {
+            toObj: function (xml) {
+                var o = {};
+                if (xml.nodeType == 1) { // element node ..
+                    if (xml.attributes.length) // element with attributes  ..
+                        for (var i = 0; i < xml.attributes.length; i++)
+                            o["@" + xml.attributes[i].nodeName] = (xml.attributes[i].nodeValue || "").toString();
+                    if (xml.firstChild) { // element has child nodes ..
+                        var textChild = 0, cdataChild = 0, hasElementChild = false;
+                        for (var n = xml.firstChild; n; n = n.nextSibling) {
+                            if (n.nodeType == 1)
+                                hasElementChild = true;
+                            else if (n.nodeType == 3 && n.nodeValue.match(/[^ \f\n\r\t\v]/))
+                                textChild++; // non-whitespace text
+                            else if (n.nodeType == 4)
+                                cdataChild++; // cdata section node
+                        }
+                        if (hasElementChild) {
+                            if (textChild < 2 && cdataChild < 2) { // structured element with evtl. a single text or/and cdata node ..
+                                X.removeWhite(xml);
+                                for (var n = xml.firstChild; n; n = n.nextSibling) {
+                                    if (n.nodeType == 3) // text node
+                                        o["#text"] = X.escape(n.nodeValue);
+                                    else if (n.nodeType == 4) // cdata node
+                                        o["#cdata"] = X.escape(n.nodeValue);
+                                    else if (o[n.nodeName]) { // multiple occurence of element ..
+                                        if (o[n.nodeName] instanceof Array)
+                                            o[n.nodeName][o[n.nodeName].length] = X.toObj(n);
+                                        else
+                                            o[n.nodeName] = [o[n.nodeName], X.toObj(n)];
+                                    }
+                                    else // first occurence of element..
+                                        o[n.nodeName] = X.toObj(n);
+                                }
+                            }
+                            else { // mixed content
+                                if (!xml.attributes.length)
+                                    o = X.escape(X.innerXml(xml));
+                                else
+                                    o["#text"] = X.escape(X.innerXml(xml));
+                            }
+                        }
+                        else if (textChild) { // pure text
+                            if (!xml.attributes.length)
+                                o = X.escape(X.innerXml(xml));
+                            else
+                                o["#text"] = X.escape(X.innerXml(xml));
+                        }
+                        else if (cdataChild) { // cdata
+                            if (cdataChild > 1)
+                                o = X.escape(X.innerXml(xml));
+                            else
+                                for (var n = xml.firstChild; n; n = n.nextSibling)
+                                    o["#cdata"] = X.escape(n.nodeValue);
+                        }
+                    }
+                    if (!xml.attributes.length && !xml.firstChild)
+                        o = null;
+                }
+                else if (xml.nodeType == 9) { // document.node
+                    o = X.toObj(xml.documentElement);
+                }
+                else
+                    alert("unhandled node type: " + xml.nodeType);
+                return o;
+            },
+            toJson: function (o, name, ind) {
+                var json = name ? ("\"" + name + "\"") : "";
+                if (o instanceof Array) {
+                    for (var i = 0, n = o.length; i < n; i++)
+                        o[i] = X.toJson(o[i], "", ind + "\t");
+                    json += (name ? ":[" : "[") + (o.length > 1 ? ("\n" + ind + "\t" + o.join(",\n" + ind + "\t") + "\n" + ind) : o.join("")) + "]";
+                }
+                else if (o == null)
+                    json += (name && ":") + "null";
+                else if (typeof (o) == "object") {
+                    var arr = [];
+                    for (var m in o)
+                        arr[arr.length] = X.toJson(o[m], m, ind + "\t");
+                    json += (name ? ":{" : "{") + (arr.length > 1 ? ("\n" + ind + "\t" + arr.join(",\n" + ind + "\t") + "\n" + ind) : arr.join("")) + "}";
+                }
+                else if (typeof (o) == "string")
+                    json += (name && ":") + "\"" + o.toString() + "\"";
+                else
+                    json += (name && ":") + o.toString();
+                return json;
+            },
+            innerXml: function (node) {
+                var s = "";
+                if ("innerHTML" in node)
+                    s = node.innerHTML;
+                else {
+                    var asXml = function (n) {
+                        var s = "";
+                        if (n.nodeType == 1) {
+                            s += "<" + n.nodeName;
+                            for (var i = 0; i < n.attributes.length; i++)
+                                s += " " + n.attributes[i].nodeName + "=\"" + (n.attributes[i].nodeValue || "").toString() + "\"";
+                            if (n.firstChild) {
+                                s += ">";
+                                for (var c = n.firstChild; c; c = c.nextSibling)
+                                    s += asXml(c);
+                                s += "</" + n.nodeName + ">";
+                            }
+                            else
+                                s += "/>";
+                        }
+                        else if (n.nodeType == 3)
+                            s += n.nodeValue;
+                        else if (n.nodeType == 4)
+                            s += "<![CDATA[" + n.nodeValue + "]]>";
+                        return s;
+                    };
+                    for (var c = node.firstChild; c; c = c.nextSibling)
+                        s += asXml(c);
+                }
+                return s;
+            },
+            escape: function (txt) {
+                return txt.replace(/[\\]/g, "\\\\")
+                    .replace(/[\"]/g, '\\"')
+                    .replace(/[\n]/g, '\\n')
+                    .replace(/[\r]/g, '\\r');
+            },
+            removeWhite: function (e) {
+                e.normalize();
+                for (var n = e.firstChild; n;) {
+                    if (n.nodeType == 3) { // text node
+                        if (!n.nodeValue.match(/[^ \f\n\r\t\v]/)) { // pure whitespace text node
+                            var nxt = n.nextSibling;
+                            e.removeChild(n);
+                            n = nxt;
+                        }
+                        else
+                            n = n.nextSibling;
+                    }
+                    else if (n.nodeType == 1) { // element node
+                        X.removeWhite(n);
+                        n = n.nextSibling;
+                    }
+                    else // any other node
+                        n = n.nextSibling;
+                }
+                return e;
+            }
+        };
+        if (xml.nodeType == 9) // document node
+            xml = xml.documentElement;
+        var json = X.toJson(X.toObj(X.removeWhite(xml)), xml.nodeName, "\t");
+        return "{\n" + tab + (tab ? json.replace(/\t/g, tab) : json.replace(/\t|\n/g, "")) + "\n}";
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('salesServicesFocus'),
@@ -2075,9 +2252,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../environments/environment */ "./AngularAssociate/environments/environment.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
-/* harmony import */ var _jwt_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./jwt.service */ "./AngularAssociate/app/services/auth/jwt.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 
 
 
@@ -2085,9 +2260,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ApiService = /** @class */ (function () {
-    function ApiService(http, jwtService) {
+    function ApiService(http) {
         this.http = http;
-        this.jwtService = jwtService;
     }
     ApiService.prototype.formatErrors = function (error) {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["throwError"])(error.error);
@@ -2095,23 +2269,23 @@ var ApiService = /** @class */ (function () {
     ApiService.prototype.get = function (path, params) {
         if (params === void 0) { params = new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpParams"](); }
         return this.http.get("" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiEndPoint + path, { params: params })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.formatErrors));
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.formatErrors));
     };
     ApiService.prototype.put = function (path, body) {
         if (body === void 0) { body = {}; }
-        return this.http.put("" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiEndPoint + path, JSON.stringify(body)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.formatErrors));
+        return this.http.put("" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiEndPoint + path, JSON.stringify(body)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.formatErrors));
     };
     ApiService.prototype.post = function (path, body) {
         if (body === void 0) { body = {}; }
-        return this.http.post("" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiEndPoint + path, JSON.stringify(body)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.formatErrors));
+        return this.http.post("" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiEndPoint + path, JSON.stringify(body)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.formatErrors));
     };
     ApiService.prototype.delete = function (path) {
-        return this.http.delete("" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiEndPoint + path).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.formatErrors));
+        return this.http.delete("" + _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiEndPoint + path).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(this.formatErrors));
     };
+    ApiService.prototype.abc = function () { };
     ApiService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"],
-            _jwt_service__WEBPACK_IMPORTED_MODULE_5__["JwtService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
     ], ApiService);
     return ApiService;
 }());
@@ -2251,8 +2425,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _jwt_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./jwt.service */ "./AngularAssociate/app/services/auth/jwt.service.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "JwtService", function() { return _jwt_service__WEBPACK_IMPORTED_MODULE_3__["JwtService"]; });
 
-/* harmony import */ var _profiles_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./profiles.service */ "./AngularAssociate/app/services/auth/profiles.service.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ProfilesService", function() { return _profiles_service__WEBPACK_IMPORTED_MODULE_4__["ProfilesService"]; });
+/* harmony import */ var _profile_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./profile.service */ "./AngularAssociate/app/services/auth/profile.service.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ProfilesService", function() { return _profile_service__WEBPACK_IMPORTED_MODULE_4__["ProfilesService"]; });
 
 /* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./user.service */ "./AngularAssociate/app/services/auth/user.service.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UserService", function() { return _user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]; });
@@ -2351,10 +2525,10 @@ var NoAuthGuard = /** @class */ (function () {
 
 /***/ }),
 
-/***/ "./AngularAssociate/app/services/auth/profiles.service.ts":
-/*!****************************************************************!*\
-  !*** ./AngularAssociate/app/services/auth/profiles.service.ts ***!
-  \****************************************************************/
+/***/ "./AngularAssociate/app/services/auth/profile.service.ts":
+/*!***************************************************************!*\
+  !*** ./AngularAssociate/app/services/auth/profile.service.ts ***!
+  \***************************************************************/
 /*! exports provided: ProfilesService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2363,29 +2537,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfilesService", function() { return ProfilesService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./api.service */ "./AngularAssociate/app/services/auth/api.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _api_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./api.service */ "./AngularAssociate/app/services/auth/api.service.ts");
+/* harmony import */ var _jwt_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./jwt.service */ "./AngularAssociate/app/services/auth/jwt.service.ts");
+/* harmony import */ var _entities_user__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../entities/user */ "./AngularAssociate/app/entities/user.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
+
+
 
 
 
 
 var ProfilesService = /** @class */ (function () {
-    function ProfilesService(apiService) {
+    function ProfilesService(user, apiService, http, jwtService) {
+        if (user === void 0) { user = null; }
+        if (apiService === void 0) { apiService = null; }
+        if (http === void 0) { http = null; }
+        if (jwtService === void 0) { jwtService = null; }
+        this.user = user;
         this.apiService = apiService;
+        this.http = http;
+        this.jwtService = jwtService;
+        this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]({});
+        this.currentUser = this.currentUserSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["distinctUntilChanged"])());
+        this.isAuthenticatedSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
     }
-    ProfilesService.prototype.get = function (username) {
-        return this.apiService.get('/profiles/' + username)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (data) { return data.profile; }));
-    };
-    ProfilesService.prototype.follow = function (username) {
-        return this.apiService.post('/profiles/' + username + '/follow');
-    };
-    ProfilesService.prototype.unfollow = function (username) {
-        return this.apiService.delete('/profiles/' + username + '/follow');
-    };
     ProfilesService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_entities_user__WEBPACK_IMPORTED_MODULE_6__["User"],
+            _api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _jwt_service__WEBPACK_IMPORTED_MODULE_5__["JwtService"]])
     ], ProfilesService);
     return ProfilesService;
 }());
@@ -2796,29 +2982,31 @@ var SearchService = /** @class */ (function () {
     };
     SearchService.prototype.viewAdvanceSearchByZipcode = function (zipc, subCategoryId) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var urlToAdvanceSearch;
+            var urlToAdvanceSearch, result;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        debugger;
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearch1";
-                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
-                                debugger;
-                                return data;
-                            })).toPromise()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                        console.log(new Date());
+                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).toPromise()];
+                    case 1:
+                        result = _a.sent();
+                        console.log(new Date());
+                        return [2 /*return*/, result];
                 }
             });
         });
     };
     //For services
-    SearchService.prototype.attemptGetJobtypeWiseCategory = function () {
+    SearchService.prototype.getJobtypeWiseCategoryByZipcode = function () {
         var urlToJobTypeWiseCategory = "Associate/ws/Category.asmx/JobtypeWiseCategory";
         return this.apiService.post(urlToJobTypeWiseCategory, { flag: 1, jobtype: 2 })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
             return data;
         }));
     };
-    SearchService.prototype.attemptGetViewAdvanceSearchForServices = function (categoryId, zipc) {
+    SearchService.prototype.getViewAdvanceSearchForServices = function (categoryId, zipc) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var urlToJobTypeWiseCategory;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
@@ -2839,14 +3027,14 @@ var SearchService = /** @class */ (function () {
         });
     };
     //For sales
-    SearchService.prototype.attemptGetSalesCategoryCityWise = function (state, city) {
+    SearchService.prototype.getSalesCategoryCityWise = function (state, city) {
         var urlToSubCategories = "Associate/ws/subCategory.asmx/SubCategories";
         return this.apiService.post(urlToSubCategories, { Categoryid: 1 })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
             return data;
         }));
     };
-    SearchService.prototype.attemptGetAdvanceSearchCityStateWise = function (state, city, subCategoryId) {
+    SearchService.prototype.getAdvanceSearchCityStateWise = function (state, city, subCategoryId) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var urlToAdvanceSearch;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
@@ -2868,14 +3056,14 @@ var SearchService = /** @class */ (function () {
         });
     };
     //For services
-    SearchService.prototype.attemptGetServicesCategoryCityWise = function (state, city) {
+    SearchService.prototype.getServicesCategoryCityWise = function (state, city) {
         var urlToServiceCategory = "Associate/ws/Category.asmx/JobtypeWiseCategory";
         return this.apiService.post(urlToServiceCategory, { flag: 1, jobtype: 2 })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
             return data;
         }));
     };
-    SearchService.prototype.attemptGetAdvanceSearchServicesCityStateWise = function (state, city, subCategoryId) {
+    SearchService.prototype.getAdvanceSearchServicesCityStateWise = function (state, city, subCategoryId) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var urlToAdvanceSearch;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
@@ -2899,7 +3087,7 @@ var SearchService = /** @class */ (function () {
     //For IPAddress
     SearchService.prototype.attemptGetSalesAdts = function () {
         var _this = this;
-        var urlToGetIP = "http://jsonip.com?=callback";
+        var urlToGetIP = "https://jsonip.com?=callback";
         return this.http.get(urlToGetIP)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (data) {
             var _ipAddress = data.ip;
@@ -3009,7 +3197,7 @@ var FooterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Header Container\r\n================================================== -->\r\n<header id=\"header-container\">\r\n\r\n    <!-- Header -->\r\n    <div id=\"header\" *appShowAuthed=\"false\">\r\n        <div class=\"container\">\r\n\r\n            <!-- Left Side Content -->\r\n            <div class=\"left-side\">\r\n\r\n                <!-- Logo -->\r\n                <div id=\"logo\">\r\n                    <a routerLink=\"/\" ><img src=\"img/wcr-logo.png\" alt=\"\"></a>\r\n                </div>\r\n\r\n\r\n                <!-- Mobile Navigation -->\r\n                <div class=\"mmenu-trigger\">\r\n                    <button class=\"hamburger hamburger--collapse\" type=\"button\">\r\n                        <span class=\"hamburger-box\">\r\n                            <span class=\"hamburger-inner\"></span>\r\n                        </span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <!-- Left Side Content / End -->\r\n            <!-- Right Side Content / End -->\r\n            <div class=\"right-side\">\r\n                <!-- Header Widget -->\r\n                <div class=\"header-widget\">\r\n                    <a class=\"sign-in\" routerLink=\"/login\" routerLinkActive=\"active\">LOG IN </a> <!--<i class=\"fa fa-user\"></i>--> \r\n                    <a class=\"waves-effect waves-light btn\" routerLink=\"/register\" routerLinkActive=\"active\">Sign up</a>\r\n                </div>\r\n                <!-- Header Widget / End -->\r\n            </div>\r\n            <!-- Right Side Content / End -->\r\n\r\n        </div>\r\n    </div>\r\n    <!-- Header / End -->\r\n\r\n</header>\r\n<div class=\"clearfix\"></div>\r\n<!-- Header Container / End -->\r\n\r\n\r\n\r\n<!-- Main Navigation -->\r\n<!--<nav id=\"navigation\" class=\"style-1\">\r\n    <ul id=\"responsive\">\r\n\r\n        <li>\r\n            <a class=\"current\" href=\"#\">Home</a>\r\n            <ul>\r\n                <li><a href=\"index.html\">Home 1</a></li>\r\n                <li><a href=\"index-2.html\">Home 2</a></li>\r\n                <li><a href=\"index-3.html\">Home 3</a></li>\r\n                <li><a href=\"index-4.html\">Home 4</a></li>\r\n            </ul>\r\n        </li>\r\n\r\n        <li>\r\n            <a href=\"#\">Listings</a>\r\n            <ul>\r\n                <li>\r\n                    <a href=\"#\">List Layout</a>\r\n                    <ul>\r\n                        <li><a href=\"listings-list-with-sidebar.html\">With Sidebar</a></li>\r\n                        <li><a href=\"listings-list-with-map.html\">With Map</a></li>\r\n                        <li><a href=\"listings-list-full-width.html\">Full Width</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">Grid Layout</a>\r\n                    <ul>\r\n                        <li><a href=\"listings-grid-standard-with-sidebar.html\">Standard With Sidebar</a></li>\r\n                        <li><a href=\"listings-grid-compact-with-sidebar.html\">Compact With Sidebar</a></li>\r\n                        <li><a href=\"listings-grid-with-map.html\">With Map</a></li>\r\n                        <li><a href=\"listings-grid-full-width.html\">Full Width</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">Half Map</a>\r\n                    <ul>\r\n                        <li><a href=\"listings-half-map-list.html\">List Layout</a></li>\r\n                        <li><a href=\"listings-half-map-grid-standard.html\">Grid Standard Layout</a></li>\r\n                        <li><a href=\"listings-half-map-grid-compact.html\">Grid Compact Layout</a></li>\r\n                    </ul>\r\n                </li>\r\n            </ul>\r\n        </li>\r\n\r\n        <li>\r\n            <a href=\"#\">Features</a>\r\n            <ul>\r\n                <li>\r\n                    <a href=\"#\">Single Properties</a>\r\n                    <ul>\r\n                        <li><a href=\"single-property-page-1.html\">Property Style 1</a></li>\r\n                        <li><a href=\"single-property-page-2.html\">Property Style 2</a></li>\r\n                        <li><a href=\"single-property-page-3.html\">Property Style 3</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">Search Styles</a>\r\n                    <ul>\r\n                        <li><a href=\"index.html\">Home Search 1</a></li>\r\n                        <li><a href=\"index-2.html\">Home Search 2</a></li>\r\n                        <li><a href=\"index-3.html\">Home Search 3</a></li>\r\n                        <li><a href=\"listings-list-full-width.html\">Advanced Style</a></li>\r\n                        <li><a href=\"listings-list-with-sidebar.html\">Sidebar Search</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">My Account</a>\r\n                    <ul>\r\n                        <li><a href=\"my-profile.html\">My Profile</a></li>\r\n                        <li><a href=\"my-bookmarks.html\">Bookmarked Listings</a></li>\r\n                        <li><a href=\"my-properties.html\">My Properties</a></li>\r\n                        <li><a href=\"change-password.html\">Change Password</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">Agencies & Agents</a>\r\n                    <ul>\r\n                        <li><a href=\"agencies-list.html\">Agencies List</a></li>\r\n                        <li><a href=\"agency-page.html\">Agency Page</a></li>\r\n                        <li><a href=\"agents-list.html\">Agents List</a></li>\r\n                        <li><a href=\"agent-page.html\">Agent Page</a></li>\r\n                    </ul>\r\n                </li>\r\n\r\n                <li><a href=\"compare-properties.html\">Compare Properties</a></li>\r\n                <li><a href=\"submit-property.html\">Submit Property</a></li>\r\n            </ul>\r\n        </li>\r\n\r\n        <li>\r\n            <a href=\"#\">Pages</a>\r\n            <ul>\r\n                <li>\r\n                    <a href=\"blog.html\">Blog</a>\r\n                    <ul>\r\n                        <li><a href=\"blog.html\">Blog</a></li>\r\n                        <li><a href=\"blog-post.html\">Blog Post</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li><a href=\"contact.html\">Contact</a></li>\r\n                <li><a href=\"elements.html\">Elements</a></li>\r\n                <li><a href=\"pricing-tables.html\">Pricing Tables</a></li>\r\n                <li><a href=\"typography.html\">Typography</a></li>\r\n                <li><a href=\"icons.html\">Icons</a></li>\r\n            </ul>\r\n        </li>\r\n\r\n    </ul>\r\n</nav>\r\n<div class=\"clearfix\"></div>-->\r\n<!-- Main Navigation / End -->"
+module.exports = "<!-- Header Container\r\n================================================== -->\r\n<header id=\"header-container\">\r\n\r\n    <!-- Header -->\r\n    <div id=\"header\" *appShowAuthed=\"false\">\r\n        <div class=\"container\">\r\n\r\n            <!-- Left Side Content -->\r\n            <div class=\"left-side\">\r\n\r\n                <!-- Logo -->\r\n                <div id=\"logo\">\r\n                    <a routerLink=\"/\" ><img src=\"img/wcr-logo.png\" alt=\"\"></a>\r\n                </div>\r\n\r\n\r\n                <!-- Mobile Navigation -->\r\n                <div class=\"mmenu-trigger\">\r\n                    <button class=\"hamburger hamburger--collapse\" type=\"button\">\r\n                        <span class=\"hamburger-box\">\r\n                            <span class=\"hamburger-inner\"></span>\r\n                        </span>\r\n                    </button>\r\n                </div>\r\n            </div>\r\n            <!-- Left Side Content / End -->\r\n            <!-- Right Side Content / End -->\r\n            <div class=\"right-side\">\r\n                <!-- Header Widget -->\r\n                <div class=\"header-widget\">\r\n                    <a class=\"sign-in\" routerLink=\"/login\" routerLinkActive=\"active\">LOG IN </a> <!--<i class=\"fa fa-user\"></i>--> \r\n                    <a class=\"waves-effect waves-light btn mg-t-10\" routerLink=\"/register\" routerLinkActive=\"active\">Sign up</a>\r\n                </div>\r\n                <!-- Header Widget / End -->\r\n            </div>\r\n            <!-- Right Side Content / End -->\r\n\r\n        </div>\r\n    </div>\r\n    <!-- Header / End -->\r\n\r\n</header>\r\n<div class=\"clearfix\"></div>\r\n<!-- Header Container / End -->\r\n\r\n\r\n\r\n<!-- Main Navigation -->\r\n<!--<nav id=\"navigation\" class=\"style-1\">\r\n    <ul id=\"responsive\">\r\n\r\n        <li>\r\n            <a class=\"current\" href=\"#\">Home</a>\r\n            <ul>\r\n                <li><a href=\"index.html\">Home 1</a></li>\r\n                <li><a href=\"index-2.html\">Home 2</a></li>\r\n                <li><a href=\"index-3.html\">Home 3</a></li>\r\n                <li><a href=\"index-4.html\">Home 4</a></li>\r\n            </ul>\r\n        </li>\r\n\r\n        <li>\r\n            <a href=\"#\">Listings</a>\r\n            <ul>\r\n                <li>\r\n                    <a href=\"#\">List Layout</a>\r\n                    <ul>\r\n                        <li><a href=\"listings-list-with-sidebar.html\">With Sidebar</a></li>\r\n                        <li><a href=\"listings-list-with-map.html\">With Map</a></li>\r\n                        <li><a href=\"listings-list-full-width.html\">Full Width</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">Grid Layout</a>\r\n                    <ul>\r\n                        <li><a href=\"listings-grid-standard-with-sidebar.html\">Standard With Sidebar</a></li>\r\n                        <li><a href=\"listings-grid-compact-with-sidebar.html\">Compact With Sidebar</a></li>\r\n                        <li><a href=\"listings-grid-with-map.html\">With Map</a></li>\r\n                        <li><a href=\"listings-grid-full-width.html\">Full Width</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">Half Map</a>\r\n                    <ul>\r\n                        <li><a href=\"listings-half-map-list.html\">List Layout</a></li>\r\n                        <li><a href=\"listings-half-map-grid-standard.html\">Grid Standard Layout</a></li>\r\n                        <li><a href=\"listings-half-map-grid-compact.html\">Grid Compact Layout</a></li>\r\n                    </ul>\r\n                </li>\r\n            </ul>\r\n        </li>\r\n\r\n        <li>\r\n            <a href=\"#\">Features</a>\r\n            <ul>\r\n                <li>\r\n                    <a href=\"#\">Single Properties</a>\r\n                    <ul>\r\n                        <li><a href=\"single-property-page-1.html\">Property Style 1</a></li>\r\n                        <li><a href=\"single-property-page-2.html\">Property Style 2</a></li>\r\n                        <li><a href=\"single-property-page-3.html\">Property Style 3</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">Search Styles</a>\r\n                    <ul>\r\n                        <li><a href=\"index.html\">Home Search 1</a></li>\r\n                        <li><a href=\"index-2.html\">Home Search 2</a></li>\r\n                        <li><a href=\"index-3.html\">Home Search 3</a></li>\r\n                        <li><a href=\"listings-list-full-width.html\">Advanced Style</a></li>\r\n                        <li><a href=\"listings-list-with-sidebar.html\">Sidebar Search</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">My Account</a>\r\n                    <ul>\r\n                        <li><a href=\"my-profile.html\">My Profile</a></li>\r\n                        <li><a href=\"my-bookmarks.html\">Bookmarked Listings</a></li>\r\n                        <li><a href=\"my-properties.html\">My Properties</a></li>\r\n                        <li><a href=\"change-password.html\">Change Password</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li>\r\n                    <a href=\"#\">Agencies & Agents</a>\r\n                    <ul>\r\n                        <li><a href=\"agencies-list.html\">Agencies List</a></li>\r\n                        <li><a href=\"agency-page.html\">Agency Page</a></li>\r\n                        <li><a href=\"agents-list.html\">Agents List</a></li>\r\n                        <li><a href=\"agent-page.html\">Agent Page</a></li>\r\n                    </ul>\r\n                </li>\r\n\r\n                <li><a href=\"compare-properties.html\">Compare Properties</a></li>\r\n                <li><a href=\"submit-property.html\">Submit Property</a></li>\r\n            </ul>\r\n        </li>\r\n\r\n        <li>\r\n            <a href=\"#\">Pages</a>\r\n            <ul>\r\n                <li>\r\n                    <a href=\"blog.html\">Blog</a>\r\n                    <ul>\r\n                        <li><a href=\"blog.html\">Blog</a></li>\r\n                        <li><a href=\"blog-post.html\">Blog Post</a></li>\r\n                    </ul>\r\n                </li>\r\n                <li><a href=\"contact.html\">Contact</a></li>\r\n                <li><a href=\"elements.html\">Elements</a></li>\r\n                <li><a href=\"pricing-tables.html\">Pricing Tables</a></li>\r\n                <li><a href=\"typography.html\">Typography</a></li>\r\n                <li><a href=\"icons.html\">Icons</a></li>\r\n            </ul>\r\n        </li>\r\n\r\n    </ul>\r\n</nav>\r\n<div class=\"clearfix\"></div>-->\r\n<!-- Main Navigation / End -->"
 
 /***/ }),
 
@@ -3360,7 +3548,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
+module.exports = __webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
 
 
 /***/ })

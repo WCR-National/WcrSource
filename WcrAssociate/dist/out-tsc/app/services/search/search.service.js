@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { ApiService } from '../api_service';
+import { ApiService } from '../auth';
 import { JwtService } from '../auth';
 import { map, distinctUntilChanged } from 'rxjs/operators';
 var SearchService = /** @class */ (function () {
@@ -25,13 +25,18 @@ var SearchService = /** @class */ (function () {
     };
     SearchService.prototype.viewAdvanceSearchByZipcode = function (zipc, subCategoryId) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var urlToAdvanceSearch;
+            var urlToAdvanceSearch, result;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        debugger;
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearch1";
+                        console.log(new Date());
                         return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).toPromise()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                    case 1:
+                        result = _a.sent();
+                        console.log(new Date());
+                        return [2 /*return*/, result];
                 }
             });
         });
@@ -51,8 +56,15 @@ var SearchService = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         urlToJobTypeWiseCategory = "ws/TopSearch.asmx/ViewAdvanceSearchForServices";
-                        return [4 /*yield*/, this.apiService.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                        return [4 /*yield*/, this.http.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise()];
+                    case 1: 
+                    //return this.apiService.post( urlToJobTypeWiseCategory, { zipcode: zipc, Category: subCategoryId })
+                    //    .pipe(map(
+                    //        data => {
+                    //            return data;
+                    //        }
+                    //    ));
+                    return [2 /*return*/, _a.sent()];
                 }
             });
         });
@@ -72,8 +84,16 @@ var SearchService = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
-                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise()];
-                    case 1: return [2 /*return*/, _a.sent()];
+                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise()];
+                    case 1: 
+                    //    data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}"
+                    //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId })
+                    //    .pipe(map(
+                    //        data => {
+                    //            return data;
+                    //        }
+                    //    ));
+                    return [2 /*return*/, _a.sent()];
                 }
             });
         });
@@ -93,7 +113,7 @@ var SearchService = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchServicesCityStateWise";
-                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise()];
+                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise()];
                     case 1: 
                     //  {'State':'" + State + "','City':'" + City + "','Category':" + ($(docs).find("ID").text()) + "}
                     //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId })
@@ -110,7 +130,7 @@ var SearchService = /** @class */ (function () {
     //For IPAddress
     SearchService.prototype.attemptGetSalesAdts = function () {
         var _this = this;
-        var urlToGetIP = "http://jsonip.com?=callback";
+        var urlToGetIP = "https://jsonip.com?=callback";
         return this.http.get(urlToGetIP)
             .pipe(map(function (data) {
             var _ipAddress = data.ip;

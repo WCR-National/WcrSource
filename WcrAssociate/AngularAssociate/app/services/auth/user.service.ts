@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
-import { ApiService } from '../api_service';
+import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
 import { environment } from '../../../environments/environment';
@@ -34,7 +34,8 @@ export class UserService {
                     data => this.setAuth(data.user),
                     err => this.purgeAuth()
                 );
-        } else {
+        }
+        else {
             // Remove any potential remnants of previous auth states
             this.purgeAuth();
         }

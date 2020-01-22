@@ -3,15 +3,11 @@ import { environment } from '../../../environments/environment';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable ,  throwError } from 'rxjs';
 
-import { JwtService } from '../auth';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class ApiService {
-  constructor(
-    private http: HttpClient,
-    private jwtService: JwtService
-  ) {}
+  constructor(  private http: HttpClient  ) {}
 
   private formatErrors(error: any) {
     return  throwError(error.error);
@@ -39,6 +35,8 @@ export class ApiService {
   delete(path): Observable<any> {
       return this.http.delete(
           `${environment.apiEndPoint}${path}`
-    ).pipe(catchError(this.formatErrors));
-  }
+      ).pipe(catchError(this.formatErrors));
+
+    }
+    abc() { }
 }

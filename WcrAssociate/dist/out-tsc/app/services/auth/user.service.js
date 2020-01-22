@@ -2,7 +2,7 @@ import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { ApiService } from '../api_service';
+import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
 import { environment } from '../../../environments/environment';

@@ -23,12 +23,15 @@ export class SearchService {
         private http: HttpClient,
         private jwtService: JwtService
     ) { }
-    
+
+
+
+
     //For sales
     subCategoriesByZipcode(zipc): Observable<any> {
 
         let urlToSubCategories: string = "Associate/ws/subCategory.asmx/SubCategories"
-        return this.apiService.post( urlToSubCategories, { Categoryid: 1 })
+        return this.apiService.post(urlToSubCategories, { Categoryid: 1 })
             .pipe(map(
                 data => {
                     return data;
@@ -38,23 +41,14 @@ export class SearchService {
 
     async viewAdvanceSearchByZipcode(zipc, subCategoryId) {
 
+        debugger;
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearch1";
 
-        return await this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).pipe(
-            map(
-                data => {
-                    debugger;
-                return data;
-            }
-        )).toPromise();
+        console.log(new Date());
+        const result = await this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).toPromise();
+        console.log(new Date());
 
-
-            //.pipe(map(
-            //    data => {
-            //        return data;
-            //    }
-            //))
-           
+        return result;
     }
 
     //For services
@@ -72,7 +66,14 @@ export class SearchService {
     async getViewAdvanceSearchForServices(categoryId, zipc) {
 
         let urlToJobTypeWiseCategory: string = "ws/TopSearch.asmx/ViewAdvanceSearchForServices";
-        return await this.apiService.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise();
+        //return this.apiService.post( urlToJobTypeWiseCategory, { zipcode: zipc, Category: subCategoryId })
+        //    .pipe(map(
+        //        data => {
+        //            return data;
+        //        }
+        //    ));
+
+        return await this.http.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise();
 
     }
 
@@ -81,7 +82,7 @@ export class SearchService {
     getSalesCategoryCityWise(state, city): Observable<any> {
 
         let urlToSubCategories: string = "Associate/ws/subCategory.asmx/SubCategories"
-        return this.apiService.post( urlToSubCategories, { Categoryid: 1 })
+        return this.apiService.post(urlToSubCategories, { Categoryid: 1 })
             .pipe(map(
                 data => {
                     return data;
@@ -91,8 +92,18 @@ export class SearchService {
 
     async getAdvanceSearchCityStateWise(state, city, subCategoryId) {
 
+
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
-         return await this.apiService.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise();
+        //    data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}"
+
+        //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId })
+        //    .pipe(map(
+        //        data => {
+        //            return data;
+        //        }
+        //    ));
+
+        return await this.http.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise();
 
     }
 
@@ -101,7 +112,7 @@ export class SearchService {
     getServicesCategoryCityWise(state, city): Observable<any> {
 
         let urlToServiceCategory: string = "Associate/ws/Category.asmx/JobtypeWiseCategory"
-        return this.apiService.post( urlToServiceCategory, { flag: 1, jobtype: 2 })
+        return this.apiService.post(urlToServiceCategory, { flag: 1, jobtype: 2 })
             .pipe(map(
                 data => {
                     return data;
@@ -114,6 +125,7 @@ export class SearchService {
 
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearchServicesCityStateWise";
         //  {'State':'" + State + "','City':'" + City + "','Category':" + ($(docs).find("ID").text()) + "}
+
         //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId })
         //    .pipe(map(
         //        data => {
@@ -121,20 +133,20 @@ export class SearchService {
         //        }
         //    ));
 
-        return await this.apiService.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise();
+        return await this.http.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise();
 
     }
 
     //For IPAddress
     attemptGetSalesAdts() {
 
-        let urlToGetIP: string = "http://jsonip.com?=callback";
+        let urlToGetIP: string = "https://jsonip.com?=callback";
         return this.http.get<any>(urlToGetIP)
             .pipe(map(
                 data => {
                     let _ipAddress = data.ip;
                     this.attemptGetZipCodeByIPAddress(_ipAddress);
-                  
+
                 }
             ));
     }

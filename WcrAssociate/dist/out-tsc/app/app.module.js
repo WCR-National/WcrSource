@@ -17,10 +17,9 @@ import { AuthComponent } from './components/auth/auth.component';
 import { HttpTokenInterceptor } from './interceptors/http.token.interceptor';
 import { User } from '../app/entities/user';
 import { ShowAuthedDirective } from './shared/show-authed.directive';
-import { ApiService } from './services/api_service';
-import { SearchService } from './services/search';
 import { FooterComponent, HeaderComponent, SharedModule } from '../app/shared';
-import { AuthGuard, JwtService, UserService, HomeAuthResolver, NoAuthGuard, encrypt_decrypt } from './services/auth';
+import { ApiService, AuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, NoAuthGuard, encrypt_decrypt } from './services/auth';
+import { SearchService } from './services/search';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -66,6 +65,7 @@ var AppModule = /** @class */ (function () {
                 ApiService,
                 AuthGuard,
                 JwtService,
+                ProfilesService,
                 UserService,
                 SearchService,
                 HomeAuthResolver,

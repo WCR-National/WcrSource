@@ -27,10 +27,6 @@ import { User } from '../app/entities/user';
 
 import { ShowAuthedDirective } from './shared/show-authed.directive';
 
-import { ApiService } from './services/api_service';
-import { SearchService } from './services/search';
-
-
 import {
     FooterComponent,
     HeaderComponent,
@@ -38,8 +34,10 @@ import {
 } from '../app/shared';
 
 import {
+    ApiService,
     AuthGuard,
     JwtService,
+    ProfilesService,
     UserService,
     HomeAuthResolver,
     NoAuthGuard,    encrypt_decrypt
@@ -89,6 +87,7 @@ import { SearchService } from './services/search';
         ApiService,
         AuthGuard,
         JwtService,
+        ProfilesService,
         UserService,
         SearchService,
         HomeAuthResolver,
