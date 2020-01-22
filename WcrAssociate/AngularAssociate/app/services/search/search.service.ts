@@ -39,15 +39,14 @@ export class SearchService {
             ));
     }
 
-    async viewAdvanceSearchByZipcode(zipc, subCategoryId) {
+     async viewAdvanceSearchByZipcode(zipc, subCategoryId) {
 
-        debugger;
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearch1";
-
-        console.log(new Date());
-        const result = await this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).toPromise();
-        console.log(new Date());
-
+        const result = await this.apiService.post(urlToAdvanceSearch, { 'zipcode': zipc, 'SubCategory': subCategoryId }).pipe(map(
+             data => {
+                 return data;
+            }
+        )).toPromise();
         return result;
     }
 
