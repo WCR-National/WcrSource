@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { JwtService } from './jwt.service';
+import { JwtService } from '../auth';
 import { catchError } from 'rxjs/operators';
 var ApiService = /** @class */ (function () {
     function ApiService(http, jwtService) {

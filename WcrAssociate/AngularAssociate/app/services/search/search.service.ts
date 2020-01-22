@@ -25,7 +25,7 @@ export class SearchService {
     ) { }
     
     //For sales
-    subCategoriesByZip(zipc): Observable<any> {
+    subCategoriesByZipcode(zipc): Observable<any> {
 
         let urlToSubCategories: string = "Associate/ws/subCategory.asmx/SubCategories"
         return this.apiService.post( urlToSubCategories, { Categoryid: 1 })
@@ -36,14 +36,14 @@ export class SearchService {
             ));
     }
 
-    async viewAdvanceSearchByZipc(zipc, subCategoryId) {
+    async viewAdvanceSearchByZipcode(zipc, subCategoryId) {
 
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearch1";
         return await this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).toPromise();           
     }
 
     //For services
-    attemptGetJobtypeWiseCategory(): Observable<any> {
+    getJobtypeWiseCategoryByZipcode(): Observable<any> {
 
         let urlToJobTypeWiseCategory: string = "Associate/ws/Category.asmx/JobtypeWiseCategory";
         return this.apiService.post(urlToJobTypeWiseCategory, { flag: 1, jobtype: 2 })
@@ -54,7 +54,7 @@ export class SearchService {
             ));
     }
 
-    async attemptGetViewAdvanceSearchForServices(categoryId, zipc) {
+    async getViewAdvanceSearchForServices(categoryId, zipc) {
 
         let urlToJobTypeWiseCategory: string = "ws/TopSearch.asmx/ViewAdvanceSearchForServices";
         return await this.apiService.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise();
@@ -63,7 +63,7 @@ export class SearchService {
 
 
     //For sales
-    attemptGetSalesCategoryCityWise(state, city): Observable<any> {
+    getSalesCategoryCityWise(state, city): Observable<any> {
 
         let urlToSubCategories: string = "Associate/ws/subCategory.asmx/SubCategories"
         return this.apiService.post( urlToSubCategories, { Categoryid: 1 })
@@ -74,7 +74,7 @@ export class SearchService {
             ));
     }
 
-     async attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId) {
+    async getAdvanceSearchCityStateWise(state, city, subCategoryId) {
 
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
          return await this.apiService.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise();
@@ -83,7 +83,7 @@ export class SearchService {
 
 
     //For services
-    attemptGetServicesCategoryCityWise(state, city): Observable<any> {
+    getServicesCategoryCityWise(state, city): Observable<any> {
 
         let urlToServiceCategory: string = "Associate/ws/Category.asmx/JobtypeWiseCategory"
         return this.apiService.post( urlToServiceCategory, { flag: 1, jobtype: 2 })
@@ -94,12 +94,11 @@ export class SearchService {
             ));
     }
 
-    async attemptGetAdvanceSearchServicesCityStateWise(state, city, subCategoryId) {
+    async getAdvanceSearchServicesCityStateWise(state, city, subCategoryId) {
 
 
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearchServicesCityStateWise";
         //  {'State':'" + State + "','City':'" + City + "','Category':" + ($(docs).find("ID").text()) + "}
-
         //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId })
         //    .pipe(map(
         //        data => {

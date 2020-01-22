@@ -266,7 +266,7 @@ export class HomeComponent implements OnInit {
         let thisHomePage = this;
 
         thisHomePage.searchService
-            .subCategoriesByZip(zipc)
+            .subCategoriesByZipcode(zipc)
             .subscribe(
                 data => {
                     if (data.d.length > 1) {
@@ -283,7 +283,7 @@ export class HomeComponent implements OnInit {
                             var subCategoryId = $(docs).find("id").text();
 
                             thisHomePage.searchService
-                                .viewAdvanceSearchByZipc(zipc, subCategoryId)
+                                .viewAdvanceSearchByZipcode(zipc, subCategoryId)
                                 .then(
                                     (data: any) => {
                                         if (data.d.length > 0) {
@@ -359,7 +359,7 @@ export class HomeComponent implements OnInit {
         let thisHomePage = this;
 
         thisHomePage.searchService
-            .attemptGetJobtypeWiseCategory()
+            .getJobtypeWiseCategoryByZipcode()
             .subscribe(
                 data => {
                     if (data.d.length > 1) {
@@ -376,7 +376,7 @@ export class HomeComponent implements OnInit {
                             var categoryId = $(docs).find("ID").text();
 
                             thisHomePage.searchService
-                                .attemptGetViewAdvanceSearchForServices(categoryId, zipc)
+                                .getViewAdvanceSearchForServices(categoryId, zipc)
                                 .then(
                                     (data: any) => {
                                         if (data.d.length > 0) {
@@ -461,7 +461,7 @@ export class HomeComponent implements OnInit {
         let thisHomePage = this;
 
         thisHomePage.searchService
-            .attemptGetSalesCategoryCityWise(state, city)
+            .getSalesCategoryCityWise(state, city)
             .subscribe(
                 data => {
                     if (data.d.length > 1) {
@@ -478,7 +478,7 @@ export class HomeComponent implements OnInit {
 
                             var subCategoryId = $(docs).find("id").text();
                             thisHomePage.searchService
-                                .attemptGetAdvanceSearchCityStateWise(state, city, subCategoryId)
+                                .getAdvanceSearchCityStateWise(state, city, subCategoryId)
                                 .then(
                                     (data: any) => {
                                         if (data.d.length > 0) {
@@ -533,7 +533,7 @@ export class HomeComponent implements OnInit {
         let thisHomePage = this;
 
         thisHomePage.searchService
-            .attemptGetServicesCategoryCityWise(state, city)
+            .getServicesCategoryCityWise(state, city)
             .subscribe(
                 data => {
                     if (data.d.length > 1) {
@@ -550,7 +550,7 @@ export class HomeComponent implements OnInit {
 
 
                             thisHomePage.searchService
-                                .attemptGetAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
+                                .getAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
                                 .then(
                                     (data: any) => {
                                         if (data.d.length > 0) {
