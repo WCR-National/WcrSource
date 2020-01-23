@@ -83,16 +83,8 @@ var SearchService = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
-                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise()];
-                    case 1: 
-                    //    data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}"
-                    //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId })
-                    //    .pipe(map(
-                    //        data => {
-                    //            return data;
-                    //        }
-                    //    ));
-                    return [2 /*return*/, _a.sent()];
+                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });

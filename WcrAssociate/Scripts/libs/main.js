@@ -1576,11 +1576,6 @@ var HomeComponent = /** @class */ (function () {
             }
         });
     };
-    HomeComponent.prototype.sleep = function (delay) {
-        var start = new Date().getTime();
-        while (new Date().getTime() < start + delay)
-            ;
-    };
     //managed both in these both functions: By IPAddrss zipCode and user entered zipCode in search
     HomeComponent.prototype.bindSalesCategory = function (zipc, searchByIpOrtxtSearch) {
         if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
@@ -1611,10 +1606,10 @@ var HomeComponent = /** @class */ (function () {
                                 results_1 = _a.sent();
                                 console.log(results_1);
                                 jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs_1, function (i, doc) {
+                                    var flag = 0;
                                     //for (const doc in docs) {
                                     jquery__WEBPACK_IMPORTED_MODULE_3__["each"](results_1, function (i, data) {
-                                        if (data.d.length > 0) {
-                                            var flag = 0;
+                                        if (data.d.length > 0 && data.d.includes('GetCategoriesinfo1')) {
                                             var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
                                             var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
                                             var docs1 = xml1.find("GetCategoriesinfo1");
@@ -1648,26 +1643,26 @@ var HomeComponent = /** @class */ (function () {
                                             }
                                         }
                                         else {
-                                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                                            innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
-                                            if (flag == 1) { }
-                                            else {
-                                                if (searchByIpOrtxtSearch == "ip") {
-                                                    innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "  </p>";
-                                                    var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                                    innerHtmlSales += "<h3 class='theme-text-color text-center'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "</h3>";
-                                                    innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("detail").text()) + "  </p>";
-                                                    innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                                }
-                                                else {
-                                                    innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "'  alt=''/></i></span></a>";
-                                                    innerHtmlSales += "<h3 class='theme-text-color text-center'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "</h3>";
-                                                    innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("detail").text()) + "  </p>";
-                                                    innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
-                                                }
-                                            }
                                         }
                                     });
+                                    if (flag == 1) { }
+                                    else {
+                                        innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                        innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+                                        if (searchByIpOrtxtSearch == "ip") {
+                                            innerHtmlSales = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "  </p>";
+                                            var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "</h3>";
+                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("detail").text()) + "  </p>";
+                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                                        }
+                                        else {
+                                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "'  alt=''/></i></span></a>";
+                                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "</h3>";
+                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("detail").text()) + "  </p>";
+                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
+                                        }
+                                    }
                                 });
                                 jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlSales').html(innerHtmlSales);
                                 //thisHomePage.innerHtmlSales = innerHtmlSales;
@@ -1704,7 +1699,6 @@ var HomeComponent = /** @class */ (function () {
                                 xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
                                 docs = xml.find("JobCategories");
                                 return [4 /*yield*/, Promise.all(docs.map(function (t) { return thisHomePage.searchService.getViewAdvanceSearchForServices(jquery__WEBPACK_IMPORTED_MODULE_3__(docs[t]).find("ID").text(), zipc); }).ajaxSuccess(function (success) {
-                                        debugger;
                                         console.log("download : " + success);
                                     }))];
                             case 1:
@@ -1712,20 +1706,16 @@ var HomeComponent = /** @class */ (function () {
                                 console.log(results_2);
                                 jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
                                     var flag = 0;
-                                    innerHtmlServices += " <div class='col-sm-3 text-center block '>";
-                                    innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                                    innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
                                     var categoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
-                                    //thisHomePage.searchService
-                                    //    .getViewAdvanceSearchForServices(categoryId, zipc)
-                                    //    .then(
-                                    //        (data: any) => {
                                     jquery__WEBPACK_IMPORTED_MODULE_3__["each"](results_2, function (i, data) {
-                                        if (data.d.length > 0) {
+                                        if (data.d.length > 0 && data.d.includes('GetCategoriesinfoservices')) {
+                                            debugger;
                                             var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
                                             var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
                                             var docs1 = xml1.find("GetCategoriesinfoservices");
                                             if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
+                                                innerHtmlServices += " <div class='col-sm-3 text-center block '>";
+                                                innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
                                                 jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
                                                     if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
                                                         if (searchByIpOrtxtSearch == "ip") {
@@ -1733,6 +1723,7 @@ var HomeComponent = /** @class */ (function () {
                                                             innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "</p>";
                                                             var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
                                                             //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                            innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
                                                             innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
                                                             innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
                                                         }
@@ -1741,6 +1732,7 @@ var HomeComponent = /** @class */ (function () {
                                                             var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
                                                             //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
                                                             innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("photo").text()) + "'  alt=''/></i></span>";
+                                                            innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
                                                             innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
                                                             innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
                                                         }
@@ -1752,32 +1744,35 @@ var HomeComponent = /** @class */ (function () {
                                             else { }
                                         }
                                         else {
+                                            debugger;
+                                        }
+                                    });
+                                    if (!data.d.includes("GetCategoriesinfoservices")) {
+                                        if (flag == 1) { }
+                                        else {
                                             innerHtmlServices += " <div class='col-sm-3 text-center block '>";
                                             innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
                                             innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
-                                            if (flag == 1) { }
+                                            if (searchByIpOrtxtSearch == "ip") {
+                                                innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "  </p>";
+                                                //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
+                                                var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
+                                                //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
+                                                innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                            }
                                             else {
-                                                if (searchByIpOrtxtSearch == "ip") {
-                                                    innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "  </p>";
-                                                    //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
-                                                    var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
-                                                    //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
-                                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                                }
-                                                else {
-                                                    var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
-                                                    innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'  alt=''/></i></span>";
-                                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
-                                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                                }
+                                                var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
+                                                innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'  alt=''/></i></span>";
+                                                innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
+                                                innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
                                             }
                                         }
-                                    });
-                                    jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlServices').html(innerHtmlServices);
-                                    //thisHomePage. = innerHtmlServices;
-                                    thisHomePage.resultContent = true;
+                                    }
                                 });
+                                jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlServices').html(innerHtmlServices);
+                                //thisHomePage. = innerHtmlServices;
+                                thisHomePage.resultContent = true;
                                 return [3 /*break*/, 2];
                             case 2:
                                 thisHomePage.isSearchingStart = false;
@@ -1792,62 +1787,87 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.bindSalesCategoryCityWise = function (state, city) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var innerHtmlSales, thisHomePage;
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 innerHtmlSales = "";
                 thisHomePage = this;
                 thisHomePage.searchService
                     .getSalesCategoryCityWise(state, city)
-                    .subscribe(function (data) {
-                    if (data.d.length > 1) {
-                        var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                        var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
-                        var docs = xml.find("subCategories");
-                        jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
-                            var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text();
-                            thisHomePage.searchService
-                                .getAdvanceSearchCityStateWise(state, city, subCategoryId)
-                                .then(function (data) {
-                                var flag = 0;
-                                innerHtmlSales += " <div class='col-sm-3 text-center block '>";
-                                innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                                if (data.d.length > 0) {
-                                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
-                                    var docs1 = xml1.find("GetCategoriesinfoCity");
-                                    jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
-                                        if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Subcategoryid").text()) {
-                                            var urlToSalesAdvertisement = 'SalesAdvertisementList.html?ca=0&id="' + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + '"&zipcode="' + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Zipcode").text() + '"&name="' + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
-                                            //innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
-                                            innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("advMainImage").text()) + "'  alt=''/></i></span>";
-                                            innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + " </h3>";
-                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p></div></div>";
-                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
-                                            flag = 1;
+                    .subscribe(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var xmlDoc, xml, docs, subCategoryId, results_3;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (!(data.d.length > 1)) return [3 /*break*/, 2];
+                                xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
+                                docs = xml.find("subCategories");
+                                subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text();
+                                return [4 /*yield*/, Promise.all(docs.map(function (t) { return thisHomePage.searchService.getAdvanceSearchCityStateWise(state, city, jquery__WEBPACK_IMPORTED_MODULE_3__(docs[t]).find("id").text()); }).ajaxSuccess(function (success) {
+                                        console.log("download : " + success);
+                                    }))];
+                            case 1:
+                                results_3 = _a.sent();
+                                console.log(results_3);
+                                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
+                                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text();
+                                    jquery__WEBPACK_IMPORTED_MODULE_3__["each"](results_3, function (i, data) {
+                                        //thisHomePage.searchService
+                                        //    .getAdvanceSearchCityStateWise(state, city, subCategoryId)
+                                        //    .then(
+                                        //        (data: any) => {
+                                        if (data.d.length > 0 && data.d.includes('GetCategoriesinfoCity')) {
+                                            var flag = 0;
+                                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
+                                            var docs1 = xml1.find("GetCategoriesinfoCity");
+                                            if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Subcategoryid").text()) {
+                                                innerHtmlSales += " <div class='col-sm-3 text-center block '>";
+                                                innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
+                                                    if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Subcategoryid").text()) {
+                                                        var urlToSalesAdvertisement = 'SalesAdvertisementList.html?ca=0&id="' + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + '"&zipcode="' + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("Zipcode").text() + '"&name="' + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
+                                                        //innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
+                                                        innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("advMainImage").text()) + "'  alt=''/></i></span>";
+                                                        innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + " </h3>";
+                                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p></div></div>";
+                                                        innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                                        flag = 1;
+                                                    }
+                                                    else { }
+                                                });
+                                            }
                                         }
-                                        else { }
-                                    });
-                                }
-                                else { }
-                                if (flag == 1) { }
-                                else {
-                                    var urlToSalesAdvertisement = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                    //innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
-                                    innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "'/></i></span>";
-                                    innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + " </h3>";
-                                    innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + " </p>";
-                                    innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
-                                }
-                            }, function (err) {
+                                        else {
+                                            if (flag == 1) { }
+                                            else {
+                                                innerHtmlSales += " <div class='col-sm-3 text-center block '>";
+                                                innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                                var urlToSalesAdvertisement = "SalesAdvertisementList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                                //innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
+                                                innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("id").text()) + "'/></i></span>";
+                                                innerHtmlSales += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + " </h3>";
+                                                innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + " </p>";
+                                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                            }
+                                        }
+                                    }
+                                    //,
+                                    //err => {
+                                    //    thisHomePage.isSearchingStart = false;
+                                    //}
+                                    );
+                                });
+                                jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlSales').html(innerHtmlSales);
+                                thisHomePage.innerHtmlSales = innerHtmlSales;
+                                thisHomePage.resultContent = true;
+                                return [3 /*break*/, 2];
+                            case 2:
                                 thisHomePage.isSearchingStart = false;
-                            });
-                        });
-                        jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlSales').html(innerHtmlSales);
-                        thisHomePage.innerHtmlSales = innerHtmlSales;
-                        thisHomePage.resultContent = true;
-                    }
-                    else { }
-                    thisHomePage.isSearchingStart = false;
-                }, function (err) {
+                                return [2 /*return*/];
+                        }
+                    });
+                }); }, function (err) {
                     thisHomePage.isSearchingStart = false;
                 });
                 return [2 /*return*/];
@@ -1857,63 +1877,88 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.bindServiesCategoryCityWise = function (state, city) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var innerHtmlServices, thisHomePage;
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 innerHtmlServices = "";
                 thisHomePage = this;
                 thisHomePage.searchService
                     .getServicesCategoryCityWise(state, city)
-                    .subscribe(function (data) {
-                    if (data.d.length > 1) {
-                        var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                        var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
-                        var docs = xml.find("JobCategories");
-                        jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
-                            var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
-                            thisHomePage.searchService
-                                .getAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
-                                .then(function (data) {
-                                var flag = 0;
-                                innerHtmlServices += " <div class=' col-sm-3 text-center block '>";
-                                innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                                if (data.d.length > 0) {
-                                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
-                                    var docs1 = xml1.find("GetsubCategoriesinfoservices");
-                                    jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
-                                        if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
-                                            var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
-                                            innerHtmlServices += "<a href='" + urlToSalesAdvertisement + "'>";
-                                            innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("photo").text()) + "'  alt=''/></i></span></a>";
-                                            innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
-                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p>";
-                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
-                                            flag = 1;
+                    .subscribe(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var xmlDoc, xml, docs, results_4;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (!(data.d.length > 1)) return [3 /*break*/, 2];
+                                xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
+                                docs = xml.find("JobCategories");
+                                return [4 /*yield*/, Promise.all(docs.map(function (t) { return thisHomePage.searchService.getAdvanceSearchCityStateWise(state, city, jquery__WEBPACK_IMPORTED_MODULE_3__(docs[t]).find("id").text()); }).ajaxSuccess(function (success) {
+                                        console.log("download : " + success);
+                                    }))];
+                            case 1:
+                                results_4 = _a.sent();
+                                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
+                                    var subCategoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
+                                    jquery__WEBPACK_IMPORTED_MODULE_3__["each"](results_4, function (i, data) {
+                                        //thisHomePage.searchService
+                                        //    .getAdvanceSearchServicesCityStateWise(state, city, subCategoryId)
+                                        //    .then(
+                                        //        (data: any) => {
+                                        if (data.d.length > 0 && data.d.includes('GetsubCategoriesinfoservices')) {
+                                            var flag = 0;
+                                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
+                                            var docs1 = xml1.find("GetsubCategoriesinfoservices");
+                                            if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
+                                                innerHtmlServices += " <div class=' col-sm-3 text-center block '>";
+                                                innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
+                                                    if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
+                                                        var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("zipcode").text() + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
+                                                        innerHtmlServices += "<a href='" + urlToSalesAdvertisement + "'>";
+                                                        innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("photo").text()) + "'  alt=''/></i></span></a>";
+                                                        innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
+                                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p>";
+                                                        innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                                        flag = 1;
+                                                    }
+                                                    else { }
+                                                });
+                                            }
+                                            else {
+                                            }
                                         }
-                                        else { }
-                                    });
-                                    if (flag == 1) { }
-                                    else {
-                                        var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=0&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
-                                        //innerHtmlSales += "<a href=''>";
-                                        innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'/></i></span>";
-                                        //innerHtmlServices += "</a>";
-                                        innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
-                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p>";
-                                        innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                        else {
+                                            if (flag == 1) { }
+                                            else {
+                                                innerHtmlServices += " <div class=' col-sm-3 text-center block '>";
+                                                innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                                var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=0&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
+                                                //innerHtmlSales += "<a href=''>";
+                                                innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'/></i></span>";
+                                                //innerHtmlServices += "</a>";
+                                                innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
+                                                innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("detail").text()) + "</p>";
+                                                innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                            }
+                                        }
                                     }
-                                }
-                                else { }
-                            }, function (err) {
+                                    //,
+                                    //    err => {
+                                    //        thisHomePage.isSearchingStart = false;
+                                    //    }
+                                    );
+                                });
+                                jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlServices').html(innerHtmlServices);
+                                //thisHomePage.innerHtmlServices = innerHtmlServices;
+                                thisHomePage.resultContent = true;
+                                return [3 /*break*/, 2];
+                            case 2:
                                 thisHomePage.isSearchingStart = false;
-                            });
-                        });
-                        jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlServices').html(innerHtmlServices);
-                        //thisHomePage.innerHtmlServices = innerHtmlServices;
-                        thisHomePage.resultContent = true;
-                    }
-                    else { }
-                    thisHomePage.isSearchingStart = false;
-                }, function (err) { thisHomePage.isSearchingStart = false; });
+                                return [2 /*return*/];
+                        }
+                    });
+                }); }, function (err) { thisHomePage.isSearchingStart = false; });
                 return [2 /*return*/];
             });
         });
@@ -2088,6 +2133,11 @@ var HomeComponent = /** @class */ (function () {
             xml = xml.documentElement;
         var json = X.toJson(X.toObj(X.removeWhite(xml)), xml.nodeName, "\t");
         return "{\n" + tab + (tab ? json.replace(/\t/g, tab) : json.replace(/\t|\n/g, "")) + "\n}";
+    };
+    HomeComponent.prototype.sleep = function (delay) {
+        var start = new Date().getTime();
+        while (new Date().getTime() < start + delay)
+            ;
     };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('salesServicesFocus'),
@@ -3148,16 +3198,8 @@ var SearchService = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
-                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise()];
-                    case 1: 
-                    //    data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}"
-                    //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId })
-                    //    .pipe(map(
-                    //        data => {
-                    //            return data;
-                    //        }
-                    //    ));
-                    return [2 /*return*/, _a.sent()];
+                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise()];
+                    case 1: return [2 /*return*/, _a.sent()];
                 }
             });
         });
