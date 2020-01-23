@@ -42414,11 +42414,11 @@ body .pac-container {
 }
 .elipsis-text {
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-top: 20px;
+    margin-top: 0px;
     text-align:left;
 }
 label {

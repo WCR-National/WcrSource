@@ -134,17 +134,17 @@ export class SearchService {
     }
 
     //For IPAddress
-    attemptGetSalesAdts() {
+    async attemptGetSalesAdts() {
 
         let urlToGetIP: string = "https://jsonip.com?=callback";
-        return this.http.get<any>(urlToGetIP)
+        return await  this.http.get<any>(urlToGetIP)
             .pipe(map(
                 data => {
                     let _ipAddress = data.ip;
                     this.attemptGetZipCodeByIPAddress(_ipAddress);
 
                 }
-            ));
+            )).toPromise();
     }
 
     async attemptGetZipCodeByIPAddress(_ipAddress) {

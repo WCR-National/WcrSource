@@ -56,7 +56,7 @@
 
 
 <!-- Fullwidth Section -->
-<section id="salesServicesDivId" class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" style='background-color:#fff;border-top: 5px solid #0e3a6b;' #divSalesServices>
+<section id="salesServicesDivId" class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" style='background-color:#f9f9f9;border-top: 5px solid #0e3a6b;' #divSalesServices>
 
     <!-- Content -->
     <div class="container">
@@ -72,7 +72,25 @@
             </div>
         </div>
 
-
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="card white darken-1 ">
+                    <div class="card-contentpd-0-force">
+                        <img class="card-image-size" src="../../../Associate/Adv_img/2main.png" />
+                    </div>
+                    <div class="card-content black-text pd-b-0-force">
+                        <span class="card-title">Card Title</span>
+                        <p class="grey-text elipsis-text">
+                            I am a very simple card. I am good at containing small bits of information.
+                            I am convenient because I require little markup to use effectively.
+                        </p>
+                    </div>
+                    <div class="card-action text-center">
+                        <a class='waves-effect waves-light btn'>View More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--<div class="row" [style.display]="ifError"></div>-->
         <div class="row" [style.display]="resultContent ? 'block':'none' ">
             <div class="col-md-12">
@@ -87,7 +105,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row" id="innerHtmlSales"> </div>
+                <div class="row" id="innerHtmlSales" [innerHtml]="innerHtmlSales"> </div>
 
                 <div class="row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30" style="border-top: 1px solid #eee;">
                     <div class="col-md-12">
@@ -97,7 +115,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row" id="innerHtmlServices"></div>
+                <div class="row" id="innerHtmlServices" [innerHtml]="innerHtmlServices"></div>
             </div>
         </div>
 

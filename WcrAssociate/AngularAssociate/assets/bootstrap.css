@@ -742,13 +742,13 @@ address {
 }
 @media (min-width: 1240px) {
   .container {
-    width: 1090px;
+    width: 1150px;
   }
 }
 
 @media (min-width: 1367px) {
   .container {
-    width: 1210px;
+    width: 1290px;
   }
 }
 
