@@ -721,11 +721,11 @@ module.exports = function (css) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\styles.css */"./AngularAssociate/styles.css");
-__webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\assets\bootstrap.css */"./AngularAssociate/assets/bootstrap.css");
-__webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\assets\icons.css */"./AngularAssociate/assets/icons.css");
-__webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\assets\style.css */"./AngularAssociate/assets/style.css");
-module.exports = __webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\assets\color.css */"./AngularAssociate/assets/color.css");
+__webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\styles.css */"./AngularAssociate/styles.css");
+__webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\assets\bootstrap.css */"./AngularAssociate/assets/bootstrap.css");
+__webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\assets\icons.css */"./AngularAssociate/assets/icons.css");
+__webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\assets\style.css */"./AngularAssociate/assets/style.css");
+module.exports = __webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\assets\color.css */"./AngularAssociate/assets/color.css");
 
 
 /***/ })

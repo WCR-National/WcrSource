@@ -290,10 +290,11 @@ export class HomeComponent implements OnInit {
                                     }
                                 }
                                 else {
-                                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+                                  
                                     if (flag == 1) { }
                                     else {
+                                        innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                        innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
                                         if (searchByIpOrtxtSearch == "ip") {
 
                                             innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
@@ -314,89 +315,7 @@ export class HomeComponent implements OnInit {
 
                             });
                         });
-                        //    var subCategoryId = $(doc).find("id").text();
-                        //    console.log(subCategoryId);
-                        //    await thisHomePage.searchService
-                        //        .viewAdvanceSearchByZipcode(zipc, subCategoryId)
-                        //        .then(
-                        //            (data: any) => {
-                        //                if (data.d.length > 0) {
 
-                        //                    var flag = 0;
-                        //                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                        //                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
-
-
-                        //                    var xmlDoc1 = $.parseXML(data.d);
-                        //                    var xml1 = $(xmlDoc1);
-                        //                    var docs1 = xml1.find("GetCategoriesinfo1");
-                        //                    console.log('executed');
-
-                        //                    $.each(docs1, function (i, doc1)
-                        //                    //for (const doc1 in docs1)
-                        //                    {
-
-                        //                        console.log($(doc).find("id").text() + "=" + $(doc1).find("Subcategoryid").text());
-                        //                        console.log();
-                        //                        if ($(doc).find("id").text() == $(doc1).find("Subcategoryid").text()) {
-
-
-                        //                            if (searchByIpOrtxtSearch == "ip") {
-                        //                                innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
-                        //                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                        //                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                        //                                innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-
-                        //                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                        //                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-
-                        //                            }
-                        //                            else {
-
-                        //                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                        //                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                        //                                innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
-                        //                                innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-
-                        //                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                        //                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                        //                            }
-                        //                            flag = 1;
-                        //                        }
-                        //                        else { }
-                        //                    });
-
-
-                        //                    if (flag == 1) { }
-                        //                    else {
-                        //                        if (searchByIpOrtxtSearch == "ip") {
-
-                        //                            innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
-                        //                            let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                        //                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                        //                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                        //                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                        //                        }
-                        //                        else {
-
-                        //                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></i></span></a>";
-                        //                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                        //                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                        //                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
-                        //                        }
-                        //                    }
-                        //                }
-                        //                else { }
-                        //                thisHomePage.isSearchingStart = false;
-
-                        //                console.log(innerHtmlSales);
-                        //                $('#innerHtmlSales').html(innerHtmlSales);
-                        //            },
-                        //            err => {
-                        //                thisHomePage.isSearchingStart = false;
-                        //            }
-                        //        )
-                        //});
 
                         $('#innerHtmlSales').html(innerHtmlSales);
                         //thisHomePage.innerHtmlSales = innerHtmlSales;
@@ -416,14 +335,20 @@ export class HomeComponent implements OnInit {
         var innerHtmlServices = "";
         let thisHomePage = this;
 
-        await thisHomePage.searchService
+        thisHomePage.searchService
             .getJobtypeWiseCategoryByZipcode()
             .subscribe(
-                data => {
+                async data => {
                     if (data.d.length > 1) {
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("JobCategories");
+
+                        const results: any = await Promise.all(docs.map(t => thisHomePage.searchService.getViewAdvanceSearchForServices($(docs[t]).find("ID").text(), zipc)).ajaxSuccess(success => {
+                            debugger;
+                            console.log("download : " + success);
+                        }));
+                        console.log(results);
 
                         $.each(docs, function (i, docs) {
                             var flag = 0;
@@ -432,74 +357,77 @@ export class HomeComponent implements OnInit {
                             innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
 
                             var categoryId = $(docs).find("ID").text();
+                            //thisHomePage.searchService
+                            //    .getViewAdvanceSearchForServices(categoryId, zipc)
+                            //    .then(
+                            //        (data: any) => {
+                            $.each(results, function (i, data) {
 
-                            thisHomePage.searchService
-                                .getViewAdvanceSearchForServices(categoryId, zipc)
-                                .then(
-                                    (data: any) => {
-                                        if (data.d.length > 0) {
+                                if (data.d.length > 0) {
 
-                                            var xmlDoc1 = $.parseXML(data.d);
-                                            var xml1 = $(xmlDoc1);
-                                            var docs1 = xml1.find("GetCategoriesinfoservices");
+                                    var xmlDoc1 = $.parseXML(data.d);
+                                    var xml1 = $(xmlDoc1);
+                                    var docs1 = xml1.find("GetCategoriesinfoservices");
+                                    if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
 
-                                            $.each(docs1, function (i, docs1) {
-                                                if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
-                                                    if (searchByIpOrtxtSearch == "ip") {
-                                                        console.log('entered in ' + searchByIpOrtxtSearch);
-                                                        innerHtmlServices = "<p>" + ($(docs).find("categoryName").text()) + "</p>";
-                                                        let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
-                                                        //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
-                                                        innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                        $.each(docs1, function (i, docs1) {
+                                            if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+                                                if (searchByIpOrtxtSearch == "ip") {
+                                                    console.log('entered in ' + searchByIpOrtxtSearch);
+                                                    innerHtmlServices = "<p>" + ($(docs).find("categoryName").text()) + "</p>";
+                                                    let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                                    //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
+                                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
 
 
-                                                    }
-                                                    else {
-                                                        console.log('entered in ' + searchByIpOrtxtSearch);
-
-                                                        let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
-                                                        //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                                        innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span>";
-                                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
-                                                        innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-
-                                                    }
-
-                                                    flag = 1;
                                                 }
-                                                else { }
-                                            });
-                                        }
-                                        else { }
+                                                else {
+                                                    console.log('entered in ' + searchByIpOrtxtSearch);
 
+                                                    let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                                    //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                    innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span>";
+                                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
+                                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
 
-                                    },
-                                    err => {
-                                        thisHomePage.isSearchingStart = false;
+                                                }
+
+                                                flag = 1;
+                                            }
+                                            else { }
+                                        });
                                     }
-                                );
-
-                            if (flag == 1) { }
-                            else {
-                                if (searchByIpOrtxtSearch == "ip") {
-
-                                    innerHtmlServices = "<p>" + ($(docs).find("categoryName").text()) + "  </p>";
-                                    //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
-                                    let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
-                                    //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
-                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-
-
+                                    else { }
                                 }
                                 else {
-                                    let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
-                                    innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span>";
-                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
-                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+
+                                    
+                                    if (flag == 1) { }
+                                    else {
+                                        innerHtmlServices += " <div class='col-sm-3 text-center block '>";
+                                        innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                        innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
+                                        if (searchByIpOrtxtSearch == "ip") {
+
+                                            innerHtmlServices = "<p>" + ($(docs).find("categoryName").text()) + "  </p>";
+                                            //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
+                                            let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                            //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
+                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+
+
+                                        }
+                                        else {
+                                            let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
+                                            innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span>";
+                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
+                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                        }
+                                    }
                                 }
-                            }
+                            });
 
                             $('#innerHtmlServices').html(innerHtmlServices);
 
@@ -523,61 +451,81 @@ export class HomeComponent implements OnInit {
         thisHomePage.searchService
             .getSalesCategoryCityWise(state, city)
             .subscribe(
-                data => {
+                async data => {
                     if (data.d.length > 1) {
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("subCategories");
+                        var subCategoryId = $(docs).find("id").text();
 
+                        const results: any = await Promise.all(docs.map(t => thisHomePage.searchService.getAdvanceSearchCityStateWise(state, city, $(docs[t]).find("id").text())).ajaxSuccess(success => {
+                            console.log("download : " + success);
+                        }));
+                        console.log(results);
 
                         $.each(docs, function (i, docs) {
 
-
                             var subCategoryId = $(docs).find("id").text();
-                            thisHomePage.searchService
-                                .getAdvanceSearchCityStateWise(state, city, subCategoryId)
-                                .then(
-                                    (data: any) => {
-                                        var flag = 0;
+
+                            $.each(results, function (i, data) {
+
+                                //thisHomePage.searchService
+                                //    .getAdvanceSearchCityStateWise(state, city, subCategoryId)
+                                //    .then(
+                                //        (data: any) => {
+                                
+                                if (data.d.length > 0) {
+                                    var xmlDoc1 = $.parseXML(data.d);
+                                    var xml1 = $(xmlDoc1);
+                                    var docs1 = xml1.find("GetCategoriesinfoCity");
+
+                                    var flag = 0;
+                                    if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text())
+                                    {
                                         innerHtmlSales += " <div class='col-sm-3 text-center block '>";
                                         innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                                        if (data.d.length > 0) {
-                                            var xmlDoc1 = $.parseXML(data.d);
-                                            var xml1 = $(xmlDoc1);
-                                            var docs1 = xml1.find("GetCategoriesinfoCity");
-                                            $.each(docs1, function (i, docs1) {
-                                                if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
-                                                    let urlToSalesAdvertisement: string = 'SalesAdvertisementList.html?ca=0&id="' + ($(docs).find("id").text()) + '"&zipcode="' + $(docs1).find("Zipcode").text() + '"&name="' + ($(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
-                                                    //innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
-                                                    innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span>";
-                                                    innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
 
-                                                    innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p></div></div>";
-                                                    innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                        $.each(docs1, function (i, docs1) {
+                                            if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
+                                                let urlToSalesAdvertisement: string = 'SalesAdvertisementList.html?ca=0&id="' + ($(docs).find("id").text()) + '"&zipcode="' + $(docs1).find("Zipcode").text() + '"&name="' + ($(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
+                                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
+                                                innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span>";
+                                                innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
 
-                                                    flag = 1;
-                                                }
-                                                else { }
-                                            });
-                                        }
-                                        else { }
+                                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p></div></div>";
+                                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
 
-                                        if (flag == 1) { }
-                                        else {
-                                            let urlToSalesAdvertisement: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                            //innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
-                                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'/></i></span>";
-                                            innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
-
-                                            innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + ($(docs).find("detail").text()) + " </p>";
-                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
-
-                                        }
-                                    },
-                                    err => {
-                                        thisHomePage.isSearchingStart = false;
+                                                flag = 1;
+                                            }
+                                            else { }
+                                        });
                                     }
-                                );
+                                    
+                                }
+                                else {
+
+                                    if (flag == 1) { }
+                                    else {
+                                        innerHtmlSales += " <div class='col-sm-3 text-center block '>";
+                                        innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+
+                                        let urlToSalesAdvertisement: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                        //innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
+                                        innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'/></i></span>";
+                                        innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
+
+                                        innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + ($(docs).find("detail").text()) + " </p>";
+                                        innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                    }
+                                }
+
+                               
+                            }
+                                //,
+                                //err => {
+                                //    thisHomePage.isSearchingStart = false;
+                                //}
+                            );
 
                         });
                         $('#innerHtmlSales').html(innerHtmlSales);
@@ -1288,3 +1236,87 @@ function validateSearchZipCode(control: AbstractControl): { [key: string]: any }
         }
     }
 }
+
+//    var subCategoryId = $(doc).find("id").text();
+                        //    console.log(subCategoryId);
+                        //    await thisHomePage.searchService
+                        //        .viewAdvanceSearchByZipcode(zipc, subCategoryId)
+                        //        .then(
+                        //            (data: any) => {
+                        //                if (data.d.length > 0) {
+
+                        //                    var flag = 0;
+                        //                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                        //                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+
+
+                        //                    var xmlDoc1 = $.parseXML(data.d);
+                        //                    var xml1 = $(xmlDoc1);
+                        //                    var docs1 = xml1.find("GetCategoriesinfo1");
+                        //                    console.log('executed');
+
+                        //                    $.each(docs1, function (i, doc1)
+                        //                    //for (const doc1 in docs1)
+                        //                    {
+
+                        //                        console.log($(doc).find("id").text() + "=" + $(doc1).find("Subcategoryid").text());
+                        //                        console.log();
+                        //                        if ($(doc).find("id").text() == $(doc1).find("Subcategoryid").text()) {
+
+
+                        //                            if (searchByIpOrtxtSearch == "ip") {
+                        //                                innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
+                        //                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                        //                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+                        //                                innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+
+                        //                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+                        //                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+
+                        //                            }
+                        //                            else {
+
+                        //                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                        //                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+                        //                                innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
+                        //                                innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+
+                        //                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+                        //                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                        //                            }
+                        //                            flag = 1;
+                        //                        }
+                        //                        else { }
+                        //                    });
+
+
+                        //                    if (flag == 1) { }
+                        //                    else {
+                        //                        if (searchByIpOrtxtSearch == "ip") {
+
+                        //                            innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
+                        //                            let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                        //                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+                        //                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+                        //                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                        //                        }
+                        //                        else {
+
+                        //                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></i></span></a>";
+                        //                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+                        //                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+                        //                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
+                        //                        }
+                        //                    }
+                        //                }
+                        //                else { }
+                        //                thisHomePage.isSearchingStart = false;
+
+                        //                console.log(innerHtmlSales);
+                        //                $('#innerHtmlSales').html(innerHtmlSales);
+                        //            },
+                        //            err => {
+                        //                thisHomePage.isSearchingStart = false;
+                        //            }
+                        //        )
+                        //});

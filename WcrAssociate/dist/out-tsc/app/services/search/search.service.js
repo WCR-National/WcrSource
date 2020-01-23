@@ -29,13 +29,12 @@ var SearchService = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        debugger;
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearch1";
-                        console.log(new Date());
-                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { zipcode: zipc, SubCategory: subCategoryId }).toPromise()];
+                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { 'zipcode': zipc, 'SubCategory': subCategoryId }).pipe(map(function (data) {
+                                return data;
+                            })).toPromise()];
                     case 1:
                         result = _a.sent();
-                        console.log(new Date());
                         return [2 /*return*/, result];
                 }
             });

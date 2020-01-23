@@ -1669,73 +1669,6 @@ var HomeComponent = /** @class */ (function () {
                                         }
                                     });
                                 });
-                                //    var subCategoryId = $(doc).find("id").text();
-                                //    console.log(subCategoryId);
-                                //    await thisHomePage.searchService
-                                //        .viewAdvanceSearchByZipcode(zipc, subCategoryId)
-                                //        .then(
-                                //            (data: any) => {
-                                //                if (data.d.length > 0) {
-                                //                    var flag = 0;
-                                //                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                                //                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
-                                //                    var xmlDoc1 = $.parseXML(data.d);
-                                //                    var xml1 = $(xmlDoc1);
-                                //                    var docs1 = xml1.find("GetCategoriesinfo1");
-                                //                    console.log('executed');
-                                //                    $.each(docs1, function (i, doc1)
-                                //                    //for (const doc1 in docs1)
-                                //                    {
-                                //                        console.log($(doc).find("id").text() + "=" + $(doc1).find("Subcategoryid").text());
-                                //                        console.log();
-                                //                        if ($(doc).find("id").text() == $(doc1).find("Subcategoryid").text()) {
-                                //                            if (searchByIpOrtxtSearch == "ip") {
-                                //                                innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
-                                //                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                //                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                //                                innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                                //                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                                //                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                //                            }
-                                //                            else {
-                                //                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                //                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                //                                innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
-                                //                                innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                                //                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                                //                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                //                            }
-                                //                            flag = 1;
-                                //                        }
-                                //                        else { }
-                                //                    });
-                                //                    if (flag == 1) { }
-                                //                    else {
-                                //                        if (searchByIpOrtxtSearch == "ip") {
-                                //                            innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
-                                //                            let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                //                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                                //                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                                //                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                //                        }
-                                //                        else {
-                                //                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></i></span></a>";
-                                //                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                                //                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                                //                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
-                                //                        }
-                                //                    }
-                                //                }
-                                //                else { }
-                                //                thisHomePage.isSearchingStart = false;
-                                //                console.log(innerHtmlSales);
-                                //                $('#innerHtmlSales').html(innerHtmlSales);
-                                //            },
-                                //            err => {
-                                //                thisHomePage.isSearchingStart = false;
-                                //            }
-                                //        )
-                                //});
                                 jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlSales').html(innerHtmlSales);
                                 //thisHomePage.innerHtmlSales = innerHtmlSales;
                                 thisHomePage.resultContent = true;
@@ -1754,32 +1687,45 @@ var HomeComponent = /** @class */ (function () {
         if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var innerHtmlServices, thisHomePage;
+            var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlServices').html("");
-                        innerHtmlServices = "";
-                        thisHomePage = this;
-                        return [4 /*yield*/, thisHomePage.searchService
-                                .getJobtypeWiseCategoryByZipcode()
-                                .subscribe(function (data) {
-                                if (data.d.length > 1) {
-                                    var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                                    var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
-                                    var docs = xml.find("JobCategories");
-                                    jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
-                                        var flag = 0;
-                                        innerHtmlServices += " <div class='col-sm-3 text-center block '>";
-                                        innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                                        innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
-                                        var categoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
-                                        thisHomePage.searchService
-                                            .getViewAdvanceSearchForServices(categoryId, zipc)
-                                            .then(function (data) {
-                                            if (data.d.length > 0) {
-                                                var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                                                var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
-                                                var docs1 = xml1.find("GetCategoriesinfoservices");
+                jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlServices').html("");
+                innerHtmlServices = "";
+                thisHomePage = this;
+                thisHomePage.searchService
+                    .getJobtypeWiseCategoryByZipcode()
+                    .subscribe(function (data) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+                    var xmlDoc, xml, docs, results_2;
+                    return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (!(data.d.length > 1)) return [3 /*break*/, 2];
+                                xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
+                                docs = xml.find("JobCategories");
+                                return [4 /*yield*/, Promise.all(docs.map(function (t) { return thisHomePage.searchService.getViewAdvanceSearchForServices(jquery__WEBPACK_IMPORTED_MODULE_3__(docs[t]).find("ID").text(), zipc); }).ajaxSuccess(function (success) {
+                                        debugger;
+                                        console.log("download : " + success);
+                                    }))];
+                            case 1:
+                                results_2 = _a.sent();
+                                console.log(results_2);
+                                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
+                                    var flag = 0;
+                                    innerHtmlServices += " <div class='col-sm-3 text-center block '>";
+                                    innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                    innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
+                                    var categoryId = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text();
+                                    //thisHomePage.searchService
+                                    //    .getViewAdvanceSearchForServices(categoryId, zipc)
+                                    //    .then(
+                                    //        (data: any) => {
+                                    jquery__WEBPACK_IMPORTED_MODULE_3__["each"](results_2, function (i, data) {
+                                        if (data.d.length > 0) {
+                                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc1);
+                                            var docs1 = xml1.find("GetCategoriesinfoservices");
+                                            if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
                                                 jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs1, function (i, docs1) {
                                                     if (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text() == jquery__WEBPACK_IMPORTED_MODULE_3__(docs1).find("categoryid").text()) {
                                                         if (searchByIpOrtxtSearch == "ip") {
@@ -1804,38 +1750,42 @@ var HomeComponent = /** @class */ (function () {
                                                 });
                                             }
                                             else { }
-                                        }, function (err) {
-                                            thisHomePage.isSearchingStart = false;
-                                        });
-                                        if (flag == 1) { }
+                                        }
                                         else {
-                                            if (searchByIpOrtxtSearch == "ip") {
-                                                innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "  </p>";
-                                                //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
-                                                var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
-                                                //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                                innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
-                                                innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                            }
+                                            innerHtmlServices += " <div class='col-sm-3 text-center block '>";
+                                            innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                            innerHtmlServices += " <h3 class='theme-text-color'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + " </h3>";
+                                            if (flag == 1) { }
                                             else {
-                                                var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
-                                                innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'  alt=''/></i></span>";
-                                                innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
-                                                innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                                if (searchByIpOrtxtSearch == "ip") {
+                                                    innerHtmlServices = "<p>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "  </p>";
+                                                    //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
+                                                    var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("categoryName").text()) + "";
+                                                    //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "  </p>";
+                                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                                }
+                                                else {
+                                                    var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
+                                                    innerHtmlServices += "<span><i><img src='images/icons/" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("catImages").text()) + "'  alt=''/></i></span>";
+                                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + (jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("Detail").text()) + "</p>";
+                                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                                }
                                             }
                                         }
-                                        jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlServices').html(innerHtmlServices);
-                                        //thisHomePage. = innerHtmlServices;
-                                        thisHomePage.resultContent = true;
                                     });
-                                }
-                                else { }
+                                    jquery__WEBPACK_IMPORTED_MODULE_3__('#innerHtmlServices').html(innerHtmlServices);
+                                    //thisHomePage. = innerHtmlServices;
+                                    thisHomePage.resultContent = true;
+                                });
+                                return [3 /*break*/, 2];
+                            case 2:
                                 thisHomePage.isSearchingStart = false;
-                            }, function (err) { thisHomePage.isSearchingStart = false; })];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
+                                return [2 /*return*/];
+                        }
+                    });
+                }); }, function (err) { thisHomePage.isSearchingStart = false; });
+                return [2 /*return*/];
             });
         });
     };
@@ -2214,6 +2164,73 @@ function validateSearchZipCode(control) {
         }
     }
 }
+//    var subCategoryId = $(doc).find("id").text();
+//    console.log(subCategoryId);
+//    await thisHomePage.searchService
+//        .viewAdvanceSearchByZipcode(zipc, subCategoryId)
+//        .then(
+//            (data: any) => {
+//                if (data.d.length > 0) {
+//                    var flag = 0;
+//                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+//                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+//                    var xmlDoc1 = $.parseXML(data.d);
+//                    var xml1 = $(xmlDoc1);
+//                    var docs1 = xml1.find("GetCategoriesinfo1");
+//                    console.log('executed');
+//                    $.each(docs1, function (i, doc1)
+//                    //for (const doc1 in docs1)
+//                    {
+//                        console.log($(doc).find("id").text() + "=" + $(doc1).find("Subcategoryid").text());
+//                        console.log();
+//                        if ($(doc).find("id").text() == $(doc1).find("Subcategoryid").text()) {
+//                            if (searchByIpOrtxtSearch == "ip") {
+//                                innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
+//                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+//                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+//                                innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+//                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+//                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+//                            }
+//                            else {
+//                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+//                                //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+//                                innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
+//                                innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+//                                innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+//                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+//                            }
+//                            flag = 1;
+//                        }
+//                        else { }
+//                    });
+//                    if (flag == 1) { }
+//                    else {
+//                        if (searchByIpOrtxtSearch == "ip") {
+//                            innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
+//                            let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+//                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+//                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+//                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+//                        }
+//                        else {
+//                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></i></span></a>";
+//                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+//                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+//                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
+//                        }
+//                    }
+//                }
+//                else { }
+//                thisHomePage.isSearchingStart = false;
+//                console.log(innerHtmlSales);
+//                $('#innerHtmlSales').html(innerHtmlSales);
+//            },
+//            err => {
+//                thisHomePage.isSearchingStart = false;
+//            }
+//        )
+//});
 
 
 /***/ }),
@@ -3638,7 +3655,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
+module.exports = __webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
 
 
 /***/ })

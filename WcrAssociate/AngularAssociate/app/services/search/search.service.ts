@@ -91,19 +91,16 @@ export class SearchService {
 
     async getAdvanceSearchCityStateWise(state, city, subCategoryId) {
 
-
         let urlToAdvanceSearch: string = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
-        //    data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}"
+        return await this.apiService.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise();
 
+        //    data: "{'State':'" + State + "','City':'" + City + "','SubCategory':" + ($(docs).find("id").text()) + "}"
         //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId })
         //    .pipe(map(
         //        data => {
         //            return data;
         //        }
         //    ));
-
-        return await this.http.post(urlToAdvanceSearch, { State: state, City: city, SubCategory: subCategoryId }).toPromise();
-
     }
 
 
