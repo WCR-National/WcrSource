@@ -2,10 +2,12 @@ import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'AngularAssociate/app/services/search';
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(route, router, userService) {
+    function HeaderComponent(route, router, _messageService, userService) {
         this.route = route;
         this.router = router;
+        this._messageService = _messageService;
         this.userService = userService;
     }
     HeaderComponent.prototype.ngOnInit = function () {
@@ -13,6 +15,9 @@ var HeaderComponent = /** @class */ (function () {
         this.userService.currentUser.subscribe(function (userData) {
             _this.currentUser = userData;
         });
+    };
+    HeaderComponent.prototype.onClickGetAds = function () {
+        this._messageService.filter('Register click');
     };
     HeaderComponent.prototype.onClickLogout = function () {
         var _this = this;
@@ -34,7 +39,7 @@ var HeaderComponent = /** @class */ (function () {
             selector: 'app-layout-header',
             templateUrl: './header.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router,
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, MessageService,
             UserService])
     ], HeaderComponent);
     return HeaderComponent;

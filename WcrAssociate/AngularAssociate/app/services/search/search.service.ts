@@ -22,10 +22,10 @@ export class SearchService {
         private apiService: ApiService,
         private http: HttpClient,
         private jwtService: JwtService
-    ) { }
-
-
-
+    ) {
+        //console.log((platformLocation as any).location);
+        //console.log((platformLocation as any).location.origin);
+    }
 
     //For sales
     subCategoriesByZipcode(zipc): Observable<any> {
@@ -72,7 +72,7 @@ export class SearchService {
         //        }
         //    ));
 
-        return await this.http.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise();
+        return await this.apiService.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise();
 
     }
 
@@ -129,23 +129,24 @@ export class SearchService {
         //        }
         //    ));
 
-        return await this.http.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise();
+        return await this.apiService.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise();
 
     }
 
     //For IPAddress
-    async attemptGetSalesAdts() {
+    //async attemptGetSalesAdts() {
 
-        let urlToGetIP: string = "https://jsonip.com?=callback";
-        return await  this.http.get<any>(urlToGetIP)
-            .pipe(map(
-                data => {
-                    let _ipAddress = data.ip;
-                    this.attemptGetZipCodeByIPAddress(_ipAddress);
+    //    let urlToGetIP: string = "http://jsonip.com?=callback";
+    //    return await this.apiService.get<any>(urlToGetIP)
+    //        .pipe(map(
+    //            data => {
+    //                debugger;
+    //                let _ipAddress = data.ip;
+    //                this.attemptGetZipCodeByIPAddress(_ipAddress);
 
-                }
-            )).toPromise();
-    }
+    //            }
+    //        )).toPromise();
+    //}
 
     async attemptGetZipCodeByIPAddress(_ipAddress) {
         let urlToGetZipCodeByIpAddress = "ws/TopSearch.asmx/GetZipCodeIpAddress";

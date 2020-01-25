@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 
 import { UserService } from '../../services/auth';
 import { User } from '../../entities/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debug } from 'util';
+import { HomeComponent } from 'AngularAssociate/app/components/home/home.component';
+import { MessageService } from 'AngularAssociate/app/services/search';
 
 @Component({
     selector: 'app-layout-header',
     templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
-    constructor(private route: ActivatedRoute, private router: Router,
+
+
+    constructor(private route: ActivatedRoute, private router: Router, private _messageService: MessageService,
         private userService: UserService
     ) { }
 
@@ -21,6 +25,9 @@ export class HeaderComponent implements OnInit {
                 this.currentUser = userData;
             }
         );
+    }
+    onClickGetAds() {
+        this._messageService.filter('Register click');
     }
 
     onClickLogout() {

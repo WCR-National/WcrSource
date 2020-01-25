@@ -2,13 +2,15 @@ import * as tslib_1 from "tslib";
 import { Component, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as $ from 'jquery';
-import { SearchService } from '../../services/search';
+import { SearchService, MessageService } from '../../services/search';
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(fb, renderer, searchService, platformId) {
+    function HomeComponent(fb, renderer, searchService, platformId, _messageService) {
+        var _this = this;
         this.fb = fb;
         this.renderer = renderer;
         this.searchService = searchService;
         this.platformId = platformId;
+        this._messageService = _messageService;
         this.isSearchingStart = false;
         this.resultContent = false;
         this.errorMessage = "";
@@ -32,11 +34,15 @@ var HomeComponent = /** @class */ (function () {
         this.formErrors = {
             'txtSearch': ''
         };
+        this._messageService.listen().subscribe(function (m) {
+            console.log(m);
+            _this.GetSalesAdts();
+        });
     }
     HomeComponent.prototype.ngOnInit = function () {
         $('#divLandingPage').focus();
         this.parallaxBG();
-        this.GetSalesAdts();
+        //this.GetSalesAdts();
         this.initializeFormsAndEvents();
     };
     HomeComponent.prototype.initializeFormsAndEvents = function () {
@@ -175,6 +181,7 @@ var HomeComponent = /** @class */ (function () {
             var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 $('#innerHtmlSales').html("");
+                this.innerHtmlSales = "";
                 innerHtmlSales = "";
                 thisHomePage = this;
                 console.log('executed');
@@ -207,56 +214,60 @@ var HomeComponent = /** @class */ (function () {
                                             console.log('executed');
                                             if ($(doc).find("id").text() == $(docs1[0]).find("Subcategoryid").text()) {
                                                 innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                                                innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+                                                innerHtmlSales += "   <div class='card white darken-1' >";
                                                 $.each(docs1, function (i, doc1) {
                                                     debugger;
                                                     console.log($(doc).find("id").text() + ',' + $(doc1).find("Subcategoryid").text());
                                                     if ($(doc).find("id").text() == $(doc1).find("Subcategoryid").text()) {
-                                                        if (searchByIpOrtxtSearch == "ip") {
-                                                            innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
-                                                            var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                                            //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                                        }
-                                                        else {
-                                                            var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                                            //innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
-                                                            innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
-                                                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                                        }
+                                                        var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                                        ////innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+                                                        //innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
+                                                        //innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
+                                                        //innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+                                                        //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                                                        innerHtmlSales += "     <div class='card-content pd-0-force card-image-section card-image-section' >";
+                                                        innerHtmlSales += "         <img class='card-image-size' src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/>";
+                                                        innerHtmlSales += "     </div>";
+                                                        innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
+                                                        innerHtmlSales += '         <span class="card-title">' + ($(doc).find("name").text()) + '</span>';
+                                                        innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(doc).find("detail").text()) + "</p>";
+                                                        innerHtmlSales += "     </div>";
+                                                        innerHtmlSales += '       <div class="card-action text-center">';
+                                                        innerHtmlSales += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a>";
+                                                        innerHtmlSales += '      </div>';
                                                         flag = 1;
                                                     }
                                                 });
+                                                innerHtmlSales += '   </div>';
+                                                innerHtmlSales += "</div>";
                                             }
                                         }
                                         else {
                                         }
                                     });
-                                    if (flag == 1) { }
-                                    else {
-                                        innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                                        innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
-                                        if (searchByIpOrtxtSearch == "ip") {
-                                            innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
-                                            var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                        }
+                                    if (!data.d.includes("GetCategoriesinfo1")) {
+                                        if (flag == 1) { }
                                         else {
-                                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></i></span></a>";
-                                            innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
-                                            innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
-                                            innerHtmlSales += "<a class='waves-effect waves-light btn' href='SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate'>View More</a></div></div>";
+                                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                            innerHtmlSales += "   <div class='card white darken-1' >";
+                                            innerHtmlSales += "     <div class='card-content pd-0-force card-image-section' >";
+                                            innerHtmlSales += "         <img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/>";
+                                            innerHtmlSales += "     </div>";
+                                            innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
+                                            innerHtmlSales += '         <span class="card-title">' + ($(doc).find("name").text()) + '</span>';
+                                            innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(doc).find('detail').text()) + "</p>";
+                                            innerHtmlSales += "     </div>";
+                                            innerHtmlSales += '       <div class="card-action text-center">';
+                                            innerHtmlSales += "           <a class='waves-effect waves-light btn' href='SalesAdvertisementList.html ? ca = 0 & id=" + ($(doc).find("id").text()) + " & zipcode=" + zipc + " & name=" + ($(doc).find("name").text()) + " & jtype=Sales & catName=RealEstate'>View More</a>";
+                                            innerHtmlSales += '      </div>';
+                                            innerHtmlSales += '   </div>';
+                                            innerHtmlSales += "</div>";
                                         }
                                     }
                                 });
-                                $('#innerHtmlSales').html(innerHtmlSales);
+                                //$('#innerHtmlSales').html(innerHtmlSales);
                                 //thisHomePage.innerHtmlSales = innerHtmlSales;
+                                thisHomePage.innerHtmlSales = innerHtmlSales;
                                 thisHomePage.resultContent = true;
                                 return [3 /*break*/, 2];
                             case 2:
@@ -275,7 +286,8 @@ var HomeComponent = /** @class */ (function () {
             var innerHtmlServices, thisHomePage;
             var _this = this;
             return tslib_1.__generator(this, function (_a) {
-                $('#innerHtmlServices').html("");
+                //$('#innerHtmlServices').html("");
+                this.innerHtmlServices = "";
                 innerHtmlServices = "";
                 thisHomePage = this;
                 thisHomePage.searchService
@@ -300,37 +312,37 @@ var HomeComponent = /** @class */ (function () {
                                     var categoryId = $(docs).find("ID").text();
                                     $.each(results_2, function (i, data) {
                                         if (data.d.length > 0 && data.d.includes('GetCategoriesinfoservices')) {
-                                            debugger;
                                             var xmlDoc1 = $.parseXML(data.d);
                                             var xml1 = $(xmlDoc1);
                                             var docs1 = xml1.find("GetCategoriesinfoservices");
                                             if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
-                                                innerHtmlServices += " <div class='col-sm-3 text-center block '>";
-                                                innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                                innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                                innerHtmlServices += "  <div class='card white darken-1' >";
                                                 $.each(docs1, function (i, docs1) {
                                                     if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
-                                                        if (searchByIpOrtxtSearch == "ip") {
-                                                            console.log('entered in ' + searchByIpOrtxtSearch);
-                                                            innerHtmlServices = "<p>" + ($(docs).find("categoryName").text()) + "</p>";
-                                                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
-                                                            //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                                            innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
-                                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
-                                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                                        }
-                                                        else {
-                                                            console.log('entered in ' + searchByIpOrtxtSearch);
-                                                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
-                                                            //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                                            innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span>";
-                                                            innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
-                                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
-                                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                                        }
+                                                        console.log('entered in ' + searchByIpOrtxtSearch);
+                                                        var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                                        ////innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
+                                                        //innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span>";
+                                                        //innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
+                                                        //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
+                                                        //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                                        innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
+                                                        innerHtmlServices += "         <img class='card-image-size' src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/>";
+                                                        innerHtmlServices += "     </div>";
+                                                        innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
+                                                        innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
+                                                        innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
+                                                        innerHtmlServices += "     </div>";
+                                                        innerHtmlServices += '       <div class="card-action text-center">';
+                                                        innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a>";
+                                                        innerHtmlServices += '      </div>';
                                                         flag = 1;
                                                     }
                                                     else { }
                                                 });
+                                                innerHtmlServices += '   </div>';
+                                                innerHtmlServices += "</div>";
                                             }
                                             else { }
                                         }
@@ -338,28 +350,35 @@ var HomeComponent = /** @class */ (function () {
                                             debugger;
                                         }
                                     });
-                                    if (flag == 1) { }
-                                    else {
-                                        innerHtmlServices += " <div class='col-sm-3 text-center block '>";
-                                        innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                                        innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
-                                        if (searchByIpOrtxtSearch == "ip") {
-                                            innerHtmlServices = "<p>" + ($(docs).find("categoryName").text()) + "  </p>";
-                                            //innerHtmlServices = "<p>" + ($(docs).find("Detail").text()) + "  </p>";
-                                            var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
-                                            //innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
-                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
-                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                        }
+                                    if (!data.d.includes("GetCategoriesinfoservices")) {
+                                        if (flag == 1) { }
                                         else {
                                             var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
-                                            innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span>";
-                                            innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
-                                            innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                            //innerHtmlServices += " <div class='col-sm-3 text-center block '>";
+                                            //innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                            //innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span>";
+                                            //innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
+                                            //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
+                                            //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                            innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                            innerHtmlServices += "  <div class='card white darken-1' >";
+                                            innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
+                                            innerHtmlServices += "         <img class='image-size-icons-without-ip ' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/>";
+                                            innerHtmlServices += "     </div>";
+                                            innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
+                                            innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
+                                            innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
+                                            innerHtmlServices += "     </div>";
+                                            innerHtmlServices += '       <div class="card-action text-center">';
+                                            innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a>";
+                                            innerHtmlServices += '      </div>';
+                                            innerHtmlServices += '   </div>';
+                                            innerHtmlServices += "</div>";
                                         }
                                     }
                                 });
-                                $('#innerHtmlServices').html(innerHtmlServices);
+                                thisHomePage.innerHtmlServices = innerHtmlServices;
+                                //$('#innerHtmlServices').html(innerHtmlServices);
                                 //thisHomePage. = innerHtmlServices;
                                 thisHomePage.resultContent = true;
                                 return [3 /*break*/, 2];
@@ -379,6 +398,7 @@ var HomeComponent = /** @class */ (function () {
             var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 innerHtmlSales = "";
+                this.innerHtmlSales = "";
                 thisHomePage = this;
                 thisHomePage.searchService
                     .getSalesCategoryCityWise(state, city)
@@ -399,6 +419,7 @@ var HomeComponent = /** @class */ (function () {
                                 results_3 = _a.sent();
                                 console.log(results_3);
                                 $.each(docs, function (i, docs) {
+                                    var flag = 0;
                                     var subCategoryId = $(docs).find("id").text();
                                     $.each(results_3, function (i, data) {
                                         //thisHomePage.searchService
@@ -411,34 +432,34 @@ var HomeComponent = /** @class */ (function () {
                                             var xml1 = $(xmlDoc1);
                                             var docs1 = xml1.find("GetCategoriesinfoCity");
                                             if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
-                                                innerHtmlSales += " <div class='col-sm-3 text-center block '>";
-                                                innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                                innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                                innerHtmlSales += "  <div class='card white darken-1' >";
                                                 $.each(docs1, function (i, docs1) {
                                                     if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
                                                         var urlToSalesAdvertisement = 'SalesAdvertisementList.html?ca=0&id="' + ($(docs).find("id").text()) + '"&zipcode="' + $(docs1).find("Zipcode").text() + '"&name="' + ($(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
                                                         //innerHtmlSales += "<a href='" + urlToSalesAdvertisement + "'>";
-                                                        innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span>";
-                                                        innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
-                                                        innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p></div></div>";
-                                                        innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                                        //innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span>";
+                                                        //innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
+                                                        //innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p>";
+                                                        //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                                        innerHtmlSales += "     <div class='card-content pd-0-force card-image-section' >";
+                                                        innerHtmlSales += "         <img class='card-image-size' src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/>";
+                                                        innerHtmlSales += "     </div>";
+                                                        innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
+                                                        innerHtmlSales += '         <span class="card-title">' + ($(docs).find("name").text()) + '</span>';
+                                                        innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
+                                                        innerHtmlSales += "     </div>";
+                                                        innerHtmlSales += '       <div class="card-action text-center">';
+                                                        innerHtmlSales += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
+                                                        innerHtmlSales += '      </div>';
                                                         flag = 1;
                                                     }
                                                     else { }
                                                 });
+                                                innerHtmlSales += '   </div>';
                                             }
                                         }
                                         else {
-                                            if (flag == 1) { }
-                                            else {
-                                                innerHtmlSales += " <div class='col-sm-3 text-center block '>";
-                                                innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                                                var urlToSalesAdvertisement = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
-                                                //innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
-                                                innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'/></i></span>";
-                                                innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
-                                                innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + ($(docs).find("detail").text()) + " </p>";
-                                                innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
-                                            }
                                         }
                                     }
                                     //,
@@ -446,8 +467,35 @@ var HomeComponent = /** @class */ (function () {
                                     //    thisHomePage.isSearchingStart = false;
                                     //}
                                     );
+                                    if (!data.d.includes('GetCategoriesinfoCity')) {
+                                        if (flag == 1) { }
+                                        else {
+                                            //innerHtmlSales += " <div class='col-sm-3 text-center block '>";
+                                            //innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                            var urlToSalesAdvertisement = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                            //innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
+                                            //innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'/></i></span>";
+                                            //innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
+                                            //innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + ($(docs).find("detail").text()) + " </p>";
+                                            //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                            innerHtmlSales += "  <div class='card white darken-1' >";
+                                            innerHtmlSales += "     <div class='card-content pd-0-force card-image-section' >";
+                                            innerHtmlSales += "         <img class='card-image-size' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'  alt=''/>";
+                                            innerHtmlSales += "     </div>";
+                                            innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
+                                            innerHtmlSales += '         <span class="card-title">' + ($(docs).find("name").text()) + '</span>';
+                                            innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
+                                            innerHtmlSales += "     </div>";
+                                            innerHtmlSales += '       <div class="card-action text-center">';
+                                            innerHtmlSales += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
+                                            innerHtmlSales += '      </div>';
+                                            innerHtmlSales += '   </div>';
+                                            innerHtmlSales += "</div>";
+                                        }
+                                    }
                                 });
-                                $('#innerHtmlSales').html(innerHtmlSales);
+                                //$('#innerHtmlSales').html(innerHtmlSales);
                                 thisHomePage.innerHtmlSales = innerHtmlSales;
                                 thisHomePage.resultContent = true;
                                 return [3 /*break*/, 2];
@@ -469,6 +517,7 @@ var HomeComponent = /** @class */ (function () {
             var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 innerHtmlServices = "";
+                this.innerHtmlServices = "";
                 thisHomePage = this;
                 thisHomePage.searchService
                     .getServicesCategoryCityWise(state, city)
@@ -487,6 +536,7 @@ var HomeComponent = /** @class */ (function () {
                             case 1:
                                 results_4 = _a.sent();
                                 $.each(docs, function (i, docs) {
+                                    var flag = 0;
                                     var subCategoryId = $(docs).find("ID").text();
                                     $.each(results_4, function (i, data) {
                                         //thisHomePage.searchService
@@ -494,25 +544,36 @@ var HomeComponent = /** @class */ (function () {
                                         //    .then(
                                         //        (data: any) => {
                                         if (data.d.length > 0 && data.d.includes('GetsubCategoriesinfoservices')) {
-                                            var flag = 0;
                                             var xmlDoc1 = $.parseXML(data.d);
                                             var xml1 = $(xmlDoc1);
                                             var docs1 = xml1.find("GetsubCategoriesinfoservices");
                                             if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
-                                                innerHtmlServices += " <div class=' col-sm-3 text-center block '>";
-                                                innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                                innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                                innerHtmlServices += "  <div class='card white darken-1' >";
                                                 $.each(docs1, function (i, docs1) {
                                                     if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
                                                         var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
-                                                        innerHtmlServices += "<a href='" + urlToSalesAdvertisement + "'>";
-                                                        innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span></a>";
-                                                        innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
-                                                        innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p>";
-                                                        innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                                        //innerHtmlServices += "<a href='" + urlToSalesAdvertisement + "'>";
+                                                        //innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span></a>";
+                                                        //innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
+                                                        //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p>";
+                                                        //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                                        innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
+                                                        innerHtmlServices += "         <img class='card-image-size' src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/>";
+                                                        innerHtmlServices += "     </div>";
+                                                        innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
+                                                        innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
+                                                        innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
+                                                        innerHtmlServices += "     </div>";
+                                                        innerHtmlServices += '       <div class="card-action text-center">';
+                                                        innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
+                                                        innerHtmlServices += '      </div>';
                                                         flag = 1;
                                                     }
                                                     else { }
                                                 });
+                                                innerHtmlServices += '   </div>';
+                                                innerHtmlServices += "</div>";
                                             }
                                             else {
                                             }
@@ -520,15 +581,6 @@ var HomeComponent = /** @class */ (function () {
                                         else {
                                             if (flag == 1) { }
                                             else {
-                                                innerHtmlServices += " <div class=' col-sm-3 text-center block '>";
-                                                innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
-                                                var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=0&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
-                                                //innerHtmlSales += "<a href=''>";
-                                                innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'/></i></span>";
-                                                //innerHtmlServices += "</a>";
-                                                innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
-                                                innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p>";
-                                                innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
                                             }
                                         }
                                     }
@@ -537,9 +589,37 @@ var HomeComponent = /** @class */ (function () {
                                     //        thisHomePage.isSearchingStart = false;
                                     //    }
                                     );
+                                    if (!data.d.includes('GetsubCategoriesinfoservices')) {
+                                        if (flag == 1) { }
+                                        else {
+                                            innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                            innerHtmlServices += "  <div class='card white darken-1' >";
+                                            var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=0&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
+                                            //innerHtmlSales += "<a href=''>";
+                                            //innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'/></i></span>";
+                                            ////innerHtmlServices += "</a>";
+                                            //innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
+                                            //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p>";
+                                            //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
+                                            innerHtmlServices;
+                                            innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
+                                            innerHtmlServices += "         <img class=image-size-icons-without-ip' src='images/icons/" + ($(docs).find("catImages").text()) + "'/>";
+                                            innerHtmlServices += "     </div>";
+                                            innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
+                                            innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
+                                            innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
+                                            innerHtmlServices += "     </div>";
+                                            innerHtmlServices += '       <div class="card-action text-center">';
+                                            innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
+                                            innerHtmlServices += '      </div>';
+                                            innerHtmlServices;
+                                            innerHtmlServices += '   </div>';
+                                            innerHtmlServices += "</div>";
+                                        }
+                                    }
                                 });
-                                $('#innerHtmlServices').html(innerHtmlServices);
-                                //thisHomePage.innerHtmlServices = innerHtmlServices;
+                                //$('#innerHtmlServices').html(innerHtmlServices);
+                                thisHomePage.innerHtmlServices = innerHtmlServices;
                                 thisHomePage.resultContent = true;
                                 return [3 /*break*/, 2];
                             case 2:
@@ -553,22 +633,141 @@ var HomeComponent = /** @class */ (function () {
         });
     };
     HomeComponent.prototype.GetSalesAdts = function () {
-        var _this = this;
-        this.searchService
-            .attemptGetSalesAdts()
-            .subscribe(function (data) {
-            if (data.d.length > 0) {
-                var salesn = _this.bindSalesCategory(data.d, "ip");
-                var servicesn = _this.bindServiesCategory(data.d, "ip");
-            }
-            else {
-                return null;
-            }
-            _this.isSearchingStart = false;
-            _this.resultContent = true;
-        }, function (err) {
-            _this.isSearchingStart = false;
-            return null;
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var globalThis;
+            return tslib_1.__generator(this, function (_a) {
+                debugger;
+                this.isSearchingStart = true;
+                globalThis = this;
+                $.getJSON("http://jsonip.com?callback=?", function (data) {
+                    var _IPAddress = data.ip;
+                    if (_IPAddress.length > 0) {
+                        globalThis.searchService.
+                            attemptGetZipCodeByIPAddress(_IPAddress)
+                            .then(function (data) {
+                            if (data.d.length > 0) {
+                                globalThis.bindSalesCategoryByIP(data.d, "ip");
+                                globalThis.bindServiesCategoryByIP(data.d, "ip");
+                            }
+                        });
+                    }
+                    else {
+                        return null;
+                    }
+                    this.isSearchingStart = false;
+                    this.resultContent = true;
+                    console.log(_IPAddress);
+                });
+                return [2 /*return*/];
+            });
+        });
+    };
+    HomeComponent.prototype.bindSalesCategoryByIP = function (zipc, searchByIpOrtxtSearch) {
+        if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var innerHtmlSales, thisHomePage;
+            var _this = this;
+            return tslib_1.__generator(this, function (_a) {
+                $('#innerHtmlSales').html("");
+                this.innerHtmlSales = "";
+                innerHtmlSales = "";
+                thisHomePage = this;
+                console.log('executed');
+                thisHomePage.searchService
+                    .subCategoriesByZipcode(zipc)
+                    .subscribe(function (data) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                    var xmlDoc, xml, docs_2, results;
+                    return tslib_1.__generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                debugger;
+                                if (!(data.d.length > 1)) return [3 /*break*/, 2];
+                                xmlDoc = $.parseXML(data.d);
+                                xml = $(xmlDoc);
+                                docs_2 = xml.find("subCategories");
+                                return [4 /*yield*/, Promise.all(docs_2.map(function (t) { return thisHomePage.searchService.viewAdvanceSearchByZipcode(zipc, $(docs_2[t]).find("id").text()); }).ajaxSuccess(function (success) {
+                                        debugger;
+                                        console.log("download : " + success);
+                                    }))];
+                            case 1:
+                                results = _a.sent();
+                                console.log(results);
+                                $.each(docs_2, function (i, doc) {
+                                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+                                    //innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
+                                    var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                                    innerHtmlSales += "<span><i><img class='image-size-icons' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></i></span>";
+                                    innerHtmlSales += "<h3 class='theme-text-color' style='float:right !important'>" + ($(doc).find("name").text()) + "</h3>";
+                                    innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
+                                    innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
+                                });
+                                //$('#innerHtmlSales').html(innerHtmlSales);
+                                //thisHomePage.innerHtmlSales = innerHtmlSales;
+                                thisHomePage.innerHtmlSales = innerHtmlSales;
+                                thisHomePage.resultContent = true;
+                                return [3 /*break*/, 2];
+                            case 2:
+                                thisHomePage.isSearchingStart = false;
+                                return [2 /*return*/];
+                        }
+                    });
+                }); }, function (err) { thisHomePage.isSearchingStart = false; });
+                return [2 /*return*/];
+            });
+        });
+    };
+    HomeComponent.prototype.bindServiesCategoryByIP = function (zipc, searchByIpOrtxtSearch) {
+        if (searchByIpOrtxtSearch === void 0) { searchByIpOrtxtSearch = "txtSearch"; }
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var innerHtmlServices, thisHomePage;
+            var _this = this;
+            return tslib_1.__generator(this, function (_a) {
+                //$('#innerHtmlServices').html("");
+                this.innerHtmlServices = "";
+                innerHtmlServices = "";
+                thisHomePage = this;
+                thisHomePage.searchService
+                    .getJobtypeWiseCategoryByZipcode()
+                    .subscribe(function (data) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+                    var xmlDoc, xml, docs, results;
+                    return tslib_1.__generator(this, function (_a) {
+                        switch (_a.label) {
+                            case 0:
+                                if (!(data.d.length > 1)) return [3 /*break*/, 2];
+                                xmlDoc = $.parseXML(data.d);
+                                xml = $(xmlDoc);
+                                docs = xml.find("JobCategories");
+                                return [4 /*yield*/, Promise.all(docs.map(function (t) { return thisHomePage.searchService.getViewAdvanceSearchForServices($(docs[t]).find("ID").text(), zipc); }).ajaxSuccess(function (success) {
+                                        console.log("download : " + success);
+                                    }))];
+                            case 1:
+                                results = _a.sent();
+                                console.log(results);
+                                $.each(docs, function (i, docs) {
+                                    var flag = 0;
+                                    var categoryId = $(docs).find("ID").text();
+                                    innerHtmlServices += " <div class='col-sm-3 text-center block '>";
+                                    innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30 pd-t-35'>";
+                                    var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+                                    innerHtmlServices += "<span><i><img class='image-size-icons' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span>";
+                                    innerHtmlServices += " <h3 class='theme-text-color' style='float:right !important'>" + ($(docs).find("categoryName").text()) + " </h3>";
+                                    innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
+                                    innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
+                                });
+                                thisHomePage.innerHtmlServices = innerHtmlServices;
+                                //$('#innerHtmlServices').html(innerHtmlServices);
+                                //thisHomePage. = innerHtmlServices;
+                                thisHomePage.resultContent = true;
+                                return [3 /*break*/, 2];
+                            case 2:
+                                thisHomePage.isSearchingStart = false;
+                                return [2 /*return*/];
+                        }
+                    });
+                }); }, function (err) { thisHomePage.isSearchingStart = false; });
+                return [2 /*return*/];
+            });
         });
     };
     HomeComponent.prototype.xml2json = function (xml, tab) {
@@ -738,7 +937,7 @@ var HomeComponent = /** @class */ (function () {
             templateUrl: './home.component.html'
         }),
         tslib_1.__param(3, Inject(PLATFORM_ID)),
-        tslib_1.__metadata("design:paramtypes", [FormBuilder, Renderer2, SearchService, Object])
+        tslib_1.__metadata("design:paramtypes", [FormBuilder, Renderer2, SearchService, Object, MessageService])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -773,8 +972,8 @@ function validateSearchZipCode(control) {
                 }
                 else {
                     if (listOfValues[1] !== undefined) {
-                        if (listOfValues[1].length != 2) {
-                            return { 'statePattern': true };
+                        if (listOfValues[1].length >= 2) {
+                            return null;
                         }
                     }
                     else {
@@ -803,6 +1002,319 @@ function validateSearchZipCode(control) {
         }
     }
 }
+//bindSalesCategory1(zipc) {
+//    var innerHtmlSales = "";
+//    let thisHomePage = this;
+//    thisHomePage.searchService
+//        .attemptGetSalesCategoryByZip(zipc)
+//        .subscribe(
+//            data => {
+//                if (data.d.length > 0) {
+//                    var xmlDoc = $.parseXML(data.d);
+//                    var xml = $(xmlDoc);
+//                    var docs = xml.find("subCategories");
+//                    $.each(docs, function (i, docs) {
+//                        var flag = 0;
+//                        innerHtmlSales += " <div class='col-sm-3 text-center block'>";
+//                        innerHtmlSales += " <div class='fullrow innerblock'>";
+//                        innerHtmlSales += " <h3>" + ($(docs).find("name").text()) + " </h3>";
+//                        var subCategoryId = $(docs).find("id").text();
+//                        thisHomePage.searchService
+//                            .attemptGetAdvanceSearchByZipc(zipc, subCategoryId)
+//                            .subscribe(
+//                                data => {
+//                                    if (data.d.length > 0) {
+//                                        var xmlDoc1 = $.parseXML(data.d);
+//                                        var xml1 = $(xmlDoc1);
+//                                        var docs1 = xml1.find("GetCategoriesinfo1");
+//                                        $.each(docs1, function (i, docs1) {
+//                                            if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+//                                                let urlToSalesAdvertisementList: string = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + $(docs1).find("Zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+//                                                innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
+//                                                innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></i></span></a></div></div>";
+//                                                flag = 1;
+//                                            }
+//                                            else { }
+//                                        });
+//                                    }
+//                                    else { }
+//                                },
+//                                err => {
+//                                    thisHomePage.isSearchingStart = false;
+//                                }
+//                            );
+//                        if (flag == 1) { }
+//                        else {
+//                            innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
+//                            innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'  alt=''/></i></span></a></div></div>";
+//                        }
+//                    });
+//                }
+//                else { }
+//            },
+//            err => { thisHomePage.isSearchingStart = false; }
+//    );
+//    return innerHtmlSales;
+//}
+//bindServiesCategory1(zipc) {
+//    var innerHtmlSales = "";
+//    let thisHomePage = this;
+//    thisHomePage.searchService
+//        .attemptGetJobtypeWiseCategory()
+//        .subscribe(
+//            data => {
+//                if (data.d.length > 1) {
+//                    var xmlDoc = $.parseXML(data.d);
+//                    var xml = $(xmlDoc);
+//                    var docs = xml.find("JobCategories");
+//                    $.each(docs, function (i, docs) {
+//                        var flag = 0;
+//                        innerHtmlSales += " <div class='col-sm-3 text-center block'>";
+//                        innerHtmlSales += " <div class='fullrow innerblock'>";
+//                        innerHtmlSales += " <h3>" + ($(docs).find("categoryName").text()) + " </h3>";
+//                        var jobTypeId = $(docs).find("ID").text();
+//                        thisHomePage.searchService
+//                            .attemptGetViewAdvanceSearchForServices(jobTypeId, zipc)
+//                            .subscribe(
+//                                data => {
+//                                    if (data.d.length > 0) {
+//                                        var xmlDoc1 = $.parseXML(data.d);
+//                                        var xml1 = $(xmlDoc1);
+//                                        var docs1 = xml1.find("GetCategoriesinfoservices");
+//                                        $.each(docs1, function (i, docs1) {
+//                                            if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
+//                                                let urlToServiceProfileList: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
+//                                                innerHtmlSales += "<a href='" + urlToServiceProfileList + "'>";
+//                                                innerHtmlSales += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span></a></div></div>";
+//                                                flag = 1;
+//                                            }
+//                                            else { }
+//                                        });
+//                                    }
+//                                    else { }
+//                                },
+//                                err => {
+//                                    thisHomePage.isSearchingStart = false;
+//                                }
+//                            );
+//                        if (flag == 1) { }
+//                        else {
+//                            innerHtmlSales += "<a href='ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate'>";
+//                            innerHtmlSales += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span></a></div></div>";
+//                        }
+//                    });
+//                }
+//                else { }
+//            },
+//            err => { thisHomePage.isSearchingStart = false; }
+//    );
+//    return innerHtmlSales;
+//}
+/*----------------------------------------------------*/
+/*  Parallax
+/*----------------------------------------------------*/
+/* fix vertical when not overflow
+call fullscreenFix() if .fullscreen content changes */
+//fullscreenFix() {
+//    var h = $('body').height();
+//    // set .fullscreen height
+//    $(".content-b").each(function (i) {
+//        if ($(this).innerHeight() > h) {
+//            $(this).closest(".fullscreen").addClass("overflow");
+//        }
+//    });
+//}
+///* resize background images */
+//backgroundResize() {
+//    var windowH = $(window).height();
+//    $(".parallax").each(function (i) {
+//        let path = $(this);
+//        // variables
+//        let contW = path.width();
+//        let contH = path.height();
+//        Number imgW = path.attr("data-img-width");
+//        Number imgH = path.attr("data-img-height");
+//        let ratio = imgW / imgH;
+//        // overflowing difference
+//        let diff = 100;
+//        diff = diff ? diff : 0;
+//        // remaining height to have fullscreen image only on parallax
+//        let remainingH = 0;
+//        if (path.hasClass("parallax") && !$("html").hasClass("touch")) {
+//            //var maxH = contH > windowH ? contH : windowH;
+//            remainingH = windowH - contH;
+//        }
+//        // set img values depending on cont
+//        imgH = contH + remainingH + diff;
+//        imgW = imgH * ratio;
+//        // fix when too large
+//        if (contW > imgW) {
+//            imgW = contW;
+//            imgH = imgW / ratio;
+//        }
+//        //
+//        path.data("resized-imgW", imgW);
+//        path.data("resized-imgH", imgH);
+//        path.css("background-size", imgW + "px " + imgH + "px");
+//    });
+//}
+///* set parallax background-position */
+//parallaxPosition(e) {
+//    var heightWindow = $(window).height();
+//    var topWindow = $(window).scrollTop();
+//    var bottomWindow = topWindow + heightWindow;
+//    var currentWindow = (topWindow + bottomWindow) / 2;
+//    $(".parallax").each(function (i) {
+//        var path = $(this);
+//        var height = path.height();
+//        var top = path.offset().top;
+//        var bottom = top + height;
+//        // only when in range
+//        if (bottomWindow > top && topWindow < bottom) {
+//            //var imgW = path.data("resized-imgW");
+//            var imgH = path.data("resized-imgH");
+//            // min when image touch top of window
+//            var min = 0;
+//            // max when image touch bottom of window
+//            var max = - imgH + heightWindow;
+//            // overflow changes parallax
+//            var overflowH = height < heightWindow ? imgH - height : imgH - heightWindow; // fix height on overflow
+//            top = top - overflowH;
+//            bottom = bottom + overflowH;
+//            // value with linear interpolation
+//            // var value = min + (max - min) * (currentWindow - top) / (bottom - top);
+//            var value = 0;
+//            if ($('.parallax').is(".titlebar")) {
+//                value = min + (max - min) * (currentWindow - top) / (bottom - top) * 2;
+//            } else {
+//                value = min + (max - min) * (currentWindow - top) / (bottom - top);
+//            }
+//            // set background-position
+//            var orizontalPosition = path.attr("data-oriz-pos");
+//            orizontalPosition = orizontalPosition ? orizontalPosition : "50%";
+//            $(this).css("background-position", orizontalPosition + " " + value + "px");
+//        }
+//    });
+//}
+//dataSaved = false;
+//purchaseForm: FormGroup;
+//allCategoriesObservable: Observable<Category[]>;
+//categorieArray: Category[];
+//purchaseArray: PurchaseEntry[];
+//allCityStateZipCodeData: Observable<CityStateZip[]>;
+//allPurchases: Observable<PurchaseEntry[]>;
+//globalAllPurchases: Observable<PurchaseEntry[]>;
+//purchaseEntry: PurchaseEntry;
+//massage = null;
+//categoryid = null;
+//constructor(private formbulider: FormBuilder, private categoryService: CategoryService) { }
+//ngOnInit() {
+//    this.purchaseForm = new FormGroup({
+//        CategoryID: new FormControl(),
+//        CategoryName: new FormControl(),
+//        Location: new FormControl(),
+//        ZipCode: new FormControl()
+//    });
+//    this.loadAllCategories();
+//    this.loadAllCityStateZip();
+//    this.loadAllPurchase();
+//}
+//loadAllCategories() {
+//    let filtered = [];
+//    let letsContinue = false;
+//    this.allCategoriesObservable = this.categoryService.getAllCategories();
+//    //this.allCategoriesObservable = this.allCategoriesObservable.pipe(
+//    //    map(result => result.
+//    //        filter(cat => cat.CategoryName != "Mortgage")
+//    //    )
+//    //);
+//    //this.categoryService.getAllPurchase().subscribe(
+//    //    function (x) {
+//    //        this.purchaseArray = x;
+//    //    },
+//    //    function (err) {
+//    //        
+//    //        console.log('Error: %s', err);
+//    //    },
+//    //    function () {
+//    //        
+//    //        for (var j = 0; j < this.purchaseArray.length; j++)
+//    //        {
+//    //            this.allCategoriesObservable = this.allCategoriesObservable.pipe(
+//    //                map(result => result.
+//    //                    filter(cat => cat.CategoryName != this.purchaseArray.CategoryName)
+//    //                )
+//    //            );
+//    //        }
+//    //    }
+//    //);
+//}
+//loadAllCityStateZip() {
+//    this.allCityStateZipCodeData = this.categoryService.getAllCityStateZipCodeData();
+//    let filtered = [];
+//    let letsContinue = false;
+//    this.allCategoriesObservable = this.categoryService.getAllCategories();
+//}
+//loadAllPurchase() {
+//    
+//    this.allPurchases = this.categoryService.getAllPurchase();
+//    this.globalAllPurchases = this.allPurchases;
+//}
+//onFormSubmit() {
+//    
+//    console.log(this.purchaseForm.value);
+//    if (this.purchaseForm !== undefined) {
+//        var notFound = true;
+//        var localthis = this;
+//        var localPurchaseForm = this.purchaseForm;
+//        this.categoryService.getAllPurchase().subscribe(
+//            function (x) {
+//                this.purchaseArray = x;
+//            },
+//            function (err) {
+//                console.log('Error: %s', err);
+//            },
+//            function () {
+//                this.purchaseArray.forEach(function (purchase) {
+//                    if (purchase.CategoryID.toString() == localPurchaseForm.value.CategoryID.split(',')[0] &&
+//                        (purchase.City == localPurchaseForm.value.Location.split(',')[0] || purchase.State == localPurchaseForm.value.Location.split(',')[1] ) && (purchase.ZipCode == localPurchaseForm.value.ZipCode)) {
+//                        localthis.dataSaved = true;
+//                        localthis.massage = 'This combination is already purchased. No more available.';
+//                        localthis.purchaseForm.reset();
+//                        notFound = false;
+//                    }
+//                });
+//                if (notFound) {
+//                    this.purchaseEntry = new PurchaseEntry();
+//                    this.purchaseEntry.CategoryID = localPurchaseForm.value.CategoryID.split(',')[0];
+//                    this.purchaseEntry.CategoryName = localPurchaseForm.value.CategoryID.split(',')[1];
+//                    this.purchaseEntry.ChargeAmount = localPurchaseForm.value.CategoryID.split(',')[2];
+//                    this.purchaseEntry.City = localPurchaseForm.value.Location.split(',')[0];
+//                    this.purchaseEntry.State = localPurchaseForm.value.Location.split(',')[1];
+//                    this.purchaseEntry.ZipCode = localPurchaseForm.value.ZipCode;
+//                    localthis.dataSaved = false;
+//                    localthis.CreatePurchase(this.purchaseEntry);
+//                    localPurchaseForm.reset();
+//                }
+//            }
+//        );
+//    }
+//}
+//CreatePurchase(purchase: PurchaseEntry) {
+//    this.categoryService.createPurchase(purchase).subscribe(
+//        () => {
+//            this.dataSaved = true;
+//            this.massage = 'Record saved Successfully';
+//            this.loadAllPurchase();
+//            this.purchaseForm.reset();
+//        }
+//    );
+//}
+//resetForm() {
+//    this.purchaseForm.reset();
+//    this.massage = null;
+//    this.dataSaved = false;
+//}
 //    var subCategoryId = $(doc).find("id").text();
 //    console.log(subCategoryId);
 //    await thisHomePage.searchService

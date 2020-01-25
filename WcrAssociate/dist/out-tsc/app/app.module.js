@@ -19,7 +19,7 @@ import { User } from '../app/entities/user';
 import { ShowAuthedDirective } from './shared/show-authed.directive';
 import { FooterComponent, HeaderComponent, SharedModule } from '../app/shared';
 import { ApiService, AuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, NoAuthGuard, encrypt_decrypt } from './services/auth';
-import { SearchService } from './services/search';
+import { SearchService, MessageService } from './services/search';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -71,7 +71,8 @@ var AppModule = /** @class */ (function () {
                 HomeAuthResolver,
                 NoAuthGuard,
                 User,
-                encrypt_decrypt
+                encrypt_decrypt,
+                MessageService
             ],
             bootstrap: [AppComponent]
         })

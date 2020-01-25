@@ -14,6 +14,8 @@ var SearchService = /** @class */ (function () {
         this.currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
         this.isAuthenticatedSubject = new ReplaySubject(1);
         this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
+        //console.log((platformLocation as any).location);
+        //console.log((platformLocation as any).location.origin);
     }
     //For sales
     SearchService.prototype.subCategoriesByZipcode = function (zipc) {
@@ -55,7 +57,7 @@ var SearchService = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         urlToJobTypeWiseCategory = "ws/TopSearch.asmx/ViewAdvanceSearchForServices";
-                        return [4 /*yield*/, this.http.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise()];
+                        return [4 /*yield*/, this.apiService.post(urlToJobTypeWiseCategory, { zipcode: zipc, Category: categoryId }).toPromise()];
                     case 1: 
                     //return this.apiService.post( urlToJobTypeWiseCategory, { zipcode: zipc, Category: subCategoryId })
                     //    .pipe(map(
@@ -104,7 +106,7 @@ var SearchService = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchServicesCityStateWise";
-                        return [4 /*yield*/, this.http.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise()];
+                        return [4 /*yield*/, this.apiService.post(urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId }).toPromise()];
                     case 1: 
                     //  {'State':'" + State + "','City':'" + City + "','Category':" + ($(docs).find("ID").text()) + "}
                     //return this.apiService.post( urlToAdvanceSearch, { State: state, City: city, Category: subCategoryId })
@@ -119,15 +121,17 @@ var SearchService = /** @class */ (function () {
         });
     };
     //For IPAddress
-    SearchService.prototype.attemptGetSalesAdts = function () {
-        var _this = this;
-        var urlToGetIP = "https://jsonip.com?=callback";
-        return this.http.get(urlToGetIP)
-            .pipe(map(function (data) {
-            var _ipAddress = data.ip;
-            _this.attemptGetZipCodeByIPAddress(_ipAddress);
-        }));
-    };
+    //async attemptGetSalesAdts() {
+    //    let urlToGetIP: string = "http://jsonip.com?=callback";
+    //    return await this.apiService.get<any>(urlToGetIP)
+    //        .pipe(map(
+    //            data => {
+    //                debugger;
+    //                let _ipAddress = data.ip;
+    //                this.attemptGetZipCodeByIPAddress(_ipAddress);
+    //            }
+    //        )).toPromise();
+    //}
     SearchService.prototype.attemptGetZipCodeByIPAddress = function (_ipAddress) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetZipCodeByIpAddress;

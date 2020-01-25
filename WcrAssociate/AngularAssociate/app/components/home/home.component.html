@@ -20,6 +20,7 @@
 
                             <div class="main-search-input">
                                 <input type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter)="onPressEnterSearchData()" />
+                                <span class="large material-icons form-control-feedback icon icon-right" [style.display]="show_check ? 'block': 'none'">check</span>
                                 <button class="button waves-effect waves-light btn" (click)="onClickSearch()">
                                     <i class="large material-icons form-control-feedback text-xs-27 pd-t-9-force">search</i>
                                 </button>
@@ -72,7 +73,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <!--<div class="row">
             <div class="col-sm-3">
                 <div class="card white darken-1 ">
                     <div class="card-contentpd-0-force">
@@ -90,7 +91,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!--<div class="row" [style.display]="ifError"></div>-->
         <div class="row" [style.display]="resultContent ? 'block':'none' ">
             <div class="col-md-12">

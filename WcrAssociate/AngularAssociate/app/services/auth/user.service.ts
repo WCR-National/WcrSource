@@ -277,7 +277,7 @@ export class UserService {
 
     attemptResetPassword(email): Observable<any> {
 
-        return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email).pipe(map(
+        return this.apiService.get('ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email).pipe(map(
             data => {
                 return data;
             }
@@ -302,7 +302,7 @@ export class UserService {
 
     validateEmail(email) {
 
-        return this.http.get(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email)
+        return this.apiService.get('ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email)
             .pipe(
                 map(
                     (data) => { return data;})
@@ -311,7 +311,7 @@ export class UserService {
 
     emailAlreadyTaken(email) {
 
-        return this.http.post(environment.apiEndPoint + 'ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email, {})
+        return this.apiService.post('ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email, {})
             .pipe(delay(300));
     }
 

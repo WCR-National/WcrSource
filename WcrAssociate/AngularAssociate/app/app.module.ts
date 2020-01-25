@@ -43,7 +43,7 @@ import {
     NoAuthGuard,    encrypt_decrypt
 
 } from './services/auth';
-import { SearchService } from './services/search';
+import { SearchService, MessageService} from './services/search';
 
 
 @NgModule({
@@ -93,7 +93,8 @@ import { SearchService } from './services/search';
         HomeAuthResolver,
         NoAuthGuard,
         User,
-        encrypt_decrypt
+        encrypt_decrypt,
+        MessageService
     ],
     bootstrap: [AppComponent]
 })
