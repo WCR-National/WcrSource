@@ -13,13 +13,14 @@ export class ApiService {
     constructor(private http: HttpClient,
         private platformLocation: PlatformLocation
     ) {
+        console.log(location.origin);
         console.log((platformLocation as any).location.href);
 
-        if (environment.apiEndPoint == (platformLocation as any).location.href) {
+        if (environment.apiEndPoint == location.origin+"/") {
             this.apiEndPoint = environment.apiEndPoint;
         }
         else {
-            this.apiEndPoint = (platformLocation as any).location.href;
+            this.apiEndPoint = location.origin + "/";
         }
     }
 

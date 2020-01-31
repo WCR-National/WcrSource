@@ -10,12 +10,13 @@ var ApiService = /** @class */ (function () {
         this.http = http;
         this.platformLocation = platformLocation;
         this.apiEndPoint = '';
+        console.log(location.origin);
         console.log(platformLocation.location.href);
-        if (environment.apiEndPoint == platformLocation.location.href) {
+        if (environment.apiEndPoint == location.origin + "/") {
             this.apiEndPoint = environment.apiEndPoint;
         }
         else {
-            this.apiEndPoint = platformLocation.location.href;
+            this.apiEndPoint = location.origin + "/";
         }
     }
     ApiService.prototype.formatErrors = function (error) {

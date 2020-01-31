@@ -3,17 +3,20 @@ import { Component, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import * as $ from 'jquery';
 import { SearchService, MessageService } from '../../services/search';
+import { Router } from '@angular/router';
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(fb, renderer, searchService, platformId, _messageService) {
+    function HomeComponent(fb, renderer, searchService, platformId, _messageService, router) {
         var _this = this;
         this.fb = fb;
         this.renderer = renderer;
         this.searchService = searchService;
         this.platformId = platformId;
         this._messageService = _messageService;
+        this.router = router;
         this.isSearchingStart = false;
         this.resultContent = false;
         this.errorMessage = "";
+        this.show_check = false;
         this.innerHtmlSales = '';
         this.innerHtmlServices = '';
         this.errorExist = false;
@@ -40,6 +43,8 @@ var HomeComponent = /** @class */ (function () {
         });
     }
     HomeComponent.prototype.ngOnInit = function () {
+        //this.show_check = true;
+        $('html, body').animate({ scrollTop: $('#header-container').offset().top }, 'slow');
         $('#divLandingPage').focus();
         this.parallaxBG();
         //this.GetSalesAdts();
@@ -48,7 +53,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.initializeFormsAndEvents = function () {
         var _this = this;
         this.searchForm = this.fb.group({
-            txtSearch: ['', [Validators.required, validateSearchZipCode]],
+            txtSearch: ['', [Validators.required, validateSearchZipCode(this)]],
         });
         this.searchForm.get('txtSearch').valueChanges.subscribe(function (data) {
             _this.errorMessage = "";
@@ -138,19 +143,19 @@ var HomeComponent = /** @class */ (function () {
                         State = $.trim(strSearchValue[i]);
                     }
                 }
-                if (State.length == 2) {
-                    salesHtml = this.bindSalesCategoryCityWise(State, City);
-                    servicesHtml = this.bindServiesCategoryCityWise(State, City);
-                    //this.innerHtmlSales = salesHtml;
-                    //this.innerHtmlServices = servicesHtml;
-                    //console.log(this.innerHtmlSales);
-                    //console.log(this.innerHtmlServices);
-                }
-                else if (State.length >= 2) {
-                    $('html, body').animate({ scrollTop: $('#divLandingPage').offset().top }, 'slow');
-                    this.errorMessage = "Please enter 2 Characters for State.";
-                    this.isSearchingStart = false;
-                }
+                //if (State.length == 2) {
+                salesHtml = this.bindSalesCategoryCityWise(State, City);
+                servicesHtml = this.bindServiesCategoryCityWise(State, City);
+                //this.innerHtmlSales = salesHtml;
+                //this.innerHtmlServices = servicesHtml;
+                //console.log(this.innerHtmlSales);
+                //console.log(this.innerHtmlServices);
+                //}
+                //else if (State.length >= 2) {
+                //    $('html, body').animate({ scrollTop: $('#divLandingPage').offset().top }, 'slow');
+                //    this.errorMessage = "Please enter 2 Characters for State.";
+                //    this.isSearchingStart = false;
+                //}
             }
             else {
                 this.errorMessage = "Invalid data entered.  Please enter City, State OR Zip Code.";
@@ -213,7 +218,7 @@ var HomeComponent = /** @class */ (function () {
                                             var docs1 = xml1.find("GetCategoriesinfo1");
                                             console.log('executed');
                                             if ($(doc).find("id").text() == $(docs1[0]).find("Subcategoryid").text()) {
-                                                innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                                innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
                                                 innerHtmlSales += "   <div class='card white darken-1' >";
                                                 $.each(docs1, function (i, doc1) {
                                                     debugger;
@@ -248,10 +253,10 @@ var HomeComponent = /** @class */ (function () {
                                     if (!data.d.includes("GetCategoriesinfo1")) {
                                         if (flag == 1) { }
                                         else {
-                                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
                                             innerHtmlSales += "   <div class='card white darken-1' >";
                                             innerHtmlSales += "     <div class='card-content pd-0-force card-image-section' >";
-                                            innerHtmlSales += "         <img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/>";
+                                            innerHtmlSales += "         <img  class='image-size-icons-without-ip' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/>";
                                             innerHtmlSales += "     </div>";
                                             innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
                                             innerHtmlSales += '         <span class="card-title">' + ($(doc).find("name").text()) + '</span>';
@@ -316,7 +321,7 @@ var HomeComponent = /** @class */ (function () {
                                             var xml1 = $(xmlDoc1);
                                             var docs1 = xml1.find("GetCategoriesinfoservices");
                                             if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
-                                                innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                                innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
                                                 innerHtmlServices += "  <div class='card white darken-1' >";
                                                 $.each(docs1, function (i, docs1) {
                                                     if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
@@ -360,10 +365,10 @@ var HomeComponent = /** @class */ (function () {
                                             //innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                                             //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
                                             //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                            innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                            innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
                                             innerHtmlServices += "  <div class='card white darken-1' >";
                                             innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
-                                            innerHtmlServices += "         <img class='image-size-icons-without-ip ' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/>";
+                                            innerHtmlServices += "         <img class='image-size-icons-without-ip' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/>";
                                             innerHtmlServices += "     </div>";
                                             innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
                                             innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
@@ -418,6 +423,7 @@ var HomeComponent = /** @class */ (function () {
                             case 1:
                                 results_3 = _a.sent();
                                 console.log(results_3);
+                                debugger;
                                 $.each(docs, function (i, docs) {
                                     var flag = 0;
                                     var subCategoryId = $(docs).find("id").text();
@@ -427,12 +433,11 @@ var HomeComponent = /** @class */ (function () {
                                         //    .then(
                                         //        (data: any) => {
                                         if (data.d.length > 0 && data.d.includes('GetCategoriesinfoCity')) {
-                                            var flag = 0;
                                             var xmlDoc1 = $.parseXML(data.d);
                                             var xml1 = $(xmlDoc1);
                                             var docs1 = xml1.find("GetCategoriesinfoCity");
                                             if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
-                                                innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                                innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
                                                 innerHtmlSales += "  <div class='card white darken-1' >";
                                                 $.each(docs1, function (i, docs1) {
                                                     if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
@@ -457,6 +462,7 @@ var HomeComponent = /** @class */ (function () {
                                                     else { }
                                                 });
                                                 innerHtmlSales += '   </div>';
+                                                innerHtmlSales += '   </div>';
                                             }
                                         }
                                         else {
@@ -478,10 +484,10 @@ var HomeComponent = /** @class */ (function () {
                                             //innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
                                             //innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + ($(docs).find("detail").text()) + " </p>";
                                             //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
-                                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
                                             innerHtmlSales += "  <div class='card white darken-1' >";
                                             innerHtmlSales += "     <div class='card-content pd-0-force card-image-section' >";
-                                            innerHtmlSales += "         <img class='card-image-size' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'  alt=''/>";
+                                            innerHtmlSales += "         <img  class='image-size-icons-without-ip' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'  alt=''/>";
                                             innerHtmlSales += "     </div>";
                                             innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
                                             innerHtmlSales += '         <span class="card-title">' + ($(docs).find("name").text()) + '</span>';
@@ -530,7 +536,7 @@ var HomeComponent = /** @class */ (function () {
                                 xmlDoc = $.parseXML(data.d);
                                 xml = $(xmlDoc);
                                 docs = xml.find("JobCategories");
-                                return [4 /*yield*/, Promise.all(docs.map(function (t) { return thisHomePage.searchService.getAdvanceSearchCityStateWise(state, city, $(docs[t]).find("id").text()); }).ajaxSuccess(function (success) {
+                                return [4 /*yield*/, Promise.all(docs.map(function (t) { return thisHomePage.searchService.getAdvanceSearchServicesCityStateWise(state, city, $(docs[t]).find("ID").text()); }).ajaxSuccess(function (success) {
                                         console.log("download : " + success);
                                     }))];
                             case 1:
@@ -563,7 +569,7 @@ var HomeComponent = /** @class */ (function () {
                                                         innerHtmlServices += "     </div>";
                                                         innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
                                                         innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
-                                                        innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
+                                                        innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                                         innerHtmlServices += "     </div>";
                                                         innerHtmlServices += '       <div class="card-action text-center">';
                                                         innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
@@ -603,11 +609,11 @@ var HomeComponent = /** @class */ (function () {
                                             //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
                                             innerHtmlServices;
                                             innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
-                                            innerHtmlServices += "         <img class=image-size-icons-without-ip' src='images/icons/" + ($(docs).find("catImages").text()) + "'/>";
+                                            innerHtmlServices += "         <img class='image-size-icons-without-ip' src='images/icons/" + ($(docs).find("catImages").text()) + "'/>";
                                             innerHtmlServices += "     </div>";
                                             innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
                                             innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
-                                            innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
+                                            innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                             innerHtmlServices += "     </div>";
                                             innerHtmlServices += '       <div class="card-action text-center">';
                                             innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
@@ -637,7 +643,12 @@ var HomeComponent = /** @class */ (function () {
             var globalThis;
             return tslib_1.__generator(this, function (_a) {
                 debugger;
+                this.resultContent = false;
                 this.isSearchingStart = true;
+                if ($('#salesServicesDivId') == null) {
+                    this.router.navigateByUrl('/');
+                }
+                $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
                 globalThis = this;
                 $.getJSON("http://jsonip.com?callback=?", function (data) {
                     var _IPAddress = data.ip;
@@ -937,70 +948,90 @@ var HomeComponent = /** @class */ (function () {
             templateUrl: './home.component.html'
         }),
         tslib_1.__param(3, Inject(PLATFORM_ID)),
-        tslib_1.__metadata("design:paramtypes", [FormBuilder, Renderer2, SearchService, Object, MessageService])
+        tslib_1.__metadata("design:paramtypes", [FormBuilder, Renderer2, SearchService, Object, MessageService, Router])
     ], HomeComponent);
     return HomeComponent;
 }());
 export { HomeComponent };
-function validateSearchZipCode(control) {
-    var value = control.value;
-    var regFirstDigits = new RegExp('^[0-9]{2}$');
-    var regFirstLetters = new RegExp('^[a-zA-Z]{2}$');
-    var regLetters = new RegExp('^[a-zA-Z]$');
-    if (/^[0-9]{2}/.test(value)) {
-        var reg = /\b\d\b/g;
-        var regFiveDig = /\b\d{5}\b/g;
-        if (/^[0-9]/.test(value)) {
-            if (value.match(regFiveDig) && value.length <= 5) {
-                return null;
-            }
-            else {
-                return { 'zipCode': true };
-            }
-        }
-        else {
-            return { 'invalidZipCode': true };
-        }
-    }
-    else if (/^[a-zA-Z]{2}/.test(value) || /^[a-zA-Z]/.test(value)) {
-        if (/^[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
-            if (/\s/.test(value)) {
-                // It has any kind of whitespace
-                var listOfValues = value.split(' ');
-                if (listOfValues.length > 2) {
-                    return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+function validateSearchZipCode(thisStatus) {
+    return function (control) {
+        var value = control.value;
+        var regFirstDigits = new RegExp('^[0-9]{2}$');
+        var regFirstLetters = new RegExp('^[a-zA-Z]{2}$');
+        var regLetters = new RegExp('^[a-zA-Z]$');
+        if (/^[0-9]{2}/.test(value)) {
+            var reg = /\b\d\b/g;
+            var regFiveDig = /\b\d{5}\b/g;
+            if (/^[0-9]/.test(value)) {
+                if (value.match(regFiveDig) && value.length <= 5) {
+                    debugger;
+                    thisStatus.show_check = true;
+                    return null;
                 }
                 else {
-                    if (listOfValues[1] !== undefined) {
-                        if (listOfValues[1].length >= 2) {
-                            return null;
-                        }
+                    thisStatus.show_check = false;
+                    return { 'zipCode': true };
+                }
+            }
+            else {
+                thisStatus.show_check = false;
+                return { 'invalidZipCode': true };
+            }
+        }
+        else if (/^[a-zA-Z]{2}/.test(value) || /^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(value)) {
+            if (/^([a-zA-Z]+\s)*[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
+                if (/\s/.test(value)) {
+                    // It has any kind of whitespace
+                    var listOfValues = value.split(',');
+                    if (listOfValues.length > 2) {
+                        thisStatus.show_check = false;
+                        return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
                     }
                     else {
-                        if (value.length >= 5) {
-                            return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                        if (listOfValues[1] !== undefined) {
+                            if (listOfValues[1][0] != " ") {
+                                thisStatus.show_check = false;
+                                return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                            }
+                            if (listOfValues[1].length >= 2) {
+                                thisStatus.show_check = true;
+                                return null;
+                            }
+                            else {
+                                thisStatus.show_check = true;
+                            }
+                        }
+                        else {
+                            if (value.length >= 5) {
+                                thisStatus.show_check = false;
+                                return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                            }
                         }
                     }
                 }
             }
+            else {
+                if (!(/^[a-zA-Z]*$/.test(value))) {
+                    thisStatus.show_check = false;
+                    return { 'cityStatePattern': true };
+                }
+                if (value.length >= 5) {
+                    thisStatus.show_check = false;
+                    return { 'cityStatePattern': true };
+                }
+            }
         }
         else {
-            if (!(/^[a-zA-Z]*$/.test(value))) {
-                return { 'cityStatePattern': true };
+            if (value.match(regFirstDigits)) {
+                thisStatus.show_check = false;
+                return { 'invalidZipCode': true };
             }
-            if (value.length >= 5) {
-                return { 'cityStatePattern': true };
+            else {
+                thisStatus.show_check = false;
+                //return { 'invalidData': true };
             }
         }
-    }
-    else {
-        if (value.match(regFirstDigits)) {
-            return { 'invalidZipCode': true };
-        }
-        else {
-            //return { 'invalidData': true };
-        }
-    }
+    };
 }
 //bindSalesCategory1(zipc) {
 //    var innerHtmlSales = "";

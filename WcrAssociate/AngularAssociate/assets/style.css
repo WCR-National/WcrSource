@@ -42444,6 +42444,7 @@ span.icon-right {
     margin-top: 0px;
     text-align:left;
 }
+
 label {
     display:flex;
 }
@@ -42457,4 +42458,55 @@ label {
     width: 110px;
     height: auto;
     padding-top: 25px;
+}
+@media (min-width: 1367px) {
+
+    .card-image-size {
+        width: 100%;
+        height: 175px;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+
+    .card-image-section {
+        height: 175px;
+        text-align: center !important;
+    }
+
+    .elipsis-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 0px;
+        text-align: left;
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 1767px) {
+
+    .card-image-size {
+        width: 100%;
+        height: 245px;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+
+    .card-image-section {
+        height: 245px;
+        text-align: center !important;
+    }
+
+    .elipsis-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-top: 0px;
+        text-align: left;
+        font-size: 17px;
+    }
 }

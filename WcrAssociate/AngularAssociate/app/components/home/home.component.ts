@@ -1089,16 +1089,16 @@ function validateSearchZipCode(thisStatus) {
                 return { 'invalidZipCode': true };
             }
         }
-        else if (/^[a-zA-Z]{2}/.test(value) || /^[a-zA-Z]/.test(value)) {
+        else if (/^[a-zA-Z]{2}/.test(value) || /^([a-zA-Z]+\s)*[a-zA-Z]+$/.test(value)) {
 
-            if (/^[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
+            if (/^([a-zA-Z]+\s)*[a-zA-Z]+\,+\s[a-zA-Z\s]+$/.test(value)) {
 
 
                 if (/\s/.test(value)) {
 
 
                     // It has any kind of whitespace
-                    var listOfValues = value.split(' ');
+                    var listOfValues = value.split(',');
                     if (listOfValues.length > 2) {
                         thisStatus.show_check = false;
                         return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
@@ -1106,6 +1106,11 @@ function validateSearchZipCode(thisStatus) {
                     else {
 
                         if (listOfValues[1] !== undefined) {
+                            if (listOfValues[1][0] != " ") {
+                                thisStatus.show_check = false;
+
+                                return { 'cityStatePattern': true }; //Please follow the pattern: City, State (Dallas, TX)
+                            }
                             if (listOfValues[1].length >= 2) {
                                 thisStatus.show_check = true;
                                 return null;

@@ -1196,8 +1196,6 @@
     <Content Include="inner_detail.html" />
     <Content Include="js\jquery-2.1.1.min.js" />
     <Content Include="MyProfile.html" />
-    <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\WcrAssociate.csprojResolveAssemblyReference.cache" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1299,9 +1297,6 @@
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\modernizr.custom.js" />
     <Content Include="js\npm.js" />
-    <Content Include="obj\Debug\WcrAssociate.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\WcrAssociate.dll" />
-    <Content Include="obj\Debug\WcrAssociate.pdb" />
     <Content Include="privacy.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1762,9 +1757,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
-    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="ws\AssociateRegistration.asmx.cs">
       <DependentUpon>AssociateRegistration.asmx</DependentUpon>
       <SubType>Component</SubType>
