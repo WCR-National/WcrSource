@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Associate/Master1.Master" AutoEventWireup="true" CodeBehind="ViewProfile.aspx.cs" Inherits="WcrAssociate.Associate.ViewProfile" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script>
         $(function () {
@@ -40,6 +41,7 @@
             </div>
         </div>
     </div>
+
     <div id="pageloader" class="pageloader" style="display: none">
         <div class="pageloader-inner">
             <div class="lds-spinner">
@@ -58,75 +60,80 @@
             </div>
         </div>
     </div>
+
+
     <div id="divEntry">
-        <div class="row ">
-            <div class=" col-sm-12 dashboard-block ">
-                <h1>Your Profile 
+        <div class="content-header justify-content-between">
+            <div class="row ">
+                <div class=" col-sm-12 dashboard-block ">
+                    <h1>Your Profile 
                     <span class="btn-right" id="dEdit" style="display: block;">
                         <input id="btnedit" type="button" class="btn btn-primary" value="EDIT" />
                     </span>
-                    <span class="btn-right" id="dUpdate" style="display: none;">
-                        <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" Text="RESET" OnClick="btnreset_Click" />
-                        <%--<input id="btnreset" type="button" class="btn btn-primary" value="RESET" />--%>
-                        <input id="btnCancel" type="button" class="btn btn-primary" value="CANCEL" />
-                        <input id="btnSubmit" type="button" class="btn btn-primary" value="UPDATE" />
-                    </span>
-                </h1>
-                 <div style="display:none;" id="info">
-                <p>
-                    <b>Welcome to WCR National.
-                    </b>
-                </p>
-                <p>
-                    Please begin by filling out your profile information.
-                </p>
-                <p>
-                    Once you’ve completed this step, the rest of the Primary Menu items will be fully available for your use.
-                </p>
-                <p>
-                    If you have any issues or concerns, you can contact customer support by clicking the ‘Customer Support’ tab towards the bottom of the menu items list.
-                </p>
-                <p>
-                    Thank you.
-                </p>
-            </div>
+                        <span class="btn-right" id="dUpdate" style="display: none;">
+                            <asp:Button ID="Button1" CssClass="btn btn-primary" runat="server" Text="RESET" OnClick="btnreset_Click" />
+                            <%--<input id="btnreset" type="button" class="btn btn-primary" value="RESET" />--%>
+                            <input id="btnCancel" type="button" class="btn btn-primary" value="CANCEL" />
+                            <input id="btnSubmit" type="button" class="btn btn-primary" value="UPDATE" />
+                        </span>
+                    </h1>
+                    <div style="display: none;" id="info">
+                        <p>
+                            <b>Welcome to WCR National.
+                            </b>
+                        </p>
+                        <p>
+                            Please begin by filling out your profile information.
+                        </p>
+                        <p>
+                            Once you’ve completed this step, the rest of the Primary Menu items will be fully available for your use.
+                        </p>
+                        <p>
+                            If you have any issues or concerns, you can contact customer support by clicking the ‘Customer Support’ tab towards the bottom of the menu items list.
+                        </p>
+                        <p>
+                            Thank you.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row dashboard-block  ">
-            <div class=" col-sm-5 ">
-                <%--<img src="Adv_img/95second.png" class="img-responsive img-thumbnail" />--%>
-                <%--  <div id="profilePic"></div>--%>
-                <div class="thumbnail-user text-center" id="pprofilePic"></div>
-                <%-- <asp:Image class='img-responsive img-thumbnail' alt='User Image' runat="server" ID="imgAssociatePhoto" />--%>
-                <input type="file" style="margin-left: 0px; display: none;" class="form-control" id="FileUpload1" />
-            </div>
-            <div class="col-sm-7 m-t-20">
-                <div class=" customebox static" id="divViewProfile" style="display: none;">
-                    <div class="box-body  form-horizontal  actual-detail">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">First Name</label>
-                                    <div class="col-sm-9  ">
-                                        <p class="form-control-static">
-                                            <label id="lblFirstName"></label>
-                                            <%-- <asp:Label ID="lblFirstName" runat="server"></asp:Label>--%>
-                                        </p>
+        <div class="content-body">
+            <div class="row dashboard-block">
+                <div class=" col-sm-5 ">
+                    <%--<img src="Adv_img/95second.png" class="img-responsive img-thumbnail" />--%>
+                    <%--  <div id="profilePic"></div>--%>
+                    <div class="thumbnail-user text-center" id="pprofilePic"></div>
+                    <%-- <asp:Image class='img-responsive img-thumbnail' alt='User Image' runat="server" ID="imgAssociatePhoto" />--%>
+                    <input type="file" style="margin-left: 0px; display: none;" class="form-control" id="FileUpload1" />
+                </div>
+                <div class="col-sm-7 m-t-20">
+                    <div class=" customebox static" id="divViewProfile" style="display: none;">
+                        <div class="box-body  form-horizontal  actual-detail">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">First Name</label>
+                                        <div class="col-sm-9  ">
+                                            <p class="form-control-static">
+                                                <label id="lblFirstName"></label>
+                                                <%-- <asp:Label ID="lblFirstName" runat="server"></asp:Label>--%>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Last Name</label>
-                                    <div class="col-sm-9  ">
-                                        <p class="form-control-static">
-                                            <label id="lblLastName"></label>
-                                            <%--<asp:Label ID="lblLastName" runat="server"></asp:Label>--%>
-                                        </p>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Last Name</label>
+                                        <div class="col-sm-9  ">
+                                            <p class="form-control-static">
+                                                <label id="lblLastName"></label>
+                                                <%--<asp:Label ID="lblLastName" runat="server"></asp:Label>--%>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <%-- <div class="form-group">
+                                <%-- <div class="form-group">
                                 <div class="col-sm-12  ">
                                     <label class="col-sm-3 control-label ">User Name</label>
                                     <div class="col-sm-9  ">
@@ -136,40 +143,40 @@
                                     </div>
                                 </div>
                             </div>--%>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Email Address</label>
-                                    <div class="col-sm-9  ">
-                                        <p class="form-control-static">
-                                            <label id="lblEmail"></label>
-                                            <%--<asp:Label ID="lblEmail" runat="server"></asp:Label>--%>
-                                        </p>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Email Address</label>
+                                        <div class="col-sm-9  ">
+                                            <p class="form-control-static">
+                                                <label id="lblEmail"></label>
+                                                <%--<asp:Label ID="lblEmail" runat="server"></asp:Label>--%>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Password</label>
-                                    <div class="col-sm-9  ">
-                                        <p class="form-control-static">
-                                            <label id="lblPassword"></label>
-                                            <%--<asp:Label ID="lblPassword" runat="server"></asp:Label>--%>
-                                        </p>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Password</label>
+                                        <div class="col-sm-9  ">
+                                            <p class="form-control-static">
+                                                <label id="lblPassword"></label>
+                                                <%--<asp:Label ID="lblPassword" runat="server"></asp:Label>--%>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Mobile Number</label>
-                                    <div class="col-sm-9  ">
-                                        <p class="form-control-static">
-                                            <label id="lblContactNo"></label>
-                                            <%--<asp:Label ID="lblContact" runat="server"></asp:Label>--%>
-                                        </p>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Mobile Number</label>
+                                        <div class="col-sm-9  ">
+                                            <p class="form-control-static">
+                                                <label id="lblContactNo"></label>
+                                                <%--<asp:Label ID="lblContact" runat="server"></asp:Label>--%>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <%-- <div class="form-group">
+                                <%-- <div class="form-group">
                                 <div class="col-sm-12  ">
                                     <label class="col-sm-3 control-label ">ZipCode</label>
                                     <div class="col-sm-9  ">
@@ -180,71 +187,71 @@
                                     </div>
                                 </div>
                             </div>--%>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">License#</label>
-                                    <div class="col-sm-9  ">
-                                        <p class="form-control-static">
-                                            <label id="lblLicense"></label>
-                                            <%--<asp:Label ID="lblLicense" runat="server"></asp:Label>--%>
-                                        </p>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">License#</label>
+                                        <div class="col-sm-9  ">
+                                            <p class="form-control-static">
+                                                <label id="lblLicense"></label>
+                                                <%--<asp:Label ID="lblLicense" runat="server"></asp:Label>--%>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Issuing State</label>
-                                    <div class="col-sm-9  ">
-                                        <p class="form-control-static" style="background-image: url()">
-                                            <label id="lblLicenseState"></label>
-                                            <%--<asp:Label ID="lblLicenseState" runat="server"></asp:Label>--%>
-                                        </p>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Issuing State</label>
+                                        <div class="col-sm-9  ">
+                                            <p class="form-control-static" style="background-image: url()">
+                                                <label id="lblLicenseState"></label>
+                                                <%--<asp:Label ID="lblLicenseState" runat="server"></asp:Label>--%>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div role="alert" id="divSuccess" class="alert alert-success" style="display: none">
-                </div>
-                <div class=" customebox pos-rel" id="divEditProfile" style="display: none;">
-                    <%-- <h1>Your Profile  <span class="btn-right">
+                    <div role="alert" id="divSuccess" class="alert alert-success" style="display: none">
+                    </div>
+                    <div class=" customebox pos-rel" id="divEditProfile" style="display: none;">
+                        <%-- <h1>Your Profile  <span class="btn-right">
                         <asp:Button ID="btnreset" CssClass="btn btn-primary" runat="server" Text="RESET" OnClick="btnreset_Click" />                       
                         <input id="btnCancel" type="button" class="btn btn-primary" value="CANCEL" />
                         <input id="btnSubmit" type="button" class="btn btn-primary" value="UPDATE" />
                     </span>
                     </h1>--%>
-                    <!-- /.box-header -->
-                    <div class="box-body  form-horizontal">
-                        <div class="col-sm-12">
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">First Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="txtfName" class="form-control" />
-                                        <%--  <asp:TextBox ID="txtfName" runat="server" class="form-control" />--%>
+                        <!-- /.box-header -->
+                        <div class="box-body  form-horizontal">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">First Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="txtfName" class="form-control" />
+                                            <%--  <asp:TextBox ID="txtfName" runat="server" class="form-control" />--%>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Last Name</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" id="txtLName" class="form-control" />
-                                        <%--  <asp:TextBox ID="txtLName" runat="server" class="form-control" />--%>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Last Name</label>
+                                        <div class="col-sm-9">
+                                            <input type="text" id="txtLName" class="form-control" />
+                                            <%--  <asp:TextBox ID="txtLName" runat="server" class="form-control" />--%>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Email Address</label>
-                                    <div class="col-sm-9  ">
-                                        <input type="text" id="txtEmailAddress"  class="form-control" />
-                                        <%--  <asp:TextBox ID="txtEmailAddress" runat="server" ReadOnly="true" class="form-control" />--%>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Email Address</label>
+                                        <div class="col-sm-9  ">
+                                            <input type="text" id="txtEmailAddress" class="form-control" />
+                                            <%--  <asp:TextBox ID="txtEmailAddress" runat="server" ReadOnly="true" class="form-control" />--%>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <%-- <div class="form-group">
+                                <%-- <div class="form-group">
                                 <div class="col-sm-12  ">
                                     <label class="col-sm-3 control-label ">User Name</label>
                                     <div class="col-sm-9">
@@ -252,54 +259,54 @@
                                     </div>
                                 </div>
                             </div>--%>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Password</label>
-                                    <div class="col-sm-9 ">
-                                        <input type="text" id="txtPassword" autocomplete="off" maxlength="20" title="Password must have a minimum of 8 characters and a maximum of 20 characters in length and must include at least 1 Upper case letter, 1 lower case letter, 1 number and 1 special character in ! @ # $ % ^ * _ " class="form-control" />
-                                        <div id="message" class="alert alert-default" style="display: none;">
-                                            <h5><strong>Password must contain the following: </strong></h5>
-                                            <p id="letter" class="invalid">A lowercase letter</p>
-                                            <div class="clearfix"></div>
-                                            <p id="capital" class="invalid">A capital (uppercase) letter</p>
-                                            <div class="clearfix"></div>
-                                            <p id="number" class="invalid">A number</p>
-                                            <div class="clearfix"></div>
-                                            <p id="length" class="invalid">Minimum of 8 char & a max of 20 char in length</p>
-                                            <div class="clearfix"></div>
-                                            <p id="specialcharacter" class="invalid">1 special character in ! @ # $ % ^ * _ </p>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Password</label>
+                                        <div class="col-sm-9 ">
+                                            <input type="text" id="txtPassword" autocomplete="off" maxlength="20" title="Password must have a minimum of 8 characters and a maximum of 20 characters in length and must include at least 1 Upper case letter, 1 lower case letter, 1 number and 1 special character in ! @ # $ % ^ * _ " class="form-control" />
+                                            <div id="message" class="alert alert-default" style="display: none;">
+                                                <h5><strong>Password must contain the following: </strong></h5>
+                                                <p id="letter" class="invalid">A lowercase letter</p>
+                                                <div class="clearfix"></div>
+                                                <p id="capital" class="invalid">A capital (uppercase) letter</p>
+                                                <div class="clearfix"></div>
+                                                <p id="number" class="invalid">A number</p>
+                                                <div class="clearfix"></div>
+                                                <p id="length" class="invalid">Minimum of 8 char & a max of 20 char in length</p>
+                                                <div class="clearfix"></div>
+                                                <p id="specialcharacter" class="invalid">1 special character in ! @ # $ % ^ * _ </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Mobile Number</label>
-                                    <div class="col-sm-9  ">
-                                        <input type="text" id="txtContactNumber" class="form-control" />
-                                        <%--<asp:TextBox ID="txtContactNumber" runat="server" class="form-control" />--%>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Mobile Number</label>
+                                        <div class="col-sm-9  ">
+                                            <input type="text" id="txtContactNumber" class="form-control" />
+                                            <%--<asp:TextBox ID="txtContactNumber" runat="server" class="form-control" />--%>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Licence ID </label>
-                                    <div class="col-sm-9  ">
-                                        <input type="text" id="txtLicenceID" class="form-control" />
-                                        <%--<asp:TextBox ID="txtLicenceID" runat="server" class="form-control" />--%>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Licence ID </label>
+                                        <div class="col-sm-9  ">
+                                            <input type="text" id="txtLicenceID" class="form-control" />
+                                            <%--<asp:TextBox ID="txtLicenceID" runat="server" class="form-control" />--%>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-12  ">
-                                    <label class="col-sm-3 control-label ">Licence State </label>
-                                    <div class="col-sm-9  ">
-                                        <input type="text" id="txtLicenceState" class="form-control" />
-                                        <%--<asp:TextBox ID="txtLicenceState" runat="server" class="form-control" />--%>
+                                <div class="form-group">
+                                    <div class="col-sm-12  ">
+                                        <label class="col-sm-3 control-label ">Licence State </label>
+                                        <div class="col-sm-9  ">
+                                            <input type="text" id="txtLicenceState" class="form-control" />
+                                            <%--<asp:TextBox ID="txtLicenceState" runat="server" class="form-control" />--%>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <%--<div class="form-group">
+                                <%--<div class="form-group">
                                 <div class="col-sm-12  ">
                                     <label class="col-sm-3 control-label ">ZipCode </label>
                                     <div class="col-sm-9  ">
@@ -307,9 +314,10 @@
                                     </div>
                                 </div>
                             </div>--%>
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -355,8 +363,7 @@
                     //alert(check);
                 }
             });
-            function UpdateInfo()
-            {
+            function UpdateInfo() {
                 var FullName = txtfName.value;
                 var LName = txtLName.value;
                 var emailID = txtEmailAddress.value;
@@ -436,8 +443,8 @@
             function showLoader() {
                 $("#pageloader").css("display", "block");
             }
-            function hideLoader() {               
-                    $("#pageloader").css("display", "none");               
+            function hideLoader() {
+                $("#pageloader").css("display", "none");
             }
             $("#btnedit").click(function () {
                 $("#divEditProfile").css("display", "block");
@@ -526,12 +533,12 @@
                                 $("#divSalesCount").addClass("diable-sidelink");
                                 $("#divServicesCount").addClass("diable-sidelink");
                                 $("#info").css("display", "block");
-                                
+
 
                             }
                             else {
-                                 $("#info").css("display", "none");
-                                
+                                $("#info").css("display", "none");
+
 
                             }
                         });
@@ -605,7 +612,7 @@
             else if (Moblength.length != 10) {
                 returnValue = "Please enter correct value in Mobile box!";
                 $("#txtContactNumber").focus();
-            }            
+            }
             else if (!isNaN(txtContactNumber.value) == "") {
                 returnValue = "Characters not allowed in Mobile Number!";
                 $("#txtContactNumber").focus();

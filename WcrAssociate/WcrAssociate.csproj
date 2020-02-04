@@ -166,6 +166,7 @@
     <Content Include="Associate\css\layout.css" />
     <Content Include="Associate\css\loader.css" />
     <Content Include="Associate\css\mCustomScrollbar.css" />
+    <Content Include="Associate\css\theme.css" />
     <Content Include="Associate\CustomerSupport.aspx" />
     <Content Include="Associate\Dashboard.aspx" />
     <Content Include="Associate\Default.aspx" />
@@ -199,6 +200,7 @@
     <Content Include="Associate\dist\css\skins\skin-yellow.min.css" />
     <Content Include="Associate\dist\css\skins\_all-skins.css" />
     <Content Include="Associate\dist\css\skins\_all-skins.min.css" />
+    <Content Include="Associate\dist\css\theme.css" />
     <Content Include="Associate\dist\img\default-50x50.gif" />
     <Content Include="Associate\dist\img\icons.png" />
     <Content Include="Associate\dist\js\app.js" />
