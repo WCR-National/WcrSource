@@ -5,21 +5,2292 @@
   !*** ./AngularAssociate/$$_lazy_route_resource lazy namespace object ***!
   \***********************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function webpackEmptyAsyncContext(req) {
-	// Here Promise.resolve().then() is used instead of new Promise() to prevent
-	// uncaught exception popping up in devtools
-	return Promise.resolve().then(function() {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
+var map = {
+	"./associate/associate.module": [
+		"./AngularAssociate/app/associate/associate.module.ts"
+	]
+};
+function webpackAsyncContext(req) {
+	var ids = map[req];
+	if(!ids) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+		var id = ids[0];
+		return __webpack_require__(id);
 	});
 }
-webpackEmptyAsyncContext.keys = function() { return []; };
-webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
-module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = "./AngularAssociate/$$_lazy_route_resource lazy recursive";
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "./AngularAssociate/$$_lazy_route_resource lazy recursive";
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/Associate/components/Dashboard/dashboard.component.html":
+/*!**************************************************************************************!*\
+  !*** ./AngularAssociate/app/Associate/components/Dashboard/dashboard.component.html ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n                <li class=\"breadcrumb-item active\" aria-current=\"page\">Events &amp; Social Media</li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Welcome to Dashboard</h4>\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">926</h1>\r\n                        <div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">Connections</h5>\r\n                    <p class=\"card-desc\">Ullamco laboris nisi ut aliquip ex ea com modo cons.</p>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">1,108</h1>\r\n                        <div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart2\" class=\"flot-chart\"></div>\r\n                        </div>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Your Articles</h5>\r\n                    <p class=\"card-desc\">Ex ea commodo con seq uat ull amco lab oris nisi ut ali.</p>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">3,024</h1>\r\n                        <div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart3\" class=\"flot-chart\"></div>\r\n                        </div>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">Your Photos</h5>\r\n                    <p class=\"card-desc\">Ex ea commodo con seq uat ull amco lab oris nisi ut ali.</p>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4 mg-t-15 mg-sm-t-20 mg-xl-t-0\">\r\n            <div class=\"card card-hover card-profile-sidebar\">\r\n                <div class=\"card-header bg-transparent\">\r\n                    <div class=\"media align-items-center\">\r\n                        <div class=\"avatar avatar-md\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                        <div class=\"media-body mg-l-15\">\r\n                            <h6 class=\"tx-color-01 mg-b-3\">Katherine Pechon</h6>\r\n                            <small class=\"d-block tx-color-03 tx-13\">Front-End Engineer</small>\r\n                        </div>\r\n                    </div><!-- media -->\r\n                    <div class=\"profile-info\">\r\n                        <div>\r\n                            <h5>102</h5>\r\n                            <p>Posts</p>\r\n                        </div>\r\n                        <div>\r\n                            <h5>268</h5>\r\n                            <p>Following</p>\r\n                        </div>\r\n                        <div>\r\n                            <h5>384</h5>\r\n                            <p>Followers</p>\r\n                        </div>\r\n                    </div><!-- profile-info -->\r\n                </div><!-- card-header -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4 mg-t-15 mg-sm-t-20\">\r\n            <div class=\"card card-hover card-social-two\">\r\n                <div class=\"card-header\">\r\n                    <h6 class=\"card-title mg-b-0\">Page Views</h6>\r\n                    <a href=\"\" class=\"lh-0 link-04\"><i data-feather=\"help-circle\" class=\"svg-14\"></i></a>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <p class=\"tx-12 tx-color-04\">August 01 - August 31</p>\r\n                    <div class=\"chart-wrapper\">\r\n                        <div class=\"overlay-body\">\r\n                            <div class=\"d-flex align-items-baseline\">\r\n                                <h3 class=\"card-value\">2,409</h3>\r\n                                <span class=\"card-percent tx-danger\"><i class=\"icon ion-android-arrow-down\"></i>5.8%</span>\r\n                            </div>\r\n                            <span class=\"tx-12 tx-color-03\">Total Page Views</span>\r\n                        </div>\r\n                        <div id=\"flotChart4\" class=\"flot-chart chart-tick-blue\"></div>\r\n                    </div>\r\n                </div>\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4 mg-t-15 mg-sm-t-20\">\r\n            <div class=\"card card-hover card-social-two\">\r\n                <div class=\"card-header\">\r\n                    <h6 class=\"card-title mg-b-0\">Page Likes</h6>\r\n                    <a href=\"\" class=\"lh-0 link-04\"><i data-feather=\"help-circle\" class=\"svg-14\"></i></a>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <p class=\"tx-12 tx-color-04\">August 01 - August 31</p>\r\n                    <div class=\"chart-wrapper\">\r\n                        <div class=\"overlay-body\">\r\n                            <div class=\"d-flex align-items-baseline\">\r\n                                <h3 class=\"card-value\">1,083</h3>\r\n                                <span class=\"card-percent tx-success\"><i class=\"icon ion-android-arrow-up\"></i>1.5%</span>\r\n                            </div>\r\n                            <span class=\"tx-12 tx-color-03\">Total Page Likes</span>\r\n                        </div>\r\n                        <div id=\"flotChart5\" class=\"flot-chart chart-tick-green\"></div>\r\n                    </div>\r\n                </div>\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4 mg-t-15 mg-sm-t-20\">\r\n            <div class=\"card card-hover card-social-two\">\r\n                <div class=\"card-header\">\r\n                    <h6 class=\"card-title mg-b-0\">Post Engagements</h6>\r\n                    <a href=\"\" class=\"lh-0 link-04\"><i data-feather=\"help-circle\" class=\"svg-14\"></i></a>\r\n                </div>\r\n                <div class=\"card-body\">\r\n                    <p class=\"tx-12 tx-color-04\">August 01 - August 31</p>\r\n                    <div class=\"chart-wrapper\">\r\n                        <div class=\"overlay-body\">\r\n                            <div class=\"d-flex align-items-baseline\">\r\n                                <h3 class=\"card-value\">6,128</h3>\r\n                                <span class=\"card-percent tx-danger\"><i class=\"icon ion-android-arrow-down\"></i>0.3%</span>\r\n                            </div>\r\n                            <span class=\"tx-12 tx-color-03\">Total Post Engagements</span>\r\n                        </div>\r\n                        <div id=\"flotChart6\" class=\"flot-chart\"></div>\r\n                    </div>\r\n                </div>\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4 mg-t-15 mg-sm-t-20\">\r\n            <div class=\"card card-hover card-connection-one\">\r\n                <div class=\"card-header\">\r\n                    <h6 class=\"card-title mg-b-0\">Connections <span>926</span></h6>\r\n                    <a href=\"\" class=\"tx-12 tx-medium\">Show all <i class=\"icon ion-android-arrow-forward\"></i></a>\r\n                </div><!-- card-header -->\r\n                <div class=\"card-body\">\r\n                    <ul class=\"list-group list-group-flush\">\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                            <div class=\"list-body\">\r\n                                <p class=\"person-name\"><a href=\"\">Jacquelyn Harley</a></p>\r\n                                <p class=\"person-location\">Market St., San Francisco, CA</p>\r\n                            </div><!-- list-body -->\r\n                            <a href=\"\" class=\"person-more\"><i data-feather=\"more-vertical\" class=\"svg-16\"></i></a>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                            <div class=\"list-body\">\r\n                                <p class=\"person-name\"><a href=\"\">Larisa Commons</a></p>\r\n                                <p class=\"person-location\">Cost Ave., Alexandria, MD</p>\r\n                            </div><!-- list-body -->\r\n                            <a href=\"\" class=\"person-more\"><i data-feather=\"more-vertical\" class=\"svg-16\"></i></a>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-primary\">j</span></div>\r\n                            <div class=\"list-body\">\r\n                                <p class=\"person-name\"><a href=\"\">Jeffrey Ledbetter</a></p>\r\n                                <p class=\"person-location\">Virgil St., Graceville, FL</p>\r\n                            </div><!-- list-body -->\r\n                            <a href=\"\" class=\"person-more\"><i data-feather=\"more-vertical\" class=\"svg-16\"></i></a>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-teal\">d</span></div>\r\n                            <div class=\"list-body\">\r\n                                <p class=\"person-name\"><a href=\"\">Debbie Winslett</a></p>\r\n                                <p class=\"person-location\">Randolph St., Natick, MA</p>\r\n                            </div><!-- list-body -->\r\n                            <a href=\"\" class=\"person-more\"><i data-feather=\"more-vertical\" class=\"svg-16\"></i></a>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                            <div class=\"list-body\">\r\n                                <p class=\"person-name\"><a href=\"\">Lawrence Green</a></p>\r\n                                <p class=\"person-location\">Clair St., Gordon, TX</p>\r\n                            </div><!-- list-body -->\r\n                            <a href=\"\" class=\"person-more\"><i data-feather=\"more-vertical\" class=\"svg-16\"></i></a>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n            </div><!-- card -->\r\n            <div class=\"card card-hover card-post-one mg-t-20\">\r\n                <div class=\"card-header\">\r\n                    <div class=\"avatar\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                    <div class=\"header-body\">\r\n                        <h6>Joyce Meyer</h6>\r\n                        <p>Aug 10, 2019 8:50am</p>\r\n                    </div>\r\n                </div><!-- card-header -->\r\n                <div class=\"card-body\">\r\n                    <p class=\"mg-b-0\">You only have one life, and if it is not going in the direction you want it to, now is the time to make changes.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer\">\r\n                    <a href=\"\"><i data-feather=\"eye\" class=\"svg-14\"></i> <span>2,024</span></a>\r\n                    <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> <span>24</span></a>\r\n                    <a href=\"\"><i data-feather=\"bookmark\" class=\"svg-14\"></i> <span>8</span></a>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4 mg-t-15 mg-sm-t-20\">\r\n            <div class=\"card card-hover card-blog-one\">\r\n                <div class=\"card-body\">\r\n                    <span class=\"badge bg-warning tx-white\">Sponsored</span>\r\n                    <h5 class=\"card-title\"><a href=\"\">The Secret Betting Strategy That Beats Online Bookmakers</a></h5>\r\n                    <p class=\"card-desc\">Any fool on the street can tell you that technology is changing at a whiplash in ducing pace.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer\">\r\n                    <div class=\"media align-items-center\">\r\n                        <div class=\"avatar avatar-xxs\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                        <h6 class=\"media-body mg-b-0 tx-13 tx-color-01 mg-l-7\">Katherine Lumaad</h6>\r\n                    </div>\r\n                    <span class=\"tx-gray-500 tx-12\">2 hours ago</span>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n            <div class=\"card card-hover card-blog-one mg-t-20\">\r\n                <div class=\"card-img-wrapper\"><img src=\"https://via.placeholder.com/1280x853/637382/fff\" class=\"card-img\" alt=\"\"></div>\r\n                <div class=\"marker pos-absolute t-10 l-10 bg-success tx-white\">Technology</div>\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title\"><a href=\"\">10 Technologies That Are About to Change the World</a></h5>\r\n                    <p class=\"card-desc\">Any fool on the street can tell you that technology is changing at a whiplash in ducing pace.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer\">\r\n                    <a href=\"\"><i data-feather=\"heart\" class=\"svg-14\"></i> <span>28</span></a>\r\n                    <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> <span>14</span></a>\r\n                    <span class=\"tx-gray-500 mg-l-auto\">2 hours ago</span>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-lg-5 col-xl-4 mg-t-15 mg-sm-t-20\">\r\n            <div class=\"card card-hover card-stories-one\">\r\n                <div class=\"card-header bg-transparent\">\r\n                    <h6 class=\"card-title mg-b-0\">Top Stories</h6>\r\n                    <a href=\"\" class=\"link-03\"><i data-feather=\"more-horizontal\" class=\"svg-14\"></i></a>\r\n                </div><!-- card-header -->\r\n                <div class=\"card-body pd-0\">\r\n                    <ul class=\"list-group list-group-flush\">\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><img src=\"https://via.placeholder.com/300/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                            <div class=\"list-body\">\r\n                                <h6 class=\"list-title\"><a href=\"\">Javascript Countdown Timer Code</a></h6>\r\n                                <div class=\"list-footer\">\r\n                                    <a href=\"\"><i data-feather=\"eye\" class=\"svg-14\"></i> <span>1,344</span></a>\r\n                                    <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> <span>5</span></a>\r\n                                    <a href=\"\"><i data-feather=\"share\" class=\"svg-14\"></i> <span>2</span></a>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-indigo\">A</span></div>\r\n                            <div class=\"list-body\">\r\n                                <h6 class=\"list-title\"><a href=\"\">Portal Layout Creation with Portlet</a></h6>\r\n                                <div class=\"list-footer\">\r\n                                    <a href=\"\"><i data-feather=\"eye\" class=\"svg-14\"></i> <span>1,021</span></a>\r\n                                    <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> <span>14</span></a>\r\n                                    <a href=\"\"><i data-feather=\"share\" class=\"svg-14\"></i> <span>8</span></a>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                            <div class=\"list-body\">\r\n                                <h6 class=\"list-title\"><a href=\"\">The Daily Routine Experts Recommend for Peak Productivity</a></h6>\r\n                                <div class=\"list-footer\">\r\n                                    <a href=\"\"><i data-feather=\"eye\" class=\"svg-14\"></i> <span>105</span></a>\r\n                                    <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> <span>1</span></a>\r\n                                    <a href=\"\"><i data-feather=\"share\" class=\"svg-14\"></i> <span>3</span></a>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-teal\">C</span></div>\r\n                            <div class=\"list-body\">\r\n                                <h6 class=\"list-title\"><a href=\"\">How Designers Engineer Luck Into Video Games</a></h6>\r\n                                <div class=\"list-footer\">\r\n                                    <a href=\"\"><i data-feather=\"eye\" class=\"svg-14\"></i> <span>1,021</span></a>\r\n                                    <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> <span>14</span></a>\r\n                                    <a href=\"\"><i data-feather=\"share\" class=\"svg-14\"></i> <span>8</span></a>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-pink\">S</span></div>\r\n                            <div class=\"list-body\">\r\n                                <h6 class=\"list-title\"><a href=\"\">The Secret Betting Strategy That Beats Online Bookmakers</a></h6>\r\n                                <div class=\"list-footer\">\r\n                                    <a href=\"\"><i data-feather=\"eye\" class=\"svg-14\"></i> <span>509</span></a>\r\n                                    <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> <span>7</span></a>\r\n                                    <a href=\"\"><i data-feather=\"share\" class=\"svg-14\"></i> <span>1</span></a>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                        <li class=\"list-group-item\">\r\n                            <div class=\"avatar\"><span class=\"avatar-initial rounded-circle bg-blue\">S</span></div>\r\n                            <div class=\"list-body\">\r\n                                <h6 class=\"list-title\"><a href=\"\">The Secret Betting Strategy That Beats Online Bookmakers</a></h6>\r\n                                <div class=\"list-footer\">\r\n                                    <a href=\"\"><i data-feather=\"eye\" class=\"svg-14\"></i> <span>509</span></a>\r\n                                    <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> <span>7</span></a>\r\n                                    <a href=\"\"><i data-feather=\"share\" class=\"svg-14\"></i> <span>1</span></a>\r\n                                </div>\r\n                            </div>\r\n                        </li>\r\n                    </ul>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer bg-transparent tx-center pd-y-10\">\r\n                    <a href=\"\" class=\"link-03 tx-12 tx-medium\">See All Stories <i class=\"icon ion-android-arrow-forward\"></i></a>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-md-8 col-lg-8 col-xl-6 mg-t-15 mg-sm-t-20 order-md-1 order-xl-0\">\r\n            <div class=\"card card-hover card-profile-one\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"media\">\r\n                        <div class=\"avatar avatar-xxl\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h5 class=\"card-title\">Katherine Lumaad</h5>\r\n                            <p class=\"card-desc\">Explorer. Bacon fanatic. Communicator. Analyst. Student. Social media advocate. Lifelong zombie guru. Gamer. Internet enthusiast.</p>\r\n                            <div class=\"media-footer\">\r\n                                <div>\r\n                                    <h6>460</h6>\r\n                                    <label>Posts</label>\r\n                                </div>\r\n                                <div>\r\n                                    <h6>132</h6>\r\n                                    <label>Followers</label>\r\n                                </div>\r\n                                <div>\r\n                                    <h6>84</h6>\r\n                                    <label>Following</label>\r\n                                </div>\r\n                            </div><!-- media-footer -->\r\n                        </div>\r\n                    </div><!-- media -->\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-md-4 col-lg col-xl-3 mg-t-15 mg-sm-t-20\">\r\n            <div class=\"card card-hover card-profile-two ht-xl-100p\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"avatar avatar-md\"><img src=\"https://via.placeholder.com/300/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                    <h6 class=\"card-title\">Samantha Perez</h6>\r\n                    <p class=\"card-desc\">Explorer. Social media hero. Bacon fanatic. Student.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer bg-transparent pd-t-0 bd-t-0\">\r\n                    <a href=\"\"><i data-feather=\"user-plus\" class=\"svg-16\"></i></a>\r\n                    <a href=\"\"><i data-feather=\"arrow-right\" class=\"svg-16\"></i></a>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-md-4 col-lg col-xl-3 mg-t-15 mg-sm-t-20\">\r\n            <div class=\"card card-profile-two card-dark bg-primary bd-primary ht-xl-100p\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"avatar avatar-md\"><img src=\"https://via.placeholder.com/300/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                    <h6 class=\"card-title\">Reynante Labares</h6>\r\n                    <p class=\"card-desc\">Internet fanatic. Food expert. Gamer. Organizer.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer bg-transparent pd-t-0 bd-t-0\">\r\n                    <a href=\"\"><i data-feather=\"user-plus\" class=\"svg-16\"></i></a>\r\n                    <a href=\"\"><i data-feather=\"arrow-right\" class=\"svg-16\"></i></a>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n    </div><!-- row -->\r\n    <div class=\"row row-sm mg-t-15 mg-sm-t-20\">\r\n        <div class=\"col-sm-6 col-xl-4\">\r\n            <div class=\"card card-hover card-profile-three\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"avatar avatar-online avatar-xxl mg-b-20\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                    <h5 class=\"profile-name\"><a href=\"\">Pepper Xo</a></h5>\r\n                    <p class=\"profile-position\">UI/UX Designer</p>\r\n                    <nav class=\"nav mg-b-15\">\r\n                        <a href=\"\" class=\"badge badge-primary-light\">HTML5</a>\r\n                        <a href=\"\" class=\"badge badge-success-light\">CSS3</a>\r\n                        <a href=\"\" class=\"badge badge-warning-light\">Javascript</a>\r\n                        <a href=\"\" class=\"badge badge-danger-light\">React</a>\r\n                        <a href=\"\" class=\"badge badge-white\">4+</a>\r\n                    </nav>\r\n                    <p class=\"profile-bio\">Explorer. Bacon fanatic. Communicator. Analyst. Student. Social media advocate. Lifelong zombie guru. Gamer. Internet enthusiast.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer row no-gutters\">\r\n                    <div class=\"col\">\r\n                        <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> Message</a>\r\n                    </div>\r\n                    <div class=\"col bd-l\">\r\n                        <a href=\"\"><i data-feather=\"user\" class=\"svg-14\"></i> View Profile</a>\r\n                    </div>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4 mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-profile-three\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"avatar avatar-online avatar-xxl mg-b-20\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                    <h5 class=\"profile-name\"><a href=\"\">Jillian Janson</a></h5>\r\n                    <p class=\"profile-position\">UI/UX Designer</p>\r\n                    <nav class=\"nav mg-b-15\">\r\n                        <a href=\"\" class=\"badge badge-primary\">HTML5</a>\r\n                        <a href=\"\" class=\"badge badge-success\">CSS3</a>\r\n                        <a href=\"\" class=\"badge badge-warning\">Javascript</a>\r\n                        <a href=\"\" class=\"badge badge-danger\">React</a>\r\n                        <a href=\"\" class=\"badge badge-white\">4+</a>\r\n                    </nav>\r\n                    <p class=\"profile-bio\">Explorer. Bacon fanatic. Communicator. Analyst. Student. Social media advocate. Lifelong zombie guru. Gamer. Internet enthusiast.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer row no-gutters\">\r\n                    <div class=\"col\">\r\n                        <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> Message</a>\r\n                    </div>\r\n                    <div class=\"col bd-l\">\r\n                        <a href=\"\"><i data-feather=\"user\" class=\"svg-14\"></i> View Profile</a>\r\n                    </div>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4\">\r\n        </div><!-- col -->\r\n    </div><!-- row -->\r\n</div><!-- content-body -->"
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/Associate/components/Dashboard/dashboard.component.ts":
+/*!************************************************************************************!*\
+  !*** ./AngularAssociate/app/Associate/components/Dashboard/dashboard.component.ts ***!
+  \************************************************************************************/
+/*! exports provided: DashboardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var crypto_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! crypto-js */ "./node_modules/crypto-js/index.js");
+/* harmony import */ var crypto_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(crypto_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
+
+
+
+
+
+
+
+
+var DashboardComponent = /** @class */ (function () {
+    function DashboardComponent(route, router, userService, fb, http) {
+        this.route = route;
+        this.router = router;
+        this.userService = userService;
+        this.fb = fb;
+        this.http = http;
+        this.authType = '';
+        this.title = '';
+        this.errors = { errors: {} };
+        this.isSubmitting = false;
+        this.showLoadingGif = false;
+        this.resentCode = false;
+        this.activationSent = false;
+        this.showOnValidateEmail = false;
+        this.showErrorsPassword = false;
+        this.showActivationDiv = false;
+        this.resetPassword = false;
+        this.FormFilledSuccessfully = false;
+        this.showEmailVerification = false;
+        this.tokenFromUI = "7061737323313233";
+        this.encrypted = "";
+        this.loginErrorMessage = "";
+        this.validationMessages = {
+            'email': {
+                'required': 'Email is required',
+                'email': 'Email is not in correct format.',
+                'emailInUse': 'This Email address is not available. Please Try another email address.'
+            },
+            'password': {
+                'required': 'Password is required',
+                'minlength': 'Min of 8 char in length',
+                'maxlength': 'Max of 20 char in length',
+                'number': 'At least one number.',
+                'lowerLetter': 'At least one lowercase.',
+                'upperLetter': 'At least one uppercase.',
+                'hasSpecialCharacters': 'At least one special character.'
+            },
+            'confirmPassword': {
+                'required': 'Confirm password is required',
+            },
+            'passwordGroup': {
+                'passwordMismatch': 'Password and Confirm password does not match.'
+            },
+            'activationCode': {
+                'required': 'Activation code is required',
+                'notValidCode': 'Activation code is not valid',
+            },
+            'terms': {
+                'required': 'You must accept terms and conditions'
+            }
+            //,
+            //'loginCredentials': {
+            //    'error': 'User Authentication Failed. Please verify your credentials'
+            //}
+        };
+        this.formErrors = {
+            'email': '',
+            'password': '',
+            'confirmPassword': '',
+            'passwordGroup': '',
+            'associate': '',
+            'consumer': '',
+            'activationCode': '',
+            'terms': ''
+            //,
+            //'loginCredentials': ''
+        };
+    }
+    DashboardComponent.prototype.ngOnInit = function () {
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //console.log(this.encrypted);
+        //this.router.navigate(['activate', '2', this.encrypted]);
+        this.setValidationOnform();
+        this.setSignInOrSignUpOrActivateOrReset();
+        this.changeValuesOfFormsEvents();
+    };
+    DashboardComponent.prototype.changeValuesOfFormsEvents = function () {
+        var _this = this;
+        this.authForm.valueChanges.subscribe(function (data) {
+            _this.logValidationErrors(_this.authForm);
+        });
+        this.authForm.get('associate').valueChanges.subscribe(function (data) {
+            if (data == true) {
+                _this.authForm.get('terms').enable();
+            }
+            else if (data == false && _this.authForm.get('consumer').value == false) {
+                _this.authForm.get('terms').disable();
+            }
+        });
+        this.authForm.get('consumer').valueChanges.subscribe(function (data) {
+            if (data == true) {
+                _this.authForm.get('terms').enable();
+            }
+            else if (data == false && _this.authForm.get('associate').value == false) {
+                _this.authForm.get('terms').disable();
+            }
+        });
+        this.authForm.get('terms').valueChanges.subscribe(function (data) {
+            if (data == false) {
+                _this.FormFilledSuccessfully = false;
+            }
+            else {
+                _this.FormFilledSuccessfully = true;
+            }
+        });
+        //this.authForm.get('terms').valueChanges.subscribe((data) => {
+        //    if (data == true) {
+        //        this.authForm.;
+        //    }
+        //    else if (data == "false" && this.authForm.get('associate').value == "false") {
+        //        this.authForm.get('terms').disable();
+        //    }
+        //});
+    };
+    DashboardComponent.prototype.logValidationErrors = function (group) {
+        var _this = this;
+        if (group === void 0) { group = this.authForm; }
+        if (this.authType == "login") {
+            this.loginErrorMessage = "";
+        }
+        this.showEmailVerification = false;
+        Object.keys(group.controls).forEach(function (key) {
+            var abstractControl = group.get(key);
+            _this.formErrors[key] = '';
+            if (abstractControl && !abstractControl.valid
+                && (abstractControl.touched || abstractControl.dirty)) {
+                _this.formErrors[key] = "";
+                var messages = _this.validationMessages[key];
+                if (abstractControl.errors != null) {
+                    for (var errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            if (messages[errorKey] !== undefined) {
+                                _this.formErrors[key] += messages[errorKey] + ' ';
+                            }
+                        }
+                    }
+                    //if (key == "password") {
+                    //}
+                }
+            }
+            if (abstractControl instanceof _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]) {
+                _this.logValidationErrors(abstractControl);
+            }
+        });
+    };
+    DashboardComponent.prototype.setValidationOnform = function () {
+        // use FormBuilder to create a form group
+        this.authForm = this.fb.group({
+            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email], [this.emailAlreadyTaken()]],
+            passwordGroup: this.fb.group({
+                password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(20),
+                        patternValidator(/\d/, { number: true }),
+                        patternValidator(/[A-Z]/, { upperLetter: true }),
+                        patternValidator(/[a-z]/, { lowerLetter: true }),
+                        patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
+                        //regexValidatorNumbers(new RegExp('^[0-9]+$'), this),
+                        //regexValidatorLower(new RegExp('/[a-z]/g'), this),
+                        //regexValidatorCapital(new RegExp('/[A-Z]/g'), this),
+                        //regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
+                    ]],
+                confirmPassword: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,]],
+            }, { validator: matchPasswords }),
+            associate: [''],
+            consumer: [''],
+            terms: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            activationCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            submitButton: ['']
+        });
+    };
+    DashboardComponent.prototype.setSignInOrSignUpOrActivateOrReset = function () {
+        var _this = this;
+        this.route.url.subscribe(function (data) {
+            // Get the last piece of the URL (it's either 'login' or 'register')
+            _this.authType = data[0].path;
+            // Set a title for the page accordingly
+            if (_this.authType === 'login') {
+                _this.title = 'Sign in';
+                _this.authForm.get('email').clearValidators();
+                _this.authForm.get('email').clearAsyncValidators();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('email').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                _this.authForm.get('associate').clearValidators();
+                _this.authForm.get('associate').updateValueAndValidity();
+                _this.authForm.get('consumer').clearValidators();
+                _this.authForm.get('consumer').updateValueAndValidity();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('activationCode').updateValueAndValidity();
+            }
+            else if (_this.authType === 'register') {
+                _this.authForm.get('email').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]);
+                _this.authForm.get('email').setAsyncValidators([_this.emailAlreadyTaken()]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(20),
+                    patternValidator(/\d/, { number: true }),
+                    patternValidator(/[A-Z]/, { upperLetter: true }),
+                    patternValidator(/[a-z]/, { lowerLetter: true }),
+                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
+                ]);
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').setValidators([matchPasswords]);
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                _this.authForm.get('terms').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').disable();
+                _this.authForm.get('passwordGroup').get('password').disable();
+                _this.authForm.get('passwordGroup').get('confirmPassword').disable();
+                _this.authForm.get('associate').disable();
+                _this.authForm.get('consumer').disable();
+                _this.authForm.get('terms').disable();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.title = 'Sign up';
+            }
+            else if (_this.authType === 'activate') {
+                _this.authForm.get('email').clearValidators();
+                _this.authForm.get('email').clearAsyncValidators();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').clearValidators();
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                //this.authForm.get('associate').clearValidators();
+                //this.authForm.get('consumer').clearValidators();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+                _this.authForm.get('activationCode').updateValueAndValidity();
+                _this.title = 'Account Activation';
+            }
+            else if (_this.authType === 'resetPassword') {
+                //this.resetPassword = true;
+                _this.authForm.get('email').enable();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('email').clearAsyncValidators();
+                _this.authForm.get('email').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').clearValidators();
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                //this.authForm.get('associate').clearValidators();
+                //this.authForm.get('associate').updateValueAndValidity();
+                //this.authForm.get('consumer').clearValidators();
+                //this.authForm.get('associate').updateValueAndValidity();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('activationCode').updateValueAndValidity();
+                _this.title = 'Reset Password';
+            }
+        });
+    };
+    /**
+     * *************************************************
+     * LOGIN Module Start
+     * *************************************************
+    **/
+    DashboardComponent.prototype.submitLoginForm = function (email, password) {
+        var _this = this;
+        if (email === void 0) { email = ""; }
+        if (password === void 0) { password = ""; }
+        this.isSubmitting = true;
+        this.loginErrorMessage = "";
+        //this.errors = { errors: {} };
+        if (email != "" && password != "") {
+            this.router.navigateByUrl('/');
+        }
+        var thisStatus = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptAssociateAccountExists(this.authType, credentials)
+            .subscribe(function (data) {
+            var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+            var xml = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc);
+            var docs = xml.find("associateExists");
+            jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs, function (i, docs) {
+                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("AccountId").text() == "0") {
+                    //for associate Login
+                    thisStatus.userService.attempConsumerAccountExists(thisStatus.authType, credentials)
+                        .then(function (data1) {
+                        if (data1.d.length > 0) {
+                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data1.d);
+                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                            var docs1 = xml1.find("consumerExists");
+                            jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AccountId").text() == "0") {
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                                }
+                                else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("IsEmailVerified").text() == "0") {
+                                }
+                                else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("IsEmailVerified").text() == "1") {
+                                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                                }
+                                else {
+                                    thisStatus.LoginAssociateOrConsumer(credentials, 2); //Consumer
+                                }
+                            });
+                        }
+                    });
+                }
+                else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("IsEmailVerified").text() == "0") {
+                    // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
+                }
+                else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("IsEmailVerified").text() == "1") {
+                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                }
+                else {
+                    thisStatus.LoginAssociateOrConsumer(credentials, 1); //associate
+                }
+            });
+            _this.isSubmitting = false;
+            //if (data > '0') {
+            //    //this.router.navigateByUrl('/Associate');
+            //    $(location).attr('href', 'Associate/ViewProfile.aspx')
+            //}
+            //else if (data == '-1') {
+            //    this.userService
+            //        .attemptConsumerAuth(this.authType, credentials)
+            //        .then(
+            //            (data: any) => {
+            //                if (data > '0') {
+            //                    this.isSubmitting = false;
+            //                    //this.router.navigateByUrl('/Consumer');
+            //                    $(location).attr('href', '/index.html')
+            //                }
+            //                else {
+            //                    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //                    this.isSubmitting = false;
+            //                }
+            //            },
+            //            err => {
+            //                this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //                this.isSubmitting = false;
+            //            }
+            //        );
+            //}
+            //else {
+            //    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //    this.isSubmitting = false;
+            //}
+        }, function (err) {
+            //this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            _this.isSubmitting = false;
+        });
+    };
+    DashboardComponent.prototype.LoginAssociateOrConsumer = function (credentials, uType) {
+        var _this = this;
+        var thisStatus = this;
+        if (uType == 1) {
+            this.userService
+                .attemptAssociateAuth(this.authType, credentials)
+                .then(function (data) {
+                if (data.d.length > 0) {
+                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                    var docs1 = xml1.find("associateLogin");
+                    jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                        if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AssociateId").text() == "-1") {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                            return;
+                        }
+                        else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "1") {
+                            thisStatus.associateLoginSessionActivate(docs1);
+                            return;
+                        }
+                        else {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                            return;
+                        }
+                    });
+                }
+                else {
+                    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                }
+                //if (data > 1) {
+                //    this.isSubmitting = false;
+                //    this.router.navigateByUrl('/');
+                //}
+                //else {
+                //    this.showErrorsPassword = true;
+                //    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                //    this.isSubmitting = false;
+                //}
+            }, function (err) {
+                //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                _this.isSubmitting = false;
+            });
+        }
+        else if (uType == 2) {
+            this.userService
+                .attemptConsumerAuth(this.authType, credentials)
+                .then(function (data) {
+                if (data.d.length > 0) {
+                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                    var docs1 = xml1.find("consumerLogin");
+                    jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                        if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Id").text() == "-1") {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                        }
+                        else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Flag").text() == "1") {
+                            thisStatus.consumerLoginSessionActivate(docs1);
+                        }
+                        else {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                        }
+                    });
+                }
+                else {
+                    _this.showErrorsPassword = true;
+                    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                    _this.isSubmitting = false;
+                }
+            }, function (err) {
+                _this.showErrorsPassword = true;
+                //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                _this.isSubmitting = false;
+            });
+        }
+    };
+    DashboardComponent.prototype.consumerLoginSessionActivate = function (docs) {
+        var _this = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .consumerLoginSessionActivate(this.authType, credentials, jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Id").text())
+            .then(function (data) {
+            if (data.d == "1") {
+                jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', '/ConsumerDashboard.html');
+            }
+        }, function (err) {
+            _this.loginErrorMessage = "Some internal error occurred.";
+            _this.isSubmitting = false;
+        });
+    };
+    DashboardComponent.prototype.associateLoginSessionActivate = function (docs) {
+        var _this = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .associateLoginSessionActivate(this.authType, credentials, jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("AssociateId").text())
+            .then(function (data) {
+            if (data.d == "1") {
+                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Mobile").text() == '') {
+                    jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/ViewProfile.aspx');
+                }
+                else {
+                    jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/Dashboard.aspx');
+                }
+            }
+        }, function (err) {
+            _this.loginErrorMessage = "Some internal error occurred.";
+            //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+            _this.isSubmitting = false;
+        });
+    };
+    /**
+     * *************************************************
+     * LOGIN Module END
+     * *************************************************
+    **/
+    /**
+    * *************************************************
+    * SIGN UP Module END
+    * *************************************************
+    **/
+    DashboardComponent.prototype.isEmailExist = function (control) {
+        var _this = this;
+        //clearTimeout(this.debouncer);
+        //return { 'emailInUse': true };
+        var thisUserService = this.userService;
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(String(control.value).toLowerCase())) {
+            this.showOnValidateEmail = true;
+            setTimeout(function () {
+                return thisUserService.validateEmail(control.value).subscribe(function (data) {
+                    if (Number(data) >= 1) {
+                        console.log("Email validate" + data);
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                    }
+                    else {
+                        _this.showEmailVerification = false;
+                        console.log("Email validate" + data);
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+                        //control.parent.get('associate').enable();
+                        //control.parent.get('consumer').enable();
+                        //this.parent.get('terms').enable();
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        return null;
+                    }
+                }, function (err) {
+                    _this.showOnValidateEmail = false;
+                    _this.FormFilledSuccessfully = false;
+                    return { 'emailInUse': true };
+                });
+            }, 1000);
+        }
+    };
+    DashboardComponent.prototype.isEmailTaken = function () {
+        this.logValidationErrors();
+        return this.authForm.get('email').hasError('emailInUse');
+    };
+    DashboardComponent.prototype.emailAlreadyTaken = function () {
+        var _this = this;
+        return function (control) {
+            var thisUserService = _this.userService;
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (re.test(String(control.value).toLowerCase())) {
+                _this.showOnValidateEmail = true;
+                return _this.userService
+                    .emailAlreadyTaken(control.value)
+                    .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) {
+                    if (data >= 1) {
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').addClass('has-error');
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').attr('style', 'top: 19% !important');
+                        return { emailInUse: true };
+                    }
+                    else {
+                        _this.showOnValidateEmail = false;
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').removeAttr('style');
+                        //control.parent.get('associate').enable();
+                        //control.parent.get('consumer').enable();
+                        //this.parent.get('terms').enable();
+                        _this.FormFilledSuccessfully = false;
+                        return Object(rxjs__WEBPACK_IMPORTED_MODULE_9__["of"])(null);
+                    }
+                }));
+                //return thisUserService.emailAlreadyTaken(control.value)
+                //    .subscribe(
+                //        (data) => {
+                //            debugger;
+                //            if (Number(data) >= 1) {
+                //                console.log("Email validate" + data);
+                //                this.showOnValidateEmail = false;
+                //                this.FormFilledSuccessfully = false;
+                //                return { 'emailTaken': true };
+                //            }
+                //            else {
+                //                this.showEmailVerification = false;
+                //                console.log("Email validate" + data);
+                //                control.parent.get('passwordGroup').enable();
+                //                control.parent.get('passwordGroup').get('password').enable();
+                //                control.parent.get('passwordGroup').get('confirmPassword').enable();
+                //                //control.parent.get('associate').enable();
+                //                //control.parent.get('consumer').enable();
+                //                //this.parent.get('terms').enable();
+                //                this.FormFilledSuccessfully = false;
+                //                return of(null);
+                //            }
+                //        },
+                //        (err) => {
+                //            this.showOnValidateEmail = false;
+                //            this.FormFilledSuccessfully = false;
+                //            return of(null);
+                //        });
+            }
+        };
+    };
+    DashboardComponent.prototype.submitRegistrationForm = function () {
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //this.router.navigate(['activate', '2', this.encrypted]);
+        this.isSubmitting = true;
+        this.FormFilledSuccessfully = true;
+        if (this.authForm.get('associate').value == true) {
+            this.associateRegister();
+        }
+        else if (this.authForm.get('consumer').value == true) {
+            debugger;
+            this.consumerRegister();
+        }
+        //this.errors = { errors: {} };
+        //const credentials = this.authForm.value;
+        //this.userService
+        //    .attemptRegister(this.authType, credentials)
+        //    .subscribe(
+        //        data => {
+        //            if (data > 1) {
+        //                this.isSubmitting = false;
+        //                this.router.navigateByUrl('/Activate');
+        //            }
+        //            else {
+        //                this.showErrorsPassword = true;
+        //                //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+        //                this.isSubmitting = false;
+        //            }
+        //        },
+        //        err => {
+        //            this.showErrorsPassword = true;
+        //            //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+        //            this.isSubmitting = false;
+        //        }
+        //    );
+    };
+    DashboardComponent.prototype.associateRegister = function () {
+        var _this = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptRegisterAssociate(this.authType, credentials)
+            .subscribe(function (data) {
+            if (data >= 1) {
+                _this.isSubmitting = false;
+                _this.request = credentials.email;
+                _this.encryptUsingAES256();
+                credentials.email = _this.encrypted;
+                credentials.email.replace('/', '~');
+                _this.request = credentials.passwordGroup.password;
+                _this.encryptUsingAES256();
+                credentials.passwordGroup.password = _this.encrypted;
+                credentials.passwordGroup.password.replace('/', '~');
+                _this.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
+            }
+            else {
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.isSubmitting = false;
+        });
+    };
+    DashboardComponent.prototype.consumerRegister = function () {
+        var _this = this;
+        debugger;
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptRegisterConsumer(this.authType, credentials)
+            .subscribe(function (data) {
+            debugger;
+            if (data >= 1) {
+                _this.isSubmitting = false;
+                _this.request = credentials.email;
+                _this.encryptUsingAES256();
+                credentials.email = _this.encrypted;
+                credentials.email.replace('/', '~');
+                _this.request = credentials.passwordGroup.password;
+                _this.encryptUsingAES256();
+                credentials.passwordGroup.password = _this.encrypted;
+                credentials.passwordGroup.password.replace('/', '~');
+                _this.router.navigate(['activate', '2', credentials.email, credentials.passwordGroup.password]);
+            }
+            else {
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.isSubmitting = false;
+        });
+    };
+    /**
+    * *************************************************
+    * SIGNUP Module END
+    * *************************************************
+    **/
+    /**
+    * *************************************************
+    * ACTIVATION Module END
+    * *************************************************
+    **/
+    DashboardComponent.prototype.submitActivationForm = function () {
+        var _this = this;
+        this.isSubmitting = true;
+        var credentials = this.authForm.value;
+        var urlComponent;
+        var encryptedPassword;
+        var encryptedEmail;
+        this.route.url.subscribe(function (data) {
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[1].path;
+                encryptedEmail = data[2].path;
+                encryptedPassword = data[3].path;
+                _this.isSubmitting = false;
+            }
+            else {
+                //page  not found
+                _this.isSubmitting = false;
+            }
+        });
+        var userType = urlComponent;
+        encryptedEmail.replace('~', '/');
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        credentials.email = this.decrypted;
+        //credentials.email = credentials.emaild.replace(/^"(.*)"$/, '$1');
+        console.log(this.decrypted);
+        encryptedPassword.replace('~', '/');
+        this.encrypted = encryptedPassword;
+        this.decryptUsingAES256();
+        credentials.passwordGroup.password = this.decrypted;
+        //credentials.passwordGroup.password = credentials.passwordGroup.password.replace(/^"(.*)"$/, '$1');
+        console.log(this.decrypted);
+        if (userType == "1") {
+            this.associateActivationCode(credentials);
+        }
+        else if (userType == "2") {
+            this.consumerActivationCode(credentials);
+        }
+    };
+    DashboardComponent.prototype.associateActivationCode = function (credentials) {
+        var _this = this;
+        this.userService
+            .getAttemptVerifiedActivationCodeAssociate(this.authType, credentials)
+            .subscribe(function (data) {
+            if (data.d == credentials.activationCode) {
+                _this.userService
+                    .attemptVerifiedActivationCodeAssociate(_this.authType, credentials.email)
+                    .then(function (data) {
+                    if (data.d.length > 0) {
+                        jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/ViewProfile.aspx');
+                        //this.router.navigateByUrl('/login');
+                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                    }
+                    _this.isSubmitting = false;
+                }, function (err) {
+                    _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+                    _this.isSubmitting = false;
+                });
+            }
+            else {
+                _this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
+                _this.isSubmitting = false;
+                _this.activationSent = true;
+            }
+        }, function (err) {
+            _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+            _this.isSubmitting = false;
+        });
+    };
+    DashboardComponent.prototype.consumerActivationCode = function (credentials) {
+        var _this = this;
+        this.userService
+            .getAttemptVerifiedActivationCodeConsumer(this.authType, credentials)
+            .subscribe(function (data) {
+            if (data.d == credentials.activationCode) {
+                _this.userService
+                    .attemptVerifiedActivationCodeConsumer(_this.authType, credentials.email)
+                    .then(function (data) {
+                    if (data.d.length > 0) {
+                        //this.router.navigateByUrl('/login');
+                        jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', '/ConsumerDashboard.html');
+                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                    }
+                    _this.isSubmitting = false;
+                }, function (err) {
+                    _this.formErrors.activationCode = "Verification code does not completed due to some error.";
+                    _this.isSubmitting = false;
+                });
+            }
+            else {
+                _this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
+                _this.isSubmitting = false;
+                _this.activationSent = true;
+            }
+        }, function (err) {
+            _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+            _this.isSubmitting = false;
+        });
+    };
+    DashboardComponent.prototype.onClickResendVerificationCode = function () {
+        var _this = this;
+        var email;
+        var urlComponent;
+        var encryptedEmail;
+        this.route.url.subscribe(function (data) {
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[0].path;
+                encryptedEmail = data[2].path;
+            }
+            else {
+                //page  not found
+            }
+        });
+        var userType = urlComponent;
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        email = this.decrypted;
+        email.replace('~', '/');
+        console.log(this.decrypted);
+        this.resentCode = true;
+        this.userService
+            .attemptResendActivateCode(email)
+            .subscribe(function (data) {
+            if (data.d > 0 && data.d > "1") {
+                _this.resentCode = false;
+                _this.isSubmitting = false;
+            }
+            else {
+                _this.resentCode = false;
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.resentCode = false;
+            _this.isSubmitting = false;
+        });
+    };
+    /**
+    * *************************************************
+    * ACTIVATION Module END
+    * *************************************************
+    **/
+    DashboardComponent.prototype.encryptUsingAES256 = function () {
+        var _key = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var _iv = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var encrypted = crypto_js__WEBPACK_IMPORTED_MODULE_6__["AES"].encrypt(JSON.stringify(this.request), _key, {
+            keySize: 16,
+            iv: _iv,
+            mode: crypto_js__WEBPACK_IMPORTED_MODULE_6__["mode"].ECB,
+            padding: crypto_js__WEBPACK_IMPORTED_MODULE_6__["pad"].Pkcs7
+        });
+        this.encrypted = encrypted.toString();
+    };
+    DashboardComponent.prototype.decryptUsingAES256 = function () {
+        var _key = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var _iv = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        this.decrypted = crypto_js__WEBPACK_IMPORTED_MODULE_6__["AES"].decrypt(this.encrypted, _key, {
+            keySize: 16,
+            iv: _iv,
+            mode: crypto_js__WEBPACK_IMPORTED_MODULE_6__["mode"].ECB,
+            padding: crypto_js__WEBPACK_IMPORTED_MODULE_6__["pad"].Pkcs7
+        }).toString(crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8);
+    };
+    DashboardComponent.prototype.submitFormResetPassword = function () {
+        var _this = this;
+        debugger;
+        var thisStatus = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptAssociateAccountExists(this.authType, credentials)
+            .subscribe(function (data) {
+            var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+            var xml = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc);
+            var docs = xml.find("associateExists");
+            jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs, function (i, docs) {
+                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("AccountId").text() != "0") {
+                    thisStatus.userService
+                        .attemptResetAssociatePassword(credentials.email)
+                        .then(function (data1) {
+                        if (data1 == "0") {
+                            thisStatus.resetPassword = true;
+                            thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
+                        }
+                    });
+                }
+                else {
+                    thisStatus.userService
+                        .attempConsumerAccountExists(thisStatus.authType, credentials)
+                        .then(function (data1) {
+                        if (data1.d.length > 0) {
+                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data1.d);
+                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                            var docs1 = xml1.find("consumerExists");
+                            jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AccountId").text() == "0") {
+                                    //Please verify your email address and retry again.
+                                    thisStatus.showEmailVerification = true;
+                                }
+                                else {
+                                    thisStatus.userService
+                                        .attemptResetConsumerPassword(credentials.email)
+                                        .then(function (data2) {
+                                        if (data2 == "0") {
+                                            thisStatus.resetPassword = true;
+                                            thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }, function (err) {
+            _this.showEmailVerification = true;
+            _this.resetPassword = false;
+            _this.isSubmitting = false;
+        });
+    };
+    DashboardComponent.prototype.showErrors = function () {
+        this.showErrorsPassword = true;
+    };
+    DashboardComponent.prototype.hideErrors = function () {
+        this.showErrorsPassword = false;
+    };
+    DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'associate-dashboard-page',
+            template: __webpack_require__(/*! ./dashboard.component.html */ "./AngularAssociate/app/Associate/components/Dashboard/dashboard.component.html")
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_auth__WEBPACK_IMPORTED_MODULE_4__["UserService"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]])
+    ], DashboardComponent);
+    return DashboardComponent;
+}());
+
+function emailDomain(domainName) {
+    return function (control) {
+        var email = control.value;
+        var domain = email.substring(email.lastIndexOf('@') + 1);
+        if (email === '' || domain.toLowerCase() === domainName.toLowerCase()) {
+            return null;
+        }
+        else {
+            return { 'emailDomain': true };
+        }
+    };
+}
+//function isEmailExist(userService: UserService, authComp: AuthComponent) {
+//    return (control: AbstractControl): { [key: string]: any } | null => {
+//        //clearTimeout(this.debouncer);
+//        //return { 'emailInUse': true };
+//        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//        if (re.test(String(control.value).toLowerCase())) {
+//            authComp.showOnValidateEmail = true;
+//            setTimeout(() => {
+//                userService.validateEmail(control.value).subscribe(
+//                    (data) => {
+//                        if (data >= 1) {
+//                            console.log("Email validate" + data);
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return { 'emailInUse': true };
+//                        }
+//                        else {
+//                            console.log("Email validate" + data);
+//                            control.parent.get('passwordGroup').enable();
+//                            control.parent.get('passwordGroup').get('password').enable();
+//                            control.parent.get('passwordGroup').get('confirmPassword').enable();
+//                            //control.parent.get('associate').enable();
+//                            //control.parent.get('consumer').enable();
+//                            //control.parent.get('terms').enable();
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return null;
+//                        }
+//                    },
+//                    (err) => {
+//                        authComp.showOnValidateEmail = false;
+//                        authComp.FormFilledSuccessfully = false;
+//                        return { 'emailInUse': true };
+//                    });
+//            }, 500);
+//        }
+//        console.log('outside');
+//        return { 'emailInUse': true };
+//    }
+//}
+function matchPasswords(group) {
+    var passwordControl = group.get('password');
+    var confirmPasswordControl = group.get('confirmPassword');
+    if (group.parent !== undefined) {
+        if (passwordControl.value != "" && (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine)) {
+            group.parent.get('associate').enable();
+            group.parent.get('consumer').enable();
+            return null;
+        }
+        else {
+            group.parent.get('associate').disable();
+            group.parent.get('consumer').disable();
+            return { 'passwordMismatch': true };
+        }
+    }
+    else {
+        return null;
+    }
+}
+function patternValidator(regex, error) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        // test the value of the control against the regexp supplied
+        var valid = regex.test(control.value);
+        // if true, return no error (no error), else return error passed in the second parameter
+        return valid ? null : error;
+    };
+}
+//function regexValidatorNumbers(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+//    return (control: AbstractControl): { [key: string]: any } => {
+//        if (!control.value) {
+//            return null;
+//        }
+//        const valid = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})".test(control.value);
+//        return valid ? null : { 'number': 'At least one number.' };
+//    };
+//}
+//function regexValidatorLower(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+//    return (control: AbstractControl): { [key: string]: any } => {
+//        if (!control.value) {
+//            return null;
+//        }
+//        const valid = regex.test(control.value);
+//        return valid ? null : { 'lowerLetter': 'At least one lowercase.' };
+//        return valid ? null : {};
+//    };
+//}
+//function regexValidatorCapital(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+//    return (control: AbstractControl): { [key: string]: any } => {
+//        if (!control.value) {
+//            return null;
+//        }
+//        const valid = regex.test(control.value);
+//        return valid ? null : { 'upperLetter': 'At least one uppercase.' };
+//    };
+//}
+//function regexValidatorSpecial(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+//    return (control: AbstractControl): { [key: string]: any } => {
+//        if (!control.value) {
+//            return null;
+//        }
+//        const valid = regex.test(control.value);
+//        return valid ? null : { 'special Character': 'At least one special character.' };
+//    };
+//}
+//const email: string = control.value;
+//const emailFromDB = this.userService.validateEmail(email); //getUserEmailFromDB();
+//if (emailFromDB === '' || emailFromDB === email) {
+//    return null;
+//} else {
+//    this.authForm.get('passwordGroup').enable();
+//    this.authForm.get('passwordGroup').get('password').enable();
+//    this.authForm.get('passwordGroup').get('confirmPassword').enable();
+//    return { 'emalInUse': true };
+//}
+//$("#passwrd").focusin(function () {
+//    $("#message").css("display", "block");
+//});
+//$("#passwrd").blur(function () {
+//    $("#message").css("display", "none");
+//});
+//$("#btnforclose").click(function () {
+//    window.location.reload();
+//});
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/Associate/components/Profile/profile.component.html":
+/*!**********************************************************************************!*\
+  !*** ./AngularAssociate/app/Associate/components/Profile/profile.component.html ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"content-body content-body-profile\">\r\n    <div class=\"profile-sidebar\">\r\n        <div class=\"profile-sidebar-header\">\r\n            <div class=\"avatar\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n            <h5>Abigail Johnson</h5>\r\n            <p>UI Developer (Savior of Mankind)</p>\r\n            <span>Bay Area, San Francisco, CA</span>\r\n            <div class=\"d-flex align-self-stretch mg-t-30\">\r\n                <a href=\"\" class=\"btn btn-brand-01 btn-sm btn-uppercase flex-fill\">Follow</a>\r\n                <a href=\"\" class=\"btn btn-white btn-sm btn-uppercase flex-fill mg-l-5\">Message</a>\r\n            </div>\r\n        </div><!-- profile-sidebar-header -->\r\n        <div class=\"profile-sidebar-body\">\r\n            <label class=\"content-label\">Websites &amp; Social Channel</label>\r\n            <ul class=\"list-unstyled profile-info-list\">\r\n                <li><i data-feather=\"globe\"></i> <a href=\"\">http://fenchiumao.me/</a></li>\r\n                <li><i data-feather=\"github\"></i> <a href=\"\">@fenchiumao</a></li>\r\n                <li><i data-feather=\"twitter\"></i> <a href=\"\">@fenmao</a></li>\r\n                <li><i data-feather=\"instagram\"></i> <a href=\"\">@fenchiumao</a></li>\r\n                <li><i data-feather=\"facebook\"></i> <a href=\"\">@fenchiumao</a></li>\r\n            </ul>\r\n            <hr class=\"mg-y-25\">\r\n            <label class=\"content-label\">Contact Information</label>\r\n            <ul class=\"list-unstyled profile-info-list mg-b-0\">\r\n                <li><i data-feather=\"briefcase\"></i> <span class=\"tx-color-03\">Bay Area, San Francisco, CA</span></li>\r\n                <li><i data-feather=\"home\"></i> <span class=\"tx-color-03\">Westfield, Oakland, CA</span></li>\r\n                <li><i data-feather=\"smartphone\"></i> <a href=\"\">(+1) 012 345 6789</a></li>\r\n                <li><i data-feather=\"phone\"></i> <a href=\"\">(+1) 987 654 3201</a></li>\r\n                <li><i data-feather=\"mail\"></i> <a href=\"\">me@fenchiumao.me</a></li>\r\n            </ul>\r\n        </div><!-- profile-sidebar-body -->\r\n    </div><!-- profile-sidebar -->\r\n    <div class=\"profile-body\">\r\n        <div class=\"profile-body-header\">\r\n            <div class=\"nav-wrapper\">\r\n                <ul class=\"nav nav-line\" id=\"profileTab\" role=\"tablist\">\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link active\" id=\"overview-tab\" data-toggle=\"tab\" href=\"#overview\" role=\"tab\" aria-controls=\"overview\" aria-selected=\"true\">Overview</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link\" id=\"projects-tab\" data-toggle=\"tab\" href=\"#timeline\" role=\"tab\" aria-controls=\"projects\" aria-selected=\"false\">Projects</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link\" id=\"people-tab\" data-toggle=\"tab\" href=\"#people\" role=\"tab\" aria-controls=\"people\" aria-selected=\"false\">Connections</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link\" id=\"settings-tab\" data-toggle=\"tab\" href=\"#settings\" role=\"tab\" aria-controls=\"settings\" aria-selected=\"false\">Settings</a>\r\n                    </li>\r\n                </ul>\r\n            </div><!-- nav-wrapper -->\r\n        </div><!-- profile-body-header -->\r\n        <div class=\"tab-content pd-15 pd-sm-20\">\r\n            <div id=\"overview\" class=\"tab-pane active show\">\r\n                <div class=\"stat-profile\">\r\n                    <div class=\"stat-profile-body\">\r\n                        <div class=\"row row-xs\">\r\n                            <div class=\"col\">\r\n                                <div class=\"card card-body pd-10 pd-md-15 bd-0 shadow-none bg-primary-light\">\r\n                                    <h1 class=\"tx-light tx-sans tx-spacing--4 tx-primary mg-b-5\">102</h1>\r\n                                    <p class=\"tx-13 tx-lg-14 tx-color-02 mg-b-0\">Your profile visitors</p>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col\">\r\n                                <div class=\"card card-body pd-10 pd-md-15 bd-0 shadow-none bg-teal-light\">\r\n                                    <h1 class=\"mg-b-5 tx-sans tx-spacing--2 tx-light tx-teal\">961</h1>\r\n                                    <p class=\"tx-13 tx-lg-14 tx-color-03 mg-b-0\">Search appearances</p>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col\">\r\n                                <div class=\"card card-body pd-10 pd-md-15 bd-0 shadow-none bg-pink-light\">\r\n                                    <h1 class=\"mg-b-5 tx-sans tx-spacing--2 tx-light tx-pink\">665</h1>\r\n                                    <p class=\"tx-13 tx-lg-14 tx-color-03 mg-b-0\">Your activity views</p>\r\n                                </div>\r\n                            </div>\r\n                        </div><!-- row -->\r\n                    </div><!-- stat-profile-body -->\r\n                </div><!-- stat-profile -->\r\n                <hr class=\"mg-y-15 op-0\">\r\n                <label class=\"content-label content-label-lg mg-b-15 tx-color-01\">Biography</label>\r\n                <p class=\"tx-color-03\">Redhead, Innovator, Saviour of Mankind, Hopeless Romantic, Attractive 20-something Yogurt Enthusiast. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>\r\n                <hr class=\"mg-y-15 op-0\">\r\n                <label class=\"content-label content-label-lg mg-b-15 tx-color-01\">Work Experience</label>\r\n                <ul class=\"list-unstyled media-list-profile\">\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-teal op-5\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Themepixels, Inc. LTD</h6>\r\n                            <p class=\"tx-color-03 tx-13\">January 2016 - Present</p>\r\n                            <p>An online-based high performing web and mobile development company, with a passion for making high quality web-based application and services for businesses and organization. </p>\r\n                        </div>\r\n                    </li>\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-primary op-5\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Berkeley Systems, Inc.</h6>\r\n                            <p class=\"tx-color-03 tx-13\">December 2012 - November 2015</p>\r\n                        </div>\r\n                    </li>\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-pink op-5\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Berkeley Systems, Inc.</h6>\r\n                            <p class=\"tx-color-03 tx-13\">December 2012 - November 2015</p>\r\n                        </div>\r\n                    </li>\r\n                </ul><!-- media-list-profile -->\r\n                <hr class=\"mg-y-15 op-0\">\r\n                <label class=\"content-label content-label-lg mg-b-15 tx-color-01\">Educational Background</label>\r\n                <ul class=\"list-unstyled media-list-profile\">\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-gray-400\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Graduate in BS in Computer Science</h6>\r\n                            <p class=\"tx-color-03 tx-13\">Hold Name University class 2006</p>\r\n                        </div>\r\n                    </li>\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-gray-400\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Sacred Heart Academy</h6>\r\n                            <p class=\"tx-color-03 tx-13\">High school graduate class 2002</p>\r\n                        </div>\r\n                    </li>\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-gray-400\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Loon Central Elementary School</h6>\r\n                            <p class=\"tx-color-03 tx-13\">Elmentary graduate class 1998</p>\r\n                        </div>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div><!-- tab-content -->\r\n    </div><!-- profile-body -->\r\n</div><!-- content-body -->\r\n"
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/Associate/components/Profile/profile.component.ts":
+/*!********************************************************************************!*\
+  !*** ./AngularAssociate/app/Associate/components/Profile/profile.component.ts ***!
+  \********************************************************************************/
+/*! exports provided: ProfileComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfileComponent", function() { return ProfileComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+
+
+
+
+
+
+var ProfileComponent = /** @class */ (function () {
+    function ProfileComponent(route, router, userService, fb, http) {
+        this.route = route;
+        this.router = router;
+        this.userService = userService;
+        this.fb = fb;
+        this.http = http;
+    }
+    ProfileComponent.prototype.ngOnInit = function () { };
+    ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'associate-profile-page',
+            template: __webpack_require__(/*! ./profile.component.html */ "./AngularAssociate/app/Associate/components/Profile/profile.component.html")
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_auth__WEBPACK_IMPORTED_MODULE_4__["UserService"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]])
+    ], ProfileComponent);
+    return ProfileComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/Associate/components/client-details/client-details.component.html":
+/*!************************************************************************************************!*\
+  !*** ./AngularAssociate/app/Associate/components/client-details/client-details.component.html ***!
+  \************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!--<div class=\"col-lg-12 col-md-12 col-sm-12 mg-b-20 col-xs-12\" style=\"text-align:center;\">\r\n    <div class=\"loader-wrap\" id=\"LoadingImageLogin\" [hidden]=\"!isSubmitting\">\r\n        <div class=\"loader\"><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span><span class=\"loader-item\"></span></div>\r\n    </div>\r\n</div>-->\r\n\r\n<div class=\"auth-page mg-b-60-force\">\r\n    <div class=\"container page\">\r\n        <div class=\"row mg-t-50\">\r\n            <div class=\"col-md-5 offset-md-3 col-xs-12 card pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center\" style=\"border-top: 5px solid #0e3a6b;\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-sm-12\">\r\n                        <h2 class=\"text-xs-center\" [style.text-align]=\"authType == 'activate' || authType == 'resetPassword' ? 'left':'center'\">{{ title }}</h2>\r\n                    </div>\r\n\r\n                    <p class=\"text-xs-center\">\r\n                        <a routerLink=\"/register\" *ngIf=\"authType == 'login'\" class=\"green-text text-darken-1\">Don't have an account? Sign up now!</a>\r\n                        <a routerLink=\"/login\" *ngIf=\"authType == 'register'\" class=\"green-text text-darken-1\">Already have an account? Sign in!</a>\r\n                    </p>\r\n                    <form [formGroup]=\"authForm\" autocomplete=\"off\" class=\"pd-t-20\">\r\n                        <fieldset [disabled]=\"isSubmitting\">\r\n\r\n                            <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.activationCode}\"\r\n                                 *ngIf=\"authType == 'activate'\">\r\n                                <div class=\"col-sm-12 mg-b-35 mg-t-10\">\r\n                                    <p class=\"grey-text text-darken-1 tx-medium\" *ngIf=\"authType == 'activate'\">\r\n                                        Activation code was sent to the Email address that was supplied for this account.\r\n                                    </p>\r\n                                </div>\r\n                                <div class=\"col-sm-12 mg-b-20\">\r\n                                    <input placeholder=\"Activation code\" id=\"activationCode\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"activationCode\" (blur)=\"logValidationErrors()\">\r\n                                    <span class=\"large material-icons form-control-feedback icon\">vpn_key</span>\r\n                                    <div class=\"invalid-data\" *ngIf=\"formErrors.activationCode\">\r\n                                        {{formErrors.activationCode}}\r\n                                    </div>\r\n                                    <span class=\"grey-text text-darken-1 tx-medium\" *ngIf=\"authType == 'activate'\" [style.display]=\"activationSent ? 'block':'none'\">Activation code has been resend to your registered Email.</span>\r\n\r\n                                </div>\r\n\r\n                                <div class=\"col-sm-12\">\r\n                                    <button class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'activate')\" type=\"submit\" [disabled]=\"!authForm.valid\">\r\n                                        <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitActivationForm()\">VERIFY</span>\r\n                                        <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                            <div class=\"spinner-layer spinner-blue-only\">\r\n                                                <div class=\"circle-clipper left\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div><div class=\"gap-patch\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div><div class=\"circle-clipper right\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </button>\r\n                                </div>\r\n\r\n\r\n                                <div class=\"col-sm-12\">\r\n                                    <!--*ngIf=\"formErrors.loginCredentials\"-->\r\n                                    <div class=\"pd-t-30 mg-b-5\">\r\n                                        Resend New Activation Code: <a class=\"blue-text text-darken-4 tx-medium\" (click)=\"onClickResendVerificationCode()\" style=\"cursor: pointer;\">Resend</a>\r\n                                        <div class=\"preloader-wrapper preloader-wrapper-button small active size-16\" [style.display]=\"resentCode ? 'block': 'none'\">\r\n                                            <div class=\"spinner-layer spinner-blue-only spinner-blue\">\r\n                                                <div class=\"circle-clipper left\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div>\r\n                                                <div class=\"gap-patch\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div>\r\n                                                <div class=\"circle-clipper right\">\r\n                                                    <div class=\"circle\"></div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"grey-text text-darken-1 tx-medium\">\r\n                                        If you experience problems activating your account,\r\n                                        please forward your activation code email to support@wcrnational.com\r\n                                        Our support team will complete your account activation within 24-48 hours.\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n\r\n                            <div class=\"form-group\" *ngIf=\"authType == 'login'\">\r\n                                <div class=\"col-sm-12\">\r\n                                    <div class=\"red-text text-darken-4 tx-medium pd-b-30\" >\r\n                                        {{ loginErrorMessage }}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"form-group\" *ngIf=\"authType == 'resetPassword'\">\r\n                                <div class=\"col-sm-12 mg-t-40 mg-b-40\">\r\n                                    <div class=\"green-text text-darken-4 tx-medium\" [style.display]=\"resetPassword ? 'block':'none'\">\r\n                                        <i class=\"material-icons\">  check_circle </i>\r\n                                        {{loginErrorMessage}}\r\n                                        <div class=\"grey-text text-darken-1 tx-medium mg-t-20\">\r\n                                            If you experience problems activating your account,\r\n                                            please forward your reset password email to support@wcrnational.com\r\n                                            Our support team will complete your account activation within 24-48 hours.\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div id=\"validateEmailDiv\" class=\"form-group\" [ngClass]=\"{'has-error': formErrors.email}\"\r\n                                 *ngIf=\"(authType == 'register' || authType == 'login' || authType == 'resetPassword')\"\r\n                                 [style.display]=\"resetPassword ? 'none': 'block'\">\r\n\r\n                                <div class=\"col-sm-12 mg-b-20\">\r\n                                    <!--(blur)=\"showPreloaderIcon();\"-->\r\n                                    <input id=\"email\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"email\" placeholder=\"Email\" (blur)=\"logValidationErrors()\"  />\r\n                                    <span class=\"large material-icons form-control-feedback icon\">email</span>\r\n\r\n\r\n                                    <div class=\"preloader-wrapper preloader-wrapper-input small active\"\r\n                                         *ngIf=\"(authType == 'register')\">\r\n                                        <div class=\"spinner-layer spinner-green-only\"\r\n                                             [style.display]=\"showOnValidateEmail ? 'block': 'none'\">\r\n                                            <div class=\"circle-clipper left\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div><div class=\"gap-patch\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div><div class=\"circle-clipper right\">\r\n                                                <div class=\"circle\"></div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.email || isEmailTaken()\">\r\n                                        {{formErrors.email}}\r\n                                    </div>\r\n                                    <div style=\"color:#a21318 !important\" class=\"col-sm-12 pd-l-0-force\" *ngIf=\"(authType == 'register')\" [style.display]=\"showEmailVerification ? 'block':'none'\">\r\n                                        Email is already in use.\r\n                                    </div>\r\n\r\n                                    <div style=\"color:#a21318 !important\" class=\"col-sm-12 pd-l-0-force\" *ngIf=\"(authType == 'resetPassword')\" [style.display]=\"showEmailVerification ? 'block':'none'\">\r\n                                        Please make sure email is correct.\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div formGroupName=\"passwordGroup\">\r\n                                    <div class=\"col-sm-12 pd-b-7\" *ngIf=\"authType == 'login'\">\r\n                                        <a [routerLink]=\"['/resetPassword']\" class=\"text-xs-left blue-text text-darken-4 tx-medium \"> <i class=\"material-icons form-control-feedback pd-b-4-force\" style=\"font-size:15px;\">vpn_key</i>Forgot password</a>\r\n                                    </div>\r\n                                    <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.password}\"\r\n                                         *ngIf=\"(authType == 'register' || authType == 'login' ) \">\r\n                                        <div class=\"col-sm-12  mg-b-20\">\r\n                                            <input id=\"password\" placeholder=\"Password\" type=\"password\" class=\" form-control pd-l-45-force\" [ngClass]=\"{'password': (authType == 'register')}\" formControlName=\"password\" (focus)=\"showErrors()\" (focusout)=\"hideErrors()\"\r\n                                                   autocomplete=\"new-password\">\r\n                                            <span class=\"large material-icons form-control-feedback icon\">lock</span>\r\n\r\n                                            <!--<label class=\"col mg-t-5\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required')  ? 'text-danger' : 'text-success'\">\r\n                                                <i class=\"material-icons\">\r\n                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ? 'cancel' :  'check_circle' }}\r\n                                                </i>\r\n                                                Password is required\r\n                                            </label>-->\r\n\r\n                                            <div class=\"col-sm-12 pd-l-0\" *ngIf=\"(authType == 'register')\" [style.display]=\"showErrorsPassword ? 'block':'none'\">\r\n                                                <label class=\"col mg-t-5\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be at least 8 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be less than 20 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}\r\n                                                    </i>\r\n                                                    Must contain at least 1 number!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 in Capital Case!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Letter in Small Case!\r\n                                                </label>\r\n\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Special Character!\r\n                                                </label>\r\n                                                <!--<div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.password\">\r\n            {{formErrors.password}}\r\n        </div>-->\r\n\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                    <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.confirmPassword || formErrors.passwordGroup}\"\r\n                                         *ngIf=\"(authType == 'register') \">\r\n                                        <div class=\"col-sm-12 mg-b-20\">\r\n                                            <input id=\"confirmPassword\" type=\"password\" class=\"form-control pd-l-45-force\"\r\n                                                   formControlName=\"confirmPassword\" (blur)=\"logValidationErrors()\" placeholder=\"Confirm Password\" autocomplete=\"new-password\">\r\n                                            <span class=\"large material-icons form-control-feedback icon\">lock</span>\r\n\r\n                                            <div class=\"col-sm-12 pd-l-0-force\"\r\n                                                 *ngIf=\"formErrors.confirmPassword || formErrors.passwordGroup\">\r\n\r\n                                                {{  formErrors.confirmPassword ? formErrors.confirmPassword : formErrors.passwordGroup  }}\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.associate}\" *ngIf=\"authType == 'register'  \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"associate\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>Yes- I want to advertise</span>\r\n                                        </label>\r\n                                        <div class=\"col-sm-12 pd-l-0-force\" *ngIf=\"formErrors.associate\">\r\n                                            {{formErrors.associate}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.consumer}\" *ngIf=\"authType == 'register'  \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"consumer\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>No- I do not</span>\r\n                                        </label>\r\n                                        <div class=\"invalid-data\" *ngIf=\"formErrors.consumer\">\r\n                                            {{formErrors.consumer}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.terms}\" *ngIf=\"(authType == 'register') \">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <label>\r\n                                            <input type=\"checkbox\" class=\"filled-in\" formControlName=\"terms\" (blur)=\"logValidationErrors()\" checked=\"checked\" />\r\n                                            <span>I agree with <a routerLink=\"/terms\" class=\"blue-text text-darken-4\" style=\"font-size:13px; font-weight:600; text-decoration: underline;\" >Terms and Conditions</a></span>\r\n                                        </label>\r\n                                        <div class=\"invalid-data\" *ngIf=\"formErrors.terms\">\r\n                                            {{formErrors.terms}}\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\" *ngIf=\"authType == 'login'\">\r\n                                    <div class=\"invalid-data\" *ngIf=\"formErrors.credentials\">\r\n                                        {{formErrors.loginCredentials}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                <div class=\"form-group\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'register')\" type=\"submit\" [disabled]=\"!FormFilledSuccessfully\">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitRegistrationForm()\">CREATE AN ACCOUNT</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-white-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n\r\n                                        <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" *ngIf=\"(authType == 'login')\" type=\"submit\" [disabled]=\"!authForm.valid \">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none' \" (click)=\"submitLoginForm()\">SIGN TO MY ACCOUNT</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-blue-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n\r\n\r\n\r\n                                        <button [style.display]=\"resetPassword ? 'none': 'block'\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\"  *ngIf=\"(authType == 'resetPassword')\" type=\"submit\" [disabled]=\"!authForm.valid\">\r\n                                            <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitFormResetPassword()\">RESET PASSWORD</span>\r\n                                            <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                <div class=\"spinner-layer spinner-blue-only\">\r\n                                                    <div class=\"circle-clipper left\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"gap-patch\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div><div class=\"circle-clipper right\">\r\n                                                        <div class=\"circle\"></div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </button>\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </div>\r\n\r\n                            <!--  -->\r\n\r\n\r\n                        </fieldset>\r\n                    </form>\r\n                </div>\r\n\r\n                <!--<div class=\"row mg-t-60 text-center\" *ngIf=\"authType == 'register'\">\r\n                    <small>\r\n                        By clicking the \"Create an Account\" button you agree with our\r\n                        <button [routerLink]=\"['/resetPassword']\" class=\"btn waves-ripple blue-grey lighten-5 blue-grey-text text-accent-4\">Terms And Conditions</button>\r\n                    </small>\r\n                </div>-->\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/Associate/components/client-details/client-details.component.ts":
+/*!**********************************************************************************************!*\
+  !*** ./AngularAssociate/app/Associate/components/client-details/client-details.component.ts ***!
+  \**********************************************************************************************/
+/*! exports provided: ClientDetailsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientDetailsComponent", function() { return ClientDetailsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var crypto_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! crypto-js */ "./node_modules/crypto-js/index.js");
+/* harmony import */ var crypto_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(crypto_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+
+
+
+
+
+
+
+
+
+
+var ClientDetailsComponent = /** @class */ (function () {
+    function ClientDetailsComponent(route, router, userService, fb, http) {
+        this.route = route;
+        this.router = router;
+        this.userService = userService;
+        this.fb = fb;
+        this.http = http;
+        this.authType = '';
+        this.title = '';
+        this.errors = { errors: {} };
+        this.isSubmitting = false;
+        this.showLoadingGif = false;
+        this.resentCode = false;
+        this.activationSent = false;
+        this.showOnValidateEmail = false;
+        this.showErrorsPassword = false;
+        this.showActivationDiv = false;
+        this.resetPassword = false;
+        this.FormFilledSuccessfully = false;
+        this.showEmailVerification = false;
+        this.tokenFromUI = "7061737323313233";
+        this.encrypted = "";
+        this.loginErrorMessage = "";
+        this.validationMessages = {
+            'email': {
+                'required': 'Email is required',
+                'email': 'Email is not in correct format.',
+                'emailInUse': 'This Email address is not available. Please Try another email address.'
+            },
+            'password': {
+                'required': 'Password is required',
+                'minlength': 'Min of 8 char in length',
+                'maxlength': 'Max of 20 char in length',
+                'number': 'At least one number.',
+                'lowerLetter': 'At least one lowercase.',
+                'upperLetter': 'At least one uppercase.',
+                'hasSpecialCharacters': 'At least one special character.'
+            },
+            'confirmPassword': {
+                'required': 'Confirm password is required',
+            },
+            'passwordGroup': {
+                'passwordMismatch': 'Password and Confirm password does not match.'
+            },
+            'activationCode': {
+                'required': 'Activation code is required',
+                'notValidCode': 'Activation code is not valid',
+            },
+            'terms': {
+                'required': 'You must accept terms and conditions'
+            }
+            //,
+            //'loginCredentials': {
+            //    'error': 'User Authentication Failed. Please verify your credentials'
+            //}
+        };
+        this.formErrors = {
+            'email': '',
+            'password': '',
+            'confirmPassword': '',
+            'passwordGroup': '',
+            'associate': '',
+            'consumer': '',
+            'activationCode': '',
+            'terms': ''
+            //,
+            //'loginCredentials': ''
+        };
+    }
+    ClientDetailsComponent.prototype.ngOnInit = function () {
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //console.log(this.encrypted);
+        //this.router.navigate(['activate', '2', this.encrypted]);
+        this.setValidationOnform();
+        this.setSignInOrSignUpOrActivateOrReset();
+        this.changeValuesOfFormsEvents();
+    };
+    ClientDetailsComponent.prototype.changeValuesOfFormsEvents = function () {
+        var _this = this;
+        this.authForm.valueChanges.subscribe(function (data) {
+            _this.logValidationErrors(_this.authForm);
+        });
+        this.authForm.get('associate').valueChanges.subscribe(function (data) {
+            if (data == true) {
+                _this.authForm.get('terms').enable();
+            }
+            else if (data == false && _this.authForm.get('consumer').value == false) {
+                _this.authForm.get('terms').disable();
+            }
+        });
+        this.authForm.get('consumer').valueChanges.subscribe(function (data) {
+            if (data == true) {
+                _this.authForm.get('terms').enable();
+            }
+            else if (data == false && _this.authForm.get('associate').value == false) {
+                _this.authForm.get('terms').disable();
+            }
+        });
+        this.authForm.get('terms').valueChanges.subscribe(function (data) {
+            if (data == false) {
+                _this.FormFilledSuccessfully = false;
+            }
+            else {
+                _this.FormFilledSuccessfully = true;
+            }
+        });
+        //this.authForm.get('terms').valueChanges.subscribe((data) => {
+        //    if (data == true) {
+        //        this.authForm.;
+        //    }
+        //    else if (data == "false" && this.authForm.get('associate').value == "false") {
+        //        this.authForm.get('terms').disable();
+        //    }
+        //});
+    };
+    ClientDetailsComponent.prototype.logValidationErrors = function (group) {
+        var _this = this;
+        if (group === void 0) { group = this.authForm; }
+        if (this.authType == "login") {
+            this.loginErrorMessage = "";
+        }
+        this.showEmailVerification = false;
+        Object.keys(group.controls).forEach(function (key) {
+            var abstractControl = group.get(key);
+            _this.formErrors[key] = '';
+            if (abstractControl && !abstractControl.valid
+                && (abstractControl.touched || abstractControl.dirty)) {
+                _this.formErrors[key] = "";
+                var messages = _this.validationMessages[key];
+                if (abstractControl.errors != null) {
+                    for (var errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            if (messages[errorKey] !== undefined) {
+                                _this.formErrors[key] += messages[errorKey] + ' ';
+                            }
+                        }
+                    }
+                    //if (key == "password") {
+                    //}
+                }
+            }
+            if (abstractControl instanceof _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]) {
+                _this.logValidationErrors(abstractControl);
+            }
+        });
+    };
+    ClientDetailsComponent.prototype.setValidationOnform = function () {
+        // use FormBuilder to create a form group
+        this.authForm = this.fb.group({
+            email: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email], [this.emailAlreadyTaken()]],
+            passwordGroup: this.fb.group({
+                password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(20),
+                        patternValidator(/\d/, { number: true }),
+                        patternValidator(/[A-Z]/, { upperLetter: true }),
+                        patternValidator(/[a-z]/, { lowerLetter: true }),
+                        patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
+                        //regexValidatorNumbers(new RegExp('^[0-9]+$'), this),
+                        //regexValidatorLower(new RegExp('/[a-z]/g'), this),
+                        //regexValidatorCapital(new RegExp('/[A-Z]/g'), this),
+                        //regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
+                    ]],
+                confirmPassword: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required,]],
+            }, { validator: matchPasswords }),
+            associate: [''],
+            consumer: [''],
+            terms: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            activationCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            submitButton: ['']
+        });
+    };
+    ClientDetailsComponent.prototype.setSignInOrSignUpOrActivateOrReset = function () {
+        var _this = this;
+        this.route.url.subscribe(function (data) {
+            // Get the last piece of the URL (it's either 'login' or 'register')
+            _this.authType = data[0].path;
+            // Set a title for the page accordingly
+            if (_this.authType === 'login') {
+                _this.title = 'Sign in';
+                _this.authForm.get('email').clearValidators();
+                _this.authForm.get('email').clearAsyncValidators();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('email').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                _this.authForm.get('associate').clearValidators();
+                _this.authForm.get('associate').updateValueAndValidity();
+                _this.authForm.get('consumer').clearValidators();
+                _this.authForm.get('consumer').updateValueAndValidity();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('activationCode').updateValueAndValidity();
+            }
+            else if (_this.authType === 'register') {
+                _this.authForm.get('email').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]);
+                _this.authForm.get('email').setAsyncValidators([_this.emailAlreadyTaken()]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(20),
+                    patternValidator(/\d/, { number: true }),
+                    patternValidator(/[A-Z]/, { upperLetter: true }),
+                    patternValidator(/[a-z]/, { lowerLetter: true }),
+                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
+                ]);
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').setValidators([matchPasswords]);
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                _this.authForm.get('terms').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').disable();
+                _this.authForm.get('passwordGroup').get('password').disable();
+                _this.authForm.get('passwordGroup').get('confirmPassword').disable();
+                _this.authForm.get('associate').disable();
+                _this.authForm.get('consumer').disable();
+                _this.authForm.get('terms').disable();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.title = 'Sign up';
+            }
+            else if (_this.authType === 'activate') {
+                _this.authForm.get('email').clearValidators();
+                _this.authForm.get('email').clearAsyncValidators();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').clearValidators();
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                //this.authForm.get('associate').clearValidators();
+                //this.authForm.get('consumer').clearValidators();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]);
+                _this.authForm.get('activationCode').updateValueAndValidity();
+                _this.title = 'Account Activation';
+            }
+            else if (_this.authType === 'resetPassword') {
+                //this.resetPassword = true;
+                _this.authForm.get('email').enable();
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('email').clearAsyncValidators();
+                _this.authForm.get('email').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].email]);
+                _this.authForm.get('email').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').clearValidators();
+                _this.authForm.get('passwordGroup').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('password').clearValidators();
+                _this.authForm.get('passwordGroup').get('password').updateValueAndValidity();
+                _this.authForm.get('passwordGroup').get('confirmPassword').clearValidators();
+                _this.authForm.get('passwordGroup').get('confirmPassword').updateValueAndValidity();
+                //this.authForm.get('associate').clearValidators();
+                //this.authForm.get('associate').updateValueAndValidity();
+                //this.authForm.get('consumer').clearValidators();
+                //this.authForm.get('associate').updateValueAndValidity();
+                _this.authForm.get('terms').clearValidators();
+                _this.authForm.get('terms').updateValueAndValidity();
+                _this.authForm.get('activationCode').clearValidators();
+                _this.authForm.get('activationCode').updateValueAndValidity();
+                _this.title = 'Reset Password';
+            }
+        });
+    };
+    /**
+     * *************************************************
+     * LOGIN Module Start
+     * *************************************************
+    **/
+    ClientDetailsComponent.prototype.submitLoginForm = function (email, password) {
+        var _this = this;
+        if (email === void 0) { email = ""; }
+        if (password === void 0) { password = ""; }
+        this.isSubmitting = true;
+        this.loginErrorMessage = "";
+        //this.errors = { errors: {} };
+        if (email != "" && password != "") {
+            this.router.navigateByUrl('/');
+        }
+        var thisStatus = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptAssociateAccountExists(this.authType, credentials)
+            .subscribe(function (data) {
+            var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+            var xml = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc);
+            var docs = xml.find("associateExists");
+            jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs, function (i, docs) {
+                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("AccountId").text() == "0") {
+                    //for associate Login
+                    thisStatus.userService.attempConsumerAccountExists(thisStatus.authType, credentials)
+                        .then(function (data1) {
+                        if (data1.d.length > 0) {
+                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data1.d);
+                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                            var docs1 = xml1.find("consumerExists");
+                            jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AccountId").text() == "0") {
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                                }
+                                else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("IsEmailVerified").text() == "0") {
+                                }
+                                else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("IsEmailVerified").text() == "1") {
+                                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                                }
+                                else {
+                                    thisStatus.LoginAssociateOrConsumer(credentials, 2); //Consumer
+                                }
+                            });
+                        }
+                    });
+                }
+                else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("IsEmailVerified").text() == "0") {
+                    // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
+                }
+                else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Status").text() == "0" && jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("IsEmailVerified").text() == "1") {
+                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                }
+                else {
+                    thisStatus.LoginAssociateOrConsumer(credentials, 1); //associate
+                }
+            });
+            _this.isSubmitting = false;
+            //if (data > '0') {
+            //    //this.router.navigateByUrl('/Associate');
+            //    $(location).attr('href', 'Associate/ViewProfile.aspx')
+            //}
+            //else if (data == '-1') {
+            //    this.userService
+            //        .attemptConsumerAuth(this.authType, credentials)
+            //        .then(
+            //            (data: any) => {
+            //                if (data > '0') {
+            //                    this.isSubmitting = false;
+            //                    //this.router.navigateByUrl('/Consumer');
+            //                    $(location).attr('href', '/index.html')
+            //                }
+            //                else {
+            //                    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //                    this.isSubmitting = false;
+            //                }
+            //            },
+            //            err => {
+            //                this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //                this.isSubmitting = false;
+            //            }
+            //        );
+            //}
+            //else {
+            //    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //    this.isSubmitting = false;
+            //}
+        }, function (err) {
+            //this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            _this.isSubmitting = false;
+        });
+    };
+    ClientDetailsComponent.prototype.LoginAssociateOrConsumer = function (credentials, uType) {
+        var _this = this;
+        var thisStatus = this;
+        if (uType == 1) {
+            this.userService
+                .attemptAssociateAuth(this.authType, credentials)
+                .then(function (data) {
+                if (data.d.length > 0) {
+                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                    var docs1 = xml1.find("associateLogin");
+                    jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                        if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AssociateId").text() == "-1") {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                            return;
+                        }
+                        else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Status").text() == "1") {
+                            thisStatus.associateLoginSessionActivate(docs1);
+                            return;
+                        }
+                        else {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                            return;
+                        }
+                    });
+                }
+                else {
+                    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                }
+                //if (data > 1) {
+                //    this.isSubmitting = false;
+                //    this.router.navigateByUrl('/');
+                //}
+                //else {
+                //    this.showErrorsPassword = true;
+                //    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                //    this.isSubmitting = false;
+                //}
+            }, function (err) {
+                //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                _this.isSubmitting = false;
+            });
+        }
+        else if (uType == 2) {
+            this.userService
+                .attemptConsumerAuth(this.authType, credentials)
+                .then(function (data) {
+                if (data.d.length > 0) {
+                    var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                    var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                    var docs1 = xml1.find("consumerLogin");
+                    jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                        if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Id").text() == "-1") {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                        }
+                        else if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("Flag").text() == "1") {
+                            thisStatus.consumerLoginSessionActivate(docs1);
+                        }
+                        else {
+                            thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                        }
+                    });
+                }
+                else {
+                    _this.showErrorsPassword = true;
+                    //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                    _this.isSubmitting = false;
+                }
+            }, function (err) {
+                _this.showErrorsPassword = true;
+                //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+                _this.isSubmitting = false;
+            });
+        }
+    };
+    ClientDetailsComponent.prototype.consumerLoginSessionActivate = function (docs) {
+        var _this = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .consumerLoginSessionActivate(this.authType, credentials, jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Id").text())
+            .then(function (data) {
+            if (data.d == "1") {
+                jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', '/ConsumerDashboard.html');
+            }
+        }, function (err) {
+            _this.loginErrorMessage = "Some internal error occurred.";
+            _this.isSubmitting = false;
+        });
+    };
+    ClientDetailsComponent.prototype.associateLoginSessionActivate = function (docs) {
+        var _this = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .associateLoginSessionActivate(this.authType, credentials, jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("AssociateId").text())
+            .then(function (data) {
+            if (data.d == "1") {
+                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Mobile").text() == '') {
+                    jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/ViewProfile.aspx');
+                }
+                else {
+                    jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/Dashboard.aspx');
+                }
+            }
+        }, function (err) {
+            _this.loginErrorMessage = "Some internal error occurred.";
+            //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+            _this.isSubmitting = false;
+        });
+    };
+    /**
+     * *************************************************
+     * LOGIN Module END
+     * *************************************************
+    **/
+    /**
+    * *************************************************
+    * SIGN UP Module END
+    * *************************************************
+    **/
+    ClientDetailsComponent.prototype.isEmailExist = function (control) {
+        var _this = this;
+        //clearTimeout(this.debouncer);
+        //return { 'emailInUse': true };
+        var thisUserService = this.userService;
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (re.test(String(control.value).toLowerCase())) {
+            this.showOnValidateEmail = true;
+            setTimeout(function () {
+                return thisUserService.validateEmail(control.value).subscribe(function (data) {
+                    if (Number(data) >= 1) {
+                        console.log("Email validate" + data);
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                    }
+                    else {
+                        _this.showEmailVerification = false;
+                        console.log("Email validate" + data);
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+                        //control.parent.get('associate').enable();
+                        //control.parent.get('consumer').enable();
+                        //this.parent.get('terms').enable();
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        return null;
+                    }
+                }, function (err) {
+                    _this.showOnValidateEmail = false;
+                    _this.FormFilledSuccessfully = false;
+                    return { 'emailInUse': true };
+                });
+            }, 1000);
+        }
+    };
+    ClientDetailsComponent.prototype.isEmailTaken = function () {
+        this.logValidationErrors();
+        return this.authForm.get('email').hasError('emailInUse');
+    };
+    ClientDetailsComponent.prototype.emailAlreadyTaken = function () {
+        var _this = this;
+        return function (control) {
+            var thisUserService = _this.userService;
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (re.test(String(control.value).toLowerCase())) {
+                _this.showOnValidateEmail = true;
+                return _this.userService
+                    .emailAlreadyTaken(control.value)
+                    .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["map"])(function (data) {
+                    if (data >= 1) {
+                        _this.showOnValidateEmail = false;
+                        _this.FormFilledSuccessfully = false;
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').addClass('has-error');
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').attr('style', 'top: 19% !important');
+                        return { emailInUse: true };
+                    }
+                    else {
+                        _this.showOnValidateEmail = false;
+                        control.parent.get('passwordGroup').enable();
+                        control.parent.get('passwordGroup').get('password').enable();
+                        control.parent.get('passwordGroup').get('confirmPassword').enable();
+                        jquery__WEBPACK_IMPORTED_MODULE_5__('#validateEmailDiv').removeAttr('style');
+                        //control.parent.get('associate').enable();
+                        //control.parent.get('consumer').enable();
+                        //this.parent.get('terms').enable();
+                        _this.FormFilledSuccessfully = false;
+                        return Object(rxjs__WEBPACK_IMPORTED_MODULE_9__["of"])(null);
+                    }
+                }));
+                //return thisUserService.emailAlreadyTaken(control.value)
+                //    .subscribe(
+                //        (data) => {
+                //            debugger;
+                //            if (Number(data) >= 1) {
+                //                console.log("Email validate" + data);
+                //                this.showOnValidateEmail = false;
+                //                this.FormFilledSuccessfully = false;
+                //                return { 'emailTaken': true };
+                //            }
+                //            else {
+                //                this.showEmailVerification = false;
+                //                console.log("Email validate" + data);
+                //                control.parent.get('passwordGroup').enable();
+                //                control.parent.get('passwordGroup').get('password').enable();
+                //                control.parent.get('passwordGroup').get('confirmPassword').enable();
+                //                //control.parent.get('associate').enable();
+                //                //control.parent.get('consumer').enable();
+                //                //this.parent.get('terms').enable();
+                //                this.FormFilledSuccessfully = false;
+                //                return of(null);
+                //            }
+                //        },
+                //        (err) => {
+                //            this.showOnValidateEmail = false;
+                //            this.FormFilledSuccessfully = false;
+                //            return of(null);
+                //        });
+            }
+        };
+    };
+    ClientDetailsComponent.prototype.submitRegistrationForm = function () {
+        //this.request = "ali87613@yahoo.com";
+        //this.encryptUsingAES256();
+        //this.router.navigate(['activate', '2', this.encrypted]);
+        this.isSubmitting = true;
+        this.FormFilledSuccessfully = true;
+        if (this.authForm.get('associate').value == true) {
+            this.associateRegister();
+        }
+        else if (this.authForm.get('consumer').value == true) {
+            debugger;
+            this.consumerRegister();
+        }
+        //this.errors = { errors: {} };
+        //const credentials = this.authForm.value;
+        //this.userService
+        //    .attemptRegister(this.authType, credentials)
+        //    .subscribe(
+        //        data => {
+        //            if (data > 1) {
+        //                this.isSubmitting = false;
+        //                this.router.navigateByUrl('/Activate');
+        //            }
+        //            else {
+        //                this.showErrorsPassword = true;
+        //                //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+        //                this.isSubmitting = false;
+        //            }
+        //        },
+        //        err => {
+        //            this.showErrorsPassword = true;
+        //            //this.formErrors.activationCode = this.validationMessages['activationCode']['message'];
+        //            this.isSubmitting = false;
+        //        }
+        //    );
+    };
+    ClientDetailsComponent.prototype.associateRegister = function () {
+        var _this = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptRegisterAssociate(this.authType, credentials)
+            .subscribe(function (data) {
+            if (data >= 1) {
+                _this.isSubmitting = false;
+                _this.request = credentials.email;
+                _this.encryptUsingAES256();
+                credentials.email = _this.encrypted;
+                credentials.email.replace('/', '~');
+                _this.request = credentials.passwordGroup.password;
+                _this.encryptUsingAES256();
+                credentials.passwordGroup.password = _this.encrypted;
+                credentials.passwordGroup.password.replace('/', '~');
+                _this.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
+            }
+            else {
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.isSubmitting = false;
+        });
+    };
+    ClientDetailsComponent.prototype.consumerRegister = function () {
+        var _this = this;
+        debugger;
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptRegisterConsumer(this.authType, credentials)
+            .subscribe(function (data) {
+            debugger;
+            if (data >= 1) {
+                _this.isSubmitting = false;
+                _this.request = credentials.email;
+                _this.encryptUsingAES256();
+                credentials.email = _this.encrypted;
+                credentials.email.replace('/', '~');
+                _this.request = credentials.passwordGroup.password;
+                _this.encryptUsingAES256();
+                credentials.passwordGroup.password = _this.encrypted;
+                credentials.passwordGroup.password.replace('/', '~');
+                _this.router.navigate(['activate', '2', credentials.email, credentials.passwordGroup.password]);
+            }
+            else {
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.isSubmitting = false;
+        });
+    };
+    /**
+    * *************************************************
+    * SIGNUP Module END
+    * *************************************************
+    **/
+    /**
+    * *************************************************
+    * ACTIVATION Module END
+    * *************************************************
+    **/
+    ClientDetailsComponent.prototype.submitActivationForm = function () {
+        var _this = this;
+        this.isSubmitting = true;
+        var credentials = this.authForm.value;
+        var urlComponent;
+        var encryptedPassword;
+        var encryptedEmail;
+        this.route.url.subscribe(function (data) {
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[1].path;
+                encryptedEmail = data[2].path;
+                encryptedPassword = data[3].path;
+                _this.isSubmitting = false;
+            }
+            else {
+                //page  not found
+                _this.isSubmitting = false;
+            }
+        });
+        var userType = urlComponent;
+        encryptedEmail.replace('~', '/');
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        credentials.email = this.decrypted;
+        //credentials.email = credentials.emaild.replace(/^"(.*)"$/, '$1');
+        console.log(this.decrypted);
+        encryptedPassword.replace('~', '/');
+        this.encrypted = encryptedPassword;
+        this.decryptUsingAES256();
+        credentials.passwordGroup.password = this.decrypted;
+        //credentials.passwordGroup.password = credentials.passwordGroup.password.replace(/^"(.*)"$/, '$1');
+        console.log(this.decrypted);
+        if (userType == "1") {
+            this.associateActivationCode(credentials);
+        }
+        else if (userType == "2") {
+            this.consumerActivationCode(credentials);
+        }
+    };
+    ClientDetailsComponent.prototype.associateActivationCode = function (credentials) {
+        var _this = this;
+        this.userService
+            .getAttemptVerifiedActivationCodeAssociate(this.authType, credentials)
+            .subscribe(function (data) {
+            if (data.d == credentials.activationCode) {
+                _this.userService
+                    .attemptVerifiedActivationCodeAssociate(_this.authType, credentials.email)
+                    .then(function (data) {
+                    if (data.d.length > 0) {
+                        jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/ViewProfile.aspx');
+                        //this.router.navigateByUrl('/login');
+                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                    }
+                    _this.isSubmitting = false;
+                }, function (err) {
+                    _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+                    _this.isSubmitting = false;
+                });
+            }
+            else {
+                _this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
+                _this.isSubmitting = false;
+                _this.activationSent = true;
+            }
+        }, function (err) {
+            _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+            _this.isSubmitting = false;
+        });
+    };
+    ClientDetailsComponent.prototype.consumerActivationCode = function (credentials) {
+        var _this = this;
+        this.userService
+            .getAttemptVerifiedActivationCodeConsumer(this.authType, credentials)
+            .subscribe(function (data) {
+            if (data.d == credentials.activationCode) {
+                _this.userService
+                    .attemptVerifiedActivationCodeConsumer(_this.authType, credentials.email)
+                    .then(function (data) {
+                    if (data.d.length > 0) {
+                        //this.router.navigateByUrl('/login');
+                        jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', '/ConsumerDashboard.html');
+                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                    }
+                    _this.isSubmitting = false;
+                }, function (err) {
+                    _this.formErrors.activationCode = "Verification code does not completed due to some error.";
+                    _this.isSubmitting = false;
+                });
+            }
+            else {
+                _this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
+                _this.isSubmitting = false;
+                _this.activationSent = true;
+            }
+        }, function (err) {
+            _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
+            _this.isSubmitting = false;
+        });
+    };
+    ClientDetailsComponent.prototype.onClickResendVerificationCode = function () {
+        var _this = this;
+        var email;
+        var urlComponent;
+        var encryptedEmail;
+        this.route.url.subscribe(function (data) {
+            if (data.length <= 4) {
+                // Get the last piece of the URL (it's either 'login' or 'register')
+                urlComponent = data[0].path;
+                encryptedEmail = data[2].path;
+            }
+            else {
+                //page  not found
+            }
+        });
+        var userType = urlComponent;
+        this.encrypted = encryptedEmail;
+        this.decryptUsingAES256();
+        email = this.decrypted;
+        email.replace('~', '/');
+        console.log(this.decrypted);
+        this.resentCode = true;
+        this.userService
+            .attemptResendActivateCode(email)
+            .subscribe(function (data) {
+            if (data.d > 0 && data.d > "1") {
+                _this.resentCode = false;
+                _this.isSubmitting = false;
+            }
+            else {
+                _this.resentCode = false;
+                _this.isSubmitting = false;
+            }
+        }, function (err) {
+            _this.resentCode = false;
+            _this.isSubmitting = false;
+        });
+    };
+    /**
+    * *************************************************
+    * ACTIVATION Module END
+    * *************************************************
+    **/
+    ClientDetailsComponent.prototype.encryptUsingAES256 = function () {
+        var _key = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var _iv = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var encrypted = crypto_js__WEBPACK_IMPORTED_MODULE_6__["AES"].encrypt(JSON.stringify(this.request), _key, {
+            keySize: 16,
+            iv: _iv,
+            mode: crypto_js__WEBPACK_IMPORTED_MODULE_6__["mode"].ECB,
+            padding: crypto_js__WEBPACK_IMPORTED_MODULE_6__["pad"].Pkcs7
+        });
+        this.encrypted = encrypted.toString();
+    };
+    ClientDetailsComponent.prototype.decryptUsingAES256 = function () {
+        var _key = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        var _iv = crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8.parse(this.tokenFromUI);
+        this.decrypted = crypto_js__WEBPACK_IMPORTED_MODULE_6__["AES"].decrypt(this.encrypted, _key, {
+            keySize: 16,
+            iv: _iv,
+            mode: crypto_js__WEBPACK_IMPORTED_MODULE_6__["mode"].ECB,
+            padding: crypto_js__WEBPACK_IMPORTED_MODULE_6__["pad"].Pkcs7
+        }).toString(crypto_js__WEBPACK_IMPORTED_MODULE_6__["enc"].Utf8);
+    };
+    ClientDetailsComponent.prototype.submitFormResetPassword = function () {
+        var _this = this;
+        debugger;
+        var thisStatus = this;
+        var credentials = this.authForm.value;
+        this.userService
+            .attemptAssociateAccountExists(this.authType, credentials)
+            .subscribe(function (data) {
+            var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+            var xml = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc);
+            var docs = xml.find("associateExists");
+            jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs, function (i, docs) {
+                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("AccountId").text() != "0") {
+                    thisStatus.userService
+                        .attemptResetAssociatePassword(credentials.email)
+                        .then(function (data1) {
+                        if (data1 == "0") {
+                            thisStatus.resetPassword = true;
+                            thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
+                        }
+                    });
+                }
+                else {
+                    thisStatus.userService
+                        .attempConsumerAccountExists(thisStatus.authType, credentials)
+                        .then(function (data1) {
+                        if (data1.d.length > 0) {
+                            var xmlDoc1 = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data1.d);
+                            var xml1 = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc1);
+                            var docs1 = xml1.find("consumerExists");
+                            jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs1, function (i, docs1) {
+                                if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs1).find("AccountId").text() == "0") {
+                                    //Please verify your email address and retry again.
+                                    thisStatus.showEmailVerification = true;
+                                }
+                                else {
+                                    thisStatus.userService
+                                        .attemptResetConsumerPassword(credentials.email)
+                                        .then(function (data2) {
+                                        if (data2 == "0") {
+                                            thisStatus.resetPassword = true;
+                                            thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }, function (err) {
+            _this.showEmailVerification = true;
+            _this.resetPassword = false;
+            _this.isSubmitting = false;
+        });
+    };
+    ClientDetailsComponent.prototype.showErrors = function () {
+        this.showErrorsPassword = true;
+    };
+    ClientDetailsComponent.prototype.hideErrors = function () {
+        this.showErrorsPassword = false;
+    };
+    ClientDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'associate-client-details-page',
+            template: __webpack_require__(/*! ./client-details.component.html */ "./AngularAssociate/app/Associate/components/client-details/client-details.component.html")
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_auth__WEBPACK_IMPORTED_MODULE_4__["UserService"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]])
+    ], ClientDetailsComponent);
+    return ClientDetailsComponent;
+}());
+
+function emailDomain(domainName) {
+    return function (control) {
+        var email = control.value;
+        var domain = email.substring(email.lastIndexOf('@') + 1);
+        if (email === '' || domain.toLowerCase() === domainName.toLowerCase()) {
+            return null;
+        }
+        else {
+            return { 'emailDomain': true };
+        }
+    };
+}
+//function isEmailExist(userService: UserService, authComp: AuthComponent) {
+//    return (control: AbstractControl): { [key: string]: any } | null => {
+//        //clearTimeout(this.debouncer);
+//        //return { 'emailInUse': true };
+//        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//        if (re.test(String(control.value).toLowerCase())) {
+//            authComp.showOnValidateEmail = true;
+//            setTimeout(() => {
+//                userService.validateEmail(control.value).subscribe(
+//                    (data) => {
+//                        if (data >= 1) {
+//                            console.log("Email validate" + data);
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return { 'emailInUse': true };
+//                        }
+//                        else {
+//                            console.log("Email validate" + data);
+//                            control.parent.get('passwordGroup').enable();
+//                            control.parent.get('passwordGroup').get('password').enable();
+//                            control.parent.get('passwordGroup').get('confirmPassword').enable();
+//                            //control.parent.get('associate').enable();
+//                            //control.parent.get('consumer').enable();
+//                            //control.parent.get('terms').enable();
+//                            authComp.showOnValidateEmail = false;
+//                            authComp.FormFilledSuccessfully = false;
+//                            return null;
+//                        }
+//                    },
+//                    (err) => {
+//                        authComp.showOnValidateEmail = false;
+//                        authComp.FormFilledSuccessfully = false;
+//                        return { 'emailInUse': true };
+//                    });
+//            }, 500);
+//        }
+//        console.log('outside');
+//        return { 'emailInUse': true };
+//    }
+//}
+function matchPasswords(group) {
+    var passwordControl = group.get('password');
+    var confirmPasswordControl = group.get('confirmPassword');
+    if (group.parent !== undefined) {
+        if (passwordControl.value != "" && (passwordControl.value === confirmPasswordControl.value || confirmPasswordControl.pristine)) {
+            group.parent.get('associate').enable();
+            group.parent.get('consumer').enable();
+            return null;
+        }
+        else {
+            group.parent.get('associate').disable();
+            group.parent.get('consumer').disable();
+            return { 'passwordMismatch': true };
+        }
+    }
+    else {
+        return null;
+    }
+}
+function patternValidator(regex, error) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        // test the value of the control against the regexp supplied
+        var valid = regex.test(control.value);
+        // if true, return no error (no error), else return error passed in the second parameter
+        return valid ? null : error;
+    };
+}
+//function regexValidatorNumbers(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+//    return (control: AbstractControl): { [key: string]: any } => {
+//        if (!control.value) {
+//            return null;
+//        }
+//        const valid = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})".test(control.value);
+//        return valid ? null : { 'number': 'At least one number.' };
+//    };
+//}
+//function regexValidatorLower(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+//    return (control: AbstractControl): { [key: string]: any } => {
+//        if (!control.value) {
+//            return null;
+//        }
+//        const valid = regex.test(control.value);
+//        return valid ? null : { 'lowerLetter': 'At least one lowercase.' };
+//        return valid ? null : {};
+//    };
+//}
+//function regexValidatorCapital(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+//    return (control: AbstractControl): { [key: string]: any } => {
+//        if (!control.value) {
+//            return null;
+//        }
+//        const valid = regex.test(control.value);
+//        return valid ? null : { 'upperLetter': 'At least one uppercase.' };
+//    };
+//}
+//function regexValidatorSpecial(regex: RegExp, authComp: AuthComponent): ValidatorFn {
+//    return (control: AbstractControl): { [key: string]: any } => {
+//        if (!control.value) {
+//            return null;
+//        }
+//        const valid = regex.test(control.value);
+//        return valid ? null : { 'special Character': 'At least one special character.' };
+//    };
+//}
+//const email: string = control.value;
+//const emailFromDB = this.userService.validateEmail(email); //getUserEmailFromDB();
+//if (emailFromDB === '' || emailFromDB === email) {
+//    return null;
+//} else {
+//    this.authForm.get('passwordGroup').enable();
+//    this.authForm.get('passwordGroup').get('password').enable();
+//    this.authForm.get('passwordGroup').get('confirmPassword').enable();
+//    return { 'emalInUse': true };
+//}
+//$("#passwrd").focusin(function () {
+//    $("#message").css("display", "block");
+//});
+//$("#passwrd").blur(function () {
+//    $("#message").css("display", "none");
+//});
+//$("#btnforclose").click(function () {
+//    window.location.reload();
+//});
+
 
 /***/ }),
 
@@ -40,6 +2311,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! .././app/components/auth/auth.component */ "./AngularAssociate/app/components/auth/auth.component.ts");
 /* harmony import */ var _app_components_terms_terms_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! .././app/components/terms/terms.component */ "./AngularAssociate/app/components/terms/terms.component.ts");
 /* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var _shared_shared_layout_shared_layout_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shared/shared-layout/shared-layout.component */ "./AngularAssociate/app/shared/shared-layout/shared-layout.component.ts");
+/* harmony import */ var _shared_associate_layout_associate_layout_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/associate-layout/associate-layout.component */ "./AngularAssociate/app/shared/associate-layout/associate-layout.component.ts");
+
+
 
 
 
@@ -55,36 +2330,49 @@ var routes = [
     //{ path: '**', redirectTo: '' }
     {
         path: '',
-        component: _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"]
-        //,
-        //resolve: {
-        //    isAuthenticated: HomeAuthResolver
-        //}
+        component: _shared_shared_layout_shared_layout_component__WEBPACK_IMPORTED_MODULE_7__["SharedLayoutComponent"],
+        children: [
+            {
+                path: '',
+                component: _app_components_home_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"]
+                //,
+                //resolve: {
+                //    isAuthenticated: HomeAuthResolver
+                //}
+            },
+            {
+                path: 'login',
+                component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
+                canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
+            },
+            {
+                path: 'register',
+                component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
+                canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
+            },
+            {
+                path: 'activate/:id/:email/:password',
+                component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
+                canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
+            },
+            {
+                path: 'resetPassword',
+                component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
+                canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
+            },
+            {
+                path: 'terms',
+                component: _app_components_terms_terms_component__WEBPACK_IMPORTED_MODULE_5__["TermsComponent"],
+                canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
+            }
+        ]
     },
     {
-        path: 'login',
-        component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
-        canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
-    },
-    {
-        path: 'register',
-        component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
-        canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
-    },
-    {
-        path: 'activate/:id/:email/:password',
-        component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
-        canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
-    },
-    {
-        path: 'resetPassword',
-        component: _app_components_auth_auth_component__WEBPACK_IMPORTED_MODULE_4__["AuthComponent"],
-        canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
-    },
-    {
-        path: 'terms',
-        component: _app_components_terms_terms_component__WEBPACK_IMPORTED_MODULE_5__["TermsComponent"],
-        canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]]
+        path: '',
+        component: _shared_associate_layout_associate_layout_component__WEBPACK_IMPORTED_MODULE_8__["AssociateLayoutComponent"],
+        children: [
+            { path: 'associate', loadChildren: './associate/associate.module#AssociateModule' }
+        ]
     }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -121,7 +2409,7 @@ module.exports = "/*!\r\n * Materialize v1.0.0 (http://materializecss.com)\r\n *
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-layout-header></app-layout-header>\r\n<router-outlet></router-outlet>\r\n<app-layout-footer></app-layout-footer>\r\n"
+module.exports = "<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -193,6 +2481,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_shared__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../app/shared */ "./AngularAssociate/app/shared/index.ts");
 /* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/auth */ "./AngularAssociate/app/services/auth/index.ts");
 /* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/search */ "./AngularAssociate/app/services/search/index.ts");
+/* harmony import */ var _shared_associate_layout__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./shared/associate-layout */ "./AngularAssociate/app/shared/associate-layout/index.ts");
+/* harmony import */ var _shared_shared_layout_shared_layout_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./shared/shared-layout/shared-layout.component */ "./AngularAssociate/app/shared/shared-layout/shared-layout.component.ts");
+/* harmony import */ var _shared_associate_sidebar__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./shared/associate-sidebar */ "./AngularAssociate/app/shared/associate-sidebar/index.ts");
+/* harmony import */ var _shared_associate_header__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./shared/associate-header */ "./AngularAssociate/app/shared/associate-header/index.ts");
+/* harmony import */ var _associate_associate_module__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./associate/associate.module */ "./AngularAssociate/app/associate/associate.module.ts");
 
 
 
@@ -215,6 +2508,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -222,12 +2520,13 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_10__["AppComponent"],
-                _app_shared__WEBPACK_IMPORTED_MODULE_17__["HeaderComponent"],
                 _components_home_home_component__WEBPACK_IMPORTED_MODULE_11__["HomeComponent"],
-                //LoginComponent,
-                //RegisterComponent,
+                _shared_shared_layout_shared_layout_component__WEBPACK_IMPORTED_MODULE_21__["SharedLayoutComponent"],
                 _app_shared__WEBPACK_IMPORTED_MODULE_17__["FooterComponent"],
                 _app_shared__WEBPACK_IMPORTED_MODULE_17__["HeaderComponent"],
+                _shared_associate_layout__WEBPACK_IMPORTED_MODULE_20__["AssociateLayoutComponent"],
+                _shared_associate_sidebar__WEBPACK_IMPORTED_MODULE_22__["SidebarComponent"],
+                _shared_associate_header__WEBPACK_IMPORTED_MODULE_23__["AssociateHeaderComponent"],
                 _components_auth_auth_component__WEBPACK_IMPORTED_MODULE_13__["AuthComponent"],
                 _app_components_terms_terms_component__WEBPACK_IMPORTED_MODULE_12__["TermsComponent"],
                 _shared_show_authed_directive__WEBPACK_IMPORTED_MODULE_16__["ShowAuthedDirective"]
@@ -252,7 +2551,8 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatToolbarModule"],
                 _angular_material_select__WEBPACK_IMPORTED_MODULE_7__["MatSelectModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"],
-                _app_shared__WEBPACK_IMPORTED_MODULE_17__["SharedModule"]
+                _app_shared__WEBPACK_IMPORTED_MODULE_17__["SharedModule"],
+                _associate_associate_module__WEBPACK_IMPORTED_MODULE_24__["AssociateModule"]
             ],
             providers: [
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
@@ -275,6 +2575,174 @@ var AppModule = /** @class */ (function () {
     return AppModule;
 }());
 
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/associate/associate-routing.module.ts":
+/*!********************************************************************!*\
+  !*** ./AngularAssociate/app/associate/associate-routing.module.ts ***!
+  \********************************************************************/
+/*! exports provided: AssociateRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AssociateRoutingModule", function() { return AssociateRoutingModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _app_Associate_components_Dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../app/Associate/components/Dashboard/dashboard.component */ "./AngularAssociate/app/Associate/components/Dashboard/dashboard.component.ts");
+/* harmony import */ var _app_Associate_components_Profile_profile_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../app/Associate/components/Profile/profile.component */ "./AngularAssociate/app/Associate/components/Profile/profile.component.ts");
+/* harmony import */ var _app_Associate_components_client_details_client_details_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../app/Associate/components/client-details/client-details.component */ "./AngularAssociate/app/Associate/components/client-details/client-details.component.ts");
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+
+
+
+
+
+
+
+
+var associateRoutes = [
+    { path: '', component: _app_Associate_components_Dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_3__["DashboardComponent"], canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]] },
+    { path: 'profile', component: _app_Associate_components_Profile_profile_component__WEBPACK_IMPORTED_MODULE_4__["ProfileComponent"], canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]] },
+    { path: 'client-details', component: _app_Associate_components_client_details_client_details_component__WEBPACK_IMPORTED_MODULE_5__["ClientDetailsComponent"], canActivate: [_services_auth__WEBPACK_IMPORTED_MODULE_6__["NoAuthGuard"]] },
+];
+var AssociateRoutingModule = /** @class */ (function () {
+    function AssociateRoutingModule() {
+    }
+    AssociateRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_7__["CommonModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(associateRoutes)
+            ],
+            exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]],
+            declarations: []
+        })
+    ], AssociateRoutingModule);
+    return AssociateRoutingModule;
+}());
+
+//const routes: Routes = [
+//    {
+//        path: '',
+//        component: CustomersComponent,
+//        children: [
+//            { path: ':id/detail', component: CustomerDetailComponent },
+//            { path: '', component: CustomerListComponent }
+//        ]
+//    }
+//]
+//@NgModule({
+//    imports: [
+//        CommonModule,
+//        RouterModule.forChild(routes)
+//    ],
+//    exports: [RouterModule],
+//    declarations: [DashboardComponent,
+//        ProfileComponent,
+//        ClientDetailsComponent
+//    ]
+//})
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/associate/associate.module.ts":
+/*!************************************************************!*\
+  !*** ./AngularAssociate/app/associate/associate.module.ts ***!
+  \************************************************************/
+/*! exports provided: AssociateModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AssociateModule", function() { return AssociateModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _app_Associate_components_Dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../app/Associate/components/Dashboard/dashboard.component */ "./AngularAssociate/app/Associate/components/Dashboard/dashboard.component.ts");
+/* harmony import */ var _app_Associate_components_Profile_profile_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../app/Associate/components/Profile/profile.component */ "./AngularAssociate/app/Associate/components/Profile/profile.component.ts");
+/* harmony import */ var _app_Associate_components_client_details_client_details_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../app/Associate/components/client-details/client-details.component */ "./AngularAssociate/app/Associate/components/client-details/client-details.component.ts");
+/* harmony import */ var _interceptors__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../interceptors */ "./AngularAssociate/app/interceptors/index.ts");
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var _services_search__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../services/search */ "./AngularAssociate/app/services/search/index.ts");
+/* harmony import */ var _associate_routing_module__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./associate-routing.module */ "./AngularAssociate/app/associate/associate-routing.module.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+//import { CustomValidator } from './validators';
+//import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
+//import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
+//import { ShowAuthedDirective } from './show-authed.directive';
+var AssociateModule = /** @class */ (function () {
+    function AssociateModule() {
+    }
+    AssociateModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+            declarations: [
+                _app_Associate_components_Dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_6__["DashboardComponent"],
+                _app_Associate_components_Profile_profile_component__WEBPACK_IMPORTED_MODULE_7__["ProfileComponent"],
+                _app_Associate_components_client_details_client_details_component__WEBPACK_IMPORTED_MODULE_8__["ClientDetailsComponent"]
+            ],
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"],
+                _associate_routing_module__WEBPACK_IMPORTED_MODULE_12__["AssociateRoutingModule"]
+            ],
+            exports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"]
+            ],
+            providers: [
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _interceptors__WEBPACK_IMPORTED_MODULE_9__["HttpTokenInterceptor"], multi: true },
+                _services_auth__WEBPACK_IMPORTED_MODULE_10__["AuthGuard"],
+                _services_auth__WEBPACK_IMPORTED_MODULE_10__["NoAuthGuard"],
+                _services_search__WEBPACK_IMPORTED_MODULE_11__["MessageService"]
+            ]
+        })
+    ], AssociateModule);
+    return AssociateModule;
+}());
+
+//@NgModule({
+//    imports: [
+//        CommonModule,
+//        AssociateRoutingModule
+//    ],
+//    declarations: [],
+//    providers: [
+//        HttpClientModule,
+//        { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+//        AuthGuard,
+//        NoAuthGuard,
+//        MessageService
+//    ]
+//})
+//export class CustomersModule { }
 
 
 /***/ }),
@@ -781,10 +3249,12 @@ var AuthComponent = /** @class */ (function () {
             .then(function (data) {
             if (data.d == "1") {
                 if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Mobile").text() == '') {
-                    jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/ViewProfile.aspx');
+                    _this.router.navigateByUrl('/associate');
+                    //$(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
-                    jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/Dashboard.aspx');
+                    _this.router.navigateByUrl('/associate/dashboard');
+                    //$(location).attr('href', 'Associate/Dashboard.aspx');
                 }
             }
         }, function (err) {
@@ -2938,6 +5408,23 @@ var HttpTokenInterceptor = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./AngularAssociate/app/interceptors/index.ts":
+/*!****************************************************!*\
+  !*** ./AngularAssociate/app/interceptors/index.ts ***!
+  \****************************************************/
+/*! exports provided: HttpTokenInterceptor */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _http_token_interceptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./http.token.interceptor */ "./AngularAssociate/app/interceptors/http.token.interceptor.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HttpTokenInterceptor", function() { return _http_token_interceptor__WEBPACK_IMPORTED_MODULE_0__["HttpTokenInterceptor"]; });
+
+
+
+
+/***/ }),
+
 /***/ "./AngularAssociate/app/services/auth/api.service.ts":
 /*!***********************************************************!*\
   !*** ./AngularAssociate/app/services/auth/api.service.ts ***!
@@ -3867,6 +6354,244 @@ var SearchService = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./AngularAssociate/app/shared/associate-header/header.component.html":
+/*!****************************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-header/header.component.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"header\">\r\n    <div class=\"header-left\">\r\n        <a href=\"\" class=\"burger-menu\"><i data-feather=\"menu\"></i></a>\r\n        <div class=\"header-search\">\r\n            <i data-feather=\"search\"></i>\r\n            <input type=\"search\" class=\"form-control\" placeholder=\"What are you looking for?\">\r\n        </div><!-- header-search -->\r\n    </div><!-- header-left -->\r\n    <div class=\"header-right\">\r\n        <a href=\"\" class=\"header-help-link\"><i data-feather=\"help-circle\"></i></a>\r\n        <div class=\"dropdown dropdown-notification\">\r\n            <a href=\"\" class=\"dropdown-link new\" data-toggle=\"dropdown\"><i data-feather=\"bell\"></i></a>\r\n            <div class=\"dropdown-menu dropdown-menu-right\">\r\n                <div class=\"dropdown-menu-header\">\r\n                    <h6>Notifications</h6>\r\n                    <a href=\"\"><i data-feather=\"more-vertical\"></i></a>\r\n                </div><!-- dropdown-menu-header -->\r\n                <div class=\"dropdown-menu-body\">\r\n                    <a href=\"\" class=\"dropdown-item\">\r\n                        <div class=\"avatar\"><span class=\"avatar-initial rounded-circle text-primary bg-primary-light\">s</span></div>\r\n                        <div class=\"dropdown-item-body\">\r\n                            <p><strong>Socrates Itumay</strong> marked the task as completed.</p>\r\n                            <span>5 hours ago</span>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"\" class=\"dropdown-item\">\r\n                        <div class=\"avatar\"><span class=\"avatar-initial rounded-circle tx-pink bg-pink-light\">r</span></div>\r\n                        <div class=\"dropdown-item-body\">\r\n                            <p><strong>Reynante Labares</strong> marked the task as incomplete.</p>\r\n                            <span>8 hours ago</span>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"\" class=\"dropdown-item\">\r\n                        <div class=\"avatar\"><span class=\"avatar-initial rounded-circle tx-success bg-success-light\">d</span></div>\r\n                        <div class=\"dropdown-item-body\">\r\n                            <p><strong>Dyanne Aceron</strong> responded to your comment on this <strong>post</strong>.</p>\r\n                            <span>a day ago</span>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"\" class=\"dropdown-item\">\r\n                        <div class=\"avatar\"><span class=\"avatar-initial rounded-circle tx-indigo bg-indigo-light\">k</span></div>\r\n                        <div class=\"dropdown-item-body\">\r\n                            <p><strong>Kirby Avendula</strong> marked the task as incomplete.</p>\r\n                            <span>2 days ago</span>\r\n                        </div>\r\n                    </a>\r\n                </div><!-- dropdown-menu-body -->\r\n                <div class=\"dropdown-menu-footer\">\r\n                    <a href=\"\">View All Notifications</a>\r\n                </div>\r\n            </div><!-- dropdown-menu -->\r\n        </div>\r\n        <div class=\"dropdown dropdown-loggeduser\">\r\n            <a href=\"\" class=\"dropdown-link\" data-toggle=\"dropdown\">\r\n                <div class=\"avatar avatar-sm\">\r\n                    <img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\">\r\n                </div><!-- avatar -->\r\n            </a>\r\n            <div class=\"dropdown-menu dropdown-menu-right\">\r\n                <div class=\"dropdown-menu-header\">\r\n                    <div class=\"media align-items-center\">\r\n                        <div class=\"avatar\">\r\n                            <img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\">\r\n                        </div><!-- avatar -->\r\n                        <div class=\"media-body mg-l-10\">\r\n                            <h6>Louise Kate Lumaad</h6>\r\n                            <span>Administrator</span>\r\n                        </div>\r\n                    </div><!-- media -->\r\n                </div>\r\n                <div class=\"dropdown-menu-body\">\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"user\"></i> View Profile</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"edit-2\"></i> Edit Profile</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"briefcase\"></i> Account Settings</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"shield\"></i> Privacy Settings</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"log-out\"></i> Sign Out</a>\r\n                </div>\r\n            </div><!-- dropdown-menu -->\r\n        </div>\r\n    </div><!-- header-right -->\r\n</div><!-- header -->"
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/associate-header/header.component.ts":
+/*!**************************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-header/header.component.ts ***!
+  \**************************************************************************/
+/*! exports provided: AssociateHeaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AssociateHeaderComponent", function() { return AssociateHeaderComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var AssociateHeaderComponent = /** @class */ (function () {
+    function AssociateHeaderComponent() {
+    }
+    AssociateHeaderComponent.prototype.ngOnInit = function () {
+    };
+    AssociateHeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'associate-layout-header',
+            template: __webpack_require__(/*! ./header.component.html */ "./AngularAssociate/app/shared/associate-header/header.component.html")
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], AssociateHeaderComponent);
+    return AssociateHeaderComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/associate-header/index.ts":
+/*!***************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-header/index.ts ***!
+  \***************************************************************/
+/*! exports provided: AssociateHeaderComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _header_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./header.component */ "./AngularAssociate/app/shared/associate-header/header.component.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AssociateHeaderComponent", function() { return _header_component__WEBPACK_IMPORTED_MODULE_0__["AssociateHeaderComponent"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/associate-layout/associate-layout.component.html":
+/*!**************************************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-layout/associate-layout.component.html ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\r\n<associate-layout-sidebar></associate-layout-sidebar>\r\n\r\n<div class=\"content content-page\">\r\n\r\n    <associate-layout-header></associate-layout-header>\r\n    <router-outlet></router-outlet>\r\n\r\n</div>"
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/associate-layout/associate-layout.component.ts":
+/*!************************************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-layout/associate-layout.component.ts ***!
+  \************************************************************************************/
+/*! exports provided: AssociateLayoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AssociateLayoutComponent", function() { return AssociateLayoutComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var AngularAssociate_app_services_search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! AngularAssociate/app/services/search */ "./AngularAssociate/app/services/search/index.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
+
+
+var AssociateLayoutComponent = /** @class */ (function () {
+    function AssociateLayoutComponent(route, router, _messageService, userService) {
+        this.route = route;
+        this.router = router;
+        this._messageService = _messageService;
+        this.userService = userService;
+    }
+    AssociateLayoutComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.currentUser.subscribe(function (userData) {
+            _this.currentUser = userData;
+        });
+        //const psSidebarBody = new PerfectScrollbar('#dpSidebarBody', {
+        //    suppressScrollX: true
+        //});
+        jquery__WEBPACK_IMPORTED_MODULE_5__('.nav-sidebar .with-sub').on('click', function (e) {
+            e.preventDefault();
+            jquery__WEBPACK_IMPORTED_MODULE_5__(this).parent().toggleClass('show');
+            jquery__WEBPACK_IMPORTED_MODULE_5__(this).parent().siblings().removeClass('show');
+            //psSidebarBody.update();
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_5__('.burger-menu:first-child').on('click', function (e) {
+            e.preventDefault();
+            jquery__WEBPACK_IMPORTED_MODULE_5__('body').toggleClass('toggle-sidebar');
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_5__('.header-search .form-control').on('focusin', function (e) {
+            jquery__WEBPACK_IMPORTED_MODULE_5__(this).parent().addClass('active');
+        });
+        jquery__WEBPACK_IMPORTED_MODULE_5__('.header-search .form-control').on('focusout', function (e) {
+            jquery__WEBPACK_IMPORTED_MODULE_5__(this).parent().removeClass('active');
+        });
+    };
+    AssociateLayoutComponent.prototype.onClickGetAds = function () {
+        this._messageService.filter('Register click');
+    };
+    AssociateLayoutComponent.prototype.onClickLogout = function () {
+        var _this = this;
+        this.userService
+            .attemptLogout()
+            .subscribe(function (data) {
+            if (data == "0") {
+                _this.router.navigateByUrl('/home');
+            }
+            else {
+                alert("OOPS Something goes wrong !");
+            }
+        }, function (err) {
+            alert("OOPS Something goes wrong !");
+        });
+    };
+    AssociateLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'associate-layout',
+            template: __webpack_require__(/*! ./associate-layout.component.html */ "./AngularAssociate/app/shared/associate-layout/associate-layout.component.html")
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], AngularAssociate_app_services_search__WEBPACK_IMPORTED_MODULE_4__["MessageService"],
+            _services_auth__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
+    ], AssociateLayoutComponent);
+    return AssociateLayoutComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/associate-layout/index.ts":
+/*!***************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-layout/index.ts ***!
+  \***************************************************************/
+/*! exports provided: AssociateLayoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _associate_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./associate-layout.component */ "./AngularAssociate/app/shared/associate-layout/associate-layout.component.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AssociateLayoutComponent", function() { return _associate_layout_component__WEBPACK_IMPORTED_MODULE_0__["AssociateLayoutComponent"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/associate-sidebar/index.ts":
+/*!****************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-sidebar/index.ts ***!
+  \****************************************************************/
+/*! exports provided: SidebarComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _sidebar_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sidebar.component */ "./AngularAssociate/app/shared/associate-sidebar/sidebar.component.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SidebarComponent", function() { return _sidebar_component__WEBPACK_IMPORTED_MODULE_0__["SidebarComponent"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/associate-sidebar/sidebar.component.html":
+/*!******************************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-sidebar/sidebar.component.html ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"sidebar\">\r\n    <div class=\"sidebar-header\">\r\n        <div>\r\n            <a href=\"Dashboard.aspx\" class=\"sidebar-logo\"><span>cassie</span></a>\r\n            <small class=\"sidebar-logo-headline\">Responsive Dashboard Template</small>\r\n        </div>  \r\n    </div>\r\n    <!-- sidebar-header -->\r\n    <div id=\"dpSidebarBody\" class=\"sidebar-body\">\r\n        <ul class=\"nav nav-sidebar\">\r\n            <li class=\"nav-label\">\r\n                <label class=\"content-label\">Template Pages</label>\r\n            </li>\r\n            <li class=\"nav-item show\">\r\n                <!-- routerLink=\"/dashboard\" -->\r\n                <a href=\"Dashboard.aspx\" class=\"nav-link with-sub active\"><i data-feather=\"box\"></i>Dashboard</a>\r\n                <!--<nav class=\"nav nav-sub\">\r\n                    <a href=\"dashboard-one.html\" class=\"nav-sub-link\">Analytics &amp; Monitoring</a>\r\n                    <a href=\"dashboard-two.html\" class=\"nav-sub-link\">Projects &amp; Web Services</a>\r\n                    <a href=\"dashboard-three.html\" class=\"nav-sub-link active\">Blog &amp; Social Media</a>\r\n                </nav>-->\r\n            </li>\r\n            <li id=\"profileclick\" class=\"nav-item\">\r\n                <!-- routerLink=\"/profile\" -->\r\n                <a href=\"Profile.aspx\" class=\"nav-link with-sub\"><i data-feather=\"layout\"></i>Profile</a>\r\n            </li>\r\n\r\n            <li id=\"clientdetailclick\" class=\"nav-item\">\r\n                <!-- routerLink=\"/client-details\" -->\r\n                <a href=\"ClientDetails.aspx\" class=\"nav-link with-sub\"><i data-feather=\"lock\"></i>Client Details</a>\r\n            </li>\r\n\r\n\r\n            <!--\r\n            <li id=\"postadtsclick\" class=\"treeview\">\r\n                <a href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <i>\r\n                        <img src=\"img/icon_sale_advertisement.png\" alt=\"\" />\r\n                    </i><span>List Your Property </span>\r\n                </a>\r\n            </li>-->\r\n            <!--\r\n            <li id=\"zipcodeclick\" class=\"treeview\">\r\n                <a href=\"ZipCodePurchase.aspx\">\r\n                    <i>\r\n                        <img src=\"img/icon_purchase_zipcode.png\" alt=\"\" />\r\n                    </i><span>Purchase Zip code </span>\r\n                </a>\r\n            </li>-->\r\n\r\n            <!--\r\n            <li id=\"customerclick\" class=\"treeview\">\r\n                <a href=\"CustomerSupport.aspx\">\r\n                    <i>\r\n                        <img src=\"img/icon_customer_support.png\" alt=\"\" />\r\n                    </i><span>Customer Support </span>\r\n                </a>\r\n            </li>\r\n            <li class=\"treeview\">\r\n                <a href=\"#\" id=\"btnLogout\">\r\n                    <img src=\"img/icon_signout.png\" alt=\"\" />\r\n                    <span>Logout </span>\r\n                </a>\r\n            </li>\r\n\r\n            <li style=\"height: 25px;\"></li>-->\r\n        </ul>\r\n\r\n        <%--                <hr class=\"mg-t-30 mg-b-25\">\r\n\r\n        <ul class=\"nav nav-sidebar\">\r\n            <li class=\"nav-item\"><a href=\"themes.html\" class=\"nav-link\"><i data-feather=\"aperture\"></i>Themes</a></li>\r\n            <li class=\"nav-item\"><a href=\"../docs.html\" class=\"nav-link\"><i data-feather=\"help-circle\"></i>Documentation</a></li>\r\n        </ul>--%>\r\n    </div>\r\n    <!-- sidebar-body -->\r\n</div>"
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/associate-sidebar/sidebar.component.ts":
+/*!****************************************************************************!*\
+  !*** ./AngularAssociate/app/shared/associate-sidebar/sidebar.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: SidebarComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SidebarComponent", function() { return SidebarComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var SidebarComponent = /** @class */ (function () {
+    function SidebarComponent() {
+    }
+    SidebarComponent.prototype.ngOnInit = function () {
+    };
+    SidebarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'associate-layout-sidebar',
+            template: __webpack_require__(/*! ./sidebar.component.html */ "./AngularAssociate/app/shared/associate-sidebar/sidebar.component.html")
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], SidebarComponent);
+    return SidebarComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./AngularAssociate/app/shared/index.ts":
 /*!**********************************************!*\
   !*** ./AngularAssociate/app/shared/index.ts ***!
@@ -4030,6 +6755,83 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "HeaderComponent", function() { return _header_component__WEBPACK_IMPORTED_MODULE_1__["HeaderComponent"]; });
 
 
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/shared-layout/shared-layout.component.html":
+/*!********************************************************************************!*\
+  !*** ./AngularAssociate/app/shared/shared-layout/shared-layout.component.html ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\r\n<div id=\"wrapper\">\r\n    <app-layout-header></app-layout-header>\r\n    <router-outlet></router-outlet>\r\n    <app-layout-footer></app-layout-footer>\r\n</div> "
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/shared/shared-layout/shared-layout.component.ts":
+/*!******************************************************************************!*\
+  !*** ./AngularAssociate/app/shared/shared-layout/shared-layout.component.ts ***!
+  \******************************************************************************/
+/*! exports provided: SharedLayoutComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedLayoutComponent", function() { return SharedLayoutComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth */ "./AngularAssociate/app/services/auth/index.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var AngularAssociate_app_services_search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! AngularAssociate/app/services/search */ "./AngularAssociate/app/services/search/index.ts");
+
+
+
+
+
+var SharedLayoutComponent = /** @class */ (function () {
+    function SharedLayoutComponent(route, router, _messageService, userService) {
+        this.route = route;
+        this.router = router;
+        this._messageService = _messageService;
+        this.userService = userService;
+    }
+    SharedLayoutComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.userService.currentUser.subscribe(function (userData) {
+            _this.currentUser = userData;
+        });
+    };
+    SharedLayoutComponent.prototype.onClickGetAds = function () {
+        this._messageService.filter('Register click');
+    };
+    SharedLayoutComponent.prototype.onClickLogout = function () {
+        var _this = this;
+        this.userService
+            .attemptLogout()
+            .subscribe(function (data) {
+            if (data == "0") {
+                _this.router.navigateByUrl('/home');
+            }
+            else {
+                alert("OOPS Something goes wrong !");
+            }
+        }, function (err) {
+            alert("OOPS Something goes wrong !");
+        });
+    };
+    SharedLayoutComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-shared-layout',
+            template: __webpack_require__(/*! ./shared-layout.component.html */ "./AngularAssociate/app/shared/shared-layout/shared-layout.component.html")
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], AngularAssociate_app_services_search__WEBPACK_IMPORTED_MODULE_4__["MessageService"],
+            _services_auth__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
+    ], SharedLayoutComponent);
+    return SharedLayoutComponent;
+}());
 
 
 
@@ -4301,7 +7103,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\WcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
+module.exports = __webpack_require__(/*! E:\WcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
 
 
 /***/ })

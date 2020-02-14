@@ -44,17 +44,23 @@ import {
 
 } from './services/auth';
 import { SearchService, MessageService} from './services/search';
+import { AssociateLayoutComponent } from './shared/associate-layout';
+import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
+import { SidebarComponent } from './shared/associate-sidebar';
+import { AssociateHeaderComponent } from './shared/associate-header';
+import { AssociateModule } from './associate/associate.module';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
         HomeComponent,
-        //LoginComponent,
-        //RegisterComponent,
+        SharedLayoutComponent,
         FooterComponent,
         HeaderComponent,
+        AssociateLayoutComponent,
+        SidebarComponent,
+        AssociateHeaderComponent,
         AuthComponent,
         TermsComponent,
         ShowAuthedDirective
@@ -79,7 +85,8 @@ import { SearchService, MessageService} from './services/search';
         MatToolbarModule,
         MatSelectModule,
         AppRoutingModule,
-        SharedModule
+        SharedModule,
+        AssociateModule
     ],
     providers: [
         HttpClientModule,

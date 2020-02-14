@@ -467,10 +467,12 @@ var AuthComponent = /** @class */ (function () {
             .then(function (data) {
             if (data.d == "1") {
                 if ($(docs).find("Mobile").text() == '') {
-                    $(location).attr('href', 'Associate/ViewProfile.aspx');
+                    _this.router.navigateByUrl('/associate/profile');
+                    //$(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
-                    $(location).attr('href', 'Associate/Dashboard.aspx');
+                    _this.router.navigateByUrl('/associate/dashboard');
+                    //$(location).attr('href', 'Associate/Dashboard.aspx');
                 }
             }
         }, function (err) {

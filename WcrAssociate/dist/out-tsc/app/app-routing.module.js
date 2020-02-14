@@ -5,6 +5,8 @@ import { HomeComponent } from '.././app/components/home/home.component';
 import { AuthComponent } from '.././app/components/auth/auth.component';
 import { TermsComponent } from '.././app/components/terms/terms.component';
 import { NoAuthGuard } from './services/auth';
+import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
+import { AssociateLayoutComponent } from './shared/associate-layout/associate-layout.component';
 var routes = [
     //{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
     //{ path: 'login', component: LoginComponent },
@@ -13,36 +15,49 @@ var routes = [
     //{ path: '**', redirectTo: '' }
     {
         path: '',
-        component: HomeComponent
-        //,
-        //resolve: {
-        //    isAuthenticated: HomeAuthResolver
-        //}
+        component: SharedLayoutComponent,
+        children: [
+            {
+                path: '',
+                component: HomeComponent
+                //,
+                //resolve: {
+                //    isAuthenticated: HomeAuthResolver
+                //}
+            },
+            {
+                path: 'login',
+                component: AuthComponent,
+                canActivate: [NoAuthGuard]
+            },
+            {
+                path: 'register',
+                component: AuthComponent,
+                canActivate: [NoAuthGuard]
+            },
+            {
+                path: 'activate/:id/:email/:password',
+                component: AuthComponent,
+                canActivate: [NoAuthGuard]
+            },
+            {
+                path: 'resetPassword',
+                component: AuthComponent,
+                canActivate: [NoAuthGuard]
+            },
+            {
+                path: 'terms',
+                component: TermsComponent,
+                canActivate: [NoAuthGuard]
+            }
+        ]
     },
     {
-        path: 'login',
-        component: AuthComponent,
-        canActivate: [NoAuthGuard]
-    },
-    {
-        path: 'register',
-        component: AuthComponent,
-        canActivate: [NoAuthGuard]
-    },
-    {
-        path: 'activate/:id/:email/:password',
-        component: AuthComponent,
-        canActivate: [NoAuthGuard]
-    },
-    {
-        path: 'resetPassword',
-        component: AuthComponent,
-        canActivate: [NoAuthGuard]
-    },
-    {
-        path: 'terms',
-        component: TermsComponent,
-        canActivate: [NoAuthGuard]
+        path: '',
+        component: AssociateLayoutComponent,
+        children: [
+            { path: 'associate', loadChildren: './associate/associate.module#AssociateModule' }
+        ]
     }
 ];
 var AppRoutingModule = /** @class */ (function () {

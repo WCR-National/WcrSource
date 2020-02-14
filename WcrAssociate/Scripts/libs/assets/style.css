@@ -42442,7 +42442,8 @@ span.icon-right {
     overflow: hidden;
     text-overflow: ellipsis;
     margin-top: 0px;
-    text-align:left;
+    text-align: left;
+    height: 90px;
 }
 
 label {
@@ -42482,6 +42483,7 @@ label {
         margin-top: 0px;
         text-align: left;
         font-size: 17px;
+        height:90px;
     }
 }
 
@@ -42508,5 +42510,6 @@ label {
         margin-top: 0px;
         text-align: left;
         font-size: 17px;
+        height: 90px;
     }
 }

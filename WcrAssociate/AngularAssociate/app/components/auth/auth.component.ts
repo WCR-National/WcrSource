@@ -583,10 +583,13 @@ export class AuthComponent implements OnInit {
                     if (data.d == "1") {
 
                         if ($(docs).find("Mobile").text() == '') {
-                            $(location).attr('href', 'Associate/ViewProfile.aspx');
+
+                            this.router.navigateByUrl('/associate');       
+                            //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         }
                         else {
-                            $(location).attr('href', 'Associate/Dashboard.aspx');
+                            this.router.navigateByUrl('/associate/dashboard');       
+                            //$(location).attr('href', 'Associate/Dashboard.aspx');
                         }
                     }
                 },

@@ -20,6 +20,10 @@ import { ShowAuthedDirective } from './shared/show-authed.directive';
 import { FooterComponent, HeaderComponent, SharedModule } from '../app/shared';
 import { ApiService, AuthGuard, JwtService, ProfilesService, UserService, HomeAuthResolver, NoAuthGuard, encrypt_decrypt } from './services/auth';
 import { SearchService, MessageService } from './services/search';
+import { AssociateLayoutComponent } from './shared/associate-layout';
+import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
+import { SidebarComponent } from './shared/associate-sidebar';
+import { AssociateHeaderComponent } from './shared/associate-header';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -27,12 +31,13 @@ var AppModule = /** @class */ (function () {
         NgModule({
             declarations: [
                 AppComponent,
-                HeaderComponent,
                 HomeComponent,
-                //LoginComponent,
-                //RegisterComponent,
+                SharedLayoutComponent,
                 FooterComponent,
                 HeaderComponent,
+                AssociateLayoutComponent,
+                SidebarComponent,
+                AssociateHeaderComponent,
                 AuthComponent,
                 TermsComponent,
                 ShowAuthedDirective

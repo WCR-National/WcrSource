@@ -13,7 +13,9 @@ import { AuthComponent } from '.././app/components/auth/auth.component';
 import { TermsComponent } from '.././app/components/terms/terms.component';
 
 import { NoAuthGuard, HomeAuthResolver } from './services/auth';
-
+import { HeaderComponent } from './shared/layout';
+import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
+import { AssociateLayoutComponent } from './shared/associate-layout/associate-layout.component';
 
 
 const routes: Routes = [
@@ -23,40 +25,55 @@ const routes: Routes = [
 
     //// otherwise redirect to home
     //{ path: '**', redirectTo: '' }
+
     {
         path: '',
-        component: HomeComponent
-        //,
-        //resolve: {
-        //    isAuthenticated: HomeAuthResolver
-        //}
+        component: SharedLayoutComponent,
+        children: [
+            {
+                path: '',
+                component: HomeComponent
+                //,
+                //resolve: {
+                //    isAuthenticated: HomeAuthResolver
+                //}
+            },
+            {
+                path: 'login',
+                component: AuthComponent,
+                canActivate: [NoAuthGuard]
+            },
+            {
+                path: 'register',
+                component: AuthComponent,
+                canActivate: [NoAuthGuard]
+            },
+            {
+                path: 'activate/:id/:email/:password',
+                component: AuthComponent,
+                canActivate: [NoAuthGuard]
+            },
+            {
+                path: 'resetPassword',
+                component: AuthComponent,
+                canActivate: [NoAuthGuard]
+            },
+            {
+                path: 'terms',
+                component: TermsComponent,
+                canActivate: [NoAuthGuard]
+            }
+        ]
     },
     {
-        path: 'login',
-        component: AuthComponent,
-        canActivate: [NoAuthGuard]
-    },
-    {
-        path: 'register',
-        component: AuthComponent,
-        canActivate: [NoAuthGuard]
-    },
-    {
-        path: 'activate/:id/:email/:password',
-        component: AuthComponent,
-        canActivate: [NoAuthGuard]
-    },
-    {
-        path: 'resetPassword',
-        component: AuthComponent,
-        canActivate: [NoAuthGuard]
-    },
-    {
-        path: 'terms',
-        component: TermsComponent,
-        canActivate: [NoAuthGuard]
+        path: '',
+        component: AssociateLayoutComponent,
+        children: [
+            { path: 'associate', loadChildren: 'app/associate/associate.module#AssociateModule' }
+        ]
     }
 ];
+
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
