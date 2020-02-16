@@ -7,36 +7,24 @@ import { HomeComponent } from '.././app/components/home/home.component';
 //import { RegisterComponent } from '.././app/components/register/register.component';
 
 
-import { AuthGuard } from '../app/_guards/auth.guard';
 
 import { AuthComponent } from '.././app/components/auth/auth.component';
 import { TermsComponent } from '.././app/components/terms/terms.component';
 
-import { NoAuthGuard, HomeAuthResolver } from './services/auth';
 import { HeaderComponent } from './shared/layout';
 import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
-import { AssociateLayoutComponent } from './shared/associate-layout/associate-layout.component';
+import { NoAuthGuard } from './_guards/no-auth-guard.service';
 
 
 const routes: Routes = [
-    //{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    //{ path: 'login', component: LoginComponent },
-    //{ path: 'register', component: RegisterComponent },
-
-    //// otherwise redirect to home
-    //{ path: '**', redirectTo: '' }
-
     {
         path: '',
         component: SharedLayoutComponent,
         children: [
             {
                 path: '',
-                component: HomeComponent
-                //,
-                //resolve: {
-                //    isAuthenticated: HomeAuthResolver
-                //}
+                component: HomeComponent,
+                canActivate: [NoAuthGuard]
             },
             {
                 path: 'login',
@@ -63,13 +51,6 @@ const routes: Routes = [
                 component: TermsComponent,
                 canActivate: [NoAuthGuard]
             }
-        ]
-    },
-    {
-        path: '',
-        component: AssociateLayoutComponent,
-        children: [
-            { path: 'associate', loadChildren: 'app/associate/associate.module#AssociateModule' }
         ]
     }
 ];

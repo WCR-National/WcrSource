@@ -6,9 +6,11 @@ import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
 import { environment } from '../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 import { map, distinctUntilChanged, delay } from 'rxjs/operators';
+import { RouterModule } from '@angular/router';
 
 
 @Injectable()
@@ -19,21 +21,48 @@ export class UserService {
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
+    public isAuthenticated_extra = false;
+
     constructor(private user: User = null,
         private apiService: ApiService = null,
         private http: HttpClient = null,
-        private jwtService: JwtService = null) { }
+        private jwtService: JwtService = null,
+        private router: Router) { }
 
     //// Verify JWT in localstorage with server & load user's info.
     //// This runs once on application startup.
     populate() {
+        debugger;
         // If JWT detected, attempt to get & store user's info
-        if (this.jwtService.getToken()) {
-            this.apiService.get('/')
-                .subscribe(
-                    data => this.setAuth(data.user),
-                    err => this.purgeAuth()
-                );
+        if (localStorage.getItem('jwtToken')) {
+            var user: any = JSON.parse(localStorage.getItem('jwtToken'));
+            if (user.type == "1") { //associate
+                var credentials: any = {};
+                credentials.email = user.email;
+
+                this.associateLoginSessionActivate("", credentials, user.id)
+                    .then((data: any) => {
+                        if (data.d == "1") {
+                            this.router.navigateByUrl('/associate');
+                        }
+                        else {
+                            this.router.navigateByUrl('/');
+                        }
+                    });
+            }
+            else if (user.type == "2") {
+                var credentials: any = {};
+                credentials.email = user.email;
+                this.consumerLoginSessionActivate("", credentials, user.id)
+                    .then((data: any) => {
+                        if (data.d == "1") {
+                            this.router.navigateByUrl('/');
+                        }
+                        else {
+                            this.router.navigateByUrl('/');
+                        }
+                    });
+            }
         }
         else {
             // Remove any potential remnants of previous auth states
@@ -42,21 +71,29 @@ export class UserService {
     }
 
     setAuth(user: User) {
+        debugger;
         // Save JWT sent from server in localstorage
-        this.jwtService.saveToken(user.token);
+        this.jwtService.saveToken(user);
         // Set current user data into observable
         this.currentUserSubject.next(user);
         // Set isAuthenticated to true
         this.isAuthenticatedSubject.next(true);
+
+        this.isAuthenticated_extra = true;
+        console.log(this.isAuthenticated_extra);
+
     }
 
     purgeAuth() {
+        debugger;
         // Remove JWT from localstorage
         this.jwtService.destroyToken();
         // Set current user to an empty object
         this.currentUserSubject.next({} as User);
         // Set auth status to false
         this.isAuthenticatedSubject.next(false);
+
+        this.isAuthenticated_extra = false;
     }
 
     rand() {
@@ -121,6 +158,7 @@ export class UserService {
         return await this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
             .pipe(map(
                 data => {
+
                     return data;
                 }
             )).toPromise();
@@ -159,6 +197,15 @@ export class UserService {
         return await this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
             .pipe(map(
                 data => {
+                    if (data.d == "1") {
+
+                        this.user.token = this.token();
+                        this.user.email = credentials.email;
+                        this.user.id = associateID;
+                        this.user.type = "2";
+                        this.setAuth(this.user);
+
+                    }
                     return data;
                 }
             )).toPromise();
@@ -171,6 +218,13 @@ export class UserService {
         return await this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
             .pipe(map(
                 data => {
+                    if (data.d == "1") {
+                        this.user.token = this.token();
+                        this.user.email = credentials.email;
+                        this.user.id = associateID;
+                        this.user.type = "1";
+                        this.setAuth(this.user);
+                    }
                     return data;
                 }
             )).toPromise();
@@ -305,8 +359,8 @@ export class UserService {
         return this.apiService.get('ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email)
             .pipe(
                 map(
-                    (data) => { return data;})
-                );
+                    (data) => { return data; })
+            );
     }
 
     emailAlreadyTaken(email) {

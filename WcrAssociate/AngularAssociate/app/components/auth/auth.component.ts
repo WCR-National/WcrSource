@@ -40,6 +40,7 @@ export class AuthComponent implements OnInit {
     tokenFromUI: string = "7061737323313233";
     encrypted: any = "";
     decrypted: string;
+    returnUrl: string;
 
     request: string;
     responce: string;
@@ -105,6 +106,9 @@ export class AuthComponent implements OnInit {
         this.setValidationOnform();
         this.setSignInOrSignUpOrActivateOrReset();
         this.changeValuesOfFormsEvents();
+
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+
     }
 
     changeValuesOfFormsEvents() {
@@ -563,6 +567,8 @@ export class AuthComponent implements OnInit {
             .then(
                 (data: any) => {
                     if (data.d == "1") {
+                        //this.router.navigate([this.returnUrl]);
+
                         $(location).attr('href', '/ConsumerDashboard.html');
                     }
                 },
@@ -583,8 +589,14 @@ export class AuthComponent implements OnInit {
                     if (data.d == "1") {
 
                         if ($(docs).find("Mobile").text() == '') {
+                            if (this.returnUrl != '') {
+                                this.router.navigate([this.returnUrl]);
+                            }
+                            else {
+                                this.router.navigateByUrl('/associate');       
+                            }
 
-                            this.router.navigateByUrl('/associate');       
+                            //this.router.navigateByUrl('/associate');       
                             //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         }
                         else {

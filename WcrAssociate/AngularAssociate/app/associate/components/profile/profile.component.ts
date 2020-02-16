@@ -21,8 +21,7 @@ import { Observable, of } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder, private http: HttpClient
-    ) { }
+    constructor() { }
 
     ngOnInit() { }
 }

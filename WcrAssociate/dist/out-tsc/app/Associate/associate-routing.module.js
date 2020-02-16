@@ -4,22 +4,52 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from '../../app/Associate/components/Dashboard/dashboard.component';
 import { ProfileComponent } from '../../app/Associate/components/Profile/profile.component';
 import { ClientDetailsComponent } from '../../app/Associate/components/client-details/client-details.component';
-import { NoAuthGuard } from '../services/auth';
+//import { LoginComponent } from '.././app/components/login/login.component';
+//import { RegisterComponent } from '.././app/components/register/register.component';
+import { AssociateLayoutComponent } from './associate-layout';
+import { AuthGuard } from '../_guards/auth-guard.service';
 var associateRoutes = [
-    { path: '', component: DashboardComponent, canActivate: [NoAuthGuard] },
-    { path: 'profile', component: ProfileComponent, canActivate: [NoAuthGuard] },
-    { path: 'client-details', component: ClientDetailsComponent, canActivate: [NoAuthGuard] },
-];
-var AppRoutingModule = /** @class */ (function () {
-    function AppRoutingModule() {
+    {
+        path: 'associate',
+        component: AssociateLayoutComponent,
+        children: [
+            {
+                path: '', component: DashboardComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'client-details', component: ClientDetailsComponent, canActivate: [AuthGuard]
+            },
+        ]
     }
-    AppRoutingModule = tslib_1.__decorate([
+];
+var AssociateRoutingModule = /** @class */ (function () {
+    function AssociateRoutingModule() {
+    }
+    AssociateRoutingModule = tslib_1.__decorate([
         NgModule({
-            imports: [RouterModule.forRoot(associateRoutes)],
+            imports: [RouterModule.forChild(associateRoutes)],
             exports: [RouterModule]
         })
-    ], AppRoutingModule);
-    return AppRoutingModule;
+    ], AssociateRoutingModule);
+    return AssociateRoutingModule;
 }());
-export { AppRoutingModule };
+export { AssociateRoutingModule };
+//const routes: Routes = [
+//    {
+//        path: '',
+//        component: CustomerComponent,
+//        children: [
+//            { path: ':id/detail', component: CustomerDetailComponent },
+//            { path: '', component: CustomerListComponent }
+//        ]
+//    }
+//];
+//@NgModule({
+//    imports: [RouterModule.forChild(routes)],
+//    exports: [RouterModule]
+//})
+//export class CustomerRoutingModule { }
 //# sourceMappingURL=associate-routing.module.js.map

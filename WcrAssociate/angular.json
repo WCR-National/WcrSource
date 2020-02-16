@@ -50,7 +50,9 @@
               "AngularAssociate/assets/bootstrap.css",
               "AngularAssociate/assets/icons.css",
               "AngularAssociate/assets/style.css",
-              "AngularAssociate/assets/color.css"
+              "AngularAssociate/assets/color.css",
+              "AngularAssociate/assets/associate/css/all.min.css",
+              "AngularAssociate/assets/associate/css/cassie.css"
             ],
             "scripts": [
               "node_modules/crypto-js/crypto-js.js"
@@ -115,7 +117,7 @@
               "AngularAssociate/assets/icons.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css",
-              "AngularAssociate/assets/associate/css/all.min.css.css",
+              "AngularAssociate/assets/associate/css/all.min.css",
               "AngularAssociate/assets/associate/css/cassie.css"
             ],
             "scripts": [

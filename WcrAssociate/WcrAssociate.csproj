@@ -112,17 +112,17 @@
   <ItemGroup>
     <Content Include="aboutus.html" />
     <Content Include="advertise.html" />
+    <Content Include="AngularAssociate\app\associate\associate-header\header.component.html" />
+    <Content Include="AngularAssociate\app\associate\associate-layout\associate-layout.component.html" />
+    <Content Include="AngularAssociate\app\associate\associate-sidebar\sidebar.component.html" />
     <Content Include="AngularAssociate\app\associate\components\client-details\client-details.component.html" />
     <Content Include="AngularAssociate\app\associate\components\profile\profile.component.html" />
     <Content Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.html" />
     <Content Include="AngularAssociate\app\components\terms\terms.component.html" />
     <Content Include="AngularAssociate\app\components\auth\auth.component.html" />
-    <Content Include="AngularAssociate\app\shared\associate-sidebar\sidebar.component.html" />
     <Content Include="AngularAssociate\app\shared\buttons\favorite-button.component.html" />
     <Content Include="AngularAssociate\app\shared\buttons\follow-button.component.html" />
-    <Content Include="AngularAssociate\app\shared\associate-header\header.component.html" />
     <Content Include="AngularAssociate\app\shared\shared-layout\shared-layout.component.html" />
-    <Content Include="AngularAssociate\app\shared\associate-layout\associate-layout.component.html" />
     <Content Include="AngularAssociate\app\shared\layout\footer.component.html" />
     <Content Include="AngularAssociate\app\shared\layout\header.component.html" />
     <Content Include="AngularAssociate\assets\associate\css\all.min.css" />
@@ -256,8 +256,8 @@
     <Content Include="Associate\img\icon_signout.png" />
     <Content Include="Associate\img\imagebox.jpg" />
     <Content Include="Associate\img\side-image.png" />
-    <Content Include="Associate\index.aspx" />
-    <Content Include="Associate\index.html" />
+    <Content Include="Associate\index1.aspx" />
+    <Content Include="Associate\index1.html" />
     <Content Include="Associate\InsertCardInfo.aspx" />
     <Content Include="Associate\js\adsbygoogle.js" />
     <Content Include="Associate\js\analytics.js" />
@@ -1388,12 +1388,12 @@
     <Compile Include="Associate\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Associate\index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Associate\index1.aspx.cs">
+      <DependentUpon>index1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Associate\index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
+    <Compile Include="Associate\index1.aspx.designer.cs">
+      <DependentUpon>index1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Associate\InsertCardInfo.aspx.cs">
       <DependentUpon>InsertCardInfo.aspx</DependentUpon>
@@ -1852,16 +1852,22 @@
     <TypeScriptCompile Include="AngularAssociate\app\app-routing.module.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\app.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\app.module.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\associate-header\header.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\associate-header\index.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\associate-layout\associate-layout.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\associate-layout\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\associate-routing.module.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\associate-sidebar\index.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\associate-sidebar\sidebar.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\associate.module.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\client-details\client-details.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\profile\profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\associate\dashboard.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\api.service.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\services\auth\home-auth-resolver.service.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\services\auth\no-auth-guard.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\_guards\no-auth-guard.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\errors.model.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\location.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\profile.model.ts" />
@@ -1875,7 +1881,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\services\authentication\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\authentication\page.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\authentication\permission.service.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\services\auth\auth-guard.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\_guards\auth-guard.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\jwt.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\profile.service.ts" />
@@ -1885,26 +1891,18 @@
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\user.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\entities\user.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\home\home.component.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\shared\associate-sidebar\sidebar.component.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\shared\associate-sidebar\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\buttons\favorite-button.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\buttons\follow-button.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\buttons\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\index.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\shared\associate-header\header.component.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\shared\associate-header\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\shared-layout\shared-layout.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\shared-layout\index.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\shared\associate-layout\associate-layout.component.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\shared\associate-layout\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\layout\footer.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\layout\header.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\layout\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\shared.module.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\shared\show-authed.directive.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\_guards\auth.guard.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\encrypt_decrypt.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\_guards\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\error.interceptor.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\fake-backend.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\index.ts" />

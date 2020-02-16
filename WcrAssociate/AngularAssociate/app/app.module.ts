@@ -27,6 +27,10 @@ import { User } from '../app/entities/user';
 
 import { ShowAuthedDirective } from './shared/show-authed.directive';
 
+import { AuthGuard } from './_guards/auth-guard.service';
+import { NoAuthGuard } from './_guards/no-auth-guard.service';
+
+
 import {
     FooterComponent,
     HeaderComponent,
@@ -35,19 +39,17 @@ import {
 
 import {
     ApiService,
-    AuthGuard,
     JwtService,
     ProfilesService,
     UserService,
-    HomeAuthResolver,
-    NoAuthGuard,    encrypt_decrypt
+    encrypt_decrypt
 
 } from './services/auth';
 import { SearchService, MessageService} from './services/search';
-import { AssociateLayoutComponent } from './shared/associate-layout';
+//import { AssociateLayoutComponent } from './shared/associate-layout';
 import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
-import { SidebarComponent } from './shared/associate-sidebar';
-import { AssociateHeaderComponent } from './shared/associate-header';
+//import { SidebarComponent } from './shared/associate-sidebar';
+//import { AssociateHeaderComponent } from './shared/associate-header';
 import { AssociateModule } from './associate/associate.module';
 
 
@@ -58,9 +60,6 @@ import { AssociateModule } from './associate/associate.module';
         SharedLayoutComponent,
         FooterComponent,
         HeaderComponent,
-        AssociateLayoutComponent,
-        SidebarComponent,
-        AssociateHeaderComponent,
         AuthComponent,
         TermsComponent,
         ShowAuthedDirective
@@ -84,24 +83,25 @@ import { AssociateModule } from './associate/associate.module';
         MatTooltipModule,
         MatToolbarModule,
         MatSelectModule,
-        AppRoutingModule,
         SharedModule,
-        AssociateModule
+        AssociateModule,
+        AppRoutingModule
+
     ],
     providers: [
+        AuthGuard,
+
         HttpClientModule,
         { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
         ApiService,
-        AuthGuard,
+        NoAuthGuard,
         JwtService,
         ProfilesService,
         UserService,
         SearchService,
-        HomeAuthResolver,
-        NoAuthGuard,
         User,
         encrypt_decrypt,
-        MessageService
+        MessageService,
     ],
     bootstrap: [AppComponent]
 })

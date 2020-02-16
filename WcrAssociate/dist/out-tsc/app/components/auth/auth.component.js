@@ -85,6 +85,7 @@ var AuthComponent = /** @class */ (function () {
         this.setValidationOnform();
         this.setSignInOrSignUpOrActivateOrReset();
         this.changeValuesOfFormsEvents();
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
     };
     AuthComponent.prototype.changeValuesOfFormsEvents = function () {
         var _this = this;
@@ -452,6 +453,7 @@ var AuthComponent = /** @class */ (function () {
             .consumerLoginSessionActivate(this.authType, credentials, $(docs).find("Id").text())
             .then(function (data) {
             if (data.d == "1") {
+                //this.router.navigate([this.returnUrl]);
                 $(location).attr('href', '/ConsumerDashboard.html');
             }
         }, function (err) {
@@ -467,7 +469,13 @@ var AuthComponent = /** @class */ (function () {
             .then(function (data) {
             if (data.d == "1") {
                 if ($(docs).find("Mobile").text() == '') {
-                    _this.router.navigateByUrl('/associate/profile');
+                    if (_this.returnUrl != '') {
+                        _this.router.navigate([_this.returnUrl]);
+                    }
+                    else {
+                        _this.router.navigateByUrl('/associate');
+                    }
+                    //this.router.navigateByUrl('/associate');       
                     //$(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {

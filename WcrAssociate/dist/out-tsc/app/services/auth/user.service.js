@@ -5,9 +5,10 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
+import { Router } from '@angular/router';
 import { map, distinctUntilChanged, delay } from 'rxjs/operators';
 var UserService = /** @class */ (function () {
-    function UserService(user, apiService, http, jwtService) {
+    function UserService(user, apiService, http, jwtService, router) {
         if (user === void 0) { user = null; }
         if (apiService === void 0) { apiService = null; }
         if (http === void 0) { http = null; }
@@ -16,19 +17,47 @@ var UserService = /** @class */ (function () {
         this.apiService = apiService;
         this.http = http;
         this.jwtService = jwtService;
+        this.router = router;
         this.currentUserSubject = new BehaviorSubject({});
         this.currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
         this.isAuthenticatedSubject = new ReplaySubject(1);
         this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
+        this.isAuthenticated_extra = false;
     }
     //// Verify JWT in localstorage with server & load user's info.
     //// This runs once on application startup.
     UserService.prototype.populate = function () {
         var _this = this;
+        debugger;
         // If JWT detected, attempt to get & store user's info
-        if (this.jwtService.getToken()) {
-            this.apiService.get('/')
-                .subscribe(function (data) { return _this.setAuth(data.user); }, function (err) { return _this.purgeAuth(); });
+        if (localStorage.getItem('jwtToken')) {
+            var user = JSON.parse(localStorage.getItem('jwtToken'));
+            if (user.type == "1") { //associate
+                var credentials = {};
+                credentials.email = user.email;
+                this.associateLoginSessionActivate("", credentials, user.id)
+                    .then(function (data) {
+                    if (data.d == "1") {
+                        _this.router.navigateByUrl('/associate');
+                    }
+                    else {
+                        _this.router.navigateByUrl('/');
+                    }
+                });
+            }
+            else if (user.type == "2") {
+                var credentials = {};
+                credentials.email = user.email;
+                this.consumerLoginSessionActivate("", credentials, user.id)
+                    .then(function (data) {
+                    if (data.d == "1") {
+                        _this.router.navigateByUrl('/');
+                    }
+                    else {
+                        _this.router.navigateByUrl('/');
+                    }
+                });
+            }
         }
         else {
             // Remove any potential remnants of previous auth states
@@ -36,20 +65,25 @@ var UserService = /** @class */ (function () {
         }
     };
     UserService.prototype.setAuth = function (user) {
+        debugger;
         // Save JWT sent from server in localstorage
-        this.jwtService.saveToken(user.token);
+        this.jwtService.saveToken(user);
         // Set current user data into observable
         this.currentUserSubject.next(user);
         // Set isAuthenticated to true
         this.isAuthenticatedSubject.next(true);
+        this.isAuthenticated_extra = true;
+        console.log(this.isAuthenticated_extra);
     };
     UserService.prototype.purgeAuth = function () {
+        debugger;
         // Remove JWT from localstorage
         this.jwtService.destroyToken();
         // Set current user to an empty object
         this.currentUserSubject.next({});
         // Set auth status to false
         this.isAuthenticatedSubject.next(false);
+        this.isAuthenticated_extra = false;
     };
     UserService.prototype.rand = function () {
         return Math.random().toString(36).substr(2); // remove `0.`
@@ -136,6 +170,7 @@ var UserService = /** @class */ (function () {
     UserService.prototype.consumerLoginSessionActivate = function (type, credentials, associateID) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToSignInSessionActivation;
+            var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -143,6 +178,13 @@ var UserService = /** @class */ (function () {
                         urlToSignInSessionActivation = "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate";
                         return [4 /*yield*/, this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
                                 .pipe(map(function (data) {
+                                if (data.d == "1") {
+                                    _this.user.token = _this.token();
+                                    _this.user.email = credentials.email;
+                                    _this.user.id = associateID;
+                                    _this.user.type = "2";
+                                    _this.setAuth(_this.user);
+                                }
                                 return data;
                             })).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -153,6 +195,7 @@ var UserService = /** @class */ (function () {
     UserService.prototype.associateLoginSessionActivate = function (type, credentials, associateID) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToSignInSessionActivation;
+            var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -161,6 +204,13 @@ var UserService = /** @class */ (function () {
                         urlToSignInSessionActivation = "ws/AssociateRegistration.asmx/AssociateLoginSessionActivate";
                         return [4 /*yield*/, this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
                                 .pipe(map(function (data) {
+                                if (data.d == "1") {
+                                    _this.user.token = _this.token();
+                                    _this.user.email = credentials.email;
+                                    _this.user.id = associateID;
+                                    _this.user.type = "1";
+                                    _this.setAuth(_this.user);
+                                }
                                 return data;
                             })).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -311,7 +361,8 @@ var UserService = /** @class */ (function () {
         tslib_1.__metadata("design:paramtypes", [User,
             ApiService,
             HttpClient,
-            JwtService])
+            JwtService,
+            Router])
     ], UserService);
     return UserService;
 }());

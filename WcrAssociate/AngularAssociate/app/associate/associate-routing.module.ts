@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-
 import { DashboardComponent } from '../../app/Associate/components/Dashboard/dashboard.component';
 import { ProfileComponent } from '../../app/Associate/components/Profile/profile.component';
 import { ClientDetailsComponent } from '../../app/Associate/components/client-details/client-details.component';
@@ -9,19 +7,30 @@ import { ClientDetailsComponent } from '../../app/Associate/components/client-de
 //import { RegisterComponent } from '.././app/components/register/register.component';
 
 
-import { AuthGuard } from '../../app/_guards/auth.guard';
-import { NoAuthGuard, HomeAuthResolver } from '../services/auth';
-import { AssociateModule } from './associate.module';
-import { CommonModule } from '@angular/common';
+import { AssociateLayoutComponent } from './associate-layout';
+import { AuthGuard } from '../_guards/auth-guard.service';
 
 const associateRoutes: Routes = [
-    { path: '', component: DashboardComponent },
-    { path: 'profile', component: ProfileComponent, canActivate: [NoAuthGuard]},
-    { path: 'client-details', component: ClientDetailsComponent, canActivate: [NoAuthGuard] },
+    {
+        path: 'associate',
+        component: AssociateLayoutComponent,
+        children: [
+            {
+                path: '', component: DashboardComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'client-details', component: ClientDetailsComponent, canActivate: [AuthGuard]
+            },
+        ]
+    }
+
 ];
 
 @NgModule({
-    imports: [   RouterModule.forChild(associateRoutes) ],
+    imports: [RouterModule.forChild(associateRoutes)],
     exports: [RouterModule]
 })
 export class AssociateRoutingModule { }

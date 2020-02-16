@@ -1,15 +1,17 @@
 import * as tslib_1 from "tslib";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from '../../app/Associate/components/Dashboard/dashboard.component';
 import { ProfileComponent } from '../../app/Associate/components/Profile/profile.component';
 import { ClientDetailsComponent } from '../../app/Associate/components/client-details/client-details.component';
-import { HttpTokenInterceptor } from '../interceptors';
-import { AuthGuard, NoAuthGuard } from '../services/auth';
+import { ApiService, JwtService } from '../services/auth';
 import { MessageService } from '../services/search';
+import { AssociateRoutingModule } from './associate-routing.module';
+import { AssociateLayoutComponent } from './associate-layout';
+import { SidebarComponent } from './associate-sidebar';
+import { AssociateHeaderComponent } from './associate-header';
 //import { CustomValidator } from './validators';
 //import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
 //import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
@@ -19,30 +21,23 @@ var AssociateModule = /** @class */ (function () {
     }
     AssociateModule = tslib_1.__decorate([
         NgModule({
+            imports: [
+                CommonModule,
+                FormsModule,
+                HttpClientModule,
+                AssociateRoutingModule
+            ],
             declarations: [
+                AssociateLayoutComponent,
+                SidebarComponent,
+                AssociateHeaderComponent,
                 DashboardComponent,
                 ProfileComponent,
                 ClientDetailsComponent,
             ],
-            imports: [
-                CommonModule,
-                FormsModule,
-                ReactiveFormsModule,
-                HttpClientModule,
-                RouterModule
-            ],
-            exports: [
-                CommonModule,
-                FormsModule,
-                ReactiveFormsModule,
-                HttpClientModule,
-                RouterModule
-            ],
             providers: [
-                HttpClientModule,
-                { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
-                AuthGuard,
-                NoAuthGuard,
+                ApiService,
+                JwtService,
                 MessageService
             ]
         })
@@ -50,4 +45,19 @@ var AssociateModule = /** @class */ (function () {
     return AssociateModule;
 }());
 export { AssociateModule };
+//@NgModule({
+//    imports: [
+//        CommonModule,
+//        AssociateRoutingModule
+//    ],
+//    declarations: [],
+//    providers: [
+//        HttpClientModule,
+//        { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+//        AuthGuard,
+//        NoAuthGuard,
+//        MessageService
+//    ]
+//})
+//export class CustomersModule { }
 //# sourceMappingURL=associate.module.js.map

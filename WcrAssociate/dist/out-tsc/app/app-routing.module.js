@@ -2,28 +2,21 @@ import * as tslib_1 from "tslib";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from '.././app/components/home/home.component';
+//import { LoginComponent } from '.././app/components/login/login.component';
+//import { RegisterComponent } from '.././app/components/register/register.component';
 import { AuthComponent } from '.././app/components/auth/auth.component';
 import { TermsComponent } from '.././app/components/terms/terms.component';
-import { NoAuthGuard } from './services/auth';
 import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
-import { AssociateLayoutComponent } from './shared/associate-layout/associate-layout.component';
+import { NoAuthGuard } from './_guards/no-auth-guard.service';
 var routes = [
-    //{ path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    //{ path: 'login', component: LoginComponent },
-    //{ path: 'register', component: RegisterComponent },
-    //// otherwise redirect to home
-    //{ path: '**', redirectTo: '' }
     {
         path: '',
         component: SharedLayoutComponent,
         children: [
             {
                 path: '',
-                component: HomeComponent
-                //,
-                //resolve: {
-                //    isAuthenticated: HomeAuthResolver
-                //}
+                component: HomeComponent,
+                canActivate: [NoAuthGuard]
             },
             {
                 path: 'login',
@@ -50,13 +43,6 @@ var routes = [
                 component: TermsComponent,
                 canActivate: [NoAuthGuard]
             }
-        ]
-    },
-    {
-        path: '',
-        component: AssociateLayoutComponent,
-        children: [
-            { path: 'associate', loadChildren: './associate/associate.module#AssociateModule' }
         ]
     }
 ];
