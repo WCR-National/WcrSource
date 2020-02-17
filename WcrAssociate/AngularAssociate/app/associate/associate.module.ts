@@ -12,6 +12,7 @@ import { AssociateRoutingModule } from './associate-routing.module';
 import { AssociateLayoutComponent } from './associate-layout';
 import { SidebarComponent } from './associate-sidebar';
 import { AssociateHeaderComponent } from './associate-header';
+import { DashboardService } from '../services/associate/dashboard.service';
 
 //import { CustomValidator } from './validators';
 
@@ -39,6 +40,7 @@ import { AssociateHeaderComponent } from './associate-header';
     providers: [
         ApiService,
         JwtService,
+        DashboardService,
         MessageService
     ]
 })

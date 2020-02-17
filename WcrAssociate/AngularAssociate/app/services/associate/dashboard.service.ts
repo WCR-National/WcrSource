@@ -28,40 +28,117 @@ export class DashboardService {
         private jwtService: JwtService = null,
         private router: Router) { }
 
-    attemptAssociateAccountExists(type, credentials): Observable<any> {
 
-        let urlToSignUp: string = "ws/AssociateRegistration.asmx/AssociateAccountExists";// + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
-        return this.apiService.post(urlToSignUp, { EmailID: credentials.email })
+
+    attemptToCountInterestedCustomers(): Observable<any> {
+
+        let urlToCountInterestedCustomers: string = "ws/Sale.asmx/CountTotalVisitors";
+        return this.apiService.post(urlToCountInterestedCustomers, {})
             .pipe(map(
                 data => {
-                    debugger;
-
-                    //if (data.d.length > 0) {
-                    //    this.user.email = credentials.email;
-                    //    this.user.password = credentials.password;
-                    //    this.user.token = this.token();
-                    //    this.setAuth(this.user);
-                    //}
                     return data;
                 }
             ));
+    } //interested consumer
 
-        //let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
-        //return this.apiService.post( urlToSignUp, {})
-        //    .pipe(map(
-        //        data => {
-        //            debugger;
+    attemptToCountAssociateCategories(): Observable<any> {
 
-        //            if (data > '0') {
-        //                this.user.email = credentials.email;
-        //                this.user.password = credentials.password;
-        //                this.user.token = this.token();
-        //                this.setAuth(this.user);
-        //            }
-        //            return data;
-        //        }
-        //    ));
-    }
+        let urlToCountAssociateCategories: string = "ws/Sale.asmx/CountAssociateCategories";
+        return this.apiService.post(urlToCountAssociateCategories, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    } //select categories
+
+    attemptToCountPurchasedCategories(): Observable<any> {
+
+        let urlToCountAssociateCategories: string = "ws/MyCategories.asmx/CountPurchasedCategories";
+        return this.apiService.post(urlToCountAssociateCategories, { jobtype:1 })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    } //purchase property listings
+
+    attemptToCountPurchaseZipCode(): Observable<any> {
+
+        let urlToCountPurchaseZipCode: string = "ws/MyCategories.asmx/CountPurchasedZipCode";
+        return this.apiService.post(urlToCountPurchaseZipCode, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    } //zip codes
+
+    attemptToCountAllPurchasedCategories(): Observable<any> {
+
+        let urlToCountAllPurchasedCategories: string = "ws/MyCategories.asmx/CountAllPurchasedCategories";
+        return this.apiService.post(urlToCountAllPurchasedCategories, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    } //all purchased categories
+
+
+
+    async attemptToZipcodeData() {
+
+        let urlToCountAllPurchasedCategories: string = "ws/MyCategories.asmx/MuPurchaseCategories";
+        return this.apiService.post(urlToCountAllPurchasedCategories, { 'JobType': '2' }).toPromise();
+    } //zip code data
+
+    async attemptToPropertyListingData() {
+
+        let urlToCountAllPurchasedCategories: string = "ws/MyCategories.asmx/AllPurchasedCategories";
+        return this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise();
+            //.pipe(map(
+            //    data => {
+            //        return data;
+            //    }
+            //));
+    } //categories data
+
+    async attemptToInterestedCustomerData() {
+
+        let urlToCountAllPurchasedCategories: string = "ws/Sale.asmx/GetVisitorsInfo";
+        return this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise();
+            //.pipe(map(
+            //    data => {
+            //        return data;
+            //    }
+            //));
+    } //interested consumer
+
+    async attemptToMyPropertyListingsData() {
+
+        let urlToCountAllPurchasedCategories: string = "ws/Sale.asmx/SelectAdvertisement";
+        return this.apiService.post(urlToCountAllPurchasedCategories, { Jobtype: 1 }).toPromise();
+            //.pipe(map(
+            //    data => {
+            //        return data;
+            //    }
+            //));
+    } //my property listings
+
+    async attemptToAllAdvertisement() {
+
+        let urlToCountAllPurchasedCategories: string = "ws/Sale.asmx/SelectAllAdvertisement";
+        return this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise();
+            //.pipe(map(
+            //    data => {
+            //        return data;
+            //    }
+            //));
+    } //All advertisement listings
+
+
+
 
     async attempConsumerAccountExists(type, credentials) {
 
@@ -74,7 +151,7 @@ export class DashboardService {
         //));
     }
 
-    
+
     validateEmail(email) {
 
         return this.apiService.get('ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email)

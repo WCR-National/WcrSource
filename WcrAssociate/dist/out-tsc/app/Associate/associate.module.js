@@ -12,6 +12,7 @@ import { AssociateRoutingModule } from './associate-routing.module';
 import { AssociateLayoutComponent } from './associate-layout';
 import { SidebarComponent } from './associate-sidebar';
 import { AssociateHeaderComponent } from './associate-header';
+import { DashboardService } from '../services/associate/dashboard.service';
 //import { CustomValidator } from './validators';
 //import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
 //import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
@@ -38,6 +39,7 @@ var AssociateModule = /** @class */ (function () {
             providers: [
                 ApiService,
                 JwtService,
+                DashboardService,
                 MessageService
             ]
         })

@@ -3,11 +3,14 @@ import { Component } from '@angular/core';
 var DashboardComponent = /** @class */ (function () {
     function DashboardComponent() {
     }
+    DashboardComponent.prototype.ngOnInit = function () {
+    };
     DashboardComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-dashboard-page',
             templateUrl: './dashboard.component.html'
-        })
+        }),
+        tslib_1.__metadata("design:paramtypes", [])
     ], DashboardComponent);
     return DashboardComponent;
 }());
