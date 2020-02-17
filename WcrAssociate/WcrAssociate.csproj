@@ -1904,6 +1904,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\shared\show-authed.directive.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\encrypt_decrypt.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\error.interceptor.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\_helpers\xml-to-json.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\fake-backend.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\index.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\jwt.interceptor.ts" />

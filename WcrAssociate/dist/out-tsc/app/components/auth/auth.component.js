@@ -469,14 +469,14 @@ var AuthComponent = /** @class */ (function () {
             .then(function (data) {
             if (data.d == "1") {
                 if ($(docs).find("Mobile").text() == '') {
-                    if (_this.returnUrl != '') {
-                        _this.router.navigate([_this.returnUrl]);
-                    }
-                    else {
-                        _this.router.navigateByUrl('/associate');
-                    }
+                    //if (this.returnUrl != '') {
+                    //    this.router.navigate([this.returnUrl]);
+                    //}
+                    //else {
+                    //    this.router.navigateByUrl('/associate');       
+                    //}
                     //this.router.navigateByUrl('/associate');       
-                    //$(location).attr('href', 'Associate/ViewProfile.aspx');
+                    $(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
                     _this.router.navigateByUrl('/associate/dashboard');
