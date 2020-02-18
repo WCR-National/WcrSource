@@ -27,6 +27,7 @@ import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.comp
 //import { SidebarComponent } from './shared/associate-sidebar';
 //import { AssociateHeaderComponent } from './shared/associate-header';
 import { AssociateModule } from './associate/associate.module';
+import { XMLToJSON } from './_helpers/xml-to-json';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -78,6 +79,7 @@ var AppModule = /** @class */ (function () {
                 User,
                 encrypt_decrypt,
                 MessageService,
+                XMLToJSON
             ],
             bootstrap: [AppComponent]
         })

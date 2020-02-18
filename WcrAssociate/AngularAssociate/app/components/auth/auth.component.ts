@@ -93,7 +93,8 @@ export class AuthComponent implements OnInit {
         //'loginCredentials': ''
     };
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder, private http: HttpClient
+    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder,
+        private http: HttpClient
     ) { }
 
     ngOnInit() {

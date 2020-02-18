@@ -1,135 +1,173 @@
 ﻿<div class="content-body content-body-profile">
     <div class="profile-sidebar">
+
         <div class="profile-sidebar-header">
-            <div class="avatar"><img src="https://via.placeholder.com/500/637382/fff" class="rounded-circle" alt=""></div>
+            <div class="avatar"><img src="{{profileImage}}" class="rounded-circle" alt=""></div>
             <h5>Abigail Johnson</h5>
-            <p>UI Developer (Savior of Mankind)</p>
-            <span>Bay Area, San Francisco, CA</span>
-            <div class="d-flex align-self-stretch mg-t-30">
-                <a href="" class="btn btn-brand-01 btn-sm btn-uppercase flex-fill">Follow</a>
-                <a href="" class="btn btn-white btn-sm btn-uppercase flex-fill mg-l-5">Message</a>
-            </div>
+
         </div><!-- profile-sidebar-header -->
+
         <div class="profile-sidebar-body">
-            <label class="content-label">Websites &amp; Social Channel</label>
-            <ul class="list-unstyled profile-info-list">
-                <li><i data-feather="globe"></i> <a href="">http://fenchiumao.me/</a></li>
-                <li><i data-feather="github"></i> <a href="">@fenchiumao</a></li>
-                <li><i data-feather="twitter"></i> <a href="">@fenmao</a></li>
-                <li><i data-feather="instagram"></i> <a href="">@fenchiumao</a></li>
-                <li><i data-feather="facebook"></i> <a href="">@fenchiumao</a></li>
-            </ul>
-            <hr class="mg-y-25">
+
             <label class="content-label">Contact Information</label>
             <ul class="list-unstyled profile-info-list mg-b-0">
-                <li><i data-feather="briefcase"></i> <span class="tx-color-03">Bay Area, San Francisco, CA</span></li>
-                <li><i data-feather="home"></i> <span class="tx-color-03">Westfield, Oakland, CA</span></li>
-                <li><i data-feather="smartphone"></i> <a href="">(+1) 012 345 6789</a></li>
-                <li><i data-feather="phone"></i> <a href="">(+1) 987 654 3201</a></li>
-                <li><i data-feather="mail"></i> <a href="">me@fenchiumao.me</a></li>
+                <li><i data-feather="home"></i> <span class="tx-color-03">{{FirstName}}</span></li>
+                <li><i data-feather="home"></i> <span class="tx-color-03">{{LastName}}</span></li>
+                <li><i data-feather="phone"></i> <a href="">{{PhoneNumber}}</a></li>
+                <li><i data-feather="mail"></i> <a href="">{{email}}</a></li>
+                <li><i data-feather="home"></i> <span class="tx-color-03">{{Password}}</span></li>
+                <li><i data-feather="home"></i> <span class="tx-color-03">{{LicenseNumber}}</span></li>
+                <li><i data-feather="home"></i> <span class="tx-color-03">{{IssuingState}}</span></li>
             </ul>
         </div><!-- profile-sidebar-body -->
     </div><!-- profile-sidebar -->
     <div class="profile-body">
         <div class="profile-body-header">
-            <div class="nav-wrapper">
-                <ul class="nav nav-line" id="profileTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="projects-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="projects" aria-selected="false">Projects</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="people-tab" data-toggle="tab" href="#people" role="tab" aria-controls="people" aria-selected="false">Connections</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
-                    </li>
-                </ul>
-            </div><!-- nav-wrapper -->
-        </div><!-- profile-body-header -->
-        <div class="tab-content pd-15 pd-sm-20">
-            <div id="overview" class="tab-pane active show">
-                <div class="stat-profile">
-                    <div class="stat-profile-body">
-                        <div class="row row-xs">
-                            <div class="col">
-                                <div class="card card-body pd-10 pd-md-15 bd-0 shadow-none bg-primary-light">
-                                    <h1 class="tx-light tx-sans tx-spacing--4 tx-primary mg-b-5">102</h1>
-                                    <p class="tx-13 tx-lg-14 tx-color-02 mg-b-0">Your profile visitors</p>
+            <div class="auth-page mg-b-60-force" [style.display]="edit ? 'display':'none'">
+                <div class="container page">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="text-xs-center"></h2>
+                        </div>
+
+                        <form [formGroup]="profileForm" autocomplete="off" class="pd-t-20">
+                            <fieldset [disabled]="isSubmitting">
+
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
+
+                                    <div class="col-sm-12 mg-b-20">
+                                        <input id="firstName" type="text" class="form-control pd-l-45-force" formControlName="firstName" placeholder="First Name" (blur)="logValidationErrors()" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="card card-body pd-10 pd-md-15 bd-0 shadow-none bg-teal-light">
-                                    <h1 class="mg-b-5 tx-sans tx-spacing--2 tx-light tx-teal">961</h1>
-                                    <p class="tx-13 tx-lg-14 tx-color-03 mg-b-0">Search appearances</p>
+
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.lastName}">
+
+                                    <div class="col-sm-12 mg-b-20">
+                                        <input id="lastName" type="text" class="form-control pd-l-45-force" formControlName="lastName" placeholder="Last Name" (blur)="logValidationErrors()" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col">
-                                <div class="card card-body pd-10 pd-md-15 bd-0 shadow-none bg-pink-light">
-                                    <h1 class="mg-b-5 tx-sans tx-spacing--2 tx-light tx-pink">665</h1>
-                                    <p class="tx-13 tx-lg-14 tx-color-03 mg-b-0">Your activity views</p>
+
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.email}">
+
+                                    <div class="col-sm-12 mg-b-20">
+                                        <input id="email" type="text" class="form-control pd-l-45-force" formControlName="email" placeholder="Email" (blur)="logValidationErrors()" />
+                                    </div>
                                 </div>
-                            </div>
-                        </div><!-- row -->
-                    </div><!-- stat-profile-body -->
-                </div><!-- stat-profile -->
-                <hr class="mg-y-15 op-0">
-                <label class="content-label content-label-lg mg-b-15 tx-color-01">Biography</label>
-                <p class="tx-color-03">Redhead, Innovator, Saviour of Mankind, Hopeless Romantic, Attractive 20-something Yogurt Enthusiast. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
-                <hr class="mg-y-15 op-0">
-                <label class="content-label content-label-lg mg-b-15 tx-color-01">Work Experience</label>
-                <ul class="list-unstyled media-list-profile">
-                    <li class="media">
-                        <div class="wd-40 ht-40 bg-teal op-5"></div>
-                        <div class="media-body">
-                            <h6 class="mg-b-5 tx-semibold">Themepixels, Inc. LTD</h6>
-                            <p class="tx-color-03 tx-13">January 2016 - Present</p>
-                            <p>An online-based high performing web and mobile development company, with a passion for making high quality web-based application and services for businesses and organization. </p>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="wd-40 ht-40 bg-primary op-5"></div>
-                        <div class="media-body">
-                            <h6 class="mg-b-5 tx-semibold">Berkeley Systems, Inc.</h6>
-                            <p class="tx-color-03 tx-13">December 2012 - November 2015</p>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="wd-40 ht-40 bg-pink op-5"></div>
-                        <div class="media-body">
-                            <h6 class="mg-b-5 tx-semibold">Berkeley Systems, Inc.</h6>
-                            <p class="tx-color-03 tx-13">December 2012 - November 2015</p>
-                        </div>
-                    </li>
-                </ul><!-- media-list-profile -->
-                <hr class="mg-y-15 op-0">
-                <label class="content-label content-label-lg mg-b-15 tx-color-01">Educational Background</label>
-                <ul class="list-unstyled media-list-profile">
-                    <li class="media">
-                        <div class="wd-40 ht-40 bg-gray-400"></div>
-                        <div class="media-body">
-                            <h6 class="mg-b-5 tx-semibold">Graduate in BS in Computer Science</h6>
-                            <p class="tx-color-03 tx-13">Hold Name University class 2006</p>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="wd-40 ht-40 bg-gray-400"></div>
-                        <div class="media-body">
-                            <h6 class="mg-b-5 tx-semibold">Sacred Heart Academy</h6>
-                            <p class="tx-color-03 tx-13">High school graduate class 2002</p>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <div class="wd-40 ht-40 bg-gray-400"></div>
-                        <div class="media-body">
-                            <h6 class="mg-b-5 tx-semibold">Loon Central Elementary School</h6>
-                            <p class="tx-color-03 tx-13">Elmentary graduate class 1998</p>
-                        </div>
-                    </li>
-                </ul>
+
+                                <div class="col-sm-12 pd-l-0-force pd-r-0-force">
+                                    <div class="form-group" [ngClass]="{'has-error': formErrors.password}">
+                                        <div class="col-sm-12  mg-b-20">
+                                            <input id="password" placeholder="Password" type="password" class=" form-control pd-l-45-force" [ngClass]="{'password': (authType == 'register')}" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
+                                                   autocomplete="new-password">
+                                            ss
+                                            i
+                                            <span class="large material-icons form-control-feedback icon">lock</span>
+
+                                            <!--<label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required')  ? 'text-danger' : 'text-success'">
+                                                <i class="material-icons">
+                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ? 'cancel' :  'check_circle' }}
+                                                </i>
+                                                Password is required
+                                            </label>-->
+
+                                            <div class="col-sm-12 pd-l-0" [style.display]="showErrorsPassword ? 'block':'none'">
+                                                <label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}
+                                                    </i>
+                                                    Must be at least 8 characters!
+                                                </label>
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}
+                                                    </i>
+                                                    Must be less than 20 characters!
+                                                </label>
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}
+                                                    </i>
+                                                    Must contain at least 1 number!
+                                                </label>
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}
+                                                    </i>
+                                                    Must contain at least 1 in Capital Case!
+                                                </label>
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}
+                                                    </i>
+                                                    Must contain at least 1 Letter in Small Case!
+                                                </label>
+
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
+                                                    </i>
+                                                    Must contain at least 1 Special Character!
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.phoneNo}">
+                                    <div class="col-sm-12 mg-b-20">
+                                        <input id="phoneNo" type="text" class="form-control pd-l-45-force" formControlName="phoneNo" placeholder="Phone Number" (blur)="logValidationErrors()" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.licenseId}">
+                                    <div class="col-sm-12 mg-b-20">
+                                        <input id="licenseId" type="text" class="form-control pd-l-45-force" formControlName="licenseId" placeholder="License Number" (blur)="logValidationErrors()" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.licenseState}">
+                                    <div class="col-sm-12 mg-b-20">
+                                        <input id="licenseState" type="text" class="form-control pd-l-45-force" formControlName="licenseState" placeholder="License State" (blur)="logValidationErrors()" />
+                                    </div>
+                                </div>
+
+
+                                <div class="col-sm-12 pd-l-0-force pd-r-0-force">
+                                    <div class="form-group">
+                                        <div class="col-sm-12 mg-b-20">
+                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit" [disabled]="!FormFilledSuccessfully">
+                                                <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitRegistrationForm()">UPDATE PROFILE</span>
+                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                    <div class="spinner-layer spinner-white-only">
+                                                        <div class="circle-clipper left">
+                                                            <div class="circle"></div>
+                                                        </div><div class="gap-patch">
+                                                            <div class="circle"></div>
+                                                        </div><div class="circle-clipper right">
+                                                            <div class="circle"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!--  -->
+
+
+                            </fieldset>
+                        </form>
+                    </div>
+
+                </div>
+
             </div>
-        </div><!-- tab-content -->
-    </div><!-- profile-body -->
-</div><!-- content-body -->
+
+        </div><!-- profile-body -->
+    </div><!-- content-body -->
+</div>

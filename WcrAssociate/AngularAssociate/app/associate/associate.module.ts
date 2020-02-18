@@ -13,6 +13,7 @@ import { AssociateLayoutComponent } from './associate-layout';
 import { SidebarComponent } from './associate-sidebar';
 import { AssociateHeaderComponent } from './associate-header';
 import { DashboardService } from '../services/associate/dashboard.service';
+import { ProfileService } from '../services/associate/Profile.service';
 
 //import { CustomValidator } from './validators';
 
@@ -41,6 +42,7 @@ import { DashboardService } from '../services/associate/dashboard.service';
         ApiService,
         JwtService,
         DashboardService,
+        ProfileService,
         MessageService
     ]
 })

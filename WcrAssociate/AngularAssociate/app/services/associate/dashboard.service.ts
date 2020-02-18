@@ -89,13 +89,13 @@ export class DashboardService {
 
     async attemptToZipcodeData() {
 
-        let urlToCountAllPurchasedCategories: string = "ws/MyCategories.asmx/MuPurchaseCategories";
+        let urlToCountAllPurchasedCategories: string = "Associate/ws/MyCategories.asmx/MuPurchaseCategories";
         return this.apiService.post(urlToCountAllPurchasedCategories, { 'JobType': '2' }).toPromise();
     } //zip code data
 
-    async attemptToPropertyListingData() {
+    async attemptToCategoriesData() {
 
-        let urlToCountAllPurchasedCategories: string = "ws/MyCategories.asmx/AllPurchasedCategories";
+        let urlToCountAllPurchasedCategories: string = "Associate/ws/MyCategories.asmx/AllPurchasedCategories";
         return this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise();
             //.pipe(map(
             //    data => {
@@ -106,8 +106,8 @@ export class DashboardService {
 
     async attemptToInterestedCustomerData() {
 
-        let urlToCountAllPurchasedCategories: string = "ws/Sale.asmx/GetVisitorsInfo";
-        return this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise();
+        let urlToGetVisitorsInfo: string = "Associate/ws/Sale.asmx/GetVisitorsInfo";
+        return this.apiService.post(urlToGetVisitorsInfo, {}).toPromise();
             //.pipe(map(
             //    data => {
             //        return data;
@@ -115,9 +115,20 @@ export class DashboardService {
             //));
     } //interested consumer
 
+    async attemptToInterestedCustomerServicesData() {
+
+        let urlToGetVisitorsInfoServices: string = "Associate/ws/Sale.asmx/GetVisitorsInfoServices";
+        return this.apiService.post(urlToGetVisitorsInfoServices, {}).toPromise();
+        //.pipe(map(
+        //    data => {
+        //        return data;
+        //    }
+        //));
+    } //interested consumer
+
     async attemptToMyPropertyListingsData() {
 
-        let urlToCountAllPurchasedCategories: string = "ws/Sale.asmx/SelectAdvertisement";
+        let urlToCountAllPurchasedCategories: string = "Associate/ws/Sale.asmx/SelectAdvertisement";
         return this.apiService.post(urlToCountAllPurchasedCategories, { Jobtype: 1 }).toPromise();
             //.pipe(map(
             //    data => {
@@ -128,7 +139,7 @@ export class DashboardService {
 
     async attemptToAllAdvertisement() {
 
-        let urlToCountAllPurchasedCategories: string = "ws/Sale.asmx/SelectAllAdvertisement";
+        let urlToCountAllPurchasedCategories: string = "Associate/ws/Sale.asmx/SelectAllAdvertisement";
         return this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise();
             //.pipe(map(
             //    data => {
@@ -142,7 +153,7 @@ export class DashboardService {
 
     async attempConsumerAccountExists(type, credentials) {
 
-        let urlToSignUp: string = "ws/AssociateRegistration.asmx/ConsumerAccountExists";// + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
+        let urlToSignUp: string = "Associate/ws/AssociateRegistration.asmx/ConsumerAccountExists";// + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
         return await this.apiService.post(urlToSignUp, { EmailID: credentials.email }).toPromise();
         //.pipe(map(
         //    data => {

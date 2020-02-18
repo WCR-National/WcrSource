@@ -517,7 +517,6 @@
                 }
             });
 
-
             $.ajax({
                 type: "POST", url: "../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails",
                 data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
@@ -552,6 +551,7 @@
                 }
             });
         });
+
         function Valid() {
             var minLength = 8;
             var maxLength = 20;
@@ -630,6 +630,7 @@
             }
             return returnValue;
         }
+
         function BindData() {
             $.ajax({
                 type: "POST", url: "../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails",

@@ -1865,6 +1865,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\associate\Profile.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\dashboard.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\api.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_guards\no-auth-guard.service.ts" />

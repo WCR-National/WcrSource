@@ -462,7 +462,8 @@
         }
         function CountInterestedConsumer() {
             $.ajax({
-                type: "POST", url: "ws/Sale.asmx/CountTotalVisitors", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                type: "POST", url: "ws/Sale.asmx/CountTotalVisitors", data: "{}", contentType: "application/json; charset=utf-8",
+                dataType: "json", async: false,
                 success: function (r) {
                     if (r.d.length > 0) {
                         var xmlDoc = $.parseXML(r.d);

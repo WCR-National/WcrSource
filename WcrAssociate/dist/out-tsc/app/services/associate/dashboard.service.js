@@ -23,34 +23,95 @@ var DashboardService = /** @class */ (function () {
         this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
         this.isAuthenticated_extra = false;
     }
-    DashboardService.prototype.attemptAssociateAccountExists = function (type, credentials) {
-        var urlToSignUp = "ws/AssociateRegistration.asmx/AssociateAccountExists"; // + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
-        return this.apiService.post(urlToSignUp, { EmailID: credentials.email })
+    DashboardService.prototype.attemptToCountInterestedCustomers = function () {
+        var urlToCountInterestedCustomers = "ws/Sale.asmx/CountTotalVisitors";
+        return this.apiService.post(urlToCountInterestedCustomers, {})
             .pipe(map(function (data) {
-            debugger;
-            //if (data.d.length > 0) {
-            //    this.user.email = credentials.email;
-            //    this.user.password = credentials.password;
-            //    this.user.token = this.token();
-            //    this.setAuth(this.user);
-            //}
             return data;
         }));
-        //let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateLog&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
-        //return this.apiService.post( urlToSignUp, {})
-        //    .pipe(map(
-        //        data => {
-        //            debugger;
-        //            if (data > '0') {
-        //                this.user.email = credentials.email;
-        //                this.user.password = credentials.password;
-        //                this.user.token = this.token();
-        //                this.setAuth(this.user);
-        //            }
-        //            return data;
-        //        }
-        //    ));
-    };
+    }; //interested consumer
+    DashboardService.prototype.attemptToCountAssociateCategories = function () {
+        var urlToCountAssociateCategories = "ws/Sale.asmx/CountAssociateCategories";
+        return this.apiService.post(urlToCountAssociateCategories, {})
+            .pipe(map(function (data) {
+            return data;
+        }));
+    }; //select categories
+    DashboardService.prototype.attemptToCountPurchasedCategories = function () {
+        var urlToCountAssociateCategories = "ws/MyCategories.asmx/CountPurchasedCategories";
+        return this.apiService.post(urlToCountAssociateCategories, { jobtype: 1 })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    }; //purchase property listings
+    DashboardService.prototype.attemptToCountPurchaseZipCode = function () {
+        var urlToCountPurchaseZipCode = "ws/MyCategories.asmx/CountPurchasedZipCode";
+        return this.apiService.post(urlToCountPurchaseZipCode, {})
+            .pipe(map(function (data) {
+            return data;
+        }));
+    }; //zip codes
+    DashboardService.prototype.attemptToCountAllPurchasedCategories = function () {
+        var urlToCountAllPurchasedCategories = "ws/MyCategories.asmx/CountAllPurchasedCategories";
+        return this.apiService.post(urlToCountAllPurchasedCategories, {})
+            .pipe(map(function (data) {
+            return data;
+        }));
+    }; //all purchased categories
+    DashboardService.prototype.attemptToZipcodeData = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToCountAllPurchasedCategories;
+            return tslib_1.__generator(this, function (_a) {
+                urlToCountAllPurchasedCategories = "ws/MyCategories.asmx/MuPurchaseCategories";
+                return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, { 'JobType': '2' }).toPromise()];
+            });
+        });
+    }; //zip code data
+    DashboardService.prototype.attemptToCategoriesData = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToCountAllPurchasedCategories;
+            return tslib_1.__generator(this, function (_a) {
+                urlToCountAllPurchasedCategories = "ws/MyCategories.asmx/AllPurchasedCategories";
+                return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise()];
+            });
+        });
+    }; //categories data
+    DashboardService.prototype.attemptToInterestedCustomerData = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToGetVisitorsInfo;
+            return tslib_1.__generator(this, function (_a) {
+                urlToGetVisitorsInfo = "ws/Sale.asmx/GetVisitorsInfo";
+                return [2 /*return*/, this.apiService.post(urlToGetVisitorsInfo, {}).toPromise()];
+            });
+        });
+    }; //interested consumer
+    DashboardService.prototype.attemptToInterestedCustomerServicesData = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToGetVisitorsInfoServices;
+            return tslib_1.__generator(this, function (_a) {
+                urlToGetVisitorsInfoServices = "ws/Sale.asmx/GetVisitorsInfoServices";
+                return [2 /*return*/, this.apiService.post(urlToGetVisitorsInfoServices, {}).toPromise()];
+            });
+        });
+    }; //interested consumer
+    DashboardService.prototype.attemptToMyPropertyListingsData = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToCountAllPurchasedCategories;
+            return tslib_1.__generator(this, function (_a) {
+                urlToCountAllPurchasedCategories = "ws/Sale.asmx/SelectAdvertisement";
+                return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, { Jobtype: 1 }).toPromise()];
+            });
+        });
+    }; //my property listings
+    DashboardService.prototype.attemptToAllAdvertisement = function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            var urlToCountAllPurchasedCategories;
+            return tslib_1.__generator(this, function (_a) {
+                urlToCountAllPurchasedCategories = "ws/Sale.asmx/SelectAllAdvertisement";
+                return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise()];
+            });
+        });
+    }; //All advertisement listings
     DashboardService.prototype.attempConsumerAccountExists = function (type, credentials) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToSignUp;

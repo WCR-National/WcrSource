@@ -44,14 +44,13 @@ export class DashboardComponent implements OnInit {
         this.attemptToCountAllPurchasedCategories();
 
 
-
-        this.attemptToZipcodeData();
-
-        this.attemptToPropertyListingData();
-
         this.attemptToInterestedCustomerData();
 
+        this.attemptToCategoriesData();
+
         this.attemptToMyPropertyListingsData();
+
+        this.attemptToZipcodeData();
 
         this.attemptToAllAdvertisement();
     }
@@ -182,6 +181,180 @@ export class DashboardComponent implements OnInit {
 
 
 
+    attemptToInterestedCustomerData() {
+        this.dashboardService
+            .attemptToInterestedCustomerData()
+            .then((data: any) => {
+                if (data.d.length > 0) {
+                    let added: Boolean = false;
+                    var xmlDoc = $.parseXML(data.d);
+                    var json = this.xmlToJson.xml2json(xmlDoc, "");
+                    var dataJson = JSON.parse(json);
+
+                    this.dashboardService
+                        .attemptToInterestedCustomerServicesData()
+                        .then((data: any) => {
+                            if (data.d.length > 0) {
+
+                                var xmlDoc = $.parseXML(data.d);
+                                var json = this.xmlToJson.xml2json(xmlDoc, "");
+
+                                var dataJsonServices = JSON.parse(json);
+                                $.each(dataJsonServices.InterestedConsumerser, function (i) {
+                                    dataJson.push(dataJsonServices[i]);
+                                });
+                                this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                                added = true;
+                            }
+                        });
+                    if (!added) {
+                        this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                    }
+                }
+            });
+    }
+
+    initialiseInterestedCustomerDataTable(asyncData) {
+        let dataTable: any = $('#interestedCustomers');
+
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                {
+                    title: 'Name',
+                    data: "name",
+                },
+                {
+                    title: 'Mobile',
+                    data: "Mob",
+                },
+                {
+                    title: 'Email',
+                    data: "EmailID",
+                },
+                {
+                    title: 'Title',
+                    data: "title",
+                },
+                {
+                    title: 'Category Name',
+                    data: "categoryName",
+                },
+                {
+                    title: 'Sub Category',
+                    data: "SubCategory",
+                },
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            order: [[1, 'asc']]
+        });
+
+    }
+
+
+    attemptToCategoriesData() {
+        this.dashboardService
+            .attemptToCategoriesData()
+            .then((data: any) => {
+                if (data.d.length > 0) {
+
+                    var xmlDoc = $.parseXML(data.d);
+                    var json = this.xmlToJson.xml2json(xmlDoc, "");
+                    var dataJson = JSON.parse(json);
+
+                    this.initialiseCategoriesDataTable(dataJson.AllPurCategories);
+                }
+            });
+    }
+
+    initialiseCategoriesDataTable(asyncData) {
+        let dataTable: any = $('#selectedCategories');
+
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                {
+                    title: 'Category/SubCategory',
+                    data: "categoryname/Name",
+                }
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            order: [[1, 'asc']]
+        });
+    }
+
+
+    attemptToMyPropertyListingsData() {
+
+        this.dashboardService
+            .attemptToMyPropertyListingsData()
+            .then((data: any) => {
+                if (data.d.length > 0) {
+
+                    var xmlDoc = $.parseXML(data.d);
+                    var json = this.xmlToJson.xml2json(xmlDoc, "");
+                    var dataJson = JSON.parse(json);
+
+                    this.initialiseMyPropertyListingsTable(dataJson.ViewAdvertisment);
+                }
+            });
+    }
+
+    initialiseMyPropertyListingsTable(asyncData) {
+
+        let dataTable: any = $('#myPropertyListings');
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                {
+                    title: 'S.N',
+                    data: "",
+                },
+                {
+                    title: 'title',
+                    data: "title",
+                },
+                {
+                    title: 'Category Name',
+                    data: "categoryname",
+                },
+                {
+                    title: 'Zip Code',
+                    data: "ZipCode",
+                },
+                {
+                    title: 'Category Name',
+                    data: "categoryName",
+                },
+                {
+                    title: 'Amount',
+                    data: "Amount",
+                },
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            order: [[1, 'asc']]
+        });
+        dataTable.on('order.dt search.dt', function () {
+            dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();
+
+    }
+
+
     attemptToZipcodeData() {
         this.dashboardService
             .attemptToZipcodeData()
@@ -192,59 +365,59 @@ export class DashboardComponent implements OnInit {
                     var json = this.xmlToJson.xml2json(xmlDoc, "");
                     var dataJson = JSON.parse(json);
 
-                    this.initialiseTable(dataJson);
-
-                    //chk = 1;
-                    //var xml = $(xmlDoc);
-                    //var docs = xml.find("PurCategories");
-                    //var cartd = [];
-                    //cartd.push("<table class='table table-condensed data-table' style='width:100%'>");
-                    //cartd.push("<tr>");
-                    //// cartd.push("<td style='color: white; background-color: skyblue' ><strong>S.N</strong></td>");
-                    //cartd.push("<th  style='width:80px;' class='uk-width-2-10 uk-text-center'> Zip Code </th>");
-                    //cartd.push("<th  class='uk-width-2-10 uk-text-center'> Category/SubCategory </th>");
-                    //cartd.push("<th  class='uk-width-2-10 uk-text-center'> Cost </th>");
-                    //cartd.push("</tr>");
-                    //// var cc = 0;
-                    //var count = 1;
-                    //var Totalamount = 0;
-                    //$.each(dataJson.PurCategories, function (i, docs) {
-                    //    cartd.push("<tr>");
-                    //    // cartd.push("<td class='uk-text-center'>" + count + "</td>");
-                    //    cartd.push("<td class='uk-text-center'> " + ($(docs).find("zipcode").text()) + " </td>");
-                    //    cartd.push("<td class='uk-text-center'> " + ($(docs).find("categoryname").text()) + "/" + ($(docs).find("Name").text()) + " </td>");
-                    //    cartd.push("<td class='uk-text-center'>$" + ($(docs).find("amount").text()) + " </td>");
-                    //    cartd.push("</tr>");
-                    //    count++;
-                    //    Totalamount += parseInt($(docs).find("amount").text());
-                    //});
-                    //cartd.push("<tr>");
-                    //cartd.push("<td class='uk-text-center total'> <strong> TOTAL </strong> </td>");
-                    //cartd.push("<td class='uk-text-center'>  </td>");
-                    //cartd.push("<td class='uk-text-center'><strong>  $" + Totalamount + " </strong> </td>");
-                    //cartd.push("</tr>");
-                    //cartd.push("</table>");
-                    //$("#divShowPostedAdvertisementsServices").html(cartd.join(''));
+                    this.initialiseTable(dataJson.PurCategories);
                 }
             });
+        //chk = 1;
+        //var xml = $(xmlDoc);
+        //var docs = xml.find("PurCategories");
+        //var cartd = [];
+        //cartd.push("<table class='table table-condensed data-table' style='width:100%'>");
+        //cartd.push("<tr>");
+        //// cartd.push("<td style='color: white; background-color: skyblue' ><strong>S.N</strong></td>");
+        //cartd.push("<th  style='width:80px;' class='uk-width-2-10 uk-text-center'> Zip Code </th>");
+        //cartd.push("<th  class='uk-width-2-10 uk-text-center'> Category/SubCategory </th>");
+        //cartd.push("<th  class='uk-width-2-10 uk-text-center'> Cost </th>");
+        //cartd.push("</tr>");
+        //// var cc = 0;
+        //var count = 1;
+        //var Totalamount = 0;
+        //$.each(dataJson.PurCategories, function (i, docs) {
+        //    cartd.push("<tr>");
+        //    // cartd.push("<td class='uk-text-center'>" + count + "</td>");
+        //    cartd.push("<td class='uk-text-center'> " + ($(docs).find("zipcode").text()) + " </td>");
+        //    cartd.push("<td class='uk-text-center'> " + ($(docs).find("categoryname").text()) + "/" + ($(docs).find("Name").text()) + " </td>");
+        //    cartd.push("<td class='uk-text-center'>$" + ($(docs).find("amount").text()) + " </td>");
+        //    cartd.push("</tr>");
+        //    count++;
+        //    Totalamount += parseInt($(docs).find("amount").text());
+        //});
+        //cartd.push("<tr>");
+        //cartd.push("<td class='uk-text-center total'> <strong> TOTAL </strong> </td>");
+        //cartd.push("<td class='uk-text-center'>  </td>");
+        //cartd.push("<td class='uk-text-center'><strong>  $" + Totalamount + " </strong> </td>");
+        //cartd.push("</tr>");
+        //cartd.push("</table>");
+        //$("#divShowPostedAdvertisementsServices").html(cartd.join(''));
+
     }
 
     initialiseTable(asyncData) {
-        let dataTable: any = $('#interestedCustomers');
+        let dataTable: any = $('#myZipCode');
 
         dataTable.DataTable({
             data: asyncData,
             columns: [
                 {
                     title: '',
-                    data: "count",
+                    data: "",
                 },
                 {
                     title: 'Zip Code',
                     data: "zipcode",
                 },
                 {
-                    title:'Category/SubCategory',
+                    title: 'Category Name',
                     data: "categoryname"
                 },
                 {
@@ -268,20 +441,11 @@ export class DashboardComponent implements OnInit {
 
     }
 
-    attemptToPropertyListingData() {
-
-    }
-
-    attemptToInterestedCustomerData() {
-
-    }
-
-    attemptToMyPropertyListingsData() {
-
-    }
 
     attemptToAllAdvertisement() {
 
 
     }
+
+
 }
