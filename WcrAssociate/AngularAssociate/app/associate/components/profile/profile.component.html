@@ -5,26 +5,35 @@
             <div class="avatar"><img src="{{profileImage}}" class="rounded-circle" alt=""></div>
             <h5>Abigail Johnson</h5>
 
+            <div id="status"></div>
+            <input id="profileImageId" type=file class="img-upload-input-bs" editor="#img-upload-panel" target="#image" status="#status" passurl="" pshape="circle" w=300 h=300 size="{150,150}" />
+            <img src="" alt="" id="image" />
+
         </div><!-- profile-sidebar-header -->
 
         <div class="profile-sidebar-body">
 
             <label class="content-label">Contact Information</label>
             <ul class="list-unstyled profile-info-list mg-b-0">
-                <li><i data-feather="home"></i> <span class="tx-color-03">{{FirstName}}</span></li>
-                <li><i data-feather="home"></i> <span class="tx-color-03">{{LastName}}</span></li>
-                <li><i data-feather="phone"></i> <a href="">{{PhoneNumber}}</a></li>
                 <li><i data-feather="mail"></i> <a href="">{{email}}</a></li>
-                <li><i data-feather="home"></i> <span class="tx-color-03">{{Password}}</span></li>
-                <li><i data-feather="home"></i> <span class="tx-color-03">{{LicenseNumber}}</span></li>
-                <li><i data-feather="home"></i> <span class="tx-color-03">{{IssuingState}}</span></li>
+                <li><i data-feather="Password"></i> <span class="tx-color-03">{{Password}}</span></li>
+            </ul>
+            <ul class="list-unstyled profile-info-list mg-b-0" [style.display]="(!isFormVisible) ? 'display':'none'">
+                <li><i data-feather="FirstName"></i> <span class="tx-color-03">{{FirstName}}</span></li>
+                <li><i data-feather="LastName"></i> <span class="tx-color-03">{{LastName}}</span></li>
+                <li><i data-feather="phone"></i> <a href="">{{PhoneNumber}}</a></li>
+                <li><i data-feather="LicenseNumber"></i> <span class="tx-color-03">{{LicenseNumber}}</span></li>
+                <li><i data-feather="IssuingState"></i> <span class="tx-color-03">{{IssuingState}}</span></li>
             </ul>
         </div><!-- profile-sidebar-body -->
     </div><!-- profile-sidebar -->
-    <div class="profile-body">
+
+
+    <div class="profile-body" [style.display]="isFormVisible ? 'display':'none'">
         <div class="profile-body-header">
             <div class="auth-page mg-b-60-force" [style.display]="edit ? 'display':'none'">
                 <div class="container page">
+
                     <div class="row">
                         <div class="col-sm-12">
                             <h2 class="text-xs-center"></h2>
@@ -32,6 +41,10 @@
 
                         <form [formGroup]="profileForm" autocomplete="off" class="pd-t-20">
                             <fieldset [disabled]="isSubmitting">
+
+                                <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
+                                    {{formError}}
+                                </div>
 
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
 
@@ -59,8 +72,6 @@
                                         <div class="col-sm-12  mg-b-20">
                                             <input id="password" placeholder="Password" type="password" class=" form-control pd-l-45-force" [ngClass]="{'password': (authType == 'register')}" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
                                                    autocomplete="new-password">
-                                            ss
-                                            i
                                             <span class="large material-icons form-control-feedback icon">lock</span>
 
                                             <!--<label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required')  ? 'text-danger' : 'text-success'">
@@ -134,7 +145,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-sm-12 pd-l-0-force pd-r-0-force">
                                     <div class="form-group">
                                         <div class="col-sm-12 mg-b-20">
@@ -158,16 +168,45 @@
                                 </div>
 
                                 <!--  -->
-
-
                             </fieldset>
                         </form>
                     </div>
 
                 </div>
-
             </div>
-
         </div><!-- profile-body -->
     </div><!-- content-body -->
+
+    <div class="modal fade" id="img-upload-panel">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Upload Profile Photo</h4>
+                    <button type="button" class="img-remove-btn-bs close">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row container">
+                        <div class="col">
+                            <div class="img-edit-container"></div>
+                        </div>
+                    </div>
+                    <!--<div class="row container">
+                        <div class="col">
+                            <label>Brightness</label>
+                            <input type="range" class="form-control-range filter" min=0 max=200 value=100 step=1 filter="brightness" />
+                        </div>
+                        <div class="col">
+                            <label>Threshold</label>
+                            <input type="range" class="form-control-range filter" min=0 max=200 value=100 step=1 filter="threshold" />
+                        </div>
+                    </div>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary img-remove-btn-bs">Close</button>
+                    <button type="button" class="btn btn-primary img-upload-btn-bs" (click)="submitImage()">Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -127,6 +127,7 @@
     <Content Include="AngularAssociate\app\shared\layout\header.component.html" />
     <Content Include="AngularAssociate\assets\associate\css\all.min.css" />
     <Content Include="AngularAssociate\assets\associate\css\cassie.css" />
+    <Content Include="AngularAssociate\assets\associate\css\croppie.css" />
     <Content Include="AngularAssociate\assets\associate\css\docs.css" />
     <Content Include="AngularAssociate\assets\associate\css\landing.css" />
     <Content Include="AngularAssociate\assets\associate\css\skin.three.css" />
@@ -141,6 +142,8 @@
     <Content Include="AngularAssociate\assets\fonts\simple-line-icons.svg" />
     <Content Include="AngularAssociate\assets\icons.css" />
     <Content Include="AngularAssociate\assets\images\background.jpg" />
+    <Content Include="AngularAssociate\assets\js\croppie.min.js" />
+    <Content Include="AngularAssociate\assets\js\imguploader.js" />
     <Content Include="AngularAssociate\assets\js\xml2json.js" />
     <Content Include="AngularAssociate\assets\js\materialize.min.js" />
     <Content Include="AngularAssociate\assets\style.css" />

@@ -12,6 +12,7 @@
           <script src="js/bootstrap.min.js"></script>       
    
       <div>
+
         <div class="modal fade small-model" id="success-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -28,6 +29,7 @@
                 </div>
             </div>
         </div>
+
         <div class="modal fade small-model" id="fail_message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -44,7 +46,8 @@
                 </div>
             </div>
         </div>
-    </div>
+
+     </div>
 
 
     <div class="row">
@@ -74,6 +77,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="full-row custome-block">
                 <h3 class="page-subtitle page-title-bg-primary text-uppercase">Sales  </h3>
                 <div class="table-responsive grid-block data-table">
@@ -81,6 +85,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="full-row custome-block">
                 <h3 class="page-subtitle text-uppercase page-title-bg-secondary">Services  </h3>
                 <div class="table-responsive grid-block data-table">
@@ -88,8 +93,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -129,6 +136,7 @@
                 window.location.reload();
             });
         });
+
         function CountInterestedConsumerSales() {
             $.ajax({
                 type: "POST", url: "ws/Sale.asmx/CountTotalVisitorsSales", data: "{'jobtype':'1'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
@@ -175,7 +183,6 @@
             });
         }
 
-
         function CountInterestedConsumer() {
             $.ajax({
                 type: "POST", url: "ws/Sale.asmx/CountTotalVisitors", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
@@ -198,7 +205,6 @@
                 }
             });
         }
-
 
         function BindData() {
             $.ajax({
@@ -278,6 +284,7 @@
                 }
             });
         }
+
         function PermananetlyRemove(rrr) {
             if (confirm("Are you sure? you want to Permanent Delete Record.")) {
             $.ajax({
@@ -296,5 +303,6 @@
             });
             }
         }
+
     </script>
 </asp:Content>

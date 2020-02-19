@@ -29,8 +29,10 @@ export class ProfileComponent implements OnInit {
     Password:       string;
     LicenseNumber:   string;
     IssuingState:   string;
-    profileImage:   string;
+    profileImage: string;
+    isFormVisible: boolean = true;
     profileForm: FormGroup;
+    formError: string;
 
     validationMessages = {
         'password': {
@@ -84,7 +86,9 @@ export class ProfileComponent implements OnInit {
                         var docs = xml.find("ViewAssociateBasicDetail");
                         $.each(docs, function (i, docs) {
 
-
+                            if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
+                                thisStatus.isFormVisible = false;
+                            }
                             thisStatus.FirstName = $(docs).find("FullName").text();
                             thisStatus.LastName = $(docs).find("LastName").text();
                             thisStatus.UserName = $(docs).find("UserName").text();
@@ -151,10 +155,7 @@ export class ProfileComponent implements OnInit {
                             }
                         }
                     }
-                    //if (key == "password") {
-                    //}
                 }
-
             }
 
             if (abstractControl instanceof FormGroup) {
@@ -169,20 +170,42 @@ export class ProfileComponent implements OnInit {
             .subscribe(
                 data => {
                     if (data.d == "1") {
-                        //upload file
+                        this.isFormVisible = false;
+                        this.getUserDetails();
+                        //hide the form and show the text only
+                        //set the sidebar values
                     }
                     if (data.d == "0") {
-                        $("#lblFailureTitle").text("Unsuccessfull!!!");
-                        $("#lblFailureDetail").text("This Email Id or User name or Mobile No Already Exists! Please Try another one.");
-                        //$('#fail_message').modal('show');
+                        this.formError = "Unsuccessfull!!! <br>This Email Id or User name or Mobile No Already Exists! Please Try another one.";
                     }
                     if (data.d == "-1") {
-                        $("#lblFailureTitle").text("Unsuccessfull!!!");
-                        $("#lblFailureDetail").text("This Email Id or User name or Mobile No Already Exists! Please Try another one.");
+                        this.formError = "Unsuccessfull!!! <br>This Email Id or User name or Mobile No Already Exists! Please Try another one.";
                         //$('#fail_message').modal('show');
                     }
                     //on return stat
                 });
+    }
+    submitImage() {
+        var fileUpload: any = $("#profileImageId").get(0);
+        var files = fileUpload.files;
+        //image resize code here
+        var image: any = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            image.append(files[i].name, files[i]);
+        }
+
+        this.profileService
+            .uploadimage(image)
+            .subscribe(
+                data => {
+                    this.profileImage = URL.createObjectURL(files[0]);
+                    this.formError = "Your profile has been updated Successfully.";
+                });
+        
+    }
+
+    cancelForm() {
+        this.isFormVisible = false;
     }
 }
 

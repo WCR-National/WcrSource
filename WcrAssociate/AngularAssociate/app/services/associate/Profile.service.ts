@@ -62,5 +62,17 @@ export class ProfileService {
                 }
             ));
     }
+
+    uploadimage(image) {
+        //
+        
+        let urlToUploadImage: string = "ws/UpdatePic.ashx";
+        return this.apiService.post(urlToUploadImage, { data: image })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
     
 }
