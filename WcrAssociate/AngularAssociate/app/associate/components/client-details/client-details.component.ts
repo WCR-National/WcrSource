@@ -23,9 +23,9 @@ import { ClientDetailsService } from 'AngularAssociate/app/services/associate/cl
 })
 export class ClientDetailsComponent implements OnInit {
 
-    interestedCustomers: string = '';
-    selectedCategories: string = '';
-    myPropertyListings: string = '';
+    salesCount: string = '';
+    servicesCount: string = '';
+    TotalCount: string = '';
     constructor(private route: ActivatedRoute, private router: Router, private dashboardService: ClientDetailsService, private xmlToJson: XMLToJSON) {
 
     }
@@ -50,24 +50,203 @@ export class ClientDetailsComponent implements OnInit {
     }
 
     getSalesCount() {
+        this.dashboardService
+            .getSalesCount()
+            .subscribe(
+                data => {
+                    let countInterestedCutomers: string = '0';
+                    if (data.d.length > 0) {
 
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("TotalInterestedConsumers");
+                        var cartd = [];
+                        $.each(docs, function (i, docs) {
+
+                            countInterestedCutomers = $(docs).find("TotalCount").text();
+                        });
+                        //$("#interestedConsumer").html(cartd.join(''));
+                        this.salesCount = countInterestedCutomers;
+
+                    } else {
+                        this.salesCount = countInterestedCutomers;
+                    }
+                });
     }
     
     getTotalSalesAndServicesCount() {
+        this.dashboardService
+            .getServicesCount()
+            .subscribe(
+                data => {
+                    let countInterestedCutomers: string = '0';
+                    if (data.d.length > 0) {
 
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("TotalInterestedConsumers");
+                        var cartd = [];
+                        $.each(docs, function (i, docs) {
+
+                            countInterestedCutomers = $(docs).find("TotalCount").text();
+                        });
+                        //$("#interestedConsumer").html(cartd.join(''));
+                        this.servicesCount = countInterestedCutomers;
+
+                    } else {
+                        this.servicesCount = countInterestedCutomers;
+                    }
+                });
     }
 
 
     getClientDetailsSalesData() {
+        //sales
+        //getClientDetailsSalesData
+        this.dashboardService
+            .getClientDetailsSalesData()
+            .subscribe(
+                data => {
+                    let countInterestedCutomers: string = '0';
+                    if (data.d.length > 0) {
 
+                        var xmlDoc = $.parseXML(data.d);
+                        var json = this.xmlToJson.xml2json(xmlDoc, "");
+                        var dataJson = JSON.parse(json);
+
+                        this.initializedDataTableSales(dataJson.InterestedConsumer);
+                    } 
+                });
+    }
+
+    initializedDataTableSales(asyncData) {
+        let dataTable: any = $('#sales');
+        let thisStatus: any = this;
+
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                { data: 'id', "visible": false },
+                {
+                    title: 'Name',
+                    data: "name",
+                },
+                {
+                    title: 'Phone no',
+                    data: "Mob",
+                },
+                {
+                    title: 'Email',
+                    data: "EmailID",
+                },
+                {
+                    title: 'Title',
+                    data: "title",
+                },
+                {
+                    title: 'Category Name',
+                    data: "categoryName",
+                },
+                {
+                    title: 'Sub Category',
+                    data: "SubCategory",
+                },
+                {
+                    "mRender": function (data, type, row) {
+                        return '<i"' + thisStatus.deleteCustomerRecords(row[0]) + '">edit</>';
+                    }
+                }
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            order: [[1, 'asc']]
+        });
     }
 
     getClientDetailsServicesData() {
+        //services
+        this.dashboardService
+            .getClientDetailsServicesData()
+            .subscribe(
+                data => {
+                    if (data.d.length > 0) {
 
+                        var xmlDoc = $.parseXML(data.d);
+                        var json = this.xmlToJson.xml2json(xmlDoc, "");
+                        var dataJson = JSON.parse(json);
+
+                        this.initializedDataTableServices(dataJson.InterestedConsumerser);
+                    }
+                });
     }
 
-    deleteCustomerRecords() {
+    initializedDataTableServices(asyncData) {
+        let dataTable: any = $('#sales');
+        let thisStatus: any = this;
+        //cartd.push("<td>" + ($(docs1).find("name").text() + " </td>"));
+        //cartd.push("<td>" + ($(docs1).find("Mob").text() + " </td>"));
+        //cartd.push("<td class=''>" + ($(docs1).find("EmailID").text() + " </td>"));
+        //cartd.push("<td>" + ($(docs1).find("zipcode").text() + " </td>"));
+        //cartd.push("<td class='text-heighlight'>" + $(docs1).find("categoryName").text() + " </td>");
 
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                { data: 'id', "visible": false},
+                {
+                    title: 'Name',
+                    data: "name",
+                },
+                {
+                    title: 'Phone no',
+                    data: "Mob",
+                },
+                {
+                    title: 'Email',
+                    data: "EmailID",
+                },
+                {
+                    title: 'Zip Code',
+                    data: "zipcode",
+                },
+                {
+                    title: 'Category Name',
+                    data: "categoryName",
+                },
+                {
+                    "mRender": function (data, type, row) {
+                        return '<i"' + thisStatus.deleteCustomerRecords(row[0]) + '">edit</>';
+                    }
+                }
+            ],
+            "columnDefs": [{
+                "searchable": false,
+                "orderable": false,
+                "targets": 0
+            }],
+            order: [[1, 'asc']]
+        });
+    }
+
+
+    deleteCustomerRecords(id) {
+        //services
+        this.dashboardService
+            .deleteCustomerRecords(id)
+            .subscribe(
+                data => {
+                    if (data.d.length > 0) {
+
+                        var xmlDoc = $.parseXML(data.d);
+                        var json = this.xmlToJson.xml2json(xmlDoc, "");
+                        var dataJson = JSON.parse(json);
+
+                        this.initializedDataTableServices(dataJson.InterestedConsumerser);
+                    }
+                });
     }
 
 
