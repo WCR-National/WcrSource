@@ -32,7 +32,7 @@ export class DashboardService {
 
     attemptToCountInterestedCustomers(): Observable<any> {
 
-        let urlToCountInterestedCustomers: string = "ws/Sale.asmx/CountTotalVisitors";
+        let urlToCountInterestedCustomers: string = "Associate/ws/Sale.asmx/CountTotalVisitors";
         return this.apiService.post(urlToCountInterestedCustomers, {})
             .pipe(map(
                 data => {
@@ -43,7 +43,7 @@ export class DashboardService {
 
     attemptToCountAssociateCategories(): Observable<any> {
 
-        let urlToCountAssociateCategories: string = "ws/Sale.asmx/CountAssociateCategories";
+        let urlToCountAssociateCategories: string = "Associate/ws/Sale.asmx/CountAssociateCategories";
         return this.apiService.post(urlToCountAssociateCategories, {})
             .pipe(map(
                 data => {
@@ -54,7 +54,7 @@ export class DashboardService {
 
     attemptToCountPurchasedCategories(): Observable<any> {
 
-        let urlToCountAssociateCategories: string = "ws/MyCategories.asmx/CountPurchasedCategories";
+        let urlToCountAssociateCategories: string = "Associate/ws/MyCategories.asmx/CountPurchasedCategories";
         return this.apiService.post(urlToCountAssociateCategories, { jobtype:1 })
             .pipe(map(
                 data => {
@@ -65,7 +65,7 @@ export class DashboardService {
 
     attemptToCountPurchaseZipCode(): Observable<any> {
 
-        let urlToCountPurchaseZipCode: string = "ws/MyCategories.asmx/CountPurchasedZipCode";
+        let urlToCountPurchaseZipCode: string = "Associate/ws/MyCategories.asmx/CountPurchasedZipCode";
         return this.apiService.post(urlToCountPurchaseZipCode, {})
             .pipe(map(
                 data => {
@@ -76,7 +76,7 @@ export class DashboardService {
 
     attemptToCountAllPurchasedCategories(): Observable<any> {
 
-        let urlToCountAllPurchasedCategories: string = "ws/MyCategories.asmx/CountAllPurchasedCategories";
+        let urlToCountAllPurchasedCategories: string = "Associate/ws/MyCategories.asmx/CountAllPurchasedCategories";
         return this.apiService.post(urlToCountAllPurchasedCategories, {})
             .pipe(map(
                 data => {

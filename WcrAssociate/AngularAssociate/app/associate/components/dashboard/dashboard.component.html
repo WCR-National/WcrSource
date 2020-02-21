@@ -64,23 +64,44 @@
 
     </div><!-- row -->
 
-    <div class="row row-sm">
+    <div class="row row-sm mg-t-50">
         <div class="col-sm-12 col-xl">
             <div class="card card-hover card-social-one">
                 <div class="card-body">
                     <h5 class="card-title tx-primary">My Clients</h5>
-                    <div id="interestedCustomers" class="col-sm-12" #tableInterestedCustomers></div>
+                    <div class="col-sm-12" #tableInterestedCustomers>
+                        <table id="interestedCustomers" class="table table-bordered">
+                            <thead>
+                                <tr> 
+                                    <th>Name</th>
+                                    <th>Mobile No</th>
+                                    <th>Email</th>
+                                    <th>Title</th>
+                                    <th>Category Name</th>
+                                    <th>SubCategory</th>
+                                </tr>
+                            </thead>
+                        </table>  
+                    </div>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div>
     </div>
 
-    <div class="row row-sm">
+    <div class="row row-sm mg-t-50">
         <div class="col-sm-3 col-xl">
             <div class="card card-hover card-social-one">
                 <div class="card-body">
                     <h5 class="card-title tx-primary">Selected Categories</h5>
-                    <div id="selectedCategories" class="col-sm-12" #tableSelectedCategories></div>
+                    <div  class="col-sm-12" #tableSelectedCategories>
+                        <table id="selectedCategories" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Category/SubCategory</th>
+                                </tr>
+                            </thead>
+                        </table>  
+                    </div>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div>
@@ -89,7 +110,19 @@
             <div class="card card-hover card-social-one">
                 <div class="card-body">
                     <h5 class="card-title tx-primary">My Property Listings</h5>
-                    <div id="myPropertyListings" class="col-sm-12" #tableMyPropertyListings></div>
+                    <div class="col-sm-12" #tableMyPropertyListings>
+                        <table id="myPropertyListings" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>S.N</th>
+                                    <th>Title</th>
+                                    <th>Category Name</th>
+                                    <th>Zip Code</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div>
@@ -98,65 +131,20 @@
             <div class="card card-hover card-social-one">
                 <div class="card-body">
                     <h5 class="card-title tx-primary">My Zip Codes</h5>
-                    <div id="myZipCode" class="col-sm-12" #tableMyZipCodes></div>
+                    <div  class="col-sm-12" #tableMyZipCodes>
+                        <table id="myZipCode" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Zip Code</th>
+                                    <th>category Name</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div>
     </div>
 
-
-    <div class="row row-sm mg-t-15 mg-sm-t-20">
-        <div class="col-sm-6 col-xl-4">
-            <div class="card card-hover card-profile-three">
-                <div class="card-body">
-                    <div class="avatar avatar-online avatar-xxl mg-b-20"><img src="https://via.placeholder.com/500/637382/fff" class="rounded-circle" alt=""></div>
-                    <h5 class="profile-name"><a href="">Pepper Xo</a></h5>
-                    <p class="profile-position">UI/UX Designer</p>
-                    <nav class="nav mg-b-15">
-                        <a href="" class="badge badge-primary-light">HTML5</a>
-                        <a href="" class="badge badge-success-light">CSS3</a>
-                        <a href="" class="badge badge-warning-light">Javascript</a>
-                        <a href="" class="badge badge-danger-light">React</a>
-                        <a href="" class="badge badge-white">4+</a>
-                    </nav>
-                    <p class="profile-bio">Explorer. Bacon fanatic. Communicator. Analyst. Student. Social media advocate. Lifelong zombie guru. Gamer. Internet enthusiast.</p>
-                </div><!-- card-body -->
-                <div class="card-footer row no-gutters">
-                    <div class="col">
-                        <a href=""><i data-feather="message-square" class="svg-14"></i> Message</a>
-                    </div>
-                    <div class="col bd-l">
-                        <a href=""><i data-feather="user" class="svg-14"></i> View Profile</a>
-                    </div>
-                </div><!-- card-footer -->
-            </div><!-- card -->
-        </div><!-- col -->
-        <div class="col-sm-6 col-xl-4 mg-t-15 mg-sm-t-0">
-            <div class="card card-hover card-profile-three">
-                <div class="card-body">
-                    <div class="avatar avatar-online avatar-xxl mg-b-20"><img src="https://via.placeholder.com/500/637382/fff" class="rounded-circle" alt=""></div>
-                    <h5 class="profile-name"><a href="">Jillian Janson</a></h5>
-                    <p class="profile-position">UI/UX Designer</p>
-                    <nav class="nav mg-b-15">
-                        <a href="" class="badge badge-primary">HTML5</a>
-                        <a href="" class="badge badge-success">CSS3</a>
-                        <a href="" class="badge badge-warning">Javascript</a>
-                        <a href="" class="badge badge-danger">React</a>
-                        <a href="" class="badge badge-white">4+</a>
-                    </nav>
-                    <p class="profile-bio">Explorer. Bacon fanatic. Communicator. Analyst. Student. Social media advocate. Lifelong zombie guru. Gamer. Internet enthusiast.</p>
-                </div><!-- card-body -->
-                <div class="card-footer row no-gutters">
-                    <div class="col">
-                        <a href=""><i data-feather="message-square" class="svg-14"></i> Message</a>
-                    </div>
-                    <div class="col bd-l">
-                        <a href=""><i data-feather="user" class="svg-14"></i> View Profile</a>
-                    </div>
-                </div><!-- card-footer -->
-            </div><!-- card -->
-        </div><!-- col -->
-        <div class="col-sm-6 col-xl-4">
-        </div><!-- col -->
-    </div><!-- row -->
 </div><!-- content-body -->

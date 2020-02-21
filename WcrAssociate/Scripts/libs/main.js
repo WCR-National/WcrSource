@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./AngularAssociate/$$_lazy_route_resource lazy re
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n                <li class=\"breadcrumb-item active\" aria-current=\"page\">Events &amp; Social Media</li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Welcome to Dashboard</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{interestedCustomers}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <p class=\"card-desc\">Total number of interested customers.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{selectedCategories}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Selected Categories</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Total number of categories selected.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myPropertyListings}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Property Listings</h5>\r\n                    <p class=\"card-desc\">Total number of current Property Listings.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"ZipCodePurchase.aspx\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myZipCodes}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Zip Codes</h5>\r\n                    <p class=\"card-desc\">Total number of zip codes.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <div id=\"interestedCustomers\" class=\"col-sm-12\" #tableInterestedCustomers></div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-3 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Selected Categories</h5>\r\n                    <div id=\"selectedCategories\" class=\"col-sm-12\" #tableSelectedCategories></div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-5 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Property Listings</h5>\r\n                    <div id=\"myPropertyListings\" class=\"col-sm-12\" #tableMyPropertyListings></div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Zip Codes</h5>\r\n                    <div id=\"myZipCode\" class=\"col-sm-12\" #tableMyZipCodes></div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <div class=\"row row-sm mg-t-15 mg-sm-t-20\">\r\n        <div class=\"col-sm-6 col-xl-4\">\r\n            <div class=\"card card-hover card-profile-three\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"avatar avatar-online avatar-xxl mg-b-20\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                    <h5 class=\"profile-name\"><a href=\"\">Pepper Xo</a></h5>\r\n                    <p class=\"profile-position\">UI/UX Designer</p>\r\n                    <nav class=\"nav mg-b-15\">\r\n                        <a href=\"\" class=\"badge badge-primary-light\">HTML5</a>\r\n                        <a href=\"\" class=\"badge badge-success-light\">CSS3</a>\r\n                        <a href=\"\" class=\"badge badge-warning-light\">Javascript</a>\r\n                        <a href=\"\" class=\"badge badge-danger-light\">React</a>\r\n                        <a href=\"\" class=\"badge badge-white\">4+</a>\r\n                    </nav>\r\n                    <p class=\"profile-bio\">Explorer. Bacon fanatic. Communicator. Analyst. Student. Social media advocate. Lifelong zombie guru. Gamer. Internet enthusiast.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer row no-gutters\">\r\n                    <div class=\"col\">\r\n                        <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> Message</a>\r\n                    </div>\r\n                    <div class=\"col bd-l\">\r\n                        <a href=\"\"><i data-feather=\"user\" class=\"svg-14\"></i> View Profile</a>\r\n                    </div>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4 mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-profile-three\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"avatar avatar-online avatar-xxl mg-b-20\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n                    <h5 class=\"profile-name\"><a href=\"\">Jillian Janson</a></h5>\r\n                    <p class=\"profile-position\">UI/UX Designer</p>\r\n                    <nav class=\"nav mg-b-15\">\r\n                        <a href=\"\" class=\"badge badge-primary\">HTML5</a>\r\n                        <a href=\"\" class=\"badge badge-success\">CSS3</a>\r\n                        <a href=\"\" class=\"badge badge-warning\">Javascript</a>\r\n                        <a href=\"\" class=\"badge badge-danger\">React</a>\r\n                        <a href=\"\" class=\"badge badge-white\">4+</a>\r\n                    </nav>\r\n                    <p class=\"profile-bio\">Explorer. Bacon fanatic. Communicator. Analyst. Student. Social media advocate. Lifelong zombie guru. Gamer. Internet enthusiast.</p>\r\n                </div><!-- card-body -->\r\n                <div class=\"card-footer row no-gutters\">\r\n                    <div class=\"col\">\r\n                        <a href=\"\"><i data-feather=\"message-square\" class=\"svg-14\"></i> Message</a>\r\n                    </div>\r\n                    <div class=\"col bd-l\">\r\n                        <a href=\"\"><i data-feather=\"user\" class=\"svg-14\"></i> View Profile</a>\r\n                    </div>\r\n                </div><!-- card-footer -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-6 col-xl-4\">\r\n        </div><!-- col -->\r\n    </div><!-- row -->\r\n</div><!-- content-body -->"
+module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n                <li class=\"breadcrumb-item active\" aria-current=\"page\">Events &amp; Social Media</li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Welcome to Dashboard</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{interestedCustomers}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <p class=\"card-desc\">Total number of interested customers.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{selectedCategories}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Selected Categories</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Total number of categories selected.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myPropertyListings}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Property Listings</h5>\r\n                    <p class=\"card-desc\">Total number of current Property Listings.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"ZipCodePurchase.aspx\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myZipCodes}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Zip Codes</h5>\r\n                    <p class=\"card-desc\">Total number of zip codes.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm mg-t-50\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <div class=\"col-sm-12\" #tableInterestedCustomers>\r\n                        <table id=\"interestedCustomers\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr> \r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm mg-t-50\">\r\n        <div class=\"col-sm-3 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Selected Categories</h5>\r\n                    <div  class=\"col-sm-12\" #tableSelectedCategories>\r\n                        <table id=\"selectedCategories\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Category/SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-5 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Property Listings</h5>\r\n                    <div class=\"col-sm-12\" #tableMyPropertyListings>\r\n                        <table id=\"myPropertyListings\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>S.N</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>Zip Code</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Zip Codes</h5>\r\n                    <div  class=\"col-sm-12\" #tableMyZipCodes>\r\n                        <table id=\"myZipCode\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Zip Code</th>\r\n                                    <th>category Name</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n</div><!-- content-body -->"
 
 /***/ }),
 
@@ -72,15 +72,16 @@ var DashboardComponent = /** @class */ (function () {
         this.myZipCodes = '';
     }
     DashboardComponent.prototype.ngOnInit = function () {
+        debugger;
         this.attemptToCountInterestedCustomers();
         this.attemptToCountAssociateCategories();
         this.attemptToCountPurchasedCategories("1");
         this.attemptToCountPurchaseZipCode();
         this.attemptToCountAllPurchasedCategories();
-        //this.attemptToInterestedCustomerData();
-        //this.attemptToCategoriesData();
-        //this.attemptToMyPropertyListingsData();
-        //this.attemptToZipcodeData();
+        this.attemptToInterestedCustomerData();
+        this.attemptToCategoriesData();
+        this.attemptToMyPropertyListingsData();
+        this.attemptToZipcodeData();
         this.attemptToAllAdvertisement();
     };
     DashboardComponent.prototype.attemptToCountInterestedCustomers = function () {
@@ -169,11 +170,11 @@ var DashboardComponent = /** @class */ (function () {
                 jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs, function (i, docs) {
                     CountPurchasedZipcodes = (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Total").text());
                 });
-                _this.myPropertyListings = CountPurchasedZipcodes;
+                _this.myZipCodes = CountPurchasedZipcodes;
                 //$("#divServicesCount").html(cartd.join(''));
             }
             else {
-                _this.myPropertyListings = CountPurchasedZipcodes;
+                _this.myZipCodes = CountPurchasedZipcodes;
             }
         });
     };
@@ -198,236 +199,239 @@ var DashboardComponent = /** @class */ (function () {
             }
         });
     };
-    //attemptToInterestedCustomerData() {
-    //    this.dashboardService
-    //        .attemptToInterestedCustomerData()
-    //        .then((data: any) => {
-    //            if (data.d.length > 0) {
-    //                let added: Boolean = false;
-    //                var xmlDoc = $.parseXML(data.d);
-    //                var json = this.xmlToJson.xml2json(xmlDoc, "");
-    //                var dataJson = JSON.parse(json);
-    //                this.dashboardService
-    //                    .attemptToInterestedCustomerServicesData()
-    //                    .then((data: any) => {
-    //                        if (data.d.length > 0) {
-    //                            var xmlDoc = $.parseXML(data.d);
-    //                            var json = this.xmlToJson.xml2json(xmlDoc, "");
-    //                            var dataJsonServices = JSON.parse(json);
-    //                            $.each(dataJsonServices.InterestedConsumerser, function (i) {
-    //                                dataJson.push(dataJsonServices[i]);
-    //                            });
-    //                            this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
-    //                            added = true;
-    //                        }
-    //                    });
-    //                if (!added) {
-    //                    this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
-    //                }
-    //            }
-    //        });
-    //}
-    //initialiseInterestedCustomerDataTable(asyncData) {
-    //    let dataTable: any = $('#interestedCustomers');
-    //    dataTable.DataTable({
-    //        data: asyncData,
-    //        columns: [
-    //            {
-    //                title: 'Name',
-    //                data: "name",
-    //            },
-    //            {
-    //                title: 'Mobile',
-    //                data: "Mob",
-    //            },
-    //            {
-    //                title: 'Email',
-    //                data: "EmailID",
-    //            },
-    //            {
-    //                title: 'Title',
-    //                data: "title",
-    //            },
-    //            {
-    //                title: 'Category Name',
-    //                data: "categoryName",
-    //            },
-    //            {
-    //                title: 'Sub Category',
-    //                data: "SubCategory",
-    //            },
-    //        ],
-    //        "columnDefs": [{
-    //            "searchable": false,
-    //            "orderable": false,
-    //            "targets": 0
-    //        }],
-    //        order: [[1, 'asc']]
-    //    });
-    //}
-    //attemptToCategoriesData() {
-    //    this.dashboardService
-    //        .attemptToCategoriesData()
-    //        .then((data: any) => {
-    //            if (data.d.length > 0) {
-    //                var xmlDoc = $.parseXML(data.d);
-    //                var json = this.xmlToJson.xml2json(xmlDoc, "");
-    //                var dataJson = JSON.parse(json);
-    //                this.initialiseCategoriesDataTable(dataJson.AllPurCategories);
-    //            }
-    //        });
-    //}
-    //initialiseCategoriesDataTable(asyncData) {
-    //    let dataTable: any = $('#selectedCategories');
-    //    dataTable.DataTable({
-    //        data: asyncData,
-    //        columns: [
-    //            {
-    //                title: 'Category/SubCategory',
-    //                data: "categoryname/Name",
-    //            }
-    //        ],
-    //        "columnDefs": [{
-    //            "searchable": false,
-    //            "orderable": false,
-    //            "targets": 0
-    //        }],
-    //        order: [[1, 'asc']]
-    //    });
-    //}
-    //attemptToMyPropertyListingsData() {
-    //    this.dashboardService
-    //        .attemptToMyPropertyListingsData()
-    //        .then((data: any) => {
-    //            if (data.d.length > 0) {
-    //                var xmlDoc = $.parseXML(data.d);
-    //                var json = this.xmlToJson.xml2json(xmlDoc, "");
-    //                var dataJson = JSON.parse(json);
-    //                this.initialiseMyPropertyListingsTable(dataJson.ViewAdvertisment);
-    //            }
-    //        });
-    //}
-    //initialiseMyPropertyListingsTable(asyncData) {
-    //    let dataTable: any = $('#myPropertyListings');
-    //    dataTable.DataTable({
-    //        data: asyncData,
-    //        columns: [
-    //            {
-    //                title: 'S.N',
-    //                data: "",
-    //            },
-    //            {
-    //                title: 'title',
-    //                data: "title",
-    //            },
-    //            {
-    //                title: 'Category Name',
-    //                data: "categoryname",
-    //            },
-    //            {
-    //                title: 'Zip Code',
-    //                data: "ZipCode",
-    //            },
-    //            {
-    //                title: 'Category Name',
-    //                data: "categoryName",
-    //            },
-    //            {
-    //                title: 'Amount',
-    //                data: "Amount",
-    //            },
-    //        ],
-    //        "columnDefs": [{
-    //            "searchable": false,
-    //            "orderable": false,
-    //            "targets": 0
-    //        }],
-    //        order: [[1, 'asc']]
-    //    });
-    //    dataTable.on('order.dt search.dt', function () {
-    //        dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-    //            cell.innerHTML = i + 1;
-    //        });
-    //    }).draw();
-    //}
-    //attemptToZipcodeData() {
-    //    this.dashboardService
-    //        .attemptToZipcodeData()
-    //        .then((data: any) => {
-    //            if (data.d.length > 0) {
-    //                var xmlDoc = $.parseXML(data.d);
-    //                var json = this.xmlToJson.xml2json(xmlDoc, "");
-    //                var dataJson = JSON.parse(json);
-    //                this.initialiseTable(dataJson.PurCategories);
-    //            }
-    //        });
-    //    //chk = 1;
-    //    //var xml = $(xmlDoc);
-    //    //var docs = xml.find("PurCategories");
-    //    //var cartd = [];
-    //    //cartd.push("<table class='table table-condensed data-table' style='width:100%'>");
-    //    //cartd.push("<tr>");
-    //    //// cartd.push("<td style='color: white; background-color: skyblue' ><strong>S.N</strong></td>");
-    //    //cartd.push("<th  style='width:80px;' class='uk-width-2-10 uk-text-center'> Zip Code </th>");
-    //    //cartd.push("<th  class='uk-width-2-10 uk-text-center'> Category/SubCategory </th>");
-    //    //cartd.push("<th  class='uk-width-2-10 uk-text-center'> Cost </th>");
-    //    //cartd.push("</tr>");
-    //    //// var cc = 0;
-    //    //var count = 1;
-    //    //var Totalamount = 0;
-    //    //$.each(dataJson.PurCategories, function (i, docs) {
-    //    //    cartd.push("<tr>");
-    //    //    // cartd.push("<td class='uk-text-center'>" + count + "</td>");
-    //    //    cartd.push("<td class='uk-text-center'> " + ($(docs).find("zipcode").text()) + " </td>");
-    //    //    cartd.push("<td class='uk-text-center'> " + ($(docs).find("categoryname").text()) + "/" + ($(docs).find("Name").text()) + " </td>");
-    //    //    cartd.push("<td class='uk-text-center'>$" + ($(docs).find("amount").text()) + " </td>");
-    //    //    cartd.push("</tr>");
-    //    //    count++;
-    //    //    Totalamount += parseInt($(docs).find("amount").text());
-    //    //});
-    //    //cartd.push("<tr>");
-    //    //cartd.push("<td class='uk-text-center total'> <strong> TOTAL </strong> </td>");
-    //    //cartd.push("<td class='uk-text-center'>  </td>");
-    //    //cartd.push("<td class='uk-text-center'><strong>  $" + Totalamount + " </strong> </td>");
-    //    //cartd.push("</tr>");
-    //    //cartd.push("</table>");
-    //    //$("#divShowPostedAdvertisementsServices").html(cartd.join(''));
-    //}
-    //initialiseTable(asyncData) {
-    //    let dataTable: any = $('#myZipCode');
-    //    dataTable.DataTable({
-    //        data: asyncData,
-    //        columns: [
-    //            {
-    //                title: '',
-    //                data: "",
-    //            },
-    //            {
-    //                title: 'Zip Code',
-    //                data: "zipcode",
-    //            },
-    //            {
-    //                title: 'Category Name',
-    //                data: "categoryname"
-    //            },
-    //            {
-    //                title: 'Cost',
-    //                data: "amount"
-    //            }
-    //        ],
-    //        "columnDefs": [{
-    //            "searchable": false,
-    //            "orderable": false,
-    //            "targets": 0
-    //        }],
-    //        order: [[1, 'asc']]
-    //    });
-    //    dataTable.on('order.dt search.dt', function () {
-    //        dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-    //            cell.innerHTML = i + 1;
-    //        });
-    //    }).draw();
-    //}
+    DashboardComponent.prototype.attemptToInterestedCustomerData = function () {
+        var _this = this;
+        this.dashboardService
+            .attemptToInterestedCustomerData()
+            .then(function (data) {
+            if (data.d.length > 0) {
+                debugger;
+                var added_1 = false;
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var dataJson = JSON.parse(json);
+                _this.dashboardService
+                    .attemptToInterestedCustomerServicesData()
+                    .then(function (data) {
+                    if (data.d.length > 0) {
+                        debugger;
+                        var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                        var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                        var dataJsonServices = JSON.parse(json);
+                        jquery__WEBPACK_IMPORTED_MODULE_5__["each"](dataJsonServices.InterestedConsumerser, function (i) {
+                            dataJson.push(dataJsonServices[i]);
+                        });
+                        _this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                        added_1 = true;
+                    }
+                    else {
+                        _this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                    }
+                });
+            }
+        });
+    };
+    DashboardComponent.prototype.initialiseInterestedCustomerDataTable = function (asyncData) {
+        debugger;
+        var dataTable = jquery__WEBPACK_IMPORTED_MODULE_5__('#interestedCustomers');
+        if (asyncData === undefined) {
+            asyncData = {
+                'name': '',
+                'Mob': "",
+                'EmailID': "",
+                'title': "",
+                'categoryName': "",
+                'SubCategory': ''
+            };
+        }
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                {
+                    data: "name",
+                },
+                {
+                    data: "Mob",
+                },
+                {
+                    data: "EmailID",
+                },
+                {
+                    data: "title",
+                },
+                {
+                    data: "categoryName",
+                },
+                {
+                    data: "SubCategory",
+                },
+            ],
+            searching: false,
+            paging: false,
+            info: false,
+            order: [[1, 'asc']]
+        });
+    };
+    DashboardComponent.prototype.attemptToCategoriesData = function () {
+        var _this = this;
+        this.dashboardService
+            .attemptToCategoriesData()
+            .then(function (data) {
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var dataJson = JSON.parse(json);
+                _this.initialiseCategoriesDataTable(dataJson.AllPurCategories);
+            }
+        });
+    };
+    DashboardComponent.prototype.initialiseCategoriesDataTable = function (asyncData) {
+        var dataTable = jquery__WEBPACK_IMPORTED_MODULE_5__('#selectedCategories');
+        if (asyncData === undefined) {
+            asyncData = {
+                'categoryname': '',
+                'Name': "",
+            };
+        }
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                {
+                    data: "categoryname/Name",
+                    "defaultContent": ""
+                }
+            ],
+            searching: false,
+            paging: false,
+            info: false,
+            order: [[1, 'asc']]
+        });
+    };
+    DashboardComponent.prototype.attemptToMyPropertyListingsData = function () {
+        var _this = this;
+        this.dashboardService
+            .attemptToMyPropertyListingsData()
+            .then(function (data) {
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var dataJson = JSON.parse(json);
+                _this.initialiseMyPropertyListingsTable(dataJson.ViewAdvertisment);
+            }
+        });
+    };
+    DashboardComponent.prototype.initialiseMyPropertyListingsTable = function (asyncData) {
+        var dataTable = jquery__WEBPACK_IMPORTED_MODULE_5__('#myPropertyListings');
+        if (asyncData === undefined) {
+            asyncData = {
+                'S.N': '',
+                'title': "",
+                'categoryname': "",
+                'ZipCode': "",
+                'Amount': ''
+            };
+        }
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                {
+                    title: 'S.N',
+                    data: "",
+                    "defaultContent": ""
+                },
+                {
+                    title: 'title',
+                    data: "title",
+                    "defaultContent": ""
+                },
+                {
+                    title: 'Category Name',
+                    data: "categoryname",
+                    "defaultContent": ""
+                },
+                {
+                    title: 'Zip Code',
+                    data: "ZipCode",
+                    "defaultContent": ""
+                },
+                {
+                    title: 'Category Name',
+                    data: "categoryName",
+                    "defaultContent": ""
+                },
+                {
+                    title: 'Amount',
+                    data: "Amount",
+                    "defaultContent": ""
+                },
+            ],
+            searching: false,
+            paging: false,
+            info: false,
+            order: [[1, 'asc']]
+        });
+        //dataTable.on('order.dt search.dt', function () {
+        //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        //        cell.innerHTML = i + 1;
+        //    });
+        //}).draw();
+    };
+    DashboardComponent.prototype.attemptToZipcodeData = function () {
+        var _this = this;
+        this.dashboardService
+            .attemptToZipcodeData()
+            .then(function (data) {
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var dataJson = JSON.parse(json);
+                _this.initialiseTable(dataJson.PurCategories);
+            }
+        });
+    };
+    DashboardComponent.prototype.initialiseTable = function (asyncData) {
+        var dataTable = jquery__WEBPACK_IMPORTED_MODULE_5__('#myZipCode');
+        if (asyncData === undefined) {
+            asyncData = {
+                'zipcode': '',
+                'categoryname': "",
+                'amount': ""
+            };
+        }
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                {
+                    title: '',
+                    data: "",
+                },
+                {
+                    title: 'Zip Code',
+                    data: "zipcode",
+                    "defaultContent": ""
+                },
+                {
+                    title: 'Category Name',
+                    data: "categoryname",
+                    "defaultContent": ""
+                },
+                {
+                    title: 'Cost',
+                    data: "amount",
+                    "defaultContent": ""
+                }
+            ],
+            searching: false,
+            paging: false,
+            info: false,
+            order: [[1, 'asc']]
+        });
+        //dataTable.on('order.dt search.dt', function () {
+        //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        //        cell.innerHTML = i + 1;
+        //    });
+        //}).draw();
+    };
     DashboardComponent.prototype.attemptToAllAdvertisement = function () {
     };
     DashboardComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -451,7 +455,7 @@ var DashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-body content-body-profile\">\r\n    <div class=\"profile-sidebar\">\r\n        <div class=\"profile-sidebar-header\">\r\n            <div class=\"avatar\"><img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\"></div>\r\n            <h5>Abigail Johnson</h5>\r\n            <p>UI Developer (Savior of Mankind)</p>\r\n            <span>Bay Area, San Francisco, CA</span>\r\n            <div class=\"d-flex align-self-stretch mg-t-30\">\r\n                <a href=\"\" class=\"btn btn-brand-01 btn-sm btn-uppercase flex-fill\">Follow</a>\r\n                <a href=\"\" class=\"btn btn-white btn-sm btn-uppercase flex-fill mg-l-5\">Message</a>\r\n            </div>\r\n        </div><!-- profile-sidebar-header -->\r\n        <div class=\"profile-sidebar-body\">\r\n            <label class=\"content-label\">Websites &amp; Social Channel</label>\r\n            <ul class=\"list-unstyled profile-info-list\">\r\n                <li><i data-feather=\"globe\"></i> <a href=\"\">http://fenchiumao.me/</a></li>\r\n                <li><i data-feather=\"github\"></i> <a href=\"\">@fenchiumao</a></li>\r\n                <li><i data-feather=\"twitter\"></i> <a href=\"\">@fenmao</a></li>\r\n                <li><i data-feather=\"instagram\"></i> <a href=\"\">@fenchiumao</a></li>\r\n                <li><i data-feather=\"facebook\"></i> <a href=\"\">@fenchiumao</a></li>\r\n            </ul>\r\n            <hr class=\"mg-y-25\">\r\n            <label class=\"content-label\">Contact Information</label>\r\n            <ul class=\"list-unstyled profile-info-list mg-b-0\">\r\n                <li><i data-feather=\"briefcase\"></i> <span class=\"tx-color-03\">Bay Area, San Francisco, CA</span></li>\r\n                <li><i data-feather=\"home\"></i> <span class=\"tx-color-03\">Westfield, Oakland, CA</span></li>\r\n                <li><i data-feather=\"smartphone\"></i> <a href=\"\">(+1) 012 345 6789</a></li>\r\n                <li><i data-feather=\"phone\"></i> <a href=\"\">(+1) 987 654 3201</a></li>\r\n                <li><i data-feather=\"mail\"></i> <a href=\"\">me@fenchiumao.me</a></li>\r\n            </ul>\r\n        </div><!-- profile-sidebar-body -->\r\n    </div><!-- profile-sidebar -->\r\n    <div class=\"profile-body\">\r\n        <div class=\"profile-body-header\">\r\n            <div class=\"nav-wrapper\">\r\n                <ul class=\"nav nav-line\" id=\"profileTab\" role=\"tablist\">\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link active\" id=\"overview-tab\" data-toggle=\"tab\" href=\"#overview\" role=\"tab\" aria-controls=\"overview\" aria-selected=\"true\">Overview</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link\" id=\"projects-tab\" data-toggle=\"tab\" href=\"#timeline\" role=\"tab\" aria-controls=\"projects\" aria-selected=\"false\">Projects</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link\" id=\"people-tab\" data-toggle=\"tab\" href=\"#people\" role=\"tab\" aria-controls=\"people\" aria-selected=\"false\">Connections</a>\r\n                    </li>\r\n                    <li class=\"nav-item\">\r\n                        <a class=\"nav-link\" id=\"settings-tab\" data-toggle=\"tab\" href=\"#settings\" role=\"tab\" aria-controls=\"settings\" aria-selected=\"false\">Settings</a>\r\n                    </li>\r\n                </ul>\r\n            </div><!-- nav-wrapper -->\r\n        </div><!-- profile-body-header -->\r\n        <div class=\"tab-content pd-15 pd-sm-20\">\r\n            <div id=\"overview\" class=\"tab-pane active show\">\r\n                <div class=\"stat-profile\">\r\n                    <div class=\"stat-profile-body\">\r\n                        <div class=\"row row-xs\">\r\n                            <div class=\"col\">\r\n                                <div class=\"card card-body pd-10 pd-md-15 bd-0 shadow-none bg-primary-light\">\r\n                                    <h1 class=\"tx-light tx-sans tx-spacing--4 tx-primary mg-b-5\">102</h1>\r\n                                    <p class=\"tx-13 tx-lg-14 tx-color-02 mg-b-0\">Your profile visitors</p>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col\">\r\n                                <div class=\"card card-body pd-10 pd-md-15 bd-0 shadow-none bg-teal-light\">\r\n                                    <h1 class=\"mg-b-5 tx-sans tx-spacing--2 tx-light tx-teal\">961</h1>\r\n                                    <p class=\"tx-13 tx-lg-14 tx-color-03 mg-b-0\">Search appearances</p>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col\">\r\n                                <div class=\"card card-body pd-10 pd-md-15 bd-0 shadow-none bg-pink-light\">\r\n                                    <h1 class=\"mg-b-5 tx-sans tx-spacing--2 tx-light tx-pink\">665</h1>\r\n                                    <p class=\"tx-13 tx-lg-14 tx-color-03 mg-b-0\">Your activity views</p>\r\n                                </div>\r\n                            </div>\r\n                        </div><!-- row -->\r\n                    </div><!-- stat-profile-body -->\r\n                </div><!-- stat-profile -->\r\n                <hr class=\"mg-y-15 op-0\">\r\n                <label class=\"content-label content-label-lg mg-b-15 tx-color-01\">Biography</label>\r\n                <p class=\"tx-color-03\">Redhead, Innovator, Saviour of Mankind, Hopeless Romantic, Attractive 20-something Yogurt Enthusiast. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>\r\n                <hr class=\"mg-y-15 op-0\">\r\n                <label class=\"content-label content-label-lg mg-b-15 tx-color-01\">Work Experience</label>\r\n                <ul class=\"list-unstyled media-list-profile\">\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-teal op-5\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Themepixels, Inc. LTD</h6>\r\n                            <p class=\"tx-color-03 tx-13\">January 2016 - Present</p>\r\n                            <p>An online-based high performing web and mobile development company, with a passion for making high quality web-based application and services for businesses and organization. </p>\r\n                        </div>\r\n                    </li>\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-primary op-5\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Berkeley Systems, Inc.</h6>\r\n                            <p class=\"tx-color-03 tx-13\">December 2012 - November 2015</p>\r\n                        </div>\r\n                    </li>\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-pink op-5\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Berkeley Systems, Inc.</h6>\r\n                            <p class=\"tx-color-03 tx-13\">December 2012 - November 2015</p>\r\n                        </div>\r\n                    </li>\r\n                </ul><!-- media-list-profile -->\r\n                <hr class=\"mg-y-15 op-0\">\r\n                <label class=\"content-label content-label-lg mg-b-15 tx-color-01\">Educational Background</label>\r\n                <ul class=\"list-unstyled media-list-profile\">\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-gray-400\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Graduate in BS in Computer Science</h6>\r\n                            <p class=\"tx-color-03 tx-13\">Hold Name University class 2006</p>\r\n                        </div>\r\n                    </li>\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-gray-400\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Sacred Heart Academy</h6>\r\n                            <p class=\"tx-color-03 tx-13\">High school graduate class 2002</p>\r\n                        </div>\r\n                    </li>\r\n                    <li class=\"media\">\r\n                        <div class=\"wd-40 ht-40 bg-gray-400\"></div>\r\n                        <div class=\"media-body\">\r\n                            <h6 class=\"mg-b-5 tx-semibold\">Loon Central Elementary School</h6>\r\n                            <p class=\"tx-color-03 tx-13\">Elmentary graduate class 1998</p>\r\n                        </div>\r\n                    </li>\r\n                </ul>\r\n            </div>\r\n        </div><!-- tab-content -->\r\n    </div><!-- profile-body -->\r\n</div><!-- content-body -->\r\n"
+module.exports = "<div class=\"content-body content-body-profile\">\r\n    <div class=\"profile-sidebar\">\r\n\r\n        <div class=\"profile-sidebar-header\">\r\n            <div class=\"avatar\"><img src=\"{{profileImage}}\" class=\"rounded-circle\" alt=\"\"></div>\r\n            <h5>Abigail Johnson</h5>\r\n\r\n            <div id=\"status\"></div>\r\n            <input id=\"profileImageId\" type=file class=\"img-upload-input-bs\" editor=\"#img-upload-panel\" target=\"#image\" status=\"#status\" passurl=\"\" pshape=\"circle\" w=300 h=300 size=\"{150,150}\" />\r\n            <img src=\"\" alt=\"\" id=\"image\" />\r\n\r\n        </div><!-- profile-sidebar-header -->\r\n\r\n        <div class=\"profile-sidebar-body\">\r\n\r\n            <label class=\"content-label\">Contact Information</label>\r\n            <ul class=\"list-unstyled profile-info-list mg-b-0\">\r\n                <li><i data-feather=\"mail\"></i> <a href=\"\">{{email}}</a></li>\r\n                <li><i data-feather=\"Password\"></i> <span class=\"tx-color-03\">{{Password}}</span></li>\r\n            </ul>\r\n            <ul class=\"list-unstyled profile-info-list mg-b-0\" [style.display]=\"(!isFormVisible) ? 'display':'none'\">\r\n                <li><i data-feather=\"FirstName\"></i> <span class=\"tx-color-03\">{{FirstName}}</span></li>\r\n                <li><i data-feather=\"LastName\"></i> <span class=\"tx-color-03\">{{LastName}}</span></li>\r\n                <li><i data-feather=\"phone\"></i> <a href=\"\">{{PhoneNumber}}</a></li>\r\n                <li><i data-feather=\"LicenseNumber\"></i> <span class=\"tx-color-03\">{{LicenseNumber}}</span></li>\r\n                <li><i data-feather=\"IssuingState\"></i> <span class=\"tx-color-03\">{{IssuingState}}</span></li>\r\n            </ul>\r\n        </div><!-- profile-sidebar-body -->\r\n    </div><!-- profile-sidebar -->\r\n\r\n\r\n    <div class=\"profile-body\" [style.display]=\"isFormVisible ? 'display':'none'\">\r\n        <div class=\"profile-body-header\">\r\n            <div class=\"auth-page mg-b-60-force\" [style.display]=\"edit ? 'display':'none'\">\r\n                <div class=\"container page\">\r\n\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-12\">\r\n                            <h2 class=\"text-xs-center\"></h2>\r\n                        </div>\r\n\r\n                        <form [formGroup]=\"profileForm\" autocomplete=\"off\" class=\"pd-t-20\">\r\n                            <fieldset [disabled]=\"isSubmitting\">\r\n\r\n                                <div style=\"color:#a21318 !important\" class=\"col-sm-12 pd-l-0-force\">\r\n                                    {{formError}}\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.firstName}\">\r\n\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"firstName\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"firstName\" placeholder=\"First Name\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.lastName}\">\r\n\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"lastName\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"lastName\" placeholder=\"Last Name\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.email}\">\r\n\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"email\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"email\" placeholder=\"Email\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                    <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.password}\">\r\n                                        <div class=\"col-sm-12  mg-b-20\">\r\n                                            <input id=\"password\" placeholder=\"Password\" type=\"password\" class=\" form-control pd-l-45-force\" [ngClass]=\"{'password': (authType == 'register')}\" formControlName=\"password\" (focus)=\"showErrors()\" (focusout)=\"hideErrors()\"\r\n                                                   autocomplete=\"new-password\">\r\n                                            <span class=\"large material-icons form-control-feedback icon\">lock</span>\r\n\r\n                                            <!--<label class=\"col mg-t-5\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required')  ? 'text-danger' : 'text-success'\">\r\n                                                <i class=\"material-icons\">\r\n                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ? 'cancel' :  'check_circle' }}\r\n                                                </i>\r\n                                                Password is required\r\n                                            </label>-->\r\n\r\n                                            <div class=\"col-sm-12 pd-l-0\" [style.display]=\"showErrorsPassword ? 'block':'none'\">\r\n                                                <label class=\"col mg-t-5\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be at least 8 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be less than 20 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}\r\n                                                    </i>\r\n                                                    Must contain at least 1 number!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 in Capital Case!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Letter in Small Case!\r\n                                                </label>\r\n\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Special Character!\r\n                                                </label>\r\n\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.phoneNo}\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"phoneNo\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"phoneNo\" placeholder=\"Phone Number\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.licenseId}\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"licenseId\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"licenseId\" placeholder=\"License Number\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.licenseState}\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"licenseState\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"licenseState\" placeholder=\"License State\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                    <div class=\"form-group\">\r\n                                        <div class=\"col-sm-12 mg-b-20\">\r\n                                            <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" type=\"submit\" [disabled]=\"!FormFilledSuccessfully\">\r\n                                                <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitRegistrationForm()\">UPDATE PROFILE</span>\r\n                                                <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                    <div class=\"spinner-layer spinner-white-only\">\r\n                                                        <div class=\"circle-clipper left\">\r\n                                                            <div class=\"circle\"></div>\r\n                                                        </div><div class=\"gap-patch\">\r\n                                                            <div class=\"circle\"></div>\r\n                                                        </div><div class=\"circle-clipper right\">\r\n                                                            <div class=\"circle\"></div>\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </button>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <!--  -->\r\n                            </fieldset>\r\n                        </form>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div><!-- profile-body -->\r\n    </div><!-- content-body -->\r\n\r\n    <div class=\"modal fade\" id=\"img-upload-panel\">\r\n        <div class=\"modal-dialog modal-lg\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-header\">\r\n                    <h4 class=\"modal-title\">Upload Profile Photo</h4>\r\n                    <button type=\"button\" class=\"img-remove-btn-bs close\">&times;</button>\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"row container\">\r\n                        <div class=\"col\">\r\n                            <div class=\"img-edit-container\"></div>\r\n                        </div>\r\n                    </div>\r\n                    <!--<div class=\"row container\">\r\n                        <div class=\"col\">\r\n                            <label>Brightness</label>\r\n                            <input type=\"range\" class=\"form-control-range filter\" min=0 max=200 value=100 step=1 filter=\"brightness\" />\r\n                        </div>\r\n                        <div class=\"col\">\r\n                            <label>Threshold</label>\r\n                            <input type=\"range\" class=\"form-control-range filter\" min=0 max=200 value=100 step=1 filter=\"threshold\" />\r\n                        </div>\r\n                    </div>-->\r\n                </div>\r\n                <div class=\"modal-footer\">\r\n                    <button type=\"button\" class=\"btn btn-secondary img-remove-btn-bs\">Close</button>\r\n                    <button type=\"button\" class=\"btn btn-primary img-upload-btn-bs\" (click)=\"submitImage()\">Upload</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -467,22 +471,206 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfileComponent", function() { return ProfileComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var AngularAssociate_app_helpers_xml_to_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! AngularAssociate/app/_helpers/xml-to-json */ "./AngularAssociate/app/_helpers/xml-to-json.ts");
+/* harmony import */ var AngularAssociate_app_services_associate_Profile_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! AngularAssociate/app/services/associate/Profile.service */ "./AngularAssociate/app/services/associate/Profile.service.ts");
+
+
+
+
+
 
 
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent() {
+    function ProfileComponent(route, router, profileService, xmlToJson, fb) {
+        this.route = route;
+        this.router = router;
+        this.profileService = profileService;
+        this.xmlToJson = xmlToJson;
+        this.fb = fb;
+        this.isFormVisible = true;
+        this.validationMessages = {
+            'password': {
+                'required': 'Password is required',
+                'minlength': 'Min of 8 char in length',
+                'maxlength': 'Max of 20 char in length',
+                'number': 'At least one number.',
+                'lowerLetter': 'At least one lowercase.',
+                'upperLetter': 'At least one uppercase.',
+                'hasSpecialCharacters': 'At least one special character.'
+            },
+            'firstName': {
+                'required': 'First Name is required',
+            },
+            'lastName': {
+                'required': 'Last Name is required',
+            },
+            'licenseId': {
+                'required': 'Last Name is required',
+            },
+            'licenseState': {
+                'required': 'Last Name is required',
+            }
+        };
+        this.formErrors = {
+            'firstName': '',
+            'lastName': '',
+            'password': '',
+            'phoneNo': '',
+            'licenseId': '',
+            'licenseState': ''
+        };
     }
-    ProfileComponent.prototype.ngOnInit = function () { };
+    ProfileComponent.prototype.ngOnInit = function () {
+        this.setValidationOnForm();
+    };
+    ProfileComponent.prototype.getUserDetails = function () {
+        var thisStatus = this;
+        this.profileService
+            .getUserDetails()
+            .subscribe(function (data) {
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_4__["parseXML"](data.d);
+                var xml = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc);
+                var docs = xml.find("ViewAssociateBasicDetail");
+                jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs, function (i, docs) {
+                    if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("FullName").text() == '' || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("MobileNo").text() == '' || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() == '') {
+                        thisStatus.isFormVisible = false;
+                    }
+                    thisStatus.FirstName = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("FullName").text();
+                    thisStatus.LastName = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("LastName").text();
+                    thisStatus.UserName = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("UserName").text();
+                    thisStatus.PhoneNumber = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("MobileNo").text();
+                    thisStatus.email = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Email").text();
+                    thisStatus.Password = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Password").text();
+                    thisStatus.LicenseNumber = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("LicenseId").text();
+                    thisStatus.IssuingState = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("LicenseState").text();
+                    var pic = '';
+                    if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() != null || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() == "") {
+                        pic = "<img   alt='User Image' src='../AssociatePhoto/" + jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() + "'/> ";
+                    }
+                    else {
+                        pic = "<img  alt='User Image' src='../AssociatePhoto/0.png'/>";
+                    }
+                    thisStatus.profileImage = pic;
+                    //$("#pprofilePic").html(sd.join(''));
+                    //$("#txtfName").val($(docs).find("FullName").text());
+                    //$("#txtLName").val($(docs).find("LastName").text());
+                    //$("#txtEmailAddress").val($(docs).find("Email").text());
+                    //$("#txtPassword").val($(docs).find("Password").text());
+                    //$("#txtContactNumber").val($(docs).find("MobileNo").text());
+                    //$("#txtLicenceState").val($(docs).find("LicenseState").text());
+                    //$("#txtLicenceID").val($(docs).find("LicenseId").text());
+                });
+            }
+        });
+    };
+    ProfileComponent.prototype.setValidationOnForm = function () {
+        this.profileForm = this.fb.group({
+            firstName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            lastName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            licenseState: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            phoneNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            licenseId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(20),
+                    patternValidator(/\d/, { number: true }),
+                    patternValidator(/[A-Z]/, { upperLetter: true }),
+                    patternValidator(/[a-z]/, { lowerLetter: true }),
+                    patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
+                ]]
+        });
+    };
+    ProfileComponent.prototype.logValidationErrors = function (group) {
+        var _this = this;
+        if (group === void 0) { group = this.profileForm; }
+        Object.keys(group.controls).forEach(function (key) {
+            var abstractControl = group.get(key);
+            _this.formErrors[key] = '';
+            if (abstractControl && !abstractControl.valid
+                && (abstractControl.touched || abstractControl.dirty)) {
+                _this.formErrors[key] = "";
+                var messages = _this.validationMessages[key];
+                if (abstractControl.errors != null) {
+                    for (var errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            if (messages[errorKey] !== undefined) {
+                                _this.formErrors[key] += messages[errorKey] + ' ';
+                            }
+                        }
+                    }
+                }
+            }
+            if (abstractControl instanceof _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]) {
+                _this.logValidationErrors(abstractControl);
+            }
+        });
+    };
+    ProfileComponent.prototype.submitProfileForm = function () {
+        var _this = this;
+        this.profileService
+            .getUserDetails()
+            .subscribe(function (data) {
+            if (data.d == "1") {
+                _this.isFormVisible = false;
+                _this.getUserDetails();
+                //hide the form and show the text only
+                //set the sidebar values
+            }
+            if (data.d == "0") {
+                _this.formError = "Unsuccessfull!!! <br>This Email Id or User name or Mobile No Already Exists! Please Try another one.";
+            }
+            if (data.d == "-1") {
+                _this.formError = "Unsuccessfull!!! <br>This Email Id or User name or Mobile No Already Exists! Please Try another one.";
+                //$('#fail_message').modal('show');
+            }
+            //on return stat
+        });
+    };
+    ProfileComponent.prototype.submitImage = function () {
+        var _this = this;
+        var fileUpload = jquery__WEBPACK_IMPORTED_MODULE_4__("#profileImageId").get(0);
+        var files = fileUpload.files;
+        //image resize code here
+        var image = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            image.append(files[i].name, files[i]);
+        }
+        this.profileService
+            .uploadimage(image)
+            .subscribe(function (data) {
+            _this.profileImage = URL.createObjectURL(files[0]);
+            _this.formError = "Your profile has been updated Successfully.";
+        });
+    };
+    ProfileComponent.prototype.cancelForm = function () {
+        this.isFormVisible = false;
+    };
     ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'associate-profile-page',
             template: __webpack_require__(/*! ./profile.component.html */ "./AngularAssociate/app/Associate/components/Profile/profile.component.html")
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], AngularAssociate_app_services_associate_Profile_service__WEBPACK_IMPORTED_MODULE_6__["ProfileService"],
+            AngularAssociate_app_helpers_xml_to_json__WEBPACK_IMPORTED_MODULE_5__["XMLToJSON"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]])
     ], ProfileComponent);
     return ProfileComponent;
 }());
 
+function patternValidator(regex, error) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        // test the value of the control against the regexp supplied
+        var valid = regex.test(control.value);
+        // if true, return no error (no error), else return error passed in the second parameter
+        return valid ? null : error;
+    };
+}
 
 
 /***/ }),
@@ -494,7 +682,7 @@ var ProfileComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n                <li class=\"breadcrumb-item active\" aria-current=\"page\">Events &amp; Social Media</li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Client Details</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{salesCount}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">Total Sales</h5>\r\n                    <p class=\"card-desc\">Clients showing interest in your Sales.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{servicesCount}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Total Services</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Clients showing interest in your Services.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{TotalCount}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">Total Services & Sales</h5>\r\n                    <p class=\"card-desc\">Clients showing interest in your Services & sales.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Sales</h5>\r\n                    <div class=\"col-sm-12\" #tableSales>\r\n                        <table id=\"sales\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n\r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>Sub Category</th>\r\n\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-3 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\"> \r\n                    <h5 class=\"card-title tx-primary\">Services</h5>\r\n                    <div  class=\"col-sm-12\" #tableServices></div>\r\n                    <table id=\"services\" class=\"table table-bordered\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>Name</th>\r\n                                <th>Mobile No</th>\r\n                                <th>Email</th>\r\n                                <th>Zip Code</th>\r\n                                <th>Category Name</th>\r\n                            </tr>\r\n                        </thead>\r\n                    </table>  \r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n</div><!-- content-body -->"
 
 /***/ }),
 
@@ -510,16 +698,207 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientDetailsComponent", function() { return ClientDetailsComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var AngularAssociate_app_helpers_xml_to_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! AngularAssociate/app/_helpers/xml-to-json */ "./AngularAssociate/app/_helpers/xml-to-json.ts");
+/* harmony import */ var AngularAssociate_app_services_associate_client_details_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! AngularAssociate/app/services/associate/client-details.service */ "./AngularAssociate/app/services/associate/client-details.service.ts");
+
+
+
+
 
 
 var ClientDetailsComponent = /** @class */ (function () {
-    function ClientDetailsComponent() {
+    function ClientDetailsComponent(route, router, dashboardService, xmlToJson) {
+        this.route = route;
+        this.router = router;
+        this.dashboardService = dashboardService;
+        this.xmlToJson = xmlToJson;
+        this.salesCount = '';
+        this.servicesCount = '';
+        this.TotalCount = '';
     }
+    ClientDetailsComponent.prototype.ngOnInit = function () {
+        this.getServicesCount();
+        this.getSalesCount();
+        this.getTotalSalesAndServicesCount();
+        this.getClientDetailsSalesData();
+        this.getClientDetailsServicesData();
+        //this.deleteCustomerRecords();
+    };
+    ClientDetailsComponent.prototype.getServicesCount = function () {
+    };
+    ClientDetailsComponent.prototype.getSalesCount = function () {
+        var _this = this;
+        this.dashboardService
+            .getSalesCount()
+            .subscribe(function (data) {
+            var countInterestedCutomers = '0';
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
+                var docs = xml.find("TotalInterestedConsumers");
+                var cartd = [];
+                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
+                    countInterestedCutomers = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("TotalCount").text();
+                });
+                //$("#interestedConsumer").html(cartd.join(''));
+                _this.salesCount = countInterestedCutomers;
+            }
+            else {
+                _this.salesCount = countInterestedCutomers;
+            }
+        });
+    };
+    ClientDetailsComponent.prototype.getTotalSalesAndServicesCount = function () {
+        var _this = this;
+        this.dashboardService
+            .getServicesCount()
+            .subscribe(function (data) {
+            var countInterestedCutomers = '0';
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var xml = jquery__WEBPACK_IMPORTED_MODULE_3__(xmlDoc);
+                var docs = xml.find("TotalInterestedConsumers");
+                var cartd = [];
+                jquery__WEBPACK_IMPORTED_MODULE_3__["each"](docs, function (i, docs) {
+                    countInterestedCutomers = jquery__WEBPACK_IMPORTED_MODULE_3__(docs).find("TotalCount").text();
+                });
+                //$("#interestedConsumer").html(cartd.join(''));
+                _this.servicesCount = countInterestedCutomers;
+            }
+            else {
+                _this.servicesCount = countInterestedCutomers;
+            }
+        });
+    };
+    ClientDetailsComponent.prototype.getClientDetailsSalesData = function () {
+        var _this = this;
+        //sales
+        //getClientDetailsSalesData
+        this.dashboardService
+            .getClientDetailsSalesData()
+            .subscribe(function (data) {
+            var countInterestedCutomers = '0';
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var dataJson = JSON.parse(json);
+                _this.initializedDataTableSales(dataJson.InterestedConsumer);
+            }
+        });
+    };
+    ClientDetailsComponent.prototype.initializedDataTableSales = function (asyncData) {
+        var dataTable = jquery__WEBPACK_IMPORTED_MODULE_3__('#sales');
+        var thisStatus = this;
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                { data: 'id', "visible": false },
+                {
+                    data: "name",
+                },
+                {
+                    data: "Mob",
+                },
+                {
+                    data: "EmailID",
+                },
+                {
+                    data: "title",
+                },
+                {
+                    data: "categoryName",
+                },
+                {
+                    data: "SubCategory",
+                },
+                {
+                    "mRender": function (data, type, row) {
+                        return '<i"' + thisStatus.deleteCustomerRecords(row[0]) + '">edit</>';
+                    }
+                }
+            ],
+            searching: false,
+            paging: false,
+            info: false,
+            order: [[1, 'asc']]
+        });
+    };
+    ClientDetailsComponent.prototype.getClientDetailsServicesData = function () {
+        var _this = this;
+        //services
+        this.dashboardService
+            .getClientDetailsServicesData()
+            .subscribe(function (data) {
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var dataJson = JSON.parse(json);
+                _this.initializedDataTableServices(dataJson.InterestedConsumerser);
+            }
+        });
+    };
+    ClientDetailsComponent.prototype.initializedDataTableServices = function (asyncData) {
+        var dataTable = jquery__WEBPACK_IMPORTED_MODULE_3__('#sales');
+        var thisStatus = this;
+        //cartd.push("<td>" + ($(docs1).find("name").text() + " </td>"));
+        //cartd.push("<td>" + ($(docs1).find("Mob").text() + " </td>"));
+        //cartd.push("<td class=''>" + ($(docs1).find("EmailID").text() + " </td>"));
+        //cartd.push("<td>" + ($(docs1).find("zipcode").text() + " </td>"));
+        //cartd.push("<td class='text-heighlight'>" + $(docs1).find("categoryName").text() + " </td>");
+        dataTable.DataTable({
+            data: asyncData,
+            columns: [
+                { data: 'id', "visible": false },
+                {
+                    data: "name",
+                },
+                {
+                    data: "Mob",
+                },
+                {
+                    data: "EmailID",
+                },
+                {
+                    data: "zipcode",
+                },
+                {
+                    data: "categoryName",
+                },
+                {
+                    "mRender": function (data, type, row) {
+                        return '<i"' + thisStatus.deleteCustomerRecords(row[0]) + '">edit</>';
+                    }
+                }
+            ],
+            searching: false,
+            paging: false,
+            info: false,
+            order: [[1, 'asc']]
+        });
+    };
+    ClientDetailsComponent.prototype.deleteCustomerRecords = function (id) {
+        var _this = this;
+        //services
+        this.dashboardService
+            .deleteCustomerRecords(id)
+            .subscribe(function (data) {
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
+                var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var dataJson = JSON.parse(json);
+                _this.initializedDataTableServices(dataJson.InterestedConsumerser);
+            }
+        });
+    };
     ClientDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'associate-client-details-page',
             template: __webpack_require__(/*! ./client-details.component.html */ "./AngularAssociate/app/Associate/components/client-details/client-details.component.html")
-        })
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], AngularAssociate_app_services_associate_client_details_service__WEBPACK_IMPORTED_MODULE_5__["ClientDetailsService"], AngularAssociate_app_helpers_xml_to_json__WEBPACK_IMPORTED_MODULE_4__["XMLToJSON"]])
     ], ClientDetailsComponent);
     return ClientDetailsComponent;
 }());
@@ -1413,6 +1792,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _associate_sidebar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./associate-sidebar */ "./AngularAssociate/app/associate/associate-sidebar/index.ts");
 /* harmony import */ var _associate_header__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./associate-header */ "./AngularAssociate/app/associate/associate-header/index.ts");
 /* harmony import */ var _services_associate_dashboard_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../services/associate/dashboard.service */ "./AngularAssociate/app/services/associate/dashboard.service.ts");
+/* harmony import */ var _services_associate_Profile_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../services/associate/Profile.service */ "./AngularAssociate/app/services/associate/Profile.service.ts");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _services_associate_client_details_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../services/associate/client-details.service */ "./AngularAssociate/app/services/associate/client-details.service.ts");
+
+
+
+
+
 
 
 
@@ -1438,6 +1827,14 @@ var AssociateModule = /** @class */ (function () {
     AssociateModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             imports: [
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_16__["BrowserModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
+                _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_17__["BrowserAnimationsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatMenuModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatDatepickerModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
@@ -1455,6 +1852,8 @@ var AssociateModule = /** @class */ (function () {
                 _services_auth__WEBPACK_IMPORTED_MODULE_8__["ApiService"],
                 _services_auth__WEBPACK_IMPORTED_MODULE_8__["JwtService"],
                 _services_associate_dashboard_service__WEBPACK_IMPORTED_MODULE_14__["DashboardService"],
+                _services_associate_Profile_service__WEBPACK_IMPORTED_MODULE_15__["ProfileService"],
+                _services_associate_client_details_service__WEBPACK_IMPORTED_MODULE_19__["ClientDetailsService"],
                 _services_search__WEBPACK_IMPORTED_MODULE_9__["MessageService"]
             ]
         })
@@ -2445,7 +2844,8 @@ var AuthComponent = /** @class */ (function () {
             selector: 'app-auth-page',
             template: __webpack_require__(/*! ./auth.component.html */ "./AngularAssociate/app/components/auth/auth.component.html")
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_auth__WEBPACK_IMPORTED_MODULE_4__["UserService"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"], _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_auth__WEBPACK_IMPORTED_MODULE_4__["UserService"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_7__["HttpClient"]])
     ], AuthComponent);
     return AuthComponent;
 }());
@@ -4150,6 +4550,193 @@ var HttpTokenInterceptor = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./AngularAssociate/app/services/associate/Profile.service.ts":
+/*!********************************************************************!*\
+  !*** ./AngularAssociate/app/services/associate/Profile.service.ts ***!
+  \********************************************************************/
+/*! exports provided: ProfileService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProfileService", function() { return ProfileService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _entities_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../entities/user */ "./AngularAssociate/app/entities/user.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../auth */ "./AngularAssociate/app/services/auth/index.ts");
+
+
+
+
+
+
+
+
+var ProfileService = /** @class */ (function () {
+    function ProfileService(user, apiService, http, jwtService, router) {
+        if (user === void 0) { user = null; }
+        if (apiService === void 0) { apiService = null; }
+        if (http === void 0) { http = null; }
+        if (jwtService === void 0) { jwtService = null; }
+        this.user = user;
+        this.apiService = apiService;
+        this.http = http;
+        this.jwtService = jwtService;
+        this.router = router;
+        this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]({});
+        this.currentUser = this.currentUserSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["distinctUntilChanged"])());
+        this.isAuthenticatedSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
+        this.isAuthenticated_extra = false;
+    }
+    ProfileService.prototype.verifyNavSidebarAccessible = function () {
+        var urlToCountInterestedCustomers = "ws/AssociateRegistration.asmx/ViewAssociateBasicDetails";
+        return this.apiService.post(urlToCountInterestedCustomers, {})
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //interested consumer
+    ProfileService.prototype.getUserDetails = function () {
+        var urlToCountAssociateCategories = "ws/AssociateRegistration.asmx/ViewAssociateBasicDetails";
+        return this.apiService.post(urlToCountAssociateCategories, {})
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //select categories
+    ProfileService.prototype.updateProfileinfo = function (FirstName, LastName, PhoneNumber, email, Password, LicenseNumber, IssuingState, profileImage) {
+        var urlToCountAssociateCategories = "ws/AssociateRegistration.asmx/UpdateAssociate";
+        return this.apiService.post(urlToCountAssociateCategories, { 'FullName': FirstName, 'LastName': LastName, 'Password': Password, 'EmailID': email, 'MobileNo': PhoneNumber, 'LicenceID': LicenseNumber, 'LicenceState': IssuingState, 'ZipCode': '0' })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    };
+    ProfileService.prototype.uploadimage = function (image) {
+        //
+        var urlToUploadImage = "ws/UpdatePic.ashx";
+        return this.apiService.post(urlToUploadImage, { data: image })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    };
+    ProfileService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_entities_user__WEBPACK_IMPORTED_MODULE_4__["User"],
+            _auth__WEBPACK_IMPORTED_MODULE_7__["ApiService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _auth__WEBPACK_IMPORTED_MODULE_7__["JwtService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+    ], ProfileService);
+    return ProfileService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./AngularAssociate/app/services/associate/client-details.service.ts":
+/*!***************************************************************************!*\
+  !*** ./AngularAssociate/app/services/associate/client-details.service.ts ***!
+  \***************************************************************************/
+/*! exports provided: ClientDetailsService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientDetailsService", function() { return ClientDetailsService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var _entities_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../entities/user */ "./AngularAssociate/app/entities/user.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../auth */ "./AngularAssociate/app/services/auth/index.ts");
+
+
+
+
+
+
+
+
+var ClientDetailsService = /** @class */ (function () {
+    function ClientDetailsService(user, apiService, http, jwtService, router) {
+        if (user === void 0) { user = null; }
+        if (apiService === void 0) { apiService = null; }
+        if (http === void 0) { http = null; }
+        if (jwtService === void 0) { jwtService = null; }
+        this.user = user;
+        this.apiService = apiService;
+        this.http = http;
+        this.jwtService = jwtService;
+        this.router = router;
+        this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]({});
+        this.currentUser = this.currentUserSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["distinctUntilChanged"])());
+        this.isAuthenticatedSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
+        this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
+        this.isAuthenticated_extra = false;
+    }
+    ClientDetailsService.prototype.getServicesCount = function () {
+        var urlToCountAssociateCategories = "Associate/ws/Sale.asmx/CountTotalVisitorsSales";
+        return this.apiService.post(urlToCountAssociateCategories, { jobtype: 2 })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //interested consumer services
+    ClientDetailsService.prototype.getSalesCount = function () {
+        var urlToSalesCount = "Associate/ws/Sale.asmx/CountTotalVisitorsSales";
+        return this.apiService.post(urlToSalesCount, { jobtype: 1 })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //interested consumer sales
+    ClientDetailsService.prototype.getTotalSalesAndServicesCount = function () {
+        var urlToSalesCount = "Associate/ws/Sale.asmx/CountTotalVisitors";
+        return this.apiService.post(urlToSalesCount, { jobtype: 1 })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //interested consumer
+    ClientDetailsService.prototype.getClientDetailsSalesData = function () {
+        var urlToClientDetailsSalesData = "Associate/ws/Sale.asmx/GetVisitorsInfo";
+        return this.apiService.post(urlToClientDetailsSalesData, {})
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //interested consumer Sales data
+    ClientDetailsService.prototype.getClientDetailsServicesData = function () {
+        var urlToClientDetailsServicesData = "Associate/ws/Sale.asmx/GetVisitorsInfoServices";
+        return this.apiService.post(urlToClientDetailsServicesData, {})
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //interested consumer Servces data
+    ClientDetailsService.prototype.deleteCustomerRecords = function (id) {
+        var urlToClientDetailsServicesData = "Associate/ws/Sale.asmx/DeleteCustomerRecords";
+        return this.apiService.post(urlToClientDetailsServicesData, { ID: id })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //delete data
+    ClientDetailsService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_entities_user__WEBPACK_IMPORTED_MODULE_4__["User"],
+            _auth__WEBPACK_IMPORTED_MODULE_7__["ApiService"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _auth__WEBPACK_IMPORTED_MODULE_7__["JwtService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+    ], ClientDetailsService);
+    return ClientDetailsService;
+}());
+
+
+
+/***/ }),
+
 /***/ "./AngularAssociate/app/services/associate/dashboard.service.ts":
 /*!**********************************************************************!*\
   !*** ./AngularAssociate/app/services/associate/dashboard.service.ts ***!
@@ -4194,35 +4781,35 @@ var DashboardService = /** @class */ (function () {
         this.isAuthenticated_extra = false;
     }
     DashboardService.prototype.attemptToCountInterestedCustomers = function () {
-        var urlToCountInterestedCustomers = "ws/Sale.asmx/CountTotalVisitors";
+        var urlToCountInterestedCustomers = "Associate/ws/Sale.asmx/CountTotalVisitors";
         return this.apiService.post(urlToCountInterestedCustomers, {})
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
             return data;
         }));
     }; //interested consumer
     DashboardService.prototype.attemptToCountAssociateCategories = function () {
-        var urlToCountAssociateCategories = "ws/Sale.asmx/CountAssociateCategories";
+        var urlToCountAssociateCategories = "Associate/ws/Sale.asmx/CountAssociateCategories";
         return this.apiService.post(urlToCountAssociateCategories, {})
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
             return data;
         }));
     }; //select categories
     DashboardService.prototype.attemptToCountPurchasedCategories = function () {
-        var urlToCountAssociateCategories = "ws/MyCategories.asmx/CountPurchasedCategories";
+        var urlToCountAssociateCategories = "Associate/ws/MyCategories.asmx/CountPurchasedCategories";
         return this.apiService.post(urlToCountAssociateCategories, { jobtype: 1 })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
             return data;
         }));
     }; //purchase property listings
     DashboardService.prototype.attemptToCountPurchaseZipCode = function () {
-        var urlToCountPurchaseZipCode = "ws/MyCategories.asmx/CountPurchasedZipCode";
+        var urlToCountPurchaseZipCode = "Associate/ws/MyCategories.asmx/CountPurchasedZipCode";
         return this.apiService.post(urlToCountPurchaseZipCode, {})
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
             return data;
         }));
     }; //zip codes
     DashboardService.prototype.attemptToCountAllPurchasedCategories = function () {
-        var urlToCountAllPurchasedCategories = "ws/MyCategories.asmx/CountAllPurchasedCategories";
+        var urlToCountAllPurchasedCategories = "Associate/ws/MyCategories.asmx/CountAllPurchasedCategories";
         return this.apiService.post(urlToCountAllPurchasedCategories, {})
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
             return data;

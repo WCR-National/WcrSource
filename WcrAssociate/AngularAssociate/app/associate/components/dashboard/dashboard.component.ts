@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
 
     }
     ngOnInit() {
+        debugger;
         this.attemptToCountInterestedCustomers();
 
         this.attemptToCountAssociateCategories();
@@ -146,11 +147,11 @@ export class DashboardComponent implements OnInit {
                         $.each(docs, function (i, docs) {
                             CountPurchasedZipcodes = ($(docs).find("Total").text());
                         });
-                        this.myPropertyListings = CountPurchasedZipcodes;
+                        this.myZipCodes = CountPurchasedZipcodes;
                         //$("#divServicesCount").html(cartd.join(''));
                     }
                     else {
-                        this.myPropertyListings = CountPurchasedZipcodes;
+                        this.myZipCodes = CountPurchasedZipcodes;
                     }
                 });
     }
@@ -186,6 +187,7 @@ export class DashboardComponent implements OnInit {
             .attemptToInterestedCustomerData()
             .then((data: any) => {
                 if (data.d.length > 0) {
+                    debugger;
                     let added: Boolean = false;
                     var xmlDoc = $.parseXML(data.d);
                     var json = this.xmlToJson.xml2json(xmlDoc, "");
@@ -195,7 +197,7 @@ export class DashboardComponent implements OnInit {
                         .attemptToInterestedCustomerServicesData()
                         .then((data: any) => {
                             if (data.d.length > 0) {
-
+                                debugger;
                                 var xmlDoc = $.parseXML(data.d);
                                 var json = this.xmlToJson.xml2json(xmlDoc, "");
 
@@ -206,50 +208,52 @@ export class DashboardComponent implements OnInit {
                                 this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
                                 added = true;
                             }
+                            else {
+                                this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                            }
                         });
-                    if (!added) {
-                        this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
-                    }
                 }
             });
     }
 
     initialiseInterestedCustomerDataTable(asyncData) {
+        debugger;
         let dataTable: any = $('#interestedCustomers');
-
+        if (asyncData === undefined) {
+            asyncData = {
+                'name': '',
+                'Mob': "",
+                'EmailID': "",
+                'title': "",
+                'categoryName': "",
+                'SubCategory':''
+            };
+        }
         dataTable.DataTable({
             data: asyncData,
             columns: [
                 {
-                    title: 'Name',
                     data: "name",
                 },
                 {
-                    title: 'Mobile',
                     data: "Mob",
                 },
                 {
-                    title: 'Email',
                     data: "EmailID",
                 },
                 {
-                    title: 'Title',
                     data: "title",
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryName",
                 },
                 {
-                    title: 'Sub Category',
                     data: "SubCategory",
                 },
             ],
-            "columnDefs": [{
-                "searchable": false,
-                "orderable": false,
-                "targets": 0
-            }],
+            searching: false,
+            paging: false,
+            info: false,
             order: [[1, 'asc']]
         });
 
@@ -273,20 +277,24 @@ export class DashboardComponent implements OnInit {
 
     initialiseCategoriesDataTable(asyncData) {
         let dataTable: any = $('#selectedCategories');
-
+        if (asyncData === undefined) {
+            asyncData = {
+                'categoryname': '',
+                'Name': "",
+            };
+        }
         dataTable.DataTable({
             data: asyncData,
             columns: [
                 {
-                    title: 'Category/SubCategory',
                     data: "categoryname/Name",
+                    "defaultContent": ""
                 }
             ],
-            "columnDefs": [{
-                "searchable": false,
-                "orderable": false,
-                "targets": 0
-            }],
+            
+            searching: false,
+            paging: false,
+            info: false,
             order: [[1, 'asc']]
         });
     }
@@ -311,46 +319,60 @@ export class DashboardComponent implements OnInit {
     initialiseMyPropertyListingsTable(asyncData) {
 
         let dataTable: any = $('#myPropertyListings');
+        if (asyncData === undefined) {
+            asyncData = {
+                'S.N' : '',
+                'title': "",
+                'categoryname': "",
+                'ZipCode': "",
+                'Amount':''
+            };
+        }
         dataTable.DataTable({
             data: asyncData,
             columns: [
                 {
                     title: 'S.N',
                     data: "",
+                    "defaultContent": ""
                 },
                 {
                     title: 'title',
                     data: "title",
+                    "defaultContent": ""
                 },
                 {
                     title: 'Category Name',
                     data: "categoryname",
+                    "defaultContent": ""
                 },
                 {
                     title: 'Zip Code',
                     data: "ZipCode",
+                    "defaultContent": ""
                 },
                 {
                     title: 'Category Name',
                     data: "categoryName",
+                    "defaultContent": ""
                 },
                 {
                     title: 'Amount',
                     data: "Amount",
+                    "defaultContent": ""
                 },
             ],
-            "columnDefs": [{
-                "searchable": false,
-                "orderable": false,
-                "targets": 0
-            }],
+            
+            searching: false,
+            paging: false,
+            info: false,
             order: [[1, 'asc']]
         });
-        dataTable.on('order.dt search.dt', function () {
-            dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
+        //dataTable.on('order.dt search.dt', function () {
+        //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        //        cell.innerHTML = i + 1;
+        //    });
+        //}).draw();
 
     }
 
@@ -368,43 +390,18 @@ export class DashboardComponent implements OnInit {
                     this.initialiseTable(dataJson.PurCategories);
                 }
             });
-        //chk = 1;
-        //var xml = $(xmlDoc);
-        //var docs = xml.find("PurCategories");
-        //var cartd = [];
-        //cartd.push("<table class='table table-condensed data-table' style='width:100%'>");
-        //cartd.push("<tr>");
-        //// cartd.push("<td style='color: white; background-color: skyblue' ><strong>S.N</strong></td>");
-        //cartd.push("<th  style='width:80px;' class='uk-width-2-10 uk-text-center'> Zip Code </th>");
-        //cartd.push("<th  class='uk-width-2-10 uk-text-center'> Category/SubCategory </th>");
-        //cartd.push("<th  class='uk-width-2-10 uk-text-center'> Cost </th>");
-        //cartd.push("</tr>");
-        //// var cc = 0;
-        //var count = 1;
-        //var Totalamount = 0;
-        //$.each(dataJson.PurCategories, function (i, docs) {
-        //    cartd.push("<tr>");
-        //    // cartd.push("<td class='uk-text-center'>" + count + "</td>");
-        //    cartd.push("<td class='uk-text-center'> " + ($(docs).find("zipcode").text()) + " </td>");
-        //    cartd.push("<td class='uk-text-center'> " + ($(docs).find("categoryname").text()) + "/" + ($(docs).find("Name").text()) + " </td>");
-        //    cartd.push("<td class='uk-text-center'>$" + ($(docs).find("amount").text()) + " </td>");
-        //    cartd.push("</tr>");
-        //    count++;
-        //    Totalamount += parseInt($(docs).find("amount").text());
-        //});
-        //cartd.push("<tr>");
-        //cartd.push("<td class='uk-text-center total'> <strong> TOTAL </strong> </td>");
-        //cartd.push("<td class='uk-text-center'>  </td>");
-        //cartd.push("<td class='uk-text-center'><strong>  $" + Totalamount + " </strong> </td>");
-        //cartd.push("</tr>");
-        //cartd.push("</table>");
-        //$("#divShowPostedAdvertisementsServices").html(cartd.join(''));
 
     }
 
     initialiseTable(asyncData) {
         let dataTable: any = $('#myZipCode');
-
+        if (asyncData === undefined) {
+            asyncData = {
+                'zipcode': '',
+                'categoryname': "",
+                'amount': ""
+            };
+        }
         dataTable.DataTable({
             data: asyncData,
             columns: [
@@ -415,29 +412,30 @@ export class DashboardComponent implements OnInit {
                 {
                     title: 'Zip Code',
                     data: "zipcode",
+                    "defaultContent": ""
                 },
                 {
                     title: 'Category Name',
-                    data: "categoryname"
+                    data: "categoryname",
+                    "defaultContent": ""
                 },
                 {
                     title: 'Cost',
-                    data: "amount"
+                    data: "amount",
+                    "defaultContent": ""
                 }
             ],
-            "columnDefs": [{
-                "searchable": false,
-                "orderable": false,
-                "targets": 0
-            }],
+            searching: false,
+            paging: false,
+            info: false,
             order: [[1, 'asc']]
         });
 
-        dataTable.on('order.dt search.dt', function () {
-            dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
+        //dataTable.on('order.dt search.dt', function () {
+        //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
+        //        cell.innerHTML = i + 1;
+        //    });
+        //}).draw();
 
     }
 

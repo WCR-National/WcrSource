@@ -128,27 +128,21 @@ export class ClientDetailsComponent implements OnInit {
             columns: [
                 { data: 'id', "visible": false },
                 {
-                    title: 'Name',
                     data: "name",
                 },
                 {
-                    title: 'Phone no',
                     data: "Mob",
                 },
                 {
-                    title: 'Email',
                     data: "EmailID",
                 },
                 {
-                    title: 'Title',
                     data: "title",
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryName",
                 },
                 {
-                    title: 'Sub Category',
                     data: "SubCategory",
                 },
                 {
@@ -157,11 +151,9 @@ export class ClientDetailsComponent implements OnInit {
                     }
                 }
             ],
-            "columnDefs": [{
-                "searchable": false,
-                "orderable": false,
-                "targets": 0
-            }],
+            searching: false,
+            paging: false,
+            info: false,
             order: [[1, 'asc']]
         });
     }
@@ -197,23 +189,18 @@ export class ClientDetailsComponent implements OnInit {
             columns: [
                 { data: 'id', "visible": false},
                 {
-                    title: 'Name',
                     data: "name",
                 },
                 {
-                    title: 'Phone no',
                     data: "Mob",
                 },
                 {
-                    title: 'Email',
                     data: "EmailID",
                 },
                 {
-                    title: 'Zip Code',
                     data: "zipcode",
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryName",
                 },
                 {
@@ -222,11 +209,9 @@ export class ClientDetailsComponent implements OnInit {
                     }
                 }
             ],
-            "columnDefs": [{
-                "searchable": false,
-                "orderable": false,
-                "targets": 0
-            }],
+            searching: false,
+            paging: false,
+            info: false,
             order: [[1, 'asc']]
         });
     }

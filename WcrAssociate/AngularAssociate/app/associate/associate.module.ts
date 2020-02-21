@@ -14,6 +14,10 @@ import { SidebarComponent } from './associate-sidebar';
 import { AssociateHeaderComponent } from './associate-header';
 import { DashboardService } from '../services/associate/dashboard.service';
 import { ProfileService } from '../services/associate/Profile.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatMenuModule, MatDatepickerModule } from '@angular/material';
+import { ClientDetailsService } from '../services/associate/client-details.service';
 
 //import { CustomValidator } from './validators';
 
@@ -24,6 +28,14 @@ import { ProfileService } from '../services/associate/Profile.service';
 @NgModule({
 
     imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatDatepickerModule,
         CommonModule,
         FormsModule,
         HttpClientModule,
@@ -43,6 +55,7 @@ import { ProfileService } from '../services/associate/Profile.service';
         JwtService,
         DashboardService,
         ProfileService,
+        ClientDetailsService,
         MessageService
     ]
 })

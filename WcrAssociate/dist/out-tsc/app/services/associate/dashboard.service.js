@@ -62,7 +62,7 @@ var DashboardService = /** @class */ (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToCountAllPurchasedCategories;
             return tslib_1.__generator(this, function (_a) {
-                urlToCountAllPurchasedCategories = "ws/MyCategories.asmx/MuPurchaseCategories";
+                urlToCountAllPurchasedCategories = "Associate/ws/MyCategories.asmx/MuPurchaseCategories";
                 return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, { 'JobType': '2' }).toPromise()];
             });
         });
@@ -71,7 +71,7 @@ var DashboardService = /** @class */ (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToCountAllPurchasedCategories;
             return tslib_1.__generator(this, function (_a) {
-                urlToCountAllPurchasedCategories = "ws/MyCategories.asmx/AllPurchasedCategories";
+                urlToCountAllPurchasedCategories = "Associate/ws/MyCategories.asmx/AllPurchasedCategories";
                 return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise()];
             });
         });
@@ -80,7 +80,7 @@ var DashboardService = /** @class */ (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetVisitorsInfo;
             return tslib_1.__generator(this, function (_a) {
-                urlToGetVisitorsInfo = "ws/Sale.asmx/GetVisitorsInfo";
+                urlToGetVisitorsInfo = "Associate/ws/Sale.asmx/GetVisitorsInfo";
                 return [2 /*return*/, this.apiService.post(urlToGetVisitorsInfo, {}).toPromise()];
             });
         });
@@ -89,7 +89,7 @@ var DashboardService = /** @class */ (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetVisitorsInfoServices;
             return tslib_1.__generator(this, function (_a) {
-                urlToGetVisitorsInfoServices = "ws/Sale.asmx/GetVisitorsInfoServices";
+                urlToGetVisitorsInfoServices = "Associate/ws/Sale.asmx/GetVisitorsInfoServices";
                 return [2 /*return*/, this.apiService.post(urlToGetVisitorsInfoServices, {}).toPromise()];
             });
         });
@@ -98,7 +98,7 @@ var DashboardService = /** @class */ (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToCountAllPurchasedCategories;
             return tslib_1.__generator(this, function (_a) {
-                urlToCountAllPurchasedCategories = "ws/Sale.asmx/SelectAdvertisement";
+                urlToCountAllPurchasedCategories = "Associate/ws/Sale.asmx/SelectAdvertisement";
                 return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, { Jobtype: 1 }).toPromise()];
             });
         });
@@ -107,7 +107,7 @@ var DashboardService = /** @class */ (function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToCountAllPurchasedCategories;
             return tslib_1.__generator(this, function (_a) {
-                urlToCountAllPurchasedCategories = "ws/Sale.asmx/SelectAllAdvertisement";
+                urlToCountAllPurchasedCategories = "Associate/ws/Sale.asmx/SelectAllAdvertisement";
                 return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise()];
             });
         });
@@ -118,7 +118,7 @@ var DashboardService = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        urlToSignUp = "ws/AssociateRegistration.asmx/ConsumerAccountExists";
+                        urlToSignUp = "Associate/ws/AssociateRegistration.asmx/ConsumerAccountExists";
                         return [4 /*yield*/, this.apiService.post(urlToSignUp, { EmailID: credentials.email }).toPromise()];
                     case 1: // + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
                     return [2 /*return*/, _a.sent()];

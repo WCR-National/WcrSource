@@ -29,54 +29,10 @@ export class ClientDetailsService {
         private jwtService: JwtService = null,
         private router: Router) { }
   
-    verifyNavSidebarAccessible(): Observable<any> {
-
-        let urlToCountInterestedCustomers: string = "ws/AssociateRegistration.asmx/ViewAssociateBasicDetails";
-        return this.apiService.post(urlToCountInterestedCustomers, {})
-            .pipe(map(
-                data => {
-                    return data;
-                }
-            ));
-    } //interested consumer
-
-    getUserDetails(): Observable<any> {
-
-        let urlToCountAssociateCategories: string = "ws/AssociateRegistration.asmx/ViewAssociateBasicDetails";
-        return this.apiService.post(urlToCountAssociateCategories, {})
-            .pipe(map(
-                data => {
-                    return data;
-                }
-            ));
-    } //select categories
-
-    updateProfileinfo(FirstName, LastName, PhoneNumber, email, Password, LicenseNumber, IssuingState, profileImage) {
-        let urlToCountAssociateCategories: string = "ws/AssociateRegistration.asmx/UpdateAssociate";
-        return this.apiService.post(urlToCountAssociateCategories, { 'FullName': FirstName, 'LastName': LastName, 'Password': Password, 'EmailID': email, 'MobileNo': PhoneNumber, 'LicenceID': LicenseNumber, 'LicenceState': IssuingState , 'ZipCode': '0'})
-            .pipe(map(
-                data => {
-                    return data;
-                }
-            ));
-    }
-
-    uploadimage(image) {
-        //
-        
-        let urlToUploadImage: string = "ws/UpdatePic.ashx";
-        return this.apiService.post(urlToUploadImage, { data: image })
-            .pipe(map(
-                data => {
-                    return data;
-                }
-            ));
-    }
-
-
+    
     getServicesCount(): Observable<any> {
 
-        let urlToCountAssociateCategories: string = "ws/Sale.asmx/CountTotalVisitorsSales";
+        let urlToCountAssociateCategories: string = "Associate/ws/Sale.asmx/CountTotalVisitorsSales";
         return this.apiService.post(urlToCountAssociateCategories, { jobtype: 2 })
             .pipe(map(
                 data => {
@@ -87,7 +43,7 @@ export class ClientDetailsService {
 
     getSalesCount(): Observable<any> {
 
-        let urlToSalesCount: string = "ws/Sale.asmx/CountTotalVisitorsSales";
+        let urlToSalesCount: string = "Associate/ws/Sale.asmx/CountTotalVisitorsSales";
         return this.apiService.post(urlToSalesCount, { jobtype: 1})
             .pipe(map(
                 data => {
@@ -98,7 +54,7 @@ export class ClientDetailsService {
 
     getTotalSalesAndServicesCount(): Observable<any> {
 
-        let urlToSalesCount: string = "ws/Sale.asmx/CountTotalVisitors";
+        let urlToSalesCount: string = "Associate/ws/Sale.asmx/CountTotalVisitors";
         return this.apiService.post(urlToSalesCount, { jobtype: 1 })
             .pipe(map(
                 data => {
@@ -110,7 +66,7 @@ export class ClientDetailsService {
 
     getClientDetailsSalesData(): Observable<any> {
 
-        let urlToClientDetailsSalesData: string = "ws/Sale.asmx/GetVisitorsInfo";
+        let urlToClientDetailsSalesData: string = "Associate/ws/Sale.asmx/GetVisitorsInfo";
         return this.apiService.post(urlToClientDetailsSalesData, { })
             .pipe(map(
                 data => {
@@ -121,7 +77,7 @@ export class ClientDetailsService {
 
     getClientDetailsServicesData(): Observable<any> {
 
-        let urlToClientDetailsServicesData: string = "ws/Sale.asmx/GetVisitorsInfoServices";
+        let urlToClientDetailsServicesData: string = "Associate/ws/Sale.asmx/GetVisitorsInfoServices";
         return this.apiService.post(urlToClientDetailsServicesData, {})
             .pipe(map(
                 data => {
@@ -132,7 +88,7 @@ export class ClientDetailsService {
 
     deleteCustomerRecords(id): Observable<any> {
 
-        let urlToClientDetailsServicesData: string = "/ws/Sale.asmx/DeleteCustomerRecords";
+        let urlToClientDetailsServicesData: string = "Associate/ws/Sale.asmx/DeleteCustomerRecords";
         return this.apiService.post(urlToClientDetailsServicesData, { ID: id })
             .pipe(map(
                 data => {

@@ -929,7 +929,8 @@ var AuthComponent = /** @class */ (function () {
             selector: 'app-auth-page',
             templateUrl: './auth.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder, HttpClient])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder,
+            HttpClient])
     ], AuthComponent);
     return AuthComponent;
 }());
