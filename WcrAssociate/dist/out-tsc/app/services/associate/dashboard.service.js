@@ -23,36 +23,44 @@ var DashboardService = /** @class */ (function () {
         this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
         this.isAuthenticated_extra = false;
     }
+    //
+    DashboardService.prototype.initializeHeader = function () {
+        var urlToCountHeader = "ws/AssociateRegistration.asmx/ViewAssociateBasicDetails";
+        return this.apiService.post(urlToCountHeader, {})
+            .pipe(map(function (data) {
+            return data;
+        }));
+    }; //select categories
     DashboardService.prototype.attemptToCountInterestedCustomers = function () {
-        var urlToCountInterestedCustomers = "ws/Sale.asmx/CountTotalVisitors";
+        var urlToCountInterestedCustomers = "Associate/ws/Sale.asmx/CountTotalVisitors";
         return this.apiService.post(urlToCountInterestedCustomers, {})
             .pipe(map(function (data) {
             return data;
         }));
     }; //interested consumer
     DashboardService.prototype.attemptToCountAssociateCategories = function () {
-        var urlToCountAssociateCategories = "ws/Sale.asmx/CountAssociateCategories";
+        var urlToCountAssociateCategories = "Associate/ws/Sale.asmx/CountAssociateCategories";
         return this.apiService.post(urlToCountAssociateCategories, {})
             .pipe(map(function (data) {
             return data;
         }));
     }; //select categories
     DashboardService.prototype.attemptToCountPurchasedCategories = function () {
-        var urlToCountAssociateCategories = "ws/MyCategories.asmx/CountPurchasedCategories";
+        var urlToCountAssociateCategories = "Associate/ws/MyCategories.asmx/CountPurchasedCategories";
         return this.apiService.post(urlToCountAssociateCategories, { jobtype: 1 })
             .pipe(map(function (data) {
             return data;
         }));
     }; //purchase property listings
     DashboardService.prototype.attemptToCountPurchaseZipCode = function () {
-        var urlToCountPurchaseZipCode = "ws/MyCategories.asmx/CountPurchasedZipCode";
+        var urlToCountPurchaseZipCode = "Associate/ws/MyCategories.asmx/CountPurchasedZipCode";
         return this.apiService.post(urlToCountPurchaseZipCode, {})
             .pipe(map(function (data) {
             return data;
         }));
     }; //zip codes
     DashboardService.prototype.attemptToCountAllPurchasedCategories = function () {
-        var urlToCountAllPurchasedCategories = "ws/MyCategories.asmx/CountAllPurchasedCategories";
+        var urlToCountAllPurchasedCategories = "Associate/ws/MyCategories.asmx/CountAllPurchasedCategories";
         return this.apiService.post(urlToCountAllPurchasedCategories, {})
             .pipe(map(function (data) {
             return data;

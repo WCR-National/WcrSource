@@ -37,7 +37,7 @@ var ProfileService = /** @class */ (function () {
             return data;
         }));
     }; //select categories
-    ProfileService.prototype.updateProfileinfo = function (FirstName, LastName, PhoneNumber, email, Password, LicenseNumber, IssuingState, profileImage) {
+    ProfileService.prototype.updateProfileinfo = function (FirstName, LastName, PhoneNumber, email, Password, LicenseNumber, IssuingState) {
         var urlToCountAssociateCategories = "ws/AssociateRegistration.asmx/UpdateAssociate";
         return this.apiService.post(urlToCountAssociateCategories, { 'FullName': FirstName, 'LastName': LastName, 'Password': Password, 'EmailID': email, 'MobileNo': PhoneNumber, 'LicenceID': LicenseNumber, 'LicenceState': IssuingState, 'ZipCode': '0' })
             .pipe(map(function (data) {

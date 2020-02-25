@@ -29,6 +29,18 @@ export class DashboardService {
         private router: Router) { }
 
 
+    //
+    initializeHeader(): Observable<any> {
+
+        let urlToCountHeader: string = "ws/AssociateRegistration.asmx/ViewAssociateBasicDetails";
+        return this.apiService.post(urlToCountHeader, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    } //select categories
+
 
     attemptToCountInterestedCustomers(): Observable<any> {
 
@@ -40,6 +52,7 @@ export class DashboardService {
                 }
             ));
     } //interested consumer
+
 
     attemptToCountAssociateCategories(): Observable<any> {
 

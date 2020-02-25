@@ -1,180 +1,636 @@
-﻿<div class="content-body content-body-profile">
-    <div class="profile-sidebar">
+﻿<style>
+    .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.874rem + 2px);
+        padding: 0.437rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #454f5b;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #d9dfe7;
+        border-radius: 0;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .form-control {
+            transition: none;
+        }
+    }
+
+    .form-control:focus, .form-control:hover {
+    }
+
+    .form-control::-ms-expand {
+        background-color: transparent;
+        border: 0;
+    }
+
+    .form-control:focus {
+        color: #454f5b;
+        background-color: #fff;
+        border-color: #c4cdd6;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(85, 86, 253, 0.25);
+    }
+
+    .form-control::placeholder {
+        color: #637382;
+        opacity: 1;
+    }
+
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #e9ecf1;
+        opacity: 1;
+    }
+
+    select.form-control:focus::-ms-value {
+        color: #454f5b;
+        background-color: #fff;
+    }
+
+    .form-control-file,
+    .form-control-range {
+        display: block;
+        width: 100%;
+    }
+
+    .col-form-label {
+        padding-top: calc(0.437rem + 1px);
+        padding-bottom: calc(0.437rem + 1px);
+        margin-bottom: 0;
+        font-size: inherit;
+        line-height: 1.5;
+    }
+
+    .col-form-label-lg {
+        padding-top: calc(0.5rem + 1px);
+        padding-bottom: calc(0.5rem + 1px);
+        font-size: 1.09375rem;
+        line-height: 1.5;
+    }
+
+    .col-form-label-sm {
+        padding-top: calc(0.25rem + 1px);
+        padding-bottom: calc(0.25rem + 1px);
+        font-size: 0.8125rem;
+        line-height: 1.5;
+    }
+
+    .form-control-plaintext {
+        display: block;
+        width: 100%;
+        padding-top: 0.437rem;
+        padding-bottom: 0.437rem;
+        margin-bottom: 0;
+        line-height: 1.5;
+        color: #373857;
+        background-color: transparent;
+        border: solid transparent;
+        border-width: 1px 0;
+    }
+
+        .form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+    .form-control-sm {
+        height: calc(1.5em + 0.5rem + 2px);
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        border-radius: 0;
+    }
+
+    .form-control-lg {
+        height: calc(1.5em + 1rem + 2px);
+        padding: 0.5rem 1rem;
+        font-size: 1.09375rem;
+        line-height: 1.5;
+        border-radius: 0;
+    }
+
+    select.form-control[size], select.form-control[multiple] {
+        height: auto;
+    }
+
+    textarea.form-control {
+        height: auto;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-text {
+        display: block;
+        margin-top: 0.25rem;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -5px;
+        margin-left: -5px;
+    }
+
+        .form-row > .col,
+        .form-row > [class*="col-"] {
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+    .form-check {
+        position: relative;
+        display: block;
+        padding-left: 1.25rem;
+    }
+
+    .form-check-input {
+        position: absolute;
+        margin-top: 0.3rem;
+        margin-left: -1.25rem;
+    }
+
+        .form-check-input:disabled ~ .form-check-label {
+            color: #637382;
+        }
+
+    .form-check-label {
+        margin-bottom: 0;
+    }
+
+    .form-check-inline {
+        display: inline-flex;
+        align-items: center;
+        padding-left: 0;
+        margin-right: 0.75rem;
+    }
+
+        .form-check-inline .form-check-input {
+            position: static;
+            margin-top: 0;
+            margin-right: 0.3125rem;
+            margin-left: 0;
+        }
+
+    .valid-feedback {
+        display: none;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 80%;
+        color: #28a745;
+    }
+
+    .valid-tooltip {
+        position: absolute;
+        top: 100%;
+        z-index: 5;
+        display: none;
+        max-width: 100%;
+        padding: 0.25rem 0.5rem;
+        margin-top: .1rem;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: #fff;
+        background-color: rgba(40, 167, 69, 0.9);
+        border-radius: 0;
+    }
+
+    .was-validated .form-control:valid, .form-control.is-valid {
+        border-color: #28a745;
+        padding-right: calc(1.5em + 0.874rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: center right calc(0.375em + 0.2185rem);
+        background-size: calc(0.75em + 0.437rem) calc(0.75em + 0.437rem);
+    }
+
+        .was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+        .was-validated .form-control:valid ~ .valid-feedback,
+        .was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback,
+        .form-control.is-valid ~ .valid-tooltip {
+            display: block;
+        }
+
+    .was-validated textarea.form-control:valid, textarea.form-control.is-valid {
+        padding-right: calc(1.5em + 0.874rem);
+        background-position: top calc(0.375em + 0.2185rem) right calc(0.375em + 0.2185rem);
+    }
+
+    .was-validated .custom-select:valid, .custom-select.is-valid {
+        border-color: #28a745;
+        padding-right: calc((1em + 0.874rem) * 3 / 4 + 1.75rem);
+        background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23363d47' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center/8px 10px, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") #fff no-repeat center right 1.75rem/calc(0.75em + 0.437rem) calc(0.75em + 0.437rem);
+    }
+
+        .was-validated .custom-select:valid:focus, .custom-select.is-valid:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+        .was-validated .custom-select:valid ~ .valid-feedback,
+        .was-validated .custom-select:valid ~ .valid-tooltip, .custom-select.is-valid ~ .valid-feedback,
+        .custom-select.is-valid ~ .valid-tooltip {
+            display: block;
+        }
+
+    .was-validated .form-control-file:valid ~ .valid-feedback,
+    .was-validated .form-control-file:valid ~ .valid-tooltip, .form-control-file.is-valid ~ .valid-feedback,
+    .form-control-file.is-valid ~ .valid-tooltip {
+        display: block;
+    }
+
+    .was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
+        color: #28a745;
+    }
+
+    .was-validated .form-check-input:valid ~ .valid-feedback,
+    .was-validated .form-check-input:valid ~ .valid-tooltip, .form-check-input.is-valid ~ .valid-feedback,
+    .form-check-input.is-valid ~ .valid-tooltip {
+        display: block;
+    }
+
+    .was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {
+        color: #28a745;
+    }
+
+        .was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {
+            border-color: #28a745;
+        }
+
+    .was-validated .custom-control-input:valid ~ .valid-feedback,
+    .was-validated .custom-control-input:valid ~ .valid-tooltip, .custom-control-input.is-valid ~ .valid-feedback,
+    .custom-control-input.is-valid ~ .valid-tooltip {
+        display: block;
+    }
+
+    .was-validated .custom-control-input:valid:checked ~ .custom-control-label::before, .custom-control-input.is-valid:checked ~ .custom-control-label::before {
+        border-color: #34ce57;
+        background-color: #34ce57;
+    }
+
+    .was-validated .custom-control-input:valid:focus ~ .custom-control-label::before, .custom-control-input.is-valid:focus ~ .custom-control-label::before {
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+
+    .was-validated .custom-control-input:valid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-valid:focus:not(:checked) ~ .custom-control-label::before {
+        border-color: #28a745;
+    }
+
+    .was-validated .custom-file-input:valid ~ .custom-file-label, .custom-file-input.is-valid ~ .custom-file-label {
+        border-color: #28a745;
+    }
+
+    .was-validated .custom-file-input:valid ~ .valid-feedback,
+    .was-validated .custom-file-input:valid ~ .valid-tooltip, .custom-file-input.is-valid ~ .valid-feedback,
+    .custom-file-input.is-valid ~ .valid-tooltip {
+        display: block;
+    }
+
+    .was-validated .custom-file-input:valid:focus ~ .custom-file-label, .custom-file-input.is-valid:focus ~ .custom-file-label {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+
+    .avatar-upload {
+        position: relative;
+        max-width: 205px;
+        margin: 50px auto;
+    }
+
+    .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+    }
+
+    #profileImageId {
+        display: none;
+    }
+
+        #profileImageId + label {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            margin-bottom: 0;
+            border-radius: 100%;
+            background: #FFFFFF;
+            border: 1px solid transparent;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            font-weight: normal;
+            transition: all .2s ease-in-out;
+        }
+
+            #profileImageId + label:hover {
+                background: #f1f1f1;
+                border-color: #d6d6d6;
+            }
+
+            #profileImageId + label:after {
+                content: "\f040";
+                font-family: 'FontAwesome';
+                color: #757575;
+                position: absolute;
+                top: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                margin: auto;
+            }
+
+
+    .avatar-preview {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+
+        .avatar-preview > div {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+    .form-control {
+        height: 40px;
+    }
+
+    .form-control {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 0 0 5px;
+        border-width: 0 0 2px 0 !important;
+        /* color: #06072d; */
+    }
+
+        .form-control[_ngcontent-ibt-c1]:focus {
+            color: none;
+            background-color: none;
+            border-color: none;
+            outline: none;
+            box-shadow: none;
+            border: none;
+            color: #454f5b;
+            background-color: #fff !important;
+            border-color: #c4cdd6 !important;
+            outline: 0;
+        }
+    .has-error input:hover, .has-error input:focus {
+        box-shadow:none;
+    }
+    .form-control:focus, .form-control:hover {
+        box-shadow: none;
+    }
+
+</style>
+<div class="content-header justify-content-between">
+    <div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item"><a href="#">Profile</a></li>
+            </ol>
+        </nav>
+        <h4 class="content-title content-title-xs">Profile</h4>
+
+    </div>
+</div><!-- content-header -->
+<div class="content-body content-body-profile" >
+
+    <div class="profile-sidebar mg-t-20" style="background:#fff; height:1000px;">
 
         <div class="profile-sidebar-header">
-            <div class="avatar"><img src="{{profileImage}}" class="rounded-circle" alt=""></div>
-            <h5>Abigail Johnson</h5>
 
-            <div id="status"></div>
-            <input id="profileImageId" type=file class="img-upload-input-bs" editor="#img-upload-panel" target="#image" status="#status" passurl="" pshape="circle" w=300 h=300 size="{150,150}" />
-            <img src="" alt="" id="image" />
+            <div class="avatar-upload">
+                <div class="avatar-edit">
+                    <input type='file' id="profileImageId" accept=".png, .jpg, .jpeg" />
+                    <label for="imageUpload"></label>
+                </div>
+                <div class="avatar-preview">
+                    <!--{{profileImage}}-->
+                    <div id="imagePreview" >
+                    </div>
+                </div>
+            </div>
 
+            <!--<div class="avatar">
+                {{profileImage}}
+                <h5>Abigail Johnson</h5>
+
+                <div id="status"></div>
+                <input id="profileImageId" type=file class="img-upload-input-bs" editor="#img-upload-panel" target="#image" status="#status" passurl="" pshape="circle" w=300 h=300 size="{150,150}" />
+                <img src="" alt="" id="image" />
+            </div>-->
         </div><!-- profile-sidebar-header -->
 
         <div class="profile-sidebar-body">
 
-            <label class="content-label">Contact Information</label>
-            <ul class="list-unstyled profile-info-list mg-b-0">
-                <li><i data-feather="mail"></i> <a href="">{{email}}</a></li>
-                <li><i data-feather="Password"></i> <span class="tx-color-03">{{Password}}</span></li>
+            <label class="content-label pd-l-15 font-weight-bolder tx-16-f">Contact Information</label>
+            <ul class="list-unstyled profile-info-list mg-b-0 pd-l-15 font-weight-bold tx-14" style="">
+                <li><i data-feather="mail"></i> <a href="">Email: {{email}}</a></li>
+                <li><i data-feather="Password"></i> <span class="tx-color-03">Password: {{Password}}</span></li>
             </ul>
-            <ul class="list-unstyled profile-info-list mg-b-0" [style.display]="(!isFormVisible) ? 'display':'none'">
-                <li><i data-feather="FirstName"></i> <span class="tx-color-03">{{FirstName}}</span></li>
-                <li><i data-feather="LastName"></i> <span class="tx-color-03">{{LastName}}</span></li>
-                <li><i data-feather="phone"></i> <a href="">{{PhoneNumber}}</a></li>
-                <li><i data-feather="LicenseNumber"></i> <span class="tx-color-03">{{LicenseNumber}}</span></li>
-                <li><i data-feather="IssuingState"></i> <span class="tx-color-03">{{IssuingState}}</span></li>
+            <ul class="list-unstyled profile-info-list mg-b-0 pd-l-15 font-weight-bold tx-14" [style.display]="(!isFormVisible) ? 'block':'none'">
+                <li><i data-feather="FirstName"></i> <span class="tx-color-03">First Name: {{FirstName}}</span></li>
+                <li><i data-feather="LastName"></i> <span class="tx-color-03">Last Name: {{LastName}}</span></li>
+                <li><i data-feather="phone"></i> <a href="">Mobile No: {{PhoneNumber}}</a></li>
+                <li><i data-feather="LicenseNumber"></i> <span class="tx-color-03">LicenseId: {{LicenseNumber}}</span></li>
+                <li><i data-feather="IssuingState"></i> <span class="tx-color-03">IssuingState: {{IssuingState}}</span></li>
             </ul>
         </div><!-- profile-sidebar-body -->
     </div><!-- profile-sidebar -->
 
 
-    <div class="profile-body" [style.display]="isFormVisible ? 'display':'none'">
-        <div class="profile-body-header">
-            <div class="auth-page mg-b-60-force" [style.display]="edit ? 'display':'none'">
-                <div class="container page">
+    <div class="profile-body">
+        <div class="signup-sidebar-body">
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h2 class="text-xs-center"></h2>
-                        </div>
+            <div id="info">
+                <p>
+                    <b>
+                        Welcome to WCR National.
+                    </b>
+                </p>
+                <p>
+                    Please begin by filling out your profile information.
+                </p>
+                <p>
+                    Once you’ve completed this step, the rest of the Primary Menu items will be fully available for your use.
+                </p>
+                <p>
+                    If you have any issues or concerns, you can contact customer support by clicking the ‘Customer Support’ tab towards the bottom of the menu items list.
+                </p>
+                <p>
+                    Thank you.
+                </p>
+            </div>
+            <div class="profile-body-header" [style.display]="isFormVisible ? 'block':'none'">
+                <div class="auth-page mg-b-60-force">
+                    <div class="container page">
 
-                        <form [formGroup]="profileForm" autocomplete="off" class="pd-t-20">
-                            <fieldset [disabled]="isSubmitting">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h2 class="text-xs-center"></h2>
+                            </div>
+                            <div class="col-sm-12">
+                                <form [formGroup]="profileForm" autocomplete="off" class="pd-t-20">
+                                    <fieldset [disabled]="isSubmitting">
 
-                                <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
-                                    {{formError}}
-                                </div>
+                                        <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
+                                            {{formError}}
+                                        </div>
 
-                                <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
+                                        <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
+                                            <div class="col-sm-6 mg-b-20">
+                                                <label>Firstname</label>
+                                                <input id="firstName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your firstname" formControlName="firstName" (blur)="logValidationErrors()">
+                                            </div>
+                                        </div>
 
-                                    <div class="col-sm-12 mg-b-20">
-                                        <input id="firstName" type="text" class="form-control pd-l-45-force" formControlName="firstName" placeholder="First Name" (blur)="logValidationErrors()" />
-                                    </div>
-                                </div>
+                                        <div class="form-group" [ngClass]="{'has-error': formErrors.lastName}">
 
-                                <div class="form-group" [ngClass]="{'has-error': formErrors.lastName}">
+                                            <div class="col-sm-6 mg-b-20">
+                                                <label>Lastname</label>
+                                                <input id="lastName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your lastname" formControlName="lastName" (blur)="logValidationErrors()">
+                                            </div>
+                                        </div>
 
-                                    <div class="col-sm-12 mg-b-20">
-                                        <input id="lastName" type="text" class="form-control pd-l-45-force" formControlName="lastName" placeholder="Last Name" (blur)="logValidationErrors()" />
-                                    </div>
-                                </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6 mg-b-20">
+                                                <label>Email</label>
+                                                <input id="email" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your email" formControlName="email" (blur)="logValidationErrors()" disabled>
+                                            </div>
+                                        </div>
 
-                                <div class="form-group" [ngClass]="{'has-error': formErrors.email}">
+                                        <div class="col-sm-6 pd-l-0-force pd-r-0-force">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.password}">
+                                                <div class="col-sm-12  mg-b-20">
+                                                    <label>Password</label>
 
-                                    <div class="col-sm-12 mg-b-20">
-                                        <input id="email" type="text" class="form-control pd-l-45-force" formControlName="email" placeholder="Email" (blur)="logValidationErrors()" />
-                                    </div>
-                                </div>
+                                                    <input id="password" placeholder="Enter your password" type="password" class=" form-control pd-l-0-force password"
+                                                           formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
+                                                           autocomplete="new-password">
 
-                                <div class="col-sm-12 pd-l-0-force pd-r-0-force">
-                                    <div class="form-group" [ngClass]="{'has-error': formErrors.password}">
-                                        <div class="col-sm-12  mg-b-20">
-                                            <input id="password" placeholder="Password" type="password" class=" form-control pd-l-45-force" [ngClass]="{'password': (authType == 'register')}" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
-                                                   autocomplete="new-password">
-                                            <span class="large material-icons form-control-feedback icon">lock</span>
+                                                    <div class="col-sm-12 pd-l-0" [style.display]="showErrorsPassword ? 'block':'none'">
+                                                        <label class="col mg-t-5" [ngClass]="profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+                                                            <i class="material-icons">
 
-                                            <!--<label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required')  ? 'text-danger' : 'text-success'">
-                                                <i class="material-icons">
-                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ? 'cancel' :  'check_circle' }}
-                                                </i>
-                                                Password is required
-                                            </label>-->
+                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}
+                                                            </i>
+                                                            Must be at least 8 characters!
+                                                        </label>
+                                                        <label class="col" [ngClass]="profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'">
+                                                            <i class="material-icons">
+                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}
+                                                            </i>
+                                                            Must be less than 20 characters!
+                                                        </label>
+                                                        <label class="col" [ngClass]="profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('number')  ? 'text-danger' : 'text-success'">
+                                                            <i class="material-icons">
+                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}
+                                                            </i>
+                                                            Must contain at least 1 number!
+                                                        </label>
+                                                        <label class="col" [ngClass]="profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'">
+                                                            <i class="material-icons">
+                                                                {{ profileForm.controls['password'].hasError('required') ||  profileForm.controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}
+                                                            </i>
+                                                            Must contain at least 1 in Capital Case!
+                                                        </label>
+                                                        <label class="col" [ngClass]="profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'">
+                                                            <i class="material-icons">
+                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}
+                                                            </i>
+                                                            Must contain at least 1 Letter in Small Case!
+                                                        </label>
 
-                                            <div class="col-sm-12 pd-l-0" [style.display]="showErrorsPassword ? 'block':'none'">
-                                                <label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
-                                                    <i class="material-icons">
-                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}
-                                                    </i>
-                                                    Must be at least 8 characters!
-                                                </label>
-                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'">
-                                                    <i class="material-icons">
-                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}
-                                                    </i>
-                                                    Must be less than 20 characters!
-                                                </label>
-                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'">
-                                                    <i class="material-icons">
-                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}
-                                                    </i>
-                                                    Must contain at least 1 number!
-                                                </label>
-                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'">
-                                                    <i class="material-icons">
-                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}
-                                                    </i>
-                                                    Must contain at least 1 in Capital Case!
-                                                </label>
-                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'">
-                                                    <i class="material-icons">
-                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}
-                                                    </i>
-                                                    Must contain at least 1 Letter in Small Case!
-                                                </label>
+                                                        <label class="col" [ngClass]="profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+                                                            <i class="material-icons">
+                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
+                                                            </i>
+                                                            Must contain at least 1 Special Character!
+                                                        </label>
 
-                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
-                                                    <i class="material-icons">
+                                                    </div>
 
-                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
-                                                    </i>
-                                                    Must contain at least 1 Special Character!
-                                                </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" [ngClass]="{'has-error': formErrors.phoneNo}">
+
+                                            <div class="col-sm-6 mg-b-20">
+                                                <label>Phone number</label>
+                                                <input id="phoneNo" type="text" class="form-control pd-l-0-force" formControlName="phoneNo" placeholder="Enter your phone number" (blur)="logValidationErrors()" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" [ngClass]="{'has-error': formErrors.licenseId}">
+                                            <div class="col-sm-6 mg-b-20">
+                                                <label>License Id</label>
+                                                <input id="licenseId" type="text" class="form-control pd-l-0-force" formControlName="licenseId" placeholder="Enter your license number" (blur)="logValidationErrors()" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" [ngClass]="{'has-error': formErrors.licenseState}">
+                                            <div class="col-sm-12 mg-b-20">
+                                                <label>License State</label>
+                                                <input id="licenseState" type="text" class="form-control pd-l-0-force" formControlName="licenseState" placeholder="Enter your license state" (blur)="logValidationErrors()" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3 pd-l-0-force pd-r-0-force">
+                                            <div class="form-group">
+                                                <div class="col-sm-12 mg-b-20">
+                                                    <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit">
+                                                        <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitProfileForm()">UPDATE PROFILE</span>
+                                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                            <div class="spinner-layer spinner-white-only">
+                                                                <div class="circle-clipper left">
+                                                                    <div class="circle"></div>
+                                                                </div><div class="gap-patch">
+                                                                    <div class="circle"></div>
+                                                                </div><div class="circle-clipper right">
+                                                                    <div class="circle"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
 
                                             </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group" [ngClass]="{'has-error': formErrors.phoneNo}">
-                                    <div class="col-sm-12 mg-b-20">
-                                        <input id="phoneNo" type="text" class="form-control pd-l-45-force" formControlName="phoneNo" placeholder="Phone Number" (blur)="logValidationErrors()" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group" [ngClass]="{'has-error': formErrors.licenseId}">
-                                    <div class="col-sm-12 mg-b-20">
-                                        <input id="licenseId" type="text" class="form-control pd-l-45-force" formControlName="licenseId" placeholder="License Number" (blur)="logValidationErrors()" />
-                                    </div>
-                                </div>
-
-                                <div class="form-group" [ngClass]="{'has-error': formErrors.licenseState}">
-                                    <div class="col-sm-12 mg-b-20">
-                                        <input id="licenseState" type="text" class="form-control pd-l-45-force" formControlName="licenseState" placeholder="License State" (blur)="logValidationErrors()" />
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-12 pd-l-0-force pd-r-0-force">
-                                    <div class="form-group">
-                                        <div class="col-sm-12 mg-b-20">
-                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit" [disabled]="!FormFilledSuccessfully">
-                                                <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitRegistrationForm()">UPDATE PROFILE</span>
-                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
-                                                    <div class="spinner-layer spinner-white-only">
-                                                        <div class="circle-clipper left">
-                                                            <div class="circle"></div>
-                                                        </div><div class="gap-patch">
-                                                            <div class="circle"></div>
-                                                        </div><div class="circle-clipper right">
-                                                            <div class="circle"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </button>
                                         </div>
 
-                                    </div>
-                                </div>
+                                        <!--  -->
+                                    </fieldset>
+                                </form>
 
-                                <!--  -->
-                            </fieldset>
-                        </form>
+                            </div>
+
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
-        </div><!-- profile-body -->
+            </div><!-- profile-body -->
+
+        </div>
+
     </div><!-- content-body -->
 
     <div class="modal fade" id="img-upload-panel">

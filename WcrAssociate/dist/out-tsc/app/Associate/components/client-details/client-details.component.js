@@ -13,6 +13,7 @@ var ClientDetailsComponent = /** @class */ (function () {
         this.salesCount = '';
         this.servicesCount = '';
         this.TotalCount = '';
+        this.showSuccessMessage = '';
     }
     ClientDetailsComponent.prototype.ngOnInit = function () {
         this.getServicesCount();
@@ -92,27 +93,21 @@ var ClientDetailsComponent = /** @class */ (function () {
             columns: [
                 { data: 'id', "visible": false },
                 {
-                    title: 'Name',
                     data: "name",
                 },
                 {
-                    title: 'Phone no',
                     data: "Mob",
                 },
                 {
-                    title: 'Email',
                     data: "EmailID",
                 },
                 {
-                    title: 'Title',
                     data: "title",
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryName",
                 },
                 {
-                    title: 'Sub Category',
                     data: "SubCategory",
                 },
                 {
@@ -121,11 +116,9 @@ var ClientDetailsComponent = /** @class */ (function () {
                     }
                 }
             ],
-            "columnDefs": [{
-                    "searchable": false,
-                    "orderable": false,
-                    "targets": 0
-                }],
+            searching: false,
+            paging: false,
+            info: false,
             order: [[1, 'asc']]
         });
     };
@@ -156,23 +149,18 @@ var ClientDetailsComponent = /** @class */ (function () {
             columns: [
                 { data: 'id', "visible": false },
                 {
-                    title: 'Name',
                     data: "name",
                 },
                 {
-                    title: 'Phone no',
                     data: "Mob",
                 },
                 {
-                    title: 'Email',
                     data: "EmailID",
                 },
                 {
-                    title: 'Zip Code',
                     data: "zipcode",
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryName",
                 },
                 {
@@ -181,11 +169,9 @@ var ClientDetailsComponent = /** @class */ (function () {
                     }
                 }
             ],
-            "columnDefs": [{
-                    "searchable": false,
-                    "orderable": false,
-                    "targets": 0
-                }],
+            searching: false,
+            paging: false,
+            info: false,
             order: [[1, 'asc']]
         });
     };
@@ -195,12 +181,11 @@ var ClientDetailsComponent = /** @class */ (function () {
         this.dashboardService
             .deleteCustomerRecords(id)
             .subscribe(function (data) {
-            if (data.d.length > 0) {
-                var xmlDoc = $.parseXML(data.d);
-                var json = _this.xmlToJson.xml2json(xmlDoc, "");
-                var dataJson = JSON.parse(json);
-                _this.initializedDataTableServices(dataJson.InterestedConsumerser);
-            }
+            _this.showSuccessMessage = "Data Deleted Succesfully.";
+            _this.getClientDetailsServicesData();
+            setInterval(function () {
+                this.showSuccessMessage = "";
+            }, 2000);
         });
     };
     ClientDetailsComponent = tslib_1.__decorate([

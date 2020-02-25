@@ -15,7 +15,7 @@ namespace WcrAssociate.Associate
             if (Session["associate"].ToString() == null || Session["associate"].ToString() == "")
             {
                
-                Response.Redirect("../index.html", false);
+                //Response.Redirect("../index.html", false);
             }
             else
             {

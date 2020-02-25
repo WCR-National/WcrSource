@@ -1,81 +1,52 @@
+<style>
+    .tx-primary {
+        color: #0e3a6b;
+    }
+</style>
+
 <div class="header">
-    <div class="header-left">
+    <div class="header-left" style="width: 500px;">
         <a href="" class="burger-menu"><i data-feather="menu"></i></a>
-        <div class="header-search">
-            <i data-feather="search"></i>
-            <input type="search" class="form-control" placeholder="What are you looking for?">
-        </div><!-- header-search -->
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="col-xs-3 col-sm-2 pd-r-10"><span class="font-weight-bolder tx-14 tx-primary">WCR ID:</span> {{wcrID}}</div>
+                    <div class="col-xs-3 col-sm-2 "><span class="font-weight-bolder tx-14 tx-primary">License</span> {{LicenseID}}</div>
+                    <div class="col-xs-3 col-sm-3"><span class="font-weight-bolder tx-14 tx-primary">Contact</span> {{Contact}}</div>
+                    <div class="col-xs-3 col-sm-3"><span class="font-weight-bolder tx-14 tx-primary">Email </span>  {{Email}}</div>
+
+                </div>
+            </div>
+            <div class="row">
+            </div>
     </div><!-- header-left -->
     <div class="header-right">
         <a href="" class="header-help-link"><i data-feather="help-circle"></i></a>
-        <div class="dropdown dropdown-notification">
-            <a href="" class="dropdown-link new" data-toggle="dropdown"><i data-feather="bell"></i></a>
-            <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-menu-header">
-                    <h6>Notifications</h6>
-                    <a href=""><i data-feather="more-vertical"></i></a>
-                </div><!-- dropdown-menu-header -->
-                <div class="dropdown-menu-body">
-                    <a href="" class="dropdown-item">
-                        <div class="avatar"><span class="avatar-initial rounded-circle text-primary bg-primary-light">s</span></div>
-                        <div class="dropdown-item-body">
-                            <p><strong>Socrates Itumay</strong> marked the task as completed.</p>
-                            <span>5 hours ago</span>
-                        </div>
-                    </a>
-                    <a href="" class="dropdown-item">
-                        <div class="avatar"><span class="avatar-initial rounded-circle tx-pink bg-pink-light">r</span></div>
-                        <div class="dropdown-item-body">
-                            <p><strong>Reynante Labares</strong> marked the task as incomplete.</p>
-                            <span>8 hours ago</span>
-                        </div>
-                    </a>
-                    <a href="" class="dropdown-item">
-                        <div class="avatar"><span class="avatar-initial rounded-circle tx-success bg-success-light">d</span></div>
-                        <div class="dropdown-item-body">
-                            <p><strong>Dyanne Aceron</strong> responded to your comment on this <strong>post</strong>.</p>
-                            <span>a day ago</span>
-                        </div>
-                    </a>
-                    <a href="" class="dropdown-item">
-                        <div class="avatar"><span class="avatar-initial rounded-circle tx-indigo bg-indigo-light">k</span></div>
-                        <div class="dropdown-item-body">
-                            <p><strong>Kirby Avendula</strong> marked the task as incomplete.</p>
-                            <span>2 days ago</span>
-                        </div>
-                    </a>
-                </div><!-- dropdown-menu-body -->
-                <div class="dropdown-menu-footer">
-                    <a href="">View All Notifications</a>
-                </div>
-            </div><!-- dropdown-menu -->
-        </div>
         <div class="dropdown dropdown-loggeduser">
-            <a href="" class="dropdown-link" data-toggle="dropdown">
+            <a href="" class="dropdown-link" data-toggle="dropdown" style="float:right;">
                 <div class="avatar avatar-sm">
-                    <img src="https://via.placeholder.com/500/637382/fff" class="rounded-circle" alt="">
+                    <img id="profilePic" src="" class="rounded-circle" alt="">
                 </div><!-- avatar -->
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <div class="dropdown-menu-header">
-                    <div class="media align-items-center">
-                        <div class="avatar">
-                            <img src="https://via.placeholder.com/500/637382/fff" class="rounded-circle" alt="">
-                        </div><!-- avatar -->
-                        <div class="media-body mg-l-10">
-                            <h6>Louise Kate Lumaad</h6>
-                            <span>Administrator</span>
-                        </div>
-                    </div><!-- media -->
-                </div>
                 <div class="dropdown-menu-body">
                     <a href="" class="dropdown-item"><i data-feather="user"></i> View Profile</a>
-                    <a href="" class="dropdown-item"><i data-feather="edit-2"></i> Edit Profile</a>
-                    <a href="" class="dropdown-item"><i data-feather="briefcase"></i> Account Settings</a>
-                    <a href="" class="dropdown-item"><i data-feather="shield"></i> Privacy Settings</a>
-                    <a href="" class="dropdown-item"><i data-feather="log-out"></i> Sign Out</a>
+                    <a href="" class="dropdown-item"><i data-feather="log-out"></i> Log Out</a>
                 </div>
             </div><!-- dropdown-menu -->
+
+           
+            <a href="javascript:void(0)" class="header-help-link pd-t-8" style="float:right;">
+                <div class="col-sm-1" style="padding-right: 22px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                </div>
+                <span class="font-weight-bolder tx-18 tx-primary">{{userName}}</span>
+            </a>
+            
+
+
+
+
         </div>
     </div><!-- header-right -->
 </div><!-- header -->

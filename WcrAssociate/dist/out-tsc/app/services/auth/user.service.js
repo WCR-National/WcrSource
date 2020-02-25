@@ -5,10 +5,10 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { ApiService } from './api.service';
 import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, distinctUntilChanged, delay } from 'rxjs/operators';
 var UserService = /** @class */ (function () {
-    function UserService(user, apiService, http, jwtService, router) {
+    function UserService(user, apiService, http, jwtService, router, route) {
         if (user === void 0) { user = null; }
         if (apiService === void 0) { apiService = null; }
         if (http === void 0) { http = null; }
@@ -18,6 +18,7 @@ var UserService = /** @class */ (function () {
         this.http = http;
         this.jwtService = jwtService;
         this.router = router;
+        this.route = route;
         this.currentUserSubject = new BehaviorSubject({});
         this.currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
         this.isAuthenticatedSubject = new ReplaySubject(1);
@@ -38,7 +39,13 @@ var UserService = /** @class */ (function () {
                 this.associateLoginSessionActivate("", credentials, user.id)
                     .then(function (data) {
                     if (data.d == "1") {
-                        _this.router.navigateByUrl('/associate');
+                        _this.returnUrl = _this.route.snapshot.queryParams['returnUrl'] || '';
+                        if (_this.returnUrl == '') {
+                            _this.router.navigateByUrl('/associates');
+                        }
+                        else {
+                            _this.router.navigateByUrl('returnUrl');
+                        }
                     }
                     else {
                         _this.router.navigateByUrl('/');
@@ -362,7 +369,8 @@ var UserService = /** @class */ (function () {
             ApiService,
             HttpClient,
             JwtService,
-            Router])
+            Router,
+            ActivatedRoute])
     ], UserService);
     return UserService;
 }());

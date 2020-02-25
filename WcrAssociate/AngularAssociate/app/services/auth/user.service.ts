@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 
 @Injectable()
 export class UserService {
+    returnUrl: string;
     private currentUserSubject = new BehaviorSubject<User>({} as User);
     public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
 
@@ -27,7 +28,9 @@ export class UserService {
         private apiService: ApiService = null,
         private http: HttpClient = null,
         private jwtService: JwtService = null,
-        private router: Router) { }
+        private router: Router,
+        private route: ActivatedRoute
+    ) { }
 
     //// Verify JWT in localstorage with server & load user's info.
     //// This runs once on application startup.
@@ -43,7 +46,13 @@ export class UserService {
                 this.associateLoginSessionActivate("", credentials, user.id)
                     .then((data: any) => {
                         if (data.d == "1") {
-                            this.router.navigateByUrl('/associate');
+                            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+                            if (this.returnUrl == '') {
+                                this.router.navigateByUrl('/associates');
+                            }
+                            else {
+                                this.router.navigateByUrl('returnUrl');
+                            }
                         }
                         else {
                             this.router.navigateByUrl('/');

@@ -55,7 +55,10 @@
               "AngularAssociate/assets/associate/css/cassie.css"
             ],
             "scripts": [
-              "node_modules/crypto-js/crypto-js.js"
+              "node_modules/crypto-js/crypto-js.js",
+              "node_modules/crypto-js/crypto-js.js",
+              "AngularAssociate/assets/js/materialize.min.js",
+              "AngularAssociate/assets/js/bootstrap.bundle.min.js"
 
             ],
             "es5BrowserSupport": true
@@ -123,7 +126,8 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/crypto-js/crypto-js.js",
-              "AngularAssociate/assets/js/materialize.min.js"
+              "AngularAssociate/assets/js/materialize.min.js",
+              "AngularAssociate/assets/js/bootstrap.bundle.min.js"
             ],
             "assets": [
               "AngularAssociate/assets",

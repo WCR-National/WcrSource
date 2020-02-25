@@ -116,6 +116,7 @@
     <Content Include="AngularAssociate\app\associate\associate-layout\associate-layout.component.html" />
     <Content Include="AngularAssociate\app\associate\associate-sidebar\sidebar.component.html" />
     <Content Include="AngularAssociate\app\associate\components\client-details\client-details.component.html" />
+    <Content Include="AngularAssociate\app\associate\components\profile\profile.component.css" />
     <Content Include="AngularAssociate\app\associate\components\profile\profile.component.html" />
     <Content Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.html" />
     <Content Include="AngularAssociate\app\components\terms\terms.component.html" />
@@ -142,6 +143,8 @@
     <Content Include="AngularAssociate\assets\fonts\simple-line-icons.svg" />
     <Content Include="AngularAssociate\assets\icons.css" />
     <Content Include="AngularAssociate\assets\images\background.jpg" />
+    <Content Include="AngularAssociate\assets\images\img25.jpg" />
+    <Content Include="AngularAssociate\assets\js\bootstrap.bundle.min.js" />
     <Content Include="AngularAssociate\assets\js\croppie.min.js" />
     <Content Include="AngularAssociate\assets\js\imguploader.js" />
     <Content Include="AngularAssociate\assets\js\xml2json.js" />

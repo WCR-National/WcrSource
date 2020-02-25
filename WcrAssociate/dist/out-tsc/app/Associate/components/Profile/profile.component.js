@@ -13,6 +13,8 @@ var ProfileComponent = /** @class */ (function () {
         this.xmlToJson = xmlToJson;
         this.fb = fb;
         this.isFormVisible = true;
+        this.isSubmitting = false;
+        this.showErrorsPassword = false;
         this.validationMessages = {
             'password': {
                 'required': 'Password is required',
@@ -25,15 +27,24 @@ var ProfileComponent = /** @class */ (function () {
             },
             'firstName': {
                 'required': 'First Name is required',
+                'letterOnly': 'Allowed alphabeticals letters only.'
             },
             'lastName': {
                 'required': 'Last Name is required',
+                'letterOnly': 'Allowed alphabeticals letters only.'
             },
             'licenseId': {
                 'required': 'Last Name is required',
+                'alphaNumeric': 'Allowed alphanumeric only.'
             },
             'licenseState': {
                 'required': 'Last Name is required',
+                'letterOnly': 'Allowed alphabeticals letters only.'
+            },
+            'phoneNo': {
+                'required': 'Last Name is required',
+                'tenDigits': 'Allowed 10 digits for mobile no.',
+                'elevenDigits': 'Allowed 11 digits, if first letter is starts with 1'
             }
         };
         this.formErrors = {
@@ -46,6 +57,7 @@ var ProfileComponent = /** @class */ (function () {
         };
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.getUserDetails();
         this.setValidationOnForm();
     };
     ProfileComponent.prototype.getUserDetails = function () {
@@ -58,9 +70,24 @@ var ProfileComponent = /** @class */ (function () {
                 var xml = $(xmlDoc);
                 var docs = xml.find("ViewAssociateBasicDetail");
                 $.each(docs, function (i, docs) {
-                    if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
-                        thisStatus.isFormVisible = false;
+                    var pic = '';
+                    if ($(docs).find("Photo").text() != null || $(docs).find("Photo").text() == "") {
+                        var image = $(docs).find('Photo').text();
+                        pic = '../AssociatePhoto/' + image + '';
                     }
+                    else {
+                        pic = '../AssociatePhoto/0.png';
+                    }
+                    $("#imagePreview").css('background-image', 'url(' + pic + ')');
+                    //thisStatus.profileImage = pic;
+                    debugger;
+                    if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
+                        thisStatus.isFormVisible = true;
+                        thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
+                        thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
+                        return;
+                    }
+                    thisStatus.isFormVisible = false;
                     thisStatus.FirstName = $(docs).find("FullName").text();
                     thisStatus.LastName = $(docs).find("LastName").text();
                     thisStatus.UserName = $(docs).find("UserName").text();
@@ -69,14 +96,6 @@ var ProfileComponent = /** @class */ (function () {
                     thisStatus.Password = $(docs).find("Password").text();
                     thisStatus.LicenseNumber = $(docs).find("LicenseId").text();
                     thisStatus.IssuingState = $(docs).find("LicenseState").text();
-                    var pic = '';
-                    if ($(docs).find("Photo").text() != null || $(docs).find("Photo").text() == "") {
-                        pic = "<img   alt='User Image' src='../AssociatePhoto/" + $(docs).find("Photo").text() + "'/> ";
-                    }
-                    else {
-                        pic = "<img  alt='User Image' src='../AssociatePhoto/0.png'/>";
-                    }
-                    thisStatus.profileImage = pic;
                     //$("#pprofilePic").html(sd.join(''));
                     //$("#txtfName").val($(docs).find("FullName").text());
                     //$("#txtLName").val($(docs).find("LastName").text());
@@ -91,11 +110,12 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.setValidationOnForm = function () {
         this.profileForm = this.fb.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            licenseState: ['', Validators.required],
-            phoneNo: ['', Validators.required],
-            licenseId: ['', Validators.required],
+            email: [''],
+            firstName: ['', Validators.required, patternValidator(/[a-zA-Z]/, { letterOnly: true })],
+            lastName: ['', Validators.required, patternValidator(/[a-zA-Z]/, { letterOnly: true })],
+            licenseState: ['', Validators.required, StateValidator(/[a-zA-Z]/, { letterOnly: true })],
+            phoneNo: ['', Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })],
+            licenseId: ['', Validators.required, alphaNumeric(/[a-zA-Z0-9]/, { alphaNumeric: true }, this)],
             password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
                     patternValidator(/\d/, { number: true }),
                     patternValidator(/[A-Z]/, { upperLetter: true }),
@@ -131,14 +151,17 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.submitProfileForm = function () {
         var _this = this;
+        var credentials = this.profileForm.value;
+        this.isSubmitting = true;
         this.profileService
-            .getUserDetails()
+            .updateProfileinfo(credentials.firstName, credentials.lastName, credentials.phoneNo, credentials.email, credentials.password, credentials.licenseId, credentials.licenseState)
             .subscribe(function (data) {
             if (data.d == "1") {
-                _this.isFormVisible = false;
                 _this.getUserDetails();
                 //hide the form and show the text only
                 //set the sidebar values
+                _this.isFormVisible = false;
+                _this.isSubmitting = false;
             }
             if (data.d == "0") {
                 _this.formError = "Unsuccessfull!!! <br>This Email Id or User name or Mobile No Already Exists! Please Try another one.";
@@ -163,11 +186,91 @@ var ProfileComponent = /** @class */ (function () {
             .uploadimage(image)
             .subscribe(function (data) {
             _this.profileImage = URL.createObjectURL(files[0]);
+            $("#imagePreview").css('background-image', 'url(' + _this.profileImage + ')');
             _this.formError = "Your profile has been updated Successfully.";
         });
     };
     ProfileComponent.prototype.cancelForm = function () {
         this.isFormVisible = false;
+    };
+    ProfileComponent.prototype.showErrors = function () {
+        this.showErrorsPassword = true;
+    };
+    ProfileComponent.prototype.hideErrors = function () {
+        this.showErrorsPassword = false;
+    };
+    ProfileComponent.prototype.smallLettersToCapitalLetters = function (value) {
+        value.toUpperCase();
+    };
+    ProfileComponent.prototype.abbrState = function (input, to) {
+        var states = [
+            ['Arizona', 'AZ'],
+            ['Alabama', 'AL'],
+            ['Alaska', 'AK'],
+            ['Arkansas', 'AR'],
+            ['California', 'CA'],
+            ['Colorado', 'CO'],
+            ['Connecticut', 'CT'],
+            ['Delaware', 'DE'],
+            ['Florida', 'FL'],
+            ['Georgia', 'GA'],
+            ['Hawaii', 'HI'],
+            ['Idaho', 'ID'],
+            ['Illinois', 'IL'],
+            ['Indiana', 'IN'],
+            ['Iowa', 'IA'],
+            ['Kansas', 'KS'],
+            ['Kentucky', 'KY'],
+            ['Louisiana', 'LA'],
+            ['Maine', 'ME'],
+            ['Maryland', 'MD'],
+            ['Massachusetts', 'MA'],
+            ['Michigan', 'MI'],
+            ['Minnesota', 'MN'],
+            ['Mississippi', 'MS'],
+            ['Missouri', 'MO'],
+            ['Montana', 'MT'],
+            ['Nebraska', 'NE'],
+            ['Nevada', 'NV'],
+            ['New Hampshire', 'NH'],
+            ['New Jersey', 'NJ'],
+            ['New Mexico', 'NM'],
+            ['New York', 'NY'],
+            ['North Carolina', 'NC'],
+            ['North Dakota', 'ND'],
+            ['Ohio', 'OH'],
+            ['Oklahoma', 'OK'],
+            ['Oregon', 'OR'],
+            ['Pennsylvania', 'PA'],
+            ['Rhode Island', 'RI'],
+            ['South Carolina', 'SC'],
+            ['South Dakota', 'SD'],
+            ['Tennessee', 'TN'],
+            ['Texas', 'TX'],
+            ['Utah', 'UT'],
+            ['Vermont', 'VT'],
+            ['Virginia', 'VA'],
+            ['Washington', 'WA'],
+            ['West Virginia', 'WV'],
+            ['Wisconsin', 'WI'],
+            ['Wyoming', 'WY'],
+        ];
+        if (to == 'abbr') {
+            input = input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+            for (var i = 0; i < states.length; i++) {
+                if (states[i][0] == input) {
+                    return (states[i][1]);
+                }
+            }
+        }
+        else if (to == 'name') {
+            input = input.toUpperCase();
+            for (var i = 0; i < states.length; i++) {
+                if (states[i][1] == input) {
+                    return (states[i][0]);
+                }
+            }
+        }
     };
     ProfileComponent = tslib_1.__decorate([
         Component({
@@ -186,6 +289,60 @@ function patternValidator(regex, error) {
             // if control is empty return no error
             return null;
         }
+        // test the value of the control against the regexp supplied
+        var valid = regex.test(control.value);
+        // if true, return no error (no error), else return error passed in the second parameter
+        return valid ? null : error;
+    };
+}
+function StateValidator(regex, error) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        // test the value of the control against the regexp supplied
+        var valid = regex.test(control.value);
+        // if true, return no error (no error), else return error passed in the second parameter
+        return valid ? null : error;
+    };
+}
+function phoneValidator(regex, error) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        if (control.value[0] == "1") {
+            if (/\d{11}/.test(control.value)) {
+                // if control is empty return no error
+                return null;
+            }
+            else {
+                return { elevenDigits: true };
+            }
+        }
+        else if (control.value[0] != "1") {
+            if (/\d{10}/.test(control.value)) {
+                // if control is empty return no error
+                return null;
+            }
+            else {
+                return { tenDigits: true };
+            }
+        }
+        else {
+            return null;
+        }
+    };
+}
+function alphaNumeric(regex, error, status) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        status.smallLettersToCapitalLetters(control.value);
         // test the value of the control against the regexp supplied
         var valid = regex.test(control.value);
         // if true, return no error (no error), else return error passed in the second parameter

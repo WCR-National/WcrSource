@@ -12,7 +12,7 @@ import { AuthGuard } from '../_guards/auth-guard.service';
 
 const associateRoutes: Routes = [
     {
-        path: 'associate',
+        path: 'associates',
         component: AssociateLayoutComponent,
         children: [
             {

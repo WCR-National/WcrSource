@@ -16,7 +16,6 @@ import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ClientDetailsService } from 'AngularAssociate/app/services/associate/client-details.service';
 
 
-
 @Component({
     selector: 'associate-client-details-page',
     templateUrl: './client-details.component.html'
@@ -26,6 +25,7 @@ export class ClientDetailsComponent implements OnInit {
     salesCount: string = '';
     servicesCount: string = '';
     TotalCount: string = '';
+    showSuccessMessage: string = '';
     constructor(private route: ActivatedRoute, private router: Router, private dashboardService: ClientDetailsService, private xmlToJson: XMLToJSON) {
 
     }
@@ -73,7 +73,7 @@ export class ClientDetailsComponent implements OnInit {
                     }
                 });
     }
-    
+
     getTotalSalesAndServicesCount() {
         this.dashboardService
             .getServicesCount()
@@ -115,7 +115,7 @@ export class ClientDetailsComponent implements OnInit {
                         var dataJson = JSON.parse(json);
 
                         this.initializedDataTableSales(dataJson.InterestedConsumer);
-                    } 
+                    }
                 });
     }
 
@@ -187,7 +187,7 @@ export class ClientDetailsComponent implements OnInit {
         dataTable.DataTable({
             data: asyncData,
             columns: [
-                { data: 'id', "visible": false},
+                { data: 'id', "visible": false },
                 {
                     data: "name",
                 },
@@ -223,16 +223,11 @@ export class ClientDetailsComponent implements OnInit {
             .deleteCustomerRecords(id)
             .subscribe(
                 data => {
-                    if (data.d.length > 0) {
-
-                        var xmlDoc = $.parseXML(data.d);
-                        var json = this.xmlToJson.xml2json(xmlDoc, "");
-                        var dataJson = JSON.parse(json);
-
-                        this.initializedDataTableServices(dataJson.InterestedConsumerser);
-                    }
+                    this.showSuccessMessage = "Data Deleted Succesfully.";
+                    this.getClientDetailsServicesData();
+                    setInterval(function () {
+                        this.showSuccessMessage = "";
+                    }, 2000)
                 });
     }
-
-
 }

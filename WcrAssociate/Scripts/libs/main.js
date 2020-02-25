@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./AngularAssociate/$$_lazy_route_resource lazy re
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n                <li class=\"breadcrumb-item active\" aria-current=\"page\">Events &amp; Social Media</li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Welcome to Dashboard</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{interestedCustomers}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <p class=\"card-desc\">Total number of interested customers.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{selectedCategories}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Selected Categories</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Total number of categories selected.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myPropertyListings}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Property Listings</h5>\r\n                    <p class=\"card-desc\">Total number of current Property Listings.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"ZipCodePurchase.aspx\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myZipCodes}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Zip Codes</h5>\r\n                    <p class=\"card-desc\">Total number of zip codes.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm mg-t-50\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <div class=\"col-sm-12\" #tableInterestedCustomers>\r\n                        <table id=\"interestedCustomers\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr> \r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm mg-t-50\">\r\n        <div class=\"col-sm-3 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Selected Categories</h5>\r\n                    <div  class=\"col-sm-12\" #tableSelectedCategories>\r\n                        <table id=\"selectedCategories\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Category/SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-5 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Property Listings</h5>\r\n                    <div class=\"col-sm-12\" #tableMyPropertyListings>\r\n                        <table id=\"myPropertyListings\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>S.N</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>Zip Code</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Zip Codes</h5>\r\n                    <div  class=\"col-sm-12\" #tableMyZipCodes>\r\n                        <table id=\"myZipCode\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Zip Code</th>\r\n                                    <th>category Name</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n</div><!-- content-body -->"
+module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Welcome to Dashboard</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{interestedCustomers}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <p class=\"card-desc\">Total number of interested customers.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{selectedCategories}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Selected Categories</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Total number of categories selected.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myPropertyListings}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Property Listings</h5>\r\n                    <p class=\"card-desc\">Total number of current Property Listings.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"ZipCodePurchase.aspx\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myZipCodes}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Zip Codes</h5>\r\n                    <p class=\"card-desc\">Total number of zip codes.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm mg-t-30\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <div class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableInterestedCustomers>\r\n                        <table id=\"interestedCustomers\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr> \r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm mg-t-30\">\r\n        <div class=\"col-sm-3 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Selected Categories</h5>\r\n                    <div  class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableSelectedCategories>\r\n                        <table id=\"selectedCategories\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Category/SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-5 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Property Listings</h5>\r\n                    <div class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableMyPropertyListings>\r\n                        <table id=\"myPropertyListings\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>S.N</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>Zip Code</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Zip Codes</h5>\r\n                    <div  class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableMyZipCodes>\r\n                        <table id=\"myZipCode\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Zip Code</th>\r\n                                    <th>category Name</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n</div><!-- content-body -->"
 
 /***/ }),
 
@@ -53,6 +53,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var datatables_net__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! datatables.net */ "./node_modules/datatables.net/js/jquery.dataTables.js");
 /* harmony import */ var datatables_net__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(datatables_net__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var datatables_net_bs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! datatables.net-bs */ "./node_modules/datatables.net-bs/js/dataTables.bootstrap.js");
+/* harmony import */ var datatables_net_bs__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(datatables_net_bs__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 
@@ -72,7 +75,6 @@ var DashboardComponent = /** @class */ (function () {
         this.myZipCodes = '';
     }
     DashboardComponent.prototype.ngOnInit = function () {
-        debugger;
         this.attemptToCountInterestedCustomers();
         this.attemptToCountAssociateCategories();
         this.attemptToCountPurchasedCategories("1");
@@ -205,7 +207,6 @@ var DashboardComponent = /** @class */ (function () {
             .attemptToInterestedCustomerData()
             .then(function (data) {
             if (data.d.length > 0) {
-                debugger;
                 var added_1 = false;
                 var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
@@ -214,7 +215,6 @@ var DashboardComponent = /** @class */ (function () {
                     .attemptToInterestedCustomerServicesData()
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        debugger;
                         var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
                         var json = _this.xmlToJson.xml2json(xmlDoc, "");
                         var dataJsonServices = JSON.parse(json);
@@ -232,7 +232,6 @@ var DashboardComponent = /** @class */ (function () {
         });
     };
     DashboardComponent.prototype.initialiseInterestedCustomerDataTable = function (asyncData) {
-        debugger;
         var dataTable = jquery__WEBPACK_IMPORTED_MODULE_5__('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
@@ -269,6 +268,9 @@ var DashboardComponent = /** @class */ (function () {
             searching: false,
             paging: false,
             info: false,
+            buttons: [
+                'excel', 'pdf'
+            ],
             order: [[1, 'asc']]
         });
     };
@@ -297,14 +299,20 @@ var DashboardComponent = /** @class */ (function () {
             data: asyncData,
             columns: [
                 {
-                    data: "categoryname/Name",
-                    "defaultContent": ""
+                    "mRender": function (data, type, row) {
+                        return row['categoryname'] + '/' + row['Name'];
+                    }
                 }
             ],
             searching: false,
             paging: false,
             info: false,
-            order: [[1, 'asc']]
+            buttons: [
+                'excel', 'pdf'
+            ],
+            "aoColumnDefs": [
+                { "sWidth": "100%", "aTargets": [-1] }
+            ]
         });
     };
     DashboardComponent.prototype.attemptToMyPropertyListingsData = function () {
@@ -335,40 +343,36 @@ var DashboardComponent = /** @class */ (function () {
             data: asyncData,
             columns: [
                 {
-                    title: 'S.N',
                     data: "",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'title',
                     data: "title",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryname",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Zip Code',
                     data: "ZipCode",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Category Name',
-                    data: "categoryName",
-                    "defaultContent": ""
-                },
-                {
-                    title: 'Amount',
                     data: "Amount",
-                    "defaultContent": ""
                 },
+            ],
+            buttons: [
+                'excel', 'pdf'
             ],
             searching: false,
             paging: false,
             info: false,
-            order: [[1, 'asc']]
+            drawCallback: function () {
+                var api = this.api();
+                jquery__WEBPACK_IMPORTED_MODULE_5__(api.table().footer()).html(api.column(4).data().sum());
+            },
+            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                var index = iDisplayIndex + 1;
+                jquery__WEBPACK_IMPORTED_MODULE_5__('td:eq(0)', nRow).html(index);
+                return nRow;
+            }
         });
         //dataTable.on('order.dt search.dt', function () {
         //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -402,29 +406,24 @@ var DashboardComponent = /** @class */ (function () {
             data: asyncData,
             columns: [
                 {
-                    title: '',
-                    data: "",
-                },
-                {
-                    title: 'Zip Code',
                     data: "zipcode",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryname",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Cost',
                     data: "amount",
-                    "defaultContent": ""
                 }
+            ],
+            buttons: [
+                'excel', 'pdf'
             ],
             searching: false,
             paging: false,
             info: false,
-            order: [[1, 'asc']]
+            "aoColumnDefs": [
+                { "sWidth": "33.67%", "aTargets": [-1] }
+            ]
         });
         //dataTable.on('order.dt search.dt', function () {
         //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
@@ -455,7 +454,7 @@ var DashboardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-body content-body-profile\">\r\n    <div class=\"profile-sidebar\">\r\n\r\n        <div class=\"profile-sidebar-header\">\r\n            <div class=\"avatar\"><img src=\"{{profileImage}}\" class=\"rounded-circle\" alt=\"\"></div>\r\n            <h5>Abigail Johnson</h5>\r\n\r\n            <div id=\"status\"></div>\r\n            <input id=\"profileImageId\" type=file class=\"img-upload-input-bs\" editor=\"#img-upload-panel\" target=\"#image\" status=\"#status\" passurl=\"\" pshape=\"circle\" w=300 h=300 size=\"{150,150}\" />\r\n            <img src=\"\" alt=\"\" id=\"image\" />\r\n\r\n        </div><!-- profile-sidebar-header -->\r\n\r\n        <div class=\"profile-sidebar-body\">\r\n\r\n            <label class=\"content-label\">Contact Information</label>\r\n            <ul class=\"list-unstyled profile-info-list mg-b-0\">\r\n                <li><i data-feather=\"mail\"></i> <a href=\"\">{{email}}</a></li>\r\n                <li><i data-feather=\"Password\"></i> <span class=\"tx-color-03\">{{Password}}</span></li>\r\n            </ul>\r\n            <ul class=\"list-unstyled profile-info-list mg-b-0\" [style.display]=\"(!isFormVisible) ? 'display':'none'\">\r\n                <li><i data-feather=\"FirstName\"></i> <span class=\"tx-color-03\">{{FirstName}}</span></li>\r\n                <li><i data-feather=\"LastName\"></i> <span class=\"tx-color-03\">{{LastName}}</span></li>\r\n                <li><i data-feather=\"phone\"></i> <a href=\"\">{{PhoneNumber}}</a></li>\r\n                <li><i data-feather=\"LicenseNumber\"></i> <span class=\"tx-color-03\">{{LicenseNumber}}</span></li>\r\n                <li><i data-feather=\"IssuingState\"></i> <span class=\"tx-color-03\">{{IssuingState}}</span></li>\r\n            </ul>\r\n        </div><!-- profile-sidebar-body -->\r\n    </div><!-- profile-sidebar -->\r\n\r\n\r\n    <div class=\"profile-body\" [style.display]=\"isFormVisible ? 'display':'none'\">\r\n        <div class=\"profile-body-header\">\r\n            <div class=\"auth-page mg-b-60-force\" [style.display]=\"edit ? 'display':'none'\">\r\n                <div class=\"container page\">\r\n\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-12\">\r\n                            <h2 class=\"text-xs-center\"></h2>\r\n                        </div>\r\n\r\n                        <form [formGroup]=\"profileForm\" autocomplete=\"off\" class=\"pd-t-20\">\r\n                            <fieldset [disabled]=\"isSubmitting\">\r\n\r\n                                <div style=\"color:#a21318 !important\" class=\"col-sm-12 pd-l-0-force\">\r\n                                    {{formError}}\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.firstName}\">\r\n\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"firstName\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"firstName\" placeholder=\"First Name\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.lastName}\">\r\n\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"lastName\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"lastName\" placeholder=\"Last Name\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.email}\">\r\n\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"email\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"email\" placeholder=\"Email\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                    <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.password}\">\r\n                                        <div class=\"col-sm-12  mg-b-20\">\r\n                                            <input id=\"password\" placeholder=\"Password\" type=\"password\" class=\" form-control pd-l-45-force\" [ngClass]=\"{'password': (authType == 'register')}\" formControlName=\"password\" (focus)=\"showErrors()\" (focusout)=\"hideErrors()\"\r\n                                                   autocomplete=\"new-password\">\r\n                                            <span class=\"large material-icons form-control-feedback icon\">lock</span>\r\n\r\n                                            <!--<label class=\"col mg-t-5\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required')  ? 'text-danger' : 'text-success'\">\r\n                                                <i class=\"material-icons\">\r\n                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ? 'cancel' :  'check_circle' }}\r\n                                                </i>\r\n                                                Password is required\r\n                                            </label>-->\r\n\r\n                                            <div class=\"col-sm-12 pd-l-0\" [style.display]=\"showErrorsPassword ? 'block':'none'\">\r\n                                                <label class=\"col mg-t-5\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be at least 8 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}\r\n                                                    </i>\r\n                                                    Must be less than 20 characters!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}\r\n                                                    </i>\r\n                                                    Must contain at least 1 number!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 in Capital Case!\r\n                                                </label>\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Letter in Small Case!\r\n                                                </label>\r\n\r\n                                                <label class=\"col\" [ngClass]=\"authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'\">\r\n                                                    <i class=\"material-icons\">\r\n\r\n                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}\r\n                                                    </i>\r\n                                                    Must contain at least 1 Special Character!\r\n                                                </label>\r\n\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.phoneNo}\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"phoneNo\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"phoneNo\" placeholder=\"Phone Number\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.licenseId}\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"licenseId\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"licenseId\" placeholder=\"License Number\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.licenseState}\">\r\n                                    <div class=\"col-sm-12 mg-b-20\">\r\n                                        <input id=\"licenseState\" type=\"text\" class=\"form-control pd-l-45-force\" formControlName=\"licenseState\" placeholder=\"License State\" (blur)=\"logValidationErrors()\" />\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"col-sm-12 pd-l-0-force pd-r-0-force\">\r\n                                    <div class=\"form-group\">\r\n                                        <div class=\"col-sm-12 mg-b-20\">\r\n                                            <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" type=\"submit\" [disabled]=\"!FormFilledSuccessfully\">\r\n                                                <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitRegistrationForm()\">UPDATE PROFILE</span>\r\n                                                <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                    <div class=\"spinner-layer spinner-white-only\">\r\n                                                        <div class=\"circle-clipper left\">\r\n                                                            <div class=\"circle\"></div>\r\n                                                        </div><div class=\"gap-patch\">\r\n                                                            <div class=\"circle\"></div>\r\n                                                        </div><div class=\"circle-clipper right\">\r\n                                                            <div class=\"circle\"></div>\r\n                                                        </div>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </button>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <!--  -->\r\n                            </fieldset>\r\n                        </form>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div><!-- profile-body -->\r\n    </div><!-- content-body -->\r\n\r\n    <div class=\"modal fade\" id=\"img-upload-panel\">\r\n        <div class=\"modal-dialog modal-lg\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-header\">\r\n                    <h4 class=\"modal-title\">Upload Profile Photo</h4>\r\n                    <button type=\"button\" class=\"img-remove-btn-bs close\">&times;</button>\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"row container\">\r\n                        <div class=\"col\">\r\n                            <div class=\"img-edit-container\"></div>\r\n                        </div>\r\n                    </div>\r\n                    <!--<div class=\"row container\">\r\n                        <div class=\"col\">\r\n                            <label>Brightness</label>\r\n                            <input type=\"range\" class=\"form-control-range filter\" min=0 max=200 value=100 step=1 filter=\"brightness\" />\r\n                        </div>\r\n                        <div class=\"col\">\r\n                            <label>Threshold</label>\r\n                            <input type=\"range\" class=\"form-control-range filter\" min=0 max=200 value=100 step=1 filter=\"threshold\" />\r\n                        </div>\r\n                    </div>-->\r\n                </div>\r\n                <div class=\"modal-footer\">\r\n                    <button type=\"button\" class=\"btn btn-secondary img-remove-btn-bs\">Close</button>\r\n                    <button type=\"button\" class=\"btn btn-primary img-upload-btn-bs\" (click)=\"submitImage()\">Upload</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n"
+module.exports = "<style>\r\n    .form-control {\r\n        display: block;\r\n        width: 100%;\r\n        height: calc(1.5em + 0.874rem + 2px);\r\n        padding: 0.437rem 0.75rem;\r\n        font-size: 0.875rem;\r\n        font-weight: 400;\r\n        line-height: 1.5;\r\n        color: #454f5b;\r\n        background-color: #fff;\r\n        background-clip: padding-box;\r\n        border: 1px solid #d9dfe7;\r\n        border-radius: 0;\r\n        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;\r\n    }\r\n\r\n    @media (prefers-reduced-motion: reduce) {\r\n        .form-control {\r\n            transition: none;\r\n        }\r\n    }\r\n\r\n    .form-control:focus, .form-control:hover {\r\n    }\r\n\r\n    .form-control::-ms-expand {\r\n        background-color: transparent;\r\n        border: 0;\r\n    }\r\n\r\n    .form-control:focus {\r\n        color: #454f5b;\r\n        background-color: #fff;\r\n        border-color: #c4cdd6;\r\n        outline: 0;\r\n        box-shadow: 0 0 0 0.2rem rgba(85, 86, 253, 0.25);\r\n    }\r\n\r\n    .form-control::placeholder {\r\n        color: #637382;\r\n        opacity: 1;\r\n    }\r\n\r\n    .form-control:disabled, .form-control[readonly] {\r\n        background-color: #e9ecf1;\r\n        opacity: 1;\r\n    }\r\n\r\n    select.form-control:focus::-ms-value {\r\n        color: #454f5b;\r\n        background-color: #fff;\r\n    }\r\n\r\n    .form-control-file,\r\n    .form-control-range {\r\n        display: block;\r\n        width: 100%;\r\n    }\r\n\r\n    .col-form-label {\r\n        padding-top: calc(0.437rem + 1px);\r\n        padding-bottom: calc(0.437rem + 1px);\r\n        margin-bottom: 0;\r\n        font-size: inherit;\r\n        line-height: 1.5;\r\n    }\r\n\r\n    .col-form-label-lg {\r\n        padding-top: calc(0.5rem + 1px);\r\n        padding-bottom: calc(0.5rem + 1px);\r\n        font-size: 1.09375rem;\r\n        line-height: 1.5;\r\n    }\r\n\r\n    .col-form-label-sm {\r\n        padding-top: calc(0.25rem + 1px);\r\n        padding-bottom: calc(0.25rem + 1px);\r\n        font-size: 0.8125rem;\r\n        line-height: 1.5;\r\n    }\r\n\r\n    .form-control-plaintext {\r\n        display: block;\r\n        width: 100%;\r\n        padding-top: 0.437rem;\r\n        padding-bottom: 0.437rem;\r\n        margin-bottom: 0;\r\n        line-height: 1.5;\r\n        color: #373857;\r\n        background-color: transparent;\r\n        border: solid transparent;\r\n        border-width: 1px 0;\r\n    }\r\n\r\n        .form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {\r\n            padding-right: 0;\r\n            padding-left: 0;\r\n        }\r\n\r\n    .form-control-sm {\r\n        height: calc(1.5em + 0.5rem + 2px);\r\n        padding: 0.25rem 0.5rem;\r\n        font-size: 0.8125rem;\r\n        line-height: 1.5;\r\n        border-radius: 0;\r\n    }\r\n\r\n    .form-control-lg {\r\n        height: calc(1.5em + 1rem + 2px);\r\n        padding: 0.5rem 1rem;\r\n        font-size: 1.09375rem;\r\n        line-height: 1.5;\r\n        border-radius: 0;\r\n    }\r\n\r\n    select.form-control[size], select.form-control[multiple] {\r\n        height: auto;\r\n    }\r\n\r\n    textarea.form-control {\r\n        height: auto;\r\n    }\r\n\r\n    .form-group {\r\n        margin-bottom: 1rem;\r\n    }\r\n\r\n    .form-text {\r\n        display: block;\r\n        margin-top: 0.25rem;\r\n    }\r\n\r\n    .form-row {\r\n        display: flex;\r\n        flex-wrap: wrap;\r\n        margin-right: -5px;\r\n        margin-left: -5px;\r\n    }\r\n\r\n        .form-row > .col,\r\n        .form-row > [class*=\"col-\"] {\r\n            padding-right: 5px;\r\n            padding-left: 5px;\r\n        }\r\n\r\n    .form-check {\r\n        position: relative;\r\n        display: block;\r\n        padding-left: 1.25rem;\r\n    }\r\n\r\n    .form-check-input {\r\n        position: absolute;\r\n        margin-top: 0.3rem;\r\n        margin-left: -1.25rem;\r\n    }\r\n\r\n        .form-check-input:disabled ~ .form-check-label {\r\n            color: #637382;\r\n        }\r\n\r\n    .form-check-label {\r\n        margin-bottom: 0;\r\n    }\r\n\r\n    .form-check-inline {\r\n        display: inline-flex;\r\n        align-items: center;\r\n        padding-left: 0;\r\n        margin-right: 0.75rem;\r\n    }\r\n\r\n        .form-check-inline .form-check-input {\r\n            position: static;\r\n            margin-top: 0;\r\n            margin-right: 0.3125rem;\r\n            margin-left: 0;\r\n        }\r\n\r\n    .valid-feedback {\r\n        display: none;\r\n        width: 100%;\r\n        margin-top: 0.25rem;\r\n        font-size: 80%;\r\n        color: #28a745;\r\n    }\r\n\r\n    .valid-tooltip {\r\n        position: absolute;\r\n        top: 100%;\r\n        z-index: 5;\r\n        display: none;\r\n        max-width: 100%;\r\n        padding: 0.25rem 0.5rem;\r\n        margin-top: .1rem;\r\n        font-size: 0.8125rem;\r\n        line-height: 1.5;\r\n        color: #fff;\r\n        background-color: rgba(40, 167, 69, 0.9);\r\n        border-radius: 0;\r\n    }\r\n\r\n    .was-validated .form-control:valid, .form-control.is-valid {\r\n        border-color: #28a745;\r\n        padding-right: calc(1.5em + 0.874rem);\r\n        background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e\");\r\n        background-repeat: no-repeat;\r\n        background-position: center right calc(0.375em + 0.2185rem);\r\n        background-size: calc(0.75em + 0.437rem) calc(0.75em + 0.437rem);\r\n    }\r\n\r\n        .was-validated .form-control:valid:focus, .form-control.is-valid:focus {\r\n            border-color: #28a745;\r\n            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);\r\n        }\r\n\r\n        .was-validated .form-control:valid ~ .valid-feedback,\r\n        .was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback,\r\n        .form-control.is-valid ~ .valid-tooltip {\r\n            display: block;\r\n        }\r\n\r\n    .was-validated textarea.form-control:valid, textarea.form-control.is-valid {\r\n        padding-right: calc(1.5em + 0.874rem);\r\n        background-position: top calc(0.375em + 0.2185rem) right calc(0.375em + 0.2185rem);\r\n    }\r\n\r\n    .was-validated .custom-select:valid, .custom-select.is-valid {\r\n        border-color: #28a745;\r\n        padding-right: calc((1em + 0.874rem) * 3 / 4 + 1.75rem);\r\n        background: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23363d47' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e\") no-repeat right 0.75rem center/8px 10px, url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e\") #fff no-repeat center right 1.75rem/calc(0.75em + 0.437rem) calc(0.75em + 0.437rem);\r\n    }\r\n\r\n        .was-validated .custom-select:valid:focus, .custom-select.is-valid:focus {\r\n            border-color: #28a745;\r\n            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);\r\n        }\r\n\r\n        .was-validated .custom-select:valid ~ .valid-feedback,\r\n        .was-validated .custom-select:valid ~ .valid-tooltip, .custom-select.is-valid ~ .valid-feedback,\r\n        .custom-select.is-valid ~ .valid-tooltip {\r\n            display: block;\r\n        }\r\n\r\n    .was-validated .form-control-file:valid ~ .valid-feedback,\r\n    .was-validated .form-control-file:valid ~ .valid-tooltip, .form-control-file.is-valid ~ .valid-feedback,\r\n    .form-control-file.is-valid ~ .valid-tooltip {\r\n        display: block;\r\n    }\r\n\r\n    .was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {\r\n        color: #28a745;\r\n    }\r\n\r\n    .was-validated .form-check-input:valid ~ .valid-feedback,\r\n    .was-validated .form-check-input:valid ~ .valid-tooltip, .form-check-input.is-valid ~ .valid-feedback,\r\n    .form-check-input.is-valid ~ .valid-tooltip {\r\n        display: block;\r\n    }\r\n\r\n    .was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {\r\n        color: #28a745;\r\n    }\r\n\r\n        .was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {\r\n            border-color: #28a745;\r\n        }\r\n\r\n    .was-validated .custom-control-input:valid ~ .valid-feedback,\r\n    .was-validated .custom-control-input:valid ~ .valid-tooltip, .custom-control-input.is-valid ~ .valid-feedback,\r\n    .custom-control-input.is-valid ~ .valid-tooltip {\r\n        display: block;\r\n    }\r\n\r\n    .was-validated .custom-control-input:valid:checked ~ .custom-control-label::before, .custom-control-input.is-valid:checked ~ .custom-control-label::before {\r\n        border-color: #34ce57;\r\n        background-color: #34ce57;\r\n    }\r\n\r\n    .was-validated .custom-control-input:valid:focus ~ .custom-control-label::before, .custom-control-input.is-valid:focus ~ .custom-control-label::before {\r\n        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);\r\n    }\r\n\r\n    .was-validated .custom-control-input:valid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-valid:focus:not(:checked) ~ .custom-control-label::before {\r\n        border-color: #28a745;\r\n    }\r\n\r\n    .was-validated .custom-file-input:valid ~ .custom-file-label, .custom-file-input.is-valid ~ .custom-file-label {\r\n        border-color: #28a745;\r\n    }\r\n\r\n    .was-validated .custom-file-input:valid ~ .valid-feedback,\r\n    .was-validated .custom-file-input:valid ~ .valid-tooltip, .custom-file-input.is-valid ~ .valid-feedback,\r\n    .custom-file-input.is-valid ~ .valid-tooltip {\r\n        display: block;\r\n    }\r\n\r\n    .was-validated .custom-file-input:valid:focus ~ .custom-file-label, .custom-file-input.is-valid:focus ~ .custom-file-label {\r\n        border-color: #28a745;\r\n        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);\r\n    }\r\n\r\n    .avatar-upload {\r\n        position: relative;\r\n        max-width: 205px;\r\n        margin: 50px auto;\r\n    }\r\n\r\n    .avatar-edit {\r\n        position: absolute;\r\n        right: 12px;\r\n        z-index: 1;\r\n        top: 10px;\r\n    }\r\n\r\n    #profileImageId {\r\n        display: none;\r\n    }\r\n\r\n        #profileImageId + label {\r\n            display: inline-block;\r\n            width: 34px;\r\n            height: 34px;\r\n            margin-bottom: 0;\r\n            border-radius: 100%;\r\n            background: #FFFFFF;\r\n            border: 1px solid transparent;\r\n            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);\r\n            cursor: pointer;\r\n            font-weight: normal;\r\n            transition: all .2s ease-in-out;\r\n        }\r\n\r\n            #profileImageId + label:hover {\r\n                background: #f1f1f1;\r\n                border-color: #d6d6d6;\r\n            }\r\n\r\n            #profileImageId + label:after {\r\n                content: \"\\f040\";\r\n                font-family: 'FontAwesome';\r\n                color: #757575;\r\n                position: absolute;\r\n                top: 10px;\r\n                left: 0;\r\n                right: 0;\r\n                text-align: center;\r\n                margin: auto;\r\n            }\r\n\r\n\r\n    .avatar-preview {\r\n        width: 192px;\r\n        height: 192px;\r\n        position: relative;\r\n        border-radius: 100%;\r\n        border: 6px solid #F8F8F8;\r\n        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);\r\n    }\r\n\r\n        .avatar-preview > div {\r\n            width: 100%;\r\n            height: 100%;\r\n            border-radius: 100%;\r\n            background-size: cover;\r\n            background-repeat: no-repeat;\r\n            background-position: center;\r\n        }\r\n\r\n    .form-control {\r\n        height: 40px;\r\n    }\r\n\r\n    .form-control {\r\n        font-size: 16px;\r\n        font-weight: 500;\r\n        padding: 0 0 5px;\r\n        border-width: 0 0 2px 0 !important;\r\n        /* color: #06072d; */\r\n    }\r\n\r\n        .form-control[_ngcontent-ibt-c1]:focus {\r\n            color: none;\r\n            background-color: none;\r\n            border-color: none;\r\n            outline: none;\r\n            box-shadow: none;\r\n            border: none;\r\n            color: #454f5b;\r\n            background-color: #fff !important;\r\n            border-color: #c4cdd6 !important;\r\n            outline: 0;\r\n        }\r\n    .has-error input:hover, .has-error input:focus {\r\n        box-shadow:none;\r\n    }\r\n    .form-control:focus, .form-control:hover {\r\n        box-shadow: none;\r\n    }\r\n\r\n</style>\r\n<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Profile</a></li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Profile</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n<div class=\"content-body content-body-profile\" >\r\n\r\n    <div class=\"profile-sidebar mg-t-20\" style=\"background:#fff; height:1000px;\">\r\n\r\n        <div class=\"profile-sidebar-header\">\r\n\r\n            <div class=\"avatar-upload\">\r\n                <div class=\"avatar-edit\">\r\n                    <input type='file' id=\"profileImageId\" accept=\".png, .jpg, .jpeg\" />\r\n                    <label for=\"imageUpload\"></label>\r\n                </div>\r\n                <div class=\"avatar-preview\">\r\n                    <!--{{profileImage}}-->\r\n                    <div id=\"imagePreview\" >\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <!--<div class=\"avatar\">\r\n                {{profileImage}}\r\n                <h5>Abigail Johnson</h5>\r\n\r\n                <div id=\"status\"></div>\r\n                <input id=\"profileImageId\" type=file class=\"img-upload-input-bs\" editor=\"#img-upload-panel\" target=\"#image\" status=\"#status\" passurl=\"\" pshape=\"circle\" w=300 h=300 size=\"{150,150}\" />\r\n                <img src=\"\" alt=\"\" id=\"image\" />\r\n            </div>-->\r\n        </div><!-- profile-sidebar-header -->\r\n\r\n        <div class=\"profile-sidebar-body\">\r\n\r\n            <label class=\"content-label pd-l-15 font-weight-bolder tx-16-f\">Contact Information</label>\r\n            <ul class=\"list-unstyled profile-info-list mg-b-0 pd-l-15 font-weight-bold tx-14\" style=\"\">\r\n                <li><i data-feather=\"mail\"></i> <a href=\"\">Email: {{email}}</a></li>\r\n                <li><i data-feather=\"Password\"></i> <span class=\"tx-color-03\">Password: {{Password}}</span></li>\r\n            </ul>\r\n            <ul class=\"list-unstyled profile-info-list mg-b-0 pd-l-15 font-weight-bold tx-14\" [style.display]=\"(!isFormVisible) ? 'block':'none'\">\r\n                <li><i data-feather=\"FirstName\"></i> <span class=\"tx-color-03\">First Name: {{FirstName}}</span></li>\r\n                <li><i data-feather=\"LastName\"></i> <span class=\"tx-color-03\">Last Name: {{LastName}}</span></li>\r\n                <li><i data-feather=\"phone\"></i> <a href=\"\">Mobile No: {{PhoneNumber}}</a></li>\r\n                <li><i data-feather=\"LicenseNumber\"></i> <span class=\"tx-color-03\">LicenseId: {{LicenseNumber}}</span></li>\r\n                <li><i data-feather=\"IssuingState\"></i> <span class=\"tx-color-03\">IssuingState: {{IssuingState}}</span></li>\r\n            </ul>\r\n        </div><!-- profile-sidebar-body -->\r\n    </div><!-- profile-sidebar -->\r\n\r\n\r\n    <div class=\"profile-body\">\r\n        <div class=\"signup-sidebar-body\">\r\n\r\n            <div id=\"info\">\r\n                <p>\r\n                    <b>\r\n                        Welcome to WCR National.\r\n                    </b>\r\n                </p>\r\n                <p>\r\n                    Please begin by filling out your profile information.\r\n                </p>\r\n                <p>\r\n                    Once you’ve completed this step, the rest of the Primary Menu items will be fully available for your use.\r\n                </p>\r\n                <p>\r\n                    If you have any issues or concerns, you can contact customer support by clicking the ‘Customer Support’ tab towards the bottom of the menu items list.\r\n                </p>\r\n                <p>\r\n                    Thank you.\r\n                </p>\r\n            </div>\r\n            <div class=\"profile-body-header\" [style.display]=\"isFormVisible ? 'block':'none'\">\r\n                <div class=\"auth-page mg-b-60-force\">\r\n                    <div class=\"container page\">\r\n\r\n                        <div class=\"row\">\r\n                            <div class=\"col-sm-12\">\r\n                                <h2 class=\"text-xs-center\"></h2>\r\n                            </div>\r\n                            <div class=\"col-sm-12\">\r\n                                <form [formGroup]=\"profileForm\" autocomplete=\"off\" class=\"pd-t-20\">\r\n                                    <fieldset [disabled]=\"isSubmitting\">\r\n\r\n                                        <div style=\"color:#a21318 !important\" class=\"col-sm-12 pd-l-0-force\">\r\n                                            {{formError}}\r\n                                        </div>\r\n\r\n                                        <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.firstName}\">\r\n                                            <div class=\"col-sm-6 mg-b-20\">\r\n                                                <label>Firstname</label>\r\n                                                <input id=\"firstName\" type=\"text\" class=\"form-control pd-l-0-force form-control\" placeholder=\"Enter your firstname\" formControlName=\"firstName\" (blur)=\"logValidationErrors()\">\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                        <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.lastName}\">\r\n\r\n                                            <div class=\"col-sm-6 mg-b-20\">\r\n                                                <label>Lastname</label>\r\n                                                <input id=\"lastName\" type=\"text\" class=\"form-control pd-l-0-force form-control\" placeholder=\"Enter your lastname\" formControlName=\"lastName\" (blur)=\"logValidationErrors()\">\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                        <div class=\"form-group\">\r\n                                            <div class=\"col-sm-6 mg-b-20\">\r\n                                                <label>Email</label>\r\n                                                <input id=\"email\" type=\"text\" class=\"form-control pd-l-0-force form-control\" placeholder=\"Enter your email\" formControlName=\"email\" (blur)=\"logValidationErrors()\" disabled>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                        <div class=\"col-sm-6 pd-l-0-force pd-r-0-force\">\r\n                                            <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.password}\">\r\n                                                <div class=\"col-sm-12  mg-b-20\">\r\n                                                    <label>Password</label>\r\n\r\n                                                    <input id=\"password\" placeholder=\"Enter your password\" type=\"password\" class=\" form-control pd-l-0-force password\"\r\n                                                           formControlName=\"password\" (focus)=\"showErrors()\" (focusout)=\"hideErrors()\"\r\n                                                           autocomplete=\"new-password\">\r\n\r\n                                                    <div class=\"col-sm-12 pd-l-0\" [style.display]=\"showErrorsPassword ? 'block':'none'\">\r\n                                                        <label class=\"col mg-t-5\" [ngClass]=\"profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'\">\r\n                                                            <i class=\"material-icons\">\r\n\r\n                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}\r\n                                                            </i>\r\n                                                            Must be at least 8 characters!\r\n                                                        </label>\r\n                                                        <label class=\"col\" [ngClass]=\"profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'\">\r\n                                                            <i class=\"material-icons\">\r\n                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}\r\n                                                            </i>\r\n                                                            Must be less than 20 characters!\r\n                                                        </label>\r\n                                                        <label class=\"col\" [ngClass]=\"profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('number')  ? 'text-danger' : 'text-success'\">\r\n                                                            <i class=\"material-icons\">\r\n                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}\r\n                                                            </i>\r\n                                                            Must contain at least 1 number!\r\n                                                        </label>\r\n                                                        <label class=\"col\" [ngClass]=\"profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                            <i class=\"material-icons\">\r\n                                                                {{ profileForm.controls['password'].hasError('required') ||  profileForm.controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}\r\n                                                            </i>\r\n                                                            Must contain at least 1 in Capital Case!\r\n                                                        </label>\r\n                                                        <label class=\"col\" [ngClass]=\"profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'\">\r\n                                                            <i class=\"material-icons\">\r\n                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}\r\n                                                            </i>\r\n                                                            Must contain at least 1 Letter in Small Case!\r\n                                                        </label>\r\n\r\n                                                        <label class=\"col\" [ngClass]=\"profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'\">\r\n                                                            <i class=\"material-icons\">\r\n                                                                {{ profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}\r\n                                                            </i>\r\n                                                            Must contain at least 1 Special Character!\r\n                                                        </label>\r\n\r\n                                                    </div>\r\n\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                        <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.phoneNo}\">\r\n\r\n                                            <div class=\"col-sm-6 mg-b-20\">\r\n                                                <label>Phone number</label>\r\n                                                <input id=\"phoneNo\" type=\"text\" class=\"form-control pd-l-0-force\" formControlName=\"phoneNo\" placeholder=\"Enter your phone number\" (blur)=\"logValidationErrors()\" />\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                        <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.licenseId}\">\r\n                                            <div class=\"col-sm-6 mg-b-20\">\r\n                                                <label>License Id</label>\r\n                                                <input id=\"licenseId\" type=\"text\" class=\"form-control pd-l-0-force\" formControlName=\"licenseId\" placeholder=\"Enter your license number\" (blur)=\"logValidationErrors()\" />\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                        <div class=\"form-group\" [ngClass]=\"{'has-error': formErrors.licenseState}\">\r\n                                            <div class=\"col-sm-12 mg-b-20\">\r\n                                                <label>License State</label>\r\n                                                <input id=\"licenseState\" type=\"text\" class=\"form-control pd-l-0-force\" formControlName=\"licenseState\" placeholder=\"Enter your license state\" (blur)=\"logValidationErrors()\" />\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                        <div class=\"col-sm-3 pd-l-0-force pd-r-0-force\">\r\n                                            <div class=\"form-group\">\r\n                                                <div class=\"col-sm-12 mg-b-20\">\r\n                                                    <button style=\"position:relative; width:100%;\" class=\"btn btn-lg btn-primary pull-xs-right form-submit-button\" type=\"submit\">\r\n                                                        <span [style.display]=\"!isSubmitting ? 'block': 'none'\" (click)=\"submitProfileForm()\">UPDATE PROFILE</span>\r\n                                                        <div class=\"preloader-wrapper preloader-wrapper-button small active\" [style.display]=\"isSubmitting ? 'inline-block': 'none'\">\r\n                                                            <div class=\"spinner-layer spinner-white-only\">\r\n                                                                <div class=\"circle-clipper left\">\r\n                                                                    <div class=\"circle\"></div>\r\n                                                                </div><div class=\"gap-patch\">\r\n                                                                    <div class=\"circle\"></div>\r\n                                                                </div><div class=\"circle-clipper right\">\r\n                                                                    <div class=\"circle\"></div>\r\n                                                                </div>\r\n                                                            </div>\r\n                                                        </div>\r\n                                                    </button>\r\n                                                </div>\r\n\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                        <!--  -->\r\n                                    </fieldset>\r\n                                </form>\r\n\r\n                            </div>\r\n\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n            </div><!-- profile-body -->\r\n\r\n        </div>\r\n\r\n    </div><!-- content-body -->\r\n\r\n    <div class=\"modal fade\" id=\"img-upload-panel\">\r\n        <div class=\"modal-dialog modal-lg\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-header\">\r\n                    <h4 class=\"modal-title\">Upload Profile Photo</h4>\r\n                    <button type=\"button\" class=\"img-remove-btn-bs close\">&times;</button>\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"row container\">\r\n                        <div class=\"col\">\r\n                            <div class=\"img-edit-container\"></div>\r\n                        </div>\r\n                    </div>\r\n                    <!--<div class=\"row container\">\r\n                        <div class=\"col\">\r\n                            <label>Brightness</label>\r\n                            <input type=\"range\" class=\"form-control-range filter\" min=0 max=200 value=100 step=1 filter=\"brightness\" />\r\n                        </div>\r\n                        <div class=\"col\">\r\n                            <label>Threshold</label>\r\n                            <input type=\"range\" class=\"form-control-range filter\" min=0 max=200 value=100 step=1 filter=\"threshold\" />\r\n                        </div>\r\n                    </div>-->\r\n                </div>\r\n                <div class=\"modal-footer\">\r\n                    <button type=\"button\" class=\"btn btn-secondary img-remove-btn-bs\">Close</button>\r\n                    <button type=\"button\" class=\"btn btn-primary img-upload-btn-bs\" (click)=\"submitImage()\">Upload</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -492,6 +491,8 @@ var ProfileComponent = /** @class */ (function () {
         this.xmlToJson = xmlToJson;
         this.fb = fb;
         this.isFormVisible = true;
+        this.isSubmitting = false;
+        this.showErrorsPassword = false;
         this.validationMessages = {
             'password': {
                 'required': 'Password is required',
@@ -504,15 +505,24 @@ var ProfileComponent = /** @class */ (function () {
             },
             'firstName': {
                 'required': 'First Name is required',
+                'letterOnly': 'Allowed alphabeticals letters only.'
             },
             'lastName': {
                 'required': 'Last Name is required',
+                'letterOnly': 'Allowed alphabeticals letters only.'
             },
             'licenseId': {
                 'required': 'Last Name is required',
+                'alphaNumeric': 'Allowed alphanumeric only.'
             },
             'licenseState': {
                 'required': 'Last Name is required',
+                'letterOnly': 'Allowed alphabeticals letters only.'
+            },
+            'phoneNo': {
+                'required': 'Last Name is required',
+                'tenDigits': 'Allowed 10 digits for mobile no.',
+                'elevenDigits': 'Allowed 11 digits, if first letter is starts with 1'
             }
         };
         this.formErrors = {
@@ -525,6 +535,7 @@ var ProfileComponent = /** @class */ (function () {
         };
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        this.getUserDetails();
         this.setValidationOnForm();
     };
     ProfileComponent.prototype.getUserDetails = function () {
@@ -537,9 +548,24 @@ var ProfileComponent = /** @class */ (function () {
                 var xml = jquery__WEBPACK_IMPORTED_MODULE_4__(xmlDoc);
                 var docs = xml.find("ViewAssociateBasicDetail");
                 jquery__WEBPACK_IMPORTED_MODULE_4__["each"](docs, function (i, docs) {
-                    if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("FullName").text() == '' || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("MobileNo").text() == '' || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() == '') {
-                        thisStatus.isFormVisible = false;
+                    var pic = '';
+                    if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() != null || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() == "") {
+                        var image = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find('Photo').text();
+                        pic = '../AssociatePhoto/' + image + '';
                     }
+                    else {
+                        pic = '../AssociatePhoto/0.png';
+                    }
+                    jquery__WEBPACK_IMPORTED_MODULE_4__("#imagePreview").css('background-image', 'url(' + pic + ')');
+                    //thisStatus.profileImage = pic;
+                    debugger;
+                    if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("FullName").text() == '' || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("MobileNo").text() == '' || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() == '') {
+                        thisStatus.isFormVisible = true;
+                        thisStatus.profileForm.get('email').setValue(jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Email").text());
+                        thisStatus.profileForm.get('password').setValue(jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Password").text());
+                        return;
+                    }
+                    thisStatus.isFormVisible = false;
                     thisStatus.FirstName = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("FullName").text();
                     thisStatus.LastName = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("LastName").text();
                     thisStatus.UserName = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("UserName").text();
@@ -548,14 +574,6 @@ var ProfileComponent = /** @class */ (function () {
                     thisStatus.Password = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Password").text();
                     thisStatus.LicenseNumber = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("LicenseId").text();
                     thisStatus.IssuingState = jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("LicenseState").text();
-                    var pic = '';
-                    if (jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() != null || jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() == "") {
-                        pic = "<img   alt='User Image' src='../AssociatePhoto/" + jquery__WEBPACK_IMPORTED_MODULE_4__(docs).find("Photo").text() + "'/> ";
-                    }
-                    else {
-                        pic = "<img  alt='User Image' src='../AssociatePhoto/0.png'/>";
-                    }
-                    thisStatus.profileImage = pic;
                     //$("#pprofilePic").html(sd.join(''));
                     //$("#txtfName").val($(docs).find("FullName").text());
                     //$("#txtLName").val($(docs).find("LastName").text());
@@ -570,11 +588,12 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.setValidationOnForm = function () {
         this.profileForm = this.fb.group({
-            firstName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            lastName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            licenseState: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            phoneNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
-            licenseId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+            email: [''],
+            firstName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, patternValidator(/[a-zA-Z]/, { letterOnly: true })],
+            lastName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, patternValidator(/[a-zA-Z]/, { letterOnly: true })],
+            licenseState: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, StateValidator(/[a-zA-Z]/, { letterOnly: true })],
+            phoneNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, phoneValidator(/\d{11}/, { elevenDigits: true })],
+            licenseId: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, alphaNumeric(/[a-zA-Z0-9]/, { alphaNumeric: true }, this)],
             password: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].minLength(8), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].maxLength(20),
                     patternValidator(/\d/, { number: true }),
                     patternValidator(/[A-Z]/, { upperLetter: true }),
@@ -610,14 +629,17 @@ var ProfileComponent = /** @class */ (function () {
     };
     ProfileComponent.prototype.submitProfileForm = function () {
         var _this = this;
+        var credentials = this.profileForm.value;
+        this.isSubmitting = true;
         this.profileService
-            .getUserDetails()
+            .updateProfileinfo(credentials.firstName, credentials.lastName, credentials.phoneNo, credentials.email, credentials.password, credentials.licenseId, credentials.licenseState)
             .subscribe(function (data) {
             if (data.d == "1") {
-                _this.isFormVisible = false;
                 _this.getUserDetails();
                 //hide the form and show the text only
                 //set the sidebar values
+                _this.isFormVisible = false;
+                _this.isSubmitting = false;
             }
             if (data.d == "0") {
                 _this.formError = "Unsuccessfull!!! <br>This Email Id or User name or Mobile No Already Exists! Please Try another one.";
@@ -642,11 +664,91 @@ var ProfileComponent = /** @class */ (function () {
             .uploadimage(image)
             .subscribe(function (data) {
             _this.profileImage = URL.createObjectURL(files[0]);
+            jquery__WEBPACK_IMPORTED_MODULE_4__("#imagePreview").css('background-image', 'url(' + _this.profileImage + ')');
             _this.formError = "Your profile has been updated Successfully.";
         });
     };
     ProfileComponent.prototype.cancelForm = function () {
         this.isFormVisible = false;
+    };
+    ProfileComponent.prototype.showErrors = function () {
+        this.showErrorsPassword = true;
+    };
+    ProfileComponent.prototype.hideErrors = function () {
+        this.showErrorsPassword = false;
+    };
+    ProfileComponent.prototype.smallLettersToCapitalLetters = function (value) {
+        value.toUpperCase();
+    };
+    ProfileComponent.prototype.abbrState = function (input, to) {
+        var states = [
+            ['Arizona', 'AZ'],
+            ['Alabama', 'AL'],
+            ['Alaska', 'AK'],
+            ['Arkansas', 'AR'],
+            ['California', 'CA'],
+            ['Colorado', 'CO'],
+            ['Connecticut', 'CT'],
+            ['Delaware', 'DE'],
+            ['Florida', 'FL'],
+            ['Georgia', 'GA'],
+            ['Hawaii', 'HI'],
+            ['Idaho', 'ID'],
+            ['Illinois', 'IL'],
+            ['Indiana', 'IN'],
+            ['Iowa', 'IA'],
+            ['Kansas', 'KS'],
+            ['Kentucky', 'KY'],
+            ['Louisiana', 'LA'],
+            ['Maine', 'ME'],
+            ['Maryland', 'MD'],
+            ['Massachusetts', 'MA'],
+            ['Michigan', 'MI'],
+            ['Minnesota', 'MN'],
+            ['Mississippi', 'MS'],
+            ['Missouri', 'MO'],
+            ['Montana', 'MT'],
+            ['Nebraska', 'NE'],
+            ['Nevada', 'NV'],
+            ['New Hampshire', 'NH'],
+            ['New Jersey', 'NJ'],
+            ['New Mexico', 'NM'],
+            ['New York', 'NY'],
+            ['North Carolina', 'NC'],
+            ['North Dakota', 'ND'],
+            ['Ohio', 'OH'],
+            ['Oklahoma', 'OK'],
+            ['Oregon', 'OR'],
+            ['Pennsylvania', 'PA'],
+            ['Rhode Island', 'RI'],
+            ['South Carolina', 'SC'],
+            ['South Dakota', 'SD'],
+            ['Tennessee', 'TN'],
+            ['Texas', 'TX'],
+            ['Utah', 'UT'],
+            ['Vermont', 'VT'],
+            ['Virginia', 'VA'],
+            ['Washington', 'WA'],
+            ['West Virginia', 'WV'],
+            ['Wisconsin', 'WI'],
+            ['Wyoming', 'WY'],
+        ];
+        if (to == 'abbr') {
+            input = input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+            for (var i = 0; i < states.length; i++) {
+                if (states[i][0] == input) {
+                    return (states[i][1]);
+                }
+            }
+        }
+        else if (to == 'name') {
+            input = input.toUpperCase();
+            for (var i = 0; i < states.length; i++) {
+                if (states[i][1] == input) {
+                    return (states[i][0]);
+                }
+            }
+        }
     };
     ProfileComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -671,6 +773,60 @@ function patternValidator(regex, error) {
         return valid ? null : error;
     };
 }
+function StateValidator(regex, error) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        // test the value of the control against the regexp supplied
+        var valid = regex.test(control.value);
+        // if true, return no error (no error), else return error passed in the second parameter
+        return valid ? null : error;
+    };
+}
+function phoneValidator(regex, error) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        if (control.value[0] == "1") {
+            if (/\d{11}/.test(control.value)) {
+                // if control is empty return no error
+                return null;
+            }
+            else {
+                return { elevenDigits: true };
+            }
+        }
+        else if (control.value[0] != "1") {
+            if (/\d{10}/.test(control.value)) {
+                // if control is empty return no error
+                return null;
+            }
+            else {
+                return { tenDigits: true };
+            }
+        }
+        else {
+            return null;
+        }
+    };
+}
+function alphaNumeric(regex, error, status) {
+    return function (control) {
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+        status.smallLettersToCapitalLetters(control.value);
+        // test the value of the control against the regexp supplied
+        var valid = regex.test(control.value);
+        // if true, return no error (no error), else return error passed in the second parameter
+        return valid ? null : error;
+    };
+}
 
 
 /***/ }),
@@ -682,7 +838,7 @@ function patternValidator(regex, error) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n                <li class=\"breadcrumb-item active\" aria-current=\"page\">Events &amp; Social Media</li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Client Details</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{salesCount}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">Total Sales</h5>\r\n                    <p class=\"card-desc\">Clients showing interest in your Sales.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{servicesCount}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Total Services</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Clients showing interest in your Services.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{TotalCount}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">Total Services & Sales</h5>\r\n                    <p class=\"card-desc\">Clients showing interest in your Services & sales.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Sales</h5>\r\n                    <div class=\"col-sm-12\" #tableSales>\r\n                        <table id=\"sales\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n\r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>Sub Category</th>\r\n\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-3 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\"> \r\n                    <h5 class=\"card-title tx-primary\">Services</h5>\r\n                    <div  class=\"col-sm-12\" #tableServices></div>\r\n                    <table id=\"services\" class=\"table table-bordered\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th>Name</th>\r\n                                <th>Mobile No</th>\r\n                                <th>Email</th>\r\n                                <th>Zip Code</th>\r\n                                <th>Category Name</th>\r\n                            </tr>\r\n                        </thead>\r\n                    </table>  \r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n</div><!-- content-body -->"
+module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n                <li class=\"breadcrumb-item active\" aria-current=\"page\">Events &amp; Social Media</li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Client Details</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{salesCount}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">Total Sales</h5>\r\n                    <p class=\"card-desc\">Clients showing interest in your Sales.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{servicesCount}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Total Services</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Clients showing interest in your Services.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{TotalCount}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">Total Services & Sales</h5>\r\n                    <p class=\"card-desc\">Clients showing interest in your Services & sales.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm mg-t-30\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Sales</h5>\r\n                    <div class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableSales>\r\n                        <table id=\"sales\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n\r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>Sub Category</th>\r\n\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm mg-t-30\">\r\n        <div class=\"col-sm-3 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\"> \r\n                    <h5 class=\"card-title tx-primary\">Services</h5>\r\n                    <p>{{showSuccessMessage}}</p>\r\n                    <div class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableServices>\r\n                        <table id=\"services\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Zip Code</th>\r\n                                    <th>Category Name</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                    \r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n</div><!-- content-body -->"
 
 /***/ }),
 
@@ -718,6 +874,7 @@ var ClientDetailsComponent = /** @class */ (function () {
         this.salesCount = '';
         this.servicesCount = '';
         this.TotalCount = '';
+        this.showSuccessMessage = '';
     }
     ClientDetailsComponent.prototype.ngOnInit = function () {
         this.getServicesCount();
@@ -885,12 +1042,11 @@ var ClientDetailsComponent = /** @class */ (function () {
         this.dashboardService
             .deleteCustomerRecords(id)
             .subscribe(function (data) {
-            if (data.d.length > 0) {
-                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_3__["parseXML"](data.d);
-                var json = _this.xmlToJson.xml2json(xmlDoc, "");
-                var dataJson = JSON.parse(json);
-                _this.initializedDataTableServices(dataJson.InterestedConsumerser);
-            }
+            _this.showSuccessMessage = "Data Deleted Succesfully.";
+            _this.getClientDetailsServicesData();
+            setInterval(function () {
+                this.showSuccessMessage = "";
+            }, 2000);
         });
     };
     ClientDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1460,7 +1616,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"header\">\r\n    <div class=\"header-left\">\r\n        <a href=\"\" class=\"burger-menu\"><i data-feather=\"menu\"></i></a>\r\n        <div class=\"header-search\">\r\n            <i data-feather=\"search\"></i>\r\n            <input type=\"search\" class=\"form-control\" placeholder=\"What are you looking for?\">\r\n        </div><!-- header-search -->\r\n    </div><!-- header-left -->\r\n    <div class=\"header-right\">\r\n        <a href=\"\" class=\"header-help-link\"><i data-feather=\"help-circle\"></i></a>\r\n        <div class=\"dropdown dropdown-notification\">\r\n            <a href=\"\" class=\"dropdown-link new\" data-toggle=\"dropdown\"><i data-feather=\"bell\"></i></a>\r\n            <div class=\"dropdown-menu dropdown-menu-right\">\r\n                <div class=\"dropdown-menu-header\">\r\n                    <h6>Notifications</h6>\r\n                    <a href=\"\"><i data-feather=\"more-vertical\"></i></a>\r\n                </div><!-- dropdown-menu-header -->\r\n                <div class=\"dropdown-menu-body\">\r\n                    <a href=\"\" class=\"dropdown-item\">\r\n                        <div class=\"avatar\"><span class=\"avatar-initial rounded-circle text-primary bg-primary-light\">s</span></div>\r\n                        <div class=\"dropdown-item-body\">\r\n                            <p><strong>Socrates Itumay</strong> marked the task as completed.</p>\r\n                            <span>5 hours ago</span>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"\" class=\"dropdown-item\">\r\n                        <div class=\"avatar\"><span class=\"avatar-initial rounded-circle tx-pink bg-pink-light\">r</span></div>\r\n                        <div class=\"dropdown-item-body\">\r\n                            <p><strong>Reynante Labares</strong> marked the task as incomplete.</p>\r\n                            <span>8 hours ago</span>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"\" class=\"dropdown-item\">\r\n                        <div class=\"avatar\"><span class=\"avatar-initial rounded-circle tx-success bg-success-light\">d</span></div>\r\n                        <div class=\"dropdown-item-body\">\r\n                            <p><strong>Dyanne Aceron</strong> responded to your comment on this <strong>post</strong>.</p>\r\n                            <span>a day ago</span>\r\n                        </div>\r\n                    </a>\r\n                    <a href=\"\" class=\"dropdown-item\">\r\n                        <div class=\"avatar\"><span class=\"avatar-initial rounded-circle tx-indigo bg-indigo-light\">k</span></div>\r\n                        <div class=\"dropdown-item-body\">\r\n                            <p><strong>Kirby Avendula</strong> marked the task as incomplete.</p>\r\n                            <span>2 days ago</span>\r\n                        </div>\r\n                    </a>\r\n                </div><!-- dropdown-menu-body -->\r\n                <div class=\"dropdown-menu-footer\">\r\n                    <a href=\"\">View All Notifications</a>\r\n                </div>\r\n            </div><!-- dropdown-menu -->\r\n        </div>\r\n        <div class=\"dropdown dropdown-loggeduser\">\r\n            <a href=\"\" class=\"dropdown-link\" data-toggle=\"dropdown\">\r\n                <div class=\"avatar avatar-sm\">\r\n                    <img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\">\r\n                </div><!-- avatar -->\r\n            </a>\r\n            <div class=\"dropdown-menu dropdown-menu-right\">\r\n                <div class=\"dropdown-menu-header\">\r\n                    <div class=\"media align-items-center\">\r\n                        <div class=\"avatar\">\r\n                            <img src=\"https://via.placeholder.com/500/637382/fff\" class=\"rounded-circle\" alt=\"\">\r\n                        </div><!-- avatar -->\r\n                        <div class=\"media-body mg-l-10\">\r\n                            <h6>Louise Kate Lumaad</h6>\r\n                            <span>Administrator</span>\r\n                        </div>\r\n                    </div><!-- media -->\r\n                </div>\r\n                <div class=\"dropdown-menu-body\">\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"user\"></i> View Profile</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"edit-2\"></i> Edit Profile</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"briefcase\"></i> Account Settings</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"shield\"></i> Privacy Settings</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"log-out\"></i> Sign Out</a>\r\n                </div>\r\n            </div><!-- dropdown-menu -->\r\n        </div>\r\n    </div><!-- header-right -->\r\n</div><!-- header -->"
+module.exports = "<style>\r\n    .tx-primary {\r\n        color: #0e3a6b;\r\n    }\r\n</style>\r\n\r\n<div class=\"header\">\r\n    <div class=\"header-left\" style=\"width: 500px;\">\r\n        <a href=\"\" class=\"burger-menu\"><i data-feather=\"menu\"></i></a>\r\n            <div class=\"row\">\r\n                <div class=\"col-sm-12\">\r\n\r\n                    <div class=\"col-xs-3 col-sm-2 pd-r-10\"><span class=\"font-weight-bolder tx-14 tx-primary\">WCR ID:</span> {{wcrID}}</div>\r\n                    <div class=\"col-xs-3 col-sm-2 \"><span class=\"font-weight-bolder tx-14 tx-primary\">License</span> {{LicenseID}}</div>\r\n                    <div class=\"col-xs-3 col-sm-3\"><span class=\"font-weight-bolder tx-14 tx-primary\">Contact</span> {{Contact}}</div>\r\n                    <div class=\"col-xs-3 col-sm-3\"><span class=\"font-weight-bolder tx-14 tx-primary\">Email </span>  {{Email}}</div>\r\n\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n            </div>\r\n    </div><!-- header-left -->\r\n    <div class=\"header-right\">\r\n        <a href=\"\" class=\"header-help-link\"><i data-feather=\"help-circle\"></i></a>\r\n        <div class=\"dropdown dropdown-loggeduser\">\r\n            <a href=\"\" class=\"dropdown-link\" data-toggle=\"dropdown\" style=\"float:right;\">\r\n                <div class=\"avatar avatar-sm\">\r\n                    <img id=\"profilePic\" src=\"\" class=\"rounded-circle\" alt=\"\">\r\n                </div><!-- avatar -->\r\n            </a>\r\n            <div class=\"dropdown-menu dropdown-menu-right\">\r\n                <div class=\"dropdown-menu-body\">\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"user\"></i> View Profile</a>\r\n                    <a href=\"\" class=\"dropdown-item\"><i data-feather=\"log-out\"></i> Log Out</a>\r\n                </div>\r\n            </div><!-- dropdown-menu -->\r\n\r\n           \r\n            <a href=\"javascript:void(0)\" class=\"header-help-link pd-t-8\" style=\"float:right;\">\r\n                <div class=\"col-sm-1\" style=\"padding-right: 22px;\">\r\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-user\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"></path><circle cx=\"12\" cy=\"7\" r=\"4\"></circle></svg>\r\n                </div>\r\n                <span class=\"font-weight-bolder tx-18 tx-primary\">{{userName}}</span>\r\n            </a>\r\n            \r\n\r\n\r\n\r\n\r\n        </div>\r\n    </div><!-- header-right -->\r\n</div><!-- header -->"
 
 /***/ }),
 
@@ -1476,19 +1632,65 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AssociateHeaderComponent", function() { return AssociateHeaderComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var AngularAssociate_app_services_associate_dashboard_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! AngularAssociate/app/services/associate/dashboard.service */ "./AngularAssociate/app/services/associate/dashboard.service.ts");
+/* harmony import */ var AngularAssociate_app_helpers_xml_to_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! AngularAssociate/app/_helpers/xml-to-json */ "./AngularAssociate/app/_helpers/xml-to-json.ts");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+
+
+
+
 
 
 var AssociateHeaderComponent = /** @class */ (function () {
-    function AssociateHeaderComponent() {
+    function AssociateHeaderComponent(route, router, dashboardService, xmlToJson) {
+        this.route = route;
+        this.router = router;
+        this.dashboardService = dashboardService;
+        this.xmlToJson = xmlToJson;
     }
     AssociateHeaderComponent.prototype.ngOnInit = function () {
+        this.initializeHeader();
+    };
+    AssociateHeaderComponent.prototype.initializeHeader = function () {
+        var thisStatus = this;
+        this.dashboardService
+            .initializeHeader()
+            .subscribe(function (data) {
+            var countInterestedCutomers = '0';
+            if (data.d.length > 0) {
+                var xmlDoc = jquery__WEBPACK_IMPORTED_MODULE_5__["parseXML"](data.d);
+                var xml = jquery__WEBPACK_IMPORTED_MODULE_5__(xmlDoc);
+                var docs = xml.find("ViewAssociateBasicDetail");
+                var cartd = [];
+                var sd = [];
+                jquery__WEBPACK_IMPORTED_MODULE_5__["each"](docs, function (i, docs) {
+                    thisStatus.wcrID = jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("AssociateId").text();
+                    thisStatus.LicenseID = jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("LicenseId").text();
+                    thisStatus.Contact = jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("MobileNo").text();
+                    thisStatus.Email = jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Email").text();
+                    thisStatus.userName = jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("FullName").text() + ' ' + jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("LastName").text();
+                    if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Photo").text() != null || jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Photo").text() == "") {
+                        //cartd.push("<img class='img-circle user-img' alt='User Image' src='../AssociatePhoto/" + $(docs).find("Photo").text() + "'/>");
+                        thisStatus.profileImage = '../AssociatePhoto/' + jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Photo").text();
+                    }
+                    else {
+                        thisStatus.profileImage = '../AssociatePhoto/0.png';
+                    }
+                });
+                debugger;
+                jquery__WEBPACK_IMPORTED_MODULE_5__("#profilePic").attr('src', thisStatus.profileImage);
+            }
+        });
+        //../../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails
     };
     AssociateHeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'associate-layout-header',
             template: __webpack_require__(/*! ./header.component.html */ "./AngularAssociate/app/associate/associate-header/header.component.html")
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], AngularAssociate_app_services_associate_dashboard_service__WEBPACK_IMPORTED_MODULE_3__["DashboardService"], AngularAssociate_app_helpers_xml_to_json__WEBPACK_IMPORTED_MODULE_4__["XMLToJSON"]])
     ], AssociateHeaderComponent);
     return AssociateHeaderComponent;
 }());
@@ -1521,7 +1723,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<associate-layout-sidebar></associate-layout-sidebar>\r\n\r\n<div class=\"content content-page\">\r\n\r\n    <associate-layout-header></associate-layout-header>\r\n    <router-outlet></router-outlet>\r\n\r\n</div>"
+module.exports = "\r\n<associate-layout-sidebar></associate-layout-sidebar>\r\n\r\n<div class=\"content content-page\">\r\n\r\n    <associate-layout-header></associate-layout-header>\r\n    <router-outlet></router-outlet>\r\n\r\n    <div id=\"footer\" class=\"sticky-footer\">\r\n        <!-- Main -->\r\n        <div class=\"container-fluid\">\r\n            <!-- Copyright -->\r\n            <div class=\"row\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"copyrights\">� 2020 WCR Organisation. <a href=\"/privacy.html\" class=\"tx-medium blue-text text-darken-4\" style=\"cursor:pointer;\">Privacy and Terms</a></div>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1660,7 +1862,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var associateRoutes = [
     {
-        path: 'associate',
+        path: 'associates',
         component: _associate_layout__WEBPACK_IMPORTED_MODULE_6__["AssociateLayoutComponent"],
         children: [
             {
@@ -1730,7 +1932,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"sidebar\">\r\n    <div class=\"sidebar-header\">\r\n        <div>\r\n            <a href=\"Dashboard.aspx\" class=\"sidebar-logo\"><span>cassie</span></a>\r\n            <small class=\"sidebar-logo-headline\">Responsive Dashboard Template</small>\r\n        </div>  \r\n    </div>\r\n    <!-- sidebar-header -->\r\n    <div id=\"dpSidebarBody\" class=\"sidebar-body\">\r\n        <ul class=\"nav nav-sidebar\">\r\n            <li class=\"nav-label\">\r\n                <label class=\"content-label\">Template Pages</label>\r\n            </li>\r\n            <li class=\"nav-item show\">\r\n                <!-- routerLink=\"/dashboard\" -->\r\n                <a href=\"Dashboard.aspx\" class=\"nav-link with-sub active\"><i data-feather=\"box\"></i>Dashboard</a>\r\n                <!--<nav class=\"nav nav-sub\">\r\n                    <a href=\"dashboard-one.html\" class=\"nav-sub-link\">Analytics &amp; Monitoring</a>\r\n                    <a href=\"dashboard-two.html\" class=\"nav-sub-link\">Projects &amp; Web Services</a>\r\n                    <a href=\"dashboard-three.html\" class=\"nav-sub-link active\">Blog &amp; Social Media</a>\r\n                </nav>-->\r\n            </li>\r\n            <li id=\"profileclick\" class=\"nav-item\">\r\n                <!-- routerLink=\"/profile\" -->\r\n                <a href=\"Profile.aspx\" class=\"nav-link with-sub\"><i data-feather=\"layout\"></i>Profile</a>\r\n            </li>\r\n\r\n            <li id=\"clientdetailclick\" class=\"nav-item\">\r\n                <!-- routerLink=\"/client-details\" -->\r\n                <a href=\"ClientDetails.aspx\" class=\"nav-link with-sub\"><i data-feather=\"lock\"></i>Client Details</a>\r\n            </li>\r\n\r\n\r\n            <!--\r\n            <li id=\"postadtsclick\" class=\"treeview\">\r\n                <a href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <i>\r\n                        <img src=\"img/icon_sale_advertisement.png\" alt=\"\" />\r\n                    </i><span>List Your Property </span>\r\n                </a>\r\n            </li>-->\r\n            <!--\r\n            <li id=\"zipcodeclick\" class=\"treeview\">\r\n                <a href=\"ZipCodePurchase.aspx\">\r\n                    <i>\r\n                        <img src=\"img/icon_purchase_zipcode.png\" alt=\"\" />\r\n                    </i><span>Purchase Zip code </span>\r\n                </a>\r\n            </li>-->\r\n\r\n            <!--\r\n            <li id=\"customerclick\" class=\"treeview\">\r\n                <a href=\"CustomerSupport.aspx\">\r\n                    <i>\r\n                        <img src=\"img/icon_customer_support.png\" alt=\"\" />\r\n                    </i><span>Customer Support </span>\r\n                </a>\r\n            </li>\r\n            <li class=\"treeview\">\r\n                <a href=\"#\" id=\"btnLogout\">\r\n                    <img src=\"img/icon_signout.png\" alt=\"\" />\r\n                    <span>Logout </span>\r\n                </a>\r\n            </li>\r\n\r\n            <li style=\"height: 25px;\"></li>-->\r\n        </ul>\r\n\r\n        <!--                <hr class=\"mg-t-30 mg-b-25\">\r\n\r\n        <ul class=\"nav nav-sidebar\">\r\n            <li class=\"nav-item\"><a href=\"themes.html\" class=\"nav-link\"><i data-feather=\"aperture\"></i>Themes</a></li>\r\n            <li class=\"nav-item\"><a href=\"../docs.html\" class=\"nav-link\"><i data-feather=\"help-circle\"></i>Documentation</a></li>\r\n        </ul>-->\r\n    </div>\r\n    <!-- sidebar-body -->\r\n</div>"
+module.exports = "<div class=\"sidebar\">\r\n    <div class=\"sidebar-header\">\r\n        <div>\r\n            <a routerLink=\"/associates\" class=\"sidebar-logo\"><span>WCR National  </span></a>\r\n            <small class=\"sidebar-logo-headline\">Associate Portal</small>\r\n        </div>  \r\n    </div>\r\n    <!-- sidebar-header -->\r\n    <div id=\"dpSidebarBody\" class=\"sidebar-body\">\r\n        <ul class=\"nav nav-sidebar\">\r\n            <li class=\"nav-item show\">\r\n                <!-- routerLink=\"/dashboard\" -->\r\n                <a id=\"aDashboard\" routerLink=\"/associates\" class=\"nav-link with-sub active\"><i data-feather=\"box\"></i>Dashboard</a>\r\n                <!--<nav class=\"nav nav-sub\">\r\n                    <a href=\"dashboard-one.html\" class=\"nav-sub-link\">Analytics &amp; Monitoring</a>\r\n                    <a href=\"dashboard-two.html\" class=\"nav-sub-link\">Projects &amp; Web Services</a>\r\n                    <a href=\"dashboard-three.html\" class=\"nav-sub-link active\">Blog &amp; Social Media</a>\r\n                </nav>-->\r\n            </li>\r\n            <li id=\"profileclick\" class=\"nav-item\">\r\n                <!-- routerLink=\"/profile\" -->\r\n                <a id=\"aProfile\" routerLink=\"/associates/profile\" class=\"nav-link with-sub\"><i data-feather=\"layout\"></i>Profile</a>\r\n            </li>\r\n\r\n            <li id=\"clientdetailclick\" class=\"nav-item\">\r\n                <!-- routerLink=\"/client-details\" -->\r\n                <a id=\"aClientDetails\" routerLink=\"/associates/client-details\" class=\"nav-link with-sub\"><i data-feather=\"lock\"></i>Client Details</a>\r\n            </li>\r\n\r\n\r\n            <!--\r\n            <li id=\"postadtsclick\" class=\"treeview\">\r\n                <a href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <i>\r\n                        <img src=\"img/icon_sale_advertisement.png\" alt=\"\" />\r\n                    </i><span>List Your Property </span>\r\n                </a>\r\n            </li>-->\r\n            <!--\r\n            <li id=\"zipcodeclick\" class=\"treeview\">\r\n                <a href=\"ZipCodePurchase.aspx\">\r\n                    <i>\r\n                        <img src=\"img/icon_purchase_zipcode.png\" alt=\"\" />\r\n                    </i><span>Purchase Zip code </span>\r\n                </a>\r\n            </li>-->\r\n\r\n            <!--\r\n            <li id=\"customerclick\" class=\"treeview\">\r\n                <a href=\"CustomerSupport.aspx\">\r\n                    <i>\r\n                        <img src=\"img/icon_customer_support.png\" alt=\"\" />\r\n                    </i><span>Customer Support </span>\r\n                </a>\r\n            </li>\r\n            <li class=\"treeview\">\r\n                <a href=\"#\" id=\"btnLogout\">\r\n                    <img src=\"img/icon_signout.png\" alt=\"\" />\r\n                    <span>Logout </span>\r\n                </a>\r\n            </li>\r\n\r\n            <li style=\"height: 25px;\"></li>-->\r\n        </ul>\r\n\r\n        <!--                <hr class=\"mg-t-30 mg-b-25\">\r\n\r\n        <ul class=\"nav nav-sidebar\">\r\n            <li class=\"nav-item\"><a href=\"themes.html\" class=\"nav-link\"><i data-feather=\"aperture\"></i>Themes</a></li>\r\n            <li class=\"nav-item\"><a href=\"../docs.html\" class=\"nav-link\"><i data-feather=\"help-circle\"></i>Documentation</a></li>\r\n        </ul>-->\r\n    </div>\r\n    <!-- sidebar-body -->\r\n</div>"
 
 /***/ }),
 
@@ -2384,17 +2586,17 @@ var AuthComponent = /** @class */ (function () {
             .then(function (data) {
             if (data.d == "1") {
                 if (jquery__WEBPACK_IMPORTED_MODULE_5__(docs).find("Mobile").text() == '') {
-                    //if (this.returnUrl != '') {
-                    //    this.router.navigate([this.returnUrl]);
-                    //}
-                    //else {
-                    //    this.router.navigateByUrl('/associate');       
-                    //}
-                    //this.router.navigateByUrl('/associate');       
-                    jquery__WEBPACK_IMPORTED_MODULE_5__(location).attr('href', 'Associate/ViewProfile.aspx');
+                    if (_this.returnUrl != '') {
+                        _this.router.navigate([_this.returnUrl]);
+                    }
+                    else {
+                        _this.router.navigateByUrl('/associates/profile');
+                    }
+                    _this.router.navigateByUrl('/associate');
+                    //$(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
-                    _this.router.navigateByUrl('/associate/dashboard');
+                    _this.router.navigateByUrl('/associates');
                     //$(location).attr('href', 'Associate/Dashboard.aspx');
                 }
             }
@@ -4607,7 +4809,7 @@ var ProfileService = /** @class */ (function () {
             return data;
         }));
     }; //select categories
-    ProfileService.prototype.updateProfileinfo = function (FirstName, LastName, PhoneNumber, email, Password, LicenseNumber, IssuingState, profileImage) {
+    ProfileService.prototype.updateProfileinfo = function (FirstName, LastName, PhoneNumber, email, Password, LicenseNumber, IssuingState) {
         var urlToCountAssociateCategories = "ws/AssociateRegistration.asmx/UpdateAssociate";
         return this.apiService.post(urlToCountAssociateCategories, { 'FullName': FirstName, 'LastName': LastName, 'Password': Password, 'EmailID': email, 'MobileNo': PhoneNumber, 'LicenceID': LicenseNumber, 'LicenceState': IssuingState, 'ZipCode': '0' })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
@@ -4780,6 +4982,14 @@ var DashboardService = /** @class */ (function () {
         this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
         this.isAuthenticated_extra = false;
     }
+    //
+    DashboardService.prototype.initializeHeader = function () {
+        var urlToCountHeader = "ws/AssociateRegistration.asmx/ViewAssociateBasicDetails";
+        return this.apiService.post(urlToCountHeader, {})
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["map"])(function (data) {
+            return data;
+        }));
+    }; //select categories
     DashboardService.prototype.attemptToCountInterestedCustomers = function () {
         var urlToCountInterestedCustomers = "Associate/ws/Sale.asmx/CountTotalVisitors";
         return this.apiService.post(urlToCountInterestedCustomers, {})
@@ -5177,7 +5387,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var UserService = /** @class */ (function () {
-    function UserService(user, apiService, http, jwtService, router) {
+    function UserService(user, apiService, http, jwtService, router, route) {
         if (user === void 0) { user = null; }
         if (apiService === void 0) { apiService = null; }
         if (http === void 0) { http = null; }
@@ -5187,6 +5397,7 @@ var UserService = /** @class */ (function () {
         this.http = http;
         this.jwtService = jwtService;
         this.router = router;
+        this.route = route;
         this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"]({});
         this.currentUser = this.currentUserSubject.asObservable().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_8__["distinctUntilChanged"])());
         this.isAuthenticatedSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["ReplaySubject"](1);
@@ -5207,7 +5418,13 @@ var UserService = /** @class */ (function () {
                 this.associateLoginSessionActivate("", credentials, user.id)
                     .then(function (data) {
                     if (data.d == "1") {
-                        _this.router.navigateByUrl('/associate');
+                        _this.returnUrl = _this.route.snapshot.queryParams['returnUrl'] || '';
+                        if (_this.returnUrl == '') {
+                            _this.router.navigateByUrl('/associates');
+                        }
+                        else {
+                            _this.router.navigateByUrl('returnUrl');
+                        }
                     }
                     else {
                         _this.router.navigateByUrl('/');
@@ -5531,7 +5748,8 @@ var UserService = /** @class */ (function () {
             _api_service__WEBPACK_IMPORTED_MODULE_4__["ApiService"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
             _jwt_service__WEBPACK_IMPORTED_MODULE_5__["JwtService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]])
     ], UserService);
     return UserService;
 }());
@@ -6284,7 +6502,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\WcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
+module.exports = __webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
 
 
 /***/ })

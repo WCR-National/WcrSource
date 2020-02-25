@@ -590,17 +590,17 @@ export class AuthComponent implements OnInit {
                     if (data.d == "1") {
 
                         if ($(docs).find("Mobile").text() == '') {
-                            //if (this.returnUrl != '') {
-                            //    this.router.navigate([this.returnUrl]);
-                            //}
-                            //else {
-                            //    this.router.navigateByUrl('/associate');       
-                            //}
-                            //this.router.navigateByUrl('/associate');       
-                            $(location).attr('href', 'Associate/ViewProfile.aspx');
+                            if (this.returnUrl != '') {
+                                this.router.navigate([this.returnUrl]);
+                            }
+                            else {
+                                this.router.navigateByUrl('/associates/profile');       
+                            }
+                            this.router.navigateByUrl('/associate');       
+                            //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         }
                         else {
-                            this.router.navigateByUrl('/associate/dashboard');       
+                            this.router.navigateByUrl('/associates');       
                             //$(location).attr('href', 'Associate/Dashboard.aspx');
                         }
                     }

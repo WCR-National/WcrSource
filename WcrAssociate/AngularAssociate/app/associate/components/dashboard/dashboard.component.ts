@@ -13,8 +13,9 @@ import { DashboardService } from 'AngularAssociate/app/services/associate/dashbo
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 
 import * as $ from 'jquery';
-import * as CryptoJS from 'crypto-js';
 import 'datatables.net';
+import 'datatables.net-bs';
+
 
 
 @Component({
@@ -22,8 +23,7 @@ import 'datatables.net';
     templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-
-
+    
     interestedCustomers: string = '';
     selectedCategories: string = '';
     myPropertyListings: string = '';
@@ -33,7 +33,6 @@ export class DashboardComponent implements OnInit {
 
     }
     ngOnInit() {
-        debugger;
         this.attemptToCountInterestedCustomers();
 
         this.attemptToCountAssociateCategories();
@@ -187,7 +186,7 @@ export class DashboardComponent implements OnInit {
             .attemptToInterestedCustomerData()
             .then((data: any) => {
                 if (data.d.length > 0) {
-                    debugger;
+                    
                     let added: Boolean = false;
                     var xmlDoc = $.parseXML(data.d);
                     var json = this.xmlToJson.xml2json(xmlDoc, "");
@@ -197,7 +196,7 @@ export class DashboardComponent implements OnInit {
                         .attemptToInterestedCustomerServicesData()
                         .then((data: any) => {
                             if (data.d.length > 0) {
-                                debugger;
+                                
                                 var xmlDoc = $.parseXML(data.d);
                                 var json = this.xmlToJson.xml2json(xmlDoc, "");
 
@@ -217,7 +216,7 @@ export class DashboardComponent implements OnInit {
     }
 
     initialiseInterestedCustomerDataTable(asyncData) {
-        debugger;
+        
         let dataTable: any = $('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
@@ -226,7 +225,7 @@ export class DashboardComponent implements OnInit {
                 'EmailID': "",
                 'title': "",
                 'categoryName': "",
-                'SubCategory':''
+                'SubCategory': ''
             };
         }
         dataTable.DataTable({
@@ -254,6 +253,9 @@ export class DashboardComponent implements OnInit {
             searching: false,
             paging: false,
             info: false,
+            buttons: [
+                'excel', 'pdf'
+            ],
             order: [[1, 'asc']]
         });
 
@@ -287,18 +289,22 @@ export class DashboardComponent implements OnInit {
             data: asyncData,
             columns: [
                 {
-                    data: "categoryname/Name",
-                    "defaultContent": ""
+                    "mRender": function (data, type, row) {
+                        return row['categoryname'] + '/' + row['Name'];
+                    }
                 }
             ],
-            
             searching: false,
             paging: false,
             info: false,
-            order: [[1, 'asc']]
+            buttons: [
+                'excel', 'pdf'
+            ],
+            "aoColumnDefs": [
+                { "sWidth": "100%", "aTargets": [-1] }
+            ]
         });
     }
-
 
     attemptToMyPropertyListingsData() {
 
@@ -321,53 +327,51 @@ export class DashboardComponent implements OnInit {
         let dataTable: any = $('#myPropertyListings');
         if (asyncData === undefined) {
             asyncData = {
-                'S.N' : '',
+                'S.N': '',
                 'title': "",
                 'categoryname': "",
                 'ZipCode': "",
-                'Amount':''
+                'Amount': ''
             };
         }
         dataTable.DataTable({
             data: asyncData,
             columns: [
                 {
-                    title: 'S.N',
                     data: "",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'title',
                     data: "title",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryname",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Zip Code',
                     data: "ZipCode",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Category Name',
-                    data: "categoryName",
-                    "defaultContent": ""
-                },
-                {
-                    title: 'Amount',
                     data: "Amount",
-                    "defaultContent": ""
                 },
             ],
-            
+            buttons: [
+                'excel', 'pdf'
+            ],
             searching: false,
             paging: false,
             info: false,
-            order: [[1, 'asc']]
+            drawCallback: function () {
+                var api = this.api();
+                $(api.table().footer()).html(
+                    api.column(4).data().sum()
+                );
+            },
+            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                var index = iDisplayIndex + 1;
+                $('td:eq(0)', nRow).html(index);
+                return nRow;
+            }
         });
+
         //dataTable.on('order.dt search.dt', function () {
         //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
         //        cell.innerHTML = i + 1;
@@ -406,29 +410,24 @@ export class DashboardComponent implements OnInit {
             data: asyncData,
             columns: [
                 {
-                    title: '',
-                    data: "",
-                },
-                {
-                    title: 'Zip Code',
                     data: "zipcode",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Category Name',
                     data: "categoryname",
-                    "defaultContent": ""
                 },
                 {
-                    title: 'Cost',
                     data: "amount",
-                    "defaultContent": ""
                 }
+            ],
+            buttons: [
+                'excel', 'pdf'
             ],
             searching: false,
             paging: false,
             info: false,
-            order: [[1, 'asc']]
+            "aoColumnDefs": [
+                { "sWidth": "33.67%", "aTargets": [-1] }
+            ]
         });
 
         //dataTable.on('order.dt search.dt', function () {

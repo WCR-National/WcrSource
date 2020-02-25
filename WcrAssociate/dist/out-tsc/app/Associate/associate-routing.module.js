@@ -10,7 +10,7 @@ import { AssociateLayoutComponent } from './associate-layout';
 import { AuthGuard } from '../_guards/auth-guard.service';
 var associateRoutes = [
     {
-        path: 'associate',
+        path: 'associates',
         component: AssociateLayoutComponent,
         children: [
             {

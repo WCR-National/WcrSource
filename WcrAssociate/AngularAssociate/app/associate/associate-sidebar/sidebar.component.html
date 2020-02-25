@@ -1,19 +1,16 @@
 <div class="sidebar">
     <div class="sidebar-header">
         <div>
-            <a href="Dashboard.aspx" class="sidebar-logo"><span>cassie</span></a>
-            <small class="sidebar-logo-headline">Responsive Dashboard Template</small>
+            <a routerLink="/associates" class="sidebar-logo"><span>WCR National  </span></a>
+            <small class="sidebar-logo-headline">Associate Portal</small>
         </div>  
     </div>
     <!-- sidebar-header -->
     <div id="dpSidebarBody" class="sidebar-body">
         <ul class="nav nav-sidebar">
-            <li class="nav-label">
-                <label class="content-label">Template Pages</label>
-            </li>
             <li class="nav-item show">
                 <!-- routerLink="/dashboard" -->
-                <a href="Dashboard.aspx" class="nav-link with-sub active"><i data-feather="box"></i>Dashboard</a>
+                <a id="aDashboard" routerLink="/associates" class="nav-link with-sub active"><i data-feather="box"></i>Dashboard</a>
                 <!--<nav class="nav nav-sub">
                     <a href="dashboard-one.html" class="nav-sub-link">Analytics &amp; Monitoring</a>
                     <a href="dashboard-two.html" class="nav-sub-link">Projects &amp; Web Services</a>
@@ -22,12 +19,12 @@
             </li>
             <li id="profileclick" class="nav-item">
                 <!-- routerLink="/profile" -->
-                <a href="Profile.aspx" class="nav-link with-sub"><i data-feather="layout"></i>Profile</a>
+                <a id="aProfile" routerLink="/associates/profile" class="nav-link with-sub"><i data-feather="layout"></i>Profile</a>
             </li>
 
             <li id="clientdetailclick" class="nav-item">
                 <!-- routerLink="/client-details" -->
-                <a href="ClientDetails.aspx" class="nav-link with-sub"><i data-feather="lock"></i>Client Details</a>
+                <a id="aClientDetails" routerLink="/associates/client-details" class="nav-link with-sub"><i data-feather="lock"></i>Client Details</a>
             </li>
 
 

@@ -53,12 +53,12 @@
 
     </div><!-- row -->
 
-    <div class="row row-sm">
+    <div class="row row-sm mg-t-30">
         <div class="col-sm-12 col-xl">
             <div class="card card-hover card-social-one">
                 <div class="card-body">
                     <h5 class="card-title tx-primary">Sales</h5>
-                    <div class="col-sm-12" #tableSales>
+                    <div class="table-responsive pd-l-0-f pd-r-0-f" #tableSales>
                         <table id="sales" class="table table-bordered">
                             <thead>
                                 <tr>
@@ -79,23 +79,26 @@
         </div>
     </div>
 
-    <div class="row row-sm">
+    <div class="row row-sm mg-t-30">
         <div class="col-sm-3 col-xl">
             <div class="card card-hover card-social-one">
                 <div class="card-body"> 
                     <h5 class="card-title tx-primary">Services</h5>
-                    <div  class="col-sm-12" #tableServices></div>
-                    <table id="services" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Mobile No</th>
-                                <th>Email</th>
-                                <th>Zip Code</th>
-                                <th>Category Name</th>
-                            </tr>
-                        </thead>
-                    </table>  
+                    <p>{{showSuccessMessage}}</p>
+                    <div class="table-responsive pd-l-0-f pd-r-0-f" #tableServices>
+                        <table id="services" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Mobile No</th>
+                                    <th>Email</th>
+                                    <th>Zip Code</th>
+                                    <th>Category Name</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    
                 </div><!-- card-body -->
             </div><!-- card -->
         </div>
