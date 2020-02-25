@@ -475,7 +475,7 @@ var AuthComponent = /** @class */ (function () {
                     else {
                         _this.router.navigateByUrl('/associates/profile');
                     }
-                    _this.router.navigateByUrl('/associate');
+                    //this.router.navigateByUrl('/associate');       
                     //$(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
