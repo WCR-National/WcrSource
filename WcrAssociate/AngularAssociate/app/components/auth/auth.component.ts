@@ -596,7 +596,7 @@ export class AuthComponent implements OnInit {
                             else {
                                 this.router.navigateByUrl('/associates/profile');       
                             }
-                            this.router.navigateByUrl('/associate');       
+                            //this.router.navigateByUrl('/associate');       
                             //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         }
                         else {

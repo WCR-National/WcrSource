@@ -152,6 +152,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.submitProfileForm = function () {
         var _this = this;
         var credentials = this.profileForm.value;
+        this.abbrState(credentials.licenseState, 'to');
         this.isSubmitting = true;
         this.profileService
             .updateProfileinfo(credentials.firstName, credentials.lastName, credentials.phoneNo, credentials.email, credentials.password, credentials.licenseId, credentials.licenseState)

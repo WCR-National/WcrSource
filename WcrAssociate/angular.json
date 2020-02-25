@@ -42,20 +42,16 @@
             "tsConfig": "AngularAssociate/tsconfig.app.json",
             "assets": [
               "AngularAssociate/assets",
-              "AngularAssociate/favicon.ico",
-              "AngularAssociate/assets/fonts"
+              "AngularAssociate/favicon.ico"
             ],
             "styles": [
               "AngularAssociate/styles.css",
               "AngularAssociate/assets/bootstrap.css",
-              "AngularAssociate/assets/icons.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css",
-              "AngularAssociate/assets/associate/css/all.min.css",
               "AngularAssociate/assets/associate/css/cassie.css"
             ],
             "scripts": [
-              "node_modules/crypto-js/crypto-js.js",
               "node_modules/crypto-js/crypto-js.js",
               "AngularAssociate/assets/js/materialize.min.js",
               "AngularAssociate/assets/js/bootstrap.bundle.min.js"
@@ -117,10 +113,8 @@
             "styles": [
               "AngularAssociate/styles.css",
               "AngularAssociate/assets/bootstrap.css",
-              "AngularAssociate/assets/icons.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css",
-              "AngularAssociate/assets/associate/css/all.min.css",
               "AngularAssociate/assets/associate/css/cassie.css"
             ],
             "scripts": [
@@ -131,9 +125,7 @@
             ],
             "assets": [
               "AngularAssociate/assets",
-              "AngularAssociate/favicon.ico",
-              "AngularAssociate/assets/fonts"
-
+              "AngularAssociate/favicon.ico"
             ]
           }
         },

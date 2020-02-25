@@ -208,6 +208,7 @@ var DashboardComponent = /** @class */ (function () {
                     data: "SubCategory",
                 },
             ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
@@ -247,6 +248,7 @@ var DashboardComponent = /** @class */ (function () {
                     }
                 }
             ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
@@ -301,20 +303,37 @@ var DashboardComponent = /** @class */ (function () {
                     data: "Amount",
                 },
             ],
-            buttons: [
-                'excel', 'pdf'
-            ],
-            searching: false,
-            paging: false,
-            info: false,
-            drawCallback: function () {
-                var api = this.api();
-                $(api.table().footer()).html(api.column(4).data().sum());
-            },
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 var index = iDisplayIndex + 1;
                 $('td:eq(0)', nRow).html(index);
                 return nRow;
+            },
+            buttons: [
+                'excel', 'pdf'
+            ],
+            "autoWidth": true,
+            searching: false,
+            paging: false,
+            info: false,
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+                // converting to interger to find total
+                var intVal = function (i) {
+                    return typeof i === 'string' ? Number(i) : typeof i === 'number' ? i : 0;
+                };
+                // computing column Total of the complete result 
+                var amountTotal = api
+                    .column(5)
+                    .data()
+                    .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+                // Update footer by showing the total with the reference of the column index 
+                $(api.column(0).footer()).html('Total');
+                $(api.column(1).footer()).html('');
+                $(api.column(2).footer()).html('');
+                $(api.column(3).footer()).html('');
+                $(api.column(4).footer()).html(amountTotal);
             }
         });
         //dataTable.on('order.dt search.dt', function () {
