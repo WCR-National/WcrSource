@@ -7,8 +7,9 @@ import { JwtService } from './jwt.service';
 import { User } from '../../entities/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, distinctUntilChanged, delay } from 'rxjs/operators';
+import { PlatformLocation } from '@angular/common';
 var UserService = /** @class */ (function () {
-    function UserService(user, apiService, http, jwtService, router, route) {
+    function UserService(user, apiService, http, jwtService, router, route, platformLocation) {
         if (user === void 0) { user = null; }
         if (apiService === void 0) { apiService = null; }
         if (http === void 0) { http = null; }
@@ -19,6 +20,7 @@ var UserService = /** @class */ (function () {
         this.jwtService = jwtService;
         this.router = router;
         this.route = route;
+        this.platformLocation = platformLocation;
         this.currentUserSubject = new BehaviorSubject({});
         this.currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
         this.isAuthenticatedSubject = new ReplaySubject(1);
@@ -41,7 +43,8 @@ var UserService = /** @class */ (function () {
                     if (data.d == "1") {
                         _this.returnUrl = _this.route.snapshot.queryParams['returnUrl'] || '';
                         if (_this.returnUrl == '') {
-                            _this.router.navigateByUrl('/associates');
+                            var url = (_this.platformLocation.location.href).replace(location.origin, '');
+                            _this.router.navigateByUrl(url);
                         }
                         else {
                             _this.router.navigateByUrl('returnUrl');
@@ -370,7 +373,8 @@ var UserService = /** @class */ (function () {
             HttpClient,
             JwtService,
             Router,
-            ActivatedRoute])
+            ActivatedRoute,
+            PlatformLocation])
     ], UserService);
     return UserService;
 }());

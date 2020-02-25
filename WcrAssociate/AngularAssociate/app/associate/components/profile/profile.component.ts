@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService, encrypt_decrypt } from '../../../services/auth';
@@ -168,11 +168,11 @@ export class ProfileComponent implements OnInit {
 
         this.profileForm = this.fb.group({
             email: [''],
-            firstName: ['', Validators.required, patternValidator(/[a-zA-Z]/, { letterOnly: true })],
-            lastName: ['', Validators.required, patternValidator(/[a-zA-Z]/, { letterOnly: true })],
-            licenseState: ['', Validators.required, StateValidator(/[a-zA-Z]/, { letterOnly: true })],
-            phoneNo: ['', Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })],
-            licenseId: ['', Validators.required, alphaNumeric(/[a-zA-Z0-9]/, { alphaNumeric: true }, this)],
+            firstName: ['', Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
+            lastName: ['', Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
+            licenseState: ['', Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
+            phoneNo: ['', Validators.required, phoneValidator(/\d{10}/, { elevenDigits: true })],
+            licenseId: ['', Validators.required, alphaNumeric(/[a-zA-Z0-9]+$/, { alphaNumeric: true }, this)],
             password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
             patternValidator(/\d/, { number: true }),
             patternValidator(/[A-Z]/, { upperLetter: true }),
@@ -353,8 +353,9 @@ export class ProfileComponent implements OnInit {
 
 }
 
-function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
+function patternValidator(regex: RegExp, error: ValidationErrors) {
     return (control: AbstractControl): { [key: string]: any } => {
+        debugger;
         if (!control.value) {
             // if control is empty return no error
             return null;

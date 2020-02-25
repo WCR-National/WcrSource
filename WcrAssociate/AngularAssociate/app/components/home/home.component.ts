@@ -245,7 +245,6 @@ export class HomeComponent implements OnInit {
                         var xml = $(xmlDoc);
                         const docs = xml.find("subCategories");
                         const results = await Promise.all(docs.map(t => thisHomePage.searchService.viewAdvanceSearchByZipcode(zipc, $(docs[t]).find("id").text())).ajaxSuccess(success => {
-                            debugger;
                             console.log("download : " + success);
                         }));
 
@@ -271,7 +270,6 @@ export class HomeComponent implements OnInit {
                                         $.each(docs1, function (i, doc1)
                                         //for (const doc1 in docs1)
                                         {
-                                            debugger;
                                             console.log($(doc).find("id").text() + ',' + $(doc1).find("Subcategoryid").text())
                                             if ($(doc).find("id").text() == $(doc1).find("Subcategoryid").text()) {
 
@@ -414,7 +412,6 @@ export class HomeComponent implements OnInit {
                                     else { }
                                 }
                                 else {
-                                    debugger;
 
 
                                 }
@@ -489,7 +486,6 @@ export class HomeComponent implements OnInit {
                             console.log("download : " + success);
                         }));
                         console.log(results);
-                        debugger;
                         $.each(docs, function (i, docs) {
 
                             var flag = 0;
@@ -817,7 +813,6 @@ export class HomeComponent implements OnInit {
             .subCategoriesByZipcode(zipc)
             .subscribe(
                 async data => {
-                    debugger;
                     if (data.d.length > 1) {
                         //var json = this.xml2json(xmlDoc,"");
                         //var docsJson = JSON.parse(json).NewDataSet.subCategories;
@@ -826,7 +821,6 @@ export class HomeComponent implements OnInit {
                         var xml = $(xmlDoc);
                         const docs = xml.find("subCategories");
                         const results = await Promise.all(docs.map(t => thisHomePage.searchService.viewAdvanceSearchByZipcode(zipc, $(docs[t]).find("id").text())).ajaxSuccess(success => {
-                            debugger;
                             console.log("download : " + success);
                         }));
 
@@ -1075,7 +1069,6 @@ function validateSearchZipCode(thisStatus) {
 
             if (/^[0-9]/.test(value)) {
                 if (value.match(regFiveDig) && value.length <= 5) {
-                    debugger;
                     thisStatus.show_check = true;
                     return null;
                 }

@@ -19,7 +19,7 @@ export class NoAuthGuard implements CanActivate {
         if (localStorage.getItem('jwtToken') != null) {
             var subject = new Subject<boolean>();
             subject.next(false);
-            this.router.navigate(['associate']);
+            this.router.navigate(['associates']);
             return subject.asObservable();
         }
         return this.userService.isAuthenticated.pipe(take(1), map(isAuth => !isAuth));

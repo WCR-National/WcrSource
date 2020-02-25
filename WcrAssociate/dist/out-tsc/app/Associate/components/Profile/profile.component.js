@@ -5,13 +5,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(route, router, profileService, xmlToJson, fb) {
+    function ProfileComponent(route, router, profileService, xmlToJson, fb, modalService) {
         this.route = route;
         this.router = router;
         this.profileService = profileService;
         this.xmlToJson = xmlToJson;
         this.fb = fb;
+        this.modalService = modalService;
         this.isFormVisible = true;
         this.isSubmitting = false;
         this.showErrorsPassword = false;
@@ -59,6 +61,25 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.ngOnInit = function () {
         this.getUserDetails();
         this.setValidationOnForm();
+    };
+    ProfileComponent.prototype.open = function (content) {
+        var _this = this;
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(function (result) {
+            _this.closeResult = "Closed with: " + result;
+        }, function (reason) {
+            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
+        });
+    };
+    ProfileComponent.prototype.getDismissReason = function (reason) {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
     };
     ProfileComponent.prototype.getUserDetails = function () {
         var thisStatus = this;
@@ -273,13 +294,16 @@ var ProfileComponent = /** @class */ (function () {
             }
         }
     };
+    ProfileComponent.prototype.editForm = function () {
+        this.isFormVisible = true;
+    };
     ProfileComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-profile-page',
             templateUrl: './profile.component.html'
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, ProfileService,
-            XMLToJSON, FormBuilder])
+            XMLToJSON, FormBuilder, NgbModal])
     ], ProfileComponent);
     return ProfileComponent;
 }());

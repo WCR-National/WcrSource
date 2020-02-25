@@ -41,6 +41,7 @@ var AssociateHeaderComponent = /** @class */ (function () {
                     }
                 });
                 debugger;
+                $("#profilePicHeader").attr('src', thisStatus.profileImage);
                 $("#profilePic").attr('src', thisStatus.profileImage);
             }
         });
