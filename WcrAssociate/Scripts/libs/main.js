@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./AngularAssociate/$$_lazy_route_resource lazy re
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Welcome to Dashboard</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{interestedCustomers}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <p class=\"card-desc\">Total number of interested customers.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{selectedCategories}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Selected Categories</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Total number of categories selected.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myPropertyListings}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Property Listings</h5>\r\n                    <p class=\"card-desc\">Total number of current Property Listings.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"ZipCodePurchase.aspx\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myZipCodes}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Zip Codes</h5>\r\n                    <p class=\"card-desc\">Total number of zip codes.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm mg-t-30\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <div class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableInterestedCustomers>\r\n                        <table id=\"interestedCustomers\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr> \r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm mg-t-30\">\r\n        <div class=\"col-sm-3 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Selected Categories</h5>\r\n                    <div  class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableSelectedCategories>\r\n                        <table id=\"selectedCategories\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Category/SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-5 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Property Listings</h5>\r\n                    <div class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableMyPropertyListings>\r\n                        <table id=\"myPropertyListings\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>S.N</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>Zip Code</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Zip Codes</h5>\r\n                    <div  class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableMyZipCodes>\r\n                        <table id=\"myZipCode\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Zip Code</th>\r\n                                    <th>category Name</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n</div><!-- content-body -->"
+module.exports = "<div class=\"content-header justify-content-between\">\r\n    <div>\r\n        <nav aria-label=\"breadcrumb\">\r\n            <ol class=\"breadcrumb\">\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Pages</a></li>\r\n                <li class=\"breadcrumb-item\"><a href=\"#\">Dashboard</a></li>\r\n            </ol>\r\n        </nav>\r\n        <h4 class=\"content-title content-title-xs\">Welcome to Dashboard</h4>\r\n\r\n    </div>\r\n</div><!-- content-header -->\r\n\r\n<div class=\"content-body\">\r\n    <div class=\"row row-sm\">\r\n        <div class=\"col-sm-4 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href='ClientDetails.aspx'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{interestedCustomers}}</h1>\r\n                        <!--<div class=\"chart-wrapper\">\r\n                            <div id=\"flotChart1\" class=\"flot-chart\"></div>\r\n                        </div>-->\r\n                    </div>\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <p class=\"card-desc\">Total number of interested customers.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a id=\"aPurchaseAdvertisement\" class=\"card-body\" href='PostAdvertisement.aspx?pid=1'>\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{selectedCategories}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-pink\">Selected Categories</h5>\r\n                    <p id=\"pSubText\" class=\"card-desc\">Total number of categories selected.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"PostAdvertisement.aspx?pid=1\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myPropertyListings}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Property Listings</h5>\r\n                    <p class=\"card-desc\">Total number of current Property Listings.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n        <div class=\"col-sm-4 col-xl mg-t-15 mg-sm-t-0\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <a class=\"card-body\" href=\"ZipCodePurchase.aspx\">\r\n                    <div class=\"d-flex align-items-center justify-content-between mg-b-10\">\r\n                        <h1 class=\"card-value\">{{myZipCodes}}</h1>\r\n                    </div>\r\n                    <h5 class=\"card-title tx-teal\">My Zip Codes</h5>\r\n                    <p class=\"card-desc\">Total number of zip codes.</p>\r\n                </a><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div><!-- col -->\r\n\r\n    </div><!-- row -->\r\n\r\n    <div class=\"row row-sm mg-t-30\">\r\n        <div class=\"col-sm-12 col-xl\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Clients</h5>\r\n                    <div class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableInterestedCustomers>\r\n                        <table id=\"interestedCustomers\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr> \r\n                                    <th>Name</th>\r\n                                    <th>Mobile No</th>\r\n                                    <th>Email</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row row-sm mg-t-30\">\r\n        <div class=\"col-sm-3\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">Selected Categories</h5>\r\n                    <div  class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableSelectedCategories>\r\n                        <table id=\"selectedCategories\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Category/SubCategory</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>  \r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-5\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Property Listings</h5>\r\n                    <div class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableMyPropertyListings>\r\n                        <table id=\"myPropertyListings\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>S.N</th>\r\n                                    <th>Title</th>\r\n                                    <th>Category Name</th>\r\n                                    <th>Zip Code</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n\r\n        <div class=\"col-sm-4\">\r\n            <div class=\"card card-hover card-social-one\">\r\n                <div class=\"card-body\">\r\n                    <h5 class=\"card-title tx-primary\">My Zip Codes</h5>\r\n                    <div  class=\"table-responsive pd-l-0-f pd-r-0-f\" #tableMyZipCodes>\r\n                        <table id=\"myZipCode\" class=\"table table-bordered\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>Zip Code</th>\r\n                                    <th>category Name</th>\r\n                                    <th>Amount</th>\r\n                                </tr>\r\n                            </thead>\r\n                        </table>\r\n                    </div>\r\n                </div><!-- card-body -->\r\n            </div><!-- card -->\r\n        </div>\r\n    </div>\r\n\r\n</div><!-- content-body -->"
 
 /***/ }),
 
@@ -265,6 +265,7 @@ var DashboardComponent = /** @class */ (function () {
                     data: "SubCategory",
                 },
             ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
@@ -304,6 +305,7 @@ var DashboardComponent = /** @class */ (function () {
                     }
                 }
             ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
@@ -358,20 +360,37 @@ var DashboardComponent = /** @class */ (function () {
                     data: "Amount",
                 },
             ],
-            buttons: [
-                'excel', 'pdf'
-            ],
-            searching: false,
-            paging: false,
-            info: false,
-            drawCallback: function () {
-                var api = this.api();
-                jquery__WEBPACK_IMPORTED_MODULE_5__(api.table().footer()).html(api.column(4).data().sum());
-            },
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 var index = iDisplayIndex + 1;
                 jquery__WEBPACK_IMPORTED_MODULE_5__('td:eq(0)', nRow).html(index);
                 return nRow;
+            },
+            buttons: [
+                'excel', 'pdf'
+            ],
+            "autoWidth": true,
+            searching: false,
+            paging: false,
+            info: false,
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+                // converting to interger to find total
+                var intVal = function (i) {
+                    return typeof i === 'string' ? Number(i) : typeof i === 'number' ? i : 0;
+                };
+                // computing column Total of the complete result 
+                var amountTotal = api
+                    .column(5)
+                    .data()
+                    .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+                // Update footer by showing the total with the reference of the column index 
+                jquery__WEBPACK_IMPORTED_MODULE_5__(api.column(0).footer()).html('Total');
+                jquery__WEBPACK_IMPORTED_MODULE_5__(api.column(1).footer()).html('');
+                jquery__WEBPACK_IMPORTED_MODULE_5__(api.column(2).footer()).html('');
+                jquery__WEBPACK_IMPORTED_MODULE_5__(api.column(3).footer()).html('');
+                jquery__WEBPACK_IMPORTED_MODULE_5__(api.column(4).footer()).html(amountTotal);
             }
         });
         //dataTable.on('order.dt search.dt', function () {
@@ -630,6 +649,7 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.submitProfileForm = function () {
         var _this = this;
         var credentials = this.profileForm.value;
+        this.abbrState(credentials.licenseState, 'to');
         this.isSubmitting = true;
         this.profileService
             .updateProfileinfo(credentials.firstName, credentials.lastName, credentials.phoneNo, credentials.email, credentials.password, credentials.licenseId, credentials.licenseState)
@@ -2592,7 +2612,7 @@ var AuthComponent = /** @class */ (function () {
                     else {
                         _this.router.navigateByUrl('/associates/profile');
                     }
-                    _this.router.navigateByUrl('/associate');
+                    //this.router.navigateByUrl('/associate');       
                     //$(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
@@ -6502,7 +6522,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\wcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
+module.exports = __webpack_require__(/*! E:\WcrSource\WcrAssociate\AngularAssociate\main.ts */"./AngularAssociate/main.ts");
 
 
 /***/ })
