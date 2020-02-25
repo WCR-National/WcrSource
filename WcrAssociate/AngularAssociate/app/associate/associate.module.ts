@@ -19,6 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatMenuModule, MatDatepickerModule } from '@angular/material';
 import { ClientDetailsService } from '../services/associate/client-details.service';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 //import { CustomValidator } from './validators';
 
 //import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
@@ -39,7 +41,8 @@ import { ClientDetailsService } from '../services/associate/client-details.servi
         CommonModule,
         FormsModule,
         HttpClientModule,
-        AssociateRoutingModule
+        AssociateRoutingModule,
+        NgbModule
     ],
     declarations: [
         AssociateLayoutComponent,

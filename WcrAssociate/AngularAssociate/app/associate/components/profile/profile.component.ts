@@ -14,6 +14,7 @@ import { environment } from 'AngularAssociate/environments/environment';
 import { Observable, of } from 'rxjs';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -77,14 +78,33 @@ export class ProfileComponent implements OnInit {
         'licenseId': '',
         'licenseState': ''
     };
+    closeResult: string;
 
     constructor(private route: ActivatedRoute, private router: Router, private profileService: ProfileService,
-        private xmlToJson: XMLToJSON, private fb: FormBuilder) { }
+        private xmlToJson: XMLToJSON, private fb: FormBuilder, private modalService: NgbModal) { }
 
     ngOnInit() {
         this.getUserDetails();
         this.setValidationOnForm();
 
+    }
+
+    open(content) {
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    }
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return `with: ${reason}`;
+        }
     }
 
     getUserDetails() {
@@ -326,6 +346,11 @@ export class ProfileComponent implements OnInit {
             }
         }
     }
+
+    editForm() {
+        this.isFormVisible = true;
+    }
+
 }
 
 function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {

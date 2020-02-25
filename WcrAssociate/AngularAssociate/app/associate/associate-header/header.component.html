@@ -6,7 +6,7 @@
 
 <div class="header">
     <div class="header-left" style="width: 500px;">
-        <a href="" class="burger-menu"><i data-feather="menu"></i></a>
+        <a href="" class="burger-menu"><i class="fa fa-bars"></i></a>
             <div class="row">
                 <div class="col-sm-12">
 
@@ -21,28 +21,38 @@
             </div>
     </div><!-- header-left -->
     <div class="header-right">
-        <a href="" class="header-help-link"><i data-feather="help-circle"></i></a>
-        <div class="dropdown dropdown-loggeduser">
-            <a href="" class="dropdown-link" data-toggle="dropdown" style="float:right;">
+
+        <div class="dropdown dropdown-loggeduser" ngbDropdown>
+            <a id="dropdownMenuButton" class="dropdown-link" href="javascript:void(0)" style="float:right;" ngbDropdownToggle>
                 <div class="avatar avatar-sm">
                     <img id="profilePic" src="" class="rounded-circle" alt="">
                 </div><!-- avatar -->
             </a>
-            <div class="dropdown-menu dropdown-menu-right">
+            <div class="dropdown-menu dropdown-menu-right " ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                <div class="dropdown-menu-header">
+                    <div class="media align-items-center">
+                        <div class="avatar">
+                            <img id="profilePicHeader" class="rounded-circle" alt="">
+                        </div><!-- avatar -->
+                        <div class="media-body mg-l-10">
+                            <h6>{{userName}}</h6>
+                        </div>
+                    </div><!-- media -->
+                </div>
                 <div class="dropdown-menu-body">
-                    <a href="" class="dropdown-item"><i data-feather="user"></i> View Profile</a>
-                    <a href="" class="dropdown-item"><i data-feather="log-out"></i> Log Out</a>
+                    <a routerLink="/associates/profile" class="dropdown-item tx-16-f" ngbDropdownItem><i data-feather="user"></i> View Profile</a>
+                    <a routerLink="" class="dropdown-item tx-16-f" ngbDropdownItem><i data-feather="log-out"></i> Log Out</a>
                 </div>
             </div><!-- dropdown-menu -->
 
-           
+
             <a href="javascript:void(0)" class="header-help-link pd-t-8" style="float:right;">
                 <div class="col-sm-1" style="padding-right: 22px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 </div>
-                <span class="font-weight-bolder tx-18 tx-primary">{{userName}}</span>
+                <span class="font-weight tx-18 tx-primary">{{userName}}</span>
             </a>
-            
+
 
 
 

@@ -52,9 +52,10 @@
               "AngularAssociate/assets/associate/css/cassie.css"
             ],
             "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
               "node_modules/crypto-js/crypto-js.js",
-              "AngularAssociate/assets/js/materialize.min.js",
-              "AngularAssociate/assets/js/bootstrap.bundle.min.js"
+              "AngularAssociate/assets/js/imguploader.js"
+              //"node_modules/bootstrap/dist/js/bootstrap.min.js"
 
             ],
             "es5BrowserSupport": true
@@ -112,7 +113,6 @@
             "karmaConfig": "AngularAssociate/karma.conf.js",
             "styles": [
               "AngularAssociate/styles.css",
-              "AngularAssociate/assets/bootstrap.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css",
               "AngularAssociate/assets/associate/css/cassie.css"
@@ -120,8 +120,9 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/crypto-js/crypto-js.js",
-              "AngularAssociate/assets/js/materialize.min.js",
-              "AngularAssociate/assets/js/bootstrap.bundle.min.js"
+              "AngularAssociate/assets/js/imguploader.js"
+
+              //"node_modules/bootstrap/dist/js/bootstrap.min.js"
             ],
             "assets": [
               "AngularAssociate/assets",

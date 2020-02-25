@@ -14,7 +14,6 @@ import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 
 import * as $ from 'jquery';
 import 'datatables.net';
-import 'datatables.net-bs';
 
 
 

@@ -5,7 +5,6 @@ import { DashboardService } from 'AngularAssociate/app/services/associate/dashbo
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import * as $ from 'jquery';
 import 'datatables.net';
-import 'datatables.net-bs';
 var DashboardComponent = /** @class */ (function () {
     function DashboardComponent(route, router, dashboardService, xmlToJson) {
         this.route = route;

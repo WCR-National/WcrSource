@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { map, distinctUntilChanged, delay } from 'rxjs/operators';
 import { RouterModule } from '@angular/router';
+import { PlatformLocation } from '@angular/common';
 
 
 @Injectable()
@@ -29,7 +30,9 @@ export class UserService {
         private http: HttpClient = null,
         private jwtService: JwtService = null,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private platformLocation: PlatformLocation
+
     ) { }
 
     //// Verify JWT in localstorage with server & load user's info.
@@ -48,7 +51,9 @@ export class UserService {
                         if (data.d == "1") {
                             this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
                             if (this.returnUrl == '') {
-                                this.router.navigateByUrl('/associates');
+     
+                                let url = ((this.platformLocation as any).location.href).replace(location.origin, '')
+                                this.router.navigateByUrl(url);
                             }
                             else {
                                 this.router.navigateByUrl('returnUrl');

@@ -392,15 +392,16 @@
             border-color: #c4cdd6 !important;
             outline: 0;
         }
+
     .has-error input:hover, .has-error input:focus {
-        box-shadow:none;
-    }
-    .form-control:focus, .form-control:hover {
         box-shadow: none;
     }
 
+    .form-control:focus, .form-control:hover {
+        box-shadow: none;
+    }
 </style>
-<div class="content-header justify-content-between">
+<div class="content-header justify-content-between pd-b-20-f">
     <div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -412,20 +413,20 @@
 
     </div>
 </div><!-- content-header -->
-<div class="content-body content-body-profile" >
+<div class="content-body content-body-profile pd-t-0-f">
 
     <div class="profile-sidebar mg-t-20" style="background:#fff; height:1000px;">
 
-        <div class="profile-sidebar-header">
+        <div class="profile-sidebar-header mg-b-0-f">
 
-            <div class="avatar-upload">
+            <div class="avatar-upload mg-b-30-f">
                 <div class="avatar-edit">
                     <input type='file' id="profileImageId" accept=".png, .jpg, .jpeg" />
                     <label for="imageUpload"></label>
                 </div>
                 <div class="avatar-preview">
                     <!--{{profileImage}}-->
-                    <div id="imagePreview" >
+                    <div id="imagePreview">
                     </div>
                 </div>
             </div>
@@ -440,26 +441,29 @@
             </div>-->
         </div><!-- profile-sidebar-header -->
 
-        <div class="profile-sidebar-body">
+        <div class="profile-sidebar-body text-center">
 
-            <label class="content-label pd-l-15 font-weight-bolder tx-16-f">Contact Information</label>
-            <ul class="list-unstyled profile-info-list mg-b-0 pd-l-15 font-weight-bold tx-14" style="">
-                <li><i data-feather="mail"></i> <a href="">Email: {{email}}</a></li>
-                <li><i data-feather="Password"></i> <span class="tx-color-03">Password: {{Password}}</span></li>
-            </ul>
-            <ul class="list-unstyled profile-info-list mg-b-0 pd-l-15 font-weight-bold tx-14" [style.display]="(!isFormVisible) ? 'block':'none'">
-                <li><i data-feather="FirstName"></i> <span class="tx-color-03">First Name: {{FirstName}}</span></li>
+            <label [style.display]="(!isFormVisible) ? 'block':'none'" class="content-label pd-l-15 font-weight tx-18-f">{{FirstName}} {{LastName}}</label>
+
+            <!--<ul class="list-unstyled profile-info-list mg-b-0 pd-l-15 font-weight-bold tx-14" >
+
+                <li><i class="fa fa-envelope"></i><span class="tx-color-03">{{email}}</span></li>
+                <li ><i class="fa fa-user"></i> <span class="tx-color-03">First Name: {{FirstName}}</span></li>
                 <li><i data-feather="LastName"></i> <span class="tx-color-03">Last Name: {{LastName}}</span></li>
-                <li><i data-feather="phone"></i> <a href="">Mobile No: {{PhoneNumber}}</a></li>
-                <li><i data-feather="LicenseNumber"></i> <span class="tx-color-03">LicenseId: {{LicenseNumber}}</span></li>
-                <li><i data-feather="IssuingState"></i> <span class="tx-color-03">IssuingState: {{IssuingState}}</span></li>
-            </ul>
+                <li><i class="fa fa-lock"></i> <span class="tx-color-03">Password: {{Password}}</span></li>
+                <li [style.display]="(!isFormVisible) ? 'block':'none'"><i class="fa fa-mobile-phone"></i> <a href=""><span class="tx-color-03">{{PhoneNumber}}</span></a></li>
+                <li [style.display]="(!isFormVisible) ? 'block':'none'"><i data-feather="LicenseNumber"></i> <span class="tx-color-03">{{LicenseNumber}}</span></li>
+                <li [style.display]="(!isFormVisible) ? 'block':'none'"><i data-feather="IssuingState"></i> <span class="tx-color-03"> {{IssuingState}}</span></li>
+            </ul>-->
+
+
+
         </div><!-- profile-sidebar-body -->
     </div><!-- profile-sidebar -->
 
 
     <div class="profile-body">
-        <div class="signup-sidebar-body">
+        <div class="signup-sidebar-body" [style.display]="isFormVisible ? 'block':'none'">
 
             <div id="info">
                 <p>
@@ -480,7 +484,7 @@
                     Thank you.
                 </p>
             </div>
-            <div class="profile-body-header" [style.display]="isFormVisible ? 'block':'none'">
+            <div class="profile-body-header">
                 <div class="auth-page mg-b-60-force">
                     <div class="container page">
 
@@ -631,38 +635,117 @@
 
         </div>
 
-    </div><!-- content-body -->
-
-    <div class="modal fade" id="img-upload-panel">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Upload Profile Photo</h4>
-                    <button type="button" class="img-remove-btn-bs close">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row container">
-                        <div class="col">
-                            <div class="img-edit-container"></div>
+        <div class="tab-content pd-15 pd-sm-20" [style.display]="(!isFormVisible) ? 'block':'none'">
+            <div id="overview" class="tab-pane active show">
+                <div class="col-sm-12 col-xl">
+                    <div class="row">
+                        <div class="col-sm-6 col-xl">
+                            <label class="content-label content-label-lg mg-b-f tx-color-01 float-left">Personal Information</label>
+                        </div>
+                        <div class="col-sm-6 col-xl">
+                            <button style="position:relative; width:20%;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit"></i> Edit </button>
                         </div>
                     </div>
-                    <!--<div class="row container">
-                        <div class="col">
-                            <label>Brightness</label>
-                            <input type="range" class="form-control-range filter" min=0 max=200 value=100 step=1 filter="brightness" />
-                        </div>
-                        <div class="col">
-                            <label>Threshold</label>
-                            <input type="range" class="form-control-range filter" min=0 max=200 value=100 step=1 filter="threshold" />
-                        </div>
-                    </div>-->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary img-remove-btn-bs">Close</button>
-                    <button type="button" class="btn btn-primary img-upload-btn-bs" (click)="submitImage()">Upload</button>
+
+                <hr class="mg-y-15 op-0">
+                <div class="col-sm-12 col-xl">
+                    <ul class="list-unstyled media-list-profile mg-t-30">
+
+                        <li class="media">
+                            <div class="wd-40 ht-40 bg-blue op-5"></div>
+                            <div class="media-body">
+                                <div class="col-sm-12 col-xl">
+                                    <div class="row ">
+                                        <div class="col-sm-6 tx-semibold pd-t-7">Email  (<i class="fa fa-envelope"></i>) </div>
+                                        <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{email}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="wd-40 ht-40 bg-indigo op-5"></div>
+                            <div class="media-body">
+                                <div class="col-sm-12 col-xl">
+                                    <div class="row">
+                                        <div class="col-sm-6 tx-semibold pd-t-7">Password  (<i class="fa fa-lock"></i>) </div>
+                                        <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{Password}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="wd-40 ht-40 bg-green op-5"></div>
+                            <div class="media-body">
+                                <div class="col-sm-12 col-xl">
+                                    <div class="row">
+                                        <div class="col-sm-6 tx-semibold pd-t-7">Mobile Number  (<i class="fa fa-mobile-phone"></i>)</div>
+                                        <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{PhoneNumber}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="wd-40 ht-40 bg-teal op-5"></div>
+                            <div class="media-body">
+                                <div class="col-sm-12 col-xl">
+                                    <div class="row">
+                                        <div class="col-sm-6 tx-semibold pd-t-7">License Number  (<i class="fa fa-certificate"></i>)</div>
+                                        <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{LicenseNumber}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="wd-40 ht-40 bg-teal op-5"></div>
+                            <div class="media-body">
+                                <div class="col-sm-12 col-xl">
+                                    <div class="row">
+                                        <div class="col-sm-6 tx-semibold pd-t-7">License Issuing State  (<i class="fa fa-certificate"></i>)</div>
+                                        <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{IssuingState}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+
+                    </ul><!-- media-list-profile -->
+                    <hr class="mg-y-15 op-0">
+                </div>
+
+            </div>
+        </div>
+    </div><!-- content-body -->
+
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Upload Profile Image</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row container">
+                <div class="col">
+                    <div class="img-edit-container"></div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="modal-footer">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary img-remove-btn-bs">Close</button>
+                <button type="button" class="btn btn-primary img-upload-btn-bs" (click)="submitImage()">Upload</button>
+            </div>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        </div>
+    </ng-template>
+
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+
+    <hr>
+
+<pre>{{closeResult}}</pre>
+
 
 </div>
+

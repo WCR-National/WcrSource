@@ -60,6 +60,9 @@ export class AssociateHeaderComponent implements OnInit {
                             }
                         });
                         debugger;
+                        
+                        $("#profilePicHeader").attr('src', thisStatus.profileImage);
+                  
                         $("#profilePic").attr('src', thisStatus.profileImage );
 
 

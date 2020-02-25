@@ -1,10 +1,8 @@
-/*
-* Cassie v1.0.0 (https://themepixels.me/cassie)
-* Copyright 2019 ThemePixels
-* Licensed under ThemeForest License
-*
-*
-*/
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Oswald:300,400,500|Fira+Sans:300,400,500,600|Archivo+Narrow:400,500,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Mono|Roboto+Slab:300,400,700|Roboto+Condensed:300,400,700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");
+
 :root {
     --blue: #5556fd;
     --indigo: #6610f2;
@@ -3020,7 +3018,7 @@ input[type="button"].btn-block {
     white-space: nowrap;
 }
 
-    .dropdown-toggle::after {
+    /*.dropdown-toggle::after {
         display: inline-block;
         margin-left: 0.255em;
         vertical-align: 0.255em;
@@ -3033,7 +3031,7 @@ input[type="button"].btn-block {
 
     .dropdown-toggle:empty::after {
         margin-left: 0;
-    }
+    }*/
 
 .dropdown-menu {
     position: absolute;
