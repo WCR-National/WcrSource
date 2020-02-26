@@ -10,57 +10,50 @@
         <ul class="nav nav-sidebar">
             <li class="nav-item show">
                 <!-- routerLink="/dashboard" -->
-                <a id="aDashboard" routerLink="/associates" class="nav-link with-sub active"><i data-feather="box"></i>Dashboard</a>
+                <a id="aDashboard" routerLink="/associates" class="nav-link with-sub active" [ngClass]="{'active': (isDashboard)}"><i data-feather="box"></i>Dashboard</a>
                 <!--<nav class="nav nav-sub">
-                    <a href="dashboard-one.html" class="nav-sub-link">Analytics &amp; Monitoring</a>
-                    <a href="dashboard-two.html" class="nav-sub-link">Projects &amp; Web Services</a>
-                    <a href="dashboard-three.html" class="nav-sub-link active">Blog &amp; Social Media</a>
-                </nav>-->
+            <a href="dashboard-one.html" class="nav-sub-link">Analytics &amp; Monitoring</a>
+            <a href="dashboard-two.html" class="nav-sub-link">Projects &amp; Web Services</a>
+            <a href="dashboard-three.html" class="nav-sub-link active">Blog &amp; Social Media</a>
+        </nav>-->
             </li>
-            <li id="profileclick" class="nav-item">
+            <li id="profileclick" class="nav-item"  [ngClass]="{'active': (isProfile)}">
                 <!-- routerLink="/profile" -->
                 <a id="aProfile" routerLink="/associates/profile" class="nav-link with-sub"><i data-feather="layout"></i>Profile</a>
             </li>
 
-            <li id="clientdetailclick" class="nav-item">
-                <!-- routerLink="/client-details" -->
-                <a id="aClientDetails" routerLink="/associates/client-details" class="nav-link with-sub"><i data-feather="lock"></i>Client Details</a>
-            </li>
-
-
             <!--
-            <li id="postadtsclick" class="treeview">
-                <a href="PostAdvertisement.aspx?pid=1">
-                    <i>
-                        <img src="img/icon_sale_advertisement.png" alt="" />
-                    </i><span>List Your Property </span>
-                </a>
-            </li>-->
+    <li id="postadtsclick" class="treeview">
+        <a href="PostAdvertisement.aspx?pid=1">
+            <i>
+                <img src="img/icon_sale_advertisement.png" alt="" />
+            </i><span>List Your Property </span>
+        </a>
+    </li>-->
             <!--
-            <li id="zipcodeclick" class="treeview">
-                <a href="ZipCodePurchase.aspx">
-                    <i>
-                        <img src="img/icon_purchase_zipcode.png" alt="" />
-                    </i><span>Purchase Zip code </span>
-                </a>
-            </li>-->
-
+    <li id="zipcodeclick" class="treeview">
+        <a href="ZipCodePurchase.aspx">
+            <i>
+                <img src="img/icon_purchase_zipcode.png" alt="" />
+            </i><span>Purchase Zip code </span>
+        </a>
+    </li>-->
             <!--
-            <li id="customerclick" class="treeview">
-                <a href="CustomerSupport.aspx">
-                    <i>
-                        <img src="img/icon_customer_support.png" alt="" />
-                    </i><span>Customer Support </span>
-                </a>
-            </li>
-            <li class="treeview">
-                <a href="#" id="btnLogout">
-                    <img src="img/icon_signout.png" alt="" />
-                    <span>Logout </span>
-                </a>
-            </li>
+    <li id="customerclick" class="treeview">
+        <a href="CustomerSupport.aspx">
+            <i>
+                <img src="img/icon_customer_support.png" alt="" />
+            </i><span>Customer Support </span>
+        </a>
+    </li>
+    <li class="treeview">
+        <a href="#" id="btnLogout">
+            <img src="img/icon_signout.png" alt="" />
+            <span>Logout </span>
+        </a>
+    </li>
 
-            <li style="height: 25px;"></li>-->
+    <li style="height: 25px;"></li>-->
         </ul>
 
         <!--                <hr class="mg-t-30 mg-b-25">

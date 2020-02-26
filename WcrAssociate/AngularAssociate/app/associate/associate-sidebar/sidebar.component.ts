@@ -13,9 +13,20 @@ import { MessageService } from 'AngularAssociate/app/services/search';
 })
 export class SidebarComponent implements OnInit {
 
+    isProfile: boolean = false;
+    isDashboard: boolean = false;
+
     constructor() { }
 
     ngOnInit() {
+        if (location.origin.includes("profile")) {
+            this.isProfile = true;
+            this.isDashboard = false;
+        }
+        else {
+            this.isProfile = false;
+            this.isDashboard = true;
+        }
     }
 
 }    
