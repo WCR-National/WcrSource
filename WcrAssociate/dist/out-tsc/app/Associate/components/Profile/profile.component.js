@@ -1,22 +1,26 @@
 import * as tslib_1 from "tslib";
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as $ from 'jquery';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(route, router, profileService, xmlToJson, fb, modalService) {
+    function ProfileComponent(route, router, profileService, xmlToJson, fb, modalService, cd) {
         this.route = route;
         this.router = router;
         this.profileService = profileService;
         this.xmlToJson = xmlToJson;
         this.fb = fb;
         this.modalService = modalService;
+        this.cd = cd;
         this.isFormVisible = true;
         this.isSubmitting = false;
         this.showErrorsPassword = false;
+        this.isProfileFormVisible = false;
+        this.profileImagePath = "";
+        this.isProfileImageFormVisisble = false;
         this.validationMessages = {
             'password': {
                 'required': 'Password is required',
@@ -57,6 +61,9 @@ var ProfileComponent = /** @class */ (function () {
             'licenseId': '',
             'licenseState': ''
         };
+        this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+        this.editFile = false;
+        this.removeUpload = false;
     }
     ProfileComponent.prototype.ngOnInit = function () {
         this.getUserDetails();
@@ -69,6 +76,9 @@ var ProfileComponent = /** @class */ (function () {
         }, function (reason) {
             _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
         });
+    };
+    ProfileComponent.prototype.showHideProfileImage = function () {
+        this.isProfileFormVisible = true;
     };
     ProfileComponent.prototype.getDismissReason = function (reason) {
         if (reason === ModalDismissReasons.ESC) {
@@ -100,6 +110,7 @@ var ProfileComponent = /** @class */ (function () {
                         pic = '../AssociatePhoto/0.png';
                     }
                     $("#imagePreview").css('background-image', 'url(' + pic + ')');
+                    thisStatus.profileImagePath = pic;
                     //thisStatus.profileImage = pic;
                     debugger;
                     if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
@@ -132,11 +143,11 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.setValidationOnForm = function () {
         this.profileForm = this.fb.group({
             email: [''],
-            firstName: ['', Validators.required, patternValidator(/[a-zA-Z]/, { letterOnly: true })],
-            lastName: ['', Validators.required, patternValidator(/[a-zA-Z]/, { letterOnly: true })],
-            licenseState: ['', Validators.required, StateValidator(/[a-zA-Z]/, { letterOnly: true })],
-            phoneNo: ['', Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })],
-            licenseId: ['', Validators.required, alphaNumeric(/[a-zA-Z0-9]/, { alphaNumeric: true }, this)],
+            firstName: ['', Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
+            lastName: ['', Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
+            licenseState: ['', Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
+            phoneNo: ['', Validators.required, phoneValidator(/\d{10}/, { elevenDigits: true })],
+            licenseId: ['', Validators.required, alphaNumeric(/[a-zA-Z0-9]+$/, { alphaNumeric: true }, this)],
             password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
                     patternValidator(/\d/, { number: true }),
                     patternValidator(/[A-Z]/, { upperLetter: true }),
@@ -195,22 +206,8 @@ var ProfileComponent = /** @class */ (function () {
             //on return stat
         });
     };
-    ProfileComponent.prototype.submitImage = function () {
-        var _this = this;
-        var fileUpload = $("#profileImageId").get(0);
-        var files = fileUpload.files;
-        //image resize code here
-        var image = new FormData();
-        for (var i = 0; i < files.length; i++) {
-            image.append(files[i].name, files[i]);
-        }
-        this.profileService
-            .uploadimage(image)
-            .subscribe(function (data) {
-            _this.profileImage = URL.createObjectURL(files[0]);
-            $("#imagePreview").css('background-image', 'url(' + _this.profileImage + ')');
-            _this.formError = "Your profile has been updated Successfully.";
-        });
+    ProfileComponent.prototype.editForm = function () {
+        this.isFormVisible = true;
     };
     ProfileComponent.prototype.cancelForm = function () {
         this.isFormVisible = false;
@@ -294,22 +291,64 @@ var ProfileComponent = /** @class */ (function () {
             }
         }
     };
-    ProfileComponent.prototype.editForm = function () {
-        this.isFormVisible = true;
+    ProfileComponent.prototype.uploadFile = function (event) {
+        var _this = this;
+        this.isProfileImageFormVisisble = true;
+        var reader = new FileReader(); // HTML5 FileReader API
+        var file = event.target.files[0];
+        if (event.target.files && event.target.files[0]) {
+            reader.readAsDataURL(file);
+            // When file uploads set it to file formcontrol
+            reader.onload = function () {
+                _this.imageUrl = reader.result;
+                $("#imagePreview").css('background-image', 'url(' + _this.imageUrl + ')');
+            };
+            // ChangeDetectorRef since file is loading outside the zone
+            this.cd.markForCheck();
+        }
     };
+    // Function to remove uploaded file
+    ProfileComponent.prototype.removeUploadedFile = function () {
+        $("#imagePreview").css('background-image', 'url(' + this.profileImagePath + ')');
+        this.isProfileImageFormVisisble = false;
+        //isProfileImageFormVisisble
+        //profileImagePath
+    };
+    ProfileComponent.prototype.UploadToServer = function () {
+        var _this = this;
+        var fileUpload = $("#profileImageId").get(0);
+        var files = fileUpload.files;
+        //image resize code here
+        var image = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            image.append(files[i].name, files[i]);
+        }
+        this.profileService
+            .uploadimage(image)
+            .subscribe(function (data) {
+            _this.profileImage = URL.createObjectURL(files[0]);
+            $("#imagePreview").css('background-image', 'url(' + _this.profileImage + ')');
+            _this.formError = "Your profile has been updated Successfully.";
+        });
+    };
+    tslib_1.__decorate([
+        ViewChild('fileInput'),
+        tslib_1.__metadata("design:type", ElementRef)
+    ], ProfileComponent.prototype, "el", void 0);
     ProfileComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-profile-page',
             templateUrl: './profile.component.html'
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, ProfileService,
-            XMLToJSON, FormBuilder, NgbModal])
+            XMLToJSON, FormBuilder, NgbModal, ChangeDetectorRef])
     ], ProfileComponent);
     return ProfileComponent;
 }());
 export { ProfileComponent };
 function patternValidator(regex, error) {
     return function (control) {
+        debugger;
         if (!control.value) {
             // if control is empty return no error
             return null;

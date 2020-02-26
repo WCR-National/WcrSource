@@ -134,6 +134,14 @@ var DashboardService = /** @class */ (function () {
             });
         });
     };
+    //
+    DashboardService.prototype.deleteCustomerRecords = function (id) {
+        var urlToDeleteCustomerRecords = "Associate/ws/Sale.asmx/DeleteCustomerRecords";
+        return this.apiService.post(urlToDeleteCustomerRecords, { ID: id })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    }; //all purchased categories
     DashboardService.prototype.validateEmail = function (email) {
         return this.apiService.get('ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email)
             .pipe(map(function (data) { return data; }));

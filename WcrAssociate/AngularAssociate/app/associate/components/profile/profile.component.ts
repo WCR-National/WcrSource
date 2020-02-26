@@ -37,6 +37,8 @@ export class ProfileComponent implements OnInit {
     isSubmitting: boolean = false;
     showErrorsPassword: boolean = false;
     isProfileFormVisible: boolean = false;
+    profileImagePath:string = "";
+    isProfileImageFormVisisble = false;
 
     validationMessages = {
         'password': {
@@ -136,6 +138,7 @@ export class ProfileComponent implements OnInit {
                                 pic = '../AssociatePhoto/0.png';
                             }
                             $("#imagePreview").css('background-image', 'url(' + pic + ')');
+                            thisStatus.profileImagePath = pic;
 
                             //thisStatus.profileImage = pic;
 
@@ -245,27 +248,6 @@ export class ProfileComponent implements OnInit {
                 });
     }
 
-    UploadToServer() {
-        var fileUpload: any = $("#profileImageId").get(0);
-        var files = fileUpload.files;
-        //image resize code here
-        var image: any = new FormData();
-        for (var i = 0; i < files.length; i++) {
-            image.append(files[i].name, files[i]);
-        }
-
-        this.profileService
-            .uploadimage(image)
-            .subscribe(
-                data => {
-                    this.profileImage = URL.createObjectURL(files[0]);
-                    $("#imagePreview").css('background-image', 'url(' + this.profileImage + ')');
-
-                    this.formError = "Your profile has been updated Successfully.";
-                });
-
-    }
-
     editForm() {
         this.isFormVisible = true;
     }
@@ -361,6 +343,7 @@ export class ProfileComponent implements OnInit {
 
 
     uploadFile(event) {
+        this.isProfileImageFormVisisble = true;
         let reader = new FileReader(); // HTML5 FileReader API
         let file = event.target.files[0];
         if (event.target.files && event.target.files[0]) {
@@ -369,8 +352,8 @@ export class ProfileComponent implements OnInit {
             // When file uploads set it to file formcontrol
             reader.onload = () => {
                 this.imageUrl = reader.result;
-                this.editFile = false;
-                this.removeUpload = true;
+                $("#imagePreview").css('background-image', 'url(' + this.imageUrl + ')');
+
             }
             // ChangeDetectorRef since file is loading outside the zone
             this.cd.markForCheck();
@@ -379,12 +362,33 @@ export class ProfileComponent implements OnInit {
 
     // Function to remove uploaded file
     removeUploadedFile() {
-        let newFileList = Array.from(this.el.nativeElement.files);
-        this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
-        this.editFile = true;
-        this.removeUpload = false;
+        $("#imagePreview").css('background-image', 'url(' + this.profileImagePath + ')');
+
+        this.isProfileImageFormVisisble = false;
+       //isProfileImageFormVisisble
+        //profileImagePath
     }
 
+    UploadToServer() {
+        var fileUpload: any = $("#profileImageId").get(0);
+        var files = fileUpload.files;
+        //image resize code here
+        var image: any = new FormData();
+        for (var i = 0; i < files.length; i++) {
+            image.append(files[i].name, files[i]);
+        }
+
+        this.profileService
+            .uploadimage(image)
+            .subscribe(
+                data => {
+                    this.profileImage = URL.createObjectURL(files[0]);
+                    $("#imagePreview").css('background-image', 'url(' + this.profileImage + ')');
+
+                    this.formError = "Your profile has been updated Successfully.";
+                });
+
+    }
 }
 
 function patternValidator(regex: RegExp, error: ValidationErrors) {

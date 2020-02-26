@@ -13,7 +13,7 @@ var NoAuthGuard = /** @class */ (function () {
         if (localStorage.getItem('jwtToken') != null) {
             var subject = new Subject();
             subject.next(false);
-            this.router.navigate(['associate']);
+            this.router.navigate(['associates']);
             return subject.asObservable();
         }
         return this.userService.isAuthenticated.pipe(take(1), map(function (isAuth) { return !isAuth; }));

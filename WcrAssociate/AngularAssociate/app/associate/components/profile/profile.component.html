@@ -304,7 +304,7 @@
     .avatar-upload {
         position: relative;
         max-width: 205px;
-        margin: 50px auto;
+        margin: 18px auto;
     }
 
     .avatar-edit {
@@ -351,8 +351,8 @@
 
 
     .avatar-preview {
-        width: 192px;
-        height: 192px;
+        width: 208px;
+        height: 208px;
         position: relative;
         border-radius: 100%;
         border: 6px solid #F8F8F8;
@@ -423,30 +423,20 @@
             <div class="avatar-upload">
                 <div class="avatar-edit">
                     <input type='file' id="profileImageId" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
-                    <label for="imageUpload"></label>
-                    <img src="" alt="" id="image" />
+                    <label for="profileImageId"></label>
                 </div>
                 <div class="avatar-preview">
-                    <!--{{profileImage}}-->
                     <div id="imagePreview">
                     </div>
                 </div>
             </div>
-            <div class="co-sm-12" [style-display]="editFile ? 'block':'none'">
+            <div class="co-sm-12" [style.display]="isProfileImageFormVisisble ? 'block':'none'">
                 <div class="row">
                     <button type="button" class="btn btn-danger btn-lg btn-block" (click)="UploadToServer()">Upload Image</button>
                     <button type="button" class="btn btn-danger btn-lg btn-block" (click)="CancelImage()">Cancel</button>
                 </div>
             </div>
-            <!--<div class="avatar">
-                {{profileImage}}
-                <h5>Abigail Johnson</h5>
-
-                <div id="status"></div>
-                <input id="profileImageId" type=file class="img-upload-input-bs" editor="#img-upload-panel" target="#image" status="#status" passurl="" pshape="circle" w=300 h=300 size="{150,150}" />
-                <img src="" alt="" id="image" />
-            </div>-->
-        </div><!-- profile-sidebar-header -->
+        </div>
 
         <div class="profile-sidebar-body text-center">
 
@@ -746,13 +736,6 @@
             <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
         </div>
     </ng-template>
-
-    <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
-
-    <hr>
-
-<pre>{{closeResult}}</pre>
-
 
 </div>
 

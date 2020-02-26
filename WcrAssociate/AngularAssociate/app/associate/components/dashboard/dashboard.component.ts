@@ -32,6 +32,8 @@ export class DashboardComponent implements OnInit {
 
     }
     ngOnInit() {
+        $.fn.dataTable.ext.errMode = 'none';
+
         this.attemptToCountInterestedCustomers();
 
         this.attemptToCountAssociateCategories();
@@ -194,20 +196,35 @@ export class DashboardComponent implements OnInit {
                     this.dashboardService
                         .attemptToInterestedCustomerServicesData()
                         .then((data: any) => {
+                            debugger;
                             if (data.d.length > 0) {
-                                
+                                debugger;
                                 var xmlDoc = $.parseXML(data.d);
                                 var json = this.xmlToJson.xml2json(xmlDoc, "");
 
                                 var dataJsonServices = JSON.parse(json);
-                                $.each(dataJsonServices.InterestedConsumerser, function (i) {
-                                    dataJson.push(dataJsonServices[i]);
-                                });
-                                this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                                if (dataJsonServices.NewDataSet != null) {
+                                    $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
+                                        dataJson.NewDataSet.InterestedConsumer.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
+                                    });
+                                    this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                                }
+                                else {
+                                    if (dataJsonServices.NewDataSet != null) {
+                                        this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+
+                                    }
+                                    else {
+                                        this.initialiseInterestedCustomerDataTable(undefined);
+
+                                    }
+                                }
+                                debugger;
+                               
                                 added = true;
                             }
                             else {
-                                this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                                this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
                             }
                         });
                 }
@@ -215,7 +232,7 @@ export class DashboardComponent implements OnInit {
     }
 
     initialiseInterestedCustomerDataTable(asyncData) {
-        
+        debugger;
         let dataTable: any = $('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
@@ -249,6 +266,11 @@ export class DashboardComponent implements OnInit {
                 {
                     data: "SubCategory",
                 },
+                {
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
+                }
             ],
             "autoWidth": true,   
             searching: false,
@@ -258,6 +280,28 @@ export class DashboardComponent implements OnInit {
                 'excel', 'pdf'
             ],
             order: [[1, 'asc']]
+        });
+
+        // Delete a record
+        $('#interestedCustomers').on('click', 'a.editor_remove', function (e) {
+            e.preventDefault();
+
+            var tr = $(this).closest('tr');
+            //get the real row index, even if the table is sorted 
+            var index = dataTable.fnGetPosition(tr[0]);
+            //alert the content of the hidden first column 
+            console.log(dataTable.fnGetData(index)[0]);
+
+            this.dashboardService
+                .deleteCustomerRecords(dataTable.fnGetData(index)[0])
+                .subscribe(
+                    data => { });
+            //dataTable.remove($(this).closest('tr'), {
+            //    title: 'Delete record',
+            //    message: 'Are you sure you wish to remove this record?',
+            //    buttons: 'Delete'
+            //});
+
         });
 
     }
@@ -272,8 +316,19 @@ export class DashboardComponent implements OnInit {
                     var xmlDoc = $.parseXML(data.d);
                     var json = this.xmlToJson.xml2json(xmlDoc, "");
                     var dataJson = JSON.parse(json);
-
-                    this.initialiseCategoriesDataTable(dataJson.AllPurCategories);
+                    if (dataJson != null && dataJson.NewDataSet != null) {
+                        if (Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
+                            this.initialiseCategoriesDataTable(dataJson.NewDataSet.AllPurCategories);
+                        }
+                        else {
+                            let jsonArray = [];
+                            jsonArray.push(dataJson.NewDataSet.AllPurCategories);
+                            this.initialiseCategoriesDataTable(jsonArray);
+                        }
+                    }
+                    else {
+                        this.initialiseCategoriesDataTable(undefined);
+                    }
                 }
             });
     }
@@ -319,7 +374,19 @@ export class DashboardComponent implements OnInit {
                     var json = this.xmlToJson.xml2json(xmlDoc, "");
                     var dataJson = JSON.parse(json);
 
-                    this.initialiseMyPropertyListingsTable(dataJson.ViewAdvertisment);
+                    if (dataJson != null && dataJson.NewDataSet != null) {
+                        if (Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
+                            this.initialiseMyPropertyListingsTable(dataJson.NewDataSet.ViewAdvertisment);
+                        }
+                        else {
+                            let jsonArray = [];
+                            jsonArray.push(dataJson.NewDataSet.ViewAdvertisment);
+                            this.initialiseMyPropertyListingsTable(jsonArray);
+                        }
+                    }
+                    else {
+                        this.initialiseMyPropertyListingsTable(undefined);
+                    }
                 }
             });
     }
@@ -411,7 +478,20 @@ export class DashboardComponent implements OnInit {
                     var json = this.xmlToJson.xml2json(xmlDoc, "");
                     var dataJson = JSON.parse(json);
 
-                    this.initialiseTable(dataJson.PurCategories);
+                    if (dataJson != null && dataJson.NewDataSet != null) {
+                        if (Array.isArray(dataJson.NewDataSet.PurCategories)) {
+                            this.initialiseTable(dataJson.NewDataSet.PurCategories);
+                        }
+                        else {
+                            let jsonArray = [];
+                            jsonArray.push(dataJson.NewDataSet.PurCategories);
+                            this.initialiseTable(jsonArray);
+
+                        }
+                    }
+                    else {
+                        this.initialiseTable(undefined);
+                    }
                 }
             });
 
@@ -426,8 +506,10 @@ export class DashboardComponent implements OnInit {
                 'amount': ""
             };
         }
+
         dataTable.DataTable({
             data: asyncData,
+
             columns: [
                 {
                     data: "zipcode",
@@ -439,16 +521,16 @@ export class DashboardComponent implements OnInit {
                     data: "amount",
                 }
             ],
-            buttons: [
-                'excel', 'pdf'
-            ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
-            "aoColumnDefs": [
-                { "sWidth": "33.67%", "aTargets": [-1] }
-            ]
+            buttons: [
+                'excel', 'pdf'
+            ],
+            order: [[1, 'asc']]
         });
+
 
         //dataTable.on('order.dt search.dt', function () {
         //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {

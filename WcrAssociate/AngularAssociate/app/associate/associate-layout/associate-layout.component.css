@@ -216,8 +216,8 @@ caption {
 
 th {
     text-align: inherit;
-    font-size:15px !important;
-    font-weight:600 !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
 }
 
 label {
@@ -71406,13 +71406,14 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
 .wd-280 {
     width: 280px;
 }
+
 body {
     background-image: none;
 }
 
 .sidebar {
     background-color: #5556fd;
-    background-image: url("../../images/img25.jpg");
+    /*background-image: url("../../images/img25.jpg");*/
     background-position: center;
     background-size: cover;
     background-blend-mode: luminosity;

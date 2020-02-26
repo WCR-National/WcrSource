@@ -17,6 +17,7 @@ var DashboardComponent = /** @class */ (function () {
         this.myZipCodes = '';
     }
     DashboardComponent.prototype.ngOnInit = function () {
+        $.fn.dataTable.ext.errMode = 'none';
         this.attemptToCountInterestedCustomers();
         this.attemptToCountAssociateCategories();
         this.attemptToCountPurchasedCategories("1");
@@ -156,24 +157,30 @@ var DashboardComponent = /** @class */ (function () {
                 _this.dashboardService
                     .attemptToInterestedCustomerServicesData()
                     .then(function (data) {
+                    debugger;
                     if (data.d.length > 0) {
+                        debugger;
                         var xmlDoc = $.parseXML(data.d);
                         var json = _this.xmlToJson.xml2json(xmlDoc, "");
                         var dataJsonServices = JSON.parse(json);
-                        $.each(dataJsonServices.InterestedConsumerser, function (i) {
-                            dataJson.push(dataJsonServices[i]);
-                        });
-                        _this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                        if (dataJsonServices.NewDataSet != null) {
+                            $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
+                                dataJson.NewDataSet.InterestedConsumer.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
+                            });
+                            _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                        }
+                        debugger;
                         added_1 = true;
                     }
                     else {
-                        _this.initialiseInterestedCustomerDataTable(dataJson.InterestedConsumer);
+                        _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
                     }
                 });
             }
         });
     };
     DashboardComponent.prototype.initialiseInterestedCustomerDataTable = function (asyncData) {
+        debugger;
         var dataTable = $('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
@@ -206,6 +213,11 @@ var DashboardComponent = /** @class */ (function () {
                 {
                     data: "SubCategory",
                 },
+                {
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
+                }
             ],
             "autoWidth": true,
             searching: false,
@@ -215,6 +227,23 @@ var DashboardComponent = /** @class */ (function () {
                 'excel', 'pdf'
             ],
             order: [[1, 'asc']]
+        });
+        // Delete a record
+        $('#interestedCustomers').on('click', 'a.editor_remove', function (e) {
+            e.preventDefault();
+            var tr = $(this).closest('tr');
+            //get the real row index, even if the table is sorted 
+            var index = dataTable.fnGetPosition(tr[0]);
+            //alert the content of the hidden first column 
+            console.log(dataTable.fnGetData(index)[0]);
+            this.dashboardService
+                .deleteCustomerRecords(dataTable.fnGetData(index)[0])
+                .subscribe(function (data) { });
+            //dataTable.remove($(this).closest('tr'), {
+            //    title: 'Delete record',
+            //    message: 'Are you sure you wish to remove this record?',
+            //    buttons: 'Delete'
+            //});
         });
     };
     DashboardComponent.prototype.attemptToCategoriesData = function () {
@@ -226,7 +255,19 @@ var DashboardComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
-                _this.initialiseCategoriesDataTable(dataJson.AllPurCategories);
+                if (dataJson != null && dataJson.NewDataSet != null) {
+                    if (Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
+                        _this.initialiseCategoriesDataTable(dataJson.NewDataSet.AllPurCategories);
+                    }
+                    else {
+                        var jsonArray = [];
+                        jsonArray.push(dataJson.NewDataSet.AllPurCategories);
+                        _this.initialiseCategoriesDataTable(jsonArray);
+                    }
+                }
+                else {
+                    _this.initialiseCategoriesDataTable(undefined);
+                }
             }
         });
     };
@@ -268,7 +309,19 @@ var DashboardComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
-                _this.initialiseMyPropertyListingsTable(dataJson.ViewAdvertisment);
+                if (dataJson != null && dataJson.NewDataSet != null) {
+                    if (Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
+                        _this.initialiseMyPropertyListingsTable(dataJson.NewDataSet.ViewAdvertisment);
+                    }
+                    else {
+                        var jsonArray = [];
+                        jsonArray.push(dataJson.NewDataSet.ViewAdvertisment);
+                        _this.initialiseMyPropertyListingsTable(jsonArray);
+                    }
+                }
+                else {
+                    _this.initialiseMyPropertyListingsTable(undefined);
+                }
             }
         });
     };
@@ -350,7 +403,19 @@ var DashboardComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
-                _this.initialiseTable(dataJson.PurCategories);
+                if (dataJson != null && dataJson.NewDataSet != null) {
+                    if (Array.isArray(dataJson.NewDataSet.PurCategories)) {
+                        _this.initialiseTable(dataJson.NewDataSet.PurCategories);
+                    }
+                    else {
+                        var jsonArray = [];
+                        jsonArray.push(dataJson.NewDataSet.PurCategories);
+                        _this.initialiseTable(jsonArray);
+                    }
+                }
+                else {
+                    _this.initialiseTable(undefined);
+                }
             }
         });
     };
@@ -376,15 +441,14 @@ var DashboardComponent = /** @class */ (function () {
                     data: "amount",
                 }
             ],
-            buttons: [
-                'excel', 'pdf'
-            ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
-            "aoColumnDefs": [
-                { "sWidth": "33.67%", "aTargets": [-1] }
-            ]
+            buttons: [
+                'excel', 'pdf'
+            ],
+            order: [[1, 'asc']]
         });
         //dataTable.on('order.dt search.dt', function () {
         //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {

@@ -202,7 +202,6 @@ var HomeComponent = /** @class */ (function () {
                                 xml = $(xmlDoc);
                                 docs_1 = xml.find("subCategories");
                                 return [4 /*yield*/, Promise.all(docs_1.map(function (t) { return thisHomePage.searchService.viewAdvanceSearchByZipcode(zipc, $(docs_1[t]).find("id").text()); }).ajaxSuccess(function (success) {
-                                        debugger;
                                         console.log("download : " + success);
                                     }))];
                             case 1:
@@ -221,7 +220,6 @@ var HomeComponent = /** @class */ (function () {
                                                 innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
                                                 innerHtmlSales += "   <div class='card white darken-1' >";
                                                 $.each(docs1, function (i, doc1) {
-                                                    debugger;
                                                     console.log($(doc).find("id").text() + ',' + $(doc1).find("Subcategoryid").text());
                                                     if ($(doc).find("id").text() == $(doc1).find("Subcategoryid").text()) {
                                                         var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
@@ -352,7 +350,6 @@ var HomeComponent = /** @class */ (function () {
                                             else { }
                                         }
                                         else {
-                                            debugger;
                                         }
                                     });
                                     if (!data.d.includes("GetCategoriesinfoservices")) {
@@ -423,7 +420,6 @@ var HomeComponent = /** @class */ (function () {
                             case 1:
                                 results_3 = _a.sent();
                                 console.log(results_3);
-                                debugger;
                                 $.each(docs, function (i, docs) {
                                     var flag = 0;
                                     var subCategoryId = $(docs).find("id").text();
@@ -691,13 +687,11 @@ var HomeComponent = /** @class */ (function () {
                     return tslib_1.__generator(this, function (_a) {
                         switch (_a.label) {
                             case 0:
-                                debugger;
                                 if (!(data.d.length > 1)) return [3 /*break*/, 2];
                                 xmlDoc = $.parseXML(data.d);
                                 xml = $(xmlDoc);
                                 docs_2 = xml.find("subCategories");
                                 return [4 /*yield*/, Promise.all(docs_2.map(function (t) { return thisHomePage.searchService.viewAdvanceSearchByZipcode(zipc, $(docs_2[t]).find("id").text()); }).ajaxSuccess(function (success) {
-                                        debugger;
                                         console.log("download : " + success);
                                     }))];
                             case 1:
@@ -964,7 +958,6 @@ function validateSearchZipCode(thisStatus) {
             var regFiveDig = /\b\d{5}\b/g;
             if (/^[0-9]/.test(value)) {
                 if (value.match(regFiveDig) && value.length <= 5) {
-                    debugger;
                     thisStatus.show_check = true;
                     return null;
                 }

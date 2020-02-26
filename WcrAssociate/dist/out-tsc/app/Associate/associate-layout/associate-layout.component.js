@@ -57,7 +57,8 @@ var AssociateLayoutComponent = /** @class */ (function () {
     AssociateLayoutComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-layout',
-            templateUrl: './associate-layout.component.html'
+            templateUrl: './associate-layout.component.html',
+            styleUrls: ['./associate-layout.component.css']
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, MessageService,
             UserService])

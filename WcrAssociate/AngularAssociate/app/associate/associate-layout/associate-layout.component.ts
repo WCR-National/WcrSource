@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ViewEncapsulation } from '@angular/core';
 
 import { UserService } from '../../services/auth';
 import { User } from '../../entities/user';
@@ -11,7 +11,11 @@ import * as $ from 'jquery';
 
 @Component({
     selector: 'associate-layout',
-    templateUrl: './associate-layout.component.html'
+    templateUrl: './associate-layout.component.html',
+    styleUrls: ['./associate-layout.component.css'],
+    encapsulation: ViewEncapsulation.None
+
+
 })
 export class AssociateLayoutComponent implements OnInit {
 

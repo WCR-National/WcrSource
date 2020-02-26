@@ -113,6 +113,7 @@
     <Content Include="aboutus.html" />
     <Content Include="advertise.html" />
     <Content Include="AngularAssociate\app\associate\associate-header\header.component.html" />
+    <Content Include="AngularAssociate\app\associate\associate-layout\associate-layout.component.css" />
     <Content Include="AngularAssociate\app\associate\associate-layout\associate-layout.component.html" />
     <Content Include="AngularAssociate\app\associate\associate-sidebar\sidebar.component.html" />
     <Content Include="AngularAssociate\app\associate\components\client-details\client-details.component.html" />
