@@ -419,10 +419,12 @@
 
         <div class="profile-sidebar-header mg-b-0-f">
 
-            <div class="avatar-upload mg-b-30-f">
+
+            <div class="avatar-upload">
                 <div class="avatar-edit">
-                    <input type='file' id="profileImageId" accept=".png, .jpg, .jpeg" />
+                    <input type='file' id="profileImageId" accept=".png, .jpg, .jpeg" #fileInput (change)="uploadFile($event)" />
                     <label for="imageUpload"></label>
+                    <img src="" alt="" id="image" />
                 </div>
                 <div class="avatar-preview">
                     <!--{{profileImage}}-->
@@ -430,7 +432,12 @@
                     </div>
                 </div>
             </div>
-
+            <div class="co-sm-12" [style-display]="editFile ? 'block':'none'">
+                <div class="row">
+                    <button type="button" class="btn btn-danger btn-lg btn-block" (click)="UploadToServer()">Upload Image</button>
+                    <button type="button" class="btn btn-danger btn-lg btn-block" (click)="CancelImage()">Cancel</button>
+                </div>
+            </div>
             <!--<div class="avatar">
                 {{profileImage}}
                 <h5>Abigail Johnson</h5>

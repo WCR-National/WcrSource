@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
     formError: string;
     isSubmitting: boolean = false;
     showErrorsPassword: boolean = false;
+    isProfileFormVisible: boolean = false;
 
     validationMessages = {
         'password': {
@@ -78,10 +79,14 @@ export class ProfileComponent implements OnInit {
         'licenseId': '',
         'licenseState': ''
     };
+    @ViewChild('fileInput') el: ElementRef;
+    imageUrl: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+    editFile: boolean = false;
+    removeUpload: boolean = false;
     closeResult: string;
 
     constructor(private route: ActivatedRoute, private router: Router, private profileService: ProfileService,
-        private xmlToJson: XMLToJSON, private fb: FormBuilder, private modalService: NgbModal) { }
+        private xmlToJson: XMLToJSON, private fb: FormBuilder, private modalService: NgbModal, private cd: ChangeDetectorRef) { }
 
     ngOnInit() {
         this.getUserDetails();
@@ -97,6 +102,9 @@ export class ProfileComponent implements OnInit {
         });
     }
 
+    showHideProfileImage() {
+        this.isProfileFormVisible = true;
+    }
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';
@@ -237,7 +245,7 @@ export class ProfileComponent implements OnInit {
                 });
     }
 
-    submitImage() {
+    UploadToServer() {
         var fileUpload: any = $("#profileImageId").get(0);
         var files = fileUpload.files;
         //image resize code here
@@ -256,6 +264,10 @@ export class ProfileComponent implements OnInit {
                     this.formError = "Your profile has been updated Successfully.";
                 });
 
+    }
+
+    editForm() {
+        this.isFormVisible = true;
     }
 
     cancelForm() {
@@ -347,8 +359,30 @@ export class ProfileComponent implements OnInit {
         }
     }
 
-    editForm() {
-        this.isFormVisible = true;
+
+    uploadFile(event) {
+        let reader = new FileReader(); // HTML5 FileReader API
+        let file = event.target.files[0];
+        if (event.target.files && event.target.files[0]) {
+            reader.readAsDataURL(file);
+
+            // When file uploads set it to file formcontrol
+            reader.onload = () => {
+                this.imageUrl = reader.result;
+                this.editFile = false;
+                this.removeUpload = true;
+            }
+            // ChangeDetectorRef since file is loading outside the zone
+            this.cd.markForCheck();
+        }
+    }
+
+    // Function to remove uploaded file
+    removeUploadedFile() {
+        let newFileList = Array.from(this.el.nativeElement.files);
+        this.imageUrl = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
+        this.editFile = true;
+        this.removeUpload = false;
     }
 
 }
