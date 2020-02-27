@@ -63,16 +63,14 @@ export class ProfileService {
             ));
     }
 
-    uploadimage(image) {
-        //
+    uploadimage(image){
         
-        let urlToUploadImage: string = "ws/UpdatePic.ashx";
-        return this.apiService.post(urlToUploadImage, { data: image })
-            .pipe(map(
-                data => {
-                    return data;
-                }
-            ));
+        debugger;
+        let urlToUploadImage: string = "Associate/ws/UpdatePic.ashx";
+        this.http.post(urlToUploadImage, image);
+
+        //return this.apiService.post(urlToUploadImage, { image })
+        //    
     }
     
 }

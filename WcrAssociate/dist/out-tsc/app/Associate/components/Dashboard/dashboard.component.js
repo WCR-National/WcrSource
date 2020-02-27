@@ -169,6 +169,14 @@ var DashboardComponent = /** @class */ (function () {
                             });
                             _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
                         }
+                        else {
+                            if (dataJsonServices.NewDataSet != null) {
+                                _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                            }
+                            else {
+                                _this.initialiseInterestedCustomerDataTable(undefined);
+                            }
+                        }
                         debugger;
                         added_1 = true;
                     }

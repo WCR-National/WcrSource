@@ -2,8 +2,18 @@ import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
 var SidebarComponent = /** @class */ (function () {
     function SidebarComponent() {
+        this.isProfile = false;
+        this.isDashboard = false;
     }
     SidebarComponent.prototype.ngOnInit = function () {
+        if (location.origin.includes("profile")) {
+            this.isProfile = true;
+            this.isDashboard = false;
+        }
+        else {
+            this.isProfile = false;
+            this.isDashboard = true;
+        }
     };
     SidebarComponent = tslib_1.__decorate([
         Component({

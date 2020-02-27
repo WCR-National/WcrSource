@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'AngularAssociate/app/services/search';
@@ -58,7 +58,8 @@ var AssociateLayoutComponent = /** @class */ (function () {
         Component({
             selector: 'associate-layout',
             templateUrl: './associate-layout.component.html',
-            styleUrls: ['./associate-layout.component.css']
+            styleUrls: ['./associate-layout.component.css'],
+            encapsulation: ViewEncapsulation.None
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, MessageService,
             UserService])

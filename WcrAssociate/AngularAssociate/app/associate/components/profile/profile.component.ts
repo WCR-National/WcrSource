@@ -162,14 +162,15 @@ export class ProfileComponent implements OnInit {
                             thisStatus.IssuingState = $(docs).find("LicenseState").text();
 
 
-                            //$("#pprofilePic").html(sd.join(''));
-                            //$("#txtfName").val($(docs).find("FullName").text());
-                            //$("#txtLName").val($(docs).find("LastName").text());
-                            //$("#txtEmailAddress").val($(docs).find("Email").text());
-                            //$("#txtPassword").val($(docs).find("Password").text());
-                            //$("#txtContactNumber").val($(docs).find("MobileNo").text());
-                            //$("#txtLicenceState").val($(docs).find("LicenseState").text());
-                            //$("#txtLicenceID").val($(docs).find("LicenseId").text());
+                            thisStatus.profileForm.get('firstName').setValue(thisStatus.FirstName);
+                            thisStatus.profileForm.get('lastName').setValue(thisStatus.LastName);
+
+                            thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
+                            thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
+                            thisStatus.profileForm.get('phoneNo').setValue(thisStatus.PhoneNumber);
+
+                            thisStatus.profileForm.get('licenseId').setValue(thisStatus.LicenseNumber);
+                            thisStatus.profileForm.get('licenseState').setValue(thisStatus.IssuingState);
                         });
                     }
                 });
@@ -360,15 +361,6 @@ export class ProfileComponent implements OnInit {
         }
     }
 
-    // Function to remove uploaded file
-    removeUploadedFile() {
-        $("#imagePreview").css('background-image', 'url(' + this.profileImagePath + ')');
-
-        this.isProfileImageFormVisisble = false;
-       //isProfileImageFormVisisble
-        //profileImagePath
-    }
-
     UploadToServer() {
         var fileUpload: any = $("#profileImageId").get(0);
         var files = fileUpload.files;
@@ -378,16 +370,37 @@ export class ProfileComponent implements OnInit {
             image.append(files[i].name, files[i]);
         }
 
-        this.profileService
-            .uploadimage(image)
-            .subscribe(
-                data => {
-                    this.profileImage = URL.createObjectURL(files[0]);
-                    $("#imagePreview").css('background-image', 'url(' + this.profileImage + ')');
+        $.ajax({
+            url: "Associate/ws/UpdatePic.ashx",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: image,
+            success: function (result) {
+                this.isProfileImageFormVisisble = false;
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
+        });
 
-                    this.formError = "Your profile has been updated Successfully.";
-                });
+        //this.profileService
+        //    .uploadimage(image);
+            //.subscribe(
+            //    data => {
+            //        //this.profileImage = URL.createObjectURL(files[0]);
+            //        //$("#imagePreview").css('background-image', 'url(' + this.profileImage + ')');
 
+            //    });
+
+    }
+    // Function to remove uploaded file
+    removeUploadedFile() {
+        $("#imagePreview").css('background-image', 'url(' + this.profileImagePath + ')');
+
+        this.isProfileImageFormVisisble = false;
+        //isProfileImageFormVisisble
+        //profileImagePath
     }
 }
 

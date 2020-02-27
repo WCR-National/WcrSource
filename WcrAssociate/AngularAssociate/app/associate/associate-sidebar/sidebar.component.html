@@ -10,16 +10,11 @@
         <ul class="nav nav-sidebar">
             <li class="nav-item show">
                 <!-- routerLink="/dashboard" -->
-                <a id="aDashboard" routerLink="/associates" class="nav-link with-sub active" [ngClass]="{'active': (isDashboard)}"><i data-feather="box"></i>Dashboard</a>
-                <!--<nav class="nav nav-sub">
-            <a href="dashboard-one.html" class="nav-sub-link">Analytics &amp; Monitoring</a>
-            <a href="dashboard-two.html" class="nav-sub-link">Projects &amp; Web Services</a>
-            <a href="dashboard-three.html" class="nav-sub-link active">Blog &amp; Social Media</a>
-        </nav>-->
+                <a  id="aDashboard" routerLink="/associates" class="nav-link with-sub" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><i data-feather="box"></i>Dashboard</a>
             </li>
             <li id="profileclick" class="nav-item"  [ngClass]="{'active': (isProfile)}">
                 <!-- routerLink="/profile" -->
-                <a id="aProfile" routerLink="/associates/profile" class="nav-link with-sub"><i data-feather="layout"></i>Profile</a>
+                <a id="aProfile" routerLink="/associates/profile" class="nav-link with-sub" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><i data-feather="layout" ></i>Profile</a>
             </li>
 
             <!--
