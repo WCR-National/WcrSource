@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from '../../app/Associate/components/Dashboard/dashboard.component';
-import { ProfileComponent } from '../../app/Associate/components/Profile/profile.component';
-import { ClientDetailsComponent } from '../../app/Associate/components/client-details/client-details.component';
+
 //import { LoginComponent } from '.././app/components/login/login.component';
 //import { RegisterComponent } from '.././app/components/register/register.component';
 
 
 import { AssociateLayoutComponent } from './associate-layout';
 import { AuthGuard } from '../_guards/auth-guard.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ClientDetailsComponent } from './components/client-details/client-details.component';
 
 const associateRoutes: Routes = [
     {

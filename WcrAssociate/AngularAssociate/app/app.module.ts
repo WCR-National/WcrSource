@@ -71,27 +71,12 @@ import { XMLToJSON } from './_helpers/xml-to-json';
         ReactiveFormsModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatIconModule,
-        MatRadioModule,
-        MatCardModule,
-        MatSidenavModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatTooltipModule,
-        MatToolbarModule,
-        MatSelectModule,
-        SharedModule,
         AssociateModule,
+        SharedModule,
         AppRoutingModule
-
     ],
     providers: [
         AuthGuard,
-
         HttpClientModule,
         { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
         ApiService,
@@ -107,4 +92,7 @@ import { XMLToJSON } from './_helpers/xml-to-json';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+        constructor() {
+    }
+}
