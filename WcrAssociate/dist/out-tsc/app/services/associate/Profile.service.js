@@ -45,12 +45,11 @@ var ProfileService = /** @class */ (function () {
         }));
     };
     ProfileService.prototype.uploadimage = function (image) {
-        //
-        var urlToUploadImage = "ws/UpdatePic.ashx";
-        return this.apiService.post(urlToUploadImage, { data: image })
-            .pipe(map(function (data) {
-            return data;
-        }));
+        debugger;
+        var urlToUploadImage = "Associate/ws/UpdatePic.ashx";
+        this.http.post(urlToUploadImage, image);
+        //return this.apiService.post(urlToUploadImage, { image })
+        //    
     };
     ProfileService = tslib_1.__decorate([
         Injectable(),

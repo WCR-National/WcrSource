@@ -128,14 +128,13 @@ var ProfileComponent = /** @class */ (function () {
                     thisStatus.Password = $(docs).find("Password").text();
                     thisStatus.LicenseNumber = $(docs).find("LicenseId").text();
                     thisStatus.IssuingState = $(docs).find("LicenseState").text();
-                    //$("#pprofilePic").html(sd.join(''));
-                    //$("#txtfName").val($(docs).find("FullName").text());
-                    //$("#txtLName").val($(docs).find("LastName").text());
-                    //$("#txtEmailAddress").val($(docs).find("Email").text());
-                    //$("#txtPassword").val($(docs).find("Password").text());
-                    //$("#txtContactNumber").val($(docs).find("MobileNo").text());
-                    //$("#txtLicenceState").val($(docs).find("LicenseState").text());
-                    //$("#txtLicenceID").val($(docs).find("LicenseId").text());
+                    thisStatus.profileForm.get('firstName').setValue(thisStatus.FirstName);
+                    thisStatus.profileForm.get('lastName').setValue(thisStatus.LastName);
+                    thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
+                    thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
+                    thisStatus.profileForm.get('phoneNo').setValue(thisStatus.PhoneNumber);
+                    thisStatus.profileForm.get('licenseId').setValue(thisStatus.LicenseNumber);
+                    thisStatus.profileForm.get('licenseState').setValue(thisStatus.IssuingState);
                 });
             }
         });
@@ -307,15 +306,7 @@ var ProfileComponent = /** @class */ (function () {
             this.cd.markForCheck();
         }
     };
-    // Function to remove uploaded file
-    ProfileComponent.prototype.removeUploadedFile = function () {
-        $("#imagePreview").css('background-image', 'url(' + this.profileImagePath + ')');
-        this.isProfileImageFormVisisble = false;
-        //isProfileImageFormVisisble
-        //profileImagePath
-    };
     ProfileComponent.prototype.UploadToServer = function () {
-        var _this = this;
         var fileUpload = $("#profileImageId").get(0);
         var files = fileUpload.files;
         //image resize code here
@@ -323,13 +314,33 @@ var ProfileComponent = /** @class */ (function () {
         for (var i = 0; i < files.length; i++) {
             image.append(files[i].name, files[i]);
         }
-        this.profileService
-            .uploadimage(image)
-            .subscribe(function (data) {
-            _this.profileImage = URL.createObjectURL(files[0]);
-            $("#imagePreview").css('background-image', 'url(' + _this.profileImage + ')');
-            _this.formError = "Your profile has been updated Successfully.";
+        $.ajax({
+            url: "Associate/ws/UpdatePic.ashx",
+            type: "POST",
+            contentType: false,
+            processData: false,
+            data: image,
+            success: function (result) {
+                this.isProfileImageFormVisisble = false;
+            },
+            error: function (err) {
+                alert(err.statusText);
+            }
         });
+        //this.profileService
+        //    .uploadimage(image);
+        //.subscribe(
+        //    data => {
+        //        //this.profileImage = URL.createObjectURL(files[0]);
+        //        //$("#imagePreview").css('background-image', 'url(' + this.profileImage + ')');
+        //    });
+    };
+    // Function to remove uploaded file
+    ProfileComponent.prototype.removeUploadedFile = function () {
+        $("#imagePreview").css('background-image', 'url(' + this.profileImagePath + ')');
+        this.isProfileImageFormVisisble = false;
+        //isProfileImageFormVisisble
+        //profileImagePath
     };
     tslib_1.__decorate([
         ViewChild('fileInput'),

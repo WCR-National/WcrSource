@@ -3,9 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MatButtonModule, MatMenuModule, MatDatepickerModule, MatNativeDateModule, MatIconModule, MatCardModule, MatSidenavModule, MatFormFieldModule, MatInputModule, MatTooltipModule, MatToolbarModule } from '@angular/material';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -49,21 +46,8 @@ var AppModule = /** @class */ (function () {
                 ReactiveFormsModule,
                 HttpClientModule,
                 BrowserAnimationsModule,
-                MatButtonModule,
-                MatMenuModule,
-                MatDatepickerModule,
-                MatNativeDateModule,
-                MatIconModule,
-                MatRadioModule,
-                MatCardModule,
-                MatSidenavModule,
-                MatFormFieldModule,
-                MatInputModule,
-                MatTooltipModule,
-                MatToolbarModule,
-                MatSelectModule,
-                SharedModule,
                 AssociateModule,
+                SharedModule,
                 AppRoutingModule
             ],
             providers: [
@@ -82,7 +66,8 @@ var AppModule = /** @class */ (function () {
                 XMLToJSON
             ],
             bootstrap: [AppComponent]
-        })
+        }),
+        tslib_1.__metadata("design:paramtypes", [])
     ], AppModule);
     return AppModule;
 }());

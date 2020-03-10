@@ -1166,11 +1166,6 @@
     <Content Include="salesnew.html" />
     <Content Include="Scripts\libs\assets\bootstrap.css" />
     <Content Include="Scripts\libs\assets\color.css" />
-    <Content Include="Scripts\libs\assets\fonts\fontawesome-webfont.svg" />
-    <Content Include="Scripts\libs\assets\fonts\fontello.svg" />
-    <Content Include="Scripts\libs\assets\fonts\iconsmind.svg" />
-    <Content Include="Scripts\libs\assets\fonts\simple-line-icons.svg" />
-    <Content Include="Scripts\libs\assets\icons.css" />
     <Content Include="Scripts\libs\assets\style.css" />
     <Content Include="Scripts\libs\favicon.ico" />
     <Content Include="Scripts\libs\index.html" />
@@ -1246,6 +1241,7 @@
     <Content Include="angular.json" />
     <Content Include="package.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\WcrNational.pubxml" />
     <Content Include="tsconfig.json" />
     <Content Include="tslint.json" />
@@ -1254,20 +1250,7 @@
     <Content Include="AngularAssociate\tsconfig.app.json" />
     <Content Include="AngularAssociate\tsconfig.spec.json" />
     <Content Include="AngularAssociate\tslint.json" />
-    <Content Include="Scripts\libs\assets\fonts\fontawesome-webfont.eot" />
-    <Content Include="Scripts\libs\assets\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Scripts\libs\assets\fonts\fontawesome-webfont.woff" />
-    <Content Include="Scripts\libs\assets\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Scripts\libs\assets\fonts\FontAwesome.otf" />
-    <Content Include="Scripts\libs\assets\fonts\fontello.eot" />
-    <Content Include="Scripts\libs\assets\fonts\fontello.ttf" />
-    <Content Include="Scripts\libs\assets\fonts\fontello.woff" />
-    <Content Include="Scripts\libs\assets\fonts\iconsmind.eot" />
-    <Content Include="Scripts\libs\assets\fonts\iconsmind.ttf" />
-    <Content Include="Scripts\libs\assets\fonts\iconsmind.woff" />
-    <Content Include="Scripts\libs\assets\fonts\simple-line-icons.eot" />
-    <Content Include="Scripts\libs\assets\fonts\simple-line-icons.ttf" />
-    <Content Include="Scripts\libs\assets\fonts\simple-line-icons.woff" />
+   
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
