@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     isProfile: boolean = false;
     isDashboard: boolean = false;
 
-    constructor() { }
+    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
     ngOnInit() {
         if (location.origin.includes("profile")) {
@@ -29,4 +29,20 @@ export class SidebarComponent implements OnInit {
         }
     }
 
+    logout() {
+        this.userService
+            .associateLogout()
+            .subscribe(
+                data => {
+                    if (data == "0") {
+                        this.userService.purgeAuth();
+                        this.router.navigateByUrl('/');       
+
+                    }
+                },
+                err => {
+                    alert('Something wrong');
+                }
+        );
+    }
 }    

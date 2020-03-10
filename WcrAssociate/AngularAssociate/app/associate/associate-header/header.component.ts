@@ -22,7 +22,7 @@ export class AssociateHeaderComponent implements OnInit {
     Email: string;
     userName: string;
 
-    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private xmlToJson: XMLToJSON) {
+    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private userService: UserService, private xmlToJson: XMLToJSON) {
 
     }
     ngOnInit() {
@@ -69,5 +69,22 @@ export class AssociateHeaderComponent implements OnInit {
                     }
                 });
         //../../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails
+    }
+
+    logout() {
+        this.userService
+            .associateLogout()
+            .subscribe(
+                data => {
+                    if (data == "0") {
+                        this.userService.purgeAuth();
+                        this.router.navigateByUrl('/');
+
+                    }
+                },
+                err => {
+                    alert('Something wrong');
+                }
+            );
     }
 }

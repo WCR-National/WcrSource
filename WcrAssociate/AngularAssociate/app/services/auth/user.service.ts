@@ -99,7 +99,6 @@ export class UserService {
     }
 
     purgeAuth() {
-        debugger;
         // Remove JWT from localstorage
         this.jwtService.destroyToken();
         // Set current user to an empty object
@@ -383,6 +382,17 @@ export class UserService {
             .pipe(delay(300));
     }
 
+    associateLogout() {
+
+
+        let urlToAssociateLogout = "ws/AssociateSignUp.ashx?action=AssociateLogout";
+        return this.apiService.post(urlToAssociateLogout, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
 
     getCurrentUser(): User {
         return this.currentUserSubject.value;

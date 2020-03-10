@@ -596,9 +596,9 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-3 pd-l-0-force pd-r-0-force">
+                                        <div class="col-sm-6 pd-l-0-force pd-r-0-force">
                                             <div class="form-group">
-                                                <div class="col-sm-12 mg-b-20">
+                                                <div class="col-sm-3 mg-b-20">
                                                     <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit">
                                                         <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitProfileForm()">UPDATE PROFILE</span>
                                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
@@ -614,10 +614,11 @@
                                                         </div>
                                                     </button>
 
+                                                </div>
+                                                <div class="col-sm-3 mg-b-20">
                                                     <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="button">
                                                         <span (click)="cancelForm()">Cancel</span>
                                                     </button>
-
                                                 </div>
 
                                             </div>

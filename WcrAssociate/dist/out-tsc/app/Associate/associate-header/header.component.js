@@ -1,14 +1,16 @@
 import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
+import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from 'AngularAssociate/app/services/associate/dashboard.service';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import * as $ from 'jquery';
 var AssociateHeaderComponent = /** @class */ (function () {
-    function AssociateHeaderComponent(route, router, dashboardService, xmlToJson) {
+    function AssociateHeaderComponent(route, router, dashboardService, userService, xmlToJson) {
         this.route = route;
         this.router = router;
         this.dashboardService = dashboardService;
+        this.userService = userService;
         this.xmlToJson = xmlToJson;
     }
     AssociateHeaderComponent.prototype.ngOnInit = function () {
@@ -47,12 +49,25 @@ var AssociateHeaderComponent = /** @class */ (function () {
         });
         //../../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails
     };
+    AssociateHeaderComponent.prototype.logout = function () {
+        var _this = this;
+        this.userService
+            .associateLogout()
+            .subscribe(function (data) {
+            if (data == "0") {
+                _this.userService.purgeAuth();
+                _this.router.navigateByUrl('/');
+            }
+        }, function (err) {
+            alert('Something wrong');
+        });
+    };
     AssociateHeaderComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-layout-header',
             templateUrl: './header.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, DashboardService, XMLToJSON])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, DashboardService, UserService, XMLToJSON])
     ], AssociateHeaderComponent);
     return AssociateHeaderComponent;
 }());

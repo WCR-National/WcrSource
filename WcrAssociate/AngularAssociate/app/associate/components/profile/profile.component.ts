@@ -161,12 +161,12 @@ export class ProfileComponent implements OnInit {
                             thisStatus.LicenseNumber = $(docs).find("LicenseId").text();
                             thisStatus.IssuingState = $(docs).find("LicenseState").text();
 
-
+                            debugger;
                             thisStatus.profileForm.get('firstName').setValue(thisStatus.FirstName);
                             thisStatus.profileForm.get('lastName').setValue(thisStatus.LastName);
 
-                            thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
-                            thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
+                            thisStatus.profileForm.get('email').setValue(thisStatus.email);
+                            thisStatus.profileForm.get('password').setValue(thisStatus.Password);
                             thisStatus.profileForm.get('phoneNo').setValue(thisStatus.PhoneNumber);
 
                             thisStatus.profileForm.get('licenseId').setValue(thisStatus.LicenseNumber);
@@ -254,6 +254,7 @@ export class ProfileComponent implements OnInit {
     }
 
     cancelForm() {
+        
         this.isFormVisible = false;
     }
 
@@ -404,7 +405,7 @@ export class ProfileComponent implements OnInit {
     }
 }
 
-function patternValidator(regex: RegExp, error: ValidationErrors) {
+function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
         debugger;
         if (!control.value) {

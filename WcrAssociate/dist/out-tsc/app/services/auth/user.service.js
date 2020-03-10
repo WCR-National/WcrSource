@@ -86,7 +86,6 @@ var UserService = /** @class */ (function () {
         console.log(this.isAuthenticated_extra);
     };
     UserService.prototype.purgeAuth = function () {
-        debugger;
         // Remove JWT from localstorage
         this.jwtService.destroyToken();
         // Set current user to an empty object
@@ -351,6 +350,13 @@ var UserService = /** @class */ (function () {
     UserService.prototype.emailAlreadyTaken = function (email) {
         return this.apiService.post('ws/AssociateSignUp.ashx?action=RecordExists&EmailID=' + email, {})
             .pipe(delay(300));
+    };
+    UserService.prototype.associateLogout = function () {
+        var urlToAssociateLogout = "ws/AssociateSignUp.ashx?action=AssociateLogout";
+        return this.apiService.post(urlToAssociateLogout, {})
+            .pipe(map(function (data) {
+            return data;
+        }));
     };
     UserService.prototype.getCurrentUser = function () {
         return this.currentUserSubject.value;
