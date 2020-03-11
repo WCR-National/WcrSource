@@ -36,7 +36,7 @@ export class SidebarComponent implements OnInit {
                 data => {
                     if (data == "0") {
                         this.userService.purgeAuth();
-                        this.router.navigateByUrl('/');       
+                        this.router.navigateByUrl('/associates' , );       
 
                     }
                 },

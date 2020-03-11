@@ -128,10 +128,11 @@ var ProfileComponent = /** @class */ (function () {
                     thisStatus.Password = $(docs).find("Password").text();
                     thisStatus.LicenseNumber = $(docs).find("LicenseId").text();
                     thisStatus.IssuingState = $(docs).find("LicenseState").text();
+                    debugger;
                     thisStatus.profileForm.get('firstName').setValue(thisStatus.FirstName);
                     thisStatus.profileForm.get('lastName').setValue(thisStatus.LastName);
-                    thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
-                    thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
+                    thisStatus.profileForm.get('email').setValue(thisStatus.email);
+                    thisStatus.profileForm.get('password').setValue(thisStatus.Password);
                     thisStatus.profileForm.get('phoneNo').setValue(thisStatus.PhoneNumber);
                     thisStatus.profileForm.get('licenseId').setValue(thisStatus.LicenseNumber);
                     thisStatus.profileForm.get('licenseState').setValue(thisStatus.IssuingState);
@@ -142,11 +143,11 @@ var ProfileComponent = /** @class */ (function () {
     ProfileComponent.prototype.setValidationOnForm = function () {
         this.profileForm = this.fb.group({
             email: [''],
-            firstName: ['', Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
-            lastName: ['', Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
-            licenseState: ['', Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })],
-            phoneNo: ['', Validators.required, phoneValidator(/\d{10}/, { elevenDigits: true })],
-            licenseId: ['', Validators.required, alphaNumeric(/[a-zA-Z0-9]+$/, { alphaNumeric: true }, this)],
+            firstName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
+            lastName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
+            licenseState: ['', [Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
+            phoneNo: ['', [Validators.required, phoneValidator(/\d{10}/, { elevenDigits: true })]],
+            licenseId: ['', [Validators.required, alphaNumeric(/[a-zA-Z0-9]+$/, { alphaNumeric: true }, this)]],
             password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
                     patternValidator(/\d/, { number: true }),
                     patternValidator(/[A-Z]/, { upperLetter: true }),
@@ -209,6 +210,7 @@ var ProfileComponent = /** @class */ (function () {
         this.isFormVisible = true;
     };
     ProfileComponent.prototype.cancelForm = function () {
+        debugger;
         this.isFormVisible = false;
     };
     ProfileComponent.prototype.showErrors = function () {

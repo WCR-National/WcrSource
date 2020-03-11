@@ -124,6 +124,7 @@
     <Content Include="AngularAssociate\app\components\auth\auth.component.html" />
     <Content Include="AngularAssociate\app\shared\buttons\favorite-button.component.html" />
     <Content Include="AngularAssociate\app\shared\buttons\follow-button.component.html" />
+    <Content Include="AngularAssociate\app\shared\shared-layout\shared-layout.component.css" />
     <Content Include="AngularAssociate\app\shared\shared-layout\shared-layout.component.html" />
     <Content Include="AngularAssociate\app\shared\layout\footer.component.html" />
     <Content Include="AngularAssociate\app\shared\layout\header.component.html" />
@@ -1250,7 +1251,6 @@
     <Content Include="AngularAssociate\tsconfig.app.json" />
     <Content Include="AngularAssociate\tsconfig.spec.json" />
     <Content Include="AngularAssociate\tslint.json" />
-   
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

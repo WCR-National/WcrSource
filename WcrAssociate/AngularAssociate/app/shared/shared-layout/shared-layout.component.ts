@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ViewEncapsulation } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { User } from '../../entities/user';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +8,9 @@ import { MessageService } from 'AngularAssociate/app/services/search';
 
 @Component({
     selector: 'app-shared-layout',
-    templateUrl: './shared-layout.component.html'
+    templateUrl: './shared-layout.component.html',
+    styleUrls: ['./shared-layout.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class SharedLayoutComponent implements OnInit {
 

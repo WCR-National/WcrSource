@@ -14,8 +14,6 @@ import * as $ from 'jquery';
     templateUrl: './associate-layout.component.html',
     styleUrls: ['./associate-layout.component.css'],
     encapsulation: ViewEncapsulation.None
-
-
 })
 export class AssociateLayoutComponent implements OnInit {
 

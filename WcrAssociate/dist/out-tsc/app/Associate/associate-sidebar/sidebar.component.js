@@ -27,7 +27,7 @@ var SidebarComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data == "0") {
                 _this.userService.purgeAuth();
-                _this.router.navigateByUrl('/');
+                _this.router.navigateByUrl('/associates');
             }
         }, function (err) {
             alert('Something wrong');
