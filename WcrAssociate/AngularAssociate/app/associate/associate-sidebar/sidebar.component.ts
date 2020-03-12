@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, NgZone } from '@angular/core';
 
 import { UserService } from '../../services/auth';
 import { User } from '../../entities/user';
@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     isProfile: boolean = false;
     isDashboard: boolean = false;
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService) { }
+    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private ngZone: NgZone) { }
 
     ngOnInit() {
         if (location.origin.includes("profile")) {
@@ -36,7 +36,8 @@ export class SidebarComponent implements OnInit {
                 data => {
                     if (data == "0") {
                         this.userService.purgeAuth();
-                        this.router.navigateByUrl('/associates' , );       
+                        this.ngZone.run(() => this.router.navigate(['/']));
+                        //this.router.navigateByUrl('/associates' , );       
 
                     }
                 },

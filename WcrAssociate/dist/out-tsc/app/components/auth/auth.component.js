@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/auth';
@@ -9,12 +9,13 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent(route, router, userService, fb, http) {
+    function AuthComponent(route, router, userService, fb, http, ngZone) {
         this.route = route;
         this.router = router;
         this.userService = userService;
         this.fb = fb;
         this.http = http;
+        this.ngZone = ngZone;
         this.authType = '';
         this.title = '';
         this.errors = { errors: {} };
@@ -470,16 +471,19 @@ var AuthComponent = /** @class */ (function () {
             if (data.d == "1") {
                 if ($(docs).find("Mobile").text() == '') {
                     if (_this.returnUrl != '') {
-                        _this.router.navigate([_this.returnUrl]);
+                        _this.ngZone.run(function () { return _this.router.navigate([_this.returnUrl]); });
+                        //this.router.navigate([this.returnUrl]);
                     }
                     else {
-                        _this.router.navigateByUrl('/associates/profile');
+                        _this.ngZone.run(function () { return _this.router.navigate(['/associates/profile']); });
+                        // this.router.navigateByUrl();       
                     }
                     //this.router.navigateByUrl('/associate');       
                     //$(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
-                    _this.router.navigateByUrl('/associates');
+                    _this.ngZone.run(function () { return _this.router.navigate(['/associates']); });
+                    //this.router.navigateByUrl('/associates');       
                     //$(location).attr('href', 'Associate/Dashboard.aspx');
                 }
             }
@@ -930,7 +934,7 @@ var AuthComponent = /** @class */ (function () {
             templateUrl: './auth.component.html'
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder,
-            HttpClient])
+            HttpClient, NgZone])
     ], AuthComponent);
     return AuthComponent;
 }());

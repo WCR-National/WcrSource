@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
@@ -31,7 +31,8 @@ export class UserService {
         private jwtService: JwtService = null,
         private router: Router,
         private route: ActivatedRoute,
-        private platformLocation: PlatformLocation
+        private platformLocation: PlatformLocation,
+        private ngZone: NgZone
 
     ) { }
 
@@ -52,15 +53,19 @@ export class UserService {
                             this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
                             if (this.returnUrl == '') {
      
-                                let url = ((this.platformLocation as any).location.href).replace(location.origin, '')
-                                this.router.navigateByUrl(url);
+                                let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                                this.ngZone.run(() => this.router.navigate([url]));
+                                //this.router.navigateByUrl(url);
                             }
                             else {
-                                this.router.navigateByUrl('returnUrl');
+                                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+                                //this.router.navigateByUrl('');
                             }
                         }
                         else {
-                            this.router.navigateByUrl('/');
+                            this.ngZone.run(() => this.router.navigate(['/']));
+
+                            //this.router.navigateByUrl('/');
                         }
                     });
             }
@@ -70,10 +75,12 @@ export class UserService {
                 this.consumerLoginSessionActivate("", credentials, user.id)
                     .then((data: any) => {
                         if (data.d == "1") {
-                            this.router.navigateByUrl('/');
+                            this.ngZone.run(() => this.router.navigate(['/']));
+                            //this.router.navigateByUrl('/');
                         }
                         else {
-                            this.router.navigateByUrl('/');
+                            this.ngZone.run(() => this.router.navigate(['/']));
+                            //this.router.navigateByUrl('/');
                         }
                     });
             }

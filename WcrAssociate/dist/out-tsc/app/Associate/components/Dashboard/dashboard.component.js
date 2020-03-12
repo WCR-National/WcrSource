@@ -23,6 +23,7 @@ var DashboardComponent = /** @class */ (function () {
         this.attemptToCountPurchasedCategories("1");
         this.attemptToCountPurchaseZipCode();
         this.attemptToCountAllPurchasedCategories();
+        debugger;
         this.attemptToInterestedCustomerData();
         this.attemptToCategoriesData();
         this.attemptToMyPropertyListingsData();

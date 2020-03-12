@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { ApiService } from './api.service';
@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map, distinctUntilChanged, delay } from 'rxjs/operators';
 import { PlatformLocation } from '@angular/common';
 var UserService = /** @class */ (function () {
-    function UserService(user, apiService, http, jwtService, router, route, platformLocation) {
+    function UserService(user, apiService, http, jwtService, router, route, platformLocation, ngZone) {
         if (user === void 0) { user = null; }
         if (apiService === void 0) { apiService = null; }
         if (http === void 0) { http = null; }
@@ -21,6 +21,7 @@ var UserService = /** @class */ (function () {
         this.router = router;
         this.route = route;
         this.platformLocation = platformLocation;
+        this.ngZone = ngZone;
         this.currentUserSubject = new BehaviorSubject({});
         this.currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
         this.isAuthenticatedSubject = new ReplaySubject(1);
@@ -43,15 +44,18 @@ var UserService = /** @class */ (function () {
                     if (data.d == "1") {
                         _this.returnUrl = _this.route.snapshot.queryParams['returnUrl'] || '';
                         if (_this.returnUrl == '') {
-                            var url = (_this.platformLocation.location.href).replace(location.origin, '');
-                            _this.router.navigateByUrl(url);
+                            var url_1 = (_this.platformLocation.location.href).replace(location.origin, '');
+                            _this.ngZone.run(function () { return _this.router.navigate([url_1]); });
+                            //this.router.navigateByUrl(url);
                         }
                         else {
-                            _this.router.navigateByUrl('returnUrl');
+                            _this.ngZone.run(function () { return _this.router.navigate([_this.returnUrl]); });
+                            //this.router.navigateByUrl('');
                         }
                     }
                     else {
-                        _this.router.navigateByUrl('/');
+                        _this.ngZone.run(function () { return _this.router.navigate(['/']); });
+                        //this.router.navigateByUrl('/');
                     }
                 });
             }
@@ -61,10 +65,12 @@ var UserService = /** @class */ (function () {
                 this.consumerLoginSessionActivate("", credentials, user.id)
                     .then(function (data) {
                     if (data.d == "1") {
-                        _this.router.navigateByUrl('/');
+                        _this.ngZone.run(function () { return _this.router.navigate(['/']); });
+                        //this.router.navigateByUrl('/');
                     }
                     else {
-                        _this.router.navigateByUrl('/');
+                        _this.ngZone.run(function () { return _this.router.navigate(['/']); });
+                        //this.router.navigateByUrl('/');
                     }
                 });
             }
@@ -380,7 +386,8 @@ var UserService = /** @class */ (function () {
             JwtService,
             Router,
             ActivatedRoute,
-            PlatformLocation])
+            PlatformLocation,
+            NgZone])
     ], UserService);
     return UserService;
 }());

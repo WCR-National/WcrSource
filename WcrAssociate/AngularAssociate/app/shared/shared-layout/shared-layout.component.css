@@ -2639,7 +2639,7 @@ a {
 }
 
 /* 2dp elevation modified*/
-.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
+.z-depth-1, nav, .card-main-panel, .card-main, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
@@ -4906,7 +4906,7 @@ small {
         transform: scale(1);
     }
 
-.card-panel {
+.card-main-panel {
     -webkit-transition: -webkit-box-shadow .25s;
     transition: -webkit-box-shadow .25s;
     transition: box-shadow .25s;
@@ -4917,7 +4917,7 @@ small {
     background-color: #fff;
 }
 
-.card {
+.card-main {
     position: relative;
     margin: 0.5rem 0 1rem 0;
     background-color: #fff;
@@ -4928,80 +4928,80 @@ small {
     border-radius: 2px;
 }
 
-    .card .card-title {
+    /*.card .card-title {
         font-size: 24px;
         font-weight: 300;
+    }*/
+
+    .card-main .card-title.activator {
+        cursor: pointer;
     }
 
-        .card .card-title.activator {
-            cursor: pointer;
-        }
-
-    .card.small, .card.medium, .card.large {
+    .card-main.small, .card.medium, .card.large {
         position: relative;
     }
 
-        .card.small .card-image, .card.medium .card-image, .card.large .card-image {
+        .card-main.small .card-image, .card.medium .card-image, .card.large .card-image {
             max-height: 60%;
             overflow: hidden;
         }
 
-            .card.small .card-image + .card-content, .card.medium .card-image + .card-content, .card.large .card-image + .card-content {
+            .card-main.small .card-image + .card-content, .card.medium .card-image + .card-content, .card.large .card-image + .card-content {
                 max-height: 40%;
             }
 
-        .card.small .card-content, .card.medium .card-content, .card.large .card-content {
+        .card-main.small .card-content, .card.medium .card-content, .card.large .card-content {
             max-height: 100%;
             overflow: hidden;
         }
 
-        .card.small .card-action, .card.medium .card-action, .card.large .card-action {
+        .card-main.small .card-action, .card.medium .card-action, .card.large .card-action {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
         }
 
-    .card.small {
+    .card-main.small {
         height: 300px;
     }
 
-    .card.medium {
+    .card-main.medium {
         height: 400px;
     }
 
-    .card.large {
+    .card-main.large {
         height: 500px;
     }
 
-    .card.horizontal {
+    .card-main.horizontal {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
     }
 
-        .card.horizontal.small .card-image, .card.horizontal.medium .card-image, .card.horizontal.large .card-image {
+        .card-main.horizontal.small .card-main-image, .card-main.horizontal.medium .card-main-image, .card-main.horizontal.large .card-main-image {
             height: 100%;
             max-height: none;
             overflow: visible;
         }
 
-            .card.horizontal.small .card-image img, .card.horizontal.medium .card-image img, .card.horizontal.large .card-image img {
+            .card-main.horizontal.small .card-main-image img, .card-main.horizontal.medium .card-main-image img, .card-main.horizontal.large .card-main-image img {
                 height: 100%;
             }
 
-        .card.horizontal .card-image {
+        .card-main.horizontal .card-main-image {
             max-width: 50%;
         }
 
-            .card.horizontal .card-image img {
+            .card-main.horizontal .card-main-image img {
                 border-radius: 2px 0 0 2px;
                 max-width: 100%;
                 width: auto;
             }
 
-        .card.horizontal .card-stacked {
+        .card-main.horizontal .card-main-stacked {
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
@@ -5018,27 +5018,27 @@ small {
             position: relative;
         }
 
-            .card.horizontal .card-stacked .card-content {
+            .card-main.horizontal .card-main-stacked .card-main-content {
                 -webkit-box-flex: 1;
                 -webkit-flex-grow: 1;
                 -ms-flex-positive: 1;
                 flex-grow: 1;
             }
 
-    .card.sticky-action .card-action {
+    .card-main.sticky-action .card-main-action {
         z-index: 2;
     }
 
-    .card.sticky-action .card-reveal {
+    .card-main.sticky-action .card-main-reveal {
         z-index: 1;
         padding-bottom: 64px;
     }
 
-    .card .card-image {
+    .card-main .card-main-image {
         position: relative;
     }
 
-        .card .card-image img {
+        .card-main .card-main-image img {
             display: block;
             border-radius: 2px 2px 0 0;
             position: relative;
@@ -5049,7 +5049,7 @@ small {
             width: 100%;
         }
 
-        .card .card-image .card-title {
+        .card-main .card-main-image .card-main-title {
             color: #fff;
             position: absolute;
             bottom: 0;
@@ -5058,36 +5058,44 @@ small {
             padding: 24px;
         }
 
-    .card .card-content {
+    .card-main .card-main-content {
         padding: 24px;
         border-radius: 0 0 2px 2px;
     }
 
-        .card .card-content p {
+        .card-main .card-main-content p {
             margin: 0;
         }
 
-        .card .card-content .card-title {
+        .card-main .card-main-content .card-main-title {
             display: block;
             line-height: 32px;
             margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: 300;
+            font-weight: 500;
+            text-align: left;
+            font-size: 24px;
+            font-weight: 300;
+            color: #06072d;
+            line-height: 1;
         }
 
-            .card .card-content .card-title i {
+            .card-main .card-main-content .card-main-title i {
                 line-height: 32px;
             }
 
-    .card .card-action {
+    .card-main .card-main-action {
         background-color: inherit;
         position: relative;
         padding: 16px 24px;
     }
 
-        .card .card-action:last-child {
+        .card-main .card-main-action:last-child {
             border-radius: 0 0 2px 2px;
         }
 
-        .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+        .card-main .card-main-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
             color: #ffab40;
             margin-right: 24px;
             -webkit-transition: color .3s ease;
@@ -5095,11 +5103,11 @@ small {
             text-transform: uppercase;
         }
 
-            .card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
+            .card-main .card-main-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating):hover {
                 color: #ffd8a6;
             }
 
-    .card .card-reveal {
+    .card-main .card-main-reveal {
         padding: 24px;
         position: absolute;
         background-color: #fff;
@@ -5112,7 +5120,7 @@ small {
         display: none;
     }
 
-        .card .card-reveal .card-title {
+        .card-main .card-main-reveal .card-main-title {
             cursor: pointer;
             display: block;
         }
@@ -5542,7 +5550,7 @@ button.btn-floating {
             transform: translateY(-50%);
             height: 100%;
             left: auto;
-            /*width 100% only goes to width of button container */
+            /*width 100% only goes to width of button container  */
             width: 500px;
         }
 
@@ -5805,8 +5813,8 @@ body.keyboard-focused .dropdown-content li:focus {
  * Copyright 2014 Alfiana E. Sibuea and other contributors
  * Released under the MIT license
  * https://github.com/fians/Waves/blob/master/LICENSE
- */
-.waves-effect {
+ 
+            .waves-effect {
     position: relative;
     cursor: pointer;
     display: inline-block;
@@ -5920,7 +5928,7 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 /* Firefox Bug: link not triggered */
-.waves-effect .waves-ripple {
+            .waves-effect .waves-ripple {
     z-index: -1;
 }
 
@@ -10387,43 +10395,43 @@ button.btn-floating {
 }
 
 
-.z-depth-1, .card-panel, .card, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
+.z-depth-1, .card-main-panel, .card-main, .toast, .btn, .btn-large, .btn-small, .btn-floating, .dropdown-content, .collapsible, .sidenav {
     -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
 
-.card {
+.card-main {
     background: #fff;
     box-shadow: 0 1px 6px rgba(57,73,76,.35);
 }
 
-.card {
+.card-main {
     position: relative;
     background-color: #fff;
     transition: box-shadow .25s;
     border-radius: 5px;
 }
 
-    .card .card-content .card-title {
+    .card-main .card-main-content .card-main-title {
         line-height: 48px;
         color: #222;
         text-align: left;
     }
 
-    .card .card-title {
+    /*.card-main .card-main-title {
         font-size: 24px;
         font-weight: 300;
         font-weight: 500;
         text-align: left;
-    }
+    }*/
 
-    .card .card-action {
+    .card-main .card-main-action {
         padding: 10px;
         padding-top: 0px;
         padding-bottom: 25px;
     }
 
-.card-image-section {
+.card-main-image-section {
     height: 130px;
     text-align: center !important;
 }
@@ -10433,7 +10441,7 @@ button.btn-floating {
     height: auto;
 }
 
-.card-image-size {
+.card-main-image-size {
     width: 100%;
     height: 130px;
     border-top-right-radius: 5px;
@@ -11665,7 +11673,7 @@ span.icon {
     height: 16px;
 }
 
-.card .card-content {
+.card-main .card-main-content {
     padding: 20px;
     border-radius: 0 0 2px 2px;
     padding-top: 5px;
@@ -48982,14 +48990,14 @@ label {
 
 @media (min-width: 1367px) {
 
-    .card-image-size {
+    .card-main-image-size {
         width: 100%;
         height: 175px;
         border-top-right-radius: 5px;
         border-top-left-radius: 5px;
     }
 
-    .card-image-section {
+    .card-main-image-section {
         height: 175px;
         text-align: center !important;
     }
@@ -49009,14 +49017,14 @@ label {
 
 @media (min-width: 1767px) {
 
-    .card-image-size {
+    .card-main-image-size {
         width: 100%;
         height: 245px;
         border-top-right-radius: 5px;
         border-top-left-radius: 5px;
     }
 
-    .card-image-section {
+    .card-main-image-section {
         height: 245px;
         text-align: center !important;
     }

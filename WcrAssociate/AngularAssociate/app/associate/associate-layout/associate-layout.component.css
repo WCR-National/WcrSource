@@ -22702,6 +22702,9 @@ body {
     margin-bottom: 0;
     letter-spacing: -1px;
 }
+.card-social-one h1 {
+    margin-top:0px !important;
+}
 
     .card-social-one .card-value span {
         font-weight: 300;
@@ -71603,4 +71606,7 @@ body {
     box-shadow: none;
     background-color: none !important;
     border: 0px;
+}
+.hide_column {
+    display:none;
 }

@@ -178,11 +178,6 @@ export class ClientDetailsComponent implements OnInit {
     initializedDataTableServices(asyncData) {
         let dataTable: any = $('#sales');
         let thisStatus: any = this;
-        //cartd.push("<td>" + ($(docs1).find("name").text() + " </td>"));
-        //cartd.push("<td>" + ($(docs1).find("Mob").text() + " </td>"));
-        //cartd.push("<td class=''>" + ($(docs1).find("EmailID").text() + " </td>"));
-        //cartd.push("<td>" + ($(docs1).find("zipcode").text() + " </td>"));
-        //cartd.push("<td class='text-heighlight'>" + $(docs1).find("categoryName").text() + " </td>");
 
         dataTable.DataTable({
             data: asyncData,

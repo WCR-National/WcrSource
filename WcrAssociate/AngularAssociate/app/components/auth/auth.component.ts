@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component, OnInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -94,7 +94,7 @@ export class AuthComponent implements OnInit {
     };
 
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder,
-        private http: HttpClient
+        private http: HttpClient, private ngZone: NgZone
     ) { }
 
     ngOnInit() {
@@ -591,16 +591,21 @@ export class AuthComponent implements OnInit {
 
                         if ($(docs).find("Mobile").text() == '') {
                             if (this.returnUrl != '') {
-                                this.router.navigate([this.returnUrl]);
+                                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+
+                                //this.router.navigate([this.returnUrl]);
                             }
                             else {
-                                this.router.navigateByUrl('/associates/profile');       
+                                this.ngZone.run(() => this.router.navigate(['/associates/profile']));
+
+                               // this.router.navigateByUrl();       
                             }
                             //this.router.navigateByUrl('/associate');       
                             //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         }
                         else {
-                            this.router.navigateByUrl('/associates');       
+                            this.ngZone.run(() => this.router.navigate(['/associates']));
+                            //this.router.navigateByUrl('/associates');       
                             //$(location).attr('href', 'Associate/Dashboard.aspx');
                         }
                     }

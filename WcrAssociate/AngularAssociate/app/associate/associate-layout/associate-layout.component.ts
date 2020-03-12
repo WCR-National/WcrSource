@@ -78,7 +78,6 @@ export class AssociateLayoutComponent implements OnInit {
                     alert("OOPS Something goes wrong !");
                 }
             );
-
     }
 
 
