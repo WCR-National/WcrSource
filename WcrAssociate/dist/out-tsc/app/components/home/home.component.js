@@ -218,7 +218,7 @@ var HomeComponent = /** @class */ (function () {
                                             console.log('executed');
                                             if ($(doc).find("id").text() == $(docs1[0]).find("Subcategoryid").text()) {
                                                 innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
-                                                innerHtmlSales += "   <div class='card white darken-1' >";
+                                                innerHtmlSales += "   <div class='card-main white darken-1' >";
                                                 $.each(docs1, function (i, doc1) {
                                                     console.log($(doc).find("id").text() + ',' + $(doc1).find("Subcategoryid").text());
                                                     if ($(doc).find("id").text() == $(doc1).find("Subcategoryid").text()) {
@@ -228,14 +228,14 @@ var HomeComponent = /** @class */ (function () {
                                                         //innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
                                                         //innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
                                                         //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
-                                                        innerHtmlSales += "     <div class='card-content pd-0-force card-image-section card-image-section' >";
-                                                        innerHtmlSales += "         <img class='card-image-size' src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/>";
+                                                        innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section card-main-image-section' >";
+                                                        innerHtmlSales += "         <img class='card-main-image-size' src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/>";
                                                         innerHtmlSales += "     </div>";
-                                                        innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
-                                                        innerHtmlSales += '         <span class="card-title">' + ($(doc).find("name").text()) + '</span>';
+                                                        innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-force">';
+                                                        innerHtmlSales += '         <span class="card-main-title">' + ($(doc).find("name").text()) + '</span>';
                                                         innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(doc).find("detail").text()) + "</p>";
                                                         innerHtmlSales += "     </div>";
-                                                        innerHtmlSales += '       <div class="card-action text-center">';
+                                                        innerHtmlSales += '       <div class="card-main-action text-center">';
                                                         innerHtmlSales += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a>";
                                                         innerHtmlSales += '      </div>';
                                                         flag = 1;
@@ -252,15 +252,15 @@ var HomeComponent = /** @class */ (function () {
                                         if (flag == 1) { }
                                         else {
                                             innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
-                                            innerHtmlSales += "   <div class='card white darken-1' >";
-                                            innerHtmlSales += "     <div class='card-content pd-0-force card-image-section' >";
+                                            innerHtmlSales += "   <div class='card-main white darken-1' >";
+                                            innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section' >";
                                             innerHtmlSales += "         <img  class='image-size-icons-without-ip' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/>";
                                             innerHtmlSales += "     </div>";
-                                            innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
-                                            innerHtmlSales += '         <span class="card-title">' + ($(doc).find("name").text()) + '</span>';
+                                            innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-force">';
+                                            innerHtmlSales += '         <span class="card-main-title">' + ($(doc).find("name").text()) + '</span>';
                                             innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(doc).find('detail').text()) + "</p>";
                                             innerHtmlSales += "     </div>";
-                                            innerHtmlSales += '       <div class="card-action text-center">';
+                                            innerHtmlSales += '       <div class="card-main-action text-center">';
                                             innerHtmlSales += "           <a class='waves-effect waves-light btn' href='SalesAdvertisementList.html ? ca = 0 & id=" + ($(doc).find("id").text()) + " & zipcode=" + zipc + " & name=" + ($(doc).find("name").text()) + " & jtype=Sales & catName=RealEstate'>View More</a>";
                                             innerHtmlSales += '      </div>';
                                             innerHtmlSales += '   </div>';
@@ -320,7 +320,7 @@ var HomeComponent = /** @class */ (function () {
                                             var docs1 = xml1.find("GetCategoriesinfoservices");
                                             if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
                                                 innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
-                                                innerHtmlServices += "  <div class='card white darken-1' >";
+                                                innerHtmlServices += "  <div class='card-main white darken-1' >";
                                                 $.each(docs1, function (i, docs1) {
                                                     if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
                                                         console.log('entered in ' + searchByIpOrtxtSearch);
@@ -330,14 +330,14 @@ var HomeComponent = /** @class */ (function () {
                                                         //innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                                                         //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
                                                         //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
-                                                        innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
-                                                        innerHtmlServices += "         <img class='card-image-size' src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/>";
+                                                        innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                                        innerHtmlServices += "         <img class='card-main-image-size' src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/>";
                                                         innerHtmlServices += "     </div>";
-                                                        innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
-                                                        innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
+                                                        innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-force">';
+                                                        innerHtmlServices += '         <span class="card-main-title">' + ($(docs).find("categoryName").text()) + '</span>';
                                                         innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                                         innerHtmlServices += "     </div>";
-                                                        innerHtmlServices += '       <div class="card-action text-center">';
+                                                        innerHtmlServices += '       <div class="card-main-action text-center">';
                                                         innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a>";
                                                         innerHtmlServices += '      </div>';
                                                         flag = 1;
@@ -357,21 +357,21 @@ var HomeComponent = /** @class */ (function () {
                                         else {
                                             var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
                                             //innerHtmlServices += " <div class='col-sm-3 text-center block '>";
-                                            //innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                            //innerHtmlServices += " <div class='fullrow innerblock card-main pd-20 mg-b-30'>";
                                             //innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span>";
                                             //innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                                             //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
                                             //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
                                             innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
-                                            innerHtmlServices += "  <div class='card white darken-1' >";
-                                            innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
+                                            innerHtmlServices += "  <div class='card-main white darken-1' >";
+                                            innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
                                             innerHtmlServices += "         <img class='image-size-icons-without-ip' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/>";
                                             innerHtmlServices += "     </div>";
-                                            innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
-                                            innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
+                                            innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-force">';
+                                            innerHtmlServices += '         <span class="card-main-title">' + ($(docs).find("categoryName").text()) + '</span>';
                                             innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                             innerHtmlServices += "     </div>";
-                                            innerHtmlServices += '       <div class="card-action text-center">';
+                                            innerHtmlServices += '       <div class="card-main-action text-center">';
                                             innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a>";
                                             innerHtmlServices += '      </div>';
                                             innerHtmlServices += '   </div>';
@@ -434,7 +434,7 @@ var HomeComponent = /** @class */ (function () {
                                             var docs1 = xml1.find("GetCategoriesinfoCity");
                                             if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
                                                 innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
-                                                innerHtmlSales += "  <div class='card white darken-1' >";
+                                                innerHtmlSales += "  <div class='card-main white darken-1' >";
                                                 $.each(docs1, function (i, docs1) {
                                                     if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
                                                         var urlToSalesAdvertisement = 'SalesAdvertisementList.html?ca=0&id="' + ($(docs).find("id").text()) + '"&zipcode="' + $(docs1).find("Zipcode").text() + '"&name="' + ($(docs).find("name").text()) + '"&jtype=Sales&catName=RealEstate';
@@ -443,14 +443,14 @@ var HomeComponent = /** @class */ (function () {
                                                         //innerHtmlSales += " <h3 class='theme-text-color'>" + ($(docs).find("name").text()) + " </h3>";
                                                         //innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p>";
                                                         //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
-                                                        innerHtmlSales += "     <div class='card-content pd-0-force card-image-section' >";
-                                                        innerHtmlSales += "         <img class='card-image-size' src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/>";
+                                                        innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                                        innerHtmlSales += "         <img class='card-main-image-size' src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/>";
                                                         innerHtmlSales += "     </div>";
-                                                        innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
-                                                        innerHtmlSales += '         <span class="card-title">' + ($(docs).find("name").text()) + '</span>';
+                                                        innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-force">';
+                                                        innerHtmlSales += '         <span class="card-main-title">' + ($(docs).find("name").text()) + '</span>';
                                                         innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
                                                         innerHtmlSales += "     </div>";
-                                                        innerHtmlSales += '       <div class="card-action text-center">';
+                                                        innerHtmlSales += '       <div class="card-main-action text-center">';
                                                         innerHtmlSales += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
                                                         innerHtmlSales += '      </div>';
                                                         flag = 1;
@@ -473,7 +473,7 @@ var HomeComponent = /** @class */ (function () {
                                         if (flag == 1) { }
                                         else {
                                             //innerHtmlSales += " <div class='col-sm-3 text-center block '>";
-                                            //innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30'>";
+                                            //innerHtmlSales += " <div class='fullrow innerblock card-main pd-20 mg-b-30'>";
                                             var urlToSalesAdvertisement = "SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                                             //innerHtmlSales += "<a href='SalesAdvertisementList.html?ca=0&id=" + ($(docs).find("id").text()) + "&name=" + ($(docs).find("name").text()) + "&jtype=Sales&catName=RealEstate'>";
                                             //innerHtmlSales += "<span><i><img src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'/></i></span>";
@@ -481,15 +481,15 @@ var HomeComponent = /** @class */ (function () {
                                             //innerHtmlSales += "</a><p class='grey-text elipsis-text' style = 'text-align:left;' > " + ($(docs).find("detail").text()) + " </p>";
                                             //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
                                             innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
-                                            innerHtmlSales += "  <div class='card white darken-1' >";
-                                            innerHtmlSales += "     <div class='card-content pd-0-force card-image-section' >";
+                                            innerHtmlSales += "  <div class='card-main white darken-1' >";
+                                            innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section' >";
                                             innerHtmlSales += "         <img  class='image-size-icons-without-ip' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'  alt=''/>";
                                             innerHtmlSales += "     </div>";
-                                            innerHtmlSales += '      <div class="card-content black-text pd-b-0-force">';
-                                            innerHtmlSales += '         <span class="card-title">' + ($(docs).find("name").text()) + '</span>';
+                                            innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-force">';
+                                            innerHtmlSales += '         <span class="card-main-title">' + ($(docs).find("name").text()) + '</span>';
                                             innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
                                             innerHtmlSales += "     </div>";
-                                            innerHtmlSales += '       <div class="card-action text-center">';
+                                            innerHtmlSales += '       <div class="card-main-action text-center">';
                                             innerHtmlSales += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
                                             innerHtmlSales += '      </div>';
                                             innerHtmlSales += '   </div>';
@@ -551,7 +551,7 @@ var HomeComponent = /** @class */ (function () {
                                             var docs1 = xml1.find("GetsubCategoriesinfoservices");
                                             if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
                                                 innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                                                innerHtmlServices += "  <div class='card white darken-1' >";
+                                                innerHtmlServices += "  <div class='card-main white darken-1' >";
                                                 $.each(docs1, function (i, docs1) {
                                                     if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
                                                         var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + $(docs1).find("zipcode").text() + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
@@ -560,14 +560,14 @@ var HomeComponent = /** @class */ (function () {
                                                         //innerHtmlServices += " <h3 class='theme-text-color'>" + ($(docs).find("categoryName").text()) + " </h3>";
                                                         //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p>";
                                                         //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
-                                                        innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
-                                                        innerHtmlServices += "         <img class='card-image-size' src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/>";
+                                                        innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                                        innerHtmlServices += "         <img class='card-main-image-size' src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/>";
                                                         innerHtmlServices += "     </div>";
-                                                        innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
-                                                        innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
+                                                        innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-force">';
+                                                        innerHtmlServices += '         <span class="card-main-title">' + ($(docs).find("categoryName").text()) + '</span>';
                                                         innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                                         innerHtmlServices += "     </div>";
-                                                        innerHtmlServices += '       <div class="card-action text-center">';
+                                                        innerHtmlServices += '       <div class="card-main-action text-center">';
                                                         innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
                                                         innerHtmlServices += '      </div>';
                                                         flag = 1;
@@ -595,7 +595,7 @@ var HomeComponent = /** @class */ (function () {
                                         if (flag == 1) { }
                                         else {
                                             innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                                            innerHtmlServices += "  <div class='card white darken-1' >";
+                                            innerHtmlServices += "  <div class='card-main white darken-1' >";
                                             var urlToSalesAdvertisement = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=0&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
                                             //innerHtmlSales += "<a href=''>";
                                             //innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'/></i></span>";
@@ -604,14 +604,14 @@ var HomeComponent = /** @class */ (function () {
                                             //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("detail").text()) + "</p>";
                                             //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
                                             innerHtmlServices;
-                                            innerHtmlServices += "     <div class='card-content pd-0-force card-image-section' >";
+                                            innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
                                             innerHtmlServices += "         <img class='image-size-icons-without-ip' src='images/icons/" + ($(docs).find("catImages").text()) + "'/>";
                                             innerHtmlServices += "     </div>";
-                                            innerHtmlServices += '      <div class="card-content black-text pd-b-0-force">';
-                                            innerHtmlServices += '         <span class="card-title">' + ($(docs).find("categoryName").text()) + '</span>';
+                                            innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-force">';
+                                            innerHtmlServices += '         <span class="card-main-title">' + ($(docs).find("categoryName").text()) + '</span>';
                                             innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                             innerHtmlServices += "     </div>";
-                                            innerHtmlServices += '       <div class="card-action text-center">';
+                                            innerHtmlServices += '       <div class="card-main-action text-center">';
                                             innerHtmlServices += "           <a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a>";
                                             innerHtmlServices += '      </div>';
                                             innerHtmlServices;
@@ -699,7 +699,7 @@ var HomeComponent = /** @class */ (function () {
                                 console.log(results);
                                 $.each(docs_2, function (i, doc) {
                                     innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-                                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+                                    innerHtmlSales += " <div class='fullrow innerblock card-main pd-20 mg-b-30' >";
                                     //innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
                                     var urlToSalesAdvertisementList = "SalesAdvertisementList.html?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                                     innerHtmlSales += "<span><i><img class='image-size-icons' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></i></span>";
@@ -753,7 +753,7 @@ var HomeComponent = /** @class */ (function () {
                                     var flag = 0;
                                     var categoryId = $(docs).find("ID").text();
                                     innerHtmlServices += " <div class='col-sm-3 text-center block '>";
-                                    innerHtmlServices += " <div class='fullrow innerblock card pd-20 mg-b-30 pd-t-35'>";
+                                    innerHtmlServices += " <div class='fullrow innerblock card-main pd-20 mg-b-30 pd-t-35'>";
                                     var urlToServiceProfileList = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=" + zipc + "&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=" + ($(docs).find("categoryName").text()) + "";
                                     innerHtmlServices += "<span><i><img class='image-size-icons' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span>";
                                     innerHtmlServices += " <h3 class='theme-text-color' style='float:right !important'>" + ($(docs).find("categoryName").text()) + " </h3>";
@@ -1348,7 +1348,7 @@ call fullscreenFix() if .fullscreen content changes */
 //                if (data.d.length > 0) {
 //                    var flag = 0;
 //                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
-//                    innerHtmlSales += " <div class='fullrow innerblock card pd-20 mg-b-30' >";
+//                    innerHtmlSales += " <div class='fullrow innerblock card-main pd-20 mg-b-30' >";
 //                    var xmlDoc1 = $.parseXML(data.d);
 //                    var xml1 = $(xmlDoc1);
 //                    var docs1 = xml1.find("GetCategoriesinfo1");

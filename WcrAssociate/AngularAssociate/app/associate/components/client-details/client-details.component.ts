@@ -4,8 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService, encrypt_decrypt } from '../../../services/auth';
 
-import * as $ from 'jquery';
-import * as CryptoJS from 'crypto-js';
+
 
 import { Errors } from '../../../entities/errors.model';
 import { HttpClient } from '@angular/common/http';
@@ -15,6 +14,10 @@ import { Observable, of } from 'rxjs';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ClientDetailsService } from 'AngularAssociate/app/services/associate/client-details.service';
 
+
+import * as $ from 'jquery';
+import * as CryptoJS from 'crypto-js';
+import 'datatables.net';
 
 @Component({
     selector: 'associate-client-details-page',
@@ -79,22 +82,23 @@ export class ClientDetailsComponent implements OnInit {
             .getServicesCount()
             .subscribe(
                 data => {
-                    let countInterestedCutomers: string = '0';
+                    let countTotalCutomers: string = '0';
                     if (data.d.length > 0) {
 
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("TotalInterestedConsumers");
                         var cartd = [];
+                        debugger;
                         $.each(docs, function (i, docs) {
 
-                            countInterestedCutomers = $(docs).find("TotalCount").text();
+                            countTotalCutomers = $(docs).find("TotalCount").text();
                         });
                         //$("#interestedConsumer").html(cartd.join(''));
-                        this.servicesCount = countInterestedCutomers;
+                        this.TotalCount = countTotalCutomers;
 
                     } else {
-                        this.servicesCount = countInterestedCutomers;
+                        this.TotalCount = countTotalCutomers;
                     }
                 });
     }
@@ -114,19 +118,40 @@ export class ClientDetailsComponent implements OnInit {
                         var json = this.xmlToJson.xml2json(xmlDoc, "");
                         var dataJson = JSON.parse(json);
 
-                        this.initializedDataTableSales(dataJson.InterestedConsumer);
+                        if (dataJson.NewDataSet != null) {
+                            this.initializedDataTableSales(dataJson.NewDataSet.InterestedConsumer);
+
+                        }
+                        else {
+                            this.initializedDataTableSales(undefined);
+
+                        }
+
+                        //this.initializedDataTableSales(dataJson.NewDataSet.InterestedConsumer);
                     }
                 });
     }
 
     initializedDataTableSales(asyncData) {
-        let dataTable: any = $('#sales');
+        let dTable: any = $('#sales');
         let thisStatus: any = this;
-
-        dataTable.DataTable({
+        if (asyncData === undefined) {
+            asyncData = {
+                'id': '',
+                'name': '',
+                'Mob': "",
+                'EmailID': "",
+                'title': "",
+                'categoryName': "",
+                'SubCategory': "",
+            };
+        }
+        dTable.dataTable({
             data: asyncData,
             columns: [
-                { data: 'id', "visible": false },
+                {
+                    data: 'id'
+                },
                 {
                     data: "name",
                 },
@@ -146,15 +171,46 @@ export class ClientDetailsComponent implements OnInit {
                     data: "SubCategory",
                 },
                 {
-                    "mRender": function (data, type, row) {
-                        return '<i"' + thisStatus.deleteCustomerRecords(row[0]) + '">edit</>';
-                    }
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
                 }
             ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
+            buttons: [
+                'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    targets: [0],
+                    className: "hide_column"
+                }
+            ],
             order: [[1, 'asc']]
+        });
+
+        $('#sales').on('click', 'a.editor_remove', function (e) {
+            e.preventDefault();
+            debugger;
+            var tr = $(this).closest('tr');
+            console.log($(this).closest('tr').children('td:first').text());
+
+            ////get the real row index, even if the table is sorted 
+            //var index = dTable.fnGetPosition(tr[0]);
+            ////alert the content of the hidden first column 
+            //console.log(dTable.fnGetData(index)[0]);
+
+            dTable.api().row($(this).parents('tr')).remove().draw(false);
+
+
+            thisStatus.dashboardService
+                .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
+                .subscribe(
+                    data => { });
+
         });
     }
 
@@ -170,19 +226,40 @@ export class ClientDetailsComponent implements OnInit {
                         var json = this.xmlToJson.xml2json(xmlDoc, "");
                         var dataJson = JSON.parse(json);
 
-                        this.initializedDataTableServices(dataJson.InterestedConsumerser);
+                        if (dataJson.NewDataSet != null) {
+                            this.initializedDataTableServices(dataJson.NewDataSet.InterestedConsumerser);
+
+                        }
+                        else {
+                            this.initializedDataTableServices(undefined);
+
+                        }
+
+                        //this.initializedDataTableServices(dataJson.NewDataSet.InterestedConsumerser);
                     }
                 });
     }
 
     initializedDataTableServices(asyncData) {
-        let dataTable: any = $('#sales');
+        let dTable: any = $('#services');
         let thisStatus: any = this;
+        if (asyncData === undefined) {
+            asyncData = {
+                'id': '',
+                'name': '',
+                'Mob': "",
+                'EmailID': "",
+                'title': "",
+                'categoryName': "",
 
-        dataTable.DataTable({
+            };
+        }
+        dTable.dataTable({
             data: asyncData,
             columns: [
-                { data: 'id', "visible": false },
+                {
+                    data: 'id'
+                },
                 {
                     data: "name",
                 },
@@ -193,21 +270,51 @@ export class ClientDetailsComponent implements OnInit {
                     data: "EmailID",
                 },
                 {
-                    data: "zipcode",
+                    data: "title",
                 },
                 {
                     data: "categoryName",
                 },
                 {
-                    "mRender": function (data, type, row) {
-                        return '<i"' + thisStatus.deleteCustomerRecords(row[0]) + '">edit</>';
-                    }
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
                 }
             ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
+            buttons: [
+                'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    targets: [0],
+                    className: "hide_column"
+                }
+            ],
             order: [[1, 'asc']]
+        });
+
+        $('#services').on('click', 'a.editor_remove', function (e) {
+            e.preventDefault();
+            debugger;
+            var tr = $(this).closest('tr');
+            console.log($(this).closest('tr').children('td:first').text());
+
+            ////get the real row index, even if the table is sorted 
+            //var index = dTable.fnGetPosition(tr[0]);
+            ////alert the content of the hidden first column 
+            //console.log(dTable.fnGetData(index)[0]);
+
+            dTable.api().row($(this).parents('tr')).remove().draw(false);
+
+
+            thisStatus.dashboardService
+                .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
+                .subscribe(
+                    data => { });
         });
     }
 

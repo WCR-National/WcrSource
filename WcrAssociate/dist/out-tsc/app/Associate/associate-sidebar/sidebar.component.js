@@ -1,12 +1,13 @@
 import * as tslib_1 from "tslib";
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 var SidebarComponent = /** @class */ (function () {
-    function SidebarComponent(route, router, userService) {
+    function SidebarComponent(route, router, userService, ngZone) {
         this.route = route;
         this.router = router;
         this.userService = userService;
+        this.ngZone = ngZone;
         this.isProfile = false;
         this.isDashboard = false;
     }
@@ -27,7 +28,8 @@ var SidebarComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data == "0") {
                 _this.userService.purgeAuth();
-                _this.router.navigateByUrl('/associates');
+                _this.ngZone.run(function () { return _this.router.navigate(['/']); });
+                //this.router.navigateByUrl('/associates' , );       
             }
         }, function (err) {
             alert('Something wrong');
@@ -38,7 +40,7 @@ var SidebarComponent = /** @class */ (function () {
             selector: 'associate-layout-sidebar',
             templateUrl: './sidebar.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, NgZone])
     ], SidebarComponent);
     return SidebarComponent;
 }());

@@ -155,6 +155,7 @@ var DashboardComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
+                console.log(dataJson);
                 _this.dashboardService
                     .attemptToInterestedCustomerServicesData()
                     .then(function (data) {
@@ -164,14 +165,16 @@ var DashboardComponent = /** @class */ (function () {
                         var xmlDoc = $.parseXML(data.d);
                         var json = _this.xmlToJson.xml2json(xmlDoc, "");
                         var dataJsonServices = JSON.parse(json);
+                        console.log(dataJsonServices);
                         if (dataJsonServices.NewDataSet != null) {
                             $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
+                                debugger;
                                 dataJson.NewDataSet.InterestedConsumer.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
                             });
                             _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
                         }
                         else {
-                            if (dataJsonServices.NewDataSet != null) {
+                            if (dataJsonServices.NewDataSet == null) {
                                 _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
                             }
                             else {
@@ -190,9 +193,10 @@ var DashboardComponent = /** @class */ (function () {
     };
     DashboardComponent.prototype.initialiseInterestedCustomerDataTable = function (asyncData) {
         debugger;
-        var dataTable = $('#interestedCustomers');
+        var dTable = $('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
+                'id': '',
                 'name': '',
                 'Mob': "",
                 'EmailID': "",
@@ -201,9 +205,12 @@ var DashboardComponent = /** @class */ (function () {
                 'SubCategory': ''
             };
         }
-        dataTable.DataTable({
+        dTable.dataTable({
             data: asyncData,
             columns: [
+                {
+                    data: "id",
+                },
                 {
                     data: "name",
                 },
@@ -235,24 +242,30 @@ var DashboardComponent = /** @class */ (function () {
             buttons: [
                 'excel', 'pdf'
             ],
+            columnDefs: [
+                {
+                    targets: [0],
+                    className: "hide_column"
+                }
+            ],
             order: [[1, 'asc']]
         });
+        //dTable.api().column(0).visible(false);;
+        var thisStatus = this;
         // Delete a record
         $('#interestedCustomers').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
+            debugger;
             var tr = $(this).closest('tr');
-            //get the real row index, even if the table is sorted 
-            var index = dataTable.fnGetPosition(tr[0]);
-            //alert the content of the hidden first column 
-            console.log(dataTable.fnGetData(index)[0]);
-            this.dashboardService
-                .deleteCustomerRecords(dataTable.fnGetData(index)[0])
+            console.log($(this).closest('tr').children('td:first').text());
+            ////get the real row index, even if the table is sorted 
+            //var index = dTable.fnGetPosition(tr[0]);
+            ////alert the content of the hidden first column 
+            //console.log(dTable.fnGetData(index)[0]);
+            dTable.api().row($(this).parents('tr')).remove().draw(false);
+            thisStatus.dashboardService
+                .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(function (data) { });
-            //dataTable.remove($(this).closest('tr'), {
-            //    title: 'Delete record',
-            //    message: 'Are you sure you wish to remove this record?',
-            //    buttons: 'Delete'
-            //});
         });
     };
     DashboardComponent.prototype.attemptToCategoriesData = function () {
@@ -264,8 +277,9 @@ var DashboardComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
+                console.log(dataJson);
                 if (dataJson != null && dataJson.NewDataSet != null) {
-                    if (Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
+                    if (Array.isArray(dataJson.NewDataSet.AllPurCategories)) {
                         _this.initialiseCategoriesDataTable(dataJson.NewDataSet.AllPurCategories);
                     }
                     else {
@@ -288,14 +302,15 @@ var DashboardComponent = /** @class */ (function () {
                 'Name': "",
             };
         }
-        dataTable.DataTable({
+        dataTable.dataTable({
             data: asyncData,
             columns: [
                 {
-                    "mRender": function (data, type, row) {
-                        return row['categoryname'] + '/' + row['Name'];
+                    "data": null,
+                    "render": function (data, type, full) {
+                        return full['categoryname'] + '/' + full['Name'];
                     }
-                }
+                },
             ],
             "autoWidth": true,
             searching: false,
@@ -318,6 +333,7 @@ var DashboardComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
+                console.log(dataJson);
                 if (dataJson != null && dataJson.NewDataSet != null) {
                     if (Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
                         _this.initialiseMyPropertyListingsTable(dataJson.NewDataSet.ViewAdvertisment);
@@ -335,6 +351,7 @@ var DashboardComponent = /** @class */ (function () {
         });
     };
     DashboardComponent.prototype.initialiseMyPropertyListingsTable = function (asyncData) {
+        $("#myPropertyListings").append('<tfoot><th></th><th></th><th></th><th></th><th></th></tfoot>');
         var dataTable = $('#myPropertyListings');
         if (asyncData === undefined) {
             asyncData = {
@@ -361,7 +378,11 @@ var DashboardComponent = /** @class */ (function () {
                     data: "ZipCode",
                 },
                 {
-                    data: "Amount",
+                    //data: "Amount",
+                    "data": null,
+                    "render": function (data, type, full) {
+                        return '$' + full['Amount'];
+                    }
                 },
             ],
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
@@ -380,28 +401,24 @@ var DashboardComponent = /** @class */ (function () {
                 var api = this.api(), data;
                 // converting to interger to find total
                 var intVal = function (i) {
-                    return typeof i === 'string' ? Number(i) : typeof i === 'number' ? i : 0;
+                    return typeof i === 'string' ? parseInt(i) : typeof i === 'number' ? i : 0;
                 };
                 // computing column Total of the complete result 
                 var amountTotal = api
-                    .column(5)
+                    .column(4)
                     .data()
                     .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
+                    debugger;
+                    return (a.toString().replace(/[\$,]/g, '') * 1) + (b.Amount * 1.0);
                 }, 0);
                 // Update footer by showing the total with the reference of the column index 
                 $(api.column(0).footer()).html('Total');
                 $(api.column(1).footer()).html('');
                 $(api.column(2).footer()).html('');
                 $(api.column(3).footer()).html('');
-                $(api.column(4).footer()).html(amountTotal);
+                $(api.column(4).footer()).html('$' + amountTotal);
             }
         });
-        //dataTable.on('order.dt search.dt', function () {
-        //    dataTable.column(0, { search: 'applied', order: 'applied' }).nodes().each(function (cell, i) {
-        //        cell.innerHTML = i + 1;
-        //    });
-        //}).draw();
     };
     DashboardComponent.prototype.attemptToZipcodeData = function () {
         var _this = this;
@@ -412,6 +429,7 @@ var DashboardComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
+                console.log(dataJson);
                 if (dataJson != null && dataJson.NewDataSet != null) {
                     if (Array.isArray(dataJson.NewDataSet.PurCategories)) {
                         _this.initialiseTable(dataJson.NewDataSet.PurCategories);
@@ -429,6 +447,7 @@ var DashboardComponent = /** @class */ (function () {
         });
     };
     DashboardComponent.prototype.initialiseTable = function (asyncData) {
+        $("#myZipCode").append('<tfoot><th></th><th></th><th></th></tfoot>');
         var dataTable = $('#myZipCode');
         if (asyncData === undefined) {
             asyncData = {
@@ -437,7 +456,7 @@ var DashboardComponent = /** @class */ (function () {
                 'amount': ""
             };
         }
-        dataTable.DataTable({
+        dataTable.dataTable({
             data: asyncData,
             columns: [
                 {
@@ -447,9 +466,31 @@ var DashboardComponent = /** @class */ (function () {
                     data: "categoryname",
                 },
                 {
-                    data: "amount",
+                    //data: "amount",
+                    "data": null,
+                    "render": function (data, type, full) {
+                        return '$' + full['amount'];
+                    }
                 }
             ],
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
+                // converting to interger to find total
+                var intVal = function (i) {
+                    return typeof i === 'string' ? parseInt(i) : typeof i === 'number' ? i : 0;
+                };
+                // computing column Total of the complete result 
+                var amountTotal = api
+                    .column(2)
+                    .data()
+                    .reduce(function (a, b) {
+                    return (a.toString().replace(/[\$,]/g, '') * 1) + (b.amount * 1.0);
+                }, 0);
+                // Update footer by showing the total with the reference of the column index 
+                $(api.column(0).footer()).html('Total');
+                $(api.column(1).footer()).html('');
+                $(api.column(2).footer()).html('$' + amountTotal);
+            },
             "autoWidth": true,
             searching: false,
             paging: false,

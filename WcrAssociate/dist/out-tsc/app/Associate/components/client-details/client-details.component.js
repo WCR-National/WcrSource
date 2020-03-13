@@ -86,12 +86,24 @@ var ClientDetailsComponent = /** @class */ (function () {
         });
     };
     ClientDetailsComponent.prototype.initializedDataTableSales = function (asyncData) {
-        var dataTable = $('#sales');
+        var dTable = $('#sales');
         var thisStatus = this;
-        dataTable.DataTable({
+        if (asyncData === undefined) {
+            asyncData = {
+                'id': '',
+                'name': '',
+                'Mob': "",
+                'EmailID': "",
+                'title': "",
+                'categoryName': ""
+            };
+        }
+        dTable.DataTable({
             data: asyncData,
             columns: [
-                { data: 'id', "visible": false },
+                {
+                    data: 'id'
+                },
                 {
                     data: "name",
                 },
@@ -111,15 +123,35 @@ var ClientDetailsComponent = /** @class */ (function () {
                     data: "SubCategory",
                 },
                 {
-                    "mRender": function (data, type, row) {
-                        return '<i"' + thisStatus.deleteCustomerRecords(row[0]) + '">edit</>';
-                    }
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
+                }
+            ],
+            columnDefs: [
+                {
+                    targets: [0],
+                    className: "hide_column"
                 }
             ],
             searching: false,
             paging: false,
             info: false,
             order: [[1, 'asc']]
+        });
+        $('#sales').on('click', 'a.editor_remove', function (e) {
+            e.preventDefault();
+            debugger;
+            var tr = $(this).closest('tr');
+            console.log($(this).closest('tr').children('td:first').text());
+            ////get the real row index, even if the table is sorted 
+            //var index = dTable.fnGetPosition(tr[0]);
+            ////alert the content of the hidden first column 
+            //console.log(dTable.fnGetData(index)[0]);
+            dTable.api().row($(this).parents('tr')).remove().draw(false);
+            thisStatus.dashboardService
+                .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
+                .subscribe(function (data) { });
         });
     };
     ClientDetailsComponent.prototype.getClientDetailsServicesData = function () {
@@ -137,17 +169,24 @@ var ClientDetailsComponent = /** @class */ (function () {
         });
     };
     ClientDetailsComponent.prototype.initializedDataTableServices = function (asyncData) {
-        var dataTable = $('#sales');
+        var dTable = $('#services');
         var thisStatus = this;
-        //cartd.push("<td>" + ($(docs1).find("name").text() + " </td>"));
-        //cartd.push("<td>" + ($(docs1).find("Mob").text() + " </td>"));
-        //cartd.push("<td class=''>" + ($(docs1).find("EmailID").text() + " </td>"));
-        //cartd.push("<td>" + ($(docs1).find("zipcode").text() + " </td>"));
-        //cartd.push("<td class='text-heighlight'>" + $(docs1).find("categoryName").text() + " </td>");
-        dataTable.DataTable({
+        if (asyncData === undefined) {
+            asyncData = {
+                'id': '',
+                'name': '',
+                'Mob': "",
+                'EmailID': "",
+                'title': "",
+                'categoryName': ""
+            };
+        }
+        dTable.dataTable({
             data: asyncData,
             columns: [
-                { data: 'id', "visible": false },
+                {
+                    data: 'id'
+                },
                 {
                     data: "name",
                 },
@@ -158,21 +197,35 @@ var ClientDetailsComponent = /** @class */ (function () {
                     data: "EmailID",
                 },
                 {
-                    data: "zipcode",
+                    data: "title",
                 },
                 {
                     data: "categoryName",
                 },
                 {
-                    "mRender": function (data, type, row) {
-                        return '<i"' + thisStatus.deleteCustomerRecords(row[0]) + '">edit</>';
-                    }
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
                 }
             ],
             searching: false,
             paging: false,
             info: false,
             order: [[1, 'asc']]
+        });
+        $('#services').on('click', 'a.editor_remove', function (e) {
+            e.preventDefault();
+            debugger;
+            var tr = $(this).closest('tr');
+            console.log($(this).closest('tr').children('td:first').text());
+            ////get the real row index, even if the table is sorted 
+            //var index = dTable.fnGetPosition(tr[0]);
+            ////alert the content of the hidden first column 
+            //console.log(dTable.fnGetData(index)[0]);
+            dTable.api().row($(this).parents('tr')).remove().draw(false);
+            thisStatus.dashboardService
+                .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
+                .subscribe(function (data) { });
         });
     };
     ClientDetailsComponent.prototype.deleteCustomerRecords = function (id) {
