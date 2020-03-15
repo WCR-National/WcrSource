@@ -954,11 +954,12 @@ export class AuthComponent implements OnInit {
 
                                     if (data.d.length > 0)
                                     {
-                                        this.ngZone.run(() => this.router.navigate(['/associates/profile']));
+                                        debugger;
+                                        //this.ngZone.run(() => this.router.navigate(['/associates/profile']));
 
                                         //$(location).attr('href', 'Associate/ViewProfile.aspx');
                                         //this.router.navigateByUrl('/login');
-                                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                                        this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
                                     this.isSubmitting = false;
 

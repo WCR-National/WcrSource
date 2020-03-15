@@ -752,9 +752,11 @@ var AuthComponent = /** @class */ (function () {
                     .attemptVerifiedActivationCodeAssociate(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        $(location).attr('href', 'Associate/ViewProfile.aspx');
+                        debugger;
+                        //this.ngZone.run(() => this.router.navigate(['/associates/profile']));
+                        //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         //this.router.navigateByUrl('/login');
-                        //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {

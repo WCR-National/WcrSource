@@ -1,9 +1,10 @@
 import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as $ from 'jquery';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ClientDetailsService } from 'AngularAssociate/app/services/associate/client-details.service';
+import * as $ from 'jquery';
+import 'datatables.net';
 var ClientDetailsComponent = /** @class */ (function () {
     function ClientDetailsComponent(route, router, dashboardService, xmlToJson) {
         this.route = route;
@@ -52,20 +53,21 @@ var ClientDetailsComponent = /** @class */ (function () {
         this.dashboardService
             .getServicesCount()
             .subscribe(function (data) {
-            var countInterestedCutomers = '0';
+            var countTotalCutomers = '0';
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
                 var docs = xml.find("TotalInterestedConsumers");
                 var cartd = [];
+                debugger;
                 $.each(docs, function (i, docs) {
-                    countInterestedCutomers = $(docs).find("TotalCount").text();
+                    countTotalCutomers = $(docs).find("TotalCount").text();
                 });
                 //$("#interestedConsumer").html(cartd.join(''));
-                _this.servicesCount = countInterestedCutomers;
+                _this.TotalCount = countTotalCutomers;
             }
             else {
-                _this.servicesCount = countInterestedCutomers;
+                _this.TotalCount = countTotalCutomers;
             }
         });
     };
@@ -81,7 +83,13 @@ var ClientDetailsComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
-                _this.initializedDataTableSales(dataJson.InterestedConsumer);
+                if (dataJson.NewDataSet != null) {
+                    _this.initializedDataTableSales(dataJson.NewDataSet.InterestedConsumer);
+                }
+                else {
+                    _this.initializedDataTableSales(undefined);
+                }
+                //this.initializedDataTableSales(dataJson.NewDataSet.InterestedConsumer);
             }
         });
     };
@@ -95,10 +103,11 @@ var ClientDetailsComponent = /** @class */ (function () {
                 'Mob': "",
                 'EmailID': "",
                 'title': "",
-                'categoryName': ""
+                'categoryName': "",
+                'SubCategory': "",
             };
         }
-        dTable.DataTable({
+        dTable.dataTable({
             data: asyncData,
             columns: [
                 {
@@ -128,15 +137,19 @@ var ClientDetailsComponent = /** @class */ (function () {
                     defaultContent: '<a href="" class="editor_remove">Delete</a>'
                 }
             ],
+            "autoWidth": true,
+            searching: false,
+            paging: false,
+            info: false,
+            buttons: [
+                'excel', 'pdf'
+            ],
             columnDefs: [
                 {
                     targets: [0],
                     className: "hide_column"
                 }
             ],
-            searching: false,
-            paging: false,
-            info: false,
             order: [[1, 'asc']]
         });
         $('#sales').on('click', 'a.editor_remove', function (e) {
@@ -164,7 +177,13 @@ var ClientDetailsComponent = /** @class */ (function () {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
-                _this.initializedDataTableServices(dataJson.InterestedConsumerser);
+                if (dataJson.NewDataSet != null) {
+                    _this.initializedDataTableServices(dataJson.NewDataSet.InterestedConsumerser);
+                }
+                else {
+                    _this.initializedDataTableServices(undefined);
+                }
+                //this.initializedDataTableServices(dataJson.NewDataSet.InterestedConsumerser);
             }
         });
     };
@@ -178,7 +197,7 @@ var ClientDetailsComponent = /** @class */ (function () {
                 'Mob': "",
                 'EmailID': "",
                 'title': "",
-                'categoryName': ""
+                'categoryName': "",
             };
         }
         dTable.dataTable({
@@ -208,9 +227,19 @@ var ClientDetailsComponent = /** @class */ (function () {
                     defaultContent: '<a href="" class="editor_remove">Delete</a>'
                 }
             ],
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
+            buttons: [
+                'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    targets: [0],
+                    className: "hide_column"
+                }
+            ],
             order: [[1, 'asc']]
         });
         $('#services').on('click', 'a.editor_remove', function (e) {

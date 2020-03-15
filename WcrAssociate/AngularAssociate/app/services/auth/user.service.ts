@@ -318,7 +318,19 @@ export class UserService {
     async attemptVerifiedActivationCodeAssociate(type, email) {
 
         let urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
-        return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
+        return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise();
+            //.pipe(map(
+            //data => {
+            //    if (data.d.length > 0) {
+            //        this.user.token = this.token();
+            //        this.user.email = email;
+            //        this.user.id = "";
+            //        this.user.type = "1";
+            //        this.setAuth(this.user);
+            //    }
+            //}
+            //)
+            
     }
 
     getAttemptVerifiedActivationCodeConsumer(type, credentials) {
