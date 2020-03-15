@@ -950,9 +950,13 @@ export class AuthComponent implements OnInit {
                             .attemptVerifiedActivationCodeAssociate(this.authType, credentials.email)
                             .then(
                                 (data: any) => {
+
+
                                     if (data.d.length > 0)
                                     {
-                                        $(location).attr('href', 'Associate/ViewProfile.aspx');
+                                        this.ngZone.run(() => this.router.navigate(['/associates/profile']));
+
+                                        //$(location).attr('href', 'Associate/ViewProfile.aspx');
                                         //this.router.navigateByUrl('/login');
                                         //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
