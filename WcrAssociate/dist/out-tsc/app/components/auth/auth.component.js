@@ -291,7 +291,7 @@ var AuthComponent = /** @class */ (function () {
         this.isSubmitting = true;
         this.loginErrorMessage = "";
         //this.errors = { errors: {} };
-        if (email != "" && password != "") {
+        if (email == "" && password == "") {
             this.router.navigateByUrl('/');
         }
         var thisStatus = this;
@@ -470,16 +470,16 @@ var AuthComponent = /** @class */ (function () {
             .then(function (data) {
             if (data.d == "1") {
                 if ($(docs).find("Mobile").text() == '') {
-                    if (_this.returnUrl != '') {
-                        _this.ngZone.run(function () { return _this.router.navigate([_this.returnUrl]); });
-                        //this.router.navigate([this.returnUrl]);
-                    }
-                    else {
-                        _this.ngZone.run(function () { return _this.router.navigate(['/associates/profile']); });
-                        // this.router.navigateByUrl();       
-                    }
-                    //this.router.navigateByUrl('/associate');       
-                    //$(location).attr('href', 'Associate/ViewProfile.aspx');
+                    //if (this.returnUrl != '') {
+                    //    this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+                    //    //this.router.navigate([this.returnUrl]);
+                    //}
+                    //else {
+                    //    this.ngZone.run(() => this.router.navigate(['/associates/profile']));
+                    //   // this.router.navigateByUrl();       
+                    //}
+                    ////this.router.navigateByUrl('/associate');       
+                    $(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
                     _this.ngZone.run(function () { return _this.router.navigate(['/associates']); });
@@ -756,8 +756,8 @@ var AuthComponent = /** @class */ (function () {
                         //this.ngZone.run(() => this.router.navigate(['/associates/profile']));
                         //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         //this.router.navigateByUrl('/login');
-                        var password = credentials.passwordGroup.password.replace(/["]/g, "");
-                        _this.submitLoginForm(credentials.email, password);
+                        credentials.passwordGroup.password = credentials.passwordGroup.password.replace(/["]/g, "");
+                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
