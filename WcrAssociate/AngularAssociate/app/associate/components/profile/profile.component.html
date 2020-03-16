@@ -483,7 +483,7 @@
             </div>
             <div class="profile-body-header">
                 <div class="auth-page mg-b-60-force">
-                    <div class="container page">
+                    <div class="container-cassie page">
 
                         <div class="row">
                             <div class="col-sm-12">
@@ -598,7 +598,7 @@
 
                                         <div class="col-sm-6 pd-l-0-force pd-r-0-force">
                                             <div class="form-group">
-                                                <div class="col-sm-3 mg-b-20">
+                                                <div class="col-sm-5 mg-b-20 pd-r-0-f">
                                                     <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit">
                                                         <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitProfileForm()">UPDATE PROFILE</span>
                                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
@@ -616,8 +616,8 @@
 
                                                 </div>
                                                 <div class="col-sm-3 mg-b-20">
-                                                    <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="button">
-                                                        <span (click)="cancelForm()">Cancel</span>
+                                                    <button (click)="cancelForm()" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="button">
+                                                        <span >Cancel</span>
                                                     </button>
                                                 </div>
 

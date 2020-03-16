@@ -756,7 +756,8 @@ var AuthComponent = /** @class */ (function () {
                         //this.ngZone.run(() => this.router.navigate(['/associates/profile']));
                         //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         //this.router.navigateByUrl('/login');
-                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                        var password = credentials.passwordGroup.password.replace(/["]/g, "");
+                        _this.submitLoginForm(credentials.email, password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {

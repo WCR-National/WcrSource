@@ -374,7 +374,7 @@ export class AuthComponent implements OnInit {
         this.isSubmitting = true;
         this.loginErrorMessage = "";
         //this.errors = { errors: {} };
-        if (email != "" && password != "") {
+        if (email == "" && password == "") {
             this.router.navigateByUrl('/');
         }
         let thisStatus = this;
@@ -959,6 +959,7 @@ export class AuthComponent implements OnInit {
 
                                         //$(location).attr('href', 'Associate/ViewProfile.aspx');
                                         //this.router.navigateByUrl('/login');
+                                        credentials.passwordGroup.password = credentials.passwordGroup.password.replace(/["]/g, "");
                                         this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                                     }
                                     this.isSubmitting = false;

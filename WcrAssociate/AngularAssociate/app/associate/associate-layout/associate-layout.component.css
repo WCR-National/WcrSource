@@ -71610,3 +71610,34 @@ body {
 .hide_column {
     display:none;
 }
+.container-cassie {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (min-width: 576px) {
+    .container-cassie {
+        max-width: 540px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container-cassie {
+        max-width: 720px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container-cassie {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-cassie {
+        max-width: 1140px;
+    }
+}
