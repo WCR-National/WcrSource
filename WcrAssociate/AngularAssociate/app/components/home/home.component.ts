@@ -57,8 +57,8 @@ export class HomeComponent implements OnInit {
         $('html, body').animate({ scrollTop: $('#header-container').offset().top }, 'slow');
 
         $('#divLandingPage').focus();
-        this.parallaxBG();
-        //this.GetSalesAdts();
+        //this.parallaxBG();
+        this.GetSalesAdts();
         this.initializeFormsAndEvents();
     }
 
@@ -757,7 +757,7 @@ export class HomeComponent implements OnInit {
         if ($('#salesServicesDivId') == null) {
             this.router.navigateByUrl('/');
         }
-        $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
+       // $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
 
         const globalThis = this;
         $.getJSON("http://jsonip.com?callback=?", function (data) {

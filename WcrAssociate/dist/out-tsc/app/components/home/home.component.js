@@ -46,8 +46,8 @@ var HomeComponent = /** @class */ (function () {
         //this.show_check = true;
         $('html, body').animate({ scrollTop: $('#header-container').offset().top }, 'slow');
         $('#divLandingPage').focus();
-        this.parallaxBG();
-        //this.GetSalesAdts();
+        //this.parallaxBG();
+        this.GetSalesAdts();
         this.initializeFormsAndEvents();
     };
     HomeComponent.prototype.initializeFormsAndEvents = function () {
@@ -644,7 +644,6 @@ var HomeComponent = /** @class */ (function () {
                 if ($('#salesServicesDivId') == null) {
                     this.router.navigateByUrl('/');
                 }
-                $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
                 globalThis = this;
                 $.getJSON("http://jsonip.com?callback=?", function (data) {
                     var _IPAddress = data.ip;

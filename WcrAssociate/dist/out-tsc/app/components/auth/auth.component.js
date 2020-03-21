@@ -284,16 +284,11 @@ var AuthComponent = /** @class */ (function () {
      * LOGIN Module Start
      * *************************************************
     **/
-    AuthComponent.prototype.submitLoginForm = function (email, password) {
+    AuthComponent.prototype.submitLoginForm = function () {
         var _this = this;
-        if (email === void 0) { email = ""; }
-        if (password === void 0) { password = ""; }
         this.isSubmitting = true;
         this.loginErrorMessage = "";
         //this.errors = { errors: {} };
-        if (email == "" && password == "") {
-            this.router.navigateByUrl('/');
-        }
         var thisStatus = this;
         var credentials = this.authForm.value;
         this.userService
@@ -462,6 +457,97 @@ var AuthComponent = /** @class */ (function () {
             _this.isSubmitting = false;
         });
     };
+    AuthComponent.prototype.submitLoginFormAfterActivation = function (email, password) {
+        var _this = this;
+        if (email === void 0) { email = ""; }
+        if (password === void 0) { password = ""; }
+        debugger;
+        this.isSubmitting = true;
+        this.loginErrorMessage = "";
+        //this.errors = { errors: {} };
+        if (email == "" && password == "") {
+            this.router.navigateByUrl('/');
+        }
+        var thisStatus = this;
+        var credentials = this.authForm.value;
+        credentials.email = email;
+        credentials.passwordGroup.password = password;
+        this.userService
+            .attemptAssociateAccountExists(this.authType, credentials)
+            .subscribe(function (data) {
+            var xmlDoc = $.parseXML(data.d);
+            var xml = $(xmlDoc);
+            var docs = xml.find("associateExists");
+            $.each(docs, function (i, docs) {
+                if ($(docs).find("AccountId").text() == "0") {
+                    //for associate Login
+                    thisStatus.userService.attempConsumerAccountExists(thisStatus.authType, credentials)
+                        .then(function (data1) {
+                        if (data1.d.length > 0) {
+                            var xmlDoc1 = $.parseXML(data1.d);
+                            var xml1 = $(xmlDoc1);
+                            var docs1 = xml1.find("consumerExists");
+                            $.each(docs1, function (i, docs1) {
+                                if ($(docs1).find("AccountId").text() == "0") {
+                                    thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
+                                }
+                                else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
+                                }
+                                else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
+                                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                                }
+                                else {
+                                    thisStatus.LoginAssociateOrConsumer(credentials, 2); //Consumer
+                                }
+                            });
+                        }
+                    });
+                }
+                else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "0") {
+                    // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
+                }
+                else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "1") {
+                    thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
+                }
+                else {
+                    thisStatus.LoginAssociateOrConsumer(credentials, 1); //associate
+                }
+            });
+            _this.isSubmitting = false;
+            //if (data > '0') {
+            //    //this.router.navigateByUrl('/Associate');
+            //    $(location).attr('href', 'Associate/ViewProfile.aspx')
+            //}
+            //else if (data == '-1') {
+            //    this.userService
+            //        .attemptConsumerAuth(this.authType, credentials)
+            //        .then(
+            //            (data: any) => {
+            //                if (data > '0') {
+            //                    this.isSubmitting = false;
+            //                    //this.router.navigateByUrl('/Consumer');
+            //                    $(location).attr('href', '/index.html')
+            //                }
+            //                else {
+            //                    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //                    this.isSubmitting = false;
+            //                }
+            //            },
+            //            err => {
+            //                this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //                this.isSubmitting = false;
+            //            }
+            //        );
+            //}
+            //else {
+            //    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            //    this.isSubmitting = false;
+            //}
+        }, function (err) {
+            //this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
+            _this.isSubmitting = false;
+        });
+    };
     AuthComponent.prototype.associateLoginSessionActivate = function (docs) {
         var _this = this;
         var credentials = this.authForm.value;
@@ -470,18 +556,19 @@ var AuthComponent = /** @class */ (function () {
             .then(function (data) {
             if (data.d == "1") {
                 if ($(docs).find("Mobile").text() == '') {
-                    //if (this.returnUrl != '') {
-                    //    this.ngZone.run(() => this.router.navigate([this.returnUrl]));
-                    //    //this.router.navigate([this.returnUrl]);
-                    //}
-                    //else {
-                    //    this.ngZone.run(() => this.router.navigate(['/associates/profile']));
-                    //   // this.router.navigateByUrl();       
-                    //}
-                    ////this.router.navigateByUrl('/associate');       
-                    $(location).attr('href', 'Associate/ViewProfile.aspx');
+                    if (_this.returnUrl != '') {
+                        _this.ngZone.run(function () { return _this.router.navigate([_this.returnUrl]); });
+                        //this.router.navigate([this.returnUrl]);
+                    }
+                    else {
+                        _this.ngZone.run(function () { return _this.router.navigate(['/associates/profile']); });
+                        // this.router.navigateByUrl();       
+                    }
+                    //this.router.navigateByUrl('/associate');       
+                    //$(location).attr('href', 'Associate/ViewProfile.aspx');
                 }
                 else {
+                    //$(location).attr('href', 'Associate/ViewProfile.aspx');
                     _this.ngZone.run(function () { return _this.router.navigate(['/associates']); });
                     //this.router.navigateByUrl('/associates');       
                     //$(location).attr('href', 'Associate/Dashboard.aspx');
@@ -757,7 +844,7 @@ var AuthComponent = /** @class */ (function () {
                         //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         //this.router.navigateByUrl('/login');
                         credentials.passwordGroup.password = credentials.passwordGroup.password.replace(/["]/g, "");
-                        _this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
+                        _this.submitLoginFormAfterActivation(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;
                 }, function (err) {
