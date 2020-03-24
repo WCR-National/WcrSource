@@ -10,6 +10,7 @@ import { AuthGuard } from '../_guards/auth-guard.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
+import { PaymentComponent } from './components/payment/payment.component';
 
 const associateRoutes: Routes = [
     {
@@ -24,6 +25,9 @@ const associateRoutes: Routes = [
             },
             {
                 path: 'client-details', component: ClientDetailsComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]
             },
         ]
     }

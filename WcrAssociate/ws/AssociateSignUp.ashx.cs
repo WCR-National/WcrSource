@@ -1,5 +1,7 @@
 ﻿using ClsLibrary.Bal;
+using ClsLibrary.Bal.Associate;
 using ClsLibrary.PropertyLayer;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Configuration;
 using System.Data;
@@ -39,6 +41,12 @@ namespace WcrAssociate.ws
                 {
                     string strr = "";
                     strr = UpdateCardData(context);
+                    context.Response.Write(strr);
+                }
+                else if (qs == "GetCardData")
+                {
+                    string strr = "";
+                    strr = GetCardData(context);
                     context.Response.Write(strr);
                 }
                 else if (qs == "Consumer")
@@ -431,6 +439,109 @@ namespace WcrAssociate.ws
                 return "-1";
             }
         }
+
+        private string GetCardData(HttpContext context)
+        {
+            BllPurchaseCategory objp = new BllPurchaseCategory();
+            WcrCryptography cardEncrypt = new WcrCryptography();
+            BllAssociateRegistration d = new BllAssociateRegistration();
+            DataTable dt = new DataTable();
+            dynamic objectCardData = new JObject();
+            try
+            {
+                int s = objp.CardExistsOrNot1(context.Session["associate"].ToString());
+                if (s >= 1)
+                {
+                    dt = d.retcardData(Convert.ToInt32(context.Session["associate"].ToString()), context.Session["userName"].ToString());
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+
+                        objectCardData._crdID = dt.Rows[0]["CardDataId"].ToString();
+                        objectCardData._crd = cardEncrypt.WcrDecryptCardNumber(dt.Rows[0]["CardNumber"].ToString());
+                        objectCardData._fstName = cardEncrypt.WcrDecrypt(dt.Rows[0]["Cardholder_FirstName"].ToString());
+                        objectCardData._sndName = cardEncrypt.WcrDecrypt(dt.Rows[0]["Cardholder_LastName"].ToString());
+                        objectCardData._Address = cardEncrypt.WcrDecrypt(dt.Rows[0]["Cardholder_Address"].ToString());
+                        objectCardData._city = cardEncrypt.WcrDecrypt(dt.Rows[0]["Cardholder_City"].ToString());
+                        objectCardData._state = cardEncrypt.WcrDecrypt(dt.Rows[0]["Cardholder_State"].ToString());
+                        objectCardData._zip = cardEncrypt.WcrDecrypt(dt.Rows[0]["Cardholder_Zip"].ToString());
+                        objectCardData._country = cardEncrypt.WcrDecrypt(dt.Rows[0]["Cardholder_Country"].ToString());
+                        objectCardData._cvv = cardEncrypt.WcrDecrypt(dt.Rows[0]["CVV"].ToString());
+                        objectCardData._months = cardEncrypt.WcrDecrypt(dt.Rows[0]["ExpMonth"].ToString());
+                        objectCardData._year = cardEncrypt.WcrDecrypt(dt.Rows[0]["ExpYear"].ToString());
+                        objectCardData._crdType = cardEncrypt.WcrDecrypt(dt.Rows[0]["CardType"].ToString());
+
+                        objectCardData.a = objectCardData._crd.TrimStart('0').Substring(0, 1);
+
+                        return objectCardData.toString();
+                        //hidCardID.Text = _crdID;
+                        //string a = _crd.Substring(0, 1);
+                        //if (a == "3")
+                        //{
+                        //    chkAmex.Checked = true;
+                        //    chkAmex.Enabled = false;
+                        //    chkDiscoverry.Enabled = false;
+                        //    chkMasterCard.Enabled = false;
+                        //    crdVisa.Enabled = false;
+                        //}
+                        //else if (a == "6")
+                        //{
+                        //    chkAmex.Enabled = false;
+                        //    chkDiscoverry.Checked = true;
+                        //    chkDiscoverry.Enabled = false;
+                        //    chkMasterCard.Enabled = false;
+                        //    crdVisa.Enabled = false;
+                        //}
+                        //else if (a == "5")
+                        //{
+                        //    chkAmex.Enabled = false;
+                        //    chkDiscoverry.Enabled = false;
+                        //    chkMasterCard.Checked = true;
+                        //    chkMasterCard.Enabled = false;
+                        //    crdVisa.Enabled = false;
+                        //}
+                        //else if (a == "4")
+                        //{
+                        //    chkAmex.Enabled = false;
+                        //    chkDiscoverry.Enabled = false;
+                        //    chkMasterCard.Enabled = false;
+                        //    crdVisa.Checked = true;
+                        //    crdVisa.Enabled = false;
+                        //}
+                        //else
+                        //{
+                        //    chkAmex.Checked = true;
+                        //    chkAmex.Enabled = false;
+                        //    chkDiscoverry.Enabled = false;
+                        //    chkMasterCard.Enabled = false;
+                        //    crdVisa.Enabled = false;
+                        //}
+                    }
+                    else
+                    {
+                        return string.Empty;
+                        //pnlAdd.Visible = true;
+                        //Button1.Visible = false;
+                        //divCardEntry.Visible = true;
+                        //divViewCardInfo.Visible = false;
+                    }
+                }
+                else
+                {
+                    return string.Empty;
+                    //BindState();
+                    //Button1.Visible = false;
+                    //pnlAdd.Visible = true;
+                    //divCardEntry.Visible = true;
+                    //divViewCardInfo.Visible = false;
+                }
+            }
+            catch
+            {
+                return "-1";
+            }
+        }
+
+
         private void SendActivationEmail(int userId, string name, string toMail)
         {
             string constr = ConfigurationManager.ConnectionStrings["con"].ConnectionString;

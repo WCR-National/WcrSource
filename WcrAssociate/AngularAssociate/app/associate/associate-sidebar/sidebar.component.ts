@@ -6,6 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debug } from 'util';
 import { HomeComponent } from 'AngularAssociate/app/components/home/home.component';
 import { MessageService } from 'AngularAssociate/app/services/search';
+import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
+import * as $ from 'jquery';
+
 
 @Component({
     selector: 'associate-layout-sidebar',
@@ -16,7 +19,7 @@ export class SidebarComponent implements OnInit {
     isProfile: boolean = false;
     isDashboard: boolean = false;
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private ngZone: NgZone) { }
+    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private profileService: ProfileService, private ngZone: NgZone) { }
 
     ngOnInit() {
         if (location.origin.includes("profile")) {
@@ -27,6 +30,32 @@ export class SidebarComponent implements OnInit {
             this.isProfile = false;
             this.isDashboard = true;
         }
+        this.validateMenuitems();
+    }
+
+    validateMenuitems() {
+        let thisStatus: any = this;
+        this.profileService
+            .getUserDetails()
+            .subscribe(
+                data => {
+                    if (data.d.length > 0) {
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("ViewAssociateBasicDetail");
+                        $.each(docs, function (i, docs) {
+
+                            if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
+
+                                for (var j = 2; j < 7; j++) {
+                                    $(".nav-sidebar li").eq(j).addClass("diable-sidelink");
+                                }
+                                return;
+                            }
+                            
+                        });
+                    }
+                });
     }
 
     logout() {

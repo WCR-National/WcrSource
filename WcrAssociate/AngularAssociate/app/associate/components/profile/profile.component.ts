@@ -23,6 +23,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
     templateUrl: './profile.component.html'
 })
 export class ProfileComponent implements OnInit {
+
     FirstName: string;
     LastName: string;
     PhoneNumber: string;
@@ -107,6 +108,7 @@ export class ProfileComponent implements OnInit {
     showHideProfileImage() {
         this.isProfileFormVisible = true;
     }
+
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';

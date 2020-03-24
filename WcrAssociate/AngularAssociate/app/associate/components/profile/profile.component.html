@@ -11,6 +11,7 @@
         background-color: #fff;
         background-clip: padding-box;
         border: 1px solid #d9dfe7;
+
         border-radius: 0;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
@@ -401,6 +402,7 @@
         box-shadow: none;
     }
 </style>
+
 <div class="content-header justify-content-between pd-b-20-f">
     <div>
         <div aria-label="breadcrumb">
@@ -460,6 +462,7 @@
 
 
     <div class="profile-body">
+
         <div class="signup-sidebar-body" [style.display]="isFormVisible ? 'block':'none'">
 
             <div id="info">
@@ -615,7 +618,7 @@
                                                     </button>
 
                                                 </div>
-                                                <div class="col-sm-3 mg-b-20">
+                                                <div class="col-sm-5 mg-b-20">
                                                     <button (click)="cancelForm()" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="button">
                                                         <span >Cancel</span>
                                                     </button>
@@ -646,7 +649,7 @@
                             <label class="content-label content-label-lg mg-b-f tx-color-01 float-left">Personal Information</label>
                         </div>
                         <div class="col-sm-6 col-xl">
-                            <button style="position:relative; width:20%;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit"></i> Edit </button>
+                            <button style="position:relative;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit"></i> Edit </button>
                         </div>
                     </div>
                 </div>
@@ -718,6 +721,7 @@
 
             </div>
         </div>
+
     </div><!-- content-body -->
 
     <ng-template #content let-modal>

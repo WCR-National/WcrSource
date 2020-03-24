@@ -5,6 +5,7 @@ using System.Data;
 using WcrClassLibrary;
 using ClsLibrary.PropertyLayer;
 using System.Xml;
+
 namespace WcrAssociate.Associate
 {
     public partial class CreditCard : System.Web.UI.Page
