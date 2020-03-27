@@ -34,15 +34,15 @@ var PaymentComponent = /** @class */ (function () {
             },
             'city': {
                 'required': 'City is required',
-                'letterOnly': 'Allowed alphabeticals letters only.'
+                'letterOnly': 'Alphabetical letters only.'
             },
             'state': {
                 'required': 'State is required',
-                'letterOnly': 'Allowed alphabeticals letters only.'
+                'letterOnly': 'Alphabetical letters only.'
             },
             'country': {
                 'required': 'Country is required',
-                'letterOnly': 'Allowed alphabeticals letters only.'
+                'letterOnly': 'Alphabetical letters only.'
             },
             'zipCode': {
                 'required': 'Zip Code is required',
@@ -94,10 +94,11 @@ var PaymentComponent = /** @class */ (function () {
         };
         this.exampleData = null;
         this.stateData = null;
-        this.zipData = null;
+        this.zipCodeData = null;
         this.expYearData = null;
         this.expMonthData = null;
         this.startValueMonth = null;
+        this.isVisaOrMCOrAmexOrDisc = null;
     }
     PaymentComponent.prototype.ngOnInit = function () {
         debugger;
@@ -121,17 +122,17 @@ var PaymentComponent = /** @class */ (function () {
             cardid: [''],
             firstName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
             lastName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            address: ['', [Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            city: ['', [Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            state: ['', [Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            country: ['', [Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            zipCode: ['', [Validators.required, StateValidator(/^[0-9]+$/, { numericOnly: true })]],
+            address: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
+            city: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
+            state: ['', [Validators.required]],
+            country: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
+            zipCode: ['', [Validators.required]],
             //name        : ['', [Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
             cardNumber: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9]+$/, { alphaNumeric: true })]],
             expMonth: ['', [Validators.required]],
             expYear: ['', [Validators.required]],
             CVCNumber: ['', [Validators.required, StateValidator(/^[0-9]+$/, { numericOnly: true })]],
-            cardType: ['', [Validators.required]],
+            cardType: [''],
             totalAmount: [''] //, [Validators.required, StateValidator(/^[0-9]+$/, { numericOnly: true })]
         });
     };
@@ -160,17 +161,6 @@ var PaymentComponent = /** @class */ (function () {
             }
         });
     };
-    PaymentComponent.prototype.changeCity = function () {
-        var city_value = this.cardForm.get('city').value;
-        var state_value = this.cardForm.get('state').value;
-        this.bindStateWiseZipCode(state_value, city_value);
-    };
-    PaymentComponent.prototype.changeState = function (event) {
-        var city_value = this.cardForm.get('city').value;
-        var state_value = event.data[0].id;
-        this.bindStateWiseZipCode(state_value, city_value);
-    };
-    PaymentComponent.prototype.changeZipCode = function (event) { };
     PaymentComponent.prototype.selectCountry = function () {
         var _this = this;
         debugger;
@@ -199,6 +189,7 @@ var PaymentComponent = /** @class */ (function () {
             if (data != "" && data != undefined && data != null && data != "-1") {
                 if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
                     _this.isAddOrUpdateButton = false;
+                    _this.isCreditCardFormVisible = false;
                 }
                 _this.crdId = data._crdID;
                 _this.crd = data._crd;
@@ -256,6 +247,7 @@ var PaymentComponent = /** @class */ (function () {
                 _this.bindState();
                 thisStatus.cardForm.get('country').setValue("US");
                 _this.isAddOrUpdateButton = true;
+                _this.isCreditCardFormVisible = true;
             }
         });
     };
@@ -293,6 +285,102 @@ var PaymentComponent = /** @class */ (function () {
         ];
         this.startValueYear = "2018";
     };
+    PaymentComponent.prototype.submitCardForm = function () {
+        var _this = this;
+        debugger;
+        if (this.cardForm.valid) {
+            var credentials = this.cardForm.value;
+            //this.abbrState(credentials.state, 'to');
+            this.isSubmitting = true;
+            this.paymentService
+                .addCardAndBillinInfo(credentials)
+                .subscribe(function (data) {
+                if (data == "1") {
+                    $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
+                    _this.isCreditCardFormVisible = true;
+                }
+                else if (data == "0") {
+                    $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
+                    _this.isCreditCardFormVisible = false;
+                }
+                else if (data == "-1") {
+                    $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
+                    _this.isCreditCardFormVisible = true;
+                }
+                else { }
+            });
+        }
+        else {
+            this.logValidationErrors(this.cardForm);
+            this.isSubmitting = false;
+            return;
+        }
+    };
+    PaymentComponent.prototype.updateCardForm = function () {
+        var _this = this;
+        debugger;
+        var credentials = this.cardForm.value;
+        if (this.cardForm.valid) {
+            //this.abbrState(credentials.state, 'to');
+            this.isSubmitting = true;
+            this.paymentService
+                .updateCardAndBillinInfo(credentials)
+                .subscribe(function (data) {
+                if (data == "1") {
+                    $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
+                    _this.isCreditCardFormVisible = true;
+                }
+                else if (data == "0") {
+                    $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
+                    _this.isCreditCardFormVisible = false;
+                }
+                else if (data == "-1") {
+                    $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
+                    _this.isCreditCardFormVisible = true;
+                }
+                else { }
+            });
+        }
+        else {
+            this.logValidationErrors(this.cardForm);
+            this.isSubmitting = false;
+        }
+    };
+    PaymentComponent.prototype.checkCardNumber = function () {
+        debugger;
+        var cardNumber = this.cardForm.get('cardNumber').value;
+        if (cardNumber.charAt(0) == "3") {
+            this.isVisaOrMCOrAmexOrDisc = "amex";
+            this.cardTypeSelector = "amex";
+        }
+        else if (cardNumber.charAt(0) == "4") {
+            this.isVisaOrMCOrAmexOrDisc = "visa";
+            this.cardTypeSelector = "visa";
+        }
+        else if (cardNumber.charAt(0) == "5") {
+            this.isVisaOrMCOrAmexOrDisc = "mastercard";
+            this.cardTypeSelector = "mastercard";
+        }
+        else if (cardNumber.charAt(0) == "6") {
+            this.isVisaOrMCOrAmexOrDisc = "doscover";
+            this.cardTypeSelector = "doscover";
+        }
+    };
+    PaymentComponent.prototype.changeCity = function () {
+        debugger;
+        var city_value = this.cardForm.get('city').value;
+        var state_value = this.cardForm.get('state').value;
+        this.bindStateWiseZipCode(state_value.value, city_value);
+    };
+    PaymentComponent.prototype.changeState = function () {
+        debugger;
+        var city_value = this.cardForm.get('city').value;
+        var state_value = this.cardForm.get('state').value;
+        this.bindStateWiseZipCode(state_value.value, city_value);
+    };
+    PaymentComponent.prototype.changeZipCode = function (event) { };
+    PaymentComponent.prototype.changeExpYear = function (content) { };
+    PaymentComponent.prototype.changeExpMonth = function (content) { };
     PaymentComponent.prototype.bindState = function () {
         var _this = this;
         var countryId = "US"; //this.cardForm.get('country').value;
@@ -305,7 +393,7 @@ var PaymentComponent = /** @class */ (function () {
                 var docs = xml.find("States1");
                 var arrState = [];
                 //this.startValueState = '';
-                arrState.push({ "value": "-1", "label": "Select State" });
+                //arrState.push({ "value": "-1", "label": "Select State" })
                 $.each(docs, function (i, docs) {
                     arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
                 });
@@ -315,68 +403,24 @@ var PaymentComponent = /** @class */ (function () {
     };
     PaymentComponent.prototype.bindStateWiseZipCode = function (state, city) {
         var _this = this;
+        debugger;
         var countryId = "US"; //this.cardForm.get('country').value;
         this.paymentService
             .bindStateWiseZipCode(state, city)
             .subscribe(function (data) {
+            debugger;
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
-                var docs = xml.find("States1");
+                var docs = xml.find("CityWiseZip");
                 var arrState = [];
-                arrState.push({ "value": "-1", "label": "Select State" });
+                //arrState.push({ "value": "-1", "label": "Select State" });
                 //this.startValueZip = '';
                 $.each(docs, function (i, docs) {
-                    arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
+                    arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
                 });
-                _this.stateData = arrState;
+                _this.zipCodeData = arrState;
             }
-        });
-    };
-    PaymentComponent.prototype.submitCardForm = function () {
-        var _this = this;
-        var credentials = this.cardForm.value;
-        this.abbrState(credentials.state, 'to');
-        this.isSubmitting = true;
-        this.paymentService
-            .addCardAndBillinInfo(credentials)
-            .subscribe(function (data) {
-            if (data == "1") {
-                $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
-                _this.isCreditCardFormVisible = true;
-            }
-            else if (data == "0") {
-                $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
-                _this.isCreditCardFormVisible = false;
-            }
-            else if (data == "-1") {
-                $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
-                _this.isCreditCardFormVisible = true;
-            }
-            else { }
-        });
-    };
-    PaymentComponent.prototype.updateCardForm = function () {
-        var _this = this;
-        var credentials = this.cardForm.value;
-        this.abbrState(credentials.state, 'to');
-        this.isSubmitting = true;
-        this.paymentService
-            .updateCardAndBillinInfo(credentials)
-            .subscribe(function (data) {
-            if (data == "1") {
-                $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
-                _this.isCreditCardFormVisible = true;
-            }
-            else if (data == "0") {
-                $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
-                _this.isCreditCardFormVisible = false;
-            }
-            else if (data == "-1") {
-                $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
-                _this.isCreditCardFormVisible = true;
-            }
-            else { }
         });
     };
     PaymentComponent.prototype.editForm = function () {

@@ -11,6 +11,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { CustomerSupportComponent } from './components/customer-support/customer-support.component';
 
 const associateRoutes: Routes = [
     {
@@ -28,6 +29,9 @@ const associateRoutes: Routes = [
             },
             {
                 path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'customer-support', component: CustomerSupportComponent, canActivate: [AuthGuard]
             },
         ]
     }

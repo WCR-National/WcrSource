@@ -54,7 +54,7 @@ var PaymentService = /** @class */ (function () {
     };
     PaymentService.prototype.addCardAndBillinInfo = function (cardData) {
         //url: "..,
-        var urlToCardAndBillingInfo = "ws/AssociateSignUp.ashx?action=CardData&CardNumber=" + cardData.cardNumber + "&Cardholder_FirstName=" + cardData.firstName + "&Cardholder_LastName=" + cardData.lastName + "&Cardholder_Address=" + cardData.address + "&Cardholder_City=" + cardData.city + "&Cardholder_State=" + cardData.state + "&Cardholder_Country=" + cardData.country + "&Cardholder_Zip=" + cardData.zipCode + "&cvv=" + cardData.CVCNumber + "&ExpMonth=" + cardData.expMonth + "&ExpYear=" + cardData.expYear + "&CardType=" + cardData.cardType + "&totalamount=" + cardData.totalAmount + "";
+        var urlToCardAndBillingInfo = "ws/AssociateSignUp.ashx?action=CardData&CardNumber=" + cardData.cardNumber + "&Cardholder_FirstName=" + cardData.firstName + "&Cardholder_LastName=" + cardData.lastName + "&Cardholder_Address=" + cardData.address + "&Cardholder_City=" + cardData.city + "&Cardholder_State=" + cardData.state.value + "&Cardholder_Country=" + cardData.country + "&Cardholder_Zip=" + cardData.zipCode.value + "&cvv=" + cardData.CVCNumber + "&ExpMonth=" + cardData.expMonth.value + "&ExpYear=" + cardData.expYear.value + "&CardType=" + cardData.cardType + "&totalamount=" + cardData.totalAmount + "";
         return this.apiService.post(urlToCardAndBillingInfo, {})
             .pipe(map(function (data) {
             return data;
@@ -63,7 +63,7 @@ var PaymentService = /** @class */ (function () {
     //  url: 
     PaymentService.prototype.updateCardAndBillinInfo = function (cardData) {
         //url: "..,
-        var urlToUpdateCardAndBillingInfo = "ws/AssociateSignUp.ashx?action=Ucardata&CardNumber=" + cardData.cardNumber + "&Cardholder_FirstName=" + cardData.firstName + "&Cardholder_LastName=" + cardData.lastName + "&Cardholder_Address=" + cardData.address + "&Cardholder_City=" + cardData.city + "&Cardholder_State=" + cardData.state + "&Cardholder_Country=" + cardData.country + "&Cardholder_Zip=" + cardData.zipCode + "&cvv=" + cardData.CVCNumber + "&ExpMonth=" + cardData.expMonth + "&ExpYear=" + cardData.expYear + "&CardType=" + cardData.cardType + "&totalamount=" + cardData.totalAmount + "&cardDataID=" + cardData.cardid + "";
+        var urlToUpdateCardAndBillingInfo = "ws/AssociateSignUp.ashx?action=Ucardata&CardNumber=" + cardData.cardNumber + "&Cardholder_FirstName=" + cardData.firstName + "&Cardholder_LastName=" + cardData.lastName + "&Cardholder_Address=" + cardData.address + "&Cardholder_City=" + cardData.city + "&Cardholder_State=" + cardData.state.value + "&Cardholder_Country=" + cardData.country + "&Cardholder_Zip=" + cardData.zipCode.value + "&cvv=" + cardData.CVCNumber + "&ExpMonth=" + cardData.expMonth.value + "&ExpYear=" + cardData.expYear.value + "&CardType=" + cardData.cardType + "&totalamount=" + cardData.totalAmount + "&cardDataID=" + cardData.cardid + "";
         return this.apiService.post(urlToUpdateCardAndBillingInfo, {})
             .pipe(map(function (data) {
             return data;

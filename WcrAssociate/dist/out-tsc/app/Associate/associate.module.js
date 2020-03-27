@@ -22,8 +22,10 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { CustomerSupportComponent } from './components/customer-support/customer-support.component';
 import { PaymentService } from '../services/associate/payment.service';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 var AssociateModule = /** @class */ (function () {
     function AssociateModule() {
     }
@@ -36,7 +38,8 @@ var AssociateModule = /** @class */ (function () {
                 DashboardComponent,
                 ProfileComponent,
                 ClientDetailsComponent,
-                PaymentComponent
+                PaymentComponent,
+                CustomerSupportComponent
             ],
             imports: [
                 CommonModule,
@@ -48,6 +51,7 @@ var AssociateModule = /** @class */ (function () {
                 AssociateRoutingModule,
                 NgbModule,
                 NgSelectModule,
+                NgOptionHighlightModule
             ],
             providers: [
                 ApiService,

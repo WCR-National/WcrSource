@@ -118,6 +118,8 @@
     <Content Include="AngularAssociate\app\associate\associate-sidebar\sidebar.component.html" />
     <Content Include="AngularAssociate\app\associate\components\payment\payment.component.html" />
     <Content Include="AngularAssociate\app\associate\components\client-details\client-details.component.html" />
+    <Content Include="AngularAssociate\app\associate\components\customer-support\customer-support.component.css" />
+    <Content Include="AngularAssociate\app\associate\components\customer-support\customer-support.component.html" />
     <Content Include="AngularAssociate\app\associate\components\profile\profile.component.css" />
     <Content Include="AngularAssociate\app\associate\components\profile\profile.component.html" />
     <Content Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.html" />
@@ -1823,12 +1825,14 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\associate.module.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\payment\payment.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\client-details\client-details.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\components\customer-support\customer-support.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\profile\profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\client-details.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\payment.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\associate\customer-support.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\Profile.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\dashboard.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\api.service.ts" />

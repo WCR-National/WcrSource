@@ -25,10 +25,14 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { CustomerSupportComponent } from './components/customer-support/customer-support.component';
+
+
 import { PaymentService } from '../services/associate/payment.service';
 import { Select2Module } from 'ng2-select2';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import { CustomerSupportService } from '../services/associate/customer-support.service';
 
 @NgModule({
     declarations: [
@@ -38,7 +42,8 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
         DashboardComponent,
         ProfileComponent,
         ClientDetailsComponent,
-        PaymentComponent
+        PaymentComponent,
+        CustomerSupportComponent
     ],
     imports: [
         CommonModule,
@@ -51,8 +56,7 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
         NgbModule,
         NgSelectModule,
         NgOptionHighlightModule
-    ]
-    ,
+    ],
     providers: [
         ApiService,
         JwtService,
@@ -60,6 +64,7 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
         ProfileService,
         ClientDetailsService,
         PaymentService,
+        CustomerSupportService,
         MessageService
     ]
 })
