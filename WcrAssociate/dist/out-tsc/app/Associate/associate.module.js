@@ -26,6 +26,7 @@ import { CustomerSupportComponent } from './components/customer-support/customer
 import { PaymentService } from '../services/associate/payment.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import { CustomerSupportService } from '../services/associate/customer-support.service';
 var AssociateModule = /** @class */ (function () {
     function AssociateModule() {
     }
@@ -60,6 +61,7 @@ var AssociateModule = /** @class */ (function () {
                 ProfileService,
                 ClientDetailsService,
                 PaymentService,
+                CustomerSupportService,
                 MessageService
             ]
         })

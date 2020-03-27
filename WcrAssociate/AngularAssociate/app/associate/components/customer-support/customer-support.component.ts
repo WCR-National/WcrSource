@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -21,7 +21,9 @@ import { CustomerSupportService } from 'AngularAssociate/app/services/associate/
 
 @Component({
     selector: 'associate-customer-support-page',
-    templateUrl: './customer-support.component.html'
+    templateUrl: './customer-support.component.html',
+    styleUrls: ['./customer-support.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 export class CustomerSupportComponent implements OnInit {
 

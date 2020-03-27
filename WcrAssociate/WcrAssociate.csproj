@@ -161,7 +161,7 @@
     <Content Include="AssociatePhoto\57.png" />
     <Content Include="AssociatePhoto\67.png" />
     <Content Include="Associate\accordion.js" />
-    <Content Include="Associate\add_card.html" />
+    <Content Include="Associate\UControls\add_card.html" />
     <Content Include="Associate\Adv_img\1main.png" />
     <Content Include="Associate\Adv_img\20main.png" />
     <Content Include="Associate\Adv_img\3first.png" />

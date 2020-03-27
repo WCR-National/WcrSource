@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
@@ -29,10 +29,8 @@ var CustomerSupportComponent = /** @class */ (function () {
         };
     }
     CustomerSupportComponent.prototype.ngOnInit = function () {
+        debugger;
         this.setValidationOnForm();
-    };
-    CustomerSupportComponent.prototype.showHideForm = function () {
-        this.isFormVisible = true;
     };
     CustomerSupportComponent.prototype.setValidationOnForm = function () {
         this.helpDeskForm = this.fb.group({
@@ -92,10 +90,15 @@ var CustomerSupportComponent = /** @class */ (function () {
             this.isSubmitting = false;
         }
     };
+    CustomerSupportComponent.prototype.showHideForm = function () {
+        this.isFormVisible = true;
+    };
     CustomerSupportComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-customer-support-page',
-            templateUrl: './customer-support.component.html'
+            templateUrl: './customer-support.component.html',
+            styleUrls: ['./customer-support.component.css'],
+            encapsulation: ViewEncapsulation.None
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, CustomerSupportService,
             XMLToJSON, FormBuilder, NgbModal, ChangeDetectorRef])
