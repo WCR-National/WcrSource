@@ -27,7 +27,8 @@ import { ClientDetailsComponent } from './components/client-details/client-detai
 import { PaymentComponent } from './components/payment/payment.component';
 import { PaymentService } from '../services/associate/payment.service';
 import { Select2Module } from 'ng2-select2';
-
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 
 @NgModule({
     declarations: [
@@ -48,8 +49,8 @@ import { Select2Module } from 'ng2-select2';
         BrowserAnimationsModule,
         AssociateRoutingModule,
         NgbModule,
-        Select2Module,
-        MatSelectModule
+        NgSelectModule,
+        NgOptionHighlightModule
     ]
     ,
     providers: [

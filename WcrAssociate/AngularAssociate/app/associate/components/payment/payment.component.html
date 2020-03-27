@@ -1,4 +1,7 @@
-﻿<style>
+﻿
+
+
+<style>
     .form-control {
         display: block;
         width: 100%;
@@ -418,10 +421,19 @@
         }
 
     .card-input-element:checked + .card-input {
-        box-shadow: 0 0 1px 1px #0e3a6b;
-        border: 3px solid #000;
+        border: 2px solid #000;
+        padding: 2px;
     }
 </style>
+
+<style>
+    .ng-select .ng-select-container {
+        -webkit-box-align: baseline;
+        align-items: baseline;
+        min-height: 44.5px;
+    }
+</style>
+
 <div class="content-header justify-content-between pd-b-20-f">
     <div>
         <div aria-label="breadcrumb">
@@ -430,36 +442,39 @@
                 <li class="breadcrumb-item"><a href="#">Payment</a></li>
             </ol>
         </div>
-        <h4 class="content-title content-title-xs">Profile</h4>
+        <h4 class="content-title content-title-xs">Payment</h4>
 
     </div>
 </div><!-- content-header -->
 
 <div class="content-body content-body-profile pd-t-0-f" style="background-color:#fff; height:1000px; ">
     <div class="profile-body">
-        <div class="auth-page mg-b-60-force">
+        <div class="auth-page mg-b-60-force" [style.display]="(isCreditCardFormVisible) ? 'block':'none'">
             <div class="container-cassie page" style="background-color:#fff;">
 
                 <div class="row">
 
                     <div class="col-sm-12">
-                        <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20">
-                            <fieldset [disabled]="isSubmitting">
+                        <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20" (ngSubmit)="submitCardForm()">
+                            <fieldset>
                                 <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
                                     {{formError}}
                                 </div>
-                                <div class="col-sm-12">
-                                    <div class="col-sm-6">
+                                <div class="col-s-12 col-sm-12">
+                                    <div class="col-xs 12 col-sm-6">
                                         <h2 class="title">Billing Info</h2>
                                         <input type="hidden" formControlName="cardid" id="cardid" />
                                         <input type="hidden" formControlName="totalAmount" id="totalAmount" />
 
-                                        <div class="col-sm-6 mg-b-20">
+                                        <div class="col-xs-12 col-sm-6 mg-b-20">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
                                                 <label>
                                                     First Name
                                                 </label>
                                                 <input id="firstName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your first name" formControlName="firstName" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.firstName">
+                                                    {{formErrors.firstName}}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -469,6 +484,9 @@
                                                     Last Name
                                                 </label>
                                                 <input id="lastName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your last name" formControlName="lastName" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.lastName">
+                                                    {{formErrors.lastName}}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -478,6 +496,9 @@
                                                     Billing Address
                                                 </label>
                                                 <input id="address" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your address" formControlName="address" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.address">
+                                                    {{formErrors.address}}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -487,7 +508,10 @@
                                                 <label>
                                                     City
                                                 </label>
-                                                <input id="city" type="text" (change)="changeCity()" class="form-control pd-l-0-force form-control" placeholder="Enter city name" formControlName="city" (blur)="logValidationErrors()">
+                                                <input id="city" type="text" (change)="changeCity()" style="margin-top:12px;" class="form-control pd-l-0-force form-control" placeholder="Enter city name" formControlName="city" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.city">
+                                                    {{formErrors.city}}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -495,11 +519,12 @@
 
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.state}">
                                                 <label>
-                                                    State
+                                                    Select State
                                                 </label>
                                                 <!--<select2 [data]="stateData" [value]="startValueState" [width]="150" (valueChanged)="changeState($event)" formControlName="state"></select2>-->
+                                                <ng-select [items]="stateData" [(ngModel)]="startValueState" (ngModelChange)="changeState()" formControlName="state" [searchable]="false"> </ng-select>
 
-                                                <input id="state" type="text" class="form-control pd-l-0-force form-control" placeholder="STATE" formControlName="firstName" (blur)="logValidationErrors()">
+                                                <!--<input id="state" type="text" class="form-control pd-l-0-force form-control" placeholder="STATE" formControlName="firstName" (blur)="logValidationErrors()">-->
                                             </div>
                                         </div>
 
@@ -509,7 +534,10 @@
                                                 <label>
                                                     Country
                                                 </label>
-                                                <input id="country" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your country name" formControlName="country" (blur)="logValidationErrors()" disabled>
+                                                <input id="country" type="text" class="form-control pd-l-0-force form-control" style="margin-top:12px;" placeholder="Enter your country name" formControlName="country" (blur)="logValidationErrors()" disabled>
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.country">
+                                                    {{formErrors.country}}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -517,19 +545,34 @@
 
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.zipCode}">
                                                 <label>
-                                                    Zip Code
+                                                    Select Zip Code
                                                 </label>
                                                 <!--<select2 [data]="zipCodeData" [value]="startValueZip" [width]="150" (valueChanged)="changeZipCode($event)" formControlName="zipCode"></select2>-->
-                                                <input id="zipCode" type="text" class="form-control pd-l-0-force form-control" placeholder="ZIP CODE" formControlName="zipCode" (blur)="logValidationErrors()">
+                                                <ng-select [items]="zipCodeData" [(ngModel)]="startValueZip" (ngModelChange)="changeZipCode(content)" formControlName="zipCode" [searchable]="false"> </ng-select>
+
+                                                <!--<input id="zipCode" type="text" class="form-control pd-l-0-force form-control" placeholder="ZIP CODE" formControlName="zipCode" (blur)="logValidationErrors()">-->
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div class="col-sm-6">
+                                    <div class="col-xs-12 col-sm-6">
                                         <h2 class="title">Credit Card Info</h2>
 
 
+
+                                        <div class="col-sm-12 mg-b-20">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.cardNumber}">
+
+                                                <label>
+                                                    Card Number
+                                                </label>
+                                                <input id="cardNumber" type="text" class="form-control pd-l-0-force form-control" (change)="checkCardNumber()" placeholder="Enter card number" formControlName="cardNumber" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.cardNumber">
+                                                    {{formErrors.cardNumber}}
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-sm-12">
                                             <label>
                                                 Choose Card Type
@@ -538,7 +581,7 @@
 
                                                 <div class="col-sm-3 col-xs pd-l-0-f pd-r-0-f">
                                                     <label>
-                                                        <input type="radio" value="visa" formControlName="cardType" class="card-input-element" checked />
+                                                        <input type="radio" value="visa" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'visa' ? false: true">
                                                         <div class="panel panel-default card-input">
                                                             <img src="AngularAssociate/assets/images/visa_logo.jpg" />
                                                         </div>
@@ -546,7 +589,7 @@
                                                 </div>
                                                 <div class="col-sm-3 col-xs pd-l-10-f pd-r-0-f">
                                                     <label>
-                                                        <input type="radio" value="mastercard" formControlName="cardType" class="card-input-element" />
+                                                        <input type="radio" value="mastercard" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'mastercard' ? false: true">
                                                         <div class="panel panel-default card-input">
                                                             <img src="AngularAssociate/assets/images/mastercard_logo.png" />
                                                         </div>
@@ -554,7 +597,7 @@
                                                 </div>
                                                 <div class="col-sm-3 col-xs pd-l-10-f pd-r-0-f">
                                                     <label>
-                                                        <input type="radio" value="amex" formControlName="cardType" class="card-input-element" />
+                                                        <input type="radio" value="amex" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'discover' ? false: true">
                                                         <div class="panel panel-default card-input">
                                                             <img src="AngularAssociate/assets/images/amex.jpg" />
                                                         </div>
@@ -562,7 +605,7 @@
                                                 </div>
                                                 <div class="col-sm-3 col-xs pd-l-10-f pd-r-0-f">
                                                     <label>
-                                                        <input type="radio" value="discover" formControlName="cardType" class="card-input-element" />
+                                                        <input type="radio" value="discover" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'discover' ? false: true">
                                                         <div class="panel panel-default card-input">
                                                             <img src="AngularAssociate/assets/images/discover.jpg" />
                                                         </div>
@@ -572,23 +615,15 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-sm-12 mg-b-20">
-                                            <div class="form-group" [ngClass]="{'has-error': formErrors.cardNumber}">
-
-                                                <label>
-                                                    Card Number
-                                                </label>
-                                                <input id="cardNumber" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter card number" formControlName="cardNumber" (blur)="logValidationErrors()">
-                                            </div>
-                                        </div>
                                         <div class="col-sm-6 mg-b-20">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.expMonth}">
 
                                                 <label>
-                                                    Exp.Month
+                                                    Select Exp.Month
                                                 </label>
                                                 <!--<input id="expMonth" type="text" class="form-control pd-l-0-force form-control" placeholder="MONTH" formControlName="expMonth" (blur)="logValidationErrors()">-->
-                                                <select2 [data]="expMonthData" [value]="startValueMonth" [width]="150" (valueChanged)="changeExpMonth($event)" formControlName="expMonth"></select2>
+                                                <ng-select [items]="expMonthData" [(ngModel)]="startValueMonth" (ngModelChange)="changeExpMonth(content)" formControlName="expMonth" [searchable]="false"> </ng-select>
+                                                <!--<select2 [data]="expMonthData" [value]="startValueMonth" [width]="150" (valueChanged)="changeExpMonth($event)" formControlName="expMonth"></select2>-->
 
                                             </div>
                                         </div>
@@ -596,12 +631,13 @@
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.expYear}">
 
                                                 <label>
-                                                    Exp.Year
+                                                    Select Exp.Year
                                                 </label>
 
                                                 <!--<select2 [data]="expYearData" [value]="startValueYear" [width]="150" (valueChanged)="changeExpYear($event)" formControlName="expYear"></select2>-->
+                                                <ng-select [items]="expYearData" [(ngModel)]="startValueYear" (ngModelChange)="changeExpYear(content)" formControlName="expYear" [searchable]="false"> </ng-select>
 
-                                                <input id="expYear" type="text" class="form-control pd-l-0-force form-control" placeholder="YEAR" formControlName="expYear" (blur)="logValidationErrors()">
+                                                <!--<input id="expYear" type="text" class="form-control pd-l-0-force form-control" placeholder="YEAR" formControlName="expYear" (blur)="logValidationErrors()">-->
                                             </div>
                                         </div>
 
@@ -611,59 +647,63 @@
                                                     CVV / CVC *
                                                 </label>
                                                 <input id="cvv" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter card cvv/cvc " formControlName="CVCNumber" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.CVCNumber">
+                                                    {{formErrors.CVCNumber}}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-xs-12 col-sm-12 pd-l-45-force pd-r-0-force pull-xs-right pull-right">
+                                    <div class="form-group">
+                                        <div class="col-xs-3 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddOrUpdateButton ? 'block': 'none'">
+                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit" (click)="submitCardForm()">
+                                                <span [style.display]="!isSubmitting ? 'block': 'none'">Add Card</span>
+                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                    <div class="spinner-layer spinner-white-only">
+                                                        <div class="circle-clipper left">
+                                                            <div class="circle"></div>
+                                                        </div><div class="gap-patch">
+                                                            <div class="circle"></div>
+                                                        </div><div class="circle-clipper right">
+                                                            <div class="circle"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+
+                                        </div>
+                                        <div class="col-xs-3  col-sm-2 mg-b-20 pd-r-0-f" [style.display]="!isAddOrUpdateButton ? 'block': 'none'">
+                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit">
+                                                <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="updateCardForm()">Update Card</span>
+                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                    <div class="spinner-layer spinner-white-only">
+                                                        <div class="circle-clipper left">
+                                                            <div class="circle"></div>
+                                                        </div><div class="gap-patch">
+                                                            <div class="circle"></div>
+                                                        </div><div class="circle-clipper right">
+                                                            <div class="circle"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+
+                                        </div>
+                                        <div class="col-xs-3  col-sm-2 mg-b-20">
+                                            <button (click)="cancelForm()" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="button">
+                                                <span>Cancel</span>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </fieldset>
                         </form>
-
                     </div>
 
-                    <div class="col-sm-6 pd-l-0-force pd-r-0-force pull-xs-right pull-right">
-                        <div class="form-group">
-                            <div class="col-xs mg-b-20 pd-r-0-f" [style.display]="isAddOrUpdateButton ? 'block': 'none'">
-                                <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit">
-                                    <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitCardForm()">Add Card</span>
-                                    <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
-                                        <div class="spinner-layer spinner-white-only">
-                                            <div class="circle-clipper left">
-                                                <div class="circle"></div>
-                                            </div><div class="gap-patch">
-                                                <div class="circle"></div>
-                                            </div><div class="circle-clipper right">
-                                                <div class="circle"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </button>
-
-                            </div>
-                            <div class="col-xs mg-b-20 pd-r-0-f" [style.display]="!isAddOrUpdateButton ? 'block': 'none'">
-                                <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit">
-                                    <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="updateCardForm()">Update Card</span>
-                                    <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
-                                        <div class="spinner-layer spinner-white-only">
-                                            <div class="circle-clipper left">
-                                                <div class="circle"></div>
-                                            </div><div class="gap-patch">
-                                                <div class="circle"></div>
-                                            </div><div class="circle-clipper right">
-                                                <div class="circle"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </button>
-
-                            </div>
-                            <div class="col-xs mg-b-20">
-                                <button (click)="cancelForm()" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="button">
-                                    <span>Cancel</span>
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
+                    
 
 
 
@@ -671,12 +711,12 @@
             </div>
         </div>
 
-        <div class="tab-content pd-15 pd-sm-20" [style.display]="(!isFormVisible) ? 'block':'none'">
+        <div class="tab-content pd-15 pd-sm-20" [style.display]="(!isCreditCardFormVisible) ? 'block':'none'">
             <div id="overview" class="tab-pane active show">
                 <div class="col-sm-12 col-xl">
                     <div class="row">
                         <div class="col-sm-6 col-xl">
-                            <label class="content-label content-label-lg mg-b-f tx-color-01 float-left">Billing And Credit Card Info</label>
+                            <h2 class="tx-color-01 float-left">Billing And Credit Card Info</h2>
                         </div>
                         <div class="col-sm-6 col-xl">
                             <button style="position:relative;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit"></i> Edit </button>
@@ -694,7 +734,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row ">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">First Name  (<i class="fa fa-envelope"></i>) </div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">First Name  (<i class="fa fa-user"></i>) </div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{firstName}}</div>
                                         </div>
                                     </div>
@@ -706,7 +746,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Last Name  (<i class="fa fa-lock"></i>) </div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">Last Name  (<i class="fa fa-user"></i>) </div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{lastName}}</div>
                                         </div>
                                     </div>
@@ -718,7 +758,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Address  (<i class="fa fa-mobile-phone"></i>)</div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">Address  (<i class="fa fa-home"></i>)</div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{address}}</div>
                                         </div>
                                     </div>
@@ -730,7 +770,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">city  (<i class="fa fa-certificate"></i>)</div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">city  (<i class="fa fa-building-o"></i>)</div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{city}}</div>
                                         </div>
                                     </div>
@@ -754,7 +794,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">country  (<i class="fa fa-certificate"></i>)</div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">country  (<i class="fa fa-flag"></i>)</div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{country}}</div>
                                         </div>
                                     </div>
@@ -766,7 +806,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">zip code  (<i class="fa fa-certificate"></i>)</div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">zip code  (<i class="fa fa-map-marker"></i>)</div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{zipCode}}</div>
                                         </div>
                                     </div>
@@ -785,7 +825,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row ">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Card Type  (<i class="fa fa-envelope"></i>) </div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">Card Type  (<i class="fa fa-check"></i>) </div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{cardType}}</div>
                                         </div>
                                     </div>
@@ -797,7 +837,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Card Number  (<i class="fa fa-lock"></i>) </div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">Card Number  (<i class="fa fa-credit-card"></i>) </div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{cardNumber}}</div>
                                         </div>
                                     </div>
@@ -809,7 +849,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Expired Month  (<i class="fa fa-mobile-phone"></i>)</div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">Expired Month  (<i class="fa fa-calendar"></i>)</div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{ExpMonth}}</div>
                                         </div>
                                     </div>
@@ -821,7 +861,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Expired Year  (<i class="fa fa-certificate"></i>)</div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">Expired Year  (<i class="fa fa-calendar-o"></i>)</div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{ExpYear}}</div>
                                         </div>
                                     </div>
@@ -833,7 +873,7 @@
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">CVV / CVC *  (<i class="fa fa-certificate"></i>)</div>
+                                            <div class="col-sm-6 tx-semibold pd-t-7">CVV / CVC *  (<i class="fa fa-sort-amount-asc"></i>)</div>
                                             <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{CVCNumber}}</div>
                                         </div>
                                     </div>
@@ -848,5 +888,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

@@ -92,6 +92,12 @@ var PaymentComponent = /** @class */ (function () {
             'cardType': '',
             'totalAmount': ''
         };
+        this.exampleData = null;
+        this.stateData = null;
+        this.zipData = null;
+        this.expYearData = null;
+        this.expMonthData = null;
+        this.startValueMonth = null;
     }
     PaymentComponent.prototype.ngOnInit = function () {
         debugger;
@@ -177,7 +183,7 @@ var PaymentComponent = /** @class */ (function () {
                 var docs = xml.find("Countries");
                 var countries = [];
                 $.each(docs, function (i, docs) {
-                    countries.push({ "id": $(docs).find("countryid").text(), "text": $(docs).find("countryid").text() });
+                    countries.push({ "value": $(docs).find("countryid").text(), "label": $(docs).find("countryid").text() });
                 });
                 _this.exampleData = countries;
             }
@@ -190,83 +196,100 @@ var PaymentComponent = /** @class */ (function () {
         this.paymentService
             .getCardAndBillinInfo()
             .subscribe(function (data) {
-            if (data != "" && data != undefined && data != null) {
-                if (data._crdID != undefined || data._crdID != "" || data._crdID != null) {
+            if (data != "" && data != undefined && data != null && data != "-1") {
+                if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
                     _this.isAddOrUpdateButton = false;
                 }
-                thisStatus.profileForm.get('cardid').setValue(data._crdID);
-                thisStatus.profileForm.get('cardNumber ').setValue(data._crd);
-                thisStatus.profileForm.get('firstName').setValue(data._fstName);
-                thisStatus.profileForm.get('lastName').setValue(data._sndName);
-                thisStatus.profileForm.get('address').setValue(data._Address);
-                thisStatus.profileForm.get('city').setValue(data._city);
-                thisStatus.profileForm.get('state').setValue(data._state);
-                thisStatus.profileForm.get('zipCode').setValue(data._zip);
-                thisStatus.profileForm.get('country').setValue(data._country);
-                thisStatus.profileForm.get('CVCNumber').setValue(data._cvv);
-                thisStatus.profileForm.get('expMonth').setValue(data._months);
-                thisStatus.profileForm.get('expYear').setValue(data._year);
-                thisStatus.profileForm.get('cardType').setValue(data._crdType);
+                _this.crdId = data._crdID;
+                _this.crd = data._crd;
+                _this.firstName = data._fstName;
+                _this.lastName = data._sndName;
+                _this.address = data._Address;
+                _this.city = data._city;
+                _this.state = data._state;
+                _this.country = data._country;
+                _this.zipCode = data._zip;
+                _this.cardNumber = data._crd;
+                _this.expMonth = data._months;
+                _this.expYear = data._year;
+                _this.CVCNumber = data._cvv;
+                thisStatus.cardForm.get('cardid').setValue(data._crdID);
+                thisStatus.cardForm.get('cardNumber ').setValue(data._crd);
+                thisStatus.cardForm.get('firstName').setValue(data._fstName);
+                thisStatus.cardForm.get('lastName').setValue(data._sndName);
+                thisStatus.cardForm.get('address').setValue(data._Address);
+                thisStatus.cardForm.get('city').setValue(data._city);
+                thisStatus.cardForm.get('state').setValue(data._state);
+                thisStatus.cardForm.get('zipCode').setValue(data._zip);
+                thisStatus.cardForm.get('country').setValue(data._country);
+                thisStatus.cardForm.get('CVCNumber').setValue(data._cvv);
+                thisStatus.cardForm.get('expMonth').setValue(data._months);
+                thisStatus.cardForm.get('expYear').setValue(data._year);
+                thisStatus.cardForm.get('cardType').setValue(data._crdType);
                 var cardType = data._crd.TrimStart('0').Substring(0, 1);
                 if (cardType == "3") {
-                    thisStatus.profileForm.get('cardType').setValue("amex");
+                    thisStatus.cardForm.get('cardType').setValue("amex");
                     //CheckBox3.Checked = true;
                 }
                 else if (cardType == "6") {
-                    thisStatus.profileForm.get('cardType').setValue("discover");
+                    _this.cardType = "discover";
+                    thisStatus.cardForm.get('cardType').setValue("discover");
                     //CheckBox4.Checked = true;
                 }
                 else if (cardType == "5") {
-                    thisStatus.profileForm.get('cardType').setValue("mastercard");
+                    _this.cardType = "mastercard";
+                    thisStatus.cardForm.get('cardType').setValue("mastercard");
                     //CheckBox2.Checked = true;
                 }
                 else if (cardType == "4") {
-                    thisStatus.profileForm.get('cardType').setValue("visa");
+                    _this.cardType = "visa";
+                    thisStatus.cardForm.get('cardType').setValue("visa");
                     //CheckBox1.Checked = true;
                 }
                 else {
-                    thisStatus.profileForm.get('cardType').setValue("amex");
+                    _this.cardType = "amex";
+                    thisStatus.cardForm.get('cardType').setValue("amex");
                     //CheckBox3.Checked = true;
                 }
             }
             else {
                 _this.bindState();
-                thisStatus.profileForm.get('country').setValue("US");
+                thisStatus.cardForm.get('country').setValue("US");
                 _this.isAddOrUpdateButton = true;
             }
         });
     };
     PaymentComponent.prototype.bindMonth = function () {
         this.expMonthData = [
-            { id: "0", text: "Month" },
-            { id: "1", text: "January" },
-            { id: "2", text: "February" },
-            { id: "3", text: "March" },
-            { id: "4", text: "April" },
-            { id: "5", text: "May" },
-            { id: "6", text: "June" },
-            { id: "7", text: "July" },
-            { id: "8", text: "August" },
-            { id: "9", text: "September" },
-            { id: "10", text: "October" },
-            { id: "11", text: "November" },
-            { id: "12", text: "December" },
+            { value: "0", label: "Month" },
+            { value: "1", label: "January" },
+            { value: "2", label: "February" },
+            { value: "3", label: "March" },
+            { value: "4", label: "April" },
+            { value: "5", label: "May" },
+            { value: "6", label: "June" },
+            { value: "7", label: "July" },
+            { value: "8", label: "August" },
+            { value: "9", label: "September" },
+            { value: "10", label: "October" },
+            { value: "11", label: "November" },
+            { value: "12", label: "December" },
         ];
-        this.startValueMonth = "2018";
+        this.startValueMonth = { value: "0", label: "Month" };
     };
     PaymentComponent.prototype.bindYear = function () {
         this.expYearData = [
-            { id: "2018", text: "2018" },
-            { id: "2019", text: "2019" },
-            { id: "2020", text: "2020" },
-            { id: "2021", text: "2021" },
-            { id: "2022", text: "2022" },
-            { id: "2023", text: "2023" },
-            { id: "2024", text: "2024" },
-            { id: "2025", text: "2025" },
-            { id: "2026", text: "2026" },
-            { id: "2027", text: "2027" },
-            { id: "2028", text: "2028" },
+            { 'value': "2018", 'label': "2018" },
+            { 'value': "2019", 'label': "2019" },
+            { 'value': "2020", 'label': "2020" },
+            { 'value': "2021", 'label': "2021" },
+            { 'value': "2022", 'label': "2022" },
+            { 'value': "2023", 'label': "2023" },
+            { 'value': "2024", 'label': "2024" },
+            { 'value': "2025", 'label': "2025" },
+            { 'value': "2026", 'label': "2026" },
+            { 'value': "2027", 'label': "2027" },
+            { 'value': "2028", 'label': "2028" },
         ];
         this.startValueYear = "2018";
     };
@@ -282,9 +305,9 @@ var PaymentComponent = /** @class */ (function () {
                 var docs = xml.find("States1");
                 var arrState = [];
                 //this.startValueState = '';
-                arrState.push({ "id": "-1", "text": "Select State" });
+                arrState.push({ "value": "-1", "label": "Select State" });
                 $.each(docs, function (i, docs) {
-                    arrState.push({ "id": $(docs).find("stateid").text(), "text": $(docs).find("stateid").text() });
+                    arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
                 });
                 _this.stateData = arrState;
             }
@@ -301,10 +324,10 @@ var PaymentComponent = /** @class */ (function () {
                 var xml = $(xmlDoc);
                 var docs = xml.find("States1");
                 var arrState = [];
-                arrState.push({ "id": "-1", "text": "Select State" });
+                arrState.push({ "value": "-1", "label": "Select State" });
                 //this.startValueZip = '';
                 $.each(docs, function (i, docs) {
-                    arrState.push({ "id": $(docs).find("stateid").text(), "text": $(docs).find("stateid").text() });
+                    arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
                 });
                 _this.stateData = arrState;
             }

@@ -16,7 +16,6 @@ import { DashboardService } from '../services/associate/dashboard.service';
 import { ProfileService } from '../services/associate/Profile.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule } from '@angular/material';
 import { ClientDetailsService } from '../services/associate/client-details.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -24,7 +23,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { PaymentService } from '../services/associate/payment.service';
-import { Select2Module } from 'ng2-select2';
+import { NgSelectModule } from '@ng-select/ng-select';
 var AssociateModule = /** @class */ (function () {
     function AssociateModule() {
     }
@@ -48,8 +47,7 @@ var AssociateModule = /** @class */ (function () {
                 BrowserAnimationsModule,
                 AssociateRoutingModule,
                 NgbModule,
-                Select2Module,
-                MatSelectModule
+                NgSelectModule,
             ],
             providers: [
                 ApiService,

@@ -3,6 +3,7 @@ import { Component, NgZone } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
+import * as $ from 'jquery';
 var SidebarComponent = /** @class */ (function () {
     function SidebarComponent(route, router, userService, profileService, ngZone) {
         this.route = route;
@@ -22,6 +23,7 @@ var SidebarComponent = /** @class */ (function () {
             this.isProfile = false;
             this.isDashboard = true;
         }
+        this.validateMenuitems();
     };
     SidebarComponent.prototype.validateMenuitems = function () {
         var thisStatus = this;
