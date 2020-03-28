@@ -44,7 +44,7 @@
                     <form [formGroup]="helpDeskForm" class="mg-t-40-f">
                         <p style="color:#ff0000; font-weight:600;" class="pd-lg-x-15 pd-l-50-f pd-r-100-f " [style.display]="isMessageTobeshown? 'block':'none'"> {{responseMessage}}</p>
                         <div class="col-xs-12 col-sm-12 pd-lg-x-15 pd-l-50-f mg-b-20-f">
-                            <label class="uk-form-label mg-b-10 tx-20-f tx-600" for="form-stacked-text">Message</label>
+                            <label class="uk-form-label mg-b-10 tx-20-f tx-600" for="form-stacked-text" style="color:#000;">Message</label>
                             <div class="uk-form-controls">
                                 <textarea class="uk-textarea uk-form-large tm-form-xlarge uk-border-rounded" style="border-color: #000; color: #000;" id="form-textarea" formNameControl="message" placeholder="Enter your message" (blue)="logValidationErrors()"></textarea>
                             </div>

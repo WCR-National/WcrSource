@@ -9,8 +9,8 @@ import * as CryptoJS from 'crypto-js';
 
 import { Errors } from '../../entities/errors.model';
 import { HttpClient } from '@angular/common/http';
-import { map, debounceTime, take, switchMap } from 'rxjs/operators';
 import { environment } from 'AngularAssociate/environments/environment';
+import { map, debounceTime, take, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 

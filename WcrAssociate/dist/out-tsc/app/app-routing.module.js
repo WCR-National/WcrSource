@@ -8,6 +8,7 @@ import { AuthComponent } from '.././app/components/auth/auth.component';
 import { TermsComponent } from '.././app/components/terms/terms.component';
 import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
 import { NoAuthGuard } from './_guards/no-auth-guard.service';
+import { LandingRegistrationComponent } from './components/landing-registration/landing-registration.component';
 var routes = [
     {
         path: '',
@@ -42,7 +43,12 @@ var routes = [
                 path: 'terms',
                 component: TermsComponent,
                 canActivate: [NoAuthGuard]
-            }
+            },
+            {
+                path: 'landing-registration',
+                component: LandingRegistrationComponent,
+                canActivate: [NoAuthGuard]
+            },
         ]
     }
 ];

@@ -29,6 +29,7 @@ import { ShowAuthedDirective } from './shared/show-authed.directive';
 
 import { AuthGuard } from './_guards/auth-guard.service';
 import { NoAuthGuard } from './_guards/no-auth-guard.service';
+import { LandingRegistrationComponent } from './components/landing-registration/landing-registration.component';
 
 
 import {
@@ -63,7 +64,8 @@ import { XMLToJSON } from './_helpers/xml-to-json';
         HeaderComponent,
         AuthComponent,
         TermsComponent,
-        ShowAuthedDirective
+        ShowAuthedDirective,
+        LandingRegistrationComponent
     ],
     imports: [
         BrowserModule,

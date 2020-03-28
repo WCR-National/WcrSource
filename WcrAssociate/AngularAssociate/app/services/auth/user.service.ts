@@ -277,6 +277,20 @@ export class UserService {
             ));
     }
 
+    attemptRegisterationAssociate(credentials): Observable<any> {
+        debugger;
+
+        let urlToAssociateSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + credentials.firstName + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
+
+        return this.apiService.post(urlToAssociateSignUp, {})
+            .pipe(map(
+                data => {
+                    console.log(data);
+                    return data;
+                }
+            ));
+    }
+
     attemptRegisterConsumer(type, credentials): Observable<any> {
 
         //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",

@@ -149,7 +149,6 @@ export class ProfileComponent implements OnInit {
                                 thisStatus.isFormVisible = true;
                                 thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
                                 thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
-                                return;
                             }
                             thisStatus.isFormVisible = false;
 

@@ -123,6 +123,8 @@
     <Content Include="AngularAssociate\app\associate\components\profile\profile.component.css" />
     <Content Include="AngularAssociate\app\associate\components\profile\profile.component.html" />
     <Content Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.html" />
+    <Content Include="AngularAssociate\app\components\landing-registration\landing-registration.component.css" />
+    <Content Include="AngularAssociate\app\components\landing-registration\landing-registration.component.html" />
     <Content Include="AngularAssociate\app\components\terms\terms.component.html" />
     <Content Include="AngularAssociate\app\components\auth\auth.component.html" />
     <Content Include="AngularAssociate\app\shared\buttons\favorite-button.component.html" />
@@ -140,6 +142,7 @@
     <Content Include="AngularAssociate\assets\images\amex.jpg" />
     <Content Include="AngularAssociate\assets\images\background.jpg" />
     <Content Include="AngularAssociate\assets\images\discover.jpg" />
+    <Content Include="AngularAssociate\assets\images\evergreen-banner.jpg" />
     <Content Include="AngularAssociate\assets\images\img25.jpg" />
     <Content Include="AngularAssociate\assets\images\mastercard_logo.png" />
     <Content Include="AngularAssociate\assets\images\visa_logo.jpg" />
@@ -1828,6 +1831,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\customer-support\customer-support.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\profile\profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\components\landing-registration\landing-registration.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\client-details.service.ts" />

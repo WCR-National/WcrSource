@@ -117,7 +117,6 @@ var ProfileComponent = /** @class */ (function () {
                         thisStatus.isFormVisible = true;
                         thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
                         thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
-                        return;
                     }
                     thisStatus.isFormVisible = false;
                     thisStatus.FirstName = $(docs).find("FullName").text();
