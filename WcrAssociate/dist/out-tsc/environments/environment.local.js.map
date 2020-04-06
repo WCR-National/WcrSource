@@ -1,1 +1,1 @@
-{"version":3,"file":"environment.local.js","sourceRoot":"","sources":["../../../AngularAssociate/environments/environment.local.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,IAAM,WAAW,GAAG;IACvB,UAAU,EAAE,IAAI;IAChB,WAAW,EAAE,yBAAyB;IACtC,IAAI,EAAE,KAAK;CAEd,CAAC"}
+{"version":3,"file":"environment.local.js","sourceRoot":"","sources":["../../../AngularAssociate/environments/environment.local.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,IAAM,WAAW,GAAG;IACvB,UAAU,EAAE,IAAI;IAChB,WAAW,EAAE,yBAAyB;IACtC,WAAW,EAAE,kBAAkB;IAC/B,IAAI,EAAE,KAAK;CAEd,CAAC"}

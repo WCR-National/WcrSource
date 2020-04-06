@@ -6,6 +6,7 @@ import { UserService } from '../../services/auth';
 import * as $ from 'jquery';
 import * as CryptoJS from 'crypto-js';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'AngularAssociate/environments/environment';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
 var AuthComponent = /** @class */ (function () {
@@ -29,7 +30,6 @@ var AuthComponent = /** @class */ (function () {
         this.resetPassword = false;
         this.FormFilledSuccessfully = false;
         this.showEmailVerification = false;
-        this.tokenFromUI = "7061737323313233";
         this.encrypted = "";
         this.loginErrorMessage = "";
         this.validationMessages = {
@@ -937,8 +937,8 @@ var AuthComponent = /** @class */ (function () {
     * *************************************************
     **/
     AuthComponent.prototype.encryptUsingAES256 = function () {
-        var _key = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
-        var _iv = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        var _key = CryptoJS.enc.Utf8.parse(environment.tokenFromUI);
+        var _iv = CryptoJS.enc.Utf8.parse(environment.tokenFromUI);
         var encrypted = CryptoJS.AES.encrypt(JSON.stringify(this.request), _key, {
             keySize: 16,
             iv: _iv,
@@ -948,8 +948,8 @@ var AuthComponent = /** @class */ (function () {
         this.encrypted = encrypted.toString();
     };
     AuthComponent.prototype.decryptUsingAES256 = function () {
-        var _key = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
-        var _iv = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        var _key = CryptoJS.enc.Utf8.parse(environment.tokenFromUI);
+        var _iv = CryptoJS.enc.Utf8.parse(environment.tokenFromUI);
         this.decrypted = CryptoJS.AES.decrypt(this.encrypted, _key, {
             keySize: 16,
             iv: _iv,
