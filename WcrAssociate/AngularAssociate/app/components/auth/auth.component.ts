@@ -37,7 +37,6 @@ export class AuthComponent implements OnInit {
     authForm: FormGroup;
     FormFilledSuccessfully: boolean = false;
     showEmailVerification: boolean = false;
-    tokenFromUI: string = "7061737323313233";
     encrypted: any = "";
     decrypted: string;
     returnUrl: string;
@@ -1184,8 +1183,8 @@ export class AuthComponent implements OnInit {
     **/
 
     encryptUsingAES256() {
-        let _key = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
-        let _iv = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        let _key = CryptoJS.enc.Utf8.parse(environment.tokenFromUI);
+        let _iv = CryptoJS.enc.Utf8.parse(environment.tokenFromUI);
         let encrypted = CryptoJS.AES.encrypt(
             JSON.stringify(this.request), _key, {
                 keySize: 16,
@@ -1197,8 +1196,8 @@ export class AuthComponent implements OnInit {
     }
 
     decryptUsingAES256() {
-        let _key = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
-        let _iv = CryptoJS.enc.Utf8.parse(this.tokenFromUI);
+        let _key = CryptoJS.enc.Utf8.parse(environment.tokenFromUI);
+        let _iv = CryptoJS.enc.Utf8.parse(environment.tokenFromUI);
 
         this.decrypted = CryptoJS.AES.decrypt(
             this.encrypted, _key, {
