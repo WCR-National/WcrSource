@@ -72160,3 +72160,7 @@ ul.footer-links {
     #footer .social-icons li a:hover {
         opacity: 1;
     }
+.nav-sidebar .nav-link:hover {
+    background-color: rgba(30, 26, 112, 0.3);
+    color: #fff;
+}

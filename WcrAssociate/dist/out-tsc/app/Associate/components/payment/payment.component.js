@@ -97,7 +97,14 @@ var PaymentComponent = /** @class */ (function () {
         this.zipCodeData = null;
         this.expYearData = null;
         this.expMonthData = null;
+        this.startValueState = null;
+        this.selectedState = null;
+        this.startValueZip = null;
+        this.selectedZip = null;
         this.startValueMonth = null;
+        this.selectedMonth = null;
+        this.startValueYear = null;
+        this.selectedYear = null;
         this.isVisaOrMCOrAmexOrDisc = null;
         this.formErrorMessage = "";
     }
@@ -212,13 +219,14 @@ var PaymentComponent = /** @class */ (function () {
                 thisStatus.cardForm.get('lastName').setValue(data._sndName);
                 thisStatus.cardForm.get('address').setValue(data._Address);
                 thisStatus.cardForm.get('city').setValue(data._city);
-                thisStatus.cardForm.get('state').setValue(data._state);
-                thisStatus.cardForm.get('zipCode').setValue(data._zip);
                 thisStatus.cardForm.get('country').setValue(data._country);
                 thisStatus.cardForm.get('CVCNumber').setValue(data._cvv);
+                thisStatus.cardForm.get('cardType').setValue(data._crdType);
+                //required to change to set selected values
+                thisStatus.cardForm.get('state').setValue(data._state);
                 thisStatus.cardForm.get('expMonth').setValue(data._months);
                 thisStatus.cardForm.get('expYear').setValue(data._year);
-                thisStatus.cardForm.get('cardType').setValue(data._crdType);
+                thisStatus.cardForm.get('zipCode').setValue(data._zip);
                 var cardType = data._crd.TrimStart('0').Substring(0, 1);
                 if (cardType == "3") {
                     thisStatus.cardForm.get('cardType').setValue("amex");
@@ -255,7 +263,7 @@ var PaymentComponent = /** @class */ (function () {
     };
     PaymentComponent.prototype.bindMonth = function () {
         this.expMonthData = [
-            { value: "0", label: "Month" },
+            //{ value: "0", label: "Month" },
             { value: "1", label: "January" },
             { value: "2", label: "February" },
             { value: "3", label: "March" },
@@ -269,7 +277,7 @@ var PaymentComponent = /** @class */ (function () {
             { value: "11", label: "November" },
             { value: "12", label: "December" },
         ];
-        this.startValueMonth = { value: "0", label: "Month" };
+        this.startValueMonth = { value: "1", label: "January" };
     };
     PaymentComponent.prototype.bindYear = function () {
         this.expYearData = [
@@ -285,7 +293,7 @@ var PaymentComponent = /** @class */ (function () {
             { 'value': "2027", 'label': "2027" },
             { 'value': "2028", 'label': "2028" },
         ];
-        this.startValueYear = "2018";
+        this.startValueYear = { 'value': "2018", 'label': "2018" };
     };
     PaymentComponent.prototype.submitCardForm = function () {
         var _this = this;
@@ -397,8 +405,12 @@ var PaymentComponent = /** @class */ (function () {
                 var docs = xml.find("States1");
                 var arrState = [];
                 //this.startValueState = '';
+                var thisStatus = _this;
                 //arrState.push({ "value": "-1", "label": "Select State" })
                 $.each(docs, function (i, docs) {
+                    if (i == 0) {
+                        thisStatus.startValueState = { "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() };
+                    }
                     arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
                 });
                 _this.stateData = arrState;
@@ -421,7 +433,11 @@ var PaymentComponent = /** @class */ (function () {
                     var arrState = [];
                     //arrState.push({ "value": "-1", "label": "Select State" });
                     //this.startValueZip = '';
+                    var thisStatus = _this;
                     $.each(docs, function (i, docs) {
+                        if (i == 0) {
+                            thisStatus.startValueZip = { "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() };
+                        }
                         arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
                     });
                     _this.zipCodeData = arrState;
