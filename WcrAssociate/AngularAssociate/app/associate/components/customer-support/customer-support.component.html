@@ -3,7 +3,7 @@
         <div aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item mg-t-5-f"><a href="#">customer support</a></li>
+                <li class="breadcrumb-item mg-t-0-f"><a href="#">customer support</a></li>
             </ol>
         </div>
         <h4 class="content-title content-title-xs mg-t-5-f">customer support</h4>
@@ -16,11 +16,11 @@
         <div class="container-cassie page">
 
             <div class="uk-background-primary uk-light">
-                <section class="tm-margin-large-top">
+                <section class="mg-t-60-f">
                     <div class="uk-container uk-text-center row">
                         <p class="uk-margin-remove-bottom tm-overtitle uk-margin-top uk-text-uppercase letter-spacing-l tx-20-f col-xs-12 col-sm-12" style="margin: 0 auto; text-align: center; margin: 0 auto; float: none; color: #000;    margin-top: 50px !important;">Welcome to help desk</p>
-                        <h2 class="uk-margin-small-top uk-heading-hero" style="    color: #000;font-size: 30px;    text-align: center;    margin: 0 auto;    float: none;    margin-bottom: 55px;">How can we help? Follow Steps</h2>
-                        <div class="uk-grid-medium uk-child-width-1-3@m uk-grid-small uk-grid-match tm-margin-large-top uk-text-center col-xs-12 col-sm-12" data-uk-grid>
+                        <h2 class="uk-margin-small-top uk-heading-hero" style="color:#686868" >How can we help? Follow Steps</h2>
+                        <div class="uk-grid-medium uk-child-width-1-3@m uk-grid-small uk-grid-match uk-text-center col-xs-12 col-sm-12" data-uk-grid>
                             <div class="col-xs col-xs-4">
                                 <a href="javascript:void(0)" class="uk-card uk-card-box uk-card-body uk-border-rounded" style="border: 1px solid rgba(207, 207, 207, 0.3);  box-shadow: 0 2px 7px 0 rgba(131, 146, 165, 0.15); background-color: #fff;">
                                     <span class="uk-icon-forder uk-border-rounded" style="border-color: #0e3a6b;"><i class="fa fa-comment" style="font-size: 40px;color: #0e3a6b;"></i></span>
@@ -44,9 +44,9 @@
                     <form [formGroup]="helpDeskForm" class="mg-t-40-f">
                         <p style="color:#ff0000; font-weight:600;" class="pd-lg-x-15 pd-l-50-f pd-r-100-f " [style.display]="isMessageTobeshown? 'block':'none'"> {{responseMessage}}</p>
                         <div class="col-xs-12 col-sm-12 pd-lg-x-15 pd-l-50-f mg-b-20-f">
-                            <label class="uk-form-label mg-b-10 tx-20-f tx-600" for="form-stacked-text" style="color:#000;">Message</label>
+                            <label class="uk-form-label mg-b-10 tx-20-f tx-600" for="form-stacked-text" style="color:#686868;">Message</label>
                             <div class="uk-form-controls">
-                                <textarea class="uk-textarea uk-form-large tm-form-xlarge uk-border-rounded" style="border-color: #000; color: #000;" id="form-textarea" formNameControl="message" placeholder="Enter your message" (blue)="logValidationErrors()"></textarea>
+                                <textarea class="uk-textarea uk-form-large tm-form-xlarge uk-border-rounded" style="border-color: #686868; color: #686868;" id="form-textarea" formNameControl="message" placeholder="Enter your message" (blue)="logValidationErrors()"></textarea>
                             </div>
                         </div>
                         <div class="uk-text col-xs-3 col-sm-2 pd-l-50-f">
@@ -60,11 +60,11 @@
                     <div class="uk-container">
                         <hr class="uk-margin-remove">
                         <div class="uk-flex-middle " data-uk-grid data-uk-scrollspy="cls: uk-animation-slide-bottom; repeat: true; delay: 100">
-                            <div class="col-xs-12 col-sm-12">
-                                <h3 class="tx-22-f " style="color:#000;">Didn't find an answer to your question?</h3>
+                            <div class="col-xs-12 col-sm-12 pd-l-0">
+                                <h3 class="tx-22-f " style="color:#686868;">Didn't find an answer to your question?</h3>
                             </div>
-                            <div class="col-xs-12 col-sm-12">
-                                <p class="tx-600 tx-xs-15-f tx-md-20-f" style="color:#000;" href="javascript:void(0)">Contact Us <i class="fa fa-phone"></i>: (USA : <span>866.456.7331</span>)</p>
+                            <div class="col-xs-12 col-sm-12 pd-l-0">
+                                <p class="tx-600 tx-xs-15-f tx-md-20-f" style="color:#686868;" href="javascript:void(0)">Contact Us <i class="fa fa-phone"></i>: (USA : <span>866.456.7331</span>)</p>
                             </div>
                         </div>
                     </div>

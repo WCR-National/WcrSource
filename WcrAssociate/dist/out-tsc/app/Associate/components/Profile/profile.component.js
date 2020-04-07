@@ -6,8 +6,9 @@ import * as $ from 'jquery';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { MessageService } from 'AngularAssociate/app/services/search';
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(route, router, profileService, xmlToJson, fb, modalService, cd) {
+    function ProfileComponent(route, router, profileService, xmlToJson, fb, modalService, cd, _messageService) {
         this.route = route;
         this.router = router;
         this.profileService = profileService;
@@ -15,6 +16,7 @@ var ProfileComponent = /** @class */ (function () {
         this.fb = fb;
         this.modalService = modalService;
         this.cd = cd;
+        this._messageService = _messageService;
         this.isFormVisible = true;
         this.isSubmitting = false;
         this.showErrorsPassword = false;
@@ -117,6 +119,10 @@ var ProfileComponent = /** @class */ (function () {
                         thisStatus.isFormVisible = true;
                         thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
                         thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
+                        thisStatus._messageService.filter('disable');
+                    }
+                    else {
+                        thisStatus._messageService.filter('enable');
                     }
                     thisStatus.isFormVisible = false;
                     thisStatus.FirstName = $(docs).find("FullName").text();
@@ -353,7 +359,8 @@ var ProfileComponent = /** @class */ (function () {
             templateUrl: './profile.component.html'
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, ProfileService,
-            XMLToJSON, FormBuilder, NgbModal, ChangeDetectorRef])
+            XMLToJSON, FormBuilder, NgbModal, ChangeDetectorRef,
+            MessageService])
     ], ProfileComponent);
     return ProfileComponent;
 }());

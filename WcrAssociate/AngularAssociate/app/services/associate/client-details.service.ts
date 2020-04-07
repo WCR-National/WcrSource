@@ -55,7 +55,7 @@ export class ClientDetailsService {
     getTotalSalesAndServicesCount(): Observable<any> {
 
         let urlToSalesCount: string = "Associate/ws/Sale.asmx/CountTotalVisitors";
-        return this.apiService.post(urlToSalesCount, { jobtype: 1 })
+        return this.apiService.post(urlToSalesCount, {})
             .pipe(map(
                 data => {
                     return data;

@@ -49,7 +49,28 @@ export class ClientDetailsComponent implements OnInit {
     }
 
     getServicesCount() {
+        this.dashboardService
+            .getServicesCount()
+            .subscribe(
+                data => {
+                    let countInterestedCutomers: string = '0';
+                    if (data.d.length > 0) {
 
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("TotalInterestedConsumers");
+                        var cartd = [];
+                        $.each(docs, function (i, docs) {
+
+                            countInterestedCutomers = $(docs).find("TotalCount").text();
+                        });
+                        //$("#interestedConsumer").html(cartd.join(''));
+                        this.servicesCount = countInterestedCutomers;
+
+                    } else {
+                        this.servicesCount = countInterestedCutomers;
+                    }
+                });
     }
 
     getSalesCount() {
@@ -79,7 +100,7 @@ export class ClientDetailsComponent implements OnInit {
 
     getTotalSalesAndServicesCount() {
         this.dashboardService
-            .getServicesCount()
+            .getTotalSalesAndServicesCount()
             .subscribe(
                 data => {
                     let countTotalCutomers: string = '0';
@@ -87,7 +108,7 @@ export class ClientDetailsComponent implements OnInit {
 
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
-                        var docs = xml.find("TotalInterestedConsumers");
+                        var docs = xml.find("TotalInterestedConsumer");
                         var cartd = [];
                         debugger;
                         $.each(docs, function (i, docs) {

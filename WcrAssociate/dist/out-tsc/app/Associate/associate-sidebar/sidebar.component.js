@@ -2,11 +2,13 @@ import * as tslib_1 from "tslib";
 import { Component, NgZone } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'AngularAssociate/app/services/search';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
 import * as $ from 'jquery';
 var SidebarComponent = /** @class */ (function () {
-    function SidebarComponent(route, router, userService, profileService, ngZone) {
+    function SidebarComponent(route, _messageService, router, userService, profileService, ngZone) {
         this.route = route;
+        this._messageService = _messageService;
         this.router = router;
         this.userService = userService;
         this.profileService = profileService;
@@ -24,6 +26,20 @@ var SidebarComponent = /** @class */ (function () {
             this.isDashboard = true;
         }
         this.validateMenuitems();
+        this._messageService.listen().subscribe(function (m) {
+            if (m == 'disable') {
+                for (var j = 2; j < 7; j++) {
+                    $(".nav-sidebar li").eq(j).addClass("diable-sidelink");
+                    $(".nav-sidebar li a").eq(j).addClass("diable-sidelink");
+                }
+            }
+            else {
+                for (var j = 2; j < 7; j++) {
+                    $(".nav-sidebar li").eq(j).removeClass("diable-sidelink");
+                    $(".nav-sidebar li a").eq(j).removeClass("diable-sidelink");
+                }
+            }
+        });
     };
     SidebarComponent.prototype.validateMenuitems = function () {
         var thisStatus = this;
@@ -38,6 +54,7 @@ var SidebarComponent = /** @class */ (function () {
                     if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
                         for (var j = 2; j < 7; j++) {
                             $(".nav-sidebar li").eq(j).addClass("diable-sidelink");
+                            $(".nav-sidebar li a").eq(j).addClass("diable-sidelink");
                         }
                         return;
                     }
@@ -64,7 +81,7 @@ var SidebarComponent = /** @class */ (function () {
             selector: 'associate-layout-sidebar',
             templateUrl: './sidebar.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, ProfileService, NgZone])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, MessageService, Router, UserService, ProfileService, NgZone])
     ], SidebarComponent);
     return SidebarComponent;
 }());

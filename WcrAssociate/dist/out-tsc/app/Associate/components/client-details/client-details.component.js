@@ -25,6 +25,26 @@ var ClientDetailsComponent = /** @class */ (function () {
         //this.deleteCustomerRecords();
     };
     ClientDetailsComponent.prototype.getServicesCount = function () {
+        var _this = this;
+        this.dashboardService
+            .getServicesCount()
+            .subscribe(function (data) {
+            var countInterestedCutomers = '0';
+            if (data.d.length > 0) {
+                var xmlDoc = $.parseXML(data.d);
+                var xml = $(xmlDoc);
+                var docs = xml.find("TotalInterestedConsumers");
+                var cartd = [];
+                $.each(docs, function (i, docs) {
+                    countInterestedCutomers = $(docs).find("TotalCount").text();
+                });
+                //$("#interestedConsumer").html(cartd.join(''));
+                _this.servicesCount = countInterestedCutomers;
+            }
+            else {
+                _this.servicesCount = countInterestedCutomers;
+            }
+        });
     };
     ClientDetailsComponent.prototype.getSalesCount = function () {
         var _this = this;
@@ -51,13 +71,13 @@ var ClientDetailsComponent = /** @class */ (function () {
     ClientDetailsComponent.prototype.getTotalSalesAndServicesCount = function () {
         var _this = this;
         this.dashboardService
-            .getServicesCount()
+            .getTotalSalesAndServicesCount()
             .subscribe(function (data) {
             var countTotalCutomers = '0';
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
-                var docs = xml.find("TotalInterestedConsumers");
+                var docs = xml.find("TotalInterestedConsumer");
                 var cartd = [];
                 debugger;
                 $.each(docs, function (i, docs) {

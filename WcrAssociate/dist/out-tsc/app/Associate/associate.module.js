@@ -27,6 +27,9 @@ import { PaymentService } from '../services/associate/payment.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { CustomerSupportService } from '../services/associate/customer-support.service';
+import { ListPropertiesComponent } from './components/list-properties/list-properties.component';
+import { BillingHistoryComponent } from './components/billing-history/billing-history.component';
+import { PurchaseZipCodeComponent } from './components/purchase-zip-code/purchase-zip-code.component';
 var AssociateModule = /** @class */ (function () {
     function AssociateModule() {
     }
@@ -40,7 +43,10 @@ var AssociateModule = /** @class */ (function () {
                 ProfileComponent,
                 ClientDetailsComponent,
                 PaymentComponent,
-                CustomerSupportComponent
+                CustomerSupportComponent,
+                ListPropertiesComponent,
+                BillingHistoryComponent,
+                PurchaseZipCodeComponent
             ],
             imports: [
                 CommonModule,

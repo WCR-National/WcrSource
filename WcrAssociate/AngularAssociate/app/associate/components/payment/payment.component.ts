@@ -119,17 +119,19 @@ export class PaymentComponent implements OnInit {
 
 
 
-    public startValueState: string;
-    public selectedState: string;
+    public startValueState = null;
+    public selectedState = null;
 
-    public startValueZip: string;
-    public selectedZip: string;
+    public startValueZip = null;
+    public selectedZip = null;
 
-    startValueMonth=null;
-    public selectedMonth: string;
+    public startValueMonth=null;
+    public selectedMonth = null;
 
-    public startValueYear: string;
-    public selectedYear: string;
+    public startValueYear = null;
+    public selectedYear = null;
+
+
 
     public crdId: string;
     public crd: string;
@@ -151,6 +153,8 @@ export class PaymentComponent implements OnInit {
     public isVisaOrMCOrAmexOrDisc: string = null;
 
     public cardTypeSelector: string;
+
+    public formErrorMessage = "";
     constructor(private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
         private fb: FormBuilder, ) {
 
@@ -207,7 +211,7 @@ export class PaymentComponent implements OnInit {
     }
 
     logValidationErrors(group: FormGroup = this.cardForm): void {
-
+        this.formErrorMessage = "";
         Object.keys(group.controls).forEach((key: string) => {
             const abstractControl = group.get(key);
             this.formErrors[key] = '';
@@ -288,13 +292,18 @@ export class PaymentComponent implements OnInit {
                         thisStatus.cardForm.get('lastName').setValue(data._sndName);
                         thisStatus.cardForm.get('address').setValue(data._Address);
                         thisStatus.cardForm.get('city').setValue(data._city);
-                        thisStatus.cardForm.get('state').setValue(data._state);
-                        thisStatus.cardForm.get('zipCode').setValue(data._zip);
                         thisStatus.cardForm.get('country').setValue(data._country);
                         thisStatus.cardForm.get('CVCNumber').setValue(data._cvv);
+                        thisStatus.cardForm.get('cardType').setValue(data._crdType);
+
+
+                        //required to change to set selected values
+                        thisStatus.cardForm.get('state').setValue(data._state);
                         thisStatus.cardForm.get('expMonth').setValue(data._months);
                         thisStatus.cardForm.get('expYear').setValue(data._year);
-                        thisStatus.cardForm.get('cardType').setValue(data._crdType);
+                        thisStatus.cardForm.get('zipCode').setValue(data._zip);
+
+
 
                         let cardType = data._crd.TrimStart('0').Substring(0, 1);
                         if (cardType == "3") {
@@ -338,7 +347,7 @@ export class PaymentComponent implements OnInit {
 
     bindMonth() {
         this.expMonthData = [
-            { value: "0", label: "Month" },
+            //{ value: "0", label: "Month" },
             { value: "1", label: "January" },
             { value: "2", label: "February" },
             { value: "3", label: "March" },
@@ -352,7 +361,7 @@ export class PaymentComponent implements OnInit {
             { value: "11", label: "November" },
             { value: "12", label: "December" },
         ];
-        this.startValueMonth = { value: "0", label: "Month" };
+        this.startValueMonth = { value: "1", label: "January" };
 
     }
 
@@ -370,10 +379,8 @@ export class PaymentComponent implements OnInit {
             { 'value': "2027", 'label': "2027" },
             { 'value': "2028", 'label': "2028" },
         ];
-        this.startValueYear = "2018";
+        this.startValueYear = { 'value': "2018", 'label': "2018" };
     }
-
-
 
     submitCardForm() {
         debugger;
@@ -404,6 +411,7 @@ export class PaymentComponent implements OnInit {
                     });
         }
         else {
+            this.formErrorMessage = "Please make sure, you entered correct data."; 
             this.logValidationErrors(this.cardForm);
             this.isSubmitting = false;
             return;
@@ -439,6 +447,7 @@ export class PaymentComponent implements OnInit {
                     });
         }
         else {
+            this.formErrorMessage = "Please make sure, you entered correct data."; 
             this.logValidationErrors(this.cardForm);
             this.isSubmitting = false;
         }
@@ -461,8 +470,8 @@ export class PaymentComponent implements OnInit {
             this.cardTypeSelector = "mastercard";
         }
         else if (cardNumber.charAt(0) == "6") {
-            this.isVisaOrMCOrAmexOrDisc = "doscover";
-            this.cardTypeSelector = "doscover";
+            this.isVisaOrMCOrAmexOrDisc = "discover";
+            this.cardTypeSelector = "discover";
         }
     }
 
@@ -501,12 +510,17 @@ export class PaymentComponent implements OnInit {
                         var docs = xml.find("States1");
                         var arrState = [];
                         //this.startValueState = '';
-
+                        var thisStatus = this;
                         //arrState.push({ "value": "-1", "label": "Select State" })
                         $.each(docs, function (i, docs) {
+                            if (i == 0) {
+                                thisStatus.startValueState = { "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() };
+                            }
+
                             arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
                         });
                         this.stateData = arrState;
+
                     }
                 }
             )
@@ -515,28 +529,35 @@ export class PaymentComponent implements OnInit {
     bindStateWiseZipCode(state, city) {
 
         debugger;
-        const countryId = "US";//this.cardForm.get('country').value;
-        this.paymentService
-            .bindStateWiseZipCode(state, city)
-            .subscribe(
-                data => {
-                    debugger;
+        if (state !== undefined) {
+            const countryId = "US";//this.cardForm.get('country').value;
+            this.paymentService
+                .bindStateWiseZipCode(state, city)
+                .subscribe(
+                    data => {
+                        debugger;
 
-                    if (data.d.length > 0) {
-                        var xmlDoc = $.parseXML(data.d);
-                        var xml = $(xmlDoc);
-                        var docs = xml.find("CityWiseZip");
-                        var arrState = [];
-                        //arrState.push({ "value": "-1", "label": "Select State" });
-                        //this.startValueZip = '';
+                        if (data.d.length > 0) {
+                            var xmlDoc = $.parseXML(data.d);
+                            var xml = $(xmlDoc);
+                            var docs = xml.find("CityWiseZip");
+                            var arrState = [];
+                            //arrState.push({ "value": "-1", "label": "Select State" });
+                            //this.startValueZip = '';
+                            var thisStatus = this;
+                            $.each(docs, function (i, docs) {
+                                if (i == 0) {
+                                    thisStatus.startValueZip= { "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() };
+                                }
 
-                        $.each(docs, function (i, docs) {
-                            arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
-                        });
-                        this.zipCodeData = arrState;
+                                arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
+                            });
+                            this.zipCodeData = arrState;
+                        }
                     }
-                }
-            )
+                )
+        }
+
     }
 
     editForm() {

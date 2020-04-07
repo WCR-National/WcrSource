@@ -15,10 +15,10 @@
 
             <li id="profileclick" class="nav-item" [ngClass]="{'active': (isProfile)}">
                 <!-- routerLink="/profile" -->
-                <a id="aProfile" routerLink="/associates/profile" class="nav-link with-sub" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><i data-feather="layout"></i>Profile</a>
+                <a id="aProfile"  class="nav-link with-sub" routerLink="/associates/profile" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><i data-feather="layout"></i>Profile</a>
             </li>
 
-            <li id="clientdetailclick" class="nav-item">
+            <li id="clientdetailclick" class="nav-item" routerLink="/associates/client-details" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                 <a href="ClientDetails.aspx" class="nav-link with-sub">
                     <!--<i>
                         <img src="img/icon_client-detail.png" alt="" />
@@ -28,7 +28,7 @@
             </li>
 
             <li id="crdclick" class="nav-item">
-                <a href="CreditCard.aspx" class="nav-link with-sub">
+                <a href="CreditCard.aspx" class="nav-link with-sub" routerLink="/associates/payment" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <!--<i>
                         <img src="img/icon_creadit_Card.png" alt="" />
                     </i>-->
@@ -37,7 +37,7 @@
             </li>
 
             <li id="billingclick" class="nav-item">
-                <a href="BillingHistory.aspx" class="nav-link with-sub">
+                <a href="BillingHistory.aspx" class="nav-link with-sub" routerLink="/associates/billing-history" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <!--<i>
                         <img src="img/icon_billing_history.png" alt="" />
                     </i>-->
@@ -46,7 +46,7 @@
             </li>
 
             <li id="postadtsclick" class="nav-item">
-                <a href="PostAdvertisement.aspx?pid=1" class="nav-link with-sub">
+                <a href="PostAdvertisement.aspx?pid=1" class="nav-link with-sub" routerLink="/associates/list-properties" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <!--<i>
                         <img src="img/icon_sale_advertisement.png" alt="" />
                     </i>-->
@@ -54,7 +54,7 @@
                 </a>
             </li>
 
-            <li id="zipcodeclick" class="nav-item">
+            <li id="zipcodeclick" class="nav-item" routerLink="/associates/purchase-zip-code" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                 <a href="ZipCodePurchase.aspx" class="nav-link with-sub">
                     <!--<i>
                         <img src="img/icon_purchase_zipcode.png" alt="" />
@@ -64,7 +64,7 @@
             </li>
 
             <li id="customerclick" class="nav-item">
-                <a href="CustomerSupport.aspx" class="nav-link with-sub">
+                <a href="CustomerSupport.aspx" class="nav-link with-sub" routerLink="/associates/customer-support" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
                     <!--<i>
                         <img src="img/icon_customer_support.png" alt="" />
                     </i>-->

@@ -443,7 +443,6 @@
             </ol>
         </div>
         <h4 class="content-title content-title-xs">Payment</h4>
-
     </div>
 </div><!-- content-header -->
 
@@ -453,7 +452,7 @@
             <div class="container-cassie page" style="background-color:#fff;">
 
                 <div class="row">
-
+                    <div class="col-sm-12" [style.display]="formErrorMessage != '' ? 'block': 'none'">{{formErrorMessage}}</div>
                     <div class="col-sm-12">
                         <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20" (ngSubmit)="submitCardForm()">
                             <fieldset>
@@ -462,7 +461,7 @@
                                 </div>
                                 <div class="col-s-12 col-sm-12">
                                     <div class="col-xs 12 col-sm-6">
-                                        <h2 class="title">Billing Info</h2>
+                                        <h2 class="title pd-l-15-f" >Billing Info</h2>
                                         <input type="hidden" formControlName="cardid" id="cardid" />
                                         <input type="hidden" formControlName="totalAmount" id="totalAmount" />
 
@@ -655,7 +654,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-sm-12 pd-l-45-force pd-r-0-force pull-xs-right pull-right">
+                                <div class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right">
                                     <div class="form-group">
                                         <div class="col-xs-3 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddOrUpdateButton ? 'block': 'none'">
                                             <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit" (click)="submitCardForm()">
@@ -716,7 +715,7 @@
                 <div class="col-sm-12 col-xl">
                     <div class="row">
                         <div class="col-sm-6 col-xl">
-                            <h2 class="tx-color-01 float-left">Billing And Credit Card Info</h2>
+                            <h2 class="tx-color-01 float-left mg-t-7-f">Billing And Credit Card Info</h2>
                         </div>
                         <div class="col-sm-6 col-xl">
                             <button style="position:relative;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit"></i> Edit </button>
@@ -778,7 +777,7 @@
                             </li>
 
                             <li class="media">
-                                <div class="wd-40 ht-40 bg-teal op-5"></div>
+                                <div class="wd-40 ht-40 bg-fuchsia-active op-5"></div>
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
@@ -790,7 +789,7 @@
                             </li>
 
                             <li class="media">
-                                <div class="wd-40 ht-40 bg-teal op-5"></div>
+                                <div class="wd-40 ht-40 bg-success-light op-5"></div>
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
@@ -802,7 +801,7 @@
                             </li>
 
                             <li class="media">
-                                <div class="wd-40 ht-40 bg-teal op-5"></div>
+                                <div class="wd-40 ht-40 bg-danger-light op-5"></div>
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
@@ -845,7 +844,7 @@
                             </li>
 
                             <li class="media">
-                                <div class="wd-40 ht-40 bg-green op-5"></div>
+                                <div class="wd-40 ht-40 bg-dark op-5"></div>
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
@@ -857,7 +856,7 @@
                             </li>
 
                             <li class="media">
-                                <div class="wd-40 ht-40 bg-teal op-5"></div>
+                                <div class="wd-40 ht-40 bg-black-7 op-5"></div>
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
@@ -869,7 +868,7 @@
                             </li>
 
                             <li class="media">
-                                <div class="wd-40 ht-40 bg-teal op-5"></div>
+                                <div class="wd-40 ht-40 bg-gray-9 op-5"></div>
                                 <div class="media-body">
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">

@@ -15,6 +15,7 @@ import { Observable, of } from 'rxjs';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { MessageService } from 'AngularAssociate/app/services/search';
 
 
 
@@ -89,7 +90,8 @@ export class ProfileComponent implements OnInit {
     closeResult: string;
 
     constructor(private route: ActivatedRoute, private router: Router, private profileService: ProfileService,
-        private xmlToJson: XMLToJSON, private fb: FormBuilder, private modalService: NgbModal, private cd: ChangeDetectorRef) { }
+        private xmlToJson: XMLToJSON, private fb: FormBuilder, private modalService: NgbModal, private cd: ChangeDetectorRef,
+        private _messageService: MessageService,) { }
 
     ngOnInit() {
         this.getUserDetails();
@@ -149,6 +151,10 @@ export class ProfileComponent implements OnInit {
                                 thisStatus.isFormVisible = true;
                                 thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
                                 thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
+                                thisStatus._messageService.filter('disable');
+                            }
+                            else {
+                                thisStatus._messageService.filter('enable');
                             }
                             thisStatus.isFormVisible = false;
 

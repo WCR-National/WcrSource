@@ -17,7 +17,7 @@ var HeaderComponent = /** @class */ (function () {
         });
     };
     HeaderComponent.prototype.onClickGetAds = function () {
-        this._messageService.filter('Register click');
+        this._messageService.filter('showAds');
     };
     HeaderComponent.prototype.onClickLogout = function () {
         var _this = this;

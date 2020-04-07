@@ -214,7 +214,7 @@ export class DashboardComponent implements OnInit {
                                 }
                                 else {
                                     if (dataJsonServices.NewDataSet == null) {
-                                        this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                                        this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet);
 
                                     }
                                     else {

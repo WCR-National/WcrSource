@@ -99,6 +99,7 @@ var PaymentComponent = /** @class */ (function () {
         this.expMonthData = null;
         this.startValueMonth = null;
         this.isVisaOrMCOrAmexOrDisc = null;
+        this.formErrorMessage = "";
     }
     PaymentComponent.prototype.ngOnInit = function () {
         debugger;
@@ -139,6 +140,7 @@ var PaymentComponent = /** @class */ (function () {
     PaymentComponent.prototype.logValidationErrors = function (group) {
         var _this = this;
         if (group === void 0) { group = this.cardForm; }
+        this.formErrorMessage = "";
         Object.keys(group.controls).forEach(function (key) {
             var abstractControl = group.get(key);
             _this.formErrors[key] = '';
@@ -311,6 +313,7 @@ var PaymentComponent = /** @class */ (function () {
             });
         }
         else {
+            this.formErrorMessage = "Please make sure, you entered correct data.";
             this.logValidationErrors(this.cardForm);
             this.isSubmitting = false;
             return;
@@ -342,6 +345,7 @@ var PaymentComponent = /** @class */ (function () {
             });
         }
         else {
+            this.formErrorMessage = "Please make sure, you entered correct data.";
             this.logValidationErrors(this.cardForm);
             this.isSubmitting = false;
         }
@@ -362,8 +366,8 @@ var PaymentComponent = /** @class */ (function () {
             this.cardTypeSelector = "mastercard";
         }
         else if (cardNumber.charAt(0) == "6") {
-            this.isVisaOrMCOrAmexOrDisc = "doscover";
-            this.cardTypeSelector = "doscover";
+            this.isVisaOrMCOrAmexOrDisc = "discover";
+            this.cardTypeSelector = "discover";
         }
     };
     PaymentComponent.prototype.changeCity = function () {
@@ -404,24 +408,26 @@ var PaymentComponent = /** @class */ (function () {
     PaymentComponent.prototype.bindStateWiseZipCode = function (state, city) {
         var _this = this;
         debugger;
-        var countryId = "US"; //this.cardForm.get('country').value;
-        this.paymentService
-            .bindStateWiseZipCode(state, city)
-            .subscribe(function (data) {
-            debugger;
-            if (data.d.length > 0) {
-                var xmlDoc = $.parseXML(data.d);
-                var xml = $(xmlDoc);
-                var docs = xml.find("CityWiseZip");
-                var arrState = [];
-                //arrState.push({ "value": "-1", "label": "Select State" });
-                //this.startValueZip = '';
-                $.each(docs, function (i, docs) {
-                    arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
-                });
-                _this.zipCodeData = arrState;
-            }
-        });
+        if (state !== undefined) {
+            var countryId = "US"; //this.cardForm.get('country').value;
+            this.paymentService
+                .bindStateWiseZipCode(state, city)
+                .subscribe(function (data) {
+                debugger;
+                if (data.d.length > 0) {
+                    var xmlDoc = $.parseXML(data.d);
+                    var xml = $(xmlDoc);
+                    var docs = xml.find("CityWiseZip");
+                    var arrState = [];
+                    //arrState.push({ "value": "-1", "label": "Select State" });
+                    //this.startValueZip = '';
+                    $.each(docs, function (i, docs) {
+                        arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
+                    });
+                    _this.zipCodeData = arrState;
+                }
+            });
+        }
     };
     PaymentComponent.prototype.editForm = function () {
         this.isCreditCardFormVisible = true;

@@ -175,7 +175,7 @@ var DashboardComponent = /** @class */ (function () {
                         }
                         else {
                             if (dataJsonServices.NewDataSet == null) {
-                                _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                                _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet);
                             }
                             else {
                                 _this.initialiseInterestedCustomerDataTable(undefined);

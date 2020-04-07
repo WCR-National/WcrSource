@@ -39,7 +39,9 @@ var HomeComponent = /** @class */ (function () {
         };
         this._messageService.listen().subscribe(function (m) {
             console.log(m);
-            _this.GetSalesAdts();
+            if (m == 'showAds') {
+                _this.GetSalesAdts();
+            }
         });
     }
     HomeComponent.prototype.ngOnInit = function () {

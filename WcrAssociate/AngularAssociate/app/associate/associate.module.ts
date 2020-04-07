@@ -33,6 +33,9 @@ import { Select2Module } from 'ng2-select2';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { CustomerSupportService } from '../services/associate/customer-support.service';
+import { ListPropertiesComponent } from './components/list-properties/list-properties.component';
+import { BillingHistoryComponent } from './components/billing-history/billing-history.component';
+import { PurchaseZipCodeComponent } from './components/purchase-zip-code/purchase-zip-code.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +46,10 @@ import { CustomerSupportService } from '../services/associate/customer-support.s
         ProfileComponent,
         ClientDetailsComponent,
         PaymentComponent,
-        CustomerSupportComponent
+        CustomerSupportComponent,
+        ListPropertiesComponent,
+        BillingHistoryComponent,
+        PurchaseZipCodeComponent
     ],
     imports: [
         CommonModule,

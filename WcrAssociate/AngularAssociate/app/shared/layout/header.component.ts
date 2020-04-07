@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
         );
     }
     onClickGetAds() {
-        this._messageService.filter('Register click');
+        this._messageService.filter('showAds');
     }
 
     onClickLogout() {

@@ -690,27 +690,27 @@ export class AuthComponent implements OnInit {
                 (data: any) => {
                     if (data.d == "1") {
 
-                        //if ($(docs).find("Mobile").text() == '') {
-                        //    if (this.returnUrl != '') {
-                        //        this.ngZone.run(() => this.router.navigate([this.returnUrl]));
-                        //        //this.router.navigate([this.returnUrl]);
-                        //    }
-                        //    else {
-                        //        this.ngZone.run(() => this.router.navigate(['/associates/profile']));
-                        //       // this.router.navigateByUrl();       
-                        //    }
-                        //    //this.router.navigateByUrl('/associate');       
-                        //    //$(location).attr('href', 'Associate/ViewProfile.aspx');
-                        //}
-                        //else {
-                        //    //$(location).attr('href', 'Associate/ViewProfile.aspx');
+                        if ($(docs).find("Mobile").text() == '') {
+                            if (this.returnUrl != '') {
+                                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+                                //this.router.navigate([this.returnUrl]);
+                            }
+                            else {
+                                this.ngZone.run(() => this.router.navigate(['/associates/profile']));
+                               // this.router.navigateByUrl();       
+                            }
+                            //this.router.navigateByUrl('/associate');       
+                            //$(location).attr('href', 'Associate/ViewProfile.aspx');
+                        }
+                        else {
+                            //$(location).attr('href', 'Associate/ViewProfile.aspx');
 
-                        //    this.ngZone.run(() => this.router.navigate(['/associates']));
-                        //    //this.router.navigateByUrl('/associates');       
-                        //    //$(location).attr('href', 'Associate/Dashboard.aspx');
-                        //}
+                            this.ngZone.run(() => this.router.navigate(['/associates']));
+                            //this.router.navigateByUrl('/associates');       
+                            //$(location).attr('href', 'Associate/Dashboard.aspx');
+                        }
 
-                        $(location).attr('href', 'Associate/ViewProfile.aspx');
+                        //$(location).attr('href', 'Associate/ViewProfile.aspx');
 
                     }
                 },

@@ -39,7 +39,7 @@ var ClientDetailsService = /** @class */ (function () {
     }; //interested consumer sales
     ClientDetailsService.prototype.getTotalSalesAndServicesCount = function () {
         var urlToSalesCount = "Associate/ws/Sale.asmx/CountTotalVisitors";
-        return this.apiService.post(urlToSalesCount, { jobtype: 1 })
+        return this.apiService.post(urlToSalesCount, {})
             .pipe(map(function (data) {
             return data;
         }));

@@ -9794,7 +9794,7 @@ textarea.form-control {
     margin-bottom: 20px;
 }
 
-.form-fieldset {
+/*.form-fieldset {
     background-color: #fff;
     border: 1px solid rgba(230, 231, 239, 0.85);
     padding: 20px 25px 25px;
@@ -9817,7 +9817,7 @@ textarea.form-control {
         color: #212b35;
         letter-spacing: .5;
         margin-bottom: 0;
-    }
+    }*/
 
 .row-sm {
     margin-left: -10px;
@@ -70944,6 +70944,7 @@ fieldset:disabled a.btn {
     cursor: not-allowed;
     opacity: 0.5;
     text-decoration: none;
+    pointer-events:none;
 }
 
 .btn, .btn-large, .btn-small,
@@ -71029,7 +71030,7 @@ fieldset:disabled a.btn {
 
     .btn:focus, .btn-large:focus, .btn-small:focus,
     .btn-floating:focus {
-        background-color: #1d7d74;
+        background-color: #0e3a6b;
     }
 
 .btn, .btn-large, .btn-small {

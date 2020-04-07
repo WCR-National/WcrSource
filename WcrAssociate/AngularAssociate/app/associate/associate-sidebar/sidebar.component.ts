@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
     isProfile: boolean = false;
     isDashboard: boolean = false;
 
-    constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private profileService: ProfileService, private ngZone: NgZone) { }
+    constructor(private route: ActivatedRoute, private _messageService: MessageService, private router: Router, private userService: UserService, private profileService: ProfileService, private ngZone: NgZone) { }
 
     ngOnInit() {
         if (location.origin.includes("profile")) {
@@ -31,6 +31,21 @@ export class SidebarComponent implements OnInit {
             this.isDashboard = true;
         }
         this.validateMenuitems();
+
+        this._messageService.listen().subscribe((m: any) => {
+            if (m == 'disable') {
+                for (var j = 2; j < 7; j++) {
+                    $(".nav-sidebar li").eq(j).addClass("diable-sidelink");
+                    $(".nav-sidebar li a").eq(j).addClass("diable-sidelink");
+                }
+            }
+            else {
+                for (var j = 2; j < 7; j++) {
+                    $(".nav-sidebar li").eq(j).removeClass("diable-sidelink");
+                    $(".nav-sidebar li a").eq(j).removeClass("diable-sidelink");
+                }
+            }
+        })
     }
 
     validateMenuitems() {
@@ -49,6 +64,7 @@ export class SidebarComponent implements OnInit {
 
                                 for (var j = 2; j < 7; j++) {
                                     $(".nav-sidebar li").eq(j).addClass("diable-sidelink");
+                                    $(".nav-sidebar li a").eq(j).addClass("diable-sidelink");
                                 }
                                 return;
                             }
