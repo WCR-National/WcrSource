@@ -153,11 +153,11 @@ export class ProfileComponent implements OnInit {
                                 thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
                                 thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
                                 thisStatus._messageService.filter('disable');
-                                thisStatus.isHideInformation = true;
+                                thisStatus.isHideInformation = false;
                             }
                             else {
                                 thisStatus._messageService.filter('enable');
-                                thisStatus.isHideInformation = false;
+                                thisStatus.isHideInformation = true;
 
                             }
                             thisStatus.isFormVisible = false;
