@@ -14,6 +14,7 @@ import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 
 import * as $ from 'jquery';
 import 'datatables.net';
+import { MessageService } from 'AngularAssociate/app/services/search';
 
 
 
@@ -27,8 +28,10 @@ export class DashboardComponent implements OnInit {
     selectedCategories: string = '';
     myPropertyListings: string = '';
     myZipCodes: string = '';
+    showInformation = false;
 
-    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private xmlToJson: XMLToJSON) {
+
+    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private xmlToJson: XMLToJSON, private _messageService: MessageService) {
 
     }
     ngOnInit() {
@@ -54,6 +57,16 @@ export class DashboardComponent implements OnInit {
         this.attemptToZipcodeData();
 
         this.attemptToAllAdvertisement();
+
+
+        this._messageService.listen().subscribe((m: any) => {
+            if (m == 'hide-info-dashboard') {
+                this.showInformation = false;
+            }
+            else if (m == 'show-info-dashboard') {
+                this.showInformation = true;
+            }
+        })
     }
 
     attemptToCountInterestedCustomers() {

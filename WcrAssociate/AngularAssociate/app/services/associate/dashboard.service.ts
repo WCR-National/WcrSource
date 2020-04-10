@@ -182,6 +182,7 @@ export class DashboardService {
         return this.apiService.post(urlToDeleteCustomerRecords, { ID: id})
             .pipe(map(
                 data => {
+                    debugger;
                     return data;
                 }
             ));

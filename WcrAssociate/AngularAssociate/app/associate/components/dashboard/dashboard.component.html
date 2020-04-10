@@ -7,7 +7,16 @@
             </ol>
         </div>
         <h4 class="content-title content-title-xs">Welcome to Dashboard</h4>
-
+        <div [style.display]="showInformation ? 'block':'none'" id="info1">
+            <h5>
+                <strong> Your dashboard shows details of activity regarding your listings displayed below. </strong>
+            </h5>
+            <ul>
+                <li> Interested customers are displayed in the ‘My Clients’ section. </li>
+                <li>  Your current Property Listings are displayed in the ‘My Property Listings’ section. </li>
+                <li> The ‘My Zip Codes’ sections displays which zip codes you are offering your services in. </li>
+            </ul>
+        </div>
     </div>
 </div><!-- content-header -->
 

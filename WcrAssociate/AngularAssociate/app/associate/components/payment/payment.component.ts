@@ -121,15 +121,19 @@ export class PaymentComponent implements OnInit {
 
     public startValueState = null;
     public selectedState = null;
+    public g_selectedState = null;
 
     public startValueZip = null;
     public selectedZip = null;
+    public g_selectedZip = null;
 
     public startValueMonth=null;
     public selectedMonth = null;
+    public g_selectedMonth = null;
 
     public startValueYear = null;
     public selectedYear = null;
+    public g_selectedYear = null;
 
 
 
@@ -268,6 +272,7 @@ export class PaymentComponent implements OnInit {
                         if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
                             this.isAddOrUpdateButton = false;
                             this.isCreditCardFormVisible = false;
+                            return false;
                         }
 
                         this.crdId = data._crdID;
@@ -298,12 +303,15 @@ export class PaymentComponent implements OnInit {
 
 
                         //required to change to set selected values
-                        thisStatus.cardForm.get('state').setValue(data._state);
-                        thisStatus.cardForm.get('expMonth').setValue(data._months);
-                        thisStatus.cardForm.get('expYear').setValue(data._year);
-                        thisStatus.cardForm.get('zipCode').setValue(data._zip);
+                        //thisStatus.cardForm.get('state').setValue(data._state);
+                        //thisStatus.cardForm.get('expMonth').setValue(data._months);
+                        //thisStatus.cardForm.get('expYear').setValue(data._year);
+                        //thisStatus.cardForm.get('zipCode').setValue(data._zip);
 
-
+                        //thisStatus.startValueState = { "": "", "": "" };
+                        //thisStatus.startValueZip = { "": "", "": "" };
+                        //thisStatus.startValueMonth = { "": "", "": "" };
+                        //thisStatus.startValueYear = { "": "", "": "" };
 
                         let cardType = data._crd.TrimStart('0').Substring(0, 1);
                         if (cardType == "3") {
@@ -361,7 +369,12 @@ export class PaymentComponent implements OnInit {
             { value: "11", label: "November" },
             { value: "12", label: "December" },
         ];
-        this.startValueMonth = { value: "1", label: "January" };
+        if (this.expMonth != "" && this.expMonth !== undefined) {
+            this.startValueMonth = [this.expMonth];//{ value: "1", label: "January" };
+        }
+        else {
+            this.startValueMonth = { value: "1", label: "January" };
+        }
 
     }
 
@@ -379,7 +392,12 @@ export class PaymentComponent implements OnInit {
             { 'value': "2027", 'label': "2027" },
             { 'value': "2028", 'label': "2028" },
         ];
-        this.startValueYear = { 'value': "2018", 'label': "2018" };
+        if (this.expYear != "" && this.expYear !== undefined) {
+            this.startValueYear = [this.expYear];//{ value: "1", label: "January" };
+        }
+        else {
+            this.startValueYear = { 'value': "2018", 'label': "2018" };
+        }
     }
 
     submitCardForm() {
@@ -512,14 +530,28 @@ export class PaymentComponent implements OnInit {
                         //this.startValueState = '';
                         var thisStatus = this;
                         //arrState.push({ "value": "-1", "label": "Select State" })
+                        var val = "";
+                        var label = "";
                         $.each(docs, function (i, docs) {
                             if (i == 0) {
-                                thisStatus.startValueState = { "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() };
+                                val = $(docs).find("stateid").text();
+                                label = $(docs).find("stateid").text();
+                                //thisStatus.startValueState = { "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() };
                             }
-
                             arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
                         });
                         this.stateData = arrState;
+
+                        if (this.state != "" && this.state !== undefined) {
+                            this.startValueState = [this.state];//{ value: "1", label: "January" };
+                            if (this.city != "" && this.city !== undefined)
+                            {
+                                this.bindStateWiseZipCode(this.state, this.city);
+                            }
+                        }
+                        else {
+                            this.startValueState = { 'value': val, 'label': label };
+                        }
 
                     }
                 }
@@ -545,14 +577,26 @@ export class PaymentComponent implements OnInit {
                             //arrState.push({ "value": "-1", "label": "Select State" });
                             //this.startValueZip = '';
                             var thisStatus = this;
+                            var val = "";
+                            var label = "";
                             $.each(docs, function (i, docs) {
-                                if (i == 0) {
-                                    thisStatus.startValueZip= { "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() };
+                                if (i == 0)
+                                {
+                                    val = $(docs).find("zipcode").text();
+                                    label = $(docs).find("zipcode").text();
+                                    //thisStatus.startValueZip= { "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() };
                                 }
 
                                 arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
                             });
                             this.zipCodeData = arrState;
+
+                            if (this.state != "" && this.state !== undefined) {
+                                this.startValueZip = [this.state];//{ value: "1", label: "January" };
+                            }
+                            else {
+                                this.startValueZip = { 'value': val, 'label': label };
+                            }
                         }
                     }
                 )

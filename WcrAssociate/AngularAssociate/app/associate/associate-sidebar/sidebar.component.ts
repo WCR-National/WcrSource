@@ -39,7 +39,8 @@ export class SidebarComponent implements OnInit {
                     $(".nav-sidebar li a").eq(j).addClass("diable-sidelink");
                 }
             }
-            else {
+            else if (m == 'enable')
+            {
                 for (var j = 2; j < 7; j++) {
                     $(".nav-sidebar li").eq(j).removeClass("diable-sidelink");
                     $(".nav-sidebar li a").eq(j).removeClass("diable-sidelink");
@@ -66,7 +67,15 @@ export class SidebarComponent implements OnInit {
                                     $(".nav-sidebar li").eq(j).addClass("diable-sidelink");
                                     $(".nav-sidebar li a").eq(j).addClass("diable-sidelink");
                                 }
+
+                                thisStatus._messageService.filter('show-info-dashboard');
+
                                 return;
+                            }
+                            else {
+                                thisStatus._messageService.filter('hide-info-dashboard');
+                                return;
+
                             }
                             
                         });

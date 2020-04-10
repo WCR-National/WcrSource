@@ -137,9 +137,16 @@ export class ClientDetailsComponent implements OnInit {
 
                         var xmlDoc = $.parseXML(data.d);
                         var json = this.xmlToJson.xml2json(xmlDoc, "");
+                        var resultJson :any = [];
                         var dataJson = JSON.parse(json);
 
+
                         if (dataJson.NewDataSet != null) {
+
+                            if (!Array.isArray(dataJson.NewDataSet.InterestedConsumer)) {
+                                resultJson.push(dataJson.NewDataSet.InterestedConsumer);
+                                dataJson.NewDataSet.InterestedConsumer = resultJson;
+                            }
                             this.initializedDataTableSales(dataJson.NewDataSet.InterestedConsumer);
 
                         }
@@ -154,6 +161,7 @@ export class ClientDetailsComponent implements OnInit {
     }
 
     initializedDataTableSales(asyncData) {
+        console.log(asyncData);
         let dTable: any = $('#sales');
         let thisStatus: any = this;
         if (asyncData === undefined) {
@@ -245,9 +253,15 @@ export class ClientDetailsComponent implements OnInit {
 
                         var xmlDoc = $.parseXML(data.d);
                         var json = this.xmlToJson.xml2json(xmlDoc, "");
-                        var dataJson = JSON.parse(json);
-
+                        var resultJson : any = [];
+                        var dataJson  = JSON.parse(json);
+                     
                         if (dataJson.NewDataSet != null) {
+                            if (!Array.isArray(dataJson.NewDataSet.InterestedConsumerser))
+                            {
+                                resultJson.push(dataJson.NewDataSet.InterestedConsumerser);
+                                dataJson.NewDataSet.InterestedConsumerser = resultJson;
+                            }
                             this.initializedDataTableServices(dataJson.NewDataSet.InterestedConsumerser);
 
                         }
@@ -262,6 +276,8 @@ export class ClientDetailsComponent implements OnInit {
     }
 
     initializedDataTableServices(asyncData) {
+        console.log(asyncData);
+
         let dTable: any = $('#services');
         let thisStatus: any = this;
         if (asyncData === undefined) {
@@ -270,7 +286,7 @@ export class ClientDetailsComponent implements OnInit {
                 'name': '',
                 'Mob': "",
                 'EmailID': "",
-                'title': "",
+                'zipcode': "",
                 'categoryName': "",
 
             };
@@ -291,7 +307,7 @@ export class ClientDetailsComponent implements OnInit {
                     data: "EmailID",
                 },
                 {
-                    data: "title",
+                    data: "zipcode",
                 },
                 {
                     data: "categoryName",
