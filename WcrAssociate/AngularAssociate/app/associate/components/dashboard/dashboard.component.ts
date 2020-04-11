@@ -60,43 +60,15 @@ export class DashboardComponent implements OnInit {
         this.attemptToAllAdvertisement();
 
 
-        this._messageService.listen().subscribe((m: any) => {
-            if (m == 'hide-info-dashboard') {
-                this.showInformation = false;
-            }
-            else if (m == 'show-info-dashboard') {
-                this.showInformation = true;
-            }
-        })
+        //this._messageService.listen().subscribe((m: any) => {
+        //    if (m == 'hide-info-dashboard') {
+        //        this.showInformation = false;
+        //    }
+        //    else if (m == 'show-info-dashboard') {
+        //        this.showInformation = true;
+        //    }
+        //})
     }
-
-    validateMenuitems() {
-        let thisStatus: any = this;
-        this.profileService
-            .getUserDetails()
-            .subscribe(
-                data => {
-                    var thisStatus: any = this;
-                    if (data.d.length > 0) {
-                        var xmlDoc = $.parseXML(data.d);
-                        var xml = $(xmlDoc);
-                        var docs = xml.find("ViewAssociateBasicDetail");
-                        $.each(docs, function (i, docs) {
-
-                            if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
-                                thisStatus.showInformation = true;
-                                return;
-                            }
-                            else {
-                                thisStatus.showInformation = false;
-                                return;
-                            }
-
-                        });
-                    }
-                });
-    }
-
 
     attemptToCountInterestedCustomers() {
         this.dashboardService

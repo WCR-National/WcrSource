@@ -68,12 +68,12 @@ export class SidebarComponent implements OnInit {
                                     $(".nav-sidebar li a").eq(j).addClass("diable-sidelink");
                                 }
 
-                                thisStatus._messageService.filter('show-info-dashboard');
+                                //thisStatus._messageService.filter('show-info-dashboard');
 
                                 return;
                             }
                             else {
-                                thisStatus._messageService.filter('hide-info-dashboard');
+                                //thisStatus._messageService.filter('hide-info-dashboard');
                                 return;
 
                             }

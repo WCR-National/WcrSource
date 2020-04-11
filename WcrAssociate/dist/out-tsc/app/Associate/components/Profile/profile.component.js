@@ -23,7 +23,7 @@ var ProfileComponent = /** @class */ (function () {
         this.isProfileFormVisible = false;
         this.profileImagePath = "";
         this.isProfileImageFormVisisble = false;
-        this.isHideInformation = true;
+        this.showInformation = false;
         this.validationMessages = {
             'password': {
                 'required': 'Password is required',
@@ -121,11 +121,11 @@ var ProfileComponent = /** @class */ (function () {
                         thisStatus.profileForm.get('email').setValue($(docs).find("Email").text());
                         thisStatus.profileForm.get('password').setValue($(docs).find("Password").text());
                         thisStatus._messageService.filter('disable');
-                        thisStatus.isHideInformation = true;
+                        thisStatus.showInformation = true;
                     }
                     else {
                         thisStatus._messageService.filter('enable');
-                        thisStatus.isHideInformation = false;
+                        thisStatus.showInformation = false;
                     }
                     thisStatus.isFormVisible = false;
                     thisStatus.FirstName = $(docs).find("FullName").text();

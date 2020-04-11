@@ -102,8 +102,13 @@ var ClientDetailsComponent = /** @class */ (function () {
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var resultJson = [];
                 var dataJson = JSON.parse(json);
                 if (dataJson.NewDataSet != null) {
+                    if (!Array.isArray(dataJson.NewDataSet.InterestedConsumer)) {
+                        resultJson.push(dataJson.NewDataSet.InterestedConsumer);
+                        dataJson.NewDataSet.InterestedConsumer = resultJson;
+                    }
                     _this.initializedDataTableSales(dataJson.NewDataSet.InterestedConsumer);
                 }
                 else {
@@ -114,6 +119,7 @@ var ClientDetailsComponent = /** @class */ (function () {
         });
     };
     ClientDetailsComponent.prototype.initializedDataTableSales = function (asyncData) {
+        console.log(asyncData);
         var dTable = $('#sales');
         var thisStatus = this;
         if (asyncData === undefined) {
@@ -196,8 +202,13 @@ var ClientDetailsComponent = /** @class */ (function () {
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
+                var resultJson = [];
                 var dataJson = JSON.parse(json);
                 if (dataJson.NewDataSet != null) {
+                    if (!Array.isArray(dataJson.NewDataSet.InterestedConsumerser)) {
+                        resultJson.push(dataJson.NewDataSet.InterestedConsumerser);
+                        dataJson.NewDataSet.InterestedConsumerser = resultJson;
+                    }
                     _this.initializedDataTableServices(dataJson.NewDataSet.InterestedConsumerser);
                 }
                 else {
@@ -208,6 +219,7 @@ var ClientDetailsComponent = /** @class */ (function () {
         });
     };
     ClientDetailsComponent.prototype.initializedDataTableServices = function (asyncData) {
+        console.log(asyncData);
         var dTable = $('#services');
         var thisStatus = this;
         if (asyncData === undefined) {
@@ -216,7 +228,7 @@ var ClientDetailsComponent = /** @class */ (function () {
                 'name': '',
                 'Mob': "",
                 'EmailID': "",
-                'title': "",
+                'zipcode': "",
                 'categoryName': "",
             };
         }
@@ -236,7 +248,7 @@ var ClientDetailsComponent = /** @class */ (function () {
                     data: "EmailID",
                 },
                 {
-                    data: "title",
+                    data: "zipcode",
                 },
                 {
                     data: "categoryName",

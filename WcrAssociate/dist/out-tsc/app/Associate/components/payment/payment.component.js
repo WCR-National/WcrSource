@@ -99,12 +99,16 @@ var PaymentComponent = /** @class */ (function () {
         this.expMonthData = null;
         this.startValueState = null;
         this.selectedState = null;
+        this.g_selectedState = null;
         this.startValueZip = null;
         this.selectedZip = null;
+        this.g_selectedZip = null;
         this.startValueMonth = null;
         this.selectedMonth = null;
+        this.g_selectedMonth = null;
         this.startValueYear = null;
         this.selectedYear = null;
+        this.g_selectedYear = null;
         this.isVisaOrMCOrAmexOrDisc = null;
         this.formErrorMessage = "";
     }
@@ -199,6 +203,7 @@ var PaymentComponent = /** @class */ (function () {
                 if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
                     _this.isAddOrUpdateButton = false;
                     _this.isCreditCardFormVisible = false;
+                    return false;
                 }
                 _this.crdId = data._crdID;
                 _this.crd = data._crd;
@@ -223,10 +228,14 @@ var PaymentComponent = /** @class */ (function () {
                 thisStatus.cardForm.get('CVCNumber').setValue(data._cvv);
                 thisStatus.cardForm.get('cardType').setValue(data._crdType);
                 //required to change to set selected values
-                thisStatus.cardForm.get('state').setValue(data._state);
-                thisStatus.cardForm.get('expMonth').setValue(data._months);
-                thisStatus.cardForm.get('expYear').setValue(data._year);
-                thisStatus.cardForm.get('zipCode').setValue(data._zip);
+                //thisStatus.cardForm.get('state').setValue(data._state);
+                //thisStatus.cardForm.get('expMonth').setValue(data._months);
+                //thisStatus.cardForm.get('expYear').setValue(data._year);
+                //thisStatus.cardForm.get('zipCode').setValue(data._zip);
+                //thisStatus.startValueState = { "": "", "": "" };
+                //thisStatus.startValueZip = { "": "", "": "" };
+                //thisStatus.startValueMonth = { "": "", "": "" };
+                //thisStatus.startValueYear = { "": "", "": "" };
                 var cardType = data._crd.TrimStart('0').Substring(0, 1);
                 if (cardType == "3") {
                     thisStatus.cardForm.get('cardType').setValue("amex");
@@ -277,7 +286,12 @@ var PaymentComponent = /** @class */ (function () {
             { value: "11", label: "November" },
             { value: "12", label: "December" },
         ];
-        this.startValueMonth = { value: "1", label: "January" };
+        if (this.expMonth != "" && this.expMonth !== undefined) {
+            this.startValueMonth = [this.expMonth]; //{ value: "1", label: "January" };
+        }
+        else {
+            this.startValueMonth = { value: "1", label: "January" };
+        }
     };
     PaymentComponent.prototype.bindYear = function () {
         this.expYearData = [
@@ -293,7 +307,12 @@ var PaymentComponent = /** @class */ (function () {
             { 'value': "2027", 'label': "2027" },
             { 'value': "2028", 'label': "2028" },
         ];
-        this.startValueYear = { 'value': "2018", 'label': "2018" };
+        if (this.expYear != "" && this.expYear !== undefined) {
+            this.startValueYear = [this.expYear]; //{ value: "1", label: "January" };
+        }
+        else {
+            this.startValueYear = { 'value': "2018", 'label': "2018" };
+        }
     };
     PaymentComponent.prototype.submitCardForm = function () {
         var _this = this;
@@ -407,13 +426,26 @@ var PaymentComponent = /** @class */ (function () {
                 //this.startValueState = '';
                 var thisStatus = _this;
                 //arrState.push({ "value": "-1", "label": "Select State" })
+                var val = "";
+                var label = "";
                 $.each(docs, function (i, docs) {
                     if (i == 0) {
-                        thisStatus.startValueState = { "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() };
+                        val = $(docs).find("stateid").text();
+                        label = $(docs).find("stateid").text();
+                        //thisStatus.startValueState = { "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() };
                     }
                     arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
                 });
                 _this.stateData = arrState;
+                if (_this.state != "" && _this.state !== undefined) {
+                    _this.startValueState = [_this.state]; //{ value: "1", label: "January" };
+                    if (_this.city != "" && _this.city !== undefined) {
+                        _this.bindStateWiseZipCode(_this.state, _this.city);
+                    }
+                }
+                else {
+                    _this.startValueState = { 'value': val, 'label': label };
+                }
             }
         });
     };
@@ -434,13 +466,23 @@ var PaymentComponent = /** @class */ (function () {
                     //arrState.push({ "value": "-1", "label": "Select State" });
                     //this.startValueZip = '';
                     var thisStatus = _this;
+                    var val = "";
+                    var label = "";
                     $.each(docs, function (i, docs) {
                         if (i == 0) {
-                            thisStatus.startValueZip = { "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() };
+                            val = $(docs).find("zipcode").text();
+                            label = $(docs).find("zipcode").text();
+                            //thisStatus.startValueZip= { "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() };
                         }
                         arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
                     });
                     _this.zipCodeData = arrState;
+                    if (_this.state != "" && _this.state !== undefined) {
+                        _this.startValueZip = [_this.state]; //{ value: "1", label: "January" };
+                    }
+                    else {
+                        _this.startValueZip = { 'value': val, 'label': label };
+                    }
                 }
             });
         }
