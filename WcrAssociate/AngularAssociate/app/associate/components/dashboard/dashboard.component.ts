@@ -15,6 +15,7 @@ import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import * as $ from 'jquery';
 import 'datatables.net';
 import { MessageService } from 'AngularAssociate/app/services/search';
+import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
 
 
 
@@ -31,7 +32,7 @@ export class DashboardComponent implements OnInit {
     showInformation = false;
 
 
-    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private xmlToJson: XMLToJSON, private _messageService: MessageService) {
+    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private xmlToJson: XMLToJSON, private profileService: ProfileService, private _messageService: MessageService) {
 
     }
     ngOnInit() {
@@ -68,6 +69,34 @@ export class DashboardComponent implements OnInit {
             }
         })
     }
+
+    validateMenuitems() {
+        let thisStatus: any = this;
+        this.profileService
+            .getUserDetails()
+            .subscribe(
+                data => {
+                    var thisStatus: any = this;
+                    if (data.d.length > 0) {
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("ViewAssociateBasicDetail");
+                        $.each(docs, function (i, docs) {
+
+                            if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
+                                thisStatus.showInformation = true;
+                                return;
+                            }
+                            else {
+                                thisStatus.showInformation = false;
+                                return;
+                            }
+
+                        });
+                    }
+                });
+    }
+
 
     attemptToCountInterestedCustomers() {
         this.dashboardService
