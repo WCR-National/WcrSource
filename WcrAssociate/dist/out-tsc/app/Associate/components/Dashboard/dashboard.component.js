@@ -22,7 +22,6 @@ var DashboardComponent = /** @class */ (function () {
         this.showInformation = false;
     }
     DashboardComponent.prototype.ngOnInit = function () {
-        var _this = this;
         $.fn.dataTable.ext.errMode = 'none';
         this.attemptToCountInterestedCustomers();
         this.attemptToCountAssociateCategories();
@@ -35,38 +34,14 @@ var DashboardComponent = /** @class */ (function () {
         this.attemptToMyPropertyListingsData();
         this.attemptToZipcodeData();
         this.attemptToAllAdvertisement();
-        this._messageService.listen().subscribe(function (m) {
-            if (m == 'hide-info-dashboard') {
-                _this.showInformation = false;
-            }
-            else if (m == 'show-info-dashboard') {
-                _this.showInformation = true;
-            }
-        });
-    };
-    DashboardComponent.prototype.validateMenuitems = function () {
-        var _this = this;
-        var thisStatus = this;
-        this.profileService
-            .getUserDetails()
-            .subscribe(function (data) {
-            var thisStatus = _this;
-            if (data.d.length > 0) {
-                var xmlDoc = $.parseXML(data.d);
-                var xml = $(xmlDoc);
-                var docs = xml.find("ViewAssociateBasicDetail");
-                $.each(docs, function (i, docs) {
-                    if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
-                        thisStatus.showInformation = true;
-                        return;
-                    }
-                    else {
-                        thisStatus.showInformation = false;
-                        return;
-                    }
-                });
-            }
-        });
+        //this._messageService.listen().subscribe((m: any) => {
+        //    if (m == 'hide-info-dashboard') {
+        //        this.showInformation = false;
+        //    }
+        //    else if (m == 'show-info-dashboard') {
+        //        this.showInformation = true;
+        //    }
+        //})
     };
     DashboardComponent.prototype.attemptToCountInterestedCustomers = function () {
         var _this = this;

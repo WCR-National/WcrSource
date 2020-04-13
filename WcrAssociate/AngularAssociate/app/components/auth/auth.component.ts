@@ -400,6 +400,17 @@ export class AuthComponent implements OnInit {
                                                 thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials"
                                             }
                                             else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
+                                                thisStatus.request = credentials.email;
+                                                thisStatus.encryptUsingAES256()
+                                                let encryptedEmail = thisStatus.encrypted;
+                                                encryptedEmail.replace('/', '~');
+
+                                                thisStatus.request = credentials.passwordGroup.password;
+                                                thisStatus.encryptUsingAES256()
+                                                let encryptedPassword = thisStatus.encrypted;
+                                                encryptedPassword.replace('/', '~');
+
+                                                thisStatus.router.navigate(['activate', '2', encryptedEmail, encryptedPassword]);
 
                                             }
                                             else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
@@ -413,7 +424,19 @@ export class AuthComponent implements OnInit {
                                     }
                                 });
                         }
-                        else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "0") {
+                        else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "0")
+                        {
+                            thisStatus.request = credentials.email;
+                            thisStatus.encryptUsingAES256()
+                            let encryptedEmail = thisStatus.encrypted;
+                            encryptedEmail.replace('/', '~');
+
+                            thisStatus.request = credentials.passwordGroup.password;
+                            thisStatus.encryptUsingAES256()
+                            let encryptedPassword = thisStatus.encrypted;
+                            encryptedPassword.replace('/', '~');
+
+                            thisStatus.router.navigate(['activate', '1', encryptedEmail, encryptedPassword]);
 
                             // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
                         }
@@ -615,6 +638,17 @@ export class AuthComponent implements OnInit {
                                             }
                                             else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
 
+                                                thisStatus.request = credentials.email;
+                                                thisStatus.encryptUsingAES256()
+                                                let encryptedEmail = thisStatus.encrypted;
+                                                encryptedEmail.replace('/', '~');
+
+                                                thisStatus.request = credentials.passwordGroup.password;
+                                                thisStatus.encryptUsingAES256()
+                                                let encryptedPassword = thisStatus.encrypted;
+                                                encryptedPassword.replace('/', '~');
+
+                                                thisStatus.router.navigate(['activate', '2', encryptedEmail, encryptedPassword]);
                                             }
                                             else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
 
@@ -628,6 +662,17 @@ export class AuthComponent implements OnInit {
                                 });
                         }
                         else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "0") {
+                            thisStatus.request = credentials.email;
+                            thisStatus.encryptUsingAES256()
+                            let encryptedEmail = thisStatus.encrypted;
+                            encryptedEmail.replace('/', '~');
+
+                            thisStatus.request = credentials.passwordGroup.password;
+                            thisStatus.encryptUsingAES256()
+                            let encryptedPassword = thisStatus.encrypted;
+                            encryptedPassword.replace('/', '~');
+
+                            thisStatus.router.navigate(['activate', '1', encryptedEmail, encryptedPassword]);
 
                             // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
                         }
