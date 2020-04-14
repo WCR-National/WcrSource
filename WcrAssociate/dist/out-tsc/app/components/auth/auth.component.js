@@ -311,7 +311,15 @@ var AuthComponent = /** @class */ (function () {
                                     thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
                                 }
                                 else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
-                                    thisStatus.router.navigate(['activate', '2', credentials.email, credentials.passwordGroup.password]);
+                                    thisStatus.request = credentials.email;
+                                    thisStatus.encryptUsingAES256();
+                                    var encryptedEmail = thisStatus.encrypted;
+                                    encryptedEmail.replace('/', '~');
+                                    thisStatus.request = credentials.passwordGroup.password;
+                                    thisStatus.encryptUsingAES256();
+                                    var encryptedPassword = thisStatus.encrypted;
+                                    encryptedPassword.replace('/', '~');
+                                    thisStatus.router.navigate(['activate', '2', encryptedEmail, encryptedPassword]);
                                 }
                                 else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
                                     thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
@@ -324,7 +332,15 @@ var AuthComponent = /** @class */ (function () {
                     });
                 }
                 else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "0") {
-                    thisStatus.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
+                    thisStatus.request = credentials.email;
+                    thisStatus.encryptUsingAES256();
+                    var encryptedEmail = thisStatus.encrypted;
+                    encryptedEmail.replace('/', '~');
+                    thisStatus.request = credentials.passwordGroup.password;
+                    thisStatus.encryptUsingAES256();
+                    var encryptedPassword = thisStatus.encrypted;
+                    encryptedPassword.replace('/', '~');
+                    thisStatus.router.navigate(['activate', '1', encryptedEmail, encryptedPassword]);
                     // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
                 }
                 else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "1") {
@@ -494,7 +510,15 @@ var AuthComponent = /** @class */ (function () {
                                     thisStatus.loginErrorMessage = "User Authentication Failed. Please verify your credentials";
                                 }
                                 else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "0") {
-                                    thisStatus.router.navigate(['activate', '2', credentials.email, credentials.passwordGroup.password]);
+                                    thisStatus.request = credentials.email;
+                                    thisStatus.encryptUsingAES256();
+                                    var encryptedEmail = thisStatus.encrypted;
+                                    encryptedEmail.replace('/', '~');
+                                    thisStatus.request = credentials.passwordGroup.password;
+                                    thisStatus.encryptUsingAES256();
+                                    var encryptedPassword = thisStatus.encrypted;
+                                    encryptedPassword.replace('/', '~');
+                                    thisStatus.router.navigate(['activate', '2', encryptedEmail, encryptedPassword]);
                                 }
                                 else if ($(docs1).find("Status").text() == "0" && $(docs1).find("IsEmailVerified").text() == "1") {
                                     thisStatus.loginErrorMessage = "Your Account has been deactivated. Contact support at: support@wcrnational.com or 866.456.7331";
@@ -507,7 +531,15 @@ var AuthComponent = /** @class */ (function () {
                     });
                 }
                 else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "0") {
-                    thisStatus.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
+                    thisStatus.request = credentials.email;
+                    thisStatus.encryptUsingAES256();
+                    var encryptedEmail = thisStatus.encrypted;
+                    encryptedEmail.replace('/', '~');
+                    thisStatus.request = credentials.passwordGroup.password;
+                    thisStatus.encryptUsingAES256();
+                    var encryptedPassword = thisStatus.encrypted;
+                    encryptedPassword.replace('/', '~');
+                    thisStatus.router.navigate(['activate', '1', encryptedEmail, encryptedPassword]);
                     // window.location.href = "UserAccountActivation.aspx?email=" + uname + "&uType=" + lbluserType.value + "&aid=" + $(docs).find("AccountId").text();
                 }
                 else if ($(docs).find("Status").text() == "0" && $(docs).find("IsEmailVerified").text() == "1") {
