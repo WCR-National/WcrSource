@@ -469,10 +469,11 @@ namespace WcrAssociate.ws
                         objectCardData._months = cardEncrypt.WcrDecrypt(dt.Rows[0]["ExpMonth"].ToString());
                         objectCardData._year = cardEncrypt.WcrDecrypt(dt.Rows[0]["ExpYear"].ToString());
                         objectCardData._crdType = cardEncrypt.WcrDecrypt(dt.Rows[0]["CardType"].ToString());
+                        string cardNumber = (objectCardData._crd).ToString().TrimStart('0').Substring(0, 1);
+                        objectCardData._crd = (objectCardData._crd).ToString().TrimStart('0');
+                        objectCardData.a = cardNumber;
 
-                        objectCardData.a = objectCardData._crd.TrimStart('0').Substring(0, 1);
-
-                        return objectCardData.toString();
+                        return objectCardData.ToString();
                         //hidCardID.Text = _crdID;
                         //string a = _crd.Substring(0, 1);
                         //if (a == "3")

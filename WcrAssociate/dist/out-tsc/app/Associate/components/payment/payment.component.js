@@ -199,67 +199,87 @@ var PaymentComponent = /** @class */ (function () {
         this.paymentService
             .getCardAndBillinInfo()
             .subscribe(function (data) {
-            if (data != "" && data != undefined && data != null && data != "-1") {
+            debugger;
+            if (data != "" && data != undefined && data != null && data != "-1" && data != -1) {
                 if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
+                    debugger;
                     _this.isAddOrUpdateButton = false;
                     _this.isCreditCardFormVisible = false;
+                    _this.crdId = data._crdID;
+                    _this.crd = data._crd;
+                    _this.firstName = data._fstName;
+                    _this.lastName = data._sndName;
+                    _this.address = data._Address;
+                    _this.city = data._city;
+                    _this.state = data._state;
+                    _this.country = data._country;
+                    _this.zipCode = data._zip;
+                    _this.cardNumber = data._crd;
+                    _this.expYear = data._year;
+                    _this.CVCNumber = data._cvv;
+                    _this.cardType = data._crdType;
+                    _this.expMonth = data._months;
+                    thisStatus.cardForm.get('cardid').setValue(data._crdID);
+                    thisStatus.cardForm.get('cardNumber').setValue(data._crd);
+                    thisStatus.cardForm.get('firstName').setValue(data._fstName);
+                    thisStatus.cardForm.get('lastName').setValue(data._sndName);
+                    thisStatus.cardForm.get('address').setValue(data._Address);
+                    thisStatus.cardForm.get('city').setValue(data._city);
+                    thisStatus.cardForm.get('country').setValue(data._country);
+                    thisStatus.cardForm.get('CVCNumber').setValue(data._cvv);
+                    thisStatus.cardForm.get('cardType').setValue(data._crdType);
+                    thisStatus.startValueYear = { value: data._year, label: data._year };
+                    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                    var selectedMonthName = months[data._months];
+                    thisStatus.startValueMonth = { value: data.months, label: selectedMonthName };
+                    _this.bindState();
+                    _this.bindStateWiseZipCode(data._state, data._city);
+                    setTimeout(function () {
+                        thisStatus.startValueState = { value: data._state, label: data._state };
+                    }, 3000);
+                    setTimeout(function () {
+                        thisStatus.startValueZip = { value: data._zip, label: data._zip };
+                    }, 4000);
+                    //required to change to set selected values
+                    //thisStatus.cardForm.get('expYear').setValue(data._year);
+                    //thisStatus.cardForm.get('zipCode').setValue(data._zip
+                    //thisStatus.cardForm.get('state').setValue(thisStatus.startValueState);
+                    //thisStatus.startValueZip = { "": "", "": "" };
+                    //
+                    //thisStatus.startValueMonth = { "": "", "": "" };
+                    //thisStatus.cardForm.get('expMonth').setValue(data._months);
+                    var cardType = data._crd.substring(0, 1);
+                    if (cardType == "3") {
+                        thisStatus.cardForm.get('cardType').setValue("amex");
+                        //CheckBox3.Checked = true;
+                    }
+                    else if (cardType == "6") {
+                        _this.cardType = "discover";
+                        thisStatus.cardForm.get('cardType').setValue("discover");
+                        //CheckBox4.Checked = true;
+                    }
+                    else if (cardType == "5") {
+                        _this.cardType = "mastercard";
+                        thisStatus.cardForm.get('cardType').setValue("mastercard");
+                        //CheckBox2.Checked = true;
+                    }
+                    else if (cardType == "4") {
+                        _this.cardType = "visa";
+                        thisStatus.cardForm.get('cardType').setValue("visa");
+                        //CheckBox1.Checked = true;
+                    }
+                    else {
+                        _this.cardType = "amex";
+                        thisStatus.cardForm.get('cardType').setValue("amex");
+                        //CheckBox3.Checked = true;
+                    }
                     return false;
                 }
-                _this.crdId = data._crdID;
-                _this.crd = data._crd;
-                _this.firstName = data._fstName;
-                _this.lastName = data._sndName;
-                _this.address = data._Address;
-                _this.city = data._city;
-                _this.state = data._state;
-                _this.country = data._country;
-                _this.zipCode = data._zip;
-                _this.cardNumber = data._crd;
-                _this.expMonth = data._months;
-                _this.expYear = data._year;
-                _this.CVCNumber = data._cvv;
-                thisStatus.cardForm.get('cardid').setValue(data._crdID);
-                thisStatus.cardForm.get('cardNumber ').setValue(data._crd);
-                thisStatus.cardForm.get('firstName').setValue(data._fstName);
-                thisStatus.cardForm.get('lastName').setValue(data._sndName);
-                thisStatus.cardForm.get('address').setValue(data._Address);
-                thisStatus.cardForm.get('city').setValue(data._city);
-                thisStatus.cardForm.get('country').setValue(data._country);
-                thisStatus.cardForm.get('CVCNumber').setValue(data._cvv);
-                thisStatus.cardForm.get('cardType').setValue(data._crdType);
-                //required to change to set selected values
-                //thisStatus.cardForm.get('state').setValue(data._state);
-                //thisStatus.cardForm.get('expMonth').setValue(data._months);
-                //thisStatus.cardForm.get('expYear').setValue(data._year);
-                //thisStatus.cardForm.get('zipCode').setValue(data._zip);
-                //thisStatus.startValueState = { "": "", "": "" };
-                //thisStatus.startValueZip = { "": "", "": "" };
-                //thisStatus.startValueMonth = { "": "", "": "" };
-                //thisStatus.startValueYear = { "": "", "": "" };
-                var cardType = data._crd.TrimStart('0').Substring(0, 1);
-                if (cardType == "3") {
-                    thisStatus.cardForm.get('cardType').setValue("amex");
-                    //CheckBox3.Checked = true;
-                }
-                else if (cardType == "6") {
-                    _this.cardType = "discover";
-                    thisStatus.cardForm.get('cardType').setValue("discover");
-                    //CheckBox4.Checked = true;
-                }
-                else if (cardType == "5") {
-                    _this.cardType = "mastercard";
-                    thisStatus.cardForm.get('cardType').setValue("mastercard");
-                    //CheckBox2.Checked = true;
-                }
-                else if (cardType == "4") {
-                    _this.cardType = "visa";
-                    thisStatus.cardForm.get('cardType').setValue("visa");
-                    //CheckBox1.Checked = true;
-                }
                 else {
-                    _this.cardType = "amex";
-                    thisStatus.cardForm.get('cardType').setValue("amex");
-                    //CheckBox3.Checked = true;
+                    _this.bindState();
+                    thisStatus.cardForm.get('country').setValue("US");
+                    _this.isAddOrUpdateButton = true;
+                    _this.isCreditCardFormVisible = true;
                 }
             }
             else {

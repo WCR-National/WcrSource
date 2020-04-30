@@ -149,6 +149,7 @@
     <Content Include="AngularAssociate\assets\images\img25.jpg" />
     <Content Include="AngularAssociate\assets\images\mastercard_logo.png" />
     <Content Include="AngularAssociate\assets\images\notfound.png" />
+    <Content Include="AngularAssociate\assets\images\registration.png" />
     <Content Include="AngularAssociate\assets\images\visa_logo.jpg" />
     <Content Include="AngularAssociate\assets\js\bootstrap.bundle.min.js" />
     <Content Include="AngularAssociate\assets\js\croppie.min.js" />

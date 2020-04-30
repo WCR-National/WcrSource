@@ -72093,6 +72093,7 @@ fieldset:disabled a.btn {
 
     .spinner-white, .spinner-white-only {
         color: #ffffff !important;
+        border-color:#fff;
     }
     /*----------------------------------- */
     /* Footer
