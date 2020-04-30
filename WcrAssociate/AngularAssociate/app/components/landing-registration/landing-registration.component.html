@@ -1,10 +1,10 @@
 
 
 <div class="col-xs-12 col-sm-12 pd-l-0 pd-r-0">
-    <div class="col-xs-12 col-sm-6 pd-l-0-f signup-sidebar-css pd-t-50 pd-b-0">
+    <div class="col-xs-12 col-sm-6 pd-l-0-f signup-sidebar-css pd-t-50 pd-b-70">
         <div class="col-sm-12">
             <div class="pd-l-0">
-                <h4 class="signup-title">Create New Account!</h4>
+                <h3 class="signup-title">Create New Account!</h3>
                 <h5 class="signup-subtitle">It's free and only takes a minute.</h5>
                 <h5 [style.display]="formErrorMessage != null ? 'block':'none'">{{formErrorMessage}}</h5>
                 <form [formGroup]="authForm"  autocomplete="off" >
@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="form-group d-flex mg-b-0">
-                            <button class="btn btn-brand-01 btn-uppercase btn-block">Create New Account</button>
+                            <button class="btn btn-brand-01 btn-uppercase btn-block" style="width: 100%; padding-top: 0px;">Create New Account</button>
                         </div>
 
 
@@ -129,14 +129,14 @@
 
 
     </div><!-- signup-sidebar -->
-    <div class="col-xs-12 col-sm-6 hidden-xs overlay-image pd-l-0 pd-r-0" style="    background: -webkit-linear-gradient(left, #3931af, #00c6ff);">
+    <div class="col-xs-12 col-sm-6 hidden-xs overlay-image pd-l-0 pd-r-0" style="background:#f9f9fd">
 
-        <div class="content align-item-center register-left pd-r-100 pd-b-200" style="margin:0 auto;">
-            <img style="width:15%;" src="https://image.ibb.co/n7oTvU/logo_white.png" alt="">
-            <h2 style="color:#fff;" class="pd-xs-l-40 pd-sm-l-70 pd-l-100 pd-xs-r-80 pd-sm-r-110 pd-r-150">Welcome to WCR National</h2>
+        <div class="content align-item-center register-left pd-b-200" style="margin:0 auto;">
+            <h3 class="pd-xs-l-40 pd-t-50 pd-sm-l-70 pd-l-100 pd-xs-r-80 pd-sm-r-110 pd-r-150">Welcome to WCR National</h3>
+            <p class="pd-xs-l-40 pd-sm-l-5 pd-l-5 pd-xs-r-80 pd-sm-r-20 pd-r-150 text-center" style="color: rgba(55, 56, 87, 0.6);  font-size: 16px;">Aroma wings est doppio black et fair trade seasonal breve. Cortado organic coffee, single shot, roast cappuccino mocha single origin doppio. Half and half.</p>
 
-            <p class="pd-xs-l-40 pd-sm-l-70 pd-l-100 pd-xs-r-80 pd-sm-r-110 pd-r-150">Aroma wings est doppio black et fair trade seasonal breve. Cortado organic coffee, single shot, roast cappuccino mocha single origin doppio. Half and half, roast, espresso roast decaffeinated aromatic, con panna froth grounds grinder sweet. Wings fair trade extraction lungo, irish cappuccino skinny saucer wings.</p>
-            </div>
+            <img src="AngularAssociate/assets/images/registration.png" />
+        </div>
 
     </div>
 </div><!-- signup-panel -->
