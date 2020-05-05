@@ -104,7 +104,7 @@ export class CustomerSupportComponent implements OnInit {
                             this.isFormVisible = false;
                             this.isSubmitting = false;
                             this.isMessageTobeshown = true;
-
+                               
                         }
                         else {
                             this.isMessageTobeshown = true;
