@@ -30,7 +30,8 @@ export class CustomerSupportService {
 
 
     submitMessageCustomerSupport(message) {
-        let urlToCountAssociateCategories: string = "ws/AssociateSupport.asmx/AssociateSupportQuery";
+        debugger;
+        let urlToCountAssociateCategories: string = "Associate/ws/AssociateSupport.asmx/AssociateSupportQuery";
         return this.apiService.post(urlToCountAssociateCategories, { 'Messg': message})
             .pipe(map(
                 data => {

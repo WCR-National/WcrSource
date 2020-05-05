@@ -57,6 +57,11 @@ const routes: Routes = [
                 component: LandingRegistrationComponent,
                 canActivate: [NoAuthGuard]
             },
+            {
+                path: 'landing-registration-activate/:id/:email/:password',
+                component: LandingRegistrationComponent,
+                canActivate: [NoAuthGuard]
+            },
         ]
     }
 ];

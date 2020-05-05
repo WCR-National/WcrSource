@@ -238,7 +238,11 @@ export class ClientDetailsComponent implements OnInit {
             thisStatus.dashboardService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(
-                    data => { });
+                    data => {
+                        thisStatus.getClientDetailsSalesData();
+                        thisStatus.getSalesCount();
+                        thisStatus.getTotalSalesAndServicesCount();
+                    });
 
         });
     }
@@ -351,7 +355,11 @@ export class ClientDetailsComponent implements OnInit {
             thisStatus.dashboardService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(
-                    data => { });
+                    data => {
+                        thisStatus.getClientDetailsServicesData();
+                        thisStatus.getServicesCount();
+                        thisStatus.getTotalSalesAndServicesCount();
+                    });
         });
     }
 

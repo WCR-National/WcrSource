@@ -432,6 +432,14 @@
         align-items: baseline;
         min-height: 44.5px;
     }
+    .ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
 </style>
 
 <div class="content-header justify-content-between pd-b-20-f">
@@ -439,10 +447,10 @@
         <div aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item"><a href="#">Payment</a></li>
+                <li class="breadcrumb-item"><a href="#">Credit card</a></li>
             </ol>
         </div>
-        <h4 class="content-title content-title-xs">Payment</h4>
+        <h4 class="content-title content-title-xs">Credit card</h4>
     </div>
 </div><!-- content-header -->
 
@@ -454,9 +462,9 @@
         <div class="auth-page mg-b-60-force" [style.display]="(isCreditCardFormVisible) ? 'block':'none'">
             <div class="container-cassie page" style="background-color:#fff;">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12">
-                        <div id="info" class="pd-l-15-f">
-                            <p>
+                    <div class="col-xs-12 col-sm-12 pd-t-50-f">
+                        <div id="info" class="pd-l-35-f">
+                            <p style="font-size: 17px; font-weight: 400; color: #2b2b2b;">
                                 Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br />
                             </p>
                         </div>
@@ -465,14 +473,14 @@
                 <div class="row">
                     <div class="col-sm-12" [style.display]="formErrorMessage != '' ? 'block': 'none'">{{formErrorMessage}}</div>
                     <div class="col-sm-12">
-                        <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20" (ngSubmit)="submitCardForm()">
+                        <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20">
                             <fieldset>
                                 <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
                                     {{formError}}
                                 </div>
                                 <div class="col-s-12 col-sm-12">
                                     <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-xs-r-0">
-                                        <h2 class="title pd-l-15-f" >Billing Info</h2>
+                                        <h2 class="tx-color-01 pd-l-15-f float-left mg-t-7-f pd-b-30-f">Credit Card Information</h2>
                                         <input type="hidden" formControlName="cardid" id="cardid" />
                                         <input type="hidden" formControlName="totalAmount" id="totalAmount" />
 
@@ -567,7 +575,6 @@
                                     </div>
 
                                     <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-xs-r-0">
-                                        <h2 class="title">Credit Card Info</h2>
 
 
 
@@ -726,16 +733,16 @@
                 <div class="col-sm-12 col-xl">
                     <div class="row">
                         <div class="col-sm-6 col-xl">
-                            <h2 class="tx-color-01 float-left mg-t-7-f">Billing And Credit Card Info</h2>
+                            <h2 class="tx-color-01 float-left mg-t-7-f"></h2>
                         </div>
                         <div class="col-sm-6 col-xl">
                             <button style="position:relative;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit"></i> Edit </button>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12">
-                    <div id="info" class="pd-l-15-f">
-                        <p> Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br /></p>         
+                <div class="col-xs-12 col-sm-12  pd-t-50-f">
+                    <div id="info" class="pd-l-35-f">
+                        <p  style="font-size: 17px; font-weight: 400; color: #2b2b2b;"> Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br /></p>         
                     </div>
                 </div>
                 <hr class="mg-y-15 op-0">
@@ -749,7 +756,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row ">
                                             <div class="col-sm-6 tx-semibold pd-t-7">First Name  (<i class="fa fa-user"></i>) </div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{firstName}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{firstName}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -761,7 +768,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">Last Name  (<i class="fa fa-user"></i>) </div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{lastName}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{lastName}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -773,7 +780,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">Address  (<i class="fa fa-home"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{address}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{address}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -785,7 +792,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">city  (<i class="fa fa-building-o"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{city}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{city}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -797,7 +804,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">state  (<i class="fa fa-certificate"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{state}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{state}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -809,7 +816,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">country  (<i class="fa fa-flag"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{country}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{country}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -821,7 +828,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">zip code  (<i class="fa fa-map-marker"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{zipCode}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{zipCode}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -840,7 +847,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row ">
                                             <div class="col-sm-6 tx-semibold pd-t-7">Card Type  (<i class="fa fa-check"></i>) </div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{cardType}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{cardType}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -852,7 +859,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">Card Number  (<i class="fa fa-credit-card"></i>) </div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{cardNumber}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{cardNumber}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -864,7 +871,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">Expired Month  (<i class="fa fa-calendar"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{expMonth}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{expMonth}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -876,7 +883,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">Expired Year  (<i class="fa fa-calendar-o"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{expYear}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{expYear}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -888,7 +895,7 @@
                                     <div class="col-sm-12 col-xl">
                                         <div class="row">
                                             <div class="col-sm-6 tx-semibold pd-t-7">CVV / CVC *  (<i class="fa fa-sort-amount-asc"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-13">  <h6 class="mg-b-5 "></h6> {{CVCNumber}}</div>
+                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{CVCNumber}}</div>
                                         </div>
                                     </div>
                                 </div>

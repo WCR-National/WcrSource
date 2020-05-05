@@ -231,7 +231,7 @@ var PaymentComponent = /** @class */ (function () {
                     thisStatus.startValueYear = { value: data._year, label: data._year };
                     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                     var selectedMonthName = months[data._months];
-                    thisStatus.startValueMonth = { value: data.months, label: selectedMonthName };
+                    thisStatus.startValueMonth = { value: data._months, label: selectedMonthName };
                     _this.bindState();
                     _this.bindStateWiseZipCode(data._state, data._city);
                     setTimeout(function () {

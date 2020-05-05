@@ -64,6 +64,7 @@ var CustomerSupportComponent = /** @class */ (function () {
     };
     CustomerSupportComponent.prototype.submmitHelpDeskForm = function () {
         var _this = this;
+        debugger;
         this.isSubmitting = true;
         if (this.helpDeskForm.valid) {
             var credentials = this.helpDeskForm.value;

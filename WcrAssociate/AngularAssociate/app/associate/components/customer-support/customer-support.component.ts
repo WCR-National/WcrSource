@@ -89,6 +89,7 @@ export class CustomerSupportComponent implements OnInit {
     }
 
     submmitHelpDeskForm() {
+        debugger;
         this.isSubmitting = true;
 
         if (this.helpDeskForm.valid) {
@@ -99,10 +100,10 @@ export class CustomerSupportComponent implements OnInit {
                 .subscribe(
                     data => {
                         if (data.d.length > 0) {
-                            this.responseMessage = "Your support issue has been succesfully sent!!!.A support representative will contact you within 24 - 48 business hours.";
+                            this.responseMessage = "Your support issue has been succesfully sent!!!. <br/>A support representative will contact you within 24 - 48 business hours.";
                             this.isFormVisible = false;
                             this.isSubmitting = false;
-                            this.isMessageTobeshown = false;
+                            this.isMessageTobeshown = true;
 
                         }
                         else {

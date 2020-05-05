@@ -311,7 +311,7 @@ export class PaymentComponent implements OnInit {
 
                             var selectedMonthName = months[data._months];
 
-                            thisStatus.startValueMonth = { value: data.months, label: selectedMonthName };
+                            thisStatus.startValueMonth = { value: data._months, label: selectedMonthName };
 
                             this.bindState();
                             this.bindStateWiseZipCode(data._state, data._city);
@@ -485,7 +485,8 @@ export class PaymentComponent implements OnInit {
                             $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
                             this.isCreditCardFormVisible = true;
                         }
-                        else if (data == "0") {
+                        else if (data == "0" || data == 0) {
+                            this.getCardDataDetails();
                             $("#lbldetail").text("Your credit card info has been Inserted Successfully.")
                             this.isCreditCardFormVisible = false;
                         }

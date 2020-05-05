@@ -190,7 +190,11 @@ var ClientDetailsComponent = /** @class */ (function () {
             dTable.api().row($(this).parents('tr')).remove().draw(false);
             thisStatus.dashboardService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
-                .subscribe(function (data) { });
+                .subscribe(function (data) {
+                thisStatus.getClientDetailsSalesData();
+                thisStatus.getSalesCount();
+                thisStatus.getTotalSalesAndServicesCount();
+            });
         });
     };
     ClientDetailsComponent.prototype.getClientDetailsServicesData = function () {
@@ -286,7 +290,11 @@ var ClientDetailsComponent = /** @class */ (function () {
             dTable.api().row($(this).parents('tr')).remove().draw(false);
             thisStatus.dashboardService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
-                .subscribe(function (data) { });
+                .subscribe(function (data) {
+                thisStatus.getClientDetailsServicesData();
+                thisStatus.getServicesCount();
+                thisStatus.getTotalSalesAndServicesCount();
+            });
         });
     };
     ClientDetailsComponent.prototype.deleteCustomerRecords = function (id) {
