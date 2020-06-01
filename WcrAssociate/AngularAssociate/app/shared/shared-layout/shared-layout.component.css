@@ -5934,7 +5934,7 @@ body.keyboard-focused .dropdown-content li:focus {
     z-index: -1;
 }
 
-.modal {
+/*.modal {
     display: none;
     position: fixed;
     left: 0;
@@ -6025,7 +6025,7 @@ body.keyboard-focused .dropdown-content li:focus {
     max-height: 45%;
     border-radius: 0;
     will-change: bottom, opacity;
-}
+}*/
 
 .collapsible {
     border-top: 1px solid #ddd;

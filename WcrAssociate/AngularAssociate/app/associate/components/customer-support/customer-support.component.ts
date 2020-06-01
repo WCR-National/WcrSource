@@ -16,6 +16,7 @@ import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerSupportService } from 'AngularAssociate/app/services/associate/customer-support.service';
+import { debug } from 'util';
 
 
 
@@ -34,11 +35,13 @@ export class CustomerSupportComponent implements OnInit {
     isFormVisible: boolean = true;
     responseMessage: string = "";
     isMessageTobeshown: boolean = false;
+    ifMessageEmpty: boolean = true;
     //@ViewChild('fileInput') el: ElementRef;
 
     validationMessages = {
         'message': {
-            'required': 'First Name is required'
+            'required': 'First Name is required',
+            'hasHtmlTags': 'Invalid, Data entered.'
         }
     }
 
@@ -50,15 +53,25 @@ export class CustomerSupportComponent implements OnInit {
         private xmlToJson: XMLToJSON, private fb: FormBuilder, private modalService: NgbModal, private cd: ChangeDetectorRef) { }
 
     ngOnInit() {
-        debugger;
         this.setValidationOnForm();
+
+        this.helpDeskForm.get('message').valueChanges.subscribe((data) => {
+            debugger;
+            if (data == "") {
+                this.ifMessageEmpty = true;
+            }
+            else {
+                this.ifMessageEmpty = false;
+            }
+        });
     }
 
     setValidationOnForm() {
 
         this.helpDeskForm = this.fb.group({
-            message: ['', [Validators.required]],
+            message: ['', [Validators.required, patternValidator(/(<([^>]+)>)/gi, { hasHtmlTags: true })]],
         });
+
     }
 
     logValidationErrors(group: FormGroup = this.helpDeskForm): void {
@@ -74,6 +87,7 @@ export class CustomerSupportComponent implements OnInit {
                 if (abstractControl.errors != null) {
                     for (const errorKey in abstractControl.errors) {
                         if (errorKey) {
+                            debugger;
                             if (messages[errorKey] !== undefined) {
                                 this.formErrors[key] += messages[errorKey] + ' ';
                             }
@@ -137,24 +151,13 @@ function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
             return null;
         }
         // test the value of the control against the regexp supplied
-        const valid = regex.test(control.value);
+        const valid = isHTML(control.value);
         // if true, return no error (no error), else return error passed in the second parameter
-        return valid ? null : error;
+        return !valid ? null : error;
     };
 }
 
-function MessageValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } => {
-        if (!control.value) {
-            // if control is empty return no error
-            return null;
-        }
-        // test the value of the control against the regexp supplied
-        const valid = regex.test(control.value);
-        // if true, return no error (no error), else return error passed in the second parameter
-        return valid ? null : error;
-    };
+function isHTML(str) {
+    var doc = new DOMParser().parseFromString(str, "text/html");
+    return Array.from(doc.body.childNodes).some(node => node.nodeType === 1);
 }
-
-
-

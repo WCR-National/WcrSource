@@ -60,7 +60,7 @@ export class SidebarComponent implements OnInit {
                         var xml = $(xmlDoc);
                         var docs = xml.find("ViewAssociateBasicDetail");
                         $.each(docs, function (i, docs) {
-
+                            debugger;
                             if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
 
                                 for (var j = 2; j < 7; j++) {

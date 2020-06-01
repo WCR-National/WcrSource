@@ -1,13 +1,141 @@
+<style>
+    .text-success i {
+        color: #4CAF50;
+    }
+
+    .text-danger i {
+        color: #dc3545;
+    }
+
+    .video-open {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .page-span:before, .page-span:after {
+        position: absolute;
+        content: '';
+    }
+
+    .vertical-align.full {
+        left: 0px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .vertical-align.full {
+        left: 0px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .vertical-align {
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        top: 50%;
+        position: absolute;
+    }
+
+    .vertical-align {
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        top: 50%;
+        position: absolute;
+    }
+
+    .play-button {
+        position: relative;
+        width: 70px;
+        height: 70px;
+        display: inline-block;
+        text-align: center;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+        .play-button:before, .play-button:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            transition: all 0.35s ease-out;
+            -webkit-transition: all 0.35s ease-out;
+            -ms-transition: all 0.35s ease-out;
+        }
+
+        .play-button:before {
+            left: -8px;
+            top: -8px;
+            right: -8px;
+            bottom: -8px;
+            border: 8px solid rgba(255,255,255,0.5);
+            z-index: -1;
+        }
+
+    .play-button-wrap {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #fff;
+    }
+
+    .play-button path, .play-button-wrap {
+        z-index: 5;
+        transition: all 0.35s ease-out;
+        -webkit-transition: all 0.35s ease-out;
+        -ms-transition: all 0.35s ease-out;
+    }
+
+    .play-button-wrap {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #fff;
+    }
+
+    .play-button path, .play-button-wrap {
+        z-index: 5;
+        transition: all 0.35s ease-out;
+        -webkit-transition: all 0.35s ease-out;
+        -ms-transition: all 0.35s ease-out;
+    }
+
+    .pd-l-0-f {
+        padding-left: 0px !important;
+    }
+
+    .pd-r-0-f {
+        padding-right: 0px !important;
+    }
+
+    .phone {
+        font-size: 24px;
+        font-weight: 600;
+        text-align: left;
+    }
+</style>
+<style>
+</style>
 
 
 <div class="col-xs-12 col-sm-12 pd-l-0 pd-r-0">
-    <div class="col-xs-12 col-sm-6 pd-l-0-f signup-sidebar-css pd-t-50 pd-b-70">
+    <div class="col-xs-12 col-sm-6 pd-l-0-f signup-sidebar-css pd-t-50 pd-b-170">
         <div class="col-sm-12">
             <div class="pd-l-0">
                 <h3 class="signup-title">Create New Account!</h3>
                 <h5 class="signup-subtitle">It's free and only takes a minute.</h5>
                 <h5 [style.display]="formErrorMessage != null ? 'block':'none'">{{formErrorMessage}}</h5>
-                <form [formGroup]="authForm"  autocomplete="off" >
+                <form [formGroup]="authForm" autocomplete="off">
                     <div class="signup-form">
                         <div class="row">
                             <div class="col-sm-6 pd-l-xs-15 pd-l-0">
@@ -41,45 +169,45 @@
 
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.password}">
                                         <label>Password</label>
-                                        <input type="password"  autocomplete="new-password" class="form-control" placeholder="Enter your password" formControlName="password" value="" (focus)="showErrors()" (focusout)="hideErrors()">
+                                        <input type="password" autocomplete="new-password" class="form-control" placeholder="Enter your password" formControlName="password" value="" (focus)="showErrors()" (focusout)="hideErrors()">
                                         <div class="invalid-data" *ngIf="formErrors.terms">
                                             {{formErrors.password}}
                                         </div>
-                                        <div class="col-sm-12 pd-l-0" *ngIf="(authType == 'register')" [style.display]="showErrorsPassword ? 'block':'none'">
-                                            <label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+                                        <div class="col-sm-12 pd-l-0-f" [style.display]="showErrorsPassword ? 'block':'none'">
+                                            <label class="col mg-t-5 pd-l-0" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
                                                     {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}
                                                 </i>
                                                 Must be at least 8 characters!
                                             </label>
-                                            <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
                                                     {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}
                                                 </i>
                                                 Must be less than 20 characters!
                                             </label>
-                                            <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
                                                     {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}
                                                 </i>
                                                 Must contain at least 1 number!
                                             </label>
 
-                                            <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
                                                     {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}
                                                 </i>
                                                 Must contain at least 1 in Capital Case!
                                             </label>
 
-                                            <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
                                                     {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}
                                                 </i>
                                                 Must contain at least 1 Letter in Small Case!
                                             </label>
 
-                                            <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
                                                     {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
                                                 </i>
@@ -94,7 +222,7 @@
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.confirmPassword || formErrors.passwordGroup}">
                                         <label>Confirm Password</label>
                                         <input type="password" class="form-control" placeholder="Enter your password" formControlName="confirmPassword" value="">
-                                        <div class="invalid-data" *ngIf="formErrors.terms">
+                                        <div class="invalid-data" *ngIf="formErrors.passwordGroup">
                                             {{  formErrors.confirmPassword ? formErrors.confirmPassword : formErrors.passwordGroup  }}
                                         </div>
                                     </div>
@@ -103,21 +231,24 @@
                         </div><!-- row -->
                         <div class="form-group mg-b-30">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="agree">
+                                <input type="checkbox" class="custom-control-input" id="agree" formControlName="terms">
                                 <label class="custom-control-label tx-sm" for="agree">I have read and agree to your <a routerLink="/terms">Terms and Conditions</a></label>
+                                <div class="invalid-data" *ngIf="formErrors.terms">
+                                    {{  formErrors.terms }}
+                                </div>
                             </div>
                         </div>
 
                         <div class="form-group d-flex mg-b-0">
-                            <button class="btn btn-brand-01 btn-uppercase btn-block" style="width: 100%; padding-top: 0px;">Create New Account</button>
+                            <button class="btn btn-brand-01 btn-uppercase btn-block" style="width: 100%; padding-top: 0px;" [disabled]="ifFormNotFilledSuccessfully">Create New Account</button>
                         </div>
 
 
                         <!--<div class="d-flex">
-                <a href="dashboard-one.html" class="btn btn-facebook btn-uppercase flex-fill">Facebook</a>
-                <a href="dashboard-one.html" class="btn btn-twitter btn-uppercase flex-fill mg-l-10">Twitter</a>
-                <a href="dashboard-one.html" class="btn btn-danger btn-uppercase flex-fill mg-l-10">Google</a>
-            </div>-->
+                            <a href="dashboard-one.html" class="btn btn-facebook btn-uppercase flex-fill">Facebook</a>
+                            <a href="dashboard-one.html" class="btn btn-twitter btn-uppercase flex-fill mg-l-10">Twitter</a>
+                            <a href="dashboard-one.html" class="btn btn-danger btn-uppercase flex-fill mg-l-10">Google</a>
+                        </div>-->
                     </div>
                 </form>
                 <div class="divider-text mg-y-30 mg-b-5-f">Or signup with</div>
@@ -132,11 +263,63 @@
     <div class="col-xs-12 col-sm-6 hidden-xs overlay-image pd-l-0 pd-r-0" style="background:#f9f9fd">
 
         <div class="content align-item-center register-left pd-b-200" style="margin:0 auto;">
-            <h3 class="pd-xs-l-40 pd-t-50 pd-sm-l-70 pd-l-100 pd-xs-r-80 pd-sm-r-110 pd-r-150">Welcome to WCR National</h3>
-            <p class="pd-xs-l-40 pd-sm-l-5 pd-l-5 pd-xs-r-80 pd-sm-r-20 pd-r-150 text-center" style="color: rgba(55, 56, 87, 0.6);  font-size: 16px;">Aroma wings est doppio black et fair trade seasonal breve. Cortado organic coffee, single shot, roast cappuccino mocha single origin doppio. Half and half.</p>
+            <h3 class="pd-xs-l-40 pd-t-50 pd-sm-l-70 pd-l-100 pd-xs-r-80 pd-sm-r-110 pd-r-150 ">Welcome to WCR National</h3>
+            <p class="pd-xs-l-40 pd-sm-l-5 pd-l-5 pd-xs-r-80 pd-sm-r-20 pd-r-150 text-center" style="color: rgba(55, 56, 87, 0.6);  font-size: 16px;">Aroma wings est doppio black et fair trade seasonal breve. Cortado organic coffee, single shot, roasta single origin doppio.<span class="text-info" style="font-weight:600;"> Watch video for more details.</span> </p>
 
-            <img src="AngularAssociate/assets/images/registration.png" />
+            <div class="col-sm-12">
+                <div class="video-open">
+                    <span class="page-span-1 page-span"></span>
+                    <img src="AngularAssociate/assets/images/registration.png" alt="" class="full-img">
+                    <div class="vertical-align full">
+                        <div class="play-button" (click)="open(content)" style="cursor:pointer;">
+                            <span class="play-button-wrap">
+                                <svg version="1.1" class="vertical-align full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 443.307 443.306" style="enable-background:new 0 0 443.307 443.306;" xml:space="preserve"><g><path d="M415.934,212.799L36.788,2.097C32.411-0.377,28.65-0.661,25.51,1.242c-3.14,1.902-4.708,5.328-4.708,10.276V431.78
+                                c0,4.952,1.569,8.381,4.708,10.284c3.14,1.902,6.901,1.622,11.278-0.855l379.146-210.703c4.381-2.478,6.571-5.434,6.571-8.856
+                                C422.505,218.224,420.314,215.274,415.934,212.799z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                           </svg>
+                            </span>
+                        </div>
+                    </div>
+                    <!--<div class="video-item">
+                        <div class="video-wrapper">
+                            <div class="video-iframe"></div>
+                            <div class="close-video main-fill-col">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 21.9 21.9" enable-background="new 0 0 21.9 21.9" width="14px" height="14px">
+                                    <path d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z" fill="#000000"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 pd-l-15 pd-xs-l-15 pd-sm-l-110 phone pd-b-35-f">
+                <h2 class="mg-t-10">Contact Us:</h2>
+                <div class="col-xs-1 col-sm-1 pd-l-15 pd-sm-l-0" style="text-align:right;"><i class="fa fa-phone font-weight-bold"></i></div>
+                <div class="col-xs-7 col-sm-5" style="text-align:left;"><span class="">866-456-7331</span></div>
+
+            </div>
+            <!--<img src="AngularAssociate/assets/images/registration.png" (click)="open(contents)" style="cursor:pointer;" />-->
         </div>
 
     </div>
 </div><!-- signup-panel -->
+<!--<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>-->
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <div class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="cursor:pointer;">
+            <span aria-hidden="true">X</span>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <iframe class="embed-responsive-item" width="100%" height="315" src="https://www.youtube.com/embed/C0DPdy98e4c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </form>
+    </div>
+</ng-template>
+

@@ -82,7 +82,9 @@ export class PaymentComponent implements OnInit {
         },
         'CVCNumber': {
             'required': 'CVC number is required',
-            'numericOnly': 'Allowed digits only.'
+            'numericOnly': 'Allowed digits only.',
+            'maxLength': 'Allowed 4 digits only.',
+
         },
         'totalAmount': {
             'required': 'Amount is required',
@@ -197,7 +199,7 @@ export class PaymentComponent implements OnInit {
             cardid: [''],
             firstName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
             lastName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            address: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
+            address: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9]+$/, { alphaNumeric: true })]],
             city: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
             state: ['', [Validators.required]],
             country: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
@@ -207,7 +209,7 @@ export class PaymentComponent implements OnInit {
             cardNumber: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9]+$/, { alphaNumeric: true })]],
             expMonth: ['', [Validators.required]],
             expYear: ['', [Validators.required]],
-            CVCNumber: ['', [Validators.required, StateValidator(/^[0-9]+$/, { numericOnly: true })]],
+            CVCNumber: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4), StateValidator(/^[0-9]+$/, { numericOnly: true })]],
             cardType: [''],
             totalAmount: [''] //, [Validators.required, StateValidator(/^[0-9]+$/, { numericOnly: true })]
 
@@ -472,10 +474,11 @@ export class PaymentComponent implements OnInit {
         debugger;
         
         const credentials = this.cardForm.value;
+        this.isSubmitting = true;
+
         if (this.cardForm.valid) {
 
             //this.abbrState(credentials.state, 'to');
-            this.isSubmitting = true;
             this.paymentService
                 .updateCardAndBillinInfo(credentials)
                 .subscribe(
@@ -495,6 +498,7 @@ export class PaymentComponent implements OnInit {
                             this.isCreditCardFormVisible = true;
                         }
                         else { }
+                        this.isSubmitting = false;
                     });
         }
         else {

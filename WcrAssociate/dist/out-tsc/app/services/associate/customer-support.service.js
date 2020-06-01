@@ -24,7 +24,7 @@ var CustomerSupportService = /** @class */ (function () {
         this.isAuthenticated_extra = false;
     }
     CustomerSupportService.prototype.submitMessageCustomerSupport = function (message) {
-        var urlToCountAssociateCategories = "ws/AssociateSupport.asmx/AssociateSupportQuery";
+        var urlToCountAssociateCategories = "Associate/ws/AssociateSupport.asmx/AssociateSupportQuery";
         return this.apiService.post(urlToCountAssociateCategories, { 'Messg': message })
             .pipe(map(function (data) {
             return data;

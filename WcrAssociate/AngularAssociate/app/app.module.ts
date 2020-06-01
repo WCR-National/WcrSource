@@ -53,6 +53,7 @@ import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.comp
 //import { AssociateHeaderComponent } from './shared/associate-header';
 import { AssociateModule } from './associate/associate.module';
 import { XMLToJSON } from './_helpers/xml-to-json';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -65,7 +66,7 @@ import { XMLToJSON } from './_helpers/xml-to-json';
         AuthComponent,
         TermsComponent,
         ShowAuthedDirective,
-        LandingRegistrationComponent
+        LandingRegistrationComponent,
     ],
     imports: [
         BrowserModule,
@@ -75,7 +76,8 @@ import { XMLToJSON } from './_helpers/xml-to-json';
         BrowserAnimationsModule,
         AssociateModule,
         SharedModule,
-        AppRoutingModule
+        AppRoutingModule,
+        NgbModule
     ],
     providers: [
         AuthGuard,

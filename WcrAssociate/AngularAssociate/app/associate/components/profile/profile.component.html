@@ -11,7 +11,6 @@
         background-color: #fff;
         background-clip: padding-box;
         border: 1px solid #d9dfe7;
-
         border-radius: 0;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
@@ -350,14 +349,14 @@
                 margin: auto;
             }
 
-        .avatar-preview > div {
-            width: 100%;
-            height: 100%;
-            border-radius: 100%;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-        }
+    .avatar-preview > div {
+        width: 100%;
+        height: 100%;
+        border-radius: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 
     .form-control {
         height: 40px;
@@ -424,8 +423,25 @@
             </div>
             <div class="col-xs-12 co-sm-12" [style.display]="isProfileImageFormVisisble ? 'block':'none'">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-6 pd-l-0 pd-0-f"><button type="button" class="btn btn-lg btn-block bg-green tx-xs-8-f" (click)="UploadToServer()">Upload Image</button></div>
-                    <div class="col-xs-6 col-sm-6 pd-l-5" ><button type="button" class="btn btn-lg btn-block bg-gray-3 tx-xs-8-f" (click)="removeUploadedFile()">Cancel</button></div>
+                    <div class="col-xs-6 col-sm-6 pd-l-0 pd-0-f">
+                        <!--<button type="button" class="" (click)="()"></button>-->
+                        <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button btn btn-lg btn-block bg-green tx-sm-10-f tx-xs-9-f" >
+                            <span [style.display]="!isSubmittingImage ? 'block': 'none'" (click)="UploadToServer()">Upload Image</span>
+                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingImage ? 'inline-block': 'none'" style="margin-top:4px;">
+                                <div class="spinner-layer spinner-white-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+
+                    </div>
+                    <div class="col-xs-6 col-sm-6 pd-l-5"><button type="button" class="btn btn-lg btn-block bg-gray-3 tx-sm-10-f  tx-xs-8-f" (click)="removeUploadedFile()">Cancel</button></div>
                 </div>
             </div>
         </div>
@@ -610,7 +626,7 @@
                                                 </div>
                                                 <div class="col-xs-6 col-sm-5 mg-b-20 pd-l-0-f">
                                                     <button (click)="cancelForm()" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="button">
-                                                        <span >Cancel</span>
+                                                        <span>Cancel</span>
                                                     </button>
                                                 </div>
 
@@ -674,7 +690,7 @@
                                 <div class="col-sm-12 col-xl">
                                     <div class="row ">
                                         <div class="col-sm-6 tx-semibold pd-t-7">Email  (<i class="fa fa-envelope"></i>) </div>
-                                        <div class="col-sm-6 tx-color-03 tx-17 tx-medium" >  <h6 class="mg-b-5 "></h6> {{email}}</div>
+                                        <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{email}}</div>
                                     </div>
                                 </div>
                             </div>

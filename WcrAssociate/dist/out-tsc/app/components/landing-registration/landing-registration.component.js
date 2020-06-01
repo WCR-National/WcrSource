@@ -8,13 +8,15 @@ import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import * as $ from 'jquery';
 import * as CryptoJS from 'crypto-js';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 var LandingRegistrationComponent = /** @class */ (function () {
-    function LandingRegistrationComponent(route, router, userService, fb, http, ngZone) {
+    function LandingRegistrationComponent(route, router, userService, fb, http, modalService, ngZone) {
         this.route = route;
         this.router = router;
         this.userService = userService;
         this.fb = fb;
         this.http = http;
+        this.modalService = modalService;
         this.ngZone = ngZone;
         this.showOnValidateEmail = false;
         this.showEmailVerification = false;
@@ -23,6 +25,7 @@ var LandingRegistrationComponent = /** @class */ (function () {
         this.tokenFromUI = "7061737323313233";
         this.formErrorMessage = null;
         this.showErrorsPassword = false;
+        this.ifFormNotFilledSuccessfully = true;
         this.validationMessages = {
             'firstName': {
                 'required': 'First Name is required',
@@ -62,8 +65,54 @@ var LandingRegistrationComponent = /** @class */ (function () {
         };
     }
     LandingRegistrationComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        debugger;
+        $('#header').hide();
         this.setValidationOnform();
         this.changeValuesOfFormsEvents();
+        this.authForm.get('passwordGroup').disable();
+        this.authForm.get('passwordGroup').get('password').disable();
+        this.authForm.get('passwordGroup').get('confirmPassword').disable();
+        this.authForm.get('terms').disable();
+        this.authForm.get('email').valueChanges.subscribe(function (data) {
+            if ((data == "" || data == undefined) || (_this.authForm.get('firstName').value == "" || _this.authForm.get('associate').value == undefined)) {
+                _this.authForm.get('password').disable();
+                _this.authForm.get('confirmPassword').disable();
+                _this.authForm.get('terms').disable();
+            }
+            else {
+                _this.authForm.get('password').enable();
+                _this.authForm.get('confirmPassword').enable();
+            }
+        });
+        this.authForm.get('terms').valueChanges.subscribe(function (data) {
+            if (data == true) {
+                _this.ifFormNotFilledSuccessfully = false;
+            }
+            else if (data == false) {
+                _this.ifFormNotFilledSuccessfully = true;
+            }
+        });
+    };
+    LandingRegistrationComponent.prototype.open = function (content) {
+        var _this = this;
+        debugger;
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(function (result) {
+            _this.closeResult = "Closed with: " + result;
+        }, function (reason) {
+            _this.closeResult = "Dismissed " + _this.getDismissReason(reason);
+        });
+    };
+    LandingRegistrationComponent.prototype.getDismissReason = function (reason) {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        }
+        else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        }
+        else {
+            return "with: " + reason;
+        }
     };
     LandingRegistrationComponent.prototype.setValidationOnform = function () {
         // use FormBuilder to create a form group
@@ -226,7 +275,7 @@ var LandingRegistrationComponent = /** @class */ (function () {
             styleUrls: ['./landing-registration.component.css']
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder,
-            HttpClient, NgZone])
+            HttpClient, NgbModal, NgZone])
     ], LandingRegistrationComponent);
     return LandingRegistrationComponent;
 }());

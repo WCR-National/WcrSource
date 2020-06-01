@@ -12,51 +12,34 @@
 </div><!-- content-header -->
 
 <div class="content-body content-body-profile pd-t-0-f" style="background-color: #fff;">
-    <div class="auth-page mg-b-60-force">
+    <div class="auth-page mg-b-60-force" style="width:100%">
         <div class="container-cassie page">
 
             <div class="uk-background-primary uk-light">
-                <section class="mg-t-60-f">
-                    <div class="uk-container uk-text-center row">
-                        <p class="uk-margin-remove-bottom tm-overtitle uk-margin-top uk-text-uppercase letter-spacing-l tx-20-f col-xs-12 col-sm-12" style="margin: 0 auto; text-align: center; margin: 0 auto; float: none; color: #000;    margin-top: 50px !important;">Welcome to help desk</p>
-                        <h2 class="uk-margin-small-top uk-heading-hero" style="color:#686868">How can we help? Follow Steps</h2>
-                        <div class="uk-grid-medium uk-child-width-1-3@m uk-grid-small uk-grid-match uk-text-center col-xs-12 col-sm-12" data-uk-grid>
-                            <div class="col-xs col-xs-4">
-                                <a href="javascript:void(0)" class="uk-card uk-card-box uk-card-body uk-border-rounded" style="border: 1px solid rgba(207, 207, 207, 0.3);  box-shadow: 0 2px 7px 0 rgba(131, 146, 165, 0.15); background-color: #fff;">
-                                    <span class="uk-icon-forder uk-border-rounded" style="border-color: #0e3a6b;"><i class="fa fa-comment" style="font-size: 40px;color: #0e3a6b;"></i></span>
-                                    <p style="font-size: 15px; font-weight: 600;color:#0e3a6b">TYPE MESSAGE</p>
-                                </a>
-                            </div>
-                            <div class="col-xs col-xs-4">
-                                <a href="javascript:void(0)" class="uk-card uk-card-box uk-card-body uk-border-rounded" style="border: 1px solid rgba(207, 207, 207, 0.3);  box-shadow: 0 2px 7px 0 rgba(131, 146, 165, 0.15); background-color: #fff;">
-                                    <span class="uk-icon-forder uk-border-rounded" style="border-color: #0e3a6b;"><i class="fa fa-check" style="font-size: 40px;color: #0e3a6b;"></i></span>
-                                    <p style="font-size: 15px; font-weight: 600;color:#0e3a6b">SUBMIT</p>
-                                </a>
-                            </div>
-                            <div class="col-xs col-xs-4">
-                                <a href="javascript:void(0)" class="uk-card uk-card-box uk-card-body uk-border-rounded" style="border: 1px solid rgba(207, 207, 207, 0.3);  box-shadow: 0 2px 7px 0 rgba(131, 146, 165, 0.15); background-color: #fff;">
-                                    <span class="uk-icon-forder uk-border-rounded" style="border-color: #0e3a6b;"><i class="fa fa-retweet" style="font-size: 40px;color: #0e3a6b;"></i></span>
-                                    <p style="font-size: 15px; font-weight: 600; color:#0e3a6b">IMMEDIATE REPONSE</p>
-                                </a>
-                            </div>
-                        </div>
+                <section class="mg-t-60-f" >
+                    <div class="col-sm-12 col-xs-12 pd-l-50-f">
+                        <p class="tx-18 tx-medium" style="color:#686868;"> STEP 1 - Type your message</p>
+                        <p class="tx-18 tx-medium" style="color:#686868;"> STEP 2 - Click SUBMIT</p>
+                        <p class="tx-18 tx-medium" style="color:#686868;"> STEP 3 - A WCR Customer Service Representative will respond by email with in 24-48 hrs</p>
                     </div>
+                    
                     <p style="color: rgb(59, 103, 0); " class="pd-lg-x-15 pd-l-50-f pd-r-100-f pd-t-30 tx-17 tx-bold" [style.display]="isMessageTobeshown? 'block':'none'"> {{responseMessage}}</p>
+
 
                     <form [formGroup]="helpDeskForm" class="mg-t-40-f" [style.display]="isFormVisible? 'block':'none'">
                         <div class="col-xs-12 col-sm-12 pd-lg-x-15 pd-l-50-f mg-b-20-f">
                             <label class="uk-form-label mg-b-10 tx-20-f tx-600" for="form-stacked-text" style="color:#686868;">Message</label>
-                            <div class="uk-form-controls" [ngClass]="{'has-error': formErrors.email}">
+                            <div class="uk-form-controls" [ngClass]="{'has-error': formErrors.message}">
                                 <textarea class="uk-textarea uk-form-large tm-form-xlarge uk-border-rounded" formControlName="message" placeholder="Enter your message" style="border-color: #686868; color: #686868;" id="form-textarea" (blue)="logValidationErrors()"></textarea>
-                                <div class="invalid-data" *ngIf="formErrors.terms">
+                                <div class="invalid-data" *ngIf="formErrors.message">
                                     {{formErrors.message}}
                                 </div>
                             </div>
-                                
+
                         </div>
                         <div class="uk-text col-xs-3 col-sm-3 pd-l-50-f">
-                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-xs-10-f" type="submit">
-                                <span [style.display]="!isSubmitting ? 'block': 'none'"  (click)="submmitHelpDeskForm()">Submit Message</span>
+                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-xs-10-f" type="submit" [disabled]="ifMessageEmpty">
+                                <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submmitHelpDeskForm()">SUBMIT</span>
                                 <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'" style="margin-top:4px;">
                                     <div class="spinner-layer spinner-white-only">
                                         <div class="circle-clipper left">
@@ -92,3 +75,29 @@
         </div>
     </div>
 </div>
+
+
+<!--<div class="uk-container uk-text-center row">
+    <p class="uk-margin-remove-bottom tm-overtitle uk-margin-top uk-text-uppercase letter-spacing-l tx-20-f col-xs-12 col-sm-12" style="margin: 0 auto; text-align: center; margin: 0 auto; float: none; color: #000;    margin-top: 50px !important;">Welcome to help desk</p>
+    <h2 class="uk-margin-small-top uk-heading-hero" style="color:#686868">How can we help? Follow Steps</h2>
+    <div class="uk-grid-medium uk-child-width-1-3@m uk-grid-small uk-grid-match uk-text-center col-xs-12 col-sm-12" data-uk-grid>
+        <div class="col-xs col-xs-4">
+            <a href="javascript:void(0)" class="uk-card uk-card-box uk-card-body uk-border-rounded" style="border: 1px solid rgba(207, 207, 207, 0.3);  box-shadow: 0 2px 7px 0 rgba(131, 146, 165, 0.15); background-color: #fff;">
+                <span class="uk-icon-forder uk-border-rounded" style="border-color: #0e3a6b;"><i class="fa fa-comment" style="font-size: 40px;color: #0e3a6b;"></i></span>
+                <p style="font-size: 15px; font-weight: 600;color:#0e3a6b">Type your message</p>
+            </a>
+        </div>
+        <div class="col-xs col-xs-4">
+            <a href="javascript:void(0)" class="uk-card uk-card-box uk-card-body uk-border-rounded" style="border: 1px solid rgba(207, 207, 207, 0.3);  box-shadow: 0 2px 7px 0 rgba(131, 146, 165, 0.15); background-color: #fff;">
+                <span class="uk-icon-forder uk-border-rounded" style="border-color: #0e3a6b;"><i class="fa fa-check" style="font-size: 40px;color: #0e3a6b;"></i></span>
+                <p style="font-size: 15px; font-weight: 600;color:#0e3a6b">Click SUBMIT</p>
+            </a>
+        </div>
+        <div class="col-xs col-xs-4">
+            <a href="javascript:void(0)" class="uk-card uk-card-box uk-card-body uk-border-rounded" style="border: 1px solid rgba(207, 207, 207, 0.3);  box-shadow: 0 2px 7px 0 rgba(131, 146, 165, 0.15); background-color: #fff;">
+                <span class="uk-icon-forder uk-border-rounded" style="border-color: #0e3a6b;"><i class="fa fa-retweet" style="font-size: 40px;color: #0e3a6b;"></i></span>
+                <p style="font-size: 15px; font-weight: 600; color:#0e3a6b">A WCR Customer Service Representative will respond by email with in </p>
+            </a>
+        </div>
+    </div>
+</div>-->

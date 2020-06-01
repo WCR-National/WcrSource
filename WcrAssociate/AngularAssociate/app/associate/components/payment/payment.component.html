@@ -463,7 +463,7 @@
             <div class="container-cassie page" style="background-color:#fff;">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 pd-t-50-f">
-                        <div id="info" class="pd-l-35-f">
+                        <div id="info" class="pd-l-0-f pd-sm-l-35-f">
                             <p style="font-size: 17px; font-weight: 400; color: #2b2b2b;">
                                 Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br />
                             </p>
@@ -478,13 +478,15 @@
                                 <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
                                     {{formError}}
                                 </div>
-                                <div class="col-s-12 col-sm-12">
+                                <div class="col-xs-12 col-sm-12">
+                                    <h2 class="tx-color-01 pd-l-0-f pd-sm-l-15-f float-left mg-t-7-f pd-b-30-f">Credit Card Information</h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 pd-l-0 pd-r-0 pd-sm-l-15 pd-sm-r-15">
                                     <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-xs-r-0">
-                                        <h2 class="tx-color-01 pd-l-15-f float-left mg-t-7-f pd-b-30-f">Credit Card Information</h2>
                                         <input type="hidden" formControlName="cardid" id="cardid" />
                                         <input type="hidden" formControlName="totalAmount" id="totalAmount" />
 
-                                        <div class="col-xs-12 col-sm-6 mg-b-20">
+                                        <div class="col-xs-12 col-sm-6 mg-b-20 pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
                                                 <label>
                                                     First Name
@@ -496,7 +498,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 mg-b-20">
+                                        <div class="col-xs-12 col-sm-6 mg-b-20   pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.lastName}">
                                                 <label>
                                                     Last Name
@@ -508,7 +510,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-12 mg-b-20">
+                                        <div class="col-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.address}">
                                                 <label>
                                                     Billing Address
@@ -520,7 +522,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 mg-b-20">
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
 
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.city}">
                                                 <label>
@@ -533,7 +535,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 mg-b-20">
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
 
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.state}">
                                                 <label>
@@ -546,7 +548,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 mg-b-20">
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
 
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.country}">
                                                 <label>
@@ -559,7 +561,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 mg-b-20">
+                                        <div class="col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
 
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.zipCode}">
                                                 <label>
@@ -574,11 +576,9 @@
 
                                     </div>
 
-                                    <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-xs-r-0">
+                                    <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-sm-l-15 pd-xs-r-0 pd-sm-r-15">
 
-
-
-                                        <div class="col-sm-12 mg-b-20">
+                                        <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.cardNumber}">
 
                                                 <label>
@@ -590,7 +590,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12">
+                                        
+                                        <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                             <label>
                                                 Choose Card Type
                                             </label>
@@ -632,7 +633,8 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-sm-6 mg-b-20">
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.expMonth}">
 
                                                 <label>
@@ -644,7 +646,8 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-sm-6 mg-b-20">
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.expYear}">
 
                                                 <label>
@@ -659,7 +662,7 @@
                                         </div>
 
                                         <div class="form-group" [ngClass]="{'has-error': formErrors.CVCNumber}">
-                                            <div class="col-sm-12 mg-b-20">
+                                            <div class="col-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                                 <label>
                                                     CVV / CVC *
                                                 </label>
@@ -674,8 +677,8 @@
 
                                 <div class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right">
                                     <div class="form-group">
-                                        <div class="col-xs-3 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddOrUpdateButton ? 'block': 'none'">
-                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" type="submit" (click)="submitCardForm()">
+                                        <div class="col-xs-6 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddOrUpdateButton ? 'block': 'none'">
+                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit" (click)="submitCardForm()">
                                                 <span [style.display]="!isSubmitting ? 'block': 'none'">Add Card</span>
                                                 <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'" style="margin-top:4px;">
                                                     <div class="spinner-layer spinner-white-only">
@@ -691,8 +694,8 @@
                                             </button>
 
                                         </div>
-                                        <div class="col-xs-3  col-sm-2 mg-b-20 pd-l-0-f pd-r-0-f" [style.display]="!isAddOrUpdateButton ? 'block': 'none'">
-                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-xs-10-f" type="submit">
+                                        <div class="col-xs-6  col-sm-2 mg-b-20 pd-l-0-f pd-r-0-f" [style.display]="!isAddOrUpdateButton ? 'block': 'none'">
+                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit">
                                                 <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="updateCardForm()">Update Card</span>
                                                 <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'" style="margin-top:4px;">
                                                     <div class="spinner-layer spinner-white-only">
@@ -741,8 +744,8 @@
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12  pd-t-50-f">
-                    <div id="info" class="pd-l-35-f">
-                        <p  style="font-size: 17px; font-weight: 400; color: #2b2b2b;"> Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br /></p>         
+                    <div id="info" class="pd-l-0-f pd-sm-l-35-f">
+                        <p style="font-size: 17px; font-weight: 400; color: #2b2b2b;"> Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br /></p>
                     </div>
                 </div>
                 <hr class="mg-y-15 op-0">

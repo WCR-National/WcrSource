@@ -1434,3 +1434,7 @@ p {
     vertical-align: middle;
     border-style: none;
 }
+.form-control[_ngcontent-sok-c2]:disabled:hover {
+    border-color: #00832959 !important;
+    box-shadow: inset 0 0 0px rgba(0,0,0,.3);
+}

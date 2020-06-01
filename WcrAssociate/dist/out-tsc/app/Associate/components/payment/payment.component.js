@@ -66,7 +66,8 @@ var PaymentComponent = /** @class */ (function () {
             },
             'CVCNumber': {
                 'required': 'CVC number is required',
-                'numericOnly': 'Allowed digits only.'
+                'numericOnly': 'Allowed digits only.',
+                'maxLength': 'Allowed 4 digits only.',
             },
             'totalAmount': {
                 'required': 'Amount is required',
@@ -134,7 +135,7 @@ var PaymentComponent = /** @class */ (function () {
             cardid: [''],
             firstName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
             lastName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            address: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
+            address: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9]+$/, { alphaNumeric: true })]],
             city: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
             state: ['', [Validators.required]],
             country: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
@@ -143,7 +144,7 @@ var PaymentComponent = /** @class */ (function () {
             cardNumber: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9]+$/, { alphaNumeric: true })]],
             expMonth: ['', [Validators.required]],
             expYear: ['', [Validators.required]],
-            CVCNumber: ['', [Validators.required, StateValidator(/^[0-9]+$/, { numericOnly: true })]],
+            CVCNumber: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(4), StateValidator(/^[0-9]+$/, { numericOnly: true })]],
             cardType: [''],
             totalAmount: [''] //, [Validators.required, StateValidator(/^[0-9]+$/, { numericOnly: true })]
         });
@@ -370,9 +371,9 @@ var PaymentComponent = /** @class */ (function () {
         var _this = this;
         debugger;
         var credentials = this.cardForm.value;
+        this.isSubmitting = true;
         if (this.cardForm.valid) {
             //this.abbrState(credentials.state, 'to');
-            this.isSubmitting = true;
             this.paymentService
                 .updateCardAndBillinInfo(credentials)
                 .subscribe(function (data) {
@@ -380,7 +381,8 @@ var PaymentComponent = /** @class */ (function () {
                     $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
                     _this.isCreditCardFormVisible = true;
                 }
-                else if (data == "0") {
+                else if (data == "0" || data == 0) {
+                    _this.getCardDataDetails();
                     $("#lbldetail").text("Your credit card info has been Inserted Successfully.");
                     _this.isCreditCardFormVisible = false;
                 }
@@ -389,6 +391,7 @@ var PaymentComponent = /** @class */ (function () {
                     _this.isCreditCardFormVisible = true;
                 }
                 else { }
+                _this.isSubmitting = false;
             });
         }
         else {

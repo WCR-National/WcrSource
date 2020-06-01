@@ -22,7 +22,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
-    "@ng-bootstrap/ng-bootstrap": "^4.2.1",
+    "@ng-bootstrap/ng-bootstrap": "^4.0.5",
     "@ng-select/ng-option-highlight": "0.0.4",
     "@ng-select/ng-select": "^2.20.5",
     "@types/crypto-js": "^3.1.43",

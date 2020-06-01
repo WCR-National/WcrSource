@@ -23,6 +23,7 @@ var ProfileComponent = /** @class */ (function () {
         this.isProfileFormVisible = false;
         this.profileImagePath = "";
         this.isProfileImageFormVisisble = false;
+        this.isSubmittingImage = false;
         this.showInformation = false;
         this.validationMessages = {
             'password': {
@@ -317,6 +318,9 @@ var ProfileComponent = /** @class */ (function () {
         }
     };
     ProfileComponent.prototype.UploadToServer = function () {
+        debugger;
+        this.isSubmittingImage = true;
+        var thisStatus = this;
         var fileUpload = $("#profileImageId").get(0);
         var files = fileUpload.files;
         //image resize code here
@@ -331,10 +335,12 @@ var ProfileComponent = /** @class */ (function () {
             processData: false,
             data: image,
             success: function (result) {
-                this.isProfileImageFormVisisble = false;
+                thisStatus.isProfileImageFormVisisble = false;
+                thisStatus.isSubmittingImage = false;
             },
             error: function (err) {
                 alert(err.statusText);
+                thisStatus.isSubmittingImage = false;
             }
         });
         //this.profileService

@@ -26,6 +26,7 @@ import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.comp
 //import { AssociateHeaderComponent } from './shared/associate-header';
 import { AssociateModule } from './associate/associate.module';
 import { XMLToJSON } from './_helpers/xml-to-json';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -40,7 +41,7 @@ var AppModule = /** @class */ (function () {
                 AuthComponent,
                 TermsComponent,
                 ShowAuthedDirective,
-                LandingRegistrationComponent
+                LandingRegistrationComponent,
             ],
             imports: [
                 BrowserModule,
@@ -50,7 +51,8 @@ var AppModule = /** @class */ (function () {
                 BrowserAnimationsModule,
                 AssociateModule,
                 SharedModule,
-                AppRoutingModule
+                AppRoutingModule,
+                NgbModule
             ],
             providers: [
                 AuthGuard,

@@ -18,10 +18,12 @@ var CustomerSupportComponent = /** @class */ (function () {
         this.isFormVisible = true;
         this.responseMessage = "";
         this.isMessageTobeshown = false;
+        this.ifMessageEmpty = true;
         //@ViewChild('fileInput') el: ElementRef;
         this.validationMessages = {
             'message': {
-                'required': 'First Name is required'
+                'required': 'First Name is required',
+                'hasHtmlTags': 'Invalid, Data entered.'
             }
         };
         this.formErrors = {
@@ -29,12 +31,21 @@ var CustomerSupportComponent = /** @class */ (function () {
         };
     }
     CustomerSupportComponent.prototype.ngOnInit = function () {
-        debugger;
+        var _this = this;
         this.setValidationOnForm();
+        this.helpDeskForm.get('message').valueChanges.subscribe(function (data) {
+            debugger;
+            if (data == "") {
+                _this.ifMessageEmpty = true;
+            }
+            else {
+                _this.ifMessageEmpty = false;
+            }
+        });
     };
     CustomerSupportComponent.prototype.setValidationOnForm = function () {
         this.helpDeskForm = this.fb.group({
-            message: ['', [Validators.required]],
+            message: ['', [Validators.required, patternValidator(/(<([^>]+)>)/gi, { hasHtmlTags: true })]],
         });
     };
     CustomerSupportComponent.prototype.logValidationErrors = function (group) {
@@ -50,6 +61,7 @@ var CustomerSupportComponent = /** @class */ (function () {
                 if (abstractControl.errors != null) {
                     for (var errorKey in abstractControl.errors) {
                         if (errorKey) {
+                            debugger;
                             if (messages[errorKey] !== undefined) {
                                 _this.formErrors[key] += messages[errorKey] + ' ';
                             }
@@ -73,10 +85,10 @@ var CustomerSupportComponent = /** @class */ (function () {
                 .submitMessageCustomerSupport(credentials.message)
                 .subscribe(function (data) {
                 if (data.d.length > 0) {
-                    _this.responseMessage = "Your support issue has been succesfully sent!!!.A support representative will contact you within 24 - 48 business hours.";
+                    _this.responseMessage = "Your support issue has been succesfully sent!!!. <br/>A support representative will contact you within 24 - 48 business hours.";
                     _this.isFormVisible = false;
                     _this.isSubmitting = false;
-                    _this.isMessageTobeshown = false;
+                    _this.isMessageTobeshown = true;
                 }
                 else {
                     _this.isMessageTobeshown = true;
@@ -115,21 +127,13 @@ function patternValidator(regex, error) {
             return null;
         }
         // test the value of the control against the regexp supplied
-        var valid = regex.test(control.value);
+        var valid = isHTML(control.value);
         // if true, return no error (no error), else return error passed in the second parameter
-        return valid ? null : error;
+        return !valid ? null : error;
     };
 }
-function MessageValidator(regex, error) {
-    return function (control) {
-        if (!control.value) {
-            // if control is empty return no error
-            return null;
-        }
-        // test the value of the control against the regexp supplied
-        var valid = regex.test(control.value);
-        // if true, return no error (no error), else return error passed in the second parameter
-        return valid ? null : error;
-    };
+function isHTML(str) {
+    var doc = new DOMParser().parseFromString(str, "text/html");
+    return Array.from(doc.body.childNodes).some(function (node) { return node.nodeType === 1; });
 }
 //# sourceMappingURL=customer-support.component.js.map

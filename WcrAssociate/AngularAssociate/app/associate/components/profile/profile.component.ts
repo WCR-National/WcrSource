@@ -16,6 +16,7 @@ import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'AngularAssociate/app/services/search';
+import { debug } from 'util';
 
 
 
@@ -41,6 +42,7 @@ export class ProfileComponent implements OnInit {
     isProfileFormVisible: boolean = false;
     profileImagePath:string = "";
     isProfileImageFormVisisble = false;
+    isSubmittingImage = false;
     showInformation = false;
 
     validationMessages = {
@@ -374,6 +376,9 @@ export class ProfileComponent implements OnInit {
     }
 
     UploadToServer() {
+        debugger;
+        this.isSubmittingImage = true;
+        var thisStatus = this;
         var fileUpload: any = $("#profileImageId").get(0);
         var files = fileUpload.files;
         //image resize code here
@@ -389,10 +394,13 @@ export class ProfileComponent implements OnInit {
             processData: false,
             data: image,
             success: function (result) {
-                this.isProfileImageFormVisisble = false;
+
+                thisStatus.isProfileImageFormVisisble = false;
+                thisStatus.isSubmittingImage = false;
             },
             error: function (err) {
                 alert(err.statusText);
+                thisStatus.isSubmittingImage = false;
             }
         });
 

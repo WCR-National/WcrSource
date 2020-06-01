@@ -7,6 +7,7 @@ import { map, debounceTime, take, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import * as $ from 'jquery';
 import * as CryptoJS from 'crypto-js';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StickyDirection } from '@angular/cdk/table';
 
 
@@ -26,11 +27,13 @@ export class LandingRegistrationComponent implements OnInit {
     tokenFromUI: string = "7061737323313233";
     formErrorMessage: string = null;
     showErrorsPassword: boolean = false;
+    ifFormNotFilledSuccessfully: boolean = true;
     request: string;
     responce: string;
 
     encrypted: string;
     decrypted: string;
+    closeResult: string;
     validationMessages = {
         'firstName': {
             'required': 'First Name is required',
@@ -71,14 +74,59 @@ export class LandingRegistrationComponent implements OnInit {
     };
 
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder,
-        private http: HttpClient, private ngZone: NgZone
+        private http: HttpClient, private modalService: NgbModal, private ngZone: NgZone
     ) { }
 
     ngOnInit() {
+        debugger;
+        $('#header').hide();
 
         this.setValidationOnform();
         this.changeValuesOfFormsEvents();
+        this.authForm.get('passwordGroup').disable();
 
+        this.authForm.get('passwordGroup').get('password').disable();
+        this.authForm.get('passwordGroup').get('confirmPassword').disable();
+        this.authForm.get('terms').disable();
+
+        this.authForm.get('email').valueChanges.subscribe((data) => {
+            if ((data == "" || data == undefined) || (this.authForm.get('firstName').value == "" || this.authForm.get('associate').value == undefined)) {
+                this.authForm.get('password').disable();
+                this.authForm.get('confirmPassword').disable();
+                this.authForm.get('terms').disable();
+            }
+            else {
+                this.authForm.get('password').enable();
+                this.authForm.get('confirmPassword').enable();
+            }
+        });
+        this.authForm.get('terms').valueChanges.subscribe((data) => {
+            if (data == true) {
+                this.ifFormNotFilledSuccessfully = false;
+            }
+            else if (data == false) {
+                this.ifFormNotFilledSuccessfully = true;
+            }
+        });
+    }
+
+    open(content) {
+        debugger;
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+            this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+    }
+
+    private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+            return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+            return 'by clicking on a backdrop';
+        } else {
+            return `with: ${reason}`;
+        }
     }
 
     setValidationOnform() {
