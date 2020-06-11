@@ -6,7 +6,10 @@
 
 </div>-->
 <style>
-
+    .spinner-white, .spinner-white-only {
+        color: #ffffff !important;
+        border-color: #fff;
+    }
     .s130 {
         min-height: 0vh;
         display: -ms-flexbox;
@@ -185,10 +188,27 @@
                             </svg>
                         </div>
                         <input id="search" type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter)="onPressEnterSearchData()" />
-                        <span class="large material-icons form-control-feedback icon icon-right" [style.display]="show_check ? 'block': 'none'">check</span>
+                        
+                        <div class="svg-wrapper" [style.display]="show_check ? 'block': 'none'">
+                            <span class="large material-icons form-control-feedback" style="font-size:25px; font-weight:700;color: green;">check</span>
+                        </div>
                     </div>
                     <div class="input-field second-wrap">
-                        <button class="btn-search" type="button">SEARCH</button>
+                        <button class="btn-search" type="button" (click)="onClickSearch()">
+                           
+                            <span [style.display]="!isSearchingStart ? 'block': 'none'"> SEARCH</span>
+                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSearchingStart ? 'inline-block': 'none'" style="margin-top:4px;">
+                                <div class="spinner-layer spinner-white-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
                     </div>
                 </div>
                 <div class="invalid-data" *ngIf="formErrors.txtSearch" [ngClass]="{'has-error': formErrors.txtSearch}" style="font-weight: 700; float: left;    padding-top: 7px;">
@@ -205,7 +225,7 @@
                         <div class="main-search-input">
                             <input type="text" />
                             <span class="large material-icons form-control-feedback icon icon-right" [style.display]="show_check ? 'block': 'none'">check</span>
-                            <button class="button waves-effect waves-light btn" (click)="onClickSearch()">
+                            <button class="button waves-effect waves-light btn" ">
                                 <i class="large material-icons form-control-feedback text-xs-27 pd-t-9-force">search</i>
                             </button>
                         </div>

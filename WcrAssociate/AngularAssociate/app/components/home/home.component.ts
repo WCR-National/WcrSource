@@ -16,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
     isSearchingStart: boolean = false;
+    isSearching: boolean = false;
     searchForm: FormGroup;
     resultContent: boolean = false;
     errorMessage: string = "";
@@ -126,6 +127,7 @@ export class HomeComponent implements OnInit {
     }
 
     onClickSearch() {
+        this.isSearchingStart = true;
         if (!this.errorExist) {
             this.searching();
         }
