@@ -24,6 +24,7 @@ export class LandingRegistrationComponent implements OnInit {
     showEmailVerification: boolean = false;
     formFilledSuccessfully: boolean = false;
     isSubmitting: boolean = false;
+    isSubmittingForm: boolean = false;
     tokenFromUI: string = "7061737323313233";
     formErrorMessage: string = null;
     showErrorsPassword: boolean = false;
@@ -119,6 +120,8 @@ export class LandingRegistrationComponent implements OnInit {
         });
     }
 
+
+
     private getDismissReason(reason: any): string {
         if (reason === ModalDismissReasons.ESC) {
             return 'by pressing ESC';
@@ -213,15 +216,20 @@ export class LandingRegistrationComponent implements OnInit {
                         map(data => {
                             if (data >= 1) {
                                 this.showOnValidateEmail = false;
+                                this.showEmailVerification = true;
                                 this.formFilledSuccessfully = false;
                                 $('#validateEmailDiv').addClass('has-error');
                                 $('#validateEmailDiv').attr('style', 'top: 19% !important');
-
+                                control.parent.get('passwordGroup').disable();
+                                control.parent.get('passwordGroup').get('password').disable();
+                                control.parent.get('passwordGroup').get('confirmPassword').disable();
 
                                 return { emailInUse: true };
                             }
                             else {
                                 this.showOnValidateEmail = false;
+                                this.showEmailVerification = true;
+
                                 control.parent.get('passwordGroup').enable();
                                 control.parent.get('passwordGroup').get('password').enable();
                                 control.parent.get('passwordGroup').get('confirmPassword').enable();
@@ -245,14 +253,18 @@ export class LandingRegistrationComponent implements OnInit {
 
     submitRegistrationForm() {
 
+        this.isSubmittingForm = true;
+        this.authForm.controls['email'].setErrors(null);
+
         const credentials = this.authForm.value;
+
         if (this.authForm.valid) {
             this.userService
                 .attemptRegisterationAssociate(credentials)
                 .subscribe(
                     data => {
                         if (data >= 1) {
-                            this.isSubmitting = false;
+                            this.isSubmittingForm = false;
                             this.request = credentials.email;
                             this.encryptUsingAES256()
                             credentials.email = this.encrypted;
@@ -266,7 +278,7 @@ export class LandingRegistrationComponent implements OnInit {
                             this.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
                         }
                         else {
-                            this.isSubmitting = false;
+                            this.isSubmittingForm = false;
                         }
                     },
                     err => {
@@ -277,7 +289,7 @@ export class LandingRegistrationComponent implements OnInit {
         }
         else {
             this.formErrorMessage = "some internal error. Please try again.";
-            this.isSubmitting = false;
+            //this.Parameters = false;
         }
     }
 

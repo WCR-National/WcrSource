@@ -123,13 +123,684 @@
         font-weight: 600;
         text-align: left;
     }
+    /* STYLES FOR THE SPINNER */
+    /**************************/
+    /*
+    * Constants:
+    *      STROKEWIDTH = 3px
+    *      ARCSIZE     = 270 degrees (amount of circle the arc takes up)
+    *      ARCTIME     = 1333ms (time it takes to expand and contract arc)
+    *      ARCSTARTROT = 216 degrees (how much the start location of the arc
+    *                                should rotate each time, 216 gives us a
+    *                                5 pointed star shape (it's 360/5 * 3).
+    *                                For a 7 pointed star, we might do
+    *                                360/7 * 3 = 154.286)
+    *      CONTAINERWIDTH = 28px
+    *      SHRINK_TIME = 400ms
+    */
+    .preloader-wrapper {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+    }
+
+        .preloader-wrapper.small {
+            width: 26px;
+            height: 26px;
+        }
+
+        .preloader-wrapper.big {
+            width: 64px;
+            height: 64px;
+        }
+
+        .preloader-wrapper.active {
+            /* duration: 360 * ARCTIME / (ARCSTARTROT + (360-ARCSIZE)) */
+            -webkit-animation: container-rotate 1568ms linear infinite;
+            animation: container-rotate 1568ms linear infinite;
+        }
+
+    @-webkit-keyframes container-rotate {
+        to {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes container-rotate {
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    .spinner-layer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        border-color: #26a69a;
+    }
+
+    .spinner-blue,
+    .spinner-blue-only {
+        border-color: #0e3a6b;
+    }
+
+    .spinner-red,
+    .spinner-red-only {
+        border-color: #db4437;
+    }
+
+    .spinner-yellow,
+    .spinner-yellow-only {
+        border-color: #f4b400;
+    }
+
+    .spinner-green,
+    .spinner-green-only {
+        border-color: #008329;
+    }
+
+    /**
+    * IMPORTANT NOTE ABOUT CSS ANIMATION PROPERTIES (keanulee):
+    *
+    * iOS Safari (tested on iOS 8.1) does not handle animation-delay very well - it doesn't
+    * guarantee that the animation will start _exactly_ after that value. So we avoid using
+    * animation-delay and instead set custom keyframes for each color (as redundant as it
+    * seems).
+    *
+    * We write out each animation in full (instead of separating animation-name,
+    * animation-duration, etc.) because under the polyfill, Safari does not recognize those
+    * specific properties properly, treats them as -webkit-animation, and overrides the
+    * other animation rules. See https://github.com/Polymer/platform/issues/53.
+    */
+    .active .spinner-layer.spinner-blue {
+        /* durations: 4 * ARCTIME */
+        -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    }
+
+    .active .spinner-layer.spinner-red {
+        /* durations: 4 * ARCTIME */
+        -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    }
+
+    .active .spinner-layer.spinner-yellow {
+        /* durations: 4 * ARCTIME */
+        -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    }
+
+    .active .spinner-layer.spinner-green {
+        /* durations: 4 * ARCTIME */
+        -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    }
+
+    .active .spinner-layer,
+    .active .spinner-layer.spinner-blue-only,
+    .active .spinner-layer.spinner-red-only,
+    .active .spinner-layer.spinner-yellow-only,
+    .active .spinner-layer.spinner-green-only {
+        /* durations: 4 * ARCTIME */
+        opacity: 1;
+        -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    }
+
+    @-webkit-keyframes fill-unfill-rotate {
+        12.5% {
+            -webkit-transform: rotate(135deg);
+        }
+        /* 0.5 * ARCSIZE */
+        25% {
+            -webkit-transform: rotate(270deg);
+        }
+        /* 1   * ARCSIZE */
+        37.5% {
+            -webkit-transform: rotate(405deg);
+        }
+        /* 1.5 * ARCSIZE */
+        50% {
+            -webkit-transform: rotate(540deg);
+        }
+        /* 2   * ARCSIZE */
+        62.5% {
+            -webkit-transform: rotate(675deg);
+        }
+        /* 2.5 * ARCSIZE */
+        75% {
+            -webkit-transform: rotate(810deg);
+        }
+        /* 3   * ARCSIZE */
+        87.5% {
+            -webkit-transform: rotate(945deg);
+        }
+        /* 3.5 * ARCSIZE */
+        to {
+            -webkit-transform: rotate(1080deg);
+        }
+        /* 4   * ARCSIZE */
+    }
+
+    @keyframes fill-unfill-rotate {
+        12.5% {
+            -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+        }
+        /* 0.5 * ARCSIZE */
+        25% {
+            -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+        }
+        /* 1   * ARCSIZE */
+        37.5% {
+            -webkit-transform: rotate(405deg);
+            transform: rotate(405deg);
+        }
+        /* 1.5 * ARCSIZE */
+        50% {
+            -webkit-transform: rotate(540deg);
+            transform: rotate(540deg);
+        }
+        /* 2   * ARCSIZE */
+        62.5% {
+            -webkit-transform: rotate(675deg);
+            transform: rotate(675deg);
+        }
+        /* 2.5 * ARCSIZE */
+        75% {
+            -webkit-transform: rotate(810deg);
+            transform: rotate(810deg);
+        }
+        /* 3   * ARCSIZE */
+        87.5% {
+            -webkit-transform: rotate(945deg);
+            transform: rotate(945deg);
+        }
+        /* 3.5 * ARCSIZE */
+        to {
+            -webkit-transform: rotate(1080deg);
+            transform: rotate(1080deg);
+        }
+        /* 4   * ARCSIZE */
+    }
+
+    @-webkit-keyframes blue-fade-in-out {
+        from {
+            opacity: 1;
+        }
+
+        25% {
+            opacity: 1;
+        }
+
+        26% {
+            opacity: 0;
+        }
+
+        89% {
+            opacity: 0;
+        }
+
+        90% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes blue-fade-in-out {
+        from {
+            opacity: 1;
+        }
+
+        25% {
+            opacity: 1;
+        }
+
+        26% {
+            opacity: 0;
+        }
+
+        89% {
+            opacity: 0;
+        }
+
+        90% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @-webkit-keyframes red-fade-in-out {
+        from {
+            opacity: 0;
+        }
+
+        15% {
+            opacity: 0;
+        }
+
+        25% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        51% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes red-fade-in-out {
+        from {
+            opacity: 0;
+        }
+
+        15% {
+            opacity: 0;
+        }
+
+        25% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        51% {
+            opacity: 0;
+        }
+    }
+
+    @-webkit-keyframes yellow-fade-in-out {
+        from {
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        75% {
+            opacity: 1;
+        }
+
+        76% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes yellow-fade-in-out {
+        from {
+            opacity: 0;
+        }
+
+        40% {
+            opacity: 0;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        75% {
+            opacity: 1;
+        }
+
+        76% {
+            opacity: 0;
+        }
+    }
+
+    @-webkit-keyframes green-fade-in-out {
+        from {
+            opacity: 0;
+        }
+
+        65% {
+            opacity: 0;
+        }
+
+        75% {
+            opacity: 1;
+        }
+
+        90% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes green-fade-in-out {
+        from {
+            opacity: 0;
+        }
+
+        65% {
+            opacity: 0;
+        }
+
+        75% {
+            opacity: 1;
+        }
+
+        90% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    /**
+    * Patch the gap that appear between the two adjacent div.circle-clipper while the
+    * spinner is rotating (appears on Chrome 38, Safari 7.1, and IE 11).
+    */
+    .gap-patch {
+        position: absolute;
+        top: 0;
+        left: 45%;
+        width: 10%;
+        height: 100%;
+        overflow: hidden;
+        border-color: inherit;
+    }
+
+        .gap-patch .circle {
+            width: 1000%;
+            left: -450%;
+        }
+
+    .circle-clipper {
+        display: inline-block;
+        position: relative;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        border-color: inherit;
+    }
+
+        .circle-clipper .circle {
+            width: 200%;
+            height: 100%;
+            border-width: 3px;
+            /* STROKEWIDTH */
+            border-style: solid;
+            border-color: inherit;
+            border-bottom-color: transparent !important;
+            border-radius: 50%;
+            -webkit-animation: none;
+            animation: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .circle-clipper.left .circle {
+            left: 0;
+            border-right-color: transparent !important;
+            -webkit-transform: rotate(129deg);
+            transform: rotate(129deg);
+        }
+
+        .circle-clipper.right .circle {
+            left: -100%;
+            border-left-color: transparent !important;
+            -webkit-transform: rotate(-129deg);
+            transform: rotate(-129deg);
+        }
+
+    .active .circle-clipper.left .circle {
+        /* duration: ARCTIME */
+        -webkit-animation: left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        animation: left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    }
+
+    .active .circle-clipper.right .circle {
+        /* duration: ARCTIME */
+        -webkit-animation: right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        animation: right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    }
+
+    @-webkit-keyframes left-spin {
+        from {
+            -webkit-transform: rotate(130deg);
+        }
+
+        50% {
+            -webkit-transform: rotate(-5deg);
+        }
+
+        to {
+            -webkit-transform: rotate(130deg);
+        }
+    }
+
+    @keyframes left-spin {
+        from {
+            -webkit-transform: rotate(130deg);
+            transform: rotate(130deg);
+        }
+
+        50% {
+            -webkit-transform: rotate(-5deg);
+            transform: rotate(-5deg);
+        }
+
+        to {
+            -webkit-transform: rotate(130deg);
+            transform: rotate(130deg);
+        }
+    }
+
+    @-webkit-keyframes right-spin {
+        from {
+            -webkit-transform: rotate(-130deg);
+        }
+
+        50% {
+            -webkit-transform: rotate(5deg);
+        }
+
+        to {
+            -webkit-transform: rotate(-130deg);
+        }
+    }
+
+    @keyframes right-spin {
+        from {
+            -webkit-transform: rotate(-130deg);
+            transform: rotate(-130deg);
+        }
+
+        50% {
+            -webkit-transform: rotate(5deg);
+            transform: rotate(5deg);
+        }
+
+        to {
+            -webkit-transform: rotate(-130deg);
+            transform: rotate(-130deg);
+        }
+    }
+
+    #spinnerContainer.cooldown {
+        /* duration: SHRINK_TIME */
+        -webkit-animation: container-rotate 1568ms linear infinite, fade-out 400ms cubic-bezier(0.4, 0, 0.2, 1);
+        animation: container-rotate 1568ms linear infinite, fade-out 400ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @-webkit-keyframes fade-out {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes fade-out {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    .slider {
+        position: relative;
+        height: 400px;
+        width: 100%;
+    }
+
+        .slider.fullscreen {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+            .slider.fullscreen ul.slides {
+                height: 100%;
+            }
+
+            .slider.fullscreen ul.indicators {
+                z-index: 2;
+                bottom: 30px;
+            }
+
+        .slider .slides {
+            background-color: #9e9e9e;
+            margin: 0;
+            height: 400px;
+        }
+
+            .slider .slides li {
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                width: 100%;
+                height: inherit;
+                overflow: hidden;
+            }
+
+                .slider .slides li img {
+                    height: 100%;
+                    width: 100%;
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                .slider .slides li .caption {
+                    color: #fff;
+                    position: absolute;
+                    top: 15%;
+                    left: 15%;
+                    width: 70%;
+                    opacity: 0;
+                }
+
+                    .slider .slides li .caption p {
+                        color: #e0e0e0;
+                    }
+
+                .slider .slides li.active {
+                    z-index: 2;
+                }
+
+        .slider .indicators {
+            position: absolute;
+            text-align: center;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0;
+        }
+
+            .slider .indicators .indicator-item {
+                display: inline-block;
+                position: relative;
+                cursor: pointer;
+                height: 16px;
+                width: 16px;
+                margin: 0 12px;
+                background-color: #e0e0e0;
+                -webkit-transition: background-color .3s;
+                transition: background-color .3s;
+                border-radius: 50%;
+            }
+
+                .slider .indicators .indicator-item.active {
+                    background-color: #4CAF50;
+                }
+
+    .material-icons {
+        text-rendering: optimizeLegibility;
+        -webkit-font-feature-settings: 'liga';
+        -moz-font-feature-settings: 'liga';
+        font-feature-settings: 'liga';
+    }
+
+    .spinner-white, .spinner-white-only {
+        color: #ffffff !important;
+        border-color: #fff;
+    }
+
+    .span6 {
+        width: 274px;
+        float: left;
+        min-height: 1px;
+        margin-left: 30px;
+    }
+
+    .pull-top {
+        margin-top: 35px;
+    }
+
+    hr {
+        border: 1px solid #e0e0e0;
+        border: 0;
+        margin: 22px 0 22px 0;
+        height: 6px;
+    }
+
+    li {
+        line-height: 24px;
+    }
 </style>
-<style>
-</style>
+
 
 
 <div class="col-xs-12 col-sm-12 pd-l-0 pd-r-0">
-    <div class="col-xs-12 col-sm-6 pd-l-0-f signup-sidebar-css pd-t-50 pd-b-170">
+    <div class="col-xs-12 col-sm-6 pd-l-0-f pd-r-0-f signup-sidebar-css pd-t-50 pd-b-170" style="padding-bottom:335px;">
         <div class="col-sm-12">
             <div class="pd-l-0">
                 <h3 class="signup-title">Create New Account!</h3>
@@ -138,20 +809,20 @@
                 <form [formGroup]="authForm" autocomplete="off">
                     <div class="signup-form">
                         <div class="row">
-                            <div class="col-sm-6 pd-l-xs-15 pd-l-0">
+                            <div class="col-sm-6 pd-xs-l-15">
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
                                     <label>First name</label>
                                     <input type="text" class="form-control" placeholder="Enter your firstname" formControlName="firstName" value="">
-                                    <div class="invalid-data" *ngIf="formErrors.terms">
+                                    <div class="invalid-data" *ngIf="formErrors.firstName">
                                         {{formErrors.firstName}}
                                     </div>
                                 </div>
                             </div><!-- col -->
-                            <div class="col-sm-6 pd-r-xs-15 pd-r-0">
+                            <div class="col-sm-6 pd-xs-r-15">
                                 <div class="form-group" id="validateEmailDiv" [ngClass]="{'has-error': formErrors.email}">
                                     <label>Email address</label>
                                     <input type="text" class="form-control" placeholder="Enter your email" formControlName="email" value="">
-                                    <div class="invalid-data" *ngIf="formErrors.terms">
+                                    <div class="invalid-data" *ngIf="formErrors.email">
                                         {{formErrors.email}}
                                     </div>
                                     <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force" [style.display]="showEmailVerification ? 'block':'none'">
@@ -165,7 +836,7 @@
                         <div class="row mg-b-5">
                             <div formGroupName="passwordGroup">
 
-                                <div class="col-sm-6 pd-l-xs-15 pd-l-0">
+                                <div class="col-sm-6 pd-xs-l-15">
 
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.password}">
                                         <label>Password</label>
@@ -218,7 +889,7 @@
 
                                     </div>
                                 </div><!-- col -->
-                                <div class="col-sm-6 pd-r-xs-15 pd-r-0">
+                                <div class="col-sm-6 pd-xs-r-15">
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.confirmPassword || formErrors.passwordGroup}">
                                         <label>Confirm Password</label>
                                         <input type="password" class="form-control" placeholder="Enter your password" formControlName="confirmPassword" value="">
@@ -240,7 +911,20 @@
                         </div>
 
                         <div class="form-group d-flex mg-b-0">
-                            <button class="btn btn-brand-01 btn-uppercase btn-block" style="width: 100%; padding-top: 0px;" [disabled]="ifFormNotFilledSuccessfully">Create New Account</button>
+                            <button class="btn btn-brand-01 btn-uppercase btn-block" style="width: 100%; padding-top: 0px;" [disabled]="ifFormNotFilledSuccessfully">
+                                <span [style.display]="!isSubmittingForm ? 'block': 'none'" (click)="submitRegistrationForm()">Create New Account</span>
+                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingForm ? 'inline-block': 'none'" style="margin-top:-4px;">
+                                    <div class="spinner-layer spinner-white-only">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div><div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div><div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
                         </div>
 
 
@@ -251,15 +935,72 @@
                         </div>-->
                     </div>
                 </form>
-                <div class="divider-text mg-y-30 mg-b-5-f">Or signup with</div>
+                <!--<div class="divider-text mg-y-30 mg-b-5-f">Or signup with</div>-->
 
 
-                <p class="mg-t-auto mg-b-0 tx-color-03 mg-l-5-f">Already have an account? <a routerLink="/login">Signin</a></p>
+                <p class="mg-t-auto mg-b-0 tx-color-03 mg-l-5-f">Already have an account? <a routerLink="/login">Sign-In</a></p>
             </div><!-- signup-sidebar-body -->
         </div>
 
+        <div class="col-xs-12 col-sm-6 visible-xs overlay-image pd-l-0 pd-r-0" style="background:#f9f9fd">
+
+            <div class="content align-item-center register-left pd-b-200" style="margin:0 auto;">
+
+                <h3 class="text-center ">Welcome to WCR National</h3>
+                <p class="text-center" style="color: rgba(55, 56, 87, 0.6);  font-size: 16px;">Aroma wings est doppio black et fair trade seasonal breve. Cortado organic coffee, single shot, roasta single origin doppio.<span class="text-info" style="font-weight:600;"> Watch video for more details.</span> </p>
+
+                <div class="col-sm-12">
+                    <div class="video-open">
+                        <span class="page-span-1 page-span"></span>
+                        <img src="AngularAssociate/assets/images/registration.png" alt="" class="full-img">
+                        <div class="vertical-align full">
+                            <div class="play-button" (click)="open(content)" style="cursor:pointer;">
+                                <span class="play-button-wrap">
+                                    <svg version="1.1" class="vertical-align full" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="20px" viewBox="0 0 443.307 443.306" style="enable-background:new 0 0 443.307 443.306;" xml:space="preserve"><g><path d="M415.934,212.799L36.788,2.097C32.411-0.377,28.65-0.661,25.51,1.242c-3.14,1.902-4.708,5.328-4.708,10.276V431.78
+                                c0,4.952,1.569,8.381,4.708,10.284c3.14,1.902,6.901,1.622,11.278-0.855l379.146-210.703c4.381-2.478,6.571-5.434,6.571-8.856
+                                C422.505,218.224,420.314,215.274,415.934,212.799z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                           </svg>
+                                </span>
+                            </div>
+                        </div>
+                        <!--<div class="video-item">
+                            <div class="video-wrapper">
+                                <div class="video-iframe"></div>
+                                <div class="close-video main-fill-col">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 21.9 21.9" enable-background="new 0 0 21.9 21.9" width="14px" height="14px">
+                                        <path d="M14.1,11.3c-0.2-0.2-0.2-0.5,0-0.7l7.5-7.5c0.2-0.2,0.3-0.5,0.3-0.7s-0.1-0.5-0.3-0.7l-1.4-1.4C20,0.1,19.7,0,19.5,0  c-0.3,0-0.5,0.1-0.7,0.3l-7.5,7.5c-0.2,0.2-0.5,0.2-0.7,0L3.1,0.3C2.9,0.1,2.6,0,2.4,0S1.9,0.1,1.7,0.3L0.3,1.7C0.1,1.9,0,2.2,0,2.4  s0.1,0.5,0.3,0.7l7.5,7.5c0.2,0.2,0.2,0.5,0,0.7l-7.5,7.5C0.1,19,0,19.3,0,19.5s0.1,0.5,0.3,0.7l1.4,1.4c0.2,0.2,0.5,0.3,0.7,0.3  s0.5-0.1,0.7-0.3l7.5-7.5c0.2-0.2,0.5-0.2,0.7,0l7.5,7.5c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3l1.4-1.4c0.2-0.2,0.3-0.5,0.3-0.7  s-0.1-0.5-0.3-0.7L14.1,11.3z" fill="#000000"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-12 pd-l-15 pd-xs-l-15 pd-sm-l-110 phone pd-b-35-f">
+                    <h3 class="theme-text-color text-center mg-t-0-f mg-b-10-f">Contact <span style="color:#f25f2a">Us:</span></h3>
+
+                    <div class="span6">
+                        <hr>
+
+                        <h5>The <strong>Office</strong></h5>
+                        <ul class="unstyled">
+                            <li style="list-style-type: disc; margin-left: 32px; font-size: 20px;">
+                                <i class="fa fa-phone"></i>
+                                <strong style="padding-left: 30px;">Phone:</strong> 866-456-7331
+                            </li>
+                        </ul>
+
+                    </div>
+
+                </div>
+                <!--<img src="AngularAssociate/assets/images/registration.png" (click)="open(contents)" style="cursor:pointer;" />-->
+            </div>
+
+        </div>
 
     </div><!-- signup-sidebar -->
+
     <div class="col-xs-12 col-sm-6 hidden-xs overlay-image pd-l-0 pd-r-0" style="background:#f9f9fd">
 
         <div class="content align-item-center register-left pd-b-200" style="margin:0 auto;">
@@ -295,9 +1036,18 @@
 
 
             <div class="col-xs-12 col-sm-12 pd-l-15 pd-xs-l-15 pd-sm-l-110 phone pd-b-35-f">
-                <h2 class="mg-t-10">Contact Us:</h2>
-                <div class="col-xs-1 col-sm-1 pd-l-15 pd-sm-l-0" style="text-align:right;"><i class="fa fa-phone font-weight-bold"></i></div>
-                <div class="col-xs-7 col-sm-5" style="text-align:left;"><span class="">866-456-7331</span></div>
+                <h3 class="mg-t-10">Contact Us:</h3>
+
+                <div class="span6">
+
+                    <h4>The <strong>Office</strong></h4>
+                    <ul class="unstyled">
+                        <li style="list-style-type: disc; margin-left: 32px; font-size: 20px;"><i class="fa fa-phone"></i> 
+                        <strong style="padding-left: 30px;">Phone:</strong> 866-456-7331</li>
+                    </ul>
+                    <hr>
+
+                </div>
 
             </div>
             <!--<img src="AngularAssociate/assets/images/registration.png" (click)="open(contents)" style="cursor:pointer;" />-->
