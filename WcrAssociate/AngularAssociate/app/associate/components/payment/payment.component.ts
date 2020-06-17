@@ -45,7 +45,9 @@ export class PaymentComponent implements OnInit {
         },
         'address': {
             'required': 'Address is required',
-            'alphaNumeric': 'Allowed alphanumeric only.'
+            'alphaNumeric': 'Allowed alphanumeric only.',
+            'alphaNumericWithSpace': 'Allowed alphanumeric and spaces only.',
+
         },
         'city': {
             'required': 'City is required',
@@ -199,7 +201,7 @@ export class PaymentComponent implements OnInit {
             cardid: [''],
             firstName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
             lastName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            address: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9]+$/, { alphaNumeric: true })]],
+            address: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9\-\s]+$/, { alphaNumericWithSpace: true })]],
             city: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
             state: ['', [Validators.required]],
             country: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],

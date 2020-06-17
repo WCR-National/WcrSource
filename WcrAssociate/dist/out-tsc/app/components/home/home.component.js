@@ -14,6 +14,7 @@ var HomeComponent = /** @class */ (function () {
         this._messageService = _messageService;
         this.router = router;
         this.isSearchingStart = false;
+        this.isSearching = false;
         this.resultContent = false;
         this.errorMessage = "";
         this.show_check = false;
@@ -106,6 +107,7 @@ var HomeComponent = /** @class */ (function () {
         //}
     };
     HomeComponent.prototype.onClickSearch = function () {
+        this.isSearchingStart = true;
         if (!this.errorExist) {
             this.searching();
         }
