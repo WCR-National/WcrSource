@@ -845,42 +845,42 @@
                                             {{formErrors.password}}
                                         </div>
                                         <div class="col-sm-12 pd-l-0-f" [style.display]="showErrorsPassword ? 'block':'none'">
-                                            <label class="col mg-t-5 pd-l-0" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+                                            <label class="col mg-t-5 pd-l-0" [ngClass]="authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('minlength')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
-                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}
+                                                    {{ authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('minlength') ? 'cancel' :  'check_circle' }}
                                                 </i>
                                                 Must be at least 8 characters!
                                             </label>
-                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('maxlength')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
-                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}
+                                                    {{ authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('maxlength') ? 'cancel' :  'check_circle' }}
                                                 </i>
                                                 Must be less than 20 characters!
                                             </label>
-                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('number')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
-                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}
+                                                    {{ authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('number') ? 'cancel' : 'check_circle'}}
                                                 </i>
                                                 Must contain at least 1 number!
                                             </label>
 
-                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('upperLetter')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
-                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}
+                                                    {{ authForm.get('passwordGroup').get('password').hasError('required') ||  authForm.get('passwordGroup').get('password').hasError('upperLetter') ? 'cancel' :  'check_circle'   }}
                                                 </i>
                                                 Must contain at least 1 in Capital Case!
                                             </label>
 
-                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('lowerLetter')  ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
-                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}
+                                                    {{ authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}
                                                 </i>
                                                 Must contain at least 1 Letter in Small Case!
                                             </label>
 
-                                            <label class="col pd-l-0-f" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+                                            <label class="col pd-l-0-f" [ngClass]="authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
                                                 <i class="material-icons">
-                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
+                                                    {{ authForm.get('passwordGroup').get('password').hasError('required') || authForm.get('passwordGroup').get('password').hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
                                                 </i>
                                                 Must contain at least 1 Special Character!
                                             </label>

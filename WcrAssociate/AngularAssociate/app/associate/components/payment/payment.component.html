@@ -475,9 +475,9 @@
                     <div class="col-sm-12">
                         <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20">
                             <fieldset>
-                                <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
+                                <!--<div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
                                     {{formError}}
-                                </div>
+                                </div>-->
                                 <div class="col-xs-12 col-sm-12">
                                     <h2 class="tx-color-01 pd-l-0-f pd-sm-l-15-f float-left mg-t-7-f pd-b-30-f">Credit Card Information</h2>
                                 </div>
@@ -568,7 +568,7 @@
                                                     Select Zip Code
                                                 </label>
                                                 <!--<select2 [data]="zipCodeData" [value]="startValueZip" [width]="150" (valueChanged)="changeZipCode($event)" formControlName="zipCode"></select2>-->
-                                                <ng-select [items]="zipCodeData" [(ngModel)]="startValueZip" (ngModelChange)="changeZipCode(content)" formControlName="zipCode" [searchable]="false"> </ng-select>
+                                                <ng-select [items]="zipCodeData" [(ngModel)]="startValueZip" (ngModelChange)="changeZipCode()" formControlName="zipCode" [searchable]="false"> </ng-select>
 
                                                 <!--<input id="zipCode" type="text" class="form-control pd-l-0-force form-control" placeholder="ZIP CODE" formControlName="zipCode" (blur)="logValidationErrors()">-->
                                             </div>
@@ -641,7 +641,7 @@
                                                     Select Exp.Month
                                                 </label>
                                                 <!--<input id="expMonth" type="text" class="form-control pd-l-0-force form-control" placeholder="MONTH" formControlName="expMonth" (blur)="logValidationErrors()">-->
-                                                <ng-select [items]="expMonthData" [(ngModel)]="startValueMonth" (ngModelChange)="changeExpMonth(content)" formControlName="expMonth" [searchable]="false"> </ng-select>
+                                                <ng-select [items]="expMonthData" [(ngModel)]="startValueMonth" (ngModelChange)="changeExpMonth()" formControlName="expMonth" [searchable]="false"> </ng-select>
                                                 <!--<select2 [data]="expMonthData" [value]="startValueMonth" [width]="150" (valueChanged)="changeExpMonth($event)" formControlName="expMonth"></select2>-->
 
                                             </div>
@@ -655,7 +655,7 @@
                                                 </label>
 
                                                 <!--<select2 [data]="expYearData" [value]="startValueYear" [width]="150" (valueChanged)="changeExpYear($event)" formControlName="expYear"></select2>-->
-                                                <ng-select [items]="expYearData" [(ngModel)]="startValueYear" (ngModelChange)="changeExpYear(content)" formControlName="expYear" [searchable]="false"> </ng-select>
+                                                <ng-select [items]="expYearData" [(ngModel)]="startValueYear" (ngModelChange)="changeExpYear()" formControlName="expYear" [searchable]="false"> </ng-select>
 
                                                 <!--<input id="expYear" type="text" class="form-control pd-l-0-force form-control" placeholder="YEAR" formControlName="expYear" (blur)="logValidationErrors()">-->
                                             </div>

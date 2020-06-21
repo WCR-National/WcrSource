@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID, NgZone } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl, AsyncValidatorFn } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'AngularAssociate/app/services/auth';
@@ -38,7 +38,7 @@ export class LandingRegistrationComponent implements OnInit {
     validationMessages = {
         'firstName': {
             'required': 'First Name is required',
-            'firstName': 'Alphabetical letters only.'
+            'letterOnly': 'Alphabetical letters only.'
         },
         'email': {
             'required': 'Email is required',
@@ -143,10 +143,6 @@ export class LandingRegistrationComponent implements OnInit {
                 patternValidator(/[A-Z]/, { upperLetter: true }),
                 patternValidator(/[a-z]/, { lowerLetter: true }),
                 patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
-                    //regexValidatorNumbers(new RegExp('^[0-9]+$'), this),
-                    //regexValidatorLower(new RegExp('/[a-z]/g'), this),
-                    //regexValidatorCapital(new RegExp('/[A-Z]/g'), this),
-                    //regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
                 ]],
                 confirmPassword: ['', [Validators.required,]],
             }, { validator: matchPasswords }),

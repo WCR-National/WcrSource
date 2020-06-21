@@ -98,9 +98,9 @@ export class PaymentComponent implements OnInit {
     }
 
     formErrors = {
-        'firstName ': '',
-        'lastName ': '',
-        'address ': '',
+        'firstName': '',
+        'lastName': '',
+        'address': '',
         'city': '',
         'state': '',
         'country': '',
@@ -548,11 +548,11 @@ export class PaymentComponent implements OnInit {
         this.bindStateWiseZipCode(state_value.value, city_value);
     }
 
-    changeZipCode(event) { }
+    changeZipCode() { }
 
-    changeExpYear(content) { }
+    changeExpYear() { }
 
-    changeExpMonth(content) { }
+    changeExpMonth() { }
 
 
     bindState() {

@@ -1,6 +1,6 @@
 import * as tslib_1 from "tslib";
 import { Component, NgZone } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'AngularAssociate/app/services/auth';
@@ -22,6 +22,7 @@ var LandingRegistrationComponent = /** @class */ (function () {
         this.showEmailVerification = false;
         this.formFilledSuccessfully = false;
         this.isSubmitting = false;
+        this.isSubmittingForm = false;
         this.tokenFromUI = "7061737323313233";
         this.formErrorMessage = null;
         this.showErrorsPassword = false;
@@ -29,7 +30,7 @@ var LandingRegistrationComponent = /** @class */ (function () {
         this.validationMessages = {
             'firstName': {
                 'required': 'First Name is required',
-                'firstName': 'Alphabetical letters only.'
+                'letterOnly': 'Alphabetical letters only.'
             },
             'email': {
                 'required': 'Email is required',
@@ -125,10 +126,6 @@ var LandingRegistrationComponent = /** @class */ (function () {
                         patternValidator(/[A-Z]/, { upperLetter: true }),
                         patternValidator(/[a-z]/, { lowerLetter: true }),
                         patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
-                        //regexValidatorNumbers(new RegExp('^[0-9]+$'), this),
-                        //regexValidatorLower(new RegExp('/[a-z]/g'), this),
-                        //regexValidatorCapital(new RegExp('/[A-Z]/g'), this),
-                        //regexValidatorSpecial(new RegExp('/[^\w\s]/gi'), this)
                     ]],
                 confirmPassword: ['', [Validators.required,]],
             }, { validator: matchPasswords }),
@@ -188,13 +185,18 @@ var LandingRegistrationComponent = /** @class */ (function () {
                     .pipe(map(function (data) {
                     if (data >= 1) {
                         _this.showOnValidateEmail = false;
+                        _this.showEmailVerification = true;
                         _this.formFilledSuccessfully = false;
                         $('#validateEmailDiv').addClass('has-error');
                         $('#validateEmailDiv').attr('style', 'top: 19% !important');
+                        control.parent.get('passwordGroup').disable();
+                        control.parent.get('passwordGroup').get('password').disable();
+                        control.parent.get('passwordGroup').get('confirmPassword').disable();
                         return { emailInUse: true };
                     }
                     else {
                         _this.showOnValidateEmail = false;
+                        _this.showEmailVerification = true;
                         control.parent.get('passwordGroup').enable();
                         control.parent.get('passwordGroup').get('password').enable();
                         control.parent.get('passwordGroup').get('confirmPassword').enable();
@@ -211,13 +213,15 @@ var LandingRegistrationComponent = /** @class */ (function () {
     };
     LandingRegistrationComponent.prototype.submitRegistrationForm = function () {
         var _this = this;
+        this.isSubmittingForm = true;
+        this.authForm.controls['email'].setErrors(null);
         var credentials = this.authForm.value;
         if (this.authForm.valid) {
             this.userService
                 .attemptRegisterationAssociate(credentials)
                 .subscribe(function (data) {
                 if (data >= 1) {
-                    _this.isSubmitting = false;
+                    _this.isSubmittingForm = false;
                     _this.request = credentials.email;
                     _this.encryptUsingAES256();
                     credentials.email = _this.encrypted;
@@ -229,7 +233,7 @@ var LandingRegistrationComponent = /** @class */ (function () {
                     _this.router.navigate(['activate', '1', credentials.email, credentials.passwordGroup.password]);
                 }
                 else {
-                    _this.isSubmitting = false;
+                    _this.isSubmittingForm = false;
                 }
             }, function (err) {
                 _this.formErrorMessage = "some internal error. Please try again.";
@@ -238,7 +242,7 @@ var LandingRegistrationComponent = /** @class */ (function () {
         }
         else {
             this.formErrorMessage = "some internal error. Please try again.";
-            this.isSubmitting = false;
+            //this.Parameters = false;
         }
     };
     LandingRegistrationComponent.prototype.encryptUsingAES256 = function () {

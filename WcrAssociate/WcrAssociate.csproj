@@ -128,8 +128,6 @@
     <Content Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.html" />
     <Content Include="AngularAssociate\app\components\landing-registration\landing-registration.component.css" />
     <Content Include="AngularAssociate\app\components\landing-registration\landing-registration.component.html" />
-    <Content Include="AngularAssociate\app\components\modal\modal.component.css" />
-    <Content Include="AngularAssociate\app\components\modal\modal.component.html" />
     <Content Include="AngularAssociate\app\components\terms\terms.component.html" />
     <Content Include="AngularAssociate\app\components\auth\auth.component.html" />
     <Content Include="AngularAssociate\app\shared\buttons\favorite-button.component.html" />
@@ -1843,7 +1841,6 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\profile\profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\landing-registration\landing-registration.component.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\components\modal\modal.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\client-details.service.ts" />

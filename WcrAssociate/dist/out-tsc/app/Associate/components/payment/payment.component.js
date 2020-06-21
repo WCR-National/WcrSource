@@ -79,9 +79,9 @@ var PaymentComponent = /** @class */ (function () {
             }
         };
         this.formErrors = {
-            'firstName ': '',
-            'lastName ': '',
-            'address ': '',
+            'firstName': '',
+            'lastName': '',
+            'address': '',
             'city': '',
             'state': '',
             'country': '',
@@ -433,9 +433,9 @@ var PaymentComponent = /** @class */ (function () {
         var state_value = this.cardForm.get('state').value;
         this.bindStateWiseZipCode(state_value.value, city_value);
     };
-    PaymentComponent.prototype.changeZipCode = function (event) { };
-    PaymentComponent.prototype.changeExpYear = function (content) { };
-    PaymentComponent.prototype.changeExpMonth = function (content) { };
+    PaymentComponent.prototype.changeZipCode = function () { };
+    PaymentComponent.prototype.changeExpYear = function () { };
+    PaymentComponent.prototype.changeExpMonth = function () { };
     PaymentComponent.prototype.bindState = function () {
         var _this = this;
         var countryId = "US"; //this.cardForm.get('country').value;
