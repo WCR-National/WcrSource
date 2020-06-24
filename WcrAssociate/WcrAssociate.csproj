@@ -136,28 +136,18 @@
     <Content Include="AngularAssociate\app\shared\shared-layout\shared-layout.component.html" />
     <Content Include="AngularAssociate\app\shared\layout\footer.component.html" />
     <Content Include="AngularAssociate\app\shared\layout\header.component.html" />
-    <Content Include="AngularAssociate\assets\associate\css\croppie.css" />
-    <Content Include="AngularAssociate\assets\associate\css\docs.css" />
-    <Content Include="AngularAssociate\assets\associate\css\landing.css" />
-    <Content Include="AngularAssociate\assets\associate\css\skin.three.css" />
     <Content Include="AngularAssociate\assets\bootstrap.css" />
     <Content Include="AngularAssociate\assets\color.css" />
     <Content Include="AngularAssociate\assets\images\amex.jpg" />
-    <Content Include="AngularAssociate\assets\images\background.jpg" />
     <Content Include="AngularAssociate\assets\images\discover.jpg" />
-    <Content Include="AngularAssociate\assets\images\evergreen-banner.jpg" />
-    <Content Include="AngularAssociate\assets\images\img25.jpg" />
     <Content Include="AngularAssociate\assets\images\mastercard_logo.png" />
     <Content Include="AngularAssociate\assets\images\notfound.png" />
-    <Content Include="AngularAssociate\assets\images\registration2.png" />
     <Content Include="AngularAssociate\assets\images\registration.png" />
     <Content Include="AngularAssociate\assets\images\visa_logo.jpg" />
     <Content Include="AngularAssociate\assets\js\bootstrap.bundle.min.js" />
     <Content Include="AngularAssociate\assets\js\croppie.min.js" />
     <Content Include="AngularAssociate\assets\js\imguploader.js" />
     <Content Include="AngularAssociate\assets\js\select2.min.js" />
-    <Content Include="AngularAssociate\assets\js\xml2json.js" />
-    <Content Include="AngularAssociate\assets\js\materialize.min.js" />
     <Content Include="AngularAssociate\assets\select2.min.css" />
     <Content Include="AngularAssociate\assets\style.css" />
     <Content Include="AngularAssociate\styles.css" />
@@ -1790,6 +1780,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="AngularAssociate\assets\associate\" />
     <Folder Include="Associate\dist\img\credit\" />
     <Folder Include="Associate\img\credit\" />
     <Folder Include="Associate\NewFolder1\" />

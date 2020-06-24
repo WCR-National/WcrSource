@@ -1392,7 +1392,7 @@ textarea.form-control {
 .overlay-image {
     /*background: url(https://superdevresources.com/wp-content/uploads/2015/12/new-york-background.jpg) no-repeat center center fixed;*/
     /*background-image: url('');*/
-    background: url('AngularAssociate/assets/images/evergreen-banner.jpg') no-repeat center center fixed;
+    /*background: url('AngularAssociate/assets/images/evergreen-banner.jpg') no-repeat center center fixed;*/
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;

@@ -839,11 +839,11 @@ var AuthComponent = /** @class */ (function () {
                 urlComponent = data[1].path;
                 encryptedEmail = data[2].path;
                 encryptedPassword = data[3].path;
-                _this.isSubmitting = false;
             }
             else {
                 //page  not found
                 _this.isSubmitting = false;
+                return false;
             }
         });
         var userType = urlComponent;

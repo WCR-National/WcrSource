@@ -1039,7 +1039,9 @@ export class AuthComponent implements OnInit {
     * *************************************************
     **/
     submitActivationForm() {
+        debugger;
         this.isSubmitting = true;
+
         const credentials = this.authForm.value;
         let urlComponent: string;
 
@@ -1052,12 +1054,11 @@ export class AuthComponent implements OnInit {
                 urlComponent = data[1].path;
                 encryptedEmail = data[2].path;
                 encryptedPassword = data[3].path;
-                this.isSubmitting = false;
-
             }
             else {
                 //page  not found
                 this.isSubmitting = false;
+                return false;
             }
         });
 
@@ -1089,7 +1090,7 @@ export class AuthComponent implements OnInit {
     }
 
     associateActivationCode(credentials) {
-
+        this.isSubmitting = true;
         this.userService
             .getAttemptVerifiedActivationCodeAssociate(this.authType, credentials)
             .subscribe(
@@ -1124,7 +1125,7 @@ export class AuthComponent implements OnInit {
 
                         this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
                         this.isSubmitting = false;
-                        this.activationSent = true;
+                        //this.activationSent = true;
                     }
                 },
                 err => {
@@ -1135,6 +1136,8 @@ export class AuthComponent implements OnInit {
     }
 
     consumerActivationCode(credentials) {
+        this.isSubmitting = true;
+
         this.userService
             .getAttemptVerifiedActivationCodeConsumer(this.authType, credentials)
             .subscribe(
@@ -1163,7 +1166,7 @@ export class AuthComponent implements OnInit {
 
                         this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
                         this.isSubmitting = false;
-                        this.activationSent = true;
+                        //this.activationSent = true;
                     }
                 },
                 err => {

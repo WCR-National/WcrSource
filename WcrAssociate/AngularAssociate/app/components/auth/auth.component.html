@@ -46,10 +46,12 @@
                                 </div>
 
                                 <div class="col-sm-12">
-                                    <button class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'activate')" type="submit" [disabled]="!authForm.valid">
-                                        <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitActivationForm()">VERIFY</span>
+
+                                    <button type="submit" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'activate')"
+                                            [disabled]="!authForm.valid">
+                                        <span [style.display]="!isSubmitting ? 'block': 'none' " (click)="submitActivationForm()">VERIFY</span>
                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
-                                            <div class="spinner-layer spinner-blue-only">
+                                            <div class="spinner-layer spinner-blue-only spinner-blue">
                                                 <div class="circle-clipper left">
                                                     <div class="circle"></div>
                                                 </div><div class="gap-patch">
@@ -310,7 +312,6 @@
                                         </button>
 
 
-
                                         <button [style.display]="resetPassword ? 'none': 'block'" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'resetPassword')" type="submit" [disabled]="!authForm.valid">
                                             <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitFormResetPassword()">RESET PASSWORD</span>
                                             <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
@@ -325,6 +326,8 @@
                                                 </div>
                                             </div>
                                         </button>
+
+
                                     </div>
 
                                 </div>

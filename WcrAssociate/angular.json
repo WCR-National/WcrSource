@@ -54,7 +54,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/crypto-js/crypto-js.js",
-              "AngularAssociate/assets/js/croppie.min.js",
+              //"AngularAssociate/assets/js/croppie.min.js",
               "AngularAssociate/assets/js/imguploader.js",
               //"node_modules/select2/dist/js/select2.min.js"
             ],
@@ -120,7 +120,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/crypto-js/crypto-js.js",
-              "AngularAssociate/assets/js/croppie.min.js",
+              //"AngularAssociate/assets/js/croppie.min.js",
               "AngularAssociate/assets/js/imguploader.js",
               //"node_modules/select2/dist/js/select2.min.js"
             ],
