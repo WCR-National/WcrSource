@@ -65,7 +65,17 @@ var UserService = /** @class */ (function () {
                 this.consumerLoginSessionActivate("", credentials, user.id)
                     .then(function (data) {
                     if (data.d == "1") {
-                        _this.ngZone.run(function () { return _this.router.navigate(['/']); });
+                        _this.returnUrl = _this.route.snapshot.queryParams['returnUrl'] || '';
+                        if (_this.returnUrl == '') {
+                            var url_2 = (_this.platformLocation.location.href).replace(location.origin, '');
+                            _this.ngZone.run(function () { return _this.router.navigate([url_2]); });
+                            //this.router.navigateByUrl(url);
+                        }
+                        else {
+                            _this.ngZone.run(function () { return _this.router.navigate([_this.returnUrl]); });
+                            //this.router.navigateByUrl('');
+                        }
+                        //this.ngZone.run(() => this.router.navigate(['/']));
                         //this.router.navigateByUrl('/');
                     }
                     else {

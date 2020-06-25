@@ -72,17 +72,31 @@ export class UserService {
             else if (user.type == "2") {
                 var credentials: any = {};
                 credentials.email = user.email;
-                this.consumerLoginSessionActivate("", credentials, user.id)
-                    .then((data: any) => {
-                        if (data.d == "1") {
-                            this.ngZone.run(() => this.router.navigate(['/']));
-                            //this.router.navigateByUrl('/');
-                        }
-                        else {
-                            this.ngZone.run(() => this.router.navigate(['/']));
-                            //this.router.navigateByUrl('/');
-                        }
-                    });
+                window.location.href = "ConsumerDashboard.html";
+                //this.ngZone.run(() => this.router.navigate(['/ConsumerDashboard.html']));
+                //this.consumerLoginSessionActivate("", credentials, user.id)
+                //    .then((data: any) => {
+                //        if (data.d == "1") {
+                //            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+                //            if (this.returnUrl == '') {
+
+                //                let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                //                this.ngZone.run(() => this.router.navigate([url]));
+                //                //this.router.navigateByUrl(url);
+                //            }
+                //            else {
+                //                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+                //                //this.router.navigateByUrl('');
+                //            }
+
+                //            //this.ngZone.run(() => this.router.navigate(['/']));
+                //            //this.router.navigateByUrl('/');
+                //        }
+                //        else {
+                //            this.ngZone.run(() => this.router.navigate(['/']));
+                //            //this.router.navigateByUrl('/');
+                //        }
+                //    });
             }
         }
         else {

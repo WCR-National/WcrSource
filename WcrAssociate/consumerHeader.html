@@ -8,8 +8,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 toplogo searchbar topsearch afterlogin ">
-                        <div class="input-group">                            
-                            <input type="text" id="txtSearch" autocomplete="off" style="text-align:left;" placeholder="City, State OR  Zip Code" class="form-control">                       
+                        <div class="input-group">
+                            <input type="text" id="txtSearch" autocomplete="off" style="text-align:left;" placeholder="City, State OR  Zip Code" class="form-control">
                             <span class="input-group-addon" style="border-left:0px;"> <a href="JavaScript:void(0);" name="tpsrc"> <i class="fa fa-search"></i></a> </span>
                         </div>
                         <span id="lblprogressmsg" style="color:red; display:none;">Please wait......</span>
@@ -25,12 +25,12 @@
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav pull-right">
-                                <li id="liprofile"><a href="index.html"> <i class="fa fa-home"></i> Home </a></li>
+                                <li id="liprofile"><a href="ConsumerDashboard.html"> <i class="fa fa-home"></i> Home </a></li>
                                 <li id="liprofile"><a href="Profile.html"> <i class="fa fa-user"></i> Profile </a></li>
                                 <li id="libookmark"><a href="bookmark.html"><i class="fa  fa-bookmark-o"></i> Bookmarks</a></li>
                                 <li id="lisupport"><a href="support.html"><i class="fa  fa-question-circle"></i>  Support</a></li>
                                 <li id="lilogout"><a href="#" id="btnLogout"><i class="fa fa-sign-out"></i>  Logout</a></li>
-                               
+
                             </ul>
                             <div id="homeicon"></div>
                         </div>
@@ -56,9 +56,11 @@
                 dataType: "json",
                 async: false,
                 cache: false,
-                success: function (response) {
+                success: function (response)
+                {
                     if (response == "0") {
-                        window.location.href = 'index.html';
+                        localStorage.removeItem('jwtToken');
+                        window.location.href = '/';
                     }
                     else {
                         alert("OOPS Something goes wrong !");

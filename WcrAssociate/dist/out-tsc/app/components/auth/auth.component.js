@@ -828,6 +828,7 @@ var AuthComponent = /** @class */ (function () {
     **/
     AuthComponent.prototype.submitActivationForm = function () {
         var _this = this;
+        debugger;
         this.isSubmitting = true;
         var credentials = this.authForm.value;
         var urlComponent;
@@ -868,6 +869,7 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.associateActivationCode = function (credentials) {
         var _this = this;
+        this.isSubmitting = true;
         this.userService
             .getAttemptVerifiedActivationCodeAssociate(this.authType, credentials)
             .subscribe(function (data) {
@@ -892,7 +894,7 @@ var AuthComponent = /** @class */ (function () {
             else {
                 _this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
                 _this.isSubmitting = false;
-                _this.activationSent = true;
+                //this.activationSent = true;
             }
         }, function (err) {
             _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
@@ -901,6 +903,7 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.consumerActivationCode = function (credentials) {
         var _this = this;
+        this.isSubmitting = true;
         this.userService
             .getAttemptVerifiedActivationCodeConsumer(this.authType, credentials)
             .subscribe(function (data) {
@@ -922,7 +925,7 @@ var AuthComponent = /** @class */ (function () {
             else {
                 _this.formErrors.activationCode = "Verification code does not match. Please Login your registered Email ID to see verification code.";
                 _this.isSubmitting = false;
-                _this.activationSent = true;
+                //this.activationSent = true;
             }
         }, function (err) {
             _this.formErrors.activationCode = _this.validationMessages['activationCode']['notValidCode'];
