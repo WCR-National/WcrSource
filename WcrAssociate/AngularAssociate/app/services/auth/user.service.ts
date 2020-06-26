@@ -102,6 +102,8 @@ export class UserService {
         else {
             // Remove any potential remnants of previous auth states
             this.purgeAuth();
+            let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+            this.ngZone.run(() => this.router.navigate([url]));
         }
     }
 
@@ -116,7 +118,6 @@ export class UserService {
 
         this.isAuthenticated_extra = true;
         console.log(this.isAuthenticated_extra);
-
     }
 
     purgeAuth() {

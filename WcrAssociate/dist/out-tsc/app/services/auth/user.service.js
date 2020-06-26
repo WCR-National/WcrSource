@@ -62,32 +62,36 @@ var UserService = /** @class */ (function () {
             else if (user.type == "2") {
                 var credentials = {};
                 credentials.email = user.email;
-                this.consumerLoginSessionActivate("", credentials, user.id)
-                    .then(function (data) {
-                    if (data.d == "1") {
-                        _this.returnUrl = _this.route.snapshot.queryParams['returnUrl'] || '';
-                        if (_this.returnUrl == '') {
-                            var url_2 = (_this.platformLocation.location.href).replace(location.origin, '');
-                            _this.ngZone.run(function () { return _this.router.navigate([url_2]); });
-                            //this.router.navigateByUrl(url);
-                        }
-                        else {
-                            _this.ngZone.run(function () { return _this.router.navigate([_this.returnUrl]); });
-                            //this.router.navigateByUrl('');
-                        }
-                        //this.ngZone.run(() => this.router.navigate(['/']));
-                        //this.router.navigateByUrl('/');
-                    }
-                    else {
-                        _this.ngZone.run(function () { return _this.router.navigate(['/']); });
-                        //this.router.navigateByUrl('/');
-                    }
-                });
+                window.location.href = "ConsumerDashboard.html";
+                //this.ngZone.run(() => this.router.navigate(['/ConsumerDashboard.html']));
+                //this.consumerLoginSessionActivate("", credentials, user.id)
+                //    .then((data: any) => {
+                //        if (data.d == "1") {
+                //            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+                //            if (this.returnUrl == '') {
+                //                let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                //                this.ngZone.run(() => this.router.navigate([url]));
+                //                //this.router.navigateByUrl(url);
+                //            }
+                //            else {
+                //                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+                //                //this.router.navigateByUrl('');
+                //            }
+                //            //this.ngZone.run(() => this.router.navigate(['/']));
+                //            //this.router.navigateByUrl('/');
+                //        }
+                //        else {
+                //            this.ngZone.run(() => this.router.navigate(['/']));
+                //            //this.router.navigateByUrl('/');
+                //        }
+                //    });
             }
         }
         else {
             // Remove any potential remnants of previous auth states
             this.purgeAuth();
+            var url_2 = (this.platformLocation.location.href);
+            this.ngZone.run(function () { return _this.router.navigate([url_2]); });
         }
     };
     UserService.prototype.setAuth = function (user) {
