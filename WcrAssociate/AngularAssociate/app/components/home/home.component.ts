@@ -16,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
     isSearchingStart: boolean = false;
+    isSearchingStartMatIcon: boolean = false;
     isSearching: boolean = false;
     searchForm: FormGroup;
     resultContent: boolean = false;
@@ -46,7 +47,7 @@ export class HomeComponent implements OnInit {
         'txtSearch': ''
     };
 
-    constructor(private fb: FormBuilder, private renderer: Renderer2, private searchService: SearchService, @Inject(PLATFORM_ID) private platformId: Object, private _messageService: MessageService, private router: Router,) {
+    constructor(private fb: FormBuilder, private renderer: Renderer2, private searchService: SearchService, @Inject(PLATFORM_ID) private platformId: Object, private _messageService: MessageService, private router: Router, ) {
         this._messageService.listen().subscribe((m: any) => {
             console.log(m);
             if (m == 'showAds') {
@@ -128,6 +129,8 @@ export class HomeComponent implements OnInit {
 
     onClickSearch() {
         this.isSearchingStart = true;
+        this.isSearchingStartMatIcon = true;
+
         if (!this.errorExist) {
             this.searching();
         }
@@ -137,6 +140,7 @@ export class HomeComponent implements OnInit {
 
         this.resultContent = false;
         this.isSearchingStart = true;
+        this.isSearchingStartMatIcon = true;
 
         //if (isPlatformBrowser(this.platformId)) {
         //    this.divSalesServices.nativeElement.focus();
@@ -178,13 +182,13 @@ export class HomeComponent implements OnInit {
 
                 //if (State.length == 2) {
 
-                    salesHtml = this.bindSalesCategoryCityWise(State, City);
-                    servicesHtml = this.bindServiesCategoryCityWise(State, City);
+                salesHtml = this.bindSalesCategoryCityWise(State, City);
+                servicesHtml = this.bindServiesCategoryCityWise(State, City);
 
-                    //this.innerHtmlSales = salesHtml;
-                    //this.innerHtmlServices = servicesHtml;
-                    //console.log(this.innerHtmlSales);
-                    //console.log(this.innerHtmlServices);
+                //this.innerHtmlSales = salesHtml;
+                //this.innerHtmlServices = servicesHtml;
+                //console.log(this.innerHtmlSales);
+                //console.log(this.innerHtmlServices);
                 //}
                 //else if (State.length >= 2) {
                 //    $('html, body').animate({ scrollTop: $('#divLandingPage').offset().top }, 'slow');
@@ -197,6 +201,8 @@ export class HomeComponent implements OnInit {
             else {
                 this.errorMessage = "Invalid data entered.  Please enter City, State OR Zip Code.";
                 this.isSearchingStart = false;
+                this.isSearchingStartMatIcon = false;
+
 
             }
         }
@@ -342,8 +348,13 @@ export class HomeComponent implements OnInit {
                     }
                     else { }
                     thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+
                 },
-                err => { thisHomePage.isSearchingStart = false; }
+                err => {
+                thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+}
             );
 
     }
@@ -463,9 +474,14 @@ export class HomeComponent implements OnInit {
                     }
                     else { }
                     thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+
 
                 },
-                err => { thisHomePage.isSearchingStart = false; }
+                err => {
+                thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+}
             );
     }
 
@@ -606,10 +622,14 @@ export class HomeComponent implements OnInit {
                     }
                     else { }
                     thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+
 
                 },
                 err => {
                     thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+
                 }
             );
     }
@@ -748,8 +768,12 @@ export class HomeComponent implements OnInit {
                     }
                     else { }
                     thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
                 },
-                err => { thisHomePage.isSearchingStart = false; }
+                err => {
+                    thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+                }
             );
     }
 
@@ -757,11 +781,12 @@ export class HomeComponent implements OnInit {
     public async GetSalesAdts() {
         debugger;
         this.resultContent = false;
+        this.isSearchingStartMatIcon = false;
         this.isSearchingStart = true;
         if ($('#salesServicesDivId') == null) {
             this.router.navigateByUrl('/');
         }
-       // $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
+        // $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
 
         const globalThis = this;
         $.getJSON("http://jsonip.com?callback=?", function (data) {
@@ -792,7 +817,7 @@ export class HomeComponent implements OnInit {
         //    .attemptGetSalesAdts()
         //    .then(
         //        (data: any) => {
-                   
+
 
         //        },
         //        err => {

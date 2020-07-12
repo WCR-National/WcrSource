@@ -90,7 +90,7 @@ var UserService = /** @class */ (function () {
         else {
             // Remove any potential remnants of previous auth states
             this.purgeAuth();
-            var url_2 = (this.platformLocation.location.href);
+            var url_2 = (this.platformLocation.location.href).replace(location.origin, '');
             this.ngZone.run(function () { return _this.router.navigate([url_2]); });
         }
     };

@@ -155,7 +155,7 @@ var ProfileComponent = /** @class */ (function () {
             firstName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
             lastName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
             licenseState: ['', [Validators.required, StateValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            phoneNo: ['', [Validators.required, phoneValidator(/\d{10}/, { elevenDigits: true })]],
+            phoneNo: ['', [Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })]],
             licenseId: ['', [Validators.required, alphaNumeric(/[a-zA-Z0-9]+$/, { alphaNumeric: true }, this)]],
             password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
                     patternValidator(/\d/, { number: true }),

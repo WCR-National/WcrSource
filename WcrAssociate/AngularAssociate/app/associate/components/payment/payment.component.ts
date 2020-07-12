@@ -296,7 +296,7 @@ export class PaymentComponent implements OnInit {
                             this.cardType = data._crdType;
 
 
-                            this.expMonth = data._months;
+                            this.expMonth = (parseInt(data._months) + 1).toString();
 
 
                             thisStatus.cardForm.get('cardid').setValue(data._crdID);

@@ -14,6 +14,7 @@ var HomeComponent = /** @class */ (function () {
         this._messageService = _messageService;
         this.router = router;
         this.isSearchingStart = false;
+        this.isSearchingStartMatIcon = false;
         this.isSearching = false;
         this.resultContent = false;
         this.errorMessage = "";
@@ -108,6 +109,7 @@ var HomeComponent = /** @class */ (function () {
     };
     HomeComponent.prototype.onClickSearch = function () {
         this.isSearchingStart = true;
+        this.isSearchingStartMatIcon = true;
         if (!this.errorExist) {
             this.searching();
         }
@@ -115,6 +117,7 @@ var HomeComponent = /** @class */ (function () {
     HomeComponent.prototype.searching = function () {
         this.resultContent = false;
         this.isSearchingStart = true;
+        this.isSearchingStartMatIcon = true;
         //if (isPlatformBrowser(this.platformId)) {
         //    this.divSalesServices.nativeElement.focus();
         //    //this.myInput.nativeElement.focus();
@@ -164,6 +167,7 @@ var HomeComponent = /** @class */ (function () {
             else {
                 this.errorMessage = "Invalid data entered.  Please enter City, State OR Zip Code.";
                 this.isSearchingStart = false;
+                this.isSearchingStartMatIcon = false;
             }
         }
     };
@@ -279,10 +283,14 @@ var HomeComponent = /** @class */ (function () {
                                 return [3 /*break*/, 2];
                             case 2:
                                 thisHomePage.isSearchingStart = false;
+                                thisHomePage.isSearchingStartMatIcon = false;
                                 return [2 /*return*/];
                         }
                     });
-                }); }, function (err) { thisHomePage.isSearchingStart = false; });
+                }); }, function (err) {
+                    thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+                });
                 return [2 /*return*/];
             });
         });
@@ -390,10 +398,14 @@ var HomeComponent = /** @class */ (function () {
                                 return [3 /*break*/, 2];
                             case 2:
                                 thisHomePage.isSearchingStart = false;
+                                thisHomePage.isSearchingStartMatIcon = false;
                                 return [2 /*return*/];
                         }
                     });
-                }); }, function (err) { thisHomePage.isSearchingStart = false; });
+                }); }, function (err) {
+                    thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+                });
                 return [2 /*return*/];
             });
         });
@@ -507,11 +519,13 @@ var HomeComponent = /** @class */ (function () {
                                 return [3 /*break*/, 2];
                             case 2:
                                 thisHomePage.isSearchingStart = false;
+                                thisHomePage.isSearchingStartMatIcon = false;
                                 return [2 /*return*/];
                         }
                     });
                 }); }, function (err) {
                     thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
                 });
                 return [2 /*return*/];
             });
@@ -630,10 +644,14 @@ var HomeComponent = /** @class */ (function () {
                                 return [3 /*break*/, 2];
                             case 2:
                                 thisHomePage.isSearchingStart = false;
+                                thisHomePage.isSearchingStartMatIcon = false;
                                 return [2 /*return*/];
                         }
                     });
-                }); }, function (err) { thisHomePage.isSearchingStart = false; });
+                }); }, function (err) {
+                    thisHomePage.isSearchingStart = false;
+                    thisHomePage.isSearchingStartMatIcon = false;
+                });
                 return [2 /*return*/];
             });
         });
@@ -644,6 +662,7 @@ var HomeComponent = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 debugger;
                 this.resultContent = false;
+                this.isSearchingStartMatIcon = false;
                 this.isSearchingStart = true;
                 if ($('#salesServicesDivId') == null) {
                     this.router.navigateByUrl('/');
