@@ -276,8 +276,7 @@ export class PaymentComponent implements OnInit {
                     if (data != "" && data != undefined && data != null && data != "-1" && data != -1) {
                         if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
                             debugger;
-                            this.isAddOrUpdateButton = false;
-                            this.isCreditCardFormVisible = false;
+
 
                             this.crdId = data._crdID;
                             this.crd = data._crd;
@@ -296,7 +295,7 @@ export class PaymentComponent implements OnInit {
                             this.cardType = data._crdType;
 
 
-                            this.expMonth = (parseInt(data._months) + 1).toString();
+                            this.expMonth = data._months; //(parseInt() + 1).toString();
 
 
                             thisStatus.cardForm.get('cardid').setValue(data._crdID);
@@ -313,7 +312,7 @@ export class PaymentComponent implements OnInit {
 
                             var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-                            var selectedMonthName = months[data._months];
+                            var selectedMonthName = months[(parseInt(data._months) - 1)];
 
                             thisStatus.startValueMonth = { value: data._months, label: selectedMonthName };
 
@@ -368,6 +367,8 @@ export class PaymentComponent implements OnInit {
                                 thisStatus.cardForm.get('cardType').setValue("amex");
                                 //CheckBox3.Checked = true;
                             }
+                            this.isAddOrUpdateButton = false;
+                            this.isCreditCardFormVisible = false;
 
                             return false;
                         }

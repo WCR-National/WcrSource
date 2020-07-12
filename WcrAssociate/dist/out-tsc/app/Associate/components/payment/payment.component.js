@@ -220,7 +220,7 @@ var PaymentComponent = /** @class */ (function () {
                     _this.expYear = data._year;
                     _this.CVCNumber = data._cvv;
                     _this.cardType = data._crdType;
-                    _this.expMonth = data._months + 1;
+                    _this.expMonth = (parseInt(data._months) + 1).toString();
                     thisStatus.cardForm.get('cardid').setValue(data._crdID);
                     thisStatus.cardForm.get('cardNumber').setValue(data._crd);
                     thisStatus.cardForm.get('firstName').setValue(data._fstName);
