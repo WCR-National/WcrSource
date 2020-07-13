@@ -44,17 +44,17 @@ var ProfileComponent = /** @class */ (function () {
                 'letterOnly': 'Allowed alphabeticals letters only.'
             },
             'licenseId': {
-                'required': 'Last Name is required',
+                'required': 'License id is required',
                 'alphaNumeric': 'Allowed alphanumeric only.'
             },
             'licenseState': {
-                'required': 'Last Name is required',
+                'required': 'License state is required',
                 'letterOnly': 'Allowed alphabeticals letters only.'
             },
             'phoneNo': {
-                'required': 'Last Name is required',
+                'required': 'Phone number is required',
                 'tenDigits': 'Allowed 10 digits for mobile no.',
-                'elevenDigits': 'Allowed 11 digits, if first letter is starts with 1'
+                'elevenDigits': 'Start with 1, Allowed 11 digits'
             }
         };
         this.formErrors = {

@@ -317,11 +317,12 @@ export class PaymentComponent implements OnInit {
                             thisStatus.startValueMonth = { value: data._months, label: selectedMonthName };
 
                             this.bindState();
-                            this.bindStateWiseZipCode(data._state, data._city);
+                            
+                            //this.bindStateWiseZipCode(data._state, data._city);
 
                             setTimeout(function () {
                                 thisStatus.startValueState = { value: data._state, label: data._state };
-                            }, 3000);
+                            }, 2000);
 
                             setTimeout(function () {
                                 thisStatus.startValueZip = { value: data._zip, label: data._zip }; 

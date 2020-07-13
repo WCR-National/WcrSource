@@ -432,6 +432,7 @@
         align-items: baseline;
         min-height: 44.5px;
     }
+
     .ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
         white-space: nowrap;
         overflow: hidden;
@@ -439,7 +440,9 @@
         font-size: 15px;
         font-weight: 500;
     }
-
+    .ng-select {
+        padding-bottom: 0.1em;
+    }
 </style>
 
 <div class="content-header justify-content-between pd-b-20-f">
@@ -453,28 +456,30 @@
         <h4 class="content-title content-title-xs">Credit card</h4>
     </div>
 </div><!-- content-header -->
+<!--[style.display]="(isCreditCardFormVisible) ? 'block':'none'"-->
 
-
-
-
-<div class="content-body content-body-profile pd-t-0-f height-payment-body" >
+<div class="content-body content-body-profile pd-t-0-f height-payment-body">
     <div class="profile-body">
-        <div class="auth-page mg-b-60-force" [style.display]="(isCreditCardFormVisible) ? 'block':'none'">
+        <div class="auth-page mg-b-60-force" >
             <div class="container-cassie page" style="background-color:#fff;">
                 <div class="row">
+
                     <div class="col-xs-12 col-sm-12 pd-t-50-f">
                         <div id="info" class="pd-l-0-f pd-sm-l-35-f">
                             <p style="font-size: 17px; font-weight: 400; color: #2b2b2b;">
-                                Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br />
+                                Credit card information entered/displayed here will be the default card for all billing associated with this account.<br />  Any changes made will result in your previous card information not being saved.<br />
                             </p>
                         </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12" [style.display]="isCreditCardFormVisible ? 'none':'block' ">
+                        <button style="position:relative;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit" ></i> Edit </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12" [style.display]="formErrorMessage != '' ? 'block': 'none'">{{formErrorMessage}}</div>
                     <div class="col-sm-12">
-                        <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20">
-                            <fieldset>
+                        <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20" >
+                            <fieldset [disabled]="(!isCreditCardFormVisible)">
                                 <!--<div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
                                     {{formError}}
                                 </div>-->
@@ -537,12 +542,12 @@
 
                                         <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
 
-                                            <div class="form-group" [ngClass]="{'has-error': formErrors.state}">
+                                            <div class="form-group" [style.pointer-events]="isCreditCardFormVisible ? 'all' : 'none'" [ngClass]="{'has-error': formErrors.state}">
                                                 <label>
                                                     Select State
                                                 </label>
                                                 <!--<select2 [data]="stateData" [value]="startValueState" [width]="150" (valueChanged)="changeState($event)" formControlName="state"></select2>-->
-                                                <ng-select [items]="stateData" [(ngModel)]="startValueState" (ngModelChange)="changeState()" formControlName="state" [searchable]="false"> </ng-select>
+                                                <ng-select [style.background]="isCreditCardFormVisible ? 'none' : '#e9ecf1'"  [items]="stateData" [(ngModel)]="startValueState" (ngModelChange)="changeState()" formControlName="state" [searchable]="false"> </ng-select>
 
                                                 <!--<input id="state" type="text" class="form-control pd-l-0-force form-control" placeholder="STATE" formControlName="firstName" (blur)="logValidationErrors()">-->
                                             </div>
@@ -563,12 +568,11 @@
 
                                         <div class="col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
 
-                                            <div class="form-group" [ngClass]="{'has-error': formErrors.zipCode}">
+                                            <div class="form-group" [style.pointer-events]="isCreditCardFormVisible ? 'all' : 'none'" [ngClass]="{'has-error': formErrors.zipCode}" >
                                                 <label>
                                                     Select Zip Code
                                                 </label>
-                                                <!--<select2 [data]="zipCodeData" [value]="startValueZip" [width]="150" (valueChanged)="changeZipCode($event)" formControlName="zipCode"></select2>-->
-                                                <ng-select [items]="zipCodeData" [(ngModel)]="startValueZip" (ngModelChange)="changeZipCode()" formControlName="zipCode" [searchable]="false"> </ng-select>
+                                                <ng-select [style.background]="isCreditCardFormVisible ? 'none' : '#e9ecf1'"  [items]="zipCodeData" [(ngModel)]="startValueZip" (ngModelChange)="changeZipCode()" formControlName="zipCode" [searchable]="false" > </ng-select>
 
                                                 <!--<input id="zipCode" type="text" class="form-control pd-l-0-force form-control" placeholder="ZIP CODE" formControlName="zipCode" (blur)="logValidationErrors()">-->
                                             </div>
@@ -590,7 +594,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                             <label>
                                                 Choose Card Type
@@ -635,27 +639,27 @@
                                         </div>
 
                                         <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                            <div class="form-group" [ngClass]="{'has-error': formErrors.expMonth}">
+                                            <div class="form-group" [style.pointer-events]="isCreditCardFormVisible ? 'all' : 'none'" [ngClass]="{'has-error': formErrors.expMonth}">
 
                                                 <label>
                                                     Select Exp.Month
                                                 </label>
                                                 <!--<input id="expMonth" type="text" class="form-control pd-l-0-force form-control" placeholder="MONTH" formControlName="expMonth" (blur)="logValidationErrors()">-->
-                                                <ng-select [items]="expMonthData" [(ngModel)]="startValueMonth" (ngModelChange)="changeExpMonth()" formControlName="expMonth" [searchable]="false"> </ng-select>
+                                                <ng-select [style.background]="isCreditCardFormVisible ? 'none' : '#e9ecf1'" [items]="expMonthData" [(ngModel)]="startValueMonth" (ngModelChange)="changeExpMonth()" formControlName="expMonth" [searchable]="false"> </ng-select>
                                                 <!--<select2 [data]="expMonthData" [value]="startValueMonth" [width]="150" (valueChanged)="changeExpMonth($event)" formControlName="expMonth"></select2>-->
 
                                             </div>
                                         </div>
 
                                         <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                            <div class="form-group" [ngClass]="{'has-error': formErrors.expYear}">
+                                            <div class="form-group" [style.pointer-events]="isCreditCardFormVisible ? 'all' : 'none'" [ngClass]="{'has-error': formErrors.expYear}">
 
                                                 <label>
                                                     Select Exp.Year
                                                 </label>
 
                                                 <!--<select2 [data]="expYearData" [value]="startValueYear" [width]="150" (valueChanged)="changeExpYear($event)" formControlName="expYear"></select2>-->
-                                                <ng-select [items]="expYearData" [(ngModel)]="startValueYear" (ngModelChange)="changeExpYear()" formControlName="expYear" [searchable]="false"> </ng-select>
+                                                <ng-select [style.background]="isCreditCardFormVisible ? 'none' : '#e9ecf1'"  [items]="expYearData" [(ngModel)]="startValueYear" (ngModelChange)="changeExpYear()" formControlName="expYear" [searchable]="false" > </ng-select>
 
                                                 <!--<input id="expYear" type="text" class="form-control pd-l-0-force form-control" placeholder="YEAR" formControlName="expYear" (blur)="logValidationErrors()">-->
                                             </div>
@@ -675,7 +679,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right">
+                                <div [style.display]="(isCreditCardFormVisible) ? 'block':'none'" class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right">
                                     <div class="form-group">
                                         <div class="col-xs-6 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddOrUpdateButton ? 'block': 'none'">
                                             <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit" (click)="submitCardForm()">
@@ -723,7 +727,7 @@
                         </form>
                     </div>
 
-                    
+
 
 
 
@@ -731,186 +735,189 @@
             </div>
         </div>
 
-        <div class="tab-content pd-15 pd-sm-20" [style.display]="(!isCreditCardFormVisible) ? 'block':'none'">
-            <div id="overview" class="tab-pane active show">
-                <div class="col-sm-12 col-xl">
-                    <div class="row">
-                        <div class="col-sm-6 col-xl">
-                            <h2 class="tx-color-01 float-left mg-t-7-f"></h2>
-                        </div>
-                        <div class="col-sm-6 col-xl">
-                            <button style="position:relative;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit"></i> Edit </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12  pd-t-50-f">
-                    <div id="info" class="pd-l-0-f pd-sm-l-35-f">
-                        <p style="font-size: 17px; font-weight: 400; color: #2b2b2b;"> Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br /></p>
-                    </div>
-                </div>
-                <hr class="mg-y-15 op-0">
-                <div class="col-sm-12 col-xl">
-                    <div class="col-sm-6">
-                        <ul class="list-unstyled media-list-profile mg-t-30">
 
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-blue op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row ">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">First Name  (<i class="fa fa-user"></i>) </div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{firstName}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-indigo op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Last Name  (<i class="fa fa-user"></i>) </div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{lastName}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-green op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Address  (<i class="fa fa-home"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{address}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-teal op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">city  (<i class="fa fa-building-o"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{city}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-fuchsia-active op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">state  (<i class="fa fa-certificate"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{state}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-success-light op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">country  (<i class="fa fa-flag"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{country}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-danger-light op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">zip code  (<i class="fa fa-map-marker"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{zipCode}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ul><!-- media-list-profile -->
-                        <hr class="mg-y-15 op-0">
-                    </div>
-
-                    <div class="col-sm-6">
-                        <ul class="list-unstyled media-list-profile mg-t-30">
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-blue op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row ">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Card Type  (<i class="fa fa-check"></i>) </div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{cardType}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-indigo op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Card Number  (<i class="fa fa-credit-card"></i>) </div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{cardNumber}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-dark op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Expired Month  (<i class="fa fa-calendar"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{expMonth}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-black-7 op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">Expired Year  (<i class="fa fa-calendar-o"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{expYear}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li class="media">
-                                <div class="wd-40 ht-40 bg-gray-9 op-5"></div>
-                                <div class="media-body">
-                                    <div class="col-sm-12 col-xl">
-                                        <div class="row">
-                                            <div class="col-sm-6 tx-semibold pd-t-7">CVV / CVC *  (<i class="fa fa-sort-amount-asc"></i>)</div>
-                                            <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{CVCNumber}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ul><!-- media-list-profile -->
-                        <hr class="mg-y-15 op-0">
-                    </div>
-                </div>
-
-            </div>
-        </div>
     </div>
 
 </div>
+
+
+<!--<div class="tab-content pd-15 pd-sm-20" [style.display]="(!isCreditCardFormVisible) ? 'block':'none'">
+    <div id="overview" class="tab-pane active show">
+        <div class="col-sm-12 col-xl">
+            <div class="row">
+                <div class="col-sm-6 col-xl">
+                    <h2 class="tx-color-01 float-left mg-t-7-f"></h2>
+                </div>
+                <div class="col-sm-6 col-xl">
+                    <button style="position:relative;" class="btn btn-lg btn-primary pull-xs-right float-right" (click)="editForm()"> <i class="fa fa-edit"></i> Edit </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12  pd-t-50-f">
+            <div id="info" class="pd-l-0-f pd-sm-l-35-f">
+                <p style="font-size: 17px; font-weight: 400; color: #2b2b2b;"> Credit card information entered/displayed here will be the default card for all billing associated with this account.  Any changes made will result in your previous card information not being saved.<br /></p>
+            </div>
+        </div>
+        <hr class="mg-y-15 op-0">
+        <div class="col-sm-12 col-xl">
+            <div class="col-sm-6">
+                <ul class="list-unstyled media-list-profile mg-t-30">
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-blue op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row ">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">First Name  (<i class="fa fa-user"></i>) </div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{firstName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-indigo op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">Last Name  (<i class="fa fa-user"></i>) </div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{lastName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-green op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">Address  (<i class="fa fa-home"></i>)</div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{address}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-teal op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">city  (<i class="fa fa-building-o"></i>)</div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{city}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-fuchsia-active op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">state  (<i class="fa fa-certificate"></i>)</div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{state}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-success-light op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">country  (<i class="fa fa-flag"></i>)</div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{country}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-danger-light op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">zip code  (<i class="fa fa-map-marker"></i>)</div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{zipCode}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+                <hr class="mg-y-15 op-0">
+            </div>
+
+            <div class="col-sm-6">
+                <ul class="list-unstyled media-list-profile mg-t-30">
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-blue op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row ">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">Card Type  (<i class="fa fa-check"></i>) </div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{cardType}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-indigo op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">Card Number  (<i class="fa fa-credit-card"></i>) </div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{cardNumber}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-dark op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">Expired Month  (<i class="fa fa-calendar"></i>)</div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{expMonth}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-black-7 op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">Expired Year  (<i class="fa fa-calendar-o"></i>)</div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{expYear}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="media">
+                        <div class="wd-40 ht-40 bg-gray-9 op-5"></div>
+                        <div class="media-body">
+                            <div class="col-sm-12 col-xl">
+                                <div class="row">
+                                    <div class="col-sm-6 tx-semibold pd-t-7">CVV / CVC *  (<i class="fa fa-sort-amount-asc"></i>)</div>
+                                    <div class="col-sm-6 tx-color-03 tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{CVCNumber}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+                <hr class="mg-y-15 op-0">
+            </div>
+        </div>
+
+    </div>
+</div>-->

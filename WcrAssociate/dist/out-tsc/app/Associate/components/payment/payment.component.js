@@ -205,8 +205,6 @@ var PaymentComponent = /** @class */ (function () {
             if (data != "" && data != undefined && data != null && data != "-1" && data != -1) {
                 if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
                     debugger;
-                    _this.isAddOrUpdateButton = false;
-                    _this.isCreditCardFormVisible = false;
                     _this.crdId = data._crdID;
                     _this.crd = data._crd;
                     _this.firstName = data._fstName;
@@ -220,7 +218,7 @@ var PaymentComponent = /** @class */ (function () {
                     _this.expYear = data._year;
                     _this.CVCNumber = data._cvv;
                     _this.cardType = data._crdType;
-                    _this.expMonth = (parseInt(data._months) + 1).toString();
+                    _this.expMonth = data._months; //(parseInt() + 1).toString();
                     thisStatus.cardForm.get('cardid').setValue(data._crdID);
                     thisStatus.cardForm.get('cardNumber').setValue(data._crd);
                     thisStatus.cardForm.get('firstName').setValue(data._fstName);
@@ -232,7 +230,7 @@ var PaymentComponent = /** @class */ (function () {
                     thisStatus.cardForm.get('cardType').setValue(data._crdType);
                     thisStatus.startValueYear = { value: data._year, label: data._year };
                     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-                    var selectedMonthName = months[data._months];
+                    var selectedMonthName = months[(parseInt(data._months) - 1)];
                     thisStatus.startValueMonth = { value: data._months, label: selectedMonthName };
                     _this.bindState();
                     _this.bindStateWiseZipCode(data._state, data._city);
@@ -275,6 +273,8 @@ var PaymentComponent = /** @class */ (function () {
                         thisStatus.cardForm.get('cardType').setValue("amex");
                         //CheckBox3.Checked = true;
                     }
+                    _this.isAddOrUpdateButton = false;
+                    _this.isCreditCardFormVisible = false;
                     return false;
                 }
                 else {
