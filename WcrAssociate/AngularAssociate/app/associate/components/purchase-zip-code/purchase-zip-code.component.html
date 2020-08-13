@@ -1,15 +1,1632 @@
-<div class="page-error">
-
-    <div class="error-panel">
-        <h2 href="dashboard-one.html" class="sidebar-logo mg-b-40" style="color: #3987fa;"><span>WCR Nation Consumer Services</span></h2>
-
-        <div class="svg-wrapper mg-b-40">
-            <img src="AngularAssociate/assets/images/notfound.png">
+<div class="content-header justify-content-between pd-b-20-f">
+    <div>
+        <div aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item"><a href="#">Credit card</a></li>
+            </ol>
         </div>
-        <h1 class="tx-28 tx-sm-36 tx-numeric tx-md-40 tx-semibold">Comming Soon</h1>
-        <h3 class="tx-16 tx-sm-18 tx-md-24 tx-light mg-b-20 mg-md-b-30">Please stay connected.</h3>
-        <p class="tx-12 tx-sm-13 tx-md-14 tx-color-04">You may have mistyped the address or the page may have moved. Try searching below.</p>
+        <h4 class="content-title content-title-xs">Purchase Zip Codes</h4>
+        <h5 class="mg-t-30">
+            <strong> Use this page to purchase specific zip codes in which to advertise your services to potential clients and customers.</strong>
+        </h5>
+        <p>
+            Purchasing a zip code is done in 3 easy steps.
+        </p>
+        <ol>
+            <li>
+                <strong> Choose a zip code to advertise </strong> <br />
+                Enter the City and State where you would like to advertise your services and then click the ‘SEARCH’ button.  The system will display what zip codes are available in that City/State.  (You can also search by a specific zip code if you have already decided on a specific zip code) <br />
+            </li>
+            <li>
+                <strong> Select a Category </strong> <br />
+                Categories that are available for purchase in your selected zip code will be displayed.
+                Once you select a category, our price rate will also be displayed.<br />
+            </li>
+            <li>Click the <strong> ‘PURCHASE’ </strong> button to complete your purchase. </li>
 
-    </div><!-- error-panel -->
+        </ol>
+        <p> And that’s it.</p>
+    </div>
+</div><!-- content-header -->
+
+<div class="content-body">
+    <div class="row row-sm">
+
+        <div class="col-xl-8">
+            <div class="card card-hover card-analytics-one">
+                <div class="card-body">
+                    <div class="row row-sm">
+                        <div class="col-sm-12 col-md-12">
+                            <label class="tx-medium tx-14 tx-color-01 mg-b-2">Your Current Purchase Code</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent">
+                    <div class="row no-gutters">
+
+                        <div class="col-6 col-sm">
+                            <div class="d-flex align-items-baseline mg-b-5">
+                                <h4 class="tx-numeric tx-normal"><span id="lblPurchasedZipCodes"></span></h4>
+                                <!--<span class="card-value-sub tx-success"><i class="icon ion-android-arrow-up"></i> 3.8%</span>-->
+                            </div>
+                            <label class="content-label content-label-xs">Total count of items purchased</label>
+                        </div><!-- col -->
+                        <div class="col-6 col-sm">
+                            <div class="d-flex align-items-baseline mg-b-5">
+                                <h4 class="tx-numeric tx-normal"> <span id="lblTotalamount"></span></h4>
+                                <!--<span class="card-value-sub tx-danger"><i class="icon ion-android-arrow-down"></i> 0.3%</span>-->
+                            </div>
+                            <label class="content-label content-label-xs">Total amount due at the start of next billing cycle</label>
+                        </div><!-- col -->
+                        <div class="col-6 col-sm">
+                            <div class="d-flex align-items-baseline mg-b-5">
+                                <h4 class="tx-numeric tx-normal"> <span id="lblBillingDate"></span></h4>
+                                <!--<span class="card-value-sub tx-danger"><i class="icon ion-android-arrow-down"></i> 0.3%</span>-->
+                            </div>
+                            <label class="content-label content-label-xs">Next billing cycle starts </label>
+                        </div><!-- col -->
+
+                    </div><!-- row -->
+                </div><!-- card-footer -->
+            </div><!-- card -->
+        </div>
+
+        <div class="col-xl-5">
+            <div class="card card-body tx-white bg-primary shadow-none ht-100p overflow-hidden">
+                <!--<div class="marker pos-absolute t-10 l-10">Card Marker</div>-->
+                <i class="fas fa-fw fa-info-circle tx-40"></i>
+                <span>
+                    A maximum limit of 10 Zip Code/Service Category purchases is allowed
+                    <br />
+                    <strong>Zip code rates vary depending on population. </strong>
+                </span>
+
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="row row-sm">
+
+        <div class="col-md-12 col-xl-12 mg-t-15 mg-sm-t-20">
+
+            <div class="card card-body">
+
+                <div class="component-section no-code">
+                    <h5 id="section3" class="tx-semibold">Justified</h5>
+                    <p class="mg-b-25">The tab component that fills the whole width of the parent element having an equal width to each tab item.</p>
+
+                    <ul class="nav nav-tabs nav-justified" id="myTab3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" id="cityStateTabId" data-toggle="tab" href="#cityStateId" role="tab" aria-controls="cityState" aria-selected="false">By City &Aacute; State</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="zipCodeTabId" data-toggle="tab" href="#zipCodeId" role="tab" aria-controls="zipCode" aria-selected="true">By Zip Code</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content bd bg-white bd-t-0 pd-20" id="myTabContent3">
+
+                        <div class="tab-pane fade" id="cityStateId" role="tabpanel" aria-labelledby="cityStateTabId">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-primary btn-block">Search</button>
+                                </div>
+                                <input type="text" aria-label="First name" class="form-control" placeholder="Zip Code" />
+
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade active show" id="zipCodeId" role="tabpanel" aria-labelledby="zipCodeTabId">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-primary btn-block">Search</button>
+                                </div>
+                                <input type="text" aria-label="First name" class="form-control" placeholder="City" />
+                                <ng-select [items]="stateData" [(ngModel)]="startValueState" (ngModelChange)="changeState()" formControlName="state" [searchable]="false"> </ng-select>
+
+                            </div>
+                        </div>
+                       
+                    </div>
+
+                </div>
+
+            </div>
+        
+        </div>
+
+        <div class="col-md-12 col-xl-12 mg-t-15 mg-sm-t-20">
+
+            <div class="card card-hover card-deal">
+                <div class="card-header bg-transparent bd-b-0">
+                    <h6 class="card-title mg-b-0">Your Selected Choices:  </h6>
+                </div><!-- card-header -->
+                <div class="card-body pd-0">
+                    <div class="table-responsive pd-l-0-f pd-r-0-f" #tablePurchasedZipCodes>
+                        <table id="purchasedZipCodesId" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Zip </th>
+                                    <th>Category </th>
+                                    <th>Subcategory </th>
+                                    <th>Cost </th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div><!-- table-responsive -->
+                </div><!-- card-body -->
+                <div class="card-footer bg-transparent">
+                    <div class="col-lg-12 button-right-pos">
+                        <input id="btnPurchase" type="button" class="btn btn-light" value="PURCHASE" />
+                        <input id="btnPurchaseCancel" type="button" class="btn btn-light" value="CANCEL" />
+                    </div>
+                </div><!-- card-footer -->
+            </div><!-- card -->
+        
+        </div>
+    
+    </div>
 
 </div>
+
+<ng-template #content let-modal>
+
+    <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel"><strong>Please Verify/Update Your Credit Card Information </strong></h3>
+
+        <div class="close" aria-label="Close" (click)="modal.dismiss('Cross click')" style="cursor:pointer;">
+            <span aria-hidden="true">X</span>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="auth-page mg-b-60-force">
+            <div class="container-cassie page" style="background-color:#fff;">
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 pd-t-50-f">
+                        <div id="info" class="pd-l-0-f pd-sm-l-35-f">
+                            <p class="alert-danger" style="font-size: 17px; font-weight: 400; color: #2b2b2b;">
+                               There was an error processing this transaction. Please verify or update your card information to complete this transaction.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12" [style.display]="formErrorMessage != '' ? 'block': 'none'">{{formErrorMessage}}</div>
+                    <div class="col-sm-12">
+                        <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20">
+                            <fieldset >
+                                <!--<div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
+                            {{formError}}
+                        </div>-->
+                                <div class="col-xs-12 col-sm-12">
+                                    <h2 class="tx-color-01 pd-l-0-f pd-sm-l-15-f float-left mg-t-7-f pd-b-30-f">Credit Card Information</h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 pd-l-0 pd-r-0 pd-sm-l-15 pd-sm-r-15">
+                                    <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-xs-r-0">
+                                        <input type="hidden" formControlName="cardid" id="cardid" />
+                                        <input type="hidden" formControlName="totalAmount" id="totalAmount" />
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20 pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
+                                                <label>
+                                                    First Name
+                                                </label>
+                                                <input id="firstName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your first name" formControlName="firstName" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.firstName">
+                                                    {{formErrors.firstName}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20   pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.lastName}">
+                                                <label>
+                                                    Last Name
+                                                </label>
+                                                <input id="lastName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your last name" formControlName="lastName" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.lastName">
+                                                    {{formErrors.lastName}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.address}">
+                                                <label>
+                                                    Billing Address
+                                                </label>
+                                                <input id="address" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your address" formControlName="address" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.address">
+                                                    {{formErrors.address}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.city}">
+                                                <label>
+                                                    City
+                                                </label>
+                                                <input id="city" type="text" (change)="changeCity()" style="margin-top:12px;" class="form-control pd-l-0-force form-control" placeholder="Enter city name" formControlName="city" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.city">
+                                                    {{formErrors.city}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.state}">
+                                                <label>
+                                                    Select State
+                                                </label>
+                                                <!--<select2 [data]="stateData" [value]="startValueState" [width]="150" (valueChanged)="changeState($event)" formControlName="state"></select2>-->
+                                                <ng-select [items]="stateData" [(ngModel)]="startValueState" (ngModelChange)="changeState()" formControlName="state" [searchable]="false"> </ng-select>
+
+                                                <!--<input id="state" type="text" class="form-control pd-l-0-force form-control" placeholder="STATE" formControlName="firstName" (blur)="logValidationErrors()">-->
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.country}">
+                                                <label>
+                                                    Country
+                                                </label>
+                                                <input id="country" type="text" class="form-control pd-l-0-force form-control" style="margin-top:12px;" placeholder="Enter your country name" formControlName="country" (blur)="logValidationErrors()" disabled>
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.country">
+                                                    {{formErrors.country}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.zipCode}">
+                                                <label>
+                                                    Select Zip Code
+                                                </label>
+                                                <ng-select [items]="zipCodeData" [(ngModel)]="startValueZip" (ngModelChange)="changeZipCode()" formControlName="zipCode" [searchable]="false"> </ng-select>
+
+                                                <!--<input id="zipCode" type="text" class="form-control pd-l-0-force form-control" placeholder="ZIP CODE" formControlName="zipCode" (blur)="logValidationErrors()">-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-sm-l-15 pd-xs-r-0 pd-sm-r-15">
+
+                                        <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.cardNumber}">
+
+                                                <label>
+                                                    Card Number
+                                                </label>
+                                                <input id="cardNumber" type="text" class="form-control pd-l-0-force form-control" (change)="checkCardNumber()" placeholder="Enter card number" formControlName="cardNumber" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.cardNumber">
+                                                    {{formErrors.cardNumber}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <label>
+                                                Choose Card Type
+                                            </label>
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.cardType}">
+
+                                                <div class="col-sm-3 col-xs-3 pd-l-0-f pd-r-0-f">
+                                                    <label>
+                                                        <input type="radio" value="visa" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'visa' ? false: true">
+                                                        <div class="panel panel-default card-input">
+                                                            <img src="AngularAssociate/assets/images/visa_logo.jpg" />
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-3 pd-l-10-f pd-r-0-f">
+                                                    <label>
+                                                        <input type="radio" value="mastercard" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'mastercard' ? false: true">
+                                                        <div class="panel panel-default card-input">
+                                                            <img src="AngularAssociate/assets/images/mastercard_logo.png" />
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-3 pd-l-10-f pd-r-0-f">
+                                                    <label>
+                                                        <input type="radio" value="amex" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'discover' ? false: true">
+                                                        <div class="panel panel-default card-input">
+                                                            <img src="AngularAssociate/assets/images/amex.jpg" />
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-3 pd-l-10-f pd-r-0-f">
+                                                    <label>
+                                                        <input type="radio" value="discover" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'discover' ? false: true">
+                                                        <div class="panel panel-default card-input">
+                                                            <img src="AngularAssociate/assets/images/discover.jpg" />
+                                                        </div>
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.expMonth}">
+
+                                                <label>
+                                                    Select Exp.Month
+                                                </label>
+                                                <!--<input id="expMonth" type="text" class="form-control pd-l-0-force form-control" placeholder="MONTH" formControlName="expMonth" (blur)="logValidationErrors()">-->
+                                                <ng-select [items]="expMonthData" [(ngModel)]="startValueMonth" (ngModelChange)="changeExpMonth()" formControlName="expMonth" [searchable]="false"> </ng-select>
+                                                <!--<select2 [data]="expMonthData" [value]="startValueMonth" [width]="150" (valueChanged)="changeExpMonth($event)" formControlName="expMonth"></select2>-->
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.expYear}">
+
+                                                <label>
+                                                    Select Exp.Year
+                                                </label>
+
+                                                <!--<select2 [data]="expYearData" [value]="startValueYear" [width]="150" (valueChanged)="changeExpYear($event)" formControlName="expYear"></select2>-->
+                                                <ng-select [items]="expYearData" [(ngModel)]="startValueYear" (ngModelChange)="changeExpYear()" formControlName="expYear" [searchable]="false"> </ng-select>
+
+                                                <!--<input id="expYear" type="text" class="form-control pd-l-0-force form-control" placeholder="YEAR" formControlName="expYear" (blur)="logValidationErrors()">-->
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" [ngClass]="{'has-error': formErrors.CVCNumber}">
+                                            <div class="col-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                <label>
+                                                    CVV / CVC *
+                                                </label>
+                                                <input id="cvv" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter card cvv/cvc " formControlName="CVCNumber" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.CVCNumber">
+                                                    {{formErrors.CVCNumber}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right">
+                                    <div class="form-group">
+                                        
+                                        <div class="col-xs-6  col-sm-2 mg-b-20 pd-l-0-f pd-r-0-f" >
+                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit">
+                                                <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="updateCardForm()">Update Card</span>
+                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'" style="margin-top:4px;">
+                                                    <div class="spinner-layer spinner-white-only">
+                                                        <div class="circle-clipper left">
+                                                            <div class="circle"></div>
+                                                        </div><div class="gap-patch">
+                                                            <div class="circle"></div>
+                                                        </div><div class="circle-clipper right">
+                                                            <div class="circle"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+
+                                        </div>
+                                        <div class="col-xs-3  col-sm-2 mg-b-20">
+                                            <button (click)="cancelForm()" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-xs-10-f" type="button">
+                                                <span>Cancel</span>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    
+    </div>
+
+</ng-template>
+
+
+<script>
+        $(document).ready(function () {
+            $("#bycity").css({ "display": "block", "border": "1px solid #00c0ef", "padding": "15px" });
+            $.ajax({
+                type: "POST", url: "../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails",
+                data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("ViewAssociateBasicDetail");
+                        $.each(docs, function (i, docs) {
+                            if ($(docs).find("FullName").text() == '' || $(docs).find("MobileNo").text() == '' || $(docs).find("Photo").text() == '') {
+                                window.location.href = "Dashboard.aspx";
+                            }
+                            else {
+                            }
+                        });
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+            $("#tabcitystate").click(function () {
+                $("#txtZipcode").val('');
+                $("#bycity").css("display", "block");
+                $("#byzipcode").css("display", "none");
+                $("#divZipcode").css("display", "none");
+                $("#divCategory").css("display", "none");
+                $("#divzipcodeDetail").css("display", "none");
+                $("#bycity").css({ "display": "block", "border": "1px solid #00c0ef", "padding": "15px" });
+            });
+            $("#tabzipcode").click(function () {
+                $("#txtZipcode").val('');
+                $("#byzipcode").css({ "display": "block", "border": "1px solid #00c0ef", "padding": "15px" });
+                $("#bycity").css("display", "none");
+                $("#divZipcode").css("display", "none");
+                $("#divCategory").css("display", "none");
+                $("#divzipcodeDetail").css("display", "none");
+
+            });
+
+
+
+            $("#bbbclose").click(function () {
+                if (_Counter > 2) {
+                    window.location.href = 'ZipCodePurchase.aspx';
+                }
+            });
+            var _Counter = 0;
+            var now = new Date();
+            var current;
+            if (now.getMonth() == 11) {
+                current = new Date(now.getFullYear() + 1, 0, 1).format('yyyy-MM-dd');
+            } else {
+                current = new Date(now.getFullYear(), now.getMonth() + 1, 1).format('yyyy-MM-dd');
+            }
+            $("#txtCity").keypress(function () {
+                //$("#txtZipcode").attr("disabled", "true");
+                $('#txtZipcode').removeAttr('placeholder');
+                $("#txtZipcode").val('');
+
+            });
+            $("#ddlState").change(function () {
+                $("#lblSuccess2").css("display", "none");
+            })
+            $("#txtZipcode").keypress(function () {
+                $('#txtCity').removeAttr('placeholder');
+                $("#txtCity").val('');
+                $("#ddlState").val("0");
+            });
+            function showLoader() {
+                $("#pageloader").css("display", "block");
+            }
+            function hideLoader() {
+                setTimeout(function () {
+                    $("#pageloader").css("display", "none");
+                }, 700);
+            }
+            $("#lblBillingDate").text(current);
+            AssociatealreadyCategories();
+            //CouponCode.value = '1';
+            var sts = 0;
+            BindState();
+
+            $("#btnpurchasenew").click(function () {
+                $("#txtZipcode").removeAttr("disabled", "true");
+                $("#txtCity").removeAttr("disabled", "true");
+                $("#ddlState").removeAttr("disabled", "true");
+                if (sts == 0) {
+                    $("#catForm").css("display", "block");
+                    $(".button-block ").addClass("disable");
+                    sts = 1;
+                }
+                else if (sts == 1) {
+                    $("#catForm").css("display", "none");
+                    $(".button-block ").removeClass("disable");
+                    $("#divZipcode").css("display", "none");
+                    $("#divCategory").css("display", "none");
+                    $("#divzipcodeDetail").css("display", "none");
+                    sts = 0;
+                }
+            });
+
+            $("#btnSearch").click(function () {
+
+                if ($("#txtZipcode").val() == "") {
+                    if ($("#ddlState").val() == 0) {
+                        $("#lblSuccess2").css("display", "block");
+                        $("#lblSuccess2").text("State must be selected.");
+                        //alert("State Can't be blank!");
+                        return false;
+                    }
+                    else if ($("#txtCity").val() == "") {
+                        alert("City Can not Blank");
+                        return false;
+                    }
+                    else {
+                        $("#divCategory").css("display", "none");
+                        $("#divZipcode").css("display", "block");
+                        $("#bycity").css({ "display": "block", "border": "0px solid #00c0ef", "padding": "15px" });
+                        //$("#divZipcode").css({ "display": "block", "border": "1px solid #00c0ef", "padding": "15px" });
+                        BindStateWiseZipcode();
+                        if (hidzipAvail.value == 1) {
+                            $("#divZipcode").css({ "display": "block", "border": "1px solid #00c0ef", "padding": "15px" });
+                            $("#lblInvalidCombination").css("display", "none");
+
+                        }
+                        else {
+                            $("#divZipcode").css({ "display": "none", "border": "1px solid #00c0ef", "padding": "15px" });
+                            $("#lblInvalidCombination").css("display", "block");
+                            $("#lblInvalidCombination").text("Invalid City/State combination.");
+                        }
+                    }
+                }
+                else {
+                    $(document).on({
+                        ajaxStart: function () {
+                            showLoader();
+                        },
+                        ajaxStop: function () {
+                            hideLoader();
+                        }
+                    });
+                    $.ajax({
+
+                        type: "POST", url: "ws/CategoryPurchase.asmx/ZipCodeExists", data: "{'Zipcode':'" + $("#txtZipcode").val() + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: true,
+                        success: function (r) {
+                            if (r.d.length > 0) {
+                                var xmlDoc = $.parseXML(r.d);
+                                var xml = $(xmlDoc);
+                                var docs = xml.find("ZipcodeExists");
+                                if ($(docs).find("ID").text() >= 1) {
+
+                                    $("#lblSuccess2").css("display", "none");
+                                    $("#divZipcode").css("display", "none");
+                                    $("#divlocation").css("display", "block");
+                                    $("#divCategory").css("display", "block");
+                                    BindCategoryZip();
+                                }
+                                else {
+                                    //$("#lblSuccess2").text("Incorrect City/State combination.");
+                                    //jQuery.noConflict();
+                                    //$("#lblFailureTitle").text("Failure!");
+                                    //$("#lblFailureDetail").text("This Zipcode is not available into the database.");
+                                    //$('#fail_message').modal('show');
+                                    //$("#txtZipcode").focus();
+                                }
+                            }
+                        },
+                        failure: function (response) {
+
+                            alert(response.d + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response.d + "Error...");
+                        }
+
+                    });
+                }
+            });
+            $("#btnSearch1").click(function () {
+                if ($("#txtZipcode").val() == "") {
+                    if ($("#ddlState").val() == 0) {
+                        alert("State Can't be blank!");
+                        return false;
+                    }
+                    else if ($("#txtCity").val() == "") {
+                        alert("City Can not Blank");
+                        return false;
+                    }
+                    else {
+                        $("#divCategory").css("display", "block");
+                        $("#divZipcode").css("display", "block");
+                        BindStateWiseZipcode();
+                    }
+                }
+                else {
+                    $(document).on({
+                        ajaxStart: function () {
+                            showLoader();
+                        },
+                        ajaxStop: function () {
+                            hideLoader();
+                        }
+                    });
+                    $.ajax({
+                        type: "POST", url: "ws/CategoryPurchase.asmx/ZipCodeExists", data: "{'Zipcode':'" + $("#txtZipcode").val() + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: true,
+                        success: function (r) {
+                            if (r.d.length > 0) {
+                                var xmlDoc = $.parseXML(r.d);
+                                var xml = $(xmlDoc);
+                                var docs = xml.find("ZipcodeExists");
+                                if ($(docs).find("ID").text() >= 1) {
+                                    $("#lblSuccess1").text("");
+                                    $("#divZipcode").css("display", "none");
+                                    $("#divlocation").css("display", "block");
+                                    //$("#divCategory").css("display", "block");
+
+                                    $("#byzipcode").css({ "display": "block", "border": "0px solid #00c0ef", "padding": "15px" });
+                                    $("#divCategory").css({ "display": "block", "border": "1px solid #00c0ef", "padding": "15px" });
+                                    BindCategoryZip();
+                                }
+                                else {
+                                    hideLoader();
+                                    $("#lblSuccess1").css("display", "block");
+                                    $("#lblSuccess1").text("Incorrect Zip Code.");
+
+                                    $("#byzipcode").css({ "display": "block", "border": "1px solid #00c0ef", "padding": "15px" });
+                                    $("#divCategory").css({ "display": "none", "border": "0px solid #00c0ef", "padding": "15px" });
+                                    $("#divzipcodeDetail").css("display", "none");
+
+                                    //jQuery.noConflict();
+                                    //$("#lblFailureTitle").text("Failure!");
+                                    //$("#lblFailureDetail").text("This Zipcode is not available into the database.");
+                                    //$('#fail_message').modal('show');
+                                    //$("#txtZipcode").focus();
+                                }
+                            }
+                        },
+                        failure: function (response) {
+
+                            alert(response.d + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response.d + "Error...");
+                        }
+                    });
+                }
+            });
+            $("#btnPurchase").click(function () {
+                $('#btnPurchase').prop('disabled', true);
+                $('#btnPurchaseCancel').prop('disabled', true);
+                checkoutClick();
+            });
+            $("#btnAddNew").click(function () {
+                var check = Valid();
+                if (check == 0) {
+                    var CardNumber = $("#ContentPlaceHolder1_txtCreditCard").val();
+                    var Cardholder_FirstName = $("#ContentPlaceHolder1_cardFname").val();
+                    var Cardholder_LastName = $("#ContentPlaceHolder1_cardLastname").val();
+                    var Cardholder_Address = $("#ContentPlaceHolder1_Cardaddress").val();
+                    var Cardholder_City = $("#ContentPlaceHolder1_cardCity").val();
+                    var Cardholder_State = $('#ContentPlaceHolder1_cardState :selected').text();
+                    var Cardholder_Country = $("#ContentPlaceHolder1_cardCountry").val();// $('#ContentPlaceHolder1_cardCountry :selected').text();
+                    var Cardholder_Zip = $('#ContentPlaceHolder1_cardzipcode :selected').text();
+                    var cvv = $("#ContentPlaceHolder1_txtCvv").val();
+                    var ExpMonth = $("#ContentPlaceHolder1_ddlMonth").val();
+                    var ExpYear = $("#ContentPlaceHolder1_ddlYear").val();
+                    var CardType = "Credit";
+                    var TotalAmount = "0";// lblToalAmountV.value;
+                    var msg = [];
+                    $.ajax({
+                        url: "../ws/AssociateSignUp.ashx?action=CardData&CardNumber=" + CardNumber + "&Cardholder_FirstName=" + Cardholder_FirstName + "&Cardholder_LastName=" + Cardholder_LastName + "&Cardholder_Address=" + Cardholder_Address + "&Cardholder_City=" + Cardholder_City + "&Cardholder_State=" + Cardholder_State + "&Cardholder_Country=" + Cardholder_Country + "&Cardholder_Zip=" + Cardholder_Zip + "&cvv=" + cvv + "&ExpMonth=" + ExpMonth + "&ExpYear=" + ExpYear + "&CardType=" + CardType + "&totalamount=" + TotalAmount + "",
+                        data: {},
+                        contentType: false,
+                        processData: false,
+                        dataType: "json",
+                        async: false,
+                        type: "POST",
+                        cache: false,
+                        success: function (response) {
+                            if (response == "1") {
+                                jQuery.noConflict();
+                                $("#lblFailureTitle").text("Failure!");
+                                $("#lblFailureDetail").text("Something Goes Wrong Please Try again.");
+                                $('#fail_message').modal('show');
+
+                            }
+                            else if (response == "0") {
+                                //ContentPlaceHolder1_txtCreditCard.value = "";
+                                //ContentPlaceHolder1_cardFname.value = "";
+                                //ContentPlaceHolder1_cardLastname.value = "";
+                                //ContentPlaceHolder1_Cardaddress.value = "";
+                                //ContentPlaceHolder1_cardzipcode.value = "";
+                                //ContentPlaceHolder1_txtCvv.value = "";
+                                //ContentPlaceHolder1_cardCity.value = "";
+                                $('#completeConsumerProfile').modal('hide');
+                                _Counter++;
+                                checkoutClick();
+
+                            }
+                            else if (response == "-1") {
+                                jQuery.noConflict();
+                                $("#lblFailureTitle").text("Failure!");
+                                $("#lblFailureDetail").text("Something Goes Wrong Please Try again.");
+                                $('#fail_message').modal('show');
+                            }
+                            else { }
+                        },
+                        failure: function (response) {
+                            alert(response + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response + "Error...");
+                        }
+                    });
+                }
+                else {
+                    alert(check);
+                }
+            });
+            function PurchaseZipCode() {
+                var catValue = $("#ddlCategory").val();
+                var _subCatValue;
+                if (catValue == 2) {
+                    _subCatValue = 5;
+                }
+                else if (catValue == 5) {
+                    _subCatValue = 13;
+                }
+                else if (catValue == 3) {
+                    _subCatValue = 8;
+                }
+                else {
+
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "ws/CategoryPurchase.asmx/PurchasedItemsServices",
+                    data: "{'CatID':'" + $("#ddlCategory").val() + "','catName':'" + $("#ddlCategory option:selected").text() + "','subCatName':'" + $("#ddlCategory option:selected").text() + "','subCatID':'" + _subCatValue + "','zipcode':'" + $("#lblzipcode").text() + "','price':'" + $("#lblprice").text() + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    cache: false,
+                    success: function (r) {
+                        if (r.d == "1") {
+                            //GetPurchasedAllRecords();
+                        }
+                        if (r.d == "0") {
+                            jQuery.noConflict();
+                            $("#lblFailureTitle").text("Failure!");
+                            $("#lblFailureDetail").text("Already Exists.");
+                            $('#fail_message').modal('show');
+                        }
+                        if (r.d == "3") {
+                            jQuery.noConflict();
+                            $("#lblFailureTitle").text("Failure!");
+                            $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                            $('#fail_message').modal('show');
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }
+            function checkoutClick() {
+                setTimeout(function () {
+                    $("#pageloader").css("display", "block");
+                }, 50);
+                $.ajax({
+                    type: "POST",
+                    url: "ws/Sale.asmx/CountPurchasedZipcode",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (r1) {
+                        if (r1.d.length > 0) {
+                            var xmlDoc1 = $.parseXML(r1.d);
+                            var xml1 = $(xmlDoc1);
+                            var docs1 = xml1.find("ZipcodePurchased");
+                            $.each(docs1, function (i, docs1) {
+                                if ($(docs1).find("Total").text() < 10) {
+                                    zipcodePurchaseCode();
+                                }
+                                else {
+                                    $("#lblFailureTitle").text("Maximum Limit is expired.");
+                                    $("#lblFailureDetail").text("YOU'VE REACHED THE MAXIMUM ALLOWED NUMBER OF SALES ADVERTISEMENT POSTS.");
+                                    $('#fail_message').modal('show');
+                                    return false;
+                                }
+                            });
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+                hideLoader();
+            }
+            function zipcodePurchaseCode() {
+                $.ajax({
+                    type: "POST",
+                    url: "ws/CategoryPurchase.asmx/AssociateCardExists",
+                    data: "{}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (r) {
+                        if (r.d.length > 0) {
+                            var xmlDoc = $.parseXML(r.d);
+                            var xml = $(xmlDoc);
+                            var docs = xml.find("CheckAssoCard");
+                            if ($(docs).find("id").text() >= 1) {
+                                var a = 0;
+                                var b = 0;
+                                var c = 0;
+                                // ApplycoponCode(a, b, c);
+                                ApplycoponCodeNew(a, b, c);
+                            }
+                            else {
+                                $('#completeConsumerProfile').modal('show');
+                            }
+                        }
+                    },
+                    failure: function (response) {
+                        alert(response.d + "Fail");
+                    },
+                    error: function (response) {
+                        alert(response.d + "Error...");
+                    }
+                });
+            }
+            $("#btnPurchaseCancel").click(function () {
+                $("#divzipcodeDetail").css("display", "none");
+                $("#catForm").css("display", "block");
+                $("#divCategory").css("display", "none");
+                $("#divZipcode").css("display", "none");
+                sts = 0;
+                $(".button-block ").removeClass("disable");
+                $("#txtZipcode").val('');
+
+            });
+            //$('input[type="checkbox"]').on('change', function () {
+            //    $(this).siblings('input[type="checkbox"]').prop('checked', false);
+            //});
+
+            $("#ContentPlaceHolder1_txtCreditCard").change(function () {
+                var fid = $("#ContentPlaceHolder1_txtCreditCard").val();
+                var itemId = fid.charAt(0);
+                if (itemId == 4) {
+                    $('#ContentPlaceHolder1_CheckBox1').prop('checked', true);
+                    $('#ContentPlaceHolder1_CheckBox2').prop('checked', false);
+                    $('#ContentPlaceHolder1_CheckBox4').prop('checked', false);
+                    $('#ContentPlaceHolder1_CheckBox3').prop('checked', false);
+                }
+                else if (itemId == 5) {
+                    $('#ContentPlaceHolder1_CheckBox2').prop('checked', true);
+                    $('#ContentPlaceHolder1_CheckBox1').prop('checked', false);
+                    $('#ContentPlaceHolder1_CheckBox4').prop('checked', false);
+                    $('#ContentPlaceHolder1_CheckBox3').prop('checked', false);
+                }
+                else if (itemId == 6) {
+                    $('#ContentPlaceHolder1_CheckBox4').prop('checked', true);
+                    $('#ContentPlaceHolder1_CheckBox2').prop('checked', false);
+                    $('#ContentPlaceHolder1_CheckBox1').prop('checked', false);
+                    $('#ContentPlaceHolder1_CheckBox3').prop('checked', false);
+                }
+                else if (itemId == 3) {
+                    $('#ContentPlaceHolder1_CheckBox3').prop('checked', true);
+                    $('#ContentPlaceHolder1_CheckBox2').prop('checked', false);
+                    $('#ContentPlaceHolder1_CheckBox4').prop('checked', false);
+                    $('#ContentPlaceHolder1_CheckBox1').prop('checked', false);
+                }
+                else {
+
+                }
+
+            });
+
+
+
+            $("#btnupdateCard").click(function () {
+                var check = Valid();
+                if (check == 0) {
+                    debugger;
+                    var CardNumber = $("#ContentPlaceHolder1_txtCreditCard").val();
+                    var Cardholder_FirstName = $("#ContentPlaceHolder1_cardFname").val();
+                    var Cardholder_LastName = $("#ContentPlaceHolder1_cardLastname").val();
+                    var Cardholder_Address = $("#ContentPlaceHolder1_Cardaddress").val();
+                    var Cardholder_City = $("#ContentPlaceHolder1_cardCity").val();
+                    var Cardholder_State = $('#ContentPlaceHolder1_cardState :selected').text();
+                    var Cardholder_Country = $("#ContentPlaceHolder1_cardCountry").val();
+                    // var Cardholder_Country = $('#ContentPlaceHolder1_cardCountry :selected').text();
+                    var Cardholder_Zip = $("#ContentPlaceHolder1_cardzipcode").val();
+                    var cvv = $("#ContentPlaceHolder1_txtCvv").val();
+                    var ExpMonth = $("#ContentPlaceHolder1_ddlMonth").val();
+                    var ExpYear = $("#ContentPlaceHolder1_ddlYear").val();
+                    var CardType = "Credit";
+                    var TotalAmount = "0";// lblToalAmountV.value;
+                    //var cardid = ContentPlaceHolder1_hidCardID.value;
+                    var cardid = $("#ContentPlaceHolder1_CardID").val();
+                    //alert(cardid1);
+                    $.ajax({
+                        url: "../ws/AssociateSignUp.ashx?action=Ucardata&CardNumber=" + CardNumber + "&Cardholder_FirstName=" + Cardholder_FirstName + "&Cardholder_LastName=" + Cardholder_LastName + "&Cardholder_Address=" + Cardholder_Address + "&Cardholder_City=" + Cardholder_City + "&Cardholder_State=" + Cardholder_State + "&Cardholder_Country=" + Cardholder_Country + "&Cardholder_Zip=" + Cardholder_Zip + "&cvv=" + cvv + "&ExpMonth=" + ExpMonth + "&ExpYear=" + ExpYear + "&CardType=" + CardType + "&totalamount=" + TotalAmount + "&cardDataID=" + cardid + "",
+                        data: {},
+                        contentType: false,
+                        processData: false,
+                        dataType: "json",
+                        async: false,
+                        type: "POST",
+                        cache: false,
+                        success: function (response) {
+                            if (response == 1) {
+                                $("#lblFailureTitle").text("Unsuccess.");
+                                $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
+                                $('#fail_message').modal('show');
+                            }
+                            else if (response == "0") {
+                                $('#completeConsumerProfile').modal('hide');
+                                checkoutClick();
+                                //$("#lblSuccess").text("Successful!!!")
+                                //$("#lbldetail").text("Your credit card info has been Updated Successfully.")
+                                //$('#success-message').modal('show');
+                            }
+                            else if (response == "-1") {
+                                $("#lblFailureTitle").text("Unsuccess.");
+                                $("#lblFailureDetail").text("Something goes wrong. Please Try again.");
+                                $('#fail_message').modal('show');
+                            }
+                            else { }
+                        },
+                        failure: function (response) {
+                            alert(response + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response + "Error...");
+                        }
+                    });
+                }
+                else {
+                    alert(check);
+                }
+            });
+            function ApplycoponCodeNew(ccode, disc, duration) {
+                var catValue = $("#ddlCategory").val();
+                var _subCatValue;
+                if (catValue == 2) {
+                    _subCatValue = 5;
+                }
+                else if (catValue == 5) {
+                    _subCatValue = 13;
+                }
+                else if (catValue == 3) {
+                    _subCatValue = 8;
+                }
+                else {
+                }
+                //$("#LoadingImage").css("display", "block");
+                var msg = [];
+                //This Web Services is used to send amount to be transaction, right now it is not in use because card data stuff is moved from db
+                var MonthValue = 1;// MemberShip.value;
+                var totalAmount = $("#lblprice").text();
+                $.ajax({
+                    type: "POST",
+                    url: "ws/CategoryPurchase.asmx/InsertAmount",
+                    // data: "{'amount':'" + MonthValue * totalAmount + "','Description':'Zip code " + $("#lblzipcode").text() + " purchase for category " + $("#ddlCategory option:selected").text() + "}",
+                    data: "{'amount':'" + MonthValue * totalAmount + "','Description':'Zip code " + $("#lblzipcode").text() + " has been purchased for  " + $("#ddlCategory option:selected").text() + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    cache: false,
+                    success: function (r) {
+                        if (r.d == "1") {
+                            $.ajax({
+                                type: "POST",
+                                url: "ws/CategoryPurchase.asmx/InsertCategory",
+                                data: "{'categoryID':'" + $("#ddlCategory").val() + "','SubcategoryID':'" + _subCatValue + "','PlanID':'1','pricevalues':'" + $("#lblprice").text() + "','zipcodeID':'" + $("#lblzipcode").text() + "','Couponcode':'" + ccode + "','Discount':'" + disc + "','Duration':'" + duration + "'}",
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                async: false,
+                                cache: false,
+                                success: function (r) {
+                                    if (r.d == "1") {
+                                        $("#lblSuccess").text("Successful Zip Code Purchase!");
+                                        $("#lbldetail").text("Your Credit Card has been successfully charged.");
+                                        $('#success-message').modal('show');
+                                        $("#divzipcodeDetail").css("display", "none");
+                                        AssociatealreadyCategories();
+                                    }
+                                    if (r.d == "0") {
+                                        $('#btnPurchase').prop('disabled', false);
+                                        $('#btnPurchaseCancel').prop('disabled', false);
+                                        $("#lblFailureTitle").text("Already Exists.");
+                                        $("#lblFailureDetail").text("Already Exists.");
+                                        $('#fail_message').modal('show');
+                                    }
+                                    if (r.d == "3") {
+                                        $('#btnPurchase').prop('disabled', false);
+                                        $('#btnPurchaseCancel').prop('disabled', false);
+                                        $("#lblFailureTitle").text("OOPS Error ! Please try again.");
+                                        $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                                        $('#fail_message').modal('show');
+                                    }
+                                },
+                                failure: function (response) {
+                                    alert(response.d + "Fail");
+                                },
+                                error: function (response) {
+                                    alert(response.d + "Error...");
+                                }
+                            });
+                        }
+                        else {
+                            if (_Counter == 0) {
+                                $('#completeConsumerProfile').modal('show');
+                                _Counter++;
+                                $("#btnupdateCard").css("display", "block");
+                                $("#btnAddNew").css("display", "none");
+                                $("#btnCancelCard").css("display", "none");
+                            }
+                            else {
+                                _Counter++;
+                                $("#lblFailureTitle").text("We can not complete this Zip Code Purchase at this time!!")
+                                $("#lblFailureDetail").text("Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.")
+                                $('#fail_message').modal('show');
+                            }
+                        }
+                    },
+                    failure: function (response) {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Failure!");
+                        $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                        $('#fail_message').modal('show');
+                    },
+                    error: function (response) {
+                        jQuery.noConflict();
+                        $("#lblFailureTitle").text("Failure!");
+                        $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                        $('#fail_message').modal('show');
+                    }
+                });
+                //end here
+            }
+        });
+
+        function AssociatealreadyCategories() {
+            $.ajax({
+                type: "POST", url: "ws/MyCategories.asmx/MuPurchaseCategories", data: "{'JobType':'2'}",
+                contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        chk = 1;
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("PurCategories");
+                        var cartd = [];
+                        cartd.push("<table class='table table-condensed'>");
+                        // cartd.push("<tr><td colspan=7>Categories you have purchased</td><td style='visibility:hidden'></td></tr>");
+                        cartd.push("<tr>");
+                        cartd.push("<th ></th>");
+                        cartd.push("<th class='uk-width-2-10 uk-text-center'><strong>Zip Code</strong></th>");
+                        cartd.push("<th  class='uk-width-2-10 uk-text-center'><strong>Category</strong></th>");
+                        cartd.push("<th  class='uk-width-2-10 uk-text-center'><strong>SubCategory</strong></th>");
+                        cartd.push("<th  class='uk-width-2-10 uk-text-center'><strong> Cost</strong> </th>");
+                        cartd.push("<th  class='uk-width-2-10 uk-text-center' style='margin-left:150px'><strong> Cancel </strong></th>");
+                        cartd.push("<th class='uk-width-2-10 uk-text-center'>  </th>");
+                        cartd.push("<th  class='uk-width-2-10 uk-text-center'><strong></strong></th>");
+                        cartd.push("</tr>");
+                        var cc = 0;
+                        var count = 1;
+                        var Totalamount = 0;
+                        $.each(docs, function (i, docs) {
+                            cartd.push("<tr>");
+                            cartd.push("<td class='uk-text-center'>" + count + "</td>");
+                            cartd.push("<td class='uk-text-center'> " + ($(docs).find("zipcode").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center'> " + ($(docs).find("categoryname").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center'> " + ($(docs).find("Name").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center'>$" + ($(docs).find("amount").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center' '><input type='button' class='btn btn-light' onclick=PermananetlyRemoveCategory(" + ($(docs).find("id").text()) + ")  id='btncancel' value='Cancel'/> </td>");
+                            cartd.push("<td style='visibility:hidden' class='uk-text-center'> " + ($(docs).find("Zipcode").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center' style='visibility:hidden'> " + ($(docs).find("subCategoryID").text()) + " </td>");
+                            cartd.push("</tr>");
+                            count++;
+                            cc++;
+                            var a = $(docs).find("amount").text();
+                            Totalamount = parseInt(Totalamount) + parseInt(a);
+                        });
+                        cartd.push("<tr>   <td colspan='7' ><b> Total Amount:- $" + Totalamount + "</b></td><td></td></tr>");
+                        $("label[for='lblRowId']").text(Totalamount);
+                        $("#lblPurchasedZipCodes").text(cc);
+                        $("#lblTotalamount").text(Totalamount);
+                        cartd.push("</table>");
+                        $("#ViewAllPurchasedRcd").css("visibility", "visible");
+                        $("#ViewAllPurchasedRcd").html(cartd.join(''));
+                        //$("label[for='lblprice']").text(Totalamount);
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function PermananetlyRemoveCategory(rrr) {
+            if (confirm("Are you sure? you want to Permanent Delete Record.")) {
+                debugger;
+                $.ajax({
+                    type: "POST",
+                    url: "ws/MyCategories.asmx/DeletePurchasedCategories",
+                    data: "{'id':" + rrr + "}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (r) {
+                        ////jQuery.noConflict();
+                        ////$("#lblSuccess").text("Success!!")
+                        ////$("#lbldetail").text("Deleted Succesfully.")
+                        ////$('#success-message').modal('show');
+                        window.location.reload();
+                        // AssociatealreadyCategories();
+                    }
+                });
+            }
+        }
+
+
+        function ApplycoponCode(ccode, disc, duration) {
+            var catValue = $("#ddlCategory").val();
+            var _subCatValue;
+            if (catValue == 2) {
+                _subCatValue = 5;
+            }
+            else if (catValue == 5) {
+                _subCatValue = 13;
+            }
+            else if (catValue == 3) {
+                _subCatValue = 8;
+            }
+            else {
+            }
+            //$("#LoadingImage").css("display", "block");
+            var msg = [];
+            $.ajax({
+                type: "POST",
+                url: "ws/CategoryPurchase.asmx/InsertCategory",
+                data: "{'categoryID':'" + $("#ddlCategory").val() + "','SubcategoryID':'" + _subCatValue + "','PlanID':'1','pricevalues':'" + $("#lblprice").text() + "','zipcodeID':'" + $("#lblzipcode").text() + "','Couponcode':'" + ccode + "','Discount':'" + disc + "','Duration':'" + duration + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                cache: false,
+                success: function (r) {
+                    if (r.d == "1") {
+                        //This Web Services is used to send amount to be transaction, right now it is not in use because card data stuff is moved from db
+                        var MonthValue = 1;// MemberShip.value;
+                        var totalAmount = $("#lblprice").text();
+                        $.ajax({
+                            type: "POST",
+                            url: "ws/CategoryPurchase.asmx/InsertAmount",
+                            data: "{'amount':'" + MonthValue * totalAmount + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: false,
+                            cache: false,
+                            success: function (r) {
+                                if (r.d == "1") {
+                                    //$("#LoadingImage").css("display", "none");
+                                    $("#lblSuccess").text("Successful Zip Code Purchase!")
+                                    $("#lbldetail").text("Your Credit Card has been successfully charged.")
+                                    $('#success-message').modal('show');
+                                    $("#divzipcodeDetail").css("display", "none");
+                                    AssociatealreadyCategories();
+                                }
+                                if (r.d == "0") {
+                                    jQuery.noConflict();
+                                    $("#lblFailureTitle").text("Failure!");
+                                    $("#lblFailureDetail").text("Already Exists.");
+                                    $('#fail_message').modal('show');
+                                }
+                                if (r.d == "3") {
+                                    jQuery.noConflict();
+                                    $("#lblFailureTitle").text("Failure!");
+                                    $("#lblFailureDetail").text("OOPS Error ! Please try again.");
+                                    $('#fail_message').modal('show');
+                                }
+                            },
+                            failure: function (response) {
+                                alert(response.d + "Fail");
+                            },
+                            error: function (response) {
+                                alert(response.d + "Error...");
+                            }
+                        });
+                        //end here
+                    }
+                    if (r.d == "0") {
+                        $("#lblFailureTitle").text("Already Exists.")
+                        $("#lblFailureDetail").text("Already Exists.")
+                        $('#fail_message').modal('show');
+                    }
+                    if (r.d == "3") {
+                        $("#lblFailureTitle").text("OOPS Error ! Please try again.")
+                        $("#lblFailureDetail").text("OOPS Error ! Please try again.")
+                        $('#fail_message').modal('show');
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function BindCategoryZip() {
+            var zpcode = $("#txtZipcode").val();
+            $.ajax({
+                type: "POST", url: "ws/Category.asmx/AvailableZipCodesForServices", data: "{'jobtype':'2','zip':'" + zpcode + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("AvailZipCodes");
+                        var cartd = [];
+                        if (($(docs).find("id").text() == '')) {
+                            $("#divCategory").css("display", "none");
+                            $("#zipcodemsg").css("display", "block");
+                            $("#zipcodemsg").text("Service Categories are no longer available in your selected zip code.Please choose another zip code");
+                        }
+                        else {
+                            $("#zipcodemsg").css("display", "none");
+                            $("#divCategory").css("display", "block");
+                            cartd.push("<option value=0>Select Category</option>")
+                            $.each(docs, function (i, docs) {
+                                cartd.push(" <option value='" + $(docs).find("id").text() + "'>" + $(docs).find("categoryname").text() + " Services</option>");
+                            });
+                            $("#ddlCategory").html(cartd.join(''));
+                        }
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function BindState() {
+            $.ajax({
+                type: "POST", url: "ws/State.asmx/CountryWiseState", data: "{'Status':'1','CountryID':'US'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("States1");
+                        var cartd = [];
+                        cartd.push("<option value=0>Select State</option>")
+                        $.each(docs, function (i, docs) {
+                            cartd.push(" <option value='" + $(docs).find("stateid").text() + "'>" + $(docs).find("stateid").text() + "</option>");
+                        });
+                        $("#ddlState").html(cartd.join(''));
+                        // $("#ContentPlaceHolder1_cardState").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function BindStateWiseZipcode() {
+            hidzipAvail.value = 0;
+            $.ajax({
+                type: "POST", url: "ws/CategoryPurchase.asmx/StateWiseZipCode",
+                data: "{'StateID':'" + $("#ddlState option:selected").text() + "', 'CityID':'" + $("#txtCity").val() + "'}",
+                contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("CityWiseZip");
+                        var cartd = [];
+                        cartd.push("<option value=0>Select ZipCode</option>")
+                        $.each(docs, function (i, docs) {
+                            hidzipAvail.value = 1;
+                            cartd.push(" <option value='" + $(docs).find("zipcode").text() + "'>" + $(docs).find("zipcode").text() + "</option>");
+                        });
+                        $("#ddlZipcode").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        function BindSubCategoryZip() {
+            var zpcode = $("#txtZipcode").val();
+            $.ajax({
+                type: "POST", url: "ws/Category.asmx/AvailableSubCategoryzipCode", data: "{'jobtype':'2','zip':'" + zpcode + "','categoryID':'" + $("#ddlCategory").val() + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("AvailSubCategories");
+                        var cartd = [];
+                        cartd.push("<option value=0>Select Sub Category</option>")
+                        $.each(docs, function (i, docs) {
+                            var ss = $(docs).find("name").text().substr(4);
+                            cartd.push(" <option value='" + $(docs).find("id").text() + "'>" + ss + "</option>");
+                        });
+                        $("#ddlsubcategory").html(cartd.join(''));
+                        $("#lblSuccess2").text("");
+                    }
+                    else {
+                        $("#lblSuccess2").css("display", "block");
+                        $("#lblSuccess2").text("Incorrect City/State combination.");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+        $(function () {
+
+                $("#ddlCategory").change(function () {
+                    var catValue = $("#ddlCategory").val();
+                    var _subCatValue;
+                    if (catValue == 2) {
+                        _subCatValue = 5;
+                    }
+                    else if (catValue == 5) {
+                        _subCatValue = 13;
+                    }
+                    else if (catValue == 3) {
+                        _subCatValue = 8;
+                    }
+                    else {
+                    }
+                    $("#divzipcodeDetail").css("display", "none");
+                    //BindSubCategoryZip();
+                    $("#divzipcodeDetail").css("display", "block");
+                    $("#lblzipcode").text($("#txtZipcode").val());
+                    $("#lblcategory").text($("#ddlCategory option:selected").text());
+                    $("#lblSubCategory").text($("#ddlCategory option:selected").text());
+                    $("#divCategory").css({ "display": "block", "border": "0px solid #00c0ef", "padding": "15px" });
+                    $.ajax({
+                        type: "POST", url: "ws/CategoryPurchase.asmx/GetSubCategoryPrice", data: "{'zipCode':'" + $("#txtZipcode").val() + "','subCategoryID':'" + _subCatValue + "'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                        success: function (r) {
+                            if (r.d.length > 0) {
+                                var xmlDoc = $.parseXML(r.d);
+                                var xml = $(xmlDoc);
+                                var docs = xml.find("GetPrice");
+                                $.each(docs, function (i, docs) {
+                                    $("#lblprice").text($(docs).find("price").text());
+                                });
+                            }
+                        },
+                        failure: function (response) {
+                            alert(response.d + "Fail");
+                        },
+                        error: function (response) {
+                            alert(response.d + "Error...");
+                        }
+                    });
+                });
+
+
+                $("#ddlZipcode").change(function () {
+                    $("#txtZipcode").val($("#ddlZipcode").val());
+                    $("#divlocation").css("display", "block");
+                    $("#divCategory").css({ "display": "block", "border": "1px solid #00c0ef", "padding": "15px" });
+                    $("#divZipcode").css({ "display": "block", "border": "0px solid #00c0ef", "padding": "15px" });
+                    BindCategoryZip();
+                });
+
+        });
+        function GetPurchasedAllRecords() {
+            $("#ViewPurchasedRcd").css("visibility", "visible");
+            $("#divzipcodeDetail").css("display", "none");
+            $("#btncheckout").css("visibility", "visible");
+            $("#btnreset").css("visibility", "visible");
+            $("#btnCancel").css("visibility", "visible");
+            $.ajax({
+                type: "POST", url: "ws/CategoryPurchase.asmx/SelectAllPurchasedCartDataServices", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("Table1");
+                        var cartd = [];
+                        cartd.push("<table class='table table-condensed' style='width:85%'>");
+                        cartd.push("<tr><td colspan=7>Categories you currently have purchased</td><td style='visibility:hidden'></td></tr>");
+                        cartd.push("<tr>");
+                        cartd.push("<td style='color: white; background-color: skyblue' ><strong>S.N</strong></td>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'><strong>Zip Code</strong></td>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'><strong>Category</strong></td>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'><strong>SubCategory</strong></td>");
+                        cartd.push("<td style='color: white; background-color: skyblue;visibility:visible' class='uk-width-2-10 uk-text-center'>  </td>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center'> Price </td>");
+                        cartd.push("<td style='color: white; background-color: skyblue; visibility:visible' class='uk-width-2-10 uk-text-center'><strong></strong></td>");
+                        cartd.push("<td style='color: white; background-color: skyblue' class='uk-width-2-10 uk-text-center' style='margin-left:150px'> Action </td>");
+                        cartd.push("</tr>");
+                        var cc = 0;
+                        var count = 1;
+                        var Totalamount = 0;
+                        $.each(docs, function (i, docs) {
+                            cartd.push("<tr>");
+                            cartd.push("<td class='uk-text-center'>" + count + "</td>");
+                            cartd.push("<td class='uk-text-center'> " + ($(docs).find("Zipcode").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center'> " + ($(docs).find("CategoryName").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center'> " + ($(docs).find("SubCategoryName").text()) + " </td>");
+                            cartd.push("<td style='visibility:hidden' class='uk-text-center'> " + ($(docs).find("Zipcode").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center'>" + ($(docs).find("Price").text()) + "$ </td>");
+                            cartd.push("<td class='uk-text-center' style='visibility:hidden'> " + ($(docs).find("subCategoryID").text()) + " </td>");
+                            cartd.push("<td class='uk-text-center' style='margin-left:150px'><input style='background-color:skyblue; color:white;' type='button' onclick=RemoveRcd1(" + cc + ")  id='btncancel' value='Cancel'/> </td>");
+                            cartd.push("</tr>");
+                            count++;
+                            cc++;
+                            var a = $(docs).find("Price").text();
+                            Totalamount = parseInt(Totalamount) + parseInt(a);
+                        });
+                        cartd.push("<tr>   <td colspan='7' style='width:85%; margin-left:200px'><b> Total Amount:-" + Totalamount + "</b></td><td></td></tr>");
+                        $("label[for='lblRowId']").text(Totalamount);
+                        cartd.push("</table>");
+                        $("#ViewPurchasedRcd").html(cartd.join(''));
+
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+        }
+
+        function Valid() {
+            var returnValue;
+            if ($("#ContentPlaceHolder1_txtCreditCard").val() == "") {
+                returnValue = "Card Number is  required";
+                $("#ContentPlaceHolder1_txtCreditCard").focus();
+            }
+            else if ($("#ContentPlaceHolder1_ddlMonth").val() == 0) {
+                returnValue = "Select Month";
+            }
+            else if ($("#ContentPlaceHolder1_ddlYear").val() == 0) {
+                returnValue = "Select Year";
+            }
+            else if ($("#ContentPlaceHolder1_txtCvv").val() == "") {
+                returnValue = "CVV code is  required";
+                $("#ContentPlaceHolder1_txtCvv").focus();
+            }
+            else if ($("#ContentPlaceHolder1_cardFname").val() == "") {
+                returnValue = "First Name required";
+            }
+            else if ($("#ContentPlaceHolder1_cardLastname").val() == "") {
+                returnValue = "Last Name  required";
+            }
+            else if ($("#ContentPlaceHolder1_Cardaddress").val() == "") {
+                returnValue = "Address required";
+            }
+            else if ($("#ContentPlaceHolder1_cardCity").val() == "") {
+                returnValue = "City required";
+            }
+            else if ($("#ContentPlaceHolder1_cardState").val() == 0) {
+                returnValue = "Select State";
+            }
+            else if ($("#ContentPlaceHolder1_cardCountry").val() == 0) {
+                returnValue = "Select Country";
+            }
+            else if ($("#ContentPlaceHolder1_cardzipcode").val() == 0) {
+                returnValue = "Select Zipcode";
+            }
+            else {
+                returnValue = "0";
+            }
+            return returnValue;
+    }
+
+        $(function () {
+            $("#ContentPlaceHolder1_cardState").change(function () {
+                BindStateWiseZipcodeForCreditCard();
+            });
+            $("#ContentPlaceHolder1_cardCity").change(function () {
+                BindCityWiseStates();
+            });
+        });
+
+        function BindCityWiseStates() {
+            $.ajax({
+                type: "POST", url: "ws/CategoryPurchase.asmx/CityWiseStates",
+                data: "{'CityID':'" + ContentPlaceHolder1_cardCity.value + "'}",
+                contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("CityWiseStates");
+                        var cartd = [];
+                        cartd.push("<option value=0>Select State</option>")
+                        $.each(docs, function (i, docs) {
+                            cartd.push(" <option value='" + $(docs).find("stateid").text() + "'>" + $(docs).find("stateid").text() + "</option>");
+                        });
+                        $("#ContentPlaceHolder1_cardState").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+    }
+
+        function BindStateWiseZipcodeForCreditCard() {
+            $.ajax({
+                type: "POST", url: "ws/CategoryPurchase.asmx/StateWiseZipCode",
+                data: "{'StateID':'" + $("#ContentPlaceHolder1_cardState option:selected").text() + "', 'CityID':'" + ContentPlaceHolder1_cardCity.value + "'}",
+                contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                success: function (r) {
+                    if (r.d.length > 0) {
+                        var xmlDoc = $.parseXML(r.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("CityWiseZip");
+                        var cartd = [];
+                        cartd.push("<option value=0>Select ZipCode</option>")
+                        $.each(docs, function (i, docs) {
+                            cartd.push(" <option value='" + $(docs).find("zipcode").text() + "'>" + $(docs).find("zipcode").text() + "</option>");
+                        });
+                        $("#ContentPlaceHolder1_cardzipcode").html(cartd.join(''));
+                    }
+                },
+                failure: function (response) {
+                    alert(response.d + "Fail");
+                },
+                error: function (response) {
+                    alert(response.d + "Error...");
+                }
+            });
+    }
+
+        $("#btnCancelCard").click(function () {
+            ContentPlaceHolder1_txtCreditCard.value = "";
+            ContentPlaceHolder1_cardFname.value = "";
+            ContentPlaceHolder1_cardLastname.value = "";
+            ContentPlaceHolder1_Cardaddress.value = "";
+            ContentPlaceHolder1_cardzipcode.value = "";
+            ContentPlaceHolder1_txtCvv.value = "";
+            ContentPlaceHolder1_txtcity.value = "";
+        });
+</script>

@@ -233,10 +233,10 @@ var PaymentComponent = /** @class */ (function () {
                     var selectedMonthName = months[(parseInt(data._months) - 1)];
                     thisStatus.startValueMonth = { value: data._months, label: selectedMonthName };
                     _this.bindState();
-                    _this.bindStateWiseZipCode(data._state, data._city);
+                    //this.bindStateWiseZipCode(data._state, data._city);
                     setTimeout(function () {
                         thisStatus.startValueState = { value: data._state, label: data._state };
-                    }, 3000);
+                    }, 2000);
                     setTimeout(function () {
                         thisStatus.startValueZip = { value: data._zip, label: data._zip };
                     }, 4000);
