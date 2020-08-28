@@ -140,6 +140,10 @@
     <Content Include="AngularAssociate\assets\color.css" />
     <Content Include="AngularAssociate\assets\images\amex.jpg" />
     <Content Include="AngularAssociate\assets\images\discover.jpg" />
+    <Content Include="AngularAssociate\assets\images\icon_group_hover.png" />
+    <Content Include="AngularAssociate\assets\images\icon_home.png" />
+    <Content Include="AngularAssociate\assets\images\icon_land.png" />
+    <Content Include="AngularAssociate\assets\images\imagebox.jpg" />
     <Content Include="AngularAssociate\assets\images\mastercard_logo.png" />
     <Content Include="AngularAssociate\assets\images\notfound.png" />
     <Content Include="AngularAssociate\assets\images\registration.png" />
@@ -1835,6 +1839,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\purchase-zipcode.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\services\associate\list-properties.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\client-details.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\payment.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\customer-support.service.ts" />
