@@ -36,6 +36,13 @@ import { CustomerSupportService } from '../services/associate/customer-support.s
 import { ListPropertiesComponent } from './components/list-properties/list-properties.component';
 import { BillingHistoryComponent } from './components/billing-history/billing-history.component';
 import { PurchaseZipCodeComponent } from './components/purchase-zip-code/purchase-zip-code.component';
+import { PurchaseZipCodeService } from '../services/associate/purchase-zipcode.service';
+import { ToastNotificationsModule } from 'ngx-toast-notifications';
+
+import { GalleryModule } from '@ngx-gallery/core';
+import { LightboxModule } from '@ngx-gallery/lightbox';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ListPropertiesService } from '../services/associate/list-properties.service';
 
 @NgModule({
     declarations: [
@@ -54,6 +61,8 @@ import { PurchaseZipCodeComponent } from './components/purchase-zip-code/purchas
     imports: [
         CommonModule,
         BrowserModule,
+        BrowserAnimationsModule,
+        ToastNotificationsModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
@@ -61,7 +70,11 @@ import { PurchaseZipCodeComponent } from './components/purchase-zip-code/purchas
         AssociateRoutingModule,
         NgbModule,
         NgSelectModule,
-        NgOptionHighlightModule
+        NgOptionHighlightModule,
+        CKEditorModule,
+        GalleryModule,
+        LightboxModule
+        
     ],
     providers: [
         ApiService,
@@ -71,7 +84,9 @@ import { PurchaseZipCodeComponent } from './components/purchase-zip-code/purchas
         ClientDetailsService,
         PaymentService,
         CustomerSupportService,
-        MessageService
+        MessageService,
+        PurchaseZipCodeService,
+        ListPropertiesService
     ]
 })
 export class AssociateModule { }
