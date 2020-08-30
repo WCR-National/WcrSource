@@ -1157,8 +1157,8 @@ export class PurchaseZipCodeComponent implements OnInit {
                             this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
                         }
                         else {
-                            //this.onOpenModalClick();
-                            this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
+                            this.onOpenModalClick();
+                            //this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
                         }
                     }
                 }
@@ -1203,8 +1203,8 @@ export class PurchaseZipCodeComponent implements OnInit {
                     else {
 
                         if (this._Counter == 0) {
-                            this.AssociateAlreadyCategories();
-                           // this.onOpenModalClick();
+                            //this.AssociateAlreadyCategories();
+                            this.onOpenModalClick();
                             this._Counter++;
 
                         }

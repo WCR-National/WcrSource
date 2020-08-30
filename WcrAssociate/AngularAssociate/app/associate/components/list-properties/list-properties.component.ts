@@ -2320,8 +2320,7 @@ function alphaNumeric(regex: RegExp, error: ValidationErrors, status): Validator
     };
 }
 
-/**
-    * Use custom gallery config with the lightbox
+/** * Use custom gallery config with the lightbox
     */
     //withCustomGalleryConfig() {
 
