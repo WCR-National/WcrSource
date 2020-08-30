@@ -609,7 +609,7 @@ var AuthComponent = /** @class */ (function () {
                     //this.router.navigateByUrl('/associates');       
                     //$(location).attr('href', 'Associate/Dashboard.aspx');
                 }
-                // $(location).attr('href', 'Associate/ViewProfile.aspx');
+                //$(location).attr('href', 'Associate/ViewProfile.aspx');
             }
         }, function (err) {
             _this.loginErrorMessage = "Some internal error occurred.";

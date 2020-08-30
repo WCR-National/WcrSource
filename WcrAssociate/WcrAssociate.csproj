@@ -118,6 +118,7 @@
     <Content Include="AngularAssociate\app\associate\associate-sidebar\sidebar.component.html" />
     <Content Include="AngularAssociate\app\associate\components\list-properties\list-properties.component.html" />
     <Content Include="AngularAssociate\app\associate\components\billing-history\billing-history.component.html" />
+    <Content Include="AngularAssociate\app\associate\components\payment-modal\payment-modal.component.html" />
     <Content Include="AngularAssociate\app\associate\components\purchase-zip-code\purchase-zip-code.component.html" />
     <Content Include="AngularAssociate\app\associate\components\payment\payment.component.html" />
     <Content Include="AngularAssociate\app\associate\components\client-details\client-details.component.html" />
@@ -1829,6 +1830,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\associate.module.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\list-properties\list-properties.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\billing-history\billing-history.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\components\payment-modal\payment-modal.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\purchase-zip-code\purchase-zip-code.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\payment\payment.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\client-details\client-details.component.ts" />

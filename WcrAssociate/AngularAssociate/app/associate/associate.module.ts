@@ -43,6 +43,7 @@ import { GalleryModule } from '@ngx-gallery/core';
 import { LightboxModule } from '@ngx-gallery/lightbox';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ListPropertiesService } from '../services/associate/list-properties.service';
+import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { ListPropertiesService } from '../services/associate/list-properties.ser
         CustomerSupportComponent,
         ListPropertiesComponent,
         BillingHistoryComponent,
-        PurchaseZipCodeComponent
+        PurchaseZipCodeComponent,
+        PaymentModalComponent
     ],
     imports: [
         CommonModule,
@@ -76,6 +78,8 @@ import { ListPropertiesService } from '../services/associate/list-properties.ser
         LightboxModule
         
     ],
+    entryComponents: [PaymentModalComponent],
+
     providers: [
         ApiService,
         JwtService,

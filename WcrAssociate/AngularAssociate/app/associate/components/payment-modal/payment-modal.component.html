@@ -1,0 +1,728 @@
+﻿
+<style>
+    .form-control {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.874rem + 2px);
+        padding: 0.437rem 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #454f5b;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #d9dfe7;
+        border-radius: 0;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .form-control {
+            transition: none;
+        }
+    }
+
+    .form-control:focus, .form-control:hover {
+    }
+
+    .form-control::-ms-expand {
+        background-color: transparent;
+        border: 0;
+    }
+
+    .form-control:focus {
+        color: #454f5b;
+        background-color: #fff;
+        border-color: #c4cdd6;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(85, 86, 253, 0.25);
+    }
+
+    .form-control::placeholder {
+        color: #637382;
+        opacity: 1;
+    }
+
+    .form-control:disabled, .form-control[readonly] {
+        background-color: #e9ecf1;
+        opacity: 1;
+    }
+
+    select.form-control:focus::-ms-value {
+        color: #454f5b;
+        background-color: #fff;
+    }
+
+    .form-control-file,
+    .form-control-range {
+        display: block;
+        width: 100%;
+    }
+
+    .col-form-label {
+        padding-top: calc(0.437rem + 1px);
+        padding-bottom: calc(0.437rem + 1px);
+        margin-bottom: 0;
+        font-size: inherit;
+        line-height: 1.5;
+    }
+
+    .col-form-label-lg {
+        padding-top: calc(0.5rem + 1px);
+        padding-bottom: calc(0.5rem + 1px);
+        font-size: 1.09375rem;
+        line-height: 1.5;
+    }
+
+    .col-form-label-sm {
+        padding-top: calc(0.25rem + 1px);
+        padding-bottom: calc(0.25rem + 1px);
+        font-size: 0.8125rem;
+        line-height: 1.5;
+    }
+
+    .form-control-plaintext {
+        display: block;
+        width: 100%;
+        padding-top: 0.437rem;
+        padding-bottom: 0.437rem;
+        margin-bottom: 0;
+        line-height: 1.5;
+        color: #373857;
+        background-color: transparent;
+        border: solid transparent;
+        border-width: 1px 0;
+    }
+
+        .form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+    .form-control-sm {
+        height: calc(1.5em + 0.5rem + 2px);
+        padding: 0.25rem 0.5rem;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        border-radius: 0;
+    }
+
+    .form-control-lg {
+        height: calc(1.5em + 1rem + 2px);
+        padding: 0.5rem 1rem;
+        font-size: 1.09375rem;
+        line-height: 1.5;
+        border-radius: 0;
+    }
+
+    select.form-control[size], select.form-control[multiple] {
+        height: auto;
+    }
+
+    textarea.form-control {
+        height: auto;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-text {
+        display: block;
+        margin-top: 0.25rem;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -5px;
+        margin-left: -5px;
+    }
+
+        .form-row > .col,
+        .form-row > [class*="col-"] {
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
+    .form-check {
+        position: relative;
+        display: block;
+        padding-left: 1.25rem;
+    }
+
+    .form-check-input {
+        position: absolute;
+        margin-top: 0.3rem;
+        margin-left: -1.25rem;
+    }
+
+        .form-check-input:disabled ~ .form-check-label {
+            color: #637382;
+        }
+
+    .form-check-label {
+        margin-bottom: 0;
+    }
+
+    .form-check-inline {
+        display: inline-flex;
+        align-items: center;
+        padding-left: 0;
+        margin-right: 0.75rem;
+    }
+
+        .form-check-inline .form-check-input {
+            position: static;
+            margin-top: 0;
+            margin-right: 0.3125rem;
+            margin-left: 0;
+        }
+
+    .valid-feedback {
+        display: none;
+        width: 100%;
+        margin-top: 0.25rem;
+        font-size: 80%;
+        color: #28a745;
+    }
+
+    .valid-tooltip {
+        position: absolute;
+        top: 100%;
+        z-index: 5;
+        display: none;
+        max-width: 100%;
+        padding: 0.25rem 0.5rem;
+        margin-top: .1rem;
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: #fff;
+        background-color: rgba(40, 167, 69, 0.9);
+        border-radius: 0;
+    }
+
+    .was-validated .form-control:valid, .form-control.is-valid {
+        border-color: #28a745;
+        padding-right: calc(1.5em + 0.874rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: center right calc(0.375em + 0.2185rem);
+        background-size: calc(0.75em + 0.437rem) calc(0.75em + 0.437rem);
+    }
+
+        .was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+        .was-validated .form-control:valid ~ .valid-feedback,
+        .was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback,
+        .form-control.is-valid ~ .valid-tooltip {
+            display: block;
+        }
+
+    .was-validated textarea.form-control:valid, textarea.form-control.is-valid {
+        padding-right: calc(1.5em + 0.874rem);
+        background-position: top calc(0.375em + 0.2185rem) right calc(0.375em + 0.2185rem);
+    }
+
+    .was-validated .custom-select:valid, .custom-select.is-valid {
+        border-color: #28a745;
+        padding-right: calc((1em + 0.874rem) * 3 / 4 + 1.75rem);
+        background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23363d47' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") no-repeat right 0.75rem center/8px 10px, url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e") #fff no-repeat center right 1.75rem/calc(0.75em + 0.437rem) calc(0.75em + 0.437rem);
+    }
+
+        .was-validated .custom-select:valid:focus, .custom-select.is-valid:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+        }
+
+        .was-validated .custom-select:valid ~ .valid-feedback,
+        .was-validated .custom-select:valid ~ .valid-tooltip, .custom-select.is-valid ~ .valid-feedback,
+        .custom-select.is-valid ~ .valid-tooltip {
+            display: block;
+        }
+
+    .was-validated .form-control-file:valid ~ .valid-feedback,
+    .was-validated .form-control-file:valid ~ .valid-tooltip, .form-control-file.is-valid ~ .valid-feedback,
+    .form-control-file.is-valid ~ .valid-tooltip {
+        display: block;
+    }
+
+    .was-validated .form-check-input:valid ~ .form-check-label, .form-check-input.is-valid ~ .form-check-label {
+        color: #28a745;
+    }
+
+    .was-validated .form-check-input:valid ~ .valid-feedback,
+    .was-validated .form-check-input:valid ~ .valid-tooltip, .form-check-input.is-valid ~ .valid-feedback,
+    .form-check-input.is-valid ~ .valid-tooltip {
+        display: block;
+    }
+
+    .was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {
+        color: #28a745;
+    }
+
+        .was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {
+            border-color: #28a745;
+        }
+
+    .was-validated .custom-control-input:valid ~ .valid-feedback,
+    .was-validated .custom-control-input:valid ~ .valid-tooltip, .custom-control-input.is-valid ~ .valid-feedback,
+    .custom-control-input.is-valid ~ .valid-tooltip {
+        display: block;
+    }
+
+    .was-validated .custom-control-input:valid:checked ~ .custom-control-label::before, .custom-control-input.is-valid:checked ~ .custom-control-label::before {
+        border-color: #34ce57;
+        background-color: #34ce57;
+    }
+
+    .was-validated .custom-control-input:valid:focus ~ .custom-control-label::before, .custom-control-input.is-valid:focus ~ .custom-control-label::before {
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+
+    .was-validated .custom-control-input:valid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-valid:focus:not(:checked) ~ .custom-control-label::before {
+        border-color: #28a745;
+    }
+
+    .was-validated .custom-file-input:valid ~ .custom-file-label, .custom-file-input.is-valid ~ .custom-file-label {
+        border-color: #28a745;
+    }
+
+    .was-validated .custom-file-input:valid ~ .valid-feedback,
+    .was-validated .custom-file-input:valid ~ .valid-tooltip, .custom-file-input.is-valid ~ .valid-feedback,
+    .custom-file-input.is-valid ~ .valid-tooltip {
+        display: block;
+    }
+
+    .was-validated .custom-file-input:valid:focus ~ .custom-file-label, .custom-file-input.is-valid:focus ~ .custom-file-label {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+
+    .avatar-upload {
+        position: relative;
+        max-width: 205px;
+        margin: 18px auto;
+    }
+
+    .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+    }
+
+    #profileImageId {
+        display: none;
+    }
+
+        #profileImageId + label {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            margin-bottom: 0;
+            border-radius: 100%;
+            background: #FFFFFF;
+            border: 1px solid transparent;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+            cursor: pointer;
+            font-weight: normal;
+            transition: all .2s ease-in-out;
+        }
+
+            #profileImageId + label:hover {
+                background: #f1f1f1;
+                border-color: #d6d6d6;
+            }
+
+            #profileImageId + label:after {
+                content: "\f040";
+                font-family: 'FontAwesome';
+                color: #757575;
+                position: absolute;
+                top: 10px;
+                left: 0;
+                right: 0;
+                text-align: center;
+                margin: auto;
+            }
+
+
+    .avatar-preview {
+        width: 208px;
+        height: 208px;
+        position: relative;
+        border-radius: 100%;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    }
+
+        .avatar-preview > div {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+    .form-control {
+        height: 40px;
+    }
+
+    .form-control {
+        font-size: 16px;
+        font-weight: 500;
+        padding: 0 0 5px;
+        border-width: 0 0 2px 0 !important;
+        /* color: #06072d; */
+    }
+
+        .form-control[_ngcontent-ibt-c1]:focus {
+            color: none;
+            background-color: none;
+            border-color: none;
+            outline: none;
+            box-shadow: none;
+            border: none;
+            color: #454f5b;
+            background-color: #fff !important;
+            border-color: #c4cdd6 !important;
+            outline: 0;
+        }
+
+    .has-error input:hover, .has-error input:focus {
+        box-shadow: none;
+    }
+
+    .form-control:focus, .form-control:hover {
+        box-shadow: none;
+    }
+</style>
+
+<style>
+
+    .card-input-element {
+        display: none;
+    }
+
+    .card-input {
+        margin: 10px;
+        padding: 00px;
+    }
+
+        .card-input:hover {
+            cursor: pointer;
+        }
+
+    .card-input-element:checked + .card-input {
+        border: 2px solid #000;
+        padding: 2px;
+    }
+</style>
+
+<style>
+    .ng-select .ng-select-container {
+        -webkit-box-align: baseline;
+        align-items: baseline;
+        min-height: 44.5px;
+    }
+
+    .ng-select.ng-select-single .ng-select-container .ng-value-container, .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .ng-select {
+        padding-bottom: 0.1em;
+    }
+</style>
+
+
+    <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel"><strong>Please Verify/Update Your Credit Card Information </strong></h3>
+
+        <div class="close" aria-label="Close" (click)="dismiss()" style="cursor:pointer;">
+            <span aria-hidden="true">X</span>
+        </div>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="auth-page mg-b-60-force">
+            <div class="container-cassie page" style="background-color:#fff;">
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 pd-t-50-f">
+                        <div id="info" class="pd-l-0-f pd-sm-l-35-f pd-r-35-f">
+                            <p class="alert-danger" style="font-size: 17px; font-weight: 400; color: #2b2b2b;">
+                                There was an error processing this transaction. Please verify or update your card information to complete this transaction.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12" [style.display]="formErrorMessage != '' ? 'block': 'none'">{{formErrorMessage}}</div>
+                    <div class="col-sm-12">
+                        <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20">
+                            <fieldset>
+                                <!--<div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
+                                    {{formError}}
+                                </div>-->
+                                <div class="col-xs-12 col-sm-12">
+                                    <h2 class="tx-color-01 pd-l-0-f pd-sm-l-15-f float-left mg-t-7-f pd-b-30-f">Credit Card Information</h2>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 pd-l-0 pd-r-0 pd-sm-l-15 pd-sm-r-15">
+                                    <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-xs-r-0">
+                                        <input type="hidden" formControlName="cardid" id="cardid" />
+                                        <input type="hidden" formControlName="totalAmount" id="totalAmount" />
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20 pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.firstName}">
+                                                <label>
+                                                    First Name
+                                                </label>
+                                                <input id="firstName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your first name" formControlName="firstName" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.firstName">
+
+                                                    {{formErrors.firstName}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20   pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.lastName}">
+                                                <label>
+                                                    Last Name
+                                                </label>
+                                                <input id="lastName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your last name" formControlName="lastName" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.lastName">
+                                                    {{formErrors.lastName}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.address}">
+                                                <label>
+                                                    Billing Address
+                                                </label>
+                                                <input id="address" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your address" formControlName="address" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.address">
+                                                    {{formErrors.address}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.city}">
+                                                <label>
+                                                    City
+                                                </label>
+                                                <input id="city" type="text" (change)="changeCity()" style="margin-top:12px;" class="form-control pd-l-0-force form-control" placeholder="Enter city name" formControlName="city" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.city">
+                                                    {{formErrors.city}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.state}">
+                                                <label>
+                                                    Select State
+                                                </label>
+                                                <!--<select2 [data]="stateData" [value]="startValueState" [width]="150" (valueChanged)="changeState($event)" formControlName="state"></select2>-->
+                                                <ng-select [items]="stateData" [(ngModel)]="startValueState" (ngModelChange)="changeState()" formControlName="state" [searchable]="false"> </ng-select>
+
+                                                <!--<input id="state" type="text" class="form-control pd-l-0-force form-control" placeholder="STATE" formControlName="firstName" (blur)="logValidationErrors()">-->
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.country}">
+                                                <label>
+                                                    Country
+                                                </label>
+                                                <input id="country" type="text" class="form-control pd-l-0-force form-control" style="margin-top:12px;" placeholder="Enter your country name" formControlName="country" (blur)="logValidationErrors()" disabled>
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.country">
+                                                    {{formErrors.country}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.zipCode}">
+                                                <label>
+                                                    Select Zip Code
+                                                </label>
+                                                <ng-select [items]="zipCodeData" [(ngModel)]="startValueZip" (ngModelChange)="changeZipCode()" formControlName="zipCode" [searchable]="false"> </ng-select>
+
+                                                <!--<input id="zipCode" type="text" class="form-control pd-l-0-force form-control" placeholder="ZIP CODE" formControlName="zipCode" (blur)="logValidationErrors()">-->
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 pd-xs-l-0 pd-sm-l-15 pd-xs-r-0 pd-sm-r-15">
+
+                                        <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.cardNumber}">
+
+                                                <label>
+                                                    Card Number
+                                                </label>
+                                                <input id="cardNumber" type="text" class="form-control pd-l-0-force form-control" (change)="checkCardNumber()" placeholder="Enter card number" formControlName="cardNumber" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.cardNumber">
+                                                    {{formErrors.cardNumber}}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <label>
+                                                Choose Card Type
+                                            </label>
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.cardType}">
+
+                                                <div class="col-sm-3 col-xs-3 pd-l-0-f pd-r-0-f">
+                                                    <label>
+                                                        <input type="radio" value="visa" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'visa' ? false: true">
+                                                        <div class="panel panel-default card-input">
+                                                            <img src="AngularAssociate/assets/images/visa_logo.jpg" />
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-3 pd-l-10-f pd-r-0-f">
+                                                    <label>
+                                                        <input type="radio" value="mastercard" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'mastercard' ? false: true">
+                                                        <div class="panel panel-default card-input">
+                                                            <img src="AngularAssociate/assets/images/mastercard_logo.png" />
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-3 pd-l-10-f pd-r-0-f">
+                                                    <label>
+                                                        <input type="radio" value="amex" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'discover' ? false: true">
+                                                        <div class="panel panel-default card-input">
+                                                            <img src="AngularAssociate/assets/images/amex.jpg" />
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="col-sm-3 col-xs-3 pd-l-10-f pd-r-0-f">
+                                                    <label>
+                                                        <input type="radio" value="discover" formControlName="cardType" class="card-input-element" [(ngModel)]="cardTypeSelector" [attr.disabled]="isVisaOrMCOrAmexOrDisc == 'discover' ? false: true">
+                                                        <div class="panel panel-default card-input">
+                                                            <img src="AngularAssociate/assets/images/discover.jpg" />
+                                                        </div>
+                                                    </label>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.expMonth}">
+
+                                                <label>
+                                                    Select Exp.Month
+                                                </label>
+                                                <!--<input id="expMonth" type="text" class="form-control pd-l-0-force form-control" placeholder="MONTH" formControlName="expMonth" (blur)="logValidationErrors()">-->
+                                                <ng-select [items]="expMonthData" [(ngModel)]="startValueMonth" (ngModelChange)="changeExpMonth()" formControlName="expMonth" [searchable]="false"> </ng-select>
+                                                <!--<select2 [data]="expMonthData" [value]="startValueMonth" [width]="150" (valueChanged)="changeExpMonth($event)" formControlName="expMonth"></select2>-->
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                            <div class="form-group" [ngClass]="{'has-error': formErrors.expYear}">
+
+                                                <label>
+                                                    Select Exp.Year
+                                                </label>
+
+                                                <!--<select2 [data]="expYearData" [value]="startValueYear" [width]="150" (valueChanged)="changeExpYear($event)" formControlName="expYear"></select2>-->
+                                                <ng-select [items]="expYearData" [(ngModel)]="startValueYear" (ngModelChange)="changeExpYear()" formControlName="expYear" [searchable]="false"> </ng-select>
+
+                                                <!--<input id="expYear" type="text" class="form-control pd-l-0-force form-control" placeholder="YEAR" formControlName="expYear" (blur)="logValidationErrors()">-->
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" [ngClass]="{'has-error': formErrors.CVCNumber}">
+                                            <div class="col-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                <label>
+                                                    CVV / CVC *
+                                                </label>
+                                                <input id="cvv" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter card cvv/cvc " formControlName="CVCNumber" (blur)="logValidationErrors()">
+                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.CVCNumber">
+                                                    {{formErrors.CVCNumber}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right">
+                                    <div class="form-group">
+                                        <div class="col-xs-6 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddOrUpdateButton ? 'block': 'none'">
+                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit" (click)="submitCardForm()">
+                                                <span [style.display]="!isSubmitting ? 'block': 'none'">Add Card</span>
+                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'" style="margin-top:4px;">
+                                                    <div class="spinner-layer spinner-white-only">
+                                                        <div class="circle-clipper left">
+                                                            <div class="circle"></div>
+                                                        </div><div class="gap-patch">
+                                                            <div class="circle"></div>
+                                                        </div><div class="circle-clipper right">
+                                                            <div class="circle"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+
+                                        </div>
+                                        <div class="col-xs-6  col-sm-2 mg-b-20 pd-l-0-f pd-r-0-f" [style.display]="!isAddOrUpdateButton ? 'block': 'none'">
+                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit">
+                                                <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="updateCardForm()">Update Card</span>
+                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'" style="margin-top:4px;">
+                                                    <div class="spinner-layer spinner-white-only">
+                                                        <div class="circle-clipper left">
+                                                            <div class="circle"></div>
+                                                        </div><div class="gap-patch">
+                                                            <div class="circle"></div>
+                                                        </div><div class="circle-clipper right">
+                                                            <div class="circle"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+
+                                        </div>
+                                        <div class="col-xs-3  col-sm-2 mg-b-20">
+                                            <button (click)="dismiss()" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-xs-10-f" type="button">
+                                                <span>Cancel</span>
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>

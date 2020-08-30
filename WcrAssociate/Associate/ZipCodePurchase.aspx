@@ -1457,6 +1457,7 @@ Once you select a category, our price rate will also be displayed.<br /> </li>
                 BindCategoryZip();
             });
         });
+
         function GetPurchasedAllRecords() {
             $("#ViewPurchasedRcd").css("visibility", "visible");
             $("#divzipcodeDetail").css("display", "none");
