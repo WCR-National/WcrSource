@@ -755,7 +755,7 @@ export class AuthComponent implements OnInit {
                             //$(location).attr('href', 'Associate/Dashboard.aspx');
                         }
 
-                        //$(location).attr('href', 'Associate/ViewProfile.aspx');
+                       // $(location).attr('href', 'Associate/ViewProfile.aspx');
 
                     }
                 },

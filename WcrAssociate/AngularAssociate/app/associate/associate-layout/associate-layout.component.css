@@ -72117,7 +72117,7 @@ ul.footer-links {
     background-size: 25px auto;
 }
 
-.land-custom:hover i, .land-custom.active i {
+.land-custom i, .land-custom:hover i, .land-custom.active i {
     display: inline-block;
     width: 100%;
     height: 25px;
@@ -72304,4 +72304,61 @@ a, a:hover {
 .toast-panel {
 
     max-width: 40rem !important;
+}
+.image-upload li .block-box .form-control {
+    margin: 10px 0;
+}
+
+.image-upload li .block-box .form-control {
+    margin: 10px 0;
+}
+
+input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+.custom-browse input[type="file"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 0px;
+    background: none;
+    text-indent: 120%;
+    cursor: pointer;
+    position: absolute;
+    height: 30px;
+    top: -10px;
+    border: 0 !important;
+    outline: 0px;
+    z-index: 5;
+}
+
+.custom-browse {
+    position: relative;
+    background: #3697ca;
+    height: 30px;
+    margin-top: 11px;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px !important;
+    display: inline-block;
+    width: 100%;
+    line-height: 30px;
+}
+
+input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+.custom-browse:after {
+    content: "Browse";
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }

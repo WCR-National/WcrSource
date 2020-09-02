@@ -120,7 +120,9 @@ var PurchaseZipCodeService = /** @class */ (function () {
         else {
         }
         var urlToInsertCategory = "Associate/ws/CategoryPurchase.asmx/InsertCategory";
-        return this.apiService.post(urlToInsertCategory, { categoryID: categoryId, SubcategoryID: subCategoryId, PlanID: '1', pricevalues: priceValues, zipcodeID: zipCode, Couponcode: cCode, Discount: disc, Duration: duration })
+        return this.apiService.post(urlToInsertCategory, {
+            categoryID: categoryId, SubcategoryID: subCategoryId, PlanID: '1', pricevalues: priceValues, zipcodeID: zipCode, Couponcode: cCode, Discount: disc, Duration: duration
+        })
             .pipe(map(function (data) {
             return data;
         }));

@@ -88,7 +88,7 @@ namespace WcrWebApplication.Associate.ws
         public string UpdateSale(int CategoryId, int SubCategoryId, string title, string Features, string address, string contactNo, string description, string countryID, string StateID, string cityID, string zipcode, float amount, int id)
         {
             string str = string.Empty;
-            if (Session["associate"].ToString() != "" || Session["associate"].ToString() != null)
+            if (!string.IsNullOrEmpty( Session["associate"]?.ToString() ) )
             {
                 PropSales proSale = new PropSales();
                 proSale.AssociateID = Convert.ToInt16(Session["associate"]);

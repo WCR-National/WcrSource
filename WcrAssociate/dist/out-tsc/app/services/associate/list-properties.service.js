@@ -67,7 +67,7 @@ var ListPropertiesService = /** @class */ (function () {
     };
     ListPropertiesService.prototype.GetAdvertisementDetails = function (advertisementId) {
         var urlToSelectAllPurchasedCartDataServices = "Associate/ws/Sale.asmx/ViewAdvertisementDetails";
-        return this.apiService.post(urlToSelectAllPurchasedCartDataServices, { advtID: advertisementId })
+        return this.apiService.post(urlToSelectAllPurchasedCartDataServices, { adID: advertisementId })
             .pipe(map(function (data) {
             return data;
         }));
@@ -87,9 +87,15 @@ var ListPropertiesService = /** @class */ (function () {
         }));
     };
     ListPropertiesService.prototype.InsertSale = function (CategoryId, subCategoryId, title, features, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice) {
+        if (adsPrice == "") {
+            adsPrice = 0;
+        }
+        else {
+            adsPrice = parseFloat(adsPrice);
+        }
         var urlToSelectAllPurchasedCartDataServices = "Associate/ws/Sale.asmx/InsertSale";
         return this.apiService.post(urlToSelectAllPurchasedCartDataServices, {
-            'CategoryId': CategoryId, 'SubCategoryId': subCategoryId, 'title': title, 'Features': features, 'address': address.trim(), 'contactNo': contactNo, 'description': description.trim(), 'countryID': countryID, 'StateID': stateID, 'cityID': cityId, 'zipcode': zipcod, 'isFeatured': isFeatured, 'jobtype': jobtype, 'amount': amount, 'advertisementPrice': adsPrice
+            'CategoryId': CategoryId, 'SubCategoryId': parseInt(subCategoryId), 'title': title, 'address': address.trim(), 'contactNo': contactNo, 'description': description.trim(), 'Features': features, 'countryID': countryID, 'StateID': stateID, 'cityID': cityId, 'isFeatured': isFeatured, 'zipcode': zipcod, 'jobtype': jobtype, 'amount': amount, 'advertisementPrice': adsPrice
         })
             .pipe(map(function (data) {
             return data;
@@ -121,9 +127,9 @@ var ListPropertiesService = /** @class */ (function () {
     ListPropertiesService.prototype.UpdateSale = function (CategoryId, SubCategoryId, title, Features, address, contactNo, description, countryID, StateID, cityID, zipcode, amount, id) {
         var urlToUpdateSale = "Associate/ws/Sale.asmx/UpdateSale";
         return this.apiService.post(urlToUpdateSale, {
-            'CategoryId': CategoryId, 'SubCategoryId': SubCategoryId, 'title': title, 'Features': Features, 'address': address.trim(),
+            'CategoryId': CategoryId, 'SubCategoryId': parseInt(SubCategoryId), 'title': title, 'Features': Features, 'address': address.trim(),
             'contactNo': contactNo, 'description': description.trim(), 'countryID': countryID, 'StateID': StateID, 'cityID': cityID,
-            'zipcode': zipcode, 'amount': amount, 'id': id
+            'zipcode': zipcode, 'amount': amount, 'id': parseInt(id)
         }).pipe(map(function (data) {
             return data;
         }));

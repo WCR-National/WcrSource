@@ -39,8 +39,8 @@ import { PurchaseZipCodeComponent } from './components/purchase-zip-code/purchas
 import { PurchaseZipCodeService } from '../services/associate/purchase-zipcode.service';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 
-import { GalleryModule } from '@ngx-gallery/core';
-import { LightboxModule } from '@ngx-gallery/lightbox';
+import { LightboxModule } from 'ngx-lightbox';
+
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ListPropertiesService } from '../services/associate/list-properties.service';
 import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
@@ -74,7 +74,6 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
         NgSelectModule,
         NgOptionHighlightModule,
         CKEditorModule,
-        GalleryModule,
         LightboxModule
         
     ],

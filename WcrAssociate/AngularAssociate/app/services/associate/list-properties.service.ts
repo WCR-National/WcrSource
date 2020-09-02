@@ -98,7 +98,7 @@ export class ListPropertiesService {
 
     GetAdvertisementDetails(advertisementId) {
         let urlToSelectAllPurchasedCartDataServices: string = "Associate/ws/Sale.asmx/ViewAdvertisementDetails";
-        return this.apiService.post(urlToSelectAllPurchasedCartDataServices, { advtID: advertisementId })
+        return this.apiService.post(urlToSelectAllPurchasedCartDataServices, { adID: advertisementId })
             .pipe(map(
                 data => {
                     return data;
@@ -130,9 +130,15 @@ export class ListPropertiesService {
     }
 
     InsertSale(CategoryId, subCategoryId, title, features, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice) {
+        if (adsPrice == "") {
+            adsPrice = 0;
+        }
+        else {
+            adsPrice = parseFloat(adsPrice);
+        }
         let urlToSelectAllPurchasedCartDataServices: string = "Associate/ws/Sale.asmx/InsertSale";
         return this.apiService.post(urlToSelectAllPurchasedCartDataServices, {
-            'CategoryId': CategoryId, 'SubCategoryId': subCategoryId, 'title': title, 'Features': features, 'address': address.trim(), 'contactNo': contactNo, 'description': description.trim(), 'countryID': countryID, 'StateID': stateID, 'cityID': cityId, 'zipcode': zipcod, 'isFeatured': isFeatured, 'jobtype': jobtype, 'amount': amount, 'advertisementPrice': adsPrice
+            'CategoryId': CategoryId, 'SubCategoryId': parseInt(subCategoryId), 'title': title, 'address': address.trim(), 'contactNo': contactNo, 'description': description.trim(), 'Features': features, 'countryID': countryID, 'StateID': stateID, 'cityID': cityId, 'isFeatured': isFeatured, 'zipcode': zipcod, 'jobtype': jobtype, 'amount': amount, 'advertisementPrice': adsPrice
         })
             .pipe(map(
                 data => {
@@ -179,9 +185,9 @@ export class ListPropertiesService {
     UpdateSale(CategoryId, SubCategoryId, title, Features, address, contactNo, description, countryID, StateID, cityID, zipcode, amount, id) {
         let urlToUpdateSale: string = "Associate/ws/Sale.asmx/UpdateSale";
         return this.apiService.post(urlToUpdateSale, {
-            'CategoryId': CategoryId, 'SubCategoryId': SubCategoryId, 'title': title, 'Features': Features, 'address': address.trim(),
+            'CategoryId': CategoryId, 'SubCategoryId': parseInt(SubCategoryId), 'title': title, 'Features': Features, 'address': address.trim(),
             'contactNo': contactNo, 'description': description.trim(), 'countryID': countryID, 'StateID': StateID, 'cityID': cityID,
-            'zipcode': zipcode, 'amount': amount, 'id': id
+            'zipcode': zipcode, 'amount': amount, 'id': parseInt(id)
         }).pipe(map(
             data => {
                 return data;

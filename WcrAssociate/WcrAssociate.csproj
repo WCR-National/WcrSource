@@ -1247,12 +1247,12 @@
     <Content Include="Associate\ws\UpdatePic.ashx" />
     <Content Include="images\JAIPUR OLD AGE HOME CENTER.pdf" />
     <Content Include="packages.config" />
-    <Content Include="Associate\UpdateAdvertisementImges.ashx" />
     <Content Include="Associate\UpdateAdvertisementSecondImage.ashx" />
     <Content Include="Associate\UpdateThirdImg.ashx" />
     <Content Include="Associate\UpdateFourthImg.ashx" />
     <Content Include="angular.json" />
     <Content Include="package.json" />
+    <Content Include="Associate\ws\UpdateAdvertisementImges.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\WcrNational.pubxml" />
@@ -1572,9 +1572,6 @@
     <Compile Include="Associate\UControls\Newleft.ascx.designer.cs">
       <DependentUpon>Newleft.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Associate\UpdateAdvertisementImges.ashx.cs">
-      <DependentUpon>UpdateAdvertisementImges.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Associate\UpdateAdvertisementSecondImage.ashx.cs">
       <DependentUpon>UpdateAdvertisementSecondImage.ashx</DependentUpon>
     </Compile>
@@ -1711,6 +1708,9 @@
     <Compile Include="Associate\ws\SubCategory.asmx.cs">
       <DependentUpon>SubCategory.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Associate\ws\UpdateAdvertisementImges.ashx.cs">
+      <DependentUpon>UpdateAdvertisementImges.ashx</DependentUpon>
     </Compile>
     <Compile Include="Associate\ws\UpdatePic.ashx.cs">
       <DependentUpon>UpdatePic.ashx</DependentUpon>

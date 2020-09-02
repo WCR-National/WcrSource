@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, Input, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, NgZone, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debug } from 'util';
-import { Gallery, GalleryItem, ImageItem, ThumbnailsPosition, ImageSize } from '@ngx-gallery/core';
+import { LightboxModule, LightboxEvent, Lightbox, IAlbum } from 'ngx-lightbox';
 
 import { ValidationErrors, AbstractControl, ValidatorFn, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PaymentService } from 'AngularAssociate/app/services/associate/payment.service';
@@ -23,12 +23,12 @@ import { PaymentModalComponent } from '../payment-modal/payment-modal.component'
 })
 
 export class ListPropertiesComponent implements OnInit {
-    cardForm: FormGroup;
+
     PostAdvertisement: FormGroup;
     categorySearchForm: FormGroup;
-
-    items: GalleryItem[];
     editor = ClassicEditor;
+    private _albums: Array<IAlbum> = [];
+
 
     isSubmitting: boolean = false;
     isCreditCardFormVisible: boolean = false;
@@ -37,9 +37,7 @@ export class ListPropertiesComponent implements OnInit {
     servicesCount: string = '';
     TotalCount: string = '';
     showSuccessMessage: string = '';
-    isAddOrUpdateButton: boolean = true;
-
-    public TotalCountOfItemsPurchased = 0;
+    isAddButtonPA: boolean = true;
 
     validationMessagesPA = {
 
@@ -85,7 +83,13 @@ export class ListPropertiesComponent implements OnInit {
             'zipCode': 'Please enter 5 digit zip code.',
             'numericOnly': 'Allowed digits only.',
             'maxLength': 'Allowed 4 digits only.',
-        }
+        },
+        'image': {
+            'required': 'Images are required'
+        },
+        'subCat': {
+            'required': 'Desired Segment selection is required'
+        },
     }
 
     formErrorsPA = {
@@ -100,7 +104,9 @@ export class ListPropertiesComponent implements OnInit {
         'cityPA': '',
         'statePA': '',
         'countryPA': '',
-        'zipCodePA': ''
+        'zipCodePA': '',
+        'image': '',
+        'subCat': ''
     };
 
 
@@ -177,7 +183,7 @@ export class ListPropertiesComponent implements OnInit {
 
     public isDisabledPABtn: boolean = false;
     public closeResult: string;
-    
+
     public zipCodeDataPA = null;
 
     public categorySearchData = null;
@@ -189,29 +195,52 @@ export class ListPropertiesComponent implements OnInit {
     public isPostAdvertismentClicked: boolean = false;
     public isNewFormPostAdvertisement = false;
     public isPostAdvertisementFormVisible = false;
-    public iSConsumerSegmentAdvertisement = false;
-    public sts1 = 0;
 
-    public monthlyBllingDate: string = "";
-    public monthlyPurchaseCategoriesDate: string = "";
+    public isDesiredConsumerSegmentVisible: boolean = false;
+    public isConsumerSegmentAdvertisementVisible: boolean = false;
+    public isUploadImageVisible: boolean = false;
+    public isOverviewAndAdditionalVisible: boolean = false;
+    public isLocationAndAddressVisible: boolean = false;
+    public sts1 = 0;
+    public g_i = 0;
+
 
     public isSubmittingPA: boolean = false;
+    public isResetButtonVisible: boolean = false;
+
+
+    public totalCountOfPostAdvertisement = null;
+    public uploadedAdvertisementImages = '';
+    public showLoadingIconOnEditClick: boolean = false;
+    public isEditForm: boolean = false;
+
+
+    public monthlyBllingDate: string = "";
+    public totalCountOfItemsPurchased = 0;
+    public totalAmount = 0;
+
+    public labelPrice = 0.0;
+    public labelCategoryPrice = 0.0;
+
 
     public nextBillingCycleStartSA = null;
-    public totalAmountSA = null;
-    public totalCountOfPostAdvertisement = null;
+    public totalCountOfPostAdvertisementSA = 0;
+    public totalAmountSA = 0;
 
-    constructor(private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
+    public dTableSA: any = null;
+    public dTableAPZC: any = null;
+
+
+
+    constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
         private fb: FormBuilder, private listpropertiesService: ListPropertiesService, private purchaseZipCodeService: PurchaseZipCodeService, private modalService: NgbModal,
-        private ngZone: NgZone, public gallery: Gallery, private toaster: Toaster) {
+        private ngZone: NgZone, private _lightboxEvent: Lightbox, private toaster: Toaster) {
 
     }
 
     ngOnInit() {
 
-        /***************************************************************
-         * *************** List Properties *****************************
-         * *************************************************************/
+
 
         this.setValidationOnForm();
 
@@ -229,37 +258,51 @@ export class ListPropertiesComponent implements OnInit {
         else {
             this.monthlyBllingDate = moment(new Date((new Date()).getFullYear(), (new Date()).getMonth() + 1, 1)).format('yyyy-MM-DD');
         }
-        this.monthlyPurchaseCategoriesDate = this.monthlyBllingDate;
+
         this.nextBillingCycleStartSA = this.monthlyBllingDate;
 
         this.PostAdvertisement.get('countryPA').setValue('US');
+
         this.GetMobileNo();
+
         this.InitializrEventsAndControlsPA();
+
+        this.ViewAllSalesAdvertisement();
 
     }
 
-    InitializrEventsAndControlsPA()
-    {
 
+
+
+    InitializrEventsAndControlsPA() {
+        var thisStatus = this;
+        $('#SubCategory').change(function () {
+
+            thisStatus.isUploadImageVisible = true;
+            //thisStatus.isOverviewAndAdditionalVisible = false;
+            //thisStatus.isLocationAndAddressVisible = false;
+
+        });
     }
 
     setValidationOnForm() {
 
         this.PostAdvertisement = this.fb.group({
             consumerSegmentType: [''],
-            titlePA: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            pricePA: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { numericOnly: true })]],
-            descPA: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9\-\s]+$/, { letterOnly: true })]],
+            titlePA: ['', [Validators.required, patternValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
+            pricePA: ['', [Validators.required, patternValidator(/^[0-9]+$/, { numericOnly: true })]],
+            descPA: ['', [Validators.required, patternValidator(/^[a-zA-Z0-9\-\s]+$/, { letterOnly: true })]],
             additionalFeature: ['', [Validators.required]],
             contactNoPA: ['', [Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })]],
-            stAddressPA: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { alphaNumeric: true })]],
-            cityPA: ['', [Validators.required]],
+            stAddressPA: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9\-\s]+$/, { alphaNumericWithSpace: true })]],
+            cityPA: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
             statePA: ['', [Validators.required]],
-            countryPA: ['', [Validators.required]],
+            countryPA: ['', [Validators.required, StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
+            subCat: ['', [Validators.required]],
             zipCodePA: ['', [Validators.required]],
             advId: [''],
-            subCat: [''],
-            lblzipCodeprice: ['']
+            lblzipCodeprice: [''],
+            image: ['', [Validators.required]]
         });
 
         this.categorySearchForm = this.fb.group({
@@ -330,47 +373,114 @@ export class ListPropertiesComponent implements OnInit {
     }
 
     onSelectFile(event, imageIndex) {
+        debugger;
+
         if (event.target.files && event.target.files[0]) {
+
+            var mimeType = event.target.files[0].type;
+            if (mimeType.match(/image\/*/) == null) {
+                this.showToast("danger", "Only images are supported.");
+                return;
+            }
+
             var reader = new FileReader();
             var imageExist = false;
-            reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+
             for (var i = 0; i < this.arrayOfImages.length; i++) {
                 if (this.arrayOfImages[i] !== undefined && this.arrayOfImages[i].imageIndex == imageIndex) {
+                    this.g_i = i;
+
                     reader.onload = (event: any) => { // called once readAsDataURL is completed
+
                         this.imageUrl = event.target.result;
-                        this.arrayOfImages[i].imageUrl = this.imageUrl;
-                        this.arrayOfImages[i].previewUrl = this.imageUrl;
+                        this.arrayOfImages[this.g_i].imageUrl = this.imageUrl;
+                        this.arrayOfImages[this.g_i].previewUrl = this.imageUrl;
+                        $('#previewImages').html('');
+                        var images = '';
+                        for (let i = 0; i < this.arrayOfImages.length; i++) {
+                            images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') ></div>";
+                        }
+                        $('#previewImages').html(images);
                     }
                     imageExist = true;
                 }
             }
+
             if (!imageExist) {
+
                 reader.onload = (event: any) => { // called once readAsDataURL is completed
+                    debugger;
                     this.imageUrl = event.target.result;
                     let imageObject = { 'srcUrl': this.imageUrl, 'previewUrl': this.imageUrl, 'imageIndex': imageIndex };
                     this.arrayOfImages.push(imageObject);
+
+                    $('#previewImages').html('');
+                    var images = '';
+                    for (let i = 0; i < this.arrayOfImages.length; i++) {
+                        images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') ></div>";
+                    }
+                    $('#previewImages').html(images);
                 }
             }
-            this.showImagesUsingFAncyBox(this.arrayOfImages);
-            if (imageIndex == '0')
-                this.UpdateImages($('#FileUpload1'), this.PostAdvertisement.get('advId').value, 'UpdateAdvertisementImges.ashx');
-            else if (imageIndex == '1')
-                this.UpdateImages($('#FileUpload1'), this.PostAdvertisement.get('advId').value, 'UpdateAdvertisementSecondImage.ashx');
-            else if (imageIndex == '2')
-                this.UpdateImages($('#FileUpload1'), this.PostAdvertisement.get('advId').value, 'UpdateThirdImg.ashx');
-            else if (imageIndex == '3')
-                this.UpdateImages($('#FileUpload1'), this.PostAdvertisement.get('advId').value, 'UpdateFourthImg.ashx');
+            reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+            this.PostAdvertisement.get('image').setValue(this.arrayOfImages.toString());
+
+            //if (imageIndex == '0')
+            //    this.UpdateImages($('#FileUpload1'), this.PostAdvertisement.get('advId').value, 'Associate/ws/UpdateAdvertisementImges.ashx');
+            //else if (imageIndex == '1')
+            //    this.UpdateImages($('#FileUpload2'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateAdvertisementSecondImage.ashx');
+            //else if (imageIndex == '2')
+            //    this.UpdateImages($('#FileUpload3'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateThirdImg.ashx');
+            //else if (imageIndex == '3')
+            //    this.UpdateImages($('#FileUpload4'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateFourthImg.ashx');
         }
     }
 
     showImagesUsingFAncyBox(p_arrayOImages) {
-        // 1. Create gallery items
-        this.items = p_arrayOImages.map(item =>
-            new ImageItem({ src: item.srcUrl, thumb: item.previewUrl })
-        );
+        debugger;
+        //$('#previewImages').fadeOut('');
 
-        // Load items into the lightbox
-        this.gallery.ref().load(this.items);
+
+        //const src = p_arrayOImages[i].srcUrl;
+        //const caption = p_arrayOImages[i].srcUrl;
+        //const thumb = p_arrayOImages[i].previewUrl
+        //const album = {
+        //    src: src,
+        //    caption: caption,
+        //    thumb: thumb
+        //};
+        //this._albums.push(album);
+        //openImage(imageIndex)
+        //{
+
+        //    openImage
+        //}
+
+        // 1. Create gallery items
+        //this.items = data.map(item =>
+        //    new ImageItem({ src: item.srcUrl, thumb: item.previewUrl })
+        //);
+
+        //// Load items into the lightbox
+        //this.gallery.ref().load(this.items);
+        //this._albums.push({
+        //    src: 'https://preview.ibb.co/mwsA6R/img7.jpg',
+        //    thumb: 'https://preview.ibb.co/mwsA6R/img7.jpg'
+        //});
+
+
+    }
+
+    open(index: number): void {
+        // open lightbox
+        this._lightboxEvent.open(this._albums, index);
+    }
+
+    close(): void {
+        // close lightbox programmatically
+        this._lightboxEvent.close();
     }
 
     BindCountry() {
@@ -483,6 +593,7 @@ export class ListPropertiesComponent implements OnInit {
     }
 
     UpdateImages(fileuploaderID, AdID, handUrl) {
+        debugger;
         var fileUpload = fileuploaderID.get(0);
         var files = fileUpload.files;
         var test = new FormData();
@@ -502,6 +613,7 @@ export class ListPropertiesComponent implements OnInit {
             processData: false,
             data: test,
             success: function (result) {
+                debugger;
             },
             error: function (err) {
                 alert(err.statusText);
@@ -614,12 +726,12 @@ export class ListPropertiesComponent implements OnInit {
                         var resultJson: any = [];
                         var dataJson = JSON.parse(json);
 
-                        if (dataJson.PurCategories != null) {
-                            if (!Array.isArray(dataJson.PurCategories)) {
-                                resultJson.push(dataJson.PurCategories);
-                                dataJson.PurCategories = resultJson;
+                        if (dataJson.NewDataSet.PurCategories != null) {
+                            if (!Array.isArray(dataJson.NewDataSet.PurCategories)) {
+                                resultJson.push(dataJson.NewDataSet.PurCategories);
+                                dataJson.NewDataSet.PurCategories = resultJson;
                             }
-                            this.InitializedDataTableCurrentPurchasedZipCodes(dataJson.PurCategories);
+                            this.InitializedDataTableCurrentPurchasedZipCodes(dataJson.NewDataSet.PurCategories);
                         }
                         else {
                             //this.InitializedDataTableCurrentPurchasedZipCodes(undefined);
@@ -678,7 +790,7 @@ export class ListPropertiesComponent implements OnInit {
                     defaultContent: '<a href="" class="editor_remove cancel">Delete</a>'
                 },
                 {
-                    data: 'Zipcode',
+                    data: 'zipcode',
                 },
                 {
                     data: 'subCategoryID',
@@ -716,7 +828,8 @@ export class ListPropertiesComponent implements OnInit {
             dTable.api().row($(this).parents('tr')).remove().draw(false);
 
 
-            thisStatus.dashboardService
+            thisStatus
+                .purchaseZipCodeService
                 .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
                 .subscribe(
                     data => {
@@ -726,6 +839,7 @@ export class ListPropertiesComponent implements OnInit {
                     });
         });
     }
+
 
 
     SelectedChoicesForPurchase() {
@@ -746,12 +860,12 @@ export class ListPropertiesComponent implements OnInit {
                         var resultJson: any = [];
                         var dataJson = JSON.parse(json);
 
-                        if (dataJson.ViewAdvertisment != null) {
-                            if (!Array.isArray(dataJson.Table1)) {
-                                resultJson.push(dataJson.Table1);
-                                dataJson.Table1 = resultJson;
+                        if (dataJson.NewDataSet.Table1 != null) {
+                            if (!Array.isArray(dataJson.NewDataSet.Table1)) {
+                                resultJson.push(dataJson.NewDataSet.Table1);
+                                dataJson.NewDataSet.Table1 = resultJson;
                             }
-                            this.InitializedDataTableSelectedChoices(dataJson.Table1);
+                            this.InitializedDataTableSelectedChoices(dataJson.NewDataSet.Table1);
                         }
                         else {
                             this.InitializedDataTableSelectedChoices(undefined);
@@ -765,7 +879,9 @@ export class ListPropertiesComponent implements OnInit {
                             totalAmount1 = totalAmount1 + parseInt(a);
                         });
                         var row = "<tr>   <td colspan='7' ><b> Total Amount:- $" + totalAmount1 + "</b></td><td></td></tr>";
-
+                        this.totalAmountSA = totalAmount1;
+                        this.totalAmount = totalAmount1;
+                        this.cdr.detectChanges();
                     }
                 }
             );
@@ -872,7 +988,7 @@ export class ListPropertiesComponent implements OnInit {
 
             this.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
         });
-        $('#ViewRcd').on('click', 'a.Cancel', function (e) {
+        $('#ViewRcd').on('click', 'a.cancel', function (e) {
             e.preventDefault();
             debugger;
             var tr = $(this).closest('tr');
@@ -922,6 +1038,8 @@ export class ListPropertiesComponent implements OnInit {
             );
     }
 
+
+
     GetPurchasedAllRecords() {
         this.listpropertiesService
             .SelectAllPurchasedCartData()
@@ -940,12 +1058,12 @@ export class ListPropertiesComponent implements OnInit {
                         var resultJson: any = [];
                         var dataJson = JSON.parse(json);
 
-                        if (dataJson.PurCategories != null) {
-                            if (!Array.isArray(dataJson.Table1)) {
-                                resultJson.push(dataJson.Table1);
-                                dataJson.Table1 = resultJson;
+                        if (dataJson.NewDataSet.Table1 != null) {
+                            if (!Array.isArray(dataJson.NewDataSet.Table1)) {
+                                resultJson.push(dataJson.NewDataSet.Table1);
+                                dataJson.NewDataSet.Table1 = resultJson;
                             }
-                            this.InitializedDataTablePurchasedZipCodes(dataJson.Table1);
+                            this.InitializedDataTablePurchasedZipCodes(dataJson.NewDataSet.Table1);
                         }
                         else {
                             this.InitializedDataTablePurchasedZipCodes(undefined);
@@ -968,7 +1086,7 @@ export class ListPropertiesComponent implements OnInit {
     InitializedDataTablePurchasedZipCodes(asyncData) {
         console.log(asyncData);
 
-        let dTable: any = $('#viewAllPurchasedZipCodes');
+        this.dTableAPZC = $('#viewAllPurchasedZipCodes');
         let thisStatus: any = this;
         if (asyncData === undefined) {
             asyncData = {
@@ -980,7 +1098,7 @@ export class ListPropertiesComponent implements OnInit {
 
             };
         }
-        dTable.dataTable({
+        this.dTableAPZC.dataTable({
             data: asyncData,
             columns: [
                 {
@@ -1004,7 +1122,7 @@ export class ListPropertiesComponent implements OnInit {
                     defaultContent: '<a href="" class="editor_remove cancel">Cancel</a>'
                 },
                 {
-                    data: 'Zipcode',
+                    data: 'zipcode',
                 },
                 {
                     data: 'subCategoryID',
@@ -1045,7 +1163,7 @@ export class ListPropertiesComponent implements OnInit {
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
 
-            dTable.api().row($(this).parents('tr')).remove().draw(false);
+            thisStatus.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
 
             this.RemoveRcd1($(this).closest('tr').children('td:first').text());
         });
@@ -1062,7 +1180,21 @@ export class ListPropertiesComponent implements OnInit {
             );
     }
 
+    RemoveTablePZC() {
+        if (this.dTableAPZC !== undefined && this.dTableAPZC != null) {
+
+            this.dTableAPZC.DataTable().clear().destroy();
+            this.dTableAPZC.off('click');
+        }
+        //if (this.dTableAPZC !== undefined && this.dTableAPZC != null) {
+        //    this.dTableAPZC.dataTable().fnClearTable();
+        //}
+    }
+
+
     ViewAllSalesAdvertisement() { //BindData  
+
+        debugger;
         this.listpropertiesService
             .SelectAdvertisement()
             .subscribe(
@@ -1080,26 +1212,28 @@ export class ListPropertiesComponent implements OnInit {
                         var resultJson: any = [];
                         var dataJson = JSON.parse(json);
 
-                        if (dataJson.ViewAdvertisment != null) {
-                            if (!Array.isArray(dataJson.ViewAdvertisment)) {
-                                resultJson.push(dataJson.ViewAdvertisment);
-                                dataJson.ViewAdvertisment = resultJson;
+                        if (dataJson.NewDataSet.ViewAdvertisment != null) {
+                            if (!Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
+                                resultJson.push(dataJson.NewDataSet.ViewAdvertisment);
+                                dataJson.NewDataSet.ViewAdvertisment = resultJson;
                             }
-                            this.InitializedDataTableSalesAdvertisement(dataJson.ViewAdvertisment);
+                            this.InitializedDataTableSalesAdvertisement(dataJson.NewDataSet.ViewAdvertisment);
                         }
                         else {
                             this.InitializedDataTableSalesAdvertisement(undefined);
                         }
 
                         var cc = 0;
-                        var count = 1;
+                        var count = 0;
                         var totalAmount1 = 0;
                         $.each(docs, function (i, docs) {
                             var a = $(docs).find("amount").text();
                             totalAmount1 = totalAmount1 + parseInt(a);
+                            count++;
                         });
+                        this.totalCountOfPostAdvertisementSA = count;
                         var row = "<tr>   <td colspan='7' ><b> Total Amount:- $" + totalAmount1 + "</b></td><td></td></tr>";
-
+                        this.cdr.detectChanges();
                     }
                 }
             );
@@ -1108,7 +1242,7 @@ export class ListPropertiesComponent implements OnInit {
     InitializedDataTableSalesAdvertisement(asyncData) {
         console.log(asyncData);
 
-        let dTable: any = $('#salesAdvertisement');
+        this.dTableSA = $('#salesAdvertisement');
         let thisStatus: any = this;
         if (asyncData === undefined) {
             asyncData = {
@@ -1122,7 +1256,7 @@ export class ListPropertiesComponent implements OnInit {
 
             };
         }
-        dTable.dataTable({
+        this.dTableSA.dataTable({
             data: asyncData,
             columns: [
                 {
@@ -1157,6 +1291,23 @@ export class ListPropertiesComponent implements OnInit {
                     defaultContent: '<a href="" class="remove">Delete</a>'
                 },
             ],
+            columnDefs: [
+                {
+                    targets: [1],
+                    render: function (data) {
+                        debugger;
+                        return '<img class="ht-100" src="../../../../Associate/Adv_img/' + data + '">'
+                    }
+                },
+                {
+                    targets: [5],
+                    className: "hide_column"
+                },
+                {
+                    targets: [6],
+                    className: "hide_column"
+                }
+            ],
             "autoWidth": true,
             searching: false,
             paging: false,
@@ -1172,33 +1323,34 @@ export class ListPropertiesComponent implements OnInit {
             debugger;
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
-
-            ////get the real row index, even if the table is sorted 
-            //var index = dTable.fnGetPosition(tr[0]);
-            ////alert the content of the hidden first column 
-            //console.log(dTable.fnGetData(index)[0]);
-
-            //dTable.api().row($(this).parents('tr')).remove().draw(false);
-
-            this.EditRecords($(this).closest('tr').children('td:first').text());
+            thisStatus.ngZone.run(() => {
+                thisStatus.EditRecords($(this).closest('tr').children('td:first').text());
+            });
         });
 
-        $('#salesAdvertisement').on('click', 'a.delete', function (e) {
+        $('#salesAdvertisement').on('click', 'a.remove', function (e) {
             e.preventDefault();
             debugger;
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
 
-            ////get the real row index, even if the table is sorted 
-            //var index = dTable.fnGetPosition(tr[0]);
-            ////alert the content of the hidden first column 
-            //console.log(dTable.fnGetData(index)[0]);
+            thisStatus.dTableSA.api().row($(this).parents('tr')).remove().draw(false);
+            thisStatus.ngZone.run(() => {
 
-            dTable.api().row($(this).parents('tr')).remove().draw(false);
-
-            this.DeleteRecords($(this).closest('tr').children('td:first').text());
-
+                thisStatus.DeleteRecords($(this).closest('tr').children('td:first').text());
+            });
         });
+    }
+
+    RemoveTableSalesAdvertisement() {
+        if (this.dTableSA !== undefined && this.dTableSA != null) {
+
+            this.dTableSA.DataTable().clear().destroy();
+            this.dTableSA.off('click');
+        }
+        //if (this.dTableAPZC !== undefined && this.dTableAPZC != null) {
+        //    this.dTableAPZC.dataTable().fnClearTable();
+        //}
     }
 
     DeleteRecords(advId) {
@@ -1206,7 +1358,7 @@ export class ListPropertiesComponent implements OnInit {
             var msg = [];
 
             this.listpropertiesService
-                .DeleteDataFromAdvertisement(advId)
+                .DeleteDataFromAdvertisement(parseInt(advId))
                 .subscribe(
                     data => {
 
@@ -1227,33 +1379,31 @@ export class ListPropertiesComponent implements OnInit {
 
     EditRecords(advId) {
 
-        $("#insertOrEdit").text("1");
-        $("#divAdvertisements").css("display", "block");
-        $("#addForm").css("display", "block");
-        $('#divDetail').css("visibility", "visible");
-        $("#btnAddNew").attr("disabled", "disabled");
-        $('#divDetail1').css("visibility", "visible");
-        $('#divImage').css("display", "none");
-        $('#divsave').css("display", "block");
-        $('#btnSubmit').css("display", "none");
-        $('#btnUpdate').css("display", "inline-block");
-        $('#divImgbutton').css("display", "block");
-        $('#ViewAllImages').css("visibility", "visible");
-        $('#divtabs').css("display", "block");
+        debugger;
+        this.isEditForm = true;
+        this.isResetButtonVisible = true;
+        this.isDisabledPABtn = true;
+        this.isAddButtonPA = false;
+        this.showLoadingIconOnEditClick = true;
+        this.isResetButtonVisible = false;
 
         this.listpropertiesService
-            .GetAdvertisementDetails(advId)
+            .GetAdvertisementDetails(parseInt(advId))
             .subscribe(
                 data => {
-
+                    debugger;
                     if (data.d.length > 0) {
+
+                        $('html, body').animate({ scrollTop: $('#loadingIconId').offset().top }, 'slow');
+
+
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("FullDetailsAdvertisments");
                         var thisStatus = this;
                         $.each(docs, function (i, docs) {
+                            thisStatus.PostAdvertisement.get('advId').setValue($(docs).find("advertisementID").text());
 
-                            $("label[for='lblRowId']").text($(docs).find("advertisementID").text());
                             var catValue = $(docs).find("subcategoryID").text();
                             if (catValue == '1') {
 
@@ -1265,6 +1415,8 @@ export class ListPropertiesComponent implements OnInit {
                                 var _select = $('<select>');
                                 _select.append($('<option></option>').val(1).html("Home"));
                                 $('#SubCategory').append(_select.html());
+                                thisStatus.PostAdvertisement.get('subCat').setValue('Home');
+
                             }
                             else if (catValue == '2') {
 
@@ -1276,6 +1428,8 @@ export class ListPropertiesComponent implements OnInit {
                                 var _select = $('<select>');
                                 _select.append($('<option></option>').val(2).html("TownHome"));
                                 $('#SubCategory').append(_select.html());
+                                thisStatus.PostAdvertisement.get('subCat').setValue('TownHome');
+
                             }
                             else if (catValue == '3') {
                                 $("#subCatMultiFamily").addClass("active");
@@ -1286,6 +1440,8 @@ export class ListPropertiesComponent implements OnInit {
                                 var _select = $('<select>');
                                 _select.append($('<option></option>').val(3).html("Multi-Family"));
                                 $('#SubCategory').append(_select.html());
+                                thisStatus.PostAdvertisement.get('subCat').setValue('Multi-Family');
+
                             }
                             else if (catValue == '4') {
                                 $("#subCatLand").addClass("active");
@@ -1296,49 +1452,191 @@ export class ListPropertiesComponent implements OnInit {
                                 var _select = $('<select>');
                                 _select.append($('<option></option>').val(4).html("Land"));
                                 $('#SubCategory').append(_select.html());
+                                thisStatus.PostAdvertisement.get('subCat').setValue('Land');
+
                             }
 
-                            $("#SubCategory").val($(docs).find("subcategoryID").text());
+                            //CKEDITOR.instances.txtFeatures.setData($(docs).find("additionalFeature").text());
+                            var images = '';
+
+                            if (($(docs).find("advMainImage").text()) !== undefined) {
+
+                                thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text();
+                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1' };
+                                thisStatus.arrayOfImages.push(imageObject);
+
+                                images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
+                            }
+                            if (($(docs).find("advMainImage").text()) !== undefined) {
+
+                                thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage1").text();
+                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                                thisStatus.arrayOfImages.push(imageObject);
+
+                                images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
+                            }
+                            if (($(docs).find("advMainImage").text()) !== undefined) {
+                                thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage2").text();
+                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                                thisStatus.arrayOfImages.push(imageObject);
+                                images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage2").text() + '/></div>';
+                            }
+                            if (($(docs).find("advMainImage").text()) !== undefined) {
+                                thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage3").text();
+                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                                thisStatus.arrayOfImages.push(imageObject);
+                                images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
+                            }
+                            thisStatus.uploadedAdvertisementImages = images;
+
+
+                            //$("#SubCategory").val($(docs).find("subcategoryID").text());
                             thisStatus.PostAdvertisement.get('titlePA').setValue($(docs).find("title").text());
+                            thisStatus.PostAdvertisement.get('additionalFeature').setValue($(docs).find("features").text());
+
                             thisStatus.PostAdvertisement.get('stAddressPA').setValue($(docs).find("address").text());
                             thisStatus.PostAdvertisement.get('contactNoPA').setValue($(docs).find("contactNo").text());
                             thisStatus.PostAdvertisement.get('descPA').setValue($(docs).find("description").text());
                             thisStatus.PostAdvertisement.get('pricePA').setValue($(docs).find("cost").text());
                             thisStatus.PostAdvertisement.get('countryPA').setValue($(docs).find("CountryID").text());
                             thisStatus.PostAdvertisement.get('cityPA').setValue($(docs).find("CityID").text());
-
-                            //CKEDITOR.instances.txtFeatures.setData($(docs).find("features").text());
-                            var sd = [];
-                            sd.push("<img class='thumb-image' width='75px' height='75px' src='../../../../../Associate/Adv_img/" + $(docs).find("advMainImage").text() + "'/>");
-                            $("#image-holder").html(sd.join(''));
-
-                            thisStatus.BindStatePA($(docs).find("StateID").text());
-
-                            var sd1 = [];
-
-                            sd1.push("<img class='thumb-image' width='75px' height='75px' src='../../../../../Associate/Adv_img/" + $(docs).find("advImage1").text() + "'/> ");
-                            $("#image-holder2").html(sd1.join(''));
-                            var sd2 = [];
-                            sd2.push("<img class='thumb-image' width='75px' height='75px' src='../../../../../Associate/Adv_img/" + $(docs).find("advImage2").text() + "'/> ");
-                            $("#image-holder3").html(sd2.join(''));
-                            var sd3 = [];
-                            sd3.push("<img class='thumb-image' width='75px' height='75px' src='../../../../../Associate/Adv_img/" + $(docs).find("advImage3").text() + "'/> ");
-                            $("#image-holder4").html(sd3.join(''));
-
-                            thisStatus.BindStateWiseZipCodeForSearch(null, null, $(docs).find("ZipCode").text());
+                            thisStatus.startValueState = { "value": $(docs).find("StateID").text(), "label": $(docs).find("StateID").text() };
+                            thisStatus.BindStateWiseZipCodeForSearch($(docs).find("StateID").text(), $(docs).find("CityID").text(), $(docs).find("ZipCode").text());
 
                         });
 
+                        thisStatus.showLoadingIconOnEditClick = false;
+                        thisStatus.isPostAdvertisementFormVisible = true;
+                        thisStatus.isDesiredConsumerSegmentVisible = true;
+                        thisStatus.isConsumerSegmentAdvertisementVisible = true;
+
                     }
+                    this.cdr.detectChanges();
                 });
+
+
     }
 
+    submitPostForm() {
+        debugger;
+        this.isSubmittingPA = true;
+        if (this.PostAdvertisement.valid) {
+
+            this.PostAds();
+        }
+        else {
+            this.formErrorMessagePA = "Please make sure, you entered correct data.";
+            this.logValidationErrorsPA(this.PostAdvertisement);
+            this.isSubmittingPA = false;
+        }
+    }
+
+    updatePostForm() {
+
+        debugger;
+        var teamlist = [];
+        //$("#divFeatures input[id*='chk']:checked").each(function () {
+        //    teamlist.push($(this).val());
+        //});
+        //var rowID = $("label[for='lblRowId']").text();
+        var msg = [];
+
+        var CategoryId = 1;
+        var SubCategoryId = $("#SubCategory").val();
+        var advertisementId = this.PostAdvertisement.get('advId').value;
+        //this.PostAdvertisement.get('');
+        var title = this.PostAdvertisement.get('titlePA').value;
+        var Features = '';//CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+        var address = this.PostAdvertisement.get('stAddressPA').value;
+        var contactNo = this.PostAdvertisement.get('contactNoPA').value;
+        var description = this.PostAdvertisement.get('descPA').value;
+        var countryID = this.PostAdvertisement.get('countryPA').value;
+        var StateID = this.PostAdvertisement.get('statePA').value.value;
+        var cityID = this.PostAdvertisement.get('cityPA').value;
+        var price = this.PostAdvertisement.get('pricePA').value;
+        var zipcode = this.PostAdvertisement.get('zipCodePA').value.value;
+        //var zipcode = this.PostAdvertisement.get('subCat').value.value;
+
+        var isFeatured = 0;
+        var jobtype = 1;
+        var amount = 0;
+        var adsPrice = this.PostAdvertisement.get('lblzipCodeprice').value;
+
+        this.listpropertiesService
+            .UpdateSale(CategoryId, SubCategoryId, title, Features, address, contactNo, description, countryID, StateID, cityID, zipcode, amount, advertisementId)
+            .subscribe(
+                data => {
+                    if (data.d == "-1") {
+                        this.showToast('danger', "This Record is Already Exists");
+                    }
+                    if (data.d == "3") {
+                        this.showToast('danger', "Unsucessfull, Try again!!!");
+                    }
+                    else if (data.d >= "1") {
+                        this.showToast('success', "Updated Successfully.");
+                        this.isPostAdvertisementFormVisible = false;
+                        this.isDesiredConsumerSegmentVisible = false;
+                        this.isConsumerSegmentAdvertisementVisible = false;
+
+
+                        this.AdvertisementImages(parseInt(advertisementId));
+                        this.ClearText();
+
+                        //this.RemoveTableSalesAdvertisement();
+                        //this.ViewAllSalesAdvertisement();
+
+                        //$('#divsave').css("visibility", "hidden");
+                        //$('#divImage').css("display", "none");
+                        //$('#btnUpdate').css("visibility", "hidden");
+                        //$("#btnAddNew").attr("disabled", true);
+
+                    }
+                }
+            );
+    }
+
+    resetPostForm() {
+        debugger;
+        this.ClearText();
+    }
+
+    cancelPostForm() {
+        this.isPostAdvertisementFormVisible = false;
+    }
+
+    ClearText() {
+        $("#subCatHome").removeClass("active");
+        $("#subCatTownHome").removeClass("active");
+        $("#subCatMultiFamily").removeClass("active");
+        $("#subCatLand").removeClass("active");
+
+        this.PostAdvertisement.get('titlePA').setValue('');
+        //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+        this.PostAdvertisement.get('stAddressPA').setValue('');
+        this.PostAdvertisement.get('contactNoPA').setValue('');
+        this.PostAdvertisement.get('descPA').setValue('');
+        this.PostAdvertisement.get('countryPA').setValue('');
+        this.stateDataPA = null;
+        this.zipCodeDataPA = null;
+        this.PostAdvertisement.get('cityPA').setValue('');
+        this.PostAdvertisement.get('pricePA').setValue('');
+        this.PostAdvertisement.get('subCat').setValue('');
+        $("#SubCategory").html('');
+
+    }
+
+
     PostAds() {
+        debugger;
         this.listpropertiesService
             .AssociateCardExists()
             .subscribe(
                 data => {
+                    debugger;
+                    //this.InsertPostAdvsData();
+                    //this line will be removed later
                     if (data.d.length > 0) {
+
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("CheckAssoCard");
@@ -1354,6 +1652,7 @@ export class ListPropertiesComponent implements OnInit {
     }
 
     InsertPostAdvsData() {
+        debugger;
         // var check = this.Valid1();
         // if (check == '0') {
 
@@ -1361,6 +1660,7 @@ export class ListPropertiesComponent implements OnInit {
             .CountAssociateAdvertisements()
             .subscribe(
                 data => {
+                    debugger;
                     if (data.d.length > 0) {
                         var xmlDoc1 = $.parseXML(data.d);
                         var xml1 = $(xmlDoc1);
@@ -1405,108 +1705,118 @@ export class ListPropertiesComponent implements OnInit {
         //}
     }
 
-    async PayAmount() {
-
+    PayAmount() {
+        debugger;
 
         var msg = [];
-        var totalAmount = this.PostAdvertisement.get('lblzipCodeprice').value// $("#lblzipCodeprice").text();
-        var amountPaidForAdvertisement: string = await this.PaidAmountForPurchaseAdvertisement(totalAmount, this.PostAdvertisement.get('title').value, this.PostAdvertisement.get('subCat').value);
-        if (amountPaidForAdvertisement == '1') {
-            var CategoryId = 1;
-            var subCategoryId = $("#SubCategory").val();
-            //this.PostAdvertisement.get('');
-            var title = this.PostAdvertisement.get('titlePA').value;
-            var featurs = '';//CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
-            var address = this.PostAdvertisement.get('stADdressPA').value;
-            var contactNo = this.PostAdvertisement.get('contactNoPA').value;
-            var description = this.PostAdvertisement.get('descPA').value;
-            var countryID = this.PostAdvertisement.get('countryPA').value;
-            var stateID = this.PostAdvertisement.get('statePa').value.value;
-            var cityId = this.PostAdvertisement.get('cityPA').value;
-            var price = this.PostAdvertisement.get('pricePA').value;
-            var zipcod = this.PostAdvertisement.get('zipCodePA').value.value;
-            var isFeatured = 0;
-            var jobtype = 1;
-            var amount = 0;
-            var adsPrice = this.PostAdvertisement.get('lblzipCodeprice').value;
-            if (price == "") {
-                amount = 0;
-            }
-            else {
-                amount = parseInt(price);
-            }
+        var totalAmount = this.PostAdvertisement.get('lblzipCodeprice').value;// $("#lblzipCodeprice").text();
+        this.PaidAmountForPurchaseAdvertisement(totalAmount, this.PostAdvertisement.get('titlePA').value, this.PostAdvertisement.get('subCat').value);
 
-            var SaveRecordPostAdvts = await this.SavePostAdvertisementsData(CategoryId, subCategoryId, title, featurs, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice);
-            if (SaveRecordPostAdvts >= '1') {
-                this.PurchasedCategorybyAssociate(1, subCategoryId, 1, 0, 0, 0, 0, 0);
-                this.PostAdvertisement.get('titlePA').setValue('');
-                //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
-                this.PostAdvertisement.get('stADdressPA').setValue('');
-                this.PostAdvertisement.get('contactNoPA').setValue('');
-                this.PostAdvertisement.get('descPA').setValue('');
-                this.PostAdvertisement.get('cityPA').setValue('');
-                this.PostAdvertisement.get('pricePA').setValue('0');
-
-                this.AdvertisementImages(SaveRecordPostAdvts);
-            }
-            else {
-                this.showToast('danger', "We can not complete this sales Advertisement Purchase at this time!!");
-                this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at <b>866.456.7331.</b>");
-
-
-            }
-        }
-        else {
-            if (this._Counter == 0) {
-                this.isDisabledPABtn = true;
-                this.onOpenModalClick();
-                this._Counter++;
-                //$("#btnupdateCard").css("display", "inline-block");
-                //$("#btnAddCard").css("display", "none");
-                //$("#btnCancelCard").css("display", "inline-block");
-            }
-            else {
-                this._Counter++;
-                this.showToast('danger', "We can not complete this sales Advertisement Purchase at this time!!");
-                this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at <b>866.456.7331.</b>");
-            }
-        }
-    }
-
-    PurchasedCategorybyAssociate(CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration) {
-
-        this.listpropertiesService
-            .InsertCatgoryPostAds(CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration)
-            .subscribe(
-                data => {
-                    return data.d;
-                }
-            );
     }
 
     PaidAmountForPurchaseAdvertisement(totalAmount, title, subcategory): any {
-
+        debugger;
         this.listpropertiesService
             .InsertAmount(totalAmount, title, subcategory)
             .subscribe(
                 data => {
-                    return data.d;
+                    debugger;
+                    if (parseInt(data.d) == 1) {
+                    var CategoryId = 1;
+                    var subCategoryId = $("#SubCategory").val();
+                    //this.PostAdvertisement.get('');
+
+                    var title = this.PostAdvertisement.get('titlePA').value;
+                    var featurs = this.PostAdvertisement.get('additionalFeature').value;;//CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+                    var address = this.PostAdvertisement.get('stAddressPA').value;
+                    var contactNo = this.PostAdvertisement.get('contactNoPA').value;
+                    var description = this.PostAdvertisement.get('descPA').value;
+                    var countryID = this.PostAdvertisement.get('countryPA').value;
+                    var stateID = this.PostAdvertisement.get('statePA').value.value;
+                    var cityId = this.PostAdvertisement.get('cityPA').value;
+                    var price = this.PostAdvertisement.get('pricePA').value;
+                    var zipcod = this.PostAdvertisement.get('zipCodePA').value.value;
+
+                    var isFeatured = 0;
+                    var jobtype = 1;
+                    var amount = 0;
+
+                    var adsPrice = this.PostAdvertisement.get('lblzipCodeprice').value;
+                    if (price == "") {
+                        amount = 0;
+                    }
+                    else {
+                        amount = parseInt(price);
+                    }
+
+                    this.SavePostAdvertisementsData(CategoryId, subCategoryId, title, featurs, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice);
+
+
+                    this.isSubmittingPA = false;
+                    }
+
                 }
             );
     }
 
     SavePostAdvertisementsData(CategoryId, subCategoryId, title, features, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice): any {
-
+        debugger;
         this.listpropertiesService
             .InsertSale(CategoryId, subCategoryId, title, features, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice)
             .subscribe(
                 data => {
-                    return data.d;
+                    debugger;
+                    if (parseInt(data.d) >= 1) {
+
+                        this.PurchasedCategorybyAssociate(1, subCategoryId, 1, 0, 0, 0, 0, 0);
+
+                        $("#subCatHome").removeClass("active");
+                        $("#subCatTownHome").removeClass("active");
+                        $("#subCatMultiFamily").removeClass("active");
+                        $("#subCatLand").removeClass("active");
+
+                        this.PostAdvertisement.get('titlePA').setValue('');
+                        //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+                        this.PostAdvertisement.get('stAddressPA').setValue('');
+                        this.PostAdvertisement.get('contactNoPA').setValue('');
+                        this.PostAdvertisement.get('descPA').setValue('');
+                        this.PostAdvertisement.get('countryPA').setValue('');
+                        this.stateDataPA = null;
+                        this.zipCodeDataPA = null;
+                        this.PostAdvertisement.get('cityPA').setValue('');
+                        this.PostAdvertisement.get('pricePA').setValue('');
+                        this.PostAdvertisement.get('subCat').setValue('');
+                        $("#SubCategory").html('');
+
+                        //this.PostAdvertisement.get('titlePA').setValue('');
+                        ////CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+                        //this.PostAdvertisement.get('stADdressPA').setValue('');
+                        //this.PostAdvertisement.get('contactNoPA').setValue('');
+                        //this.PostAdvertisement.get('descPA').setValue('');
+                        //this.PostAdvertisement.get('cityPA').setValue('');
+                        //this.PostAdvertisement.get('pricePA').setValue('0');
+                        debugger;
+                        this.AdvertisementImages(parseInt(data.d));
+                    }
+                    else {
+                        this.showToast('danger', "We can not complete this sales Advertisement Purchase at this time!!");
+                        this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at <b>866.456.7331.</b>");
+
+                    }
+                    this.isSubmittingPA = false;
+                    this.cdr.detectChanges();
+
+                },
+                error => {
+                    this.isSubmittingPA = false;
+                    return 0;
                 }
             );
     }
 
-    async AdvertisementImages(rowID) {
+    AdvertisementImages(rowID) {
+        debugger;
+        var thisStatus = this;
         var fileUpload: any = $("#FileUpload1").get(0);
         var files = fileUpload.files;
         var test = new FormData();
@@ -1536,12 +1846,13 @@ export class ListPropertiesComponent implements OnInit {
         }
 
         $.ajax({
-            url: "UploadHandler.ashx",
+            url: "Associate/UploadHandler.ashx",
             type: "POST",
             contentType: false,
             processData: false,
             data: test,
             success: function (result) {
+                debugger;
                 $("#FileUpload1").val("");
                 $("#FileUpload2").val("");
                 $("#FileUpload3").val("");
@@ -1556,12 +1867,13 @@ export class ListPropertiesComponent implements OnInit {
                 $("#Allimage-holder2").empty();
                 $("#Allimage-holder3").empty();
                 $("#btnAddNew").removeAttr('disabled');
-                this.ClearText();
-                this.ViewAllSalesAdvertisement();
-
-                this.showToast('success', "Successfully Sales Advertisment Purchased!");
-                this.showToast('success', "Your credit card has been Successfully charged!!!");
-
+                thisStatus.ClearText();
+                thisStatus.RemoveTableSalesAdvertisement();
+                thisStatus.ViewAllSalesAdvertisement();
+                thisStatus.isSubmittingPA = false;
+                thisStatus.showToast('success', "Successfully Sales Advertisment Purchased!");
+                thisStatus.showToast('success', "Your credit card has been Successfully charged!!!");
+                this.cdr.detectChanges();
             },
             error: function (err) {
                 alert(err.statusText);
@@ -1570,77 +1882,15 @@ export class ListPropertiesComponent implements OnInit {
 
     }
 
-    ClearText() {
-        this.PostAdvertisement.get('titlePA').setValue('');
-        //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
-        this.PostAdvertisement.get('stADdressPA').setValue('');
-        this.PostAdvertisement.get('contactNoPA').setValue('');
-        this.PostAdvertisement.get('descPA').setValue('');
-        this.PostAdvertisement.get('cityPA').setValue('');
-        this.PostAdvertisement.get('pricePA').setValue('');
-        this.isPostAdvertisementFormVisible = false;
 
-        //$("#txtName").val('');
-        //$("#txtFeatures").val('');
-        //$("#txtAddress").val('');
-        //$("#txtContact").val('');
-        //$("#txtdescription").val('');
-        //$("#txtAddress").val('');
-        //$("#txtPrice").val('0');
-        //$('#divImgbutton').css("display", "none");
-        //$('#divImage').css("display", "none");
-        //$('#divMoreImages').css("visibility", "hidden");
-        //$('#divsave').css("visibility", "hidden");
 
-    }
-
-    Updated() {
-        var teamlist = [];
-        $("#divFeatures input[id*='chk']:checked").each(function () {
-            teamlist.push($(this).val());
-        });
-        var rowID = $("label[for='lblRowId']").text();
-        var msg = [];
-
-        var CategoryId = 1;
-        var SubCategoryId = $("#SubCategory").val();
-        //this.PostAdvertisement.get('');
-        var title = this.PostAdvertisement.get('titlePA').value;
-        var Features = '';//CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
-        var address = this.PostAdvertisement.get('stADdressPA').value;
-        var contactNo = this.PostAdvertisement.get('contactNoPA').value;
-        var description = this.PostAdvertisement.get('descPA').value;
-        var countryID = this.PostAdvertisement.get('countryPA').value;
-        var StateID = this.PostAdvertisement.get('statePa').value.value;
-        var cityID = this.PostAdvertisement.get('cityPA').value;
-        var price = this.PostAdvertisement.get('pricePA').value;
-        var zipcode = this.PostAdvertisement.get('zipCodePA').value.value;
-        var isFeatured = 0;
-        var jobtype = 1;
-        var amount = 0;
-        var adsPrice = this.PostAdvertisement.get('lblzipCodeprice').value;
-
+    PurchasedCategorybyAssociate(CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration) {
+        debugger;
         this.listpropertiesService
-            .UpdateSale(CategoryId, SubCategoryId, title, Features, address, contactNo, description, countryID, StateID, cityID, zipcode, amount, rowID)
+            .InsertCatgoryPostAds(CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration)
             .subscribe(
                 data => {
-                    if (data.d == "-1") {
-                        this.showToast('danger', "This Record is Already Exists");
-                    }
-                    if (data.d == "3") {
-                        this.showToast('danger', "Unsucessfull, Try again!!!");
-                    }
-                    else if (data.d >= "1") {
-                        this.showToast('success', "Updated Successfully.");
-                        this.isPostAdvertisementFormVisible = false;
-                        //$('#divsave').css("visibility", "hidden");
-                        //$('#divImage').css("display", "none");
-                        //$('#btnUpdate').css("visibility", "hidden");
-                        //$("#btnAddNew").attr("disabled", true);
-                        this.ViewAllSalesAdvertisement();
-
-                    }
-                    this.ClearText();
+                    return data.d;
                 }
             );
     }
@@ -1688,36 +1938,6 @@ export class ListPropertiesComponent implements OnInit {
                 });
     }
 
-    onclickNewPurchase() {
-        this.isNewFormPostAdvertisement = true;
-        if (this.sts1 == 0) {
-            $('html, body').animate({
-                'scrollTop': $("#select-yourdesired").position().top
-            });
-
-            $(".button-block1").addClass("disable");
-            this.iSConsumerSegmentAdvertisement = true;
-            this.sts1 = 1;
-            this.isPostAdvertisementFormVisible = true;
-        }
-        else if (this.sts1 == 1) {
-            this.iSConsumerSegmentAdvertisement = false;
-            this.isPostAdvertisementFormVisible = false;
-            // window.location.href = "PostAdvertisement.aspx";
-
-            this.sts1 = 0;
-            $("#SubCategory").html("");
-
-            $("#subCatHome").removeClass("active");
-            $("#subCatTownHome").removeClass("active");
-            $("#subCatMultiFamily").removeClass("active");
-            $("#subCatLand").removeClass("active");
-            $("#subCatHome").removeClass("diable-sidelink");
-            $("#subCatTownHome").removeClass("diable-sidelink");
-            $("#subCatMultiFamily").removeClass("diable-sidelink");
-            $("#subCatLand").removeClass("diable-sidelink");
-        }
-    }
 
     BindCityWiseStatesPA(city) {
 
@@ -1748,7 +1968,7 @@ export class ListPropertiesComponent implements OnInit {
                             arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
                         });
 
-                       
+
                         if (arrState == null || arrState == undefined || arrState.length <= 0) {
                             this.formErrorMessagePA = "City is not valid. Please, Try Again!";
                             this.startValueStatePA = { 'value': '', 'label': '' };
@@ -1765,7 +1985,7 @@ export class ListPropertiesComponent implements OnInit {
     BindStateWiseZipCodeForSearch(state, city, startZipCode = null) {
 
         debugger;
-        if (state !== undefined) {
+        if (city != "" && city !== undefined && state != null) {
             const countryId = "US";//this.cardForm.get('country').value;
             this.paymentService
                 .bindStateWiseZipCode(state, city)
@@ -1773,7 +1993,7 @@ export class ListPropertiesComponent implements OnInit {
                     data => {
                         debugger;
 
-                        if (data.d.length > 0) {
+                        if (data.d.length > 0 && data.d != "Not Valid") {
                             var xmlDoc = $.parseXML(data.d);
                             var xml = $(xmlDoc);
                             var docs = xml.find("CityWiseZip");
@@ -1785,8 +2005,8 @@ export class ListPropertiesComponent implements OnInit {
                             var label = "";
                             if (startZipCode != null) {
                                 $.each(docs, function (i, docs) {
-                                    
-                                    if (startZipCode == $(docs).find("zipcode").text() ) {
+
+                                    if (startZipCode == $(docs).find("zipcode").text()) {
                                         val = $(docs).find("zipcode").text();
                                         label = $(docs).find("zipcode").text();
                                         thisStatus.startValueZipCodePA = { "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() };
@@ -1807,9 +2027,9 @@ export class ListPropertiesComponent implements OnInit {
                                     arrState.push({ "value": $(docs).find("zipcode").text(), "label": $(docs).find("zipcode").text() });
                                 });
                             }
-                            
+                            debugger;
                             if (arrState.length == 0) {
-                                this.formErrorMessagePA = "City/State Combination is not valid. Try Again";
+                                this.formErrorMessagePA = "City/State Combination is not valid. Choose again!";
                                 //this.switchNgBTab('cityStateTabId');
 
                                 //$('#cityStateTabId').tab('show');
@@ -1937,60 +2157,46 @@ export class ListPropertiesComponent implements OnInit {
                         var docs = xml.find("TotalAds");
                         let thisStatus = this;
                         $.each(docs, function (i, docs) {
-                            thisStatus.TotalCountOfItemsPurchased = parseInt($(docs).find("Total").text());
+                            thisStatus.totalCountOfItemsPurchased = parseInt($(docs).find("Total").text());
 
                             // $("#lblPurchaseCategories").text($(docs).find("Total").text());
                         });
+                        this.cdr.detectChanges();
                     }
                 });
     }
 
-    submitPostForm() {
-        this.isSubmittingPA = true;
-        if (this.PostAdvertisement.valid) {
-            $("#pageloader").css("display", "block");
-            this.PostAds();
-        }
-        else {
-            this.formErrorMessagePA = "Please make sure, you entered correct data.";
-            this.logValidationErrorsPA(this.cardForm);
-            this.isSubmitting = false;
-        }
-    }
 
-    updatePostForm() {
-        this.Updated();
-    }
-
-    resetPostForm() {
-        this.ClearText();
-    }
 
     changeCityPA() {
+        debugger;
         this.BindCityWiseStatesPA(this.PostAdvertisement.get('city').value);
+        this.markAsDirty();
+
     }
 
     changeStatePA() {
-
+        debugger;
+        this.markAsDirty();
         var state = this.PostAdvertisement.get('statePA').value != null ? this.PostAdvertisement.get('statePA').value.value : null;
         var city = this.PostAdvertisement.get('cityPA').value;
         this.BindStateWiseZipCodeForSearch(state, city);
     }
 
     changeZipCodePA() {
+        debugger;
 
-        var zipCodeVal = this.PostAdvertisement.get('zipCodePA').value ? this.PostAdvertisement.get('zipCodePA').value.value : null;
-        var subCategory = this.PostAdvertisement.get('subCat').value ? this.PostAdvertisement.get('subCat').value.value : null;
+        var zipCodeVal = this.PostAdvertisement.get('zipCodePA').value != null ? this.PostAdvertisement.get('zipCodePA').value.value : null;
+        var subCategory = this.PostAdvertisement.get('subCat').value != null ? this.PostAdvertisement.get('subCat').value.value : null;
 
 
-        if (zipCodeVal == null) {
-            $("#lblsegmentsMessage").css("display", "block");
-            $("#lblsegmentsMessage").text("SELECT YOUR DESIRED CONSUMER SEGMENT(S)");
+        if (zipCodeVal == null || zipCodeVal == undefined || zipCodeVal == '') {
+            //this.showToast('danger', 'Select your desired consumer segment');
         }
         else {
-            $("#lblsegmentsMessage").text("");
-            $("#lblsegmentsMessage").css("display", "none");
-
+            this.markAsDirty();
+            debugger;
+            this.isDisabledPABtn = false;
             this.listpropertiesService
                 .GetPostAdvertisementPrice(zipCodeVal, subCategory)
                 .subscribe(
@@ -2010,6 +2216,18 @@ export class ListPropertiesComponent implements OnInit {
                             });
                         }
                     });
+            //$("#lblsegmentsMessage").text("");
+            //$("#lblsegmentsMessage").css("display", "none");
+            //var featurs = '';//CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+            //var address = this.PostAdvertisement.get('stAddressPA').value;
+            //var contactNo = this.PostAdvertisement.get('contactNoPA').value;
+            //var description = this.PostAdvertisement.get('descPA').value;
+            //var countryID = this.PostAdvertisement.get('countryPA').value;
+            //var stateID = this.PostAdvertisement.get('statePa').value.value;
+            //var cityId = this.PostAdvertisement.get('cityPA').value;
+            //var price = this.PostAdvertisement.get('pricePA').value;
+            //var zipcod = this.PostAdvertisement.get('zipCodePA').value.value;
+
         }
     }
 
@@ -2033,13 +2251,65 @@ export class ListPropertiesComponent implements OnInit {
 
     }
 
+    onclickNewPurchase() {
+
+        this.isAddButtonPA = true;
+        this.isPostAdvertisementFormVisible = true;
+        this.isDesiredConsumerSegmentVisible = true;
+
+        $("#subCatHome").removeClass("active");
+        $("#subCatTownHome").removeClass("active");
+        $("#subCatMultiFamily").removeClass("active");
+        $("#subCatLand").removeClass("active");
+
+        //if (this.sts1 == 0) {
+        //    //$('html, body').animate({
+        //    //    'scrollTop': $("#select-yourdesired").position().top
+        //    //});
+
+        //    $(".button-block1").addClass("disable");
+        //    //this.isConsumerSegmentAdvertisementVisible = true;
+        //    this.sts1 = 1;
+        //}
+        //else if (this.sts1 == 1) {
+        //    //this.isConsumerSegmentAdvertisementVisible = false;
+        //    this.isPostAdvertisementFormVisible = false;
+        //    // window.location.href = "PostAdvertisement.aspx";
+
+        //    this.sts1 = 0;
+        //    $("#SubCategory").html("");
+
+
+        //$("#subCatHome").removeClass("diable-sidelink");
+        //$("#subCatTownHome").removeClass("diable-sidelink");
+        //$("#subCatMultiFamily").removeClass("diable-sidelink");
+        //$("#subCatLand").removeClass("diable-sidelink");
+        //}
+    }
+
+    markAsDirty() {
+        var subCat = this.PostAdvertisement.get('subCat').value;
+        var imageText = this.PostAdvertisement.get('image').value;
+
+        if (subCat == '' || subCat === undefined || subCat == null) {
+            this.PostAdvertisement.get('subCat').markAsUntouched();
+            this.PostAdvertisement.get('subCat').markAsDirty();
+
+        }
+        if (imageText == '' || imageText === undefined || imageText == null) {
+            this.PostAdvertisement.get('image').markAsUntouched();
+        }
+    }
+
     changeConsumerSegmentType(type) {
+        debugger;
         var flg = 0;
         if (type == 'Home') {
+
             $("#SubCategory").empty();
 
-            $("#lblsegmentsMessage").text("");
-            $("#lblsegmentsMessage").css("display", "none");
+            //$("#lblsegmentsMessage").text("");
+            //$("#lblsegmentsMessage").css("display", "none");
 
             $("#subCatHome").addClass("active");
             $("#subCatTownHome").removeClass("active");
@@ -2153,6 +2423,7 @@ export class ListPropertiesComponent implements OnInit {
                 $('#SubCategory').append(_select.html());
             }
         }
+        this.isConsumerSegmentAdvertisementVisible = true;
     }
 
     showToast(toastrType, text) {
@@ -2205,7 +2476,7 @@ export class ListPropertiesComponent implements OnInit {
         const modal: NgbModalRef = this.modalService.open(PaymentModalComponent, { size: 'lg', backdrop: "static" });
         const modalComponent: PaymentModalComponent = modal.componentInstance;
 
-        modal.result.then (
+        modal.result.then(
             (result) => {
                 debugger;
                 this.PostAds();
@@ -2231,20 +2502,20 @@ export class ListPropertiesComponent implements OnInit {
 
 const data = [
     {
-        srcUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg',
-        previewUrl: 'https://preview.ibb.co/jrsA6R/img12.jpg'
+        src: 'https://preview.ibb.co/jrsA6R/img12.jpg',
+        thumb: 'https://preview.ibb.co/jrsA6R/img12.jpg'
     },
     {
-        srcUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
-        previewUrl: 'https://preview.ibb.co/kPE1D6/clouds.jpg'
+        src: 'https://preview.ibb.co/kPE1D6/clouds.jpg',
+        thumb: 'https://preview.ibb.co/kPE1D6/clouds.jpg'
     },
     {
-        srcUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg',
-        previewUrl: 'https://preview.ibb.co/mwsA6R/img7.jpg'
+        src: 'https://preview.ibb.co/mwsA6R/img7.jpg',
+        thumb: 'https://preview.ibb.co/mwsA6R/img7.jpg'
     },
     {
-        srcUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg',
-        previewUrl: 'https://preview.ibb.co/kZGsLm/img8.jpg'
+        src: 'https://preview.ibb.co/kZGsLm/img8.jpg',
+        thumb: 'https://preview.ibb.co/kZGsLm/img8.jpg'
     }
 ];
 
@@ -2260,6 +2531,8 @@ function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
         return valid ? null : error;
     };
 }
+
+
 
 function StateValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
