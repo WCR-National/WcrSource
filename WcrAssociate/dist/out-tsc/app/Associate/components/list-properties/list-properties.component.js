@@ -36,6 +36,10 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.TotalCount = '';
         this.showSuccessMessage = '';
         this.isAddButtonPA = true;
+        this.isPostButtonGreen = true;
+        this.config = {
+            height: 188
+        };
         this.validationMessagesPA = {
             'consumerSegmentType': {
                 'required': 'Please select Consumer Segment Type.'
@@ -581,12 +585,12 @@ var ListPropertiesComponent = /** @class */ (function () {
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var resultJson = [];
                 var dataJson = JSON.parse(json);
-                if (dataJson.PurCategories != null) {
-                    if (!Array.isArray(dataJson.PurCategories)) {
-                        resultJson.push(dataJson.PurCategories);
-                        dataJson.PurCategories = resultJson;
+                if (dataJson.NewDataSet.PurCategories != null) {
+                    if (!Array.isArray(dataJson.NewDataSet.PurCategories)) {
+                        resultJson.push(dataJson.NewDataSet.PurCategories);
+                        dataJson.NewDataSet.PurCategories = resultJson;
                     }
-                    _this.InitializedDataTableCurrentPurchasedZipCodes(dataJson.PurCategories);
+                    _this.InitializedDataTableCurrentPurchasedZipCodes(dataJson.NewDataSet.PurCategories);
                 }
                 else {
                     //this.InitializedDataTableCurrentPurchasedZipCodes(undefined);
@@ -638,7 +642,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                     defaultContent: '<a href="" class="editor_remove cancel">Delete</a>'
                 },
                 {
-                    data: 'Zipcode',
+                    data: 'zipcode',
                 },
                 {
                     data: 'subCategoryID',
@@ -673,7 +677,8 @@ var ListPropertiesComponent = /** @class */ (function () {
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
             dTable.api().row($(this).parents('tr')).remove().draw(false);
-            thisStatus.dashboardService
+            thisStatus
+                .purchaseZipCodeService
                 .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
                 .subscribe(function (data) {
                 //thisStatus.getClientDetailsServicesData();
@@ -696,12 +701,12 @@ var ListPropertiesComponent = /** @class */ (function () {
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var resultJson = [];
                 var dataJson = JSON.parse(json);
-                if (dataJson.ViewAdvertisment != null) {
-                    if (!Array.isArray(dataJson.Table1)) {
-                        resultJson.push(dataJson.Table1);
-                        dataJson.Table1 = resultJson;
+                if (dataJson.NewDataSet.Table1 != null) {
+                    if (!Array.isArray(dataJson.NewDataSet.Table1)) {
+                        resultJson.push(dataJson.NewDataSet.Table1);
+                        dataJson.NewDataSet.Table1 = resultJson;
                     }
-                    _this.InitializedDataTableSelectedChoices(dataJson.Table1);
+                    _this.InitializedDataTableSelectedChoices(dataJson.NewDataSet.Table1);
                 }
                 else {
                     _this.InitializedDataTableSelectedChoices(undefined);
@@ -714,6 +719,9 @@ var ListPropertiesComponent = /** @class */ (function () {
                     totalAmount1 = totalAmount1 + parseInt(a);
                 });
                 var row = "<tr>   <td colspan='7' ><b> Total Amount:- $" + totalAmount1 + "</b></td><td></td></tr>";
+                _this.totalAmountSA = totalAmount1;
+                _this.totalAmount = totalAmount1;
+                _this.cdr.detectChanges();
             }
         });
     }; //BindData  //GetAllRecords
@@ -811,7 +819,7 @@ var ListPropertiesComponent = /** @class */ (function () {
             var CategoryID = rowData['CategoryID'];
             this.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
         });
-        $('#ViewRcd').on('click', 'a.Cancel', function (e) {
+        $('#ViewRcd').on('click', 'a.cancel', function (e) {
             e.preventDefault();
             debugger;
             var tr = $(this).closest('tr');
@@ -865,12 +873,12 @@ var ListPropertiesComponent = /** @class */ (function () {
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var resultJson = [];
                 var dataJson = JSON.parse(json);
-                if (dataJson.PurCategories != null) {
-                    if (!Array.isArray(dataJson.Table1)) {
-                        resultJson.push(dataJson.Table1);
-                        dataJson.Table1 = resultJson;
+                if (dataJson.NewDataSet.Table1 != null) {
+                    if (!Array.isArray(dataJson.NewDataSet.Table1)) {
+                        resultJson.push(dataJson.NewDataSet.Table1);
+                        dataJson.NewDataSet.Table1 = resultJson;
                     }
-                    _this.InitializedDataTablePurchasedZipCodes(dataJson.Table1);
+                    _this.InitializedDataTablePurchasedZipCodes(dataJson.NewDataSet.Table1);
                 }
                 else {
                     _this.InitializedDataTablePurchasedZipCodes(undefined);
@@ -923,7 +931,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                     defaultContent: '<a href="" class="editor_remove cancel">Cancel</a>'
                 },
                 {
-                    data: 'Zipcode',
+                    data: 'zipcode',
                 },
                 {
                     data: 'subCategoryID',
@@ -1008,13 +1016,16 @@ var ListPropertiesComponent = /** @class */ (function () {
                     _this.InitializedDataTableSalesAdvertisement(undefined);
                 }
                 var cc = 0;
-                var count = 1;
+                var count = 0;
                 var totalAmount1 = 0;
                 $.each(docs, function (i, docs) {
                     var a = $(docs).find("amount").text();
                     totalAmount1 = totalAmount1 + parseInt(a);
+                    count++;
                 });
+                _this.totalCountOfPostAdvertisementSA = count;
                 var row = "<tr>   <td colspan='7' ><b> Total Amount:- $" + totalAmount1 + "</b></td><td></td></tr>";
+                _this.cdr.detectChanges();
             }
         });
     };
@@ -1068,6 +1079,23 @@ var ListPropertiesComponent = /** @class */ (function () {
                     defaultContent: '<a href="" class="remove">Delete</a>'
                 },
             ],
+            columnDefs: [
+                {
+                    targets: [1],
+                    render: function (data) {
+                        debugger;
+                        return '<img class="ht-100" src="../../../../Associate/Adv_img/' + data + '">';
+                    }
+                },
+                {
+                    targets: [5],
+                    className: "hide_column"
+                },
+                {
+                    targets: [6],
+                    className: "hide_column"
+                }
+            ],
             "autoWidth": true,
             searching: false,
             paging: false,
@@ -1087,16 +1115,12 @@ var ListPropertiesComponent = /** @class */ (function () {
                 thisStatus.EditRecords($(_this).closest('tr').children('td:first').text());
             });
         });
-        $('#salesAdvertisement').on('click', 'a.delete', function (e) {
+        $('#salesAdvertisement').on('click', 'a.remove', function (e) {
             var _this = this;
             e.preventDefault();
             debugger;
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
-            ////get the real row index, even if the table is sorted 
-            //var index = dTable.fnGetPosition(tr[0]);
-            ////alert the content of the hidden first column 
-            //console.log(dTable.fnGetData(index)[0]);
             thisStatus.dTableSA.api().row($(this).parents('tr')).remove().draw(false);
             thisStatus.ngZone.run(function () {
                 thisStatus.DeleteRecords($(_this).closest('tr').children('td:first').text());
@@ -1195,18 +1219,35 @@ var ListPropertiesComponent = /** @class */ (function () {
                         thisStatus.PostAdvertisement.get('subCat').setValue('Land');
                     }
                     //CKEDITOR.instances.txtFeatures.setData($(docs).find("additionalFeature").text());
-                    thisStatus.arrayOfImages.push('../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text());
-                    thisStatus.arrayOfImages.push('../../../../Associate/Adv_img/' + $(docs).find("advImage1").text());
-                    thisStatus.arrayOfImages.push('../../../../Associate/Adv_img/' + $(docs).find("advImage2").text());
-                    thisStatus.arrayOfImages.push('../../../../Associate/Adv_img/' + $(docs).find("advImage3").text());
                     var images = '';
-                    images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
-                    images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
-                    images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage2").text() + '/></div>';
-                    images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
+                    if (($(docs).find("advMainImage").text()) !== undefined) {
+                        thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text();
+                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1' };
+                        thisStatus.arrayOfImages.push(imageObject);
+                        images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
+                    }
+                    if (($(docs).find("advMainImage").text()) !== undefined) {
+                        thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage1").text();
+                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                        thisStatus.arrayOfImages.push(imageObject);
+                        images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
+                    }
+                    if (($(docs).find("advMainImage").text()) !== undefined) {
+                        thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage2").text();
+                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                        thisStatus.arrayOfImages.push(imageObject);
+                        images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage2").text() + '/></div>';
+                    }
+                    if (($(docs).find("advMainImage").text()) !== undefined) {
+                        thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage3").text();
+                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                        thisStatus.arrayOfImages.push(imageObject);
+                        images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
+                    }
                     thisStatus.uploadedAdvertisementImages = images;
                     //$("#SubCategory").val($(docs).find("subcategoryID").text());
                     thisStatus.PostAdvertisement.get('titlePA').setValue($(docs).find("title").text());
+                    thisStatus.PostAdvertisement.get('additionalFeature').setValue($(docs).find("features").text());
                     thisStatus.PostAdvertisement.get('stAddressPA').setValue($(docs).find("address").text());
                     thisStatus.PostAdvertisement.get('contactNoPA').setValue($(docs).find("contactNo").text());
                     thisStatus.PostAdvertisement.get('descPA').setValue($(docs).find("description").text());
@@ -1223,6 +1264,7 @@ var ListPropertiesComponent = /** @class */ (function () {
             }
             _this.cdr.detectChanges();
         });
+        this.cdr.detectChanges();
     };
     ListPropertiesComponent.prototype.submitPostForm = function () {
         debugger;
@@ -1304,11 +1346,11 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.PostAdvertisement.get('titlePA').setValue('');
         //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
         this.PostAdvertisement.get('stAddressPA').setValue('');
-        this.PostAdvertisement.get('contactNoPA').setValue('');
+        //this.PostAdvertisement.get('contactNoPA').setValue('');
         this.PostAdvertisement.get('descPA').setValue('');
         this.PostAdvertisement.get('countryPA').setValue('');
-        this.stateDataPA = null;
-        this.zipCodeDataPA = null;
+        //this.stateDataPA = null;
+        //this.zipCodeDataPA = null;
         this.PostAdvertisement.get('cityPA').setValue('');
         this.PostAdvertisement.get('pricePA').setValue('');
         this.PostAdvertisement.get('subCat').setValue('');
@@ -1321,7 +1363,7 @@ var ListPropertiesComponent = /** @class */ (function () {
             .AssociateCardExists()
             .subscribe(function (data) {
             debugger;
-            _this.InsertPostAdvsData();
+            //this.InsertPostAdvsData();
             //this line will be removed later
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
@@ -1389,37 +1431,25 @@ var ListPropertiesComponent = /** @class */ (function () {
         //}
     };
     ListPropertiesComponent.prototype.PayAmount = function () {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var msg, totalAmount;
-            return tslib_1.__generator(this, function (_a) {
-                debugger;
-                msg = [];
-                totalAmount = this.PostAdvertisement.get('lblzipCodeprice').value // $("#lblzipCodeprice").text();
-                ;
-                this.PaidAmountForPurchaseAdvertisement(totalAmount, this.PostAdvertisement.get('titlePA').value, this.PostAdvertisement.get('subCat').value);
-                return [2 /*return*/];
-            });
-        });
-    };
-    ListPropertiesComponent.prototype.PurchasedCategorybyAssociate = function (CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration) {
         debugger;
-        this.listpropertiesService
-            .InsertCatgoryPostAds(CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration)
-            .subscribe(function (data) {
-            return data.d;
-        });
+        var msg = [];
+        var totalAmount = this.PostAdvertisement.get('lblzipCodeprice').value; // $("#lblzipCodeprice").text();
+        this.PaidAmountForPurchaseAdvertisement(totalAmount, this.PostAdvertisement.get('titlePA').value, this.PostAdvertisement.get('subCat').value);
     };
     ListPropertiesComponent.prototype.PaidAmountForPurchaseAdvertisement = function (totalAmount, title, subcategory) {
         var _this = this;
+        debugger;
         this.listpropertiesService
             .InsertAmount(totalAmount, title, subcategory)
             .subscribe(function (data) {
+            debugger;
             if (parseInt(data.d) == 1) {
                 var CategoryId = 1;
                 var subCategoryId = $("#SubCategory").val();
                 //this.PostAdvertisement.get('');
                 var title = _this.PostAdvertisement.get('titlePA').value;
-                var featurs = ''; //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+                var featurs = _this.PostAdvertisement.get('additionalFeature').value;
+                ; //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
                 var address = _this.PostAdvertisement.get('stAddressPA').value;
                 var contactNo = _this.PostAdvertisement.get('contactNoPA').value;
                 var description = _this.PostAdvertisement.get('descPA').value;
@@ -1475,6 +1505,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 //this.PostAdvertisement.get('descPA').setValue('');
                 //this.PostAdvertisement.get('cityPA').setValue('');
                 //this.PostAdvertisement.get('pricePA').setValue('0');
+                debugger;
                 _this.AdvertisementImages(parseInt(data.d));
             }
             else {
@@ -1482,12 +1513,15 @@ var ListPropertiesComponent = /** @class */ (function () {
                 _this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at <b>866.456.7331.</b>");
             }
             _this.isSubmittingPA = false;
+            _this.cdr.detectChanges();
         }, function (error) {
             _this.isSubmittingPA = false;
             return 0;
         });
     };
     ListPropertiesComponent.prototype.AdvertisementImages = function (rowID) {
+        debugger;
+        var thisStatus = this;
         var fileUpload = $("#FileUpload1").get(0);
         var files = fileUpload.files;
         var test = new FormData();
@@ -1522,6 +1556,7 @@ var ListPropertiesComponent = /** @class */ (function () {
             processData: false,
             data: test,
             success: function (result) {
+                debugger;
                 $("#FileUpload1").val("");
                 $("#FileUpload2").val("");
                 $("#FileUpload3").val("");
@@ -1535,15 +1570,25 @@ var ListPropertiesComponent = /** @class */ (function () {
                 $("#Allimage-holder2").empty();
                 $("#Allimage-holder3").empty();
                 $("#btnAddNew").removeAttr('disabled');
-                this.ClearText();
-                this.RemoveTableSalesAdvertisement();
-                this.ViewAllSalesAdvertisement();
-                this.showToast('success', "Successfully Sales Advertisment Purchased!");
-                this.showToast('success', "Your credit card has been Successfully charged!!!");
+                thisStatus.ClearText();
+                thisStatus.RemoveTableSalesAdvertisement();
+                thisStatus.ViewAllSalesAdvertisement();
+                thisStatus.isSubmittingPA = false;
+                thisStatus.showToast('success', "Successfully Sales Advertisment Purchased!");
+                thisStatus.showToast('success', "Your credit card has been Successfully charged!!!");
+                this.cdr.detectChanges();
             },
             error: function (err) {
                 alert(err.statusText);
             }
+        });
+    };
+    ListPropertiesComponent.prototype.PurchasedCategorybyAssociate = function (CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration) {
+        debugger;
+        this.listpropertiesService
+            .InsertCatgoryPostAds(CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration)
+            .subscribe(function (data) {
+            return data.d;
         });
     };
     ListPropertiesComponent.prototype.PurchaseSalesCategory = function () {
@@ -1779,6 +1824,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                     thisStatus_2.totalCountOfItemsPurchased = parseInt($(docs).find("Total").text());
                     // $("#lblPurchaseCategories").text($(docs).find("Total").text());
                 });
+                _this.cdr.detectChanges();
             }
         });
     };
@@ -1797,10 +1843,10 @@ var ListPropertiesComponent = /** @class */ (function () {
     ListPropertiesComponent.prototype.changeZipCodePA = function () {
         var _this = this;
         debugger;
-        var zipCodeVal = this.PostAdvertisement.get('zipCodePA').value ? this.PostAdvertisement.get('zipCodePA').value.value : null;
-        var subCategory = this.PostAdvertisement.get('subCat').value ? this.PostAdvertisement.get('subCat').value.value : null;
-        if (zipCodeVal == null) {
-            this.showToast('danger', 'Select your desired consumer segment');
+        var zipCodeVal = this.PostAdvertisement.get('zipCodePA').value != null ? this.PostAdvertisement.get('zipCodePA').value.value : null;
+        var subCategory = this.PostAdvertisement.get('subCat').value != null ? this.PostAdvertisement.get('subCat').value.value : null;
+        if (zipCodeVal == null || zipCodeVal == undefined || zipCodeVal == '') {
+            //this.showToast('danger', 'Select your desired consumer segment');
         }
         else {
             this.markAsDirty();
@@ -1850,8 +1896,20 @@ var ListPropertiesComponent = /** @class */ (function () {
         }
     };
     ListPropertiesComponent.prototype.onclickNewPurchase = function () {
+        if (this.isPostButtonGreen) {
+            this.isPostButtonGreen = false;
+        }
+        else {
+            this.isPostButtonGreen = true;
+        }
+        if (!this.isPostAdvertisementFormVisible) {
+            this.isPostAdvertisementFormVisible = true;
+        }
+        else {
+            this.isPostAdvertisementFormVisible = false;
+            return;
+        }
         this.isAddButtonPA = true;
-        this.isPostAdvertisementFormVisible = true;
         this.isDesiredConsumerSegmentVisible = true;
         $("#subCatHome").removeClass("active");
         $("#subCatTownHome").removeClass("active");

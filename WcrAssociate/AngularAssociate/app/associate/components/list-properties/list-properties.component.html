@@ -6,6 +6,7 @@
     .ck.ck-editor__editable_inline, .ck-editor__editable {
         min-height: 200px !important;
     }
+
     .table a {
         color: #090bfc !important;
     }
@@ -139,7 +140,8 @@
                     <form [formGroup]="categorySearchForm" autocomplete="off" class="pd-t-20">
                         <div class="row">
                             <div class="col-12 col-xs-12 col-xl-12 col-sm-12">
-                                <div class="col-xl-6 col-sm-6 col-xs-12 " [style.display]="divShowCategorySearch ? 'block': 'none'">
+                                <!--[style.display]="divShowCategorySearch ? 'block': 'none'"-->
+                                <div class="col-xl-6 col-sm-6 col-xs-12 ">
                                     <div class="form-group">
                                         <label>
                                             Select Category
@@ -148,7 +150,8 @@
                                         <ng-select [items]="categorySearchData" [(ngModel)]="startValueCategorySearch" (ngModelChange)="changeCategorySearch()" formControlName="categorySearch" [searchable]="false"> </ng-select>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 col-sm-6 col-xs-12 " [style.display]="divShowSubCategorySearch ? 'block': 'none'">
+                                <!--[style.display]="divShowSubCategorySearch ? 'block': 'none'"-->
+                                <div class="col-xl-6 col-sm-6 col-xs-12 ">
                                     <div class="form-group">
                                         <label>
                                             Select Sub Category
@@ -298,24 +301,24 @@
             </div>
 
             <div class="col-sx-12 col-sm-4 col-xl-4">
-
-                <div class="card card-hover card-event-one  card-project-three card-project-green">
+                <div class="card card-hover card-event-one  card-project-three card-project-pink"  [ngClass]="{'card-project-green': isPostButtonGreen }">
 
                     <div class="card-body pd-t-50-f button-block1" (click)="onclickNewPurchase()">
-                        <div class="event-logo bg-teal tx-white mg-b-15" [style.display]="!isPostAdvertisementFormVisible ? 'block': 'none'">
+                        <div class="event-logo bg-teal tx-white mg-b-15" [style.display]="!isPostAdvertisementFormVisible ? 'flex': 'none'">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus wd-20-f ht-25-f"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         </div>
 
                         <h6 class="event-title" [style.display]="!isPostAdvertisementFormVisible ? 'block': 'none'"><a href="javascript:void(0);">Post A New Advertisement</a></h6>
-                        <!--<div class="event-logo bg-teal tx-white mg-b-15" [style.display]="isPostAdvertisementFormVisible ? 'block': 'none'">
-                           <span class="">-</span>
-                        </div>-->
+                        <div class="event-logo bg-teal tx-white mg-b-15" style="background-color: #f39bc3;" [style.display]="isPostAdvertisementFormVisible ? 'flex': 'none'">
+                           <span class="" style="font-size:46px;">-</span>
+                        </div>
                         <h6 class="event-title" [style.display]="isPostAdvertisementFormVisible ? 'block': 'none'"><a href="javascript:void(0);">Cancel Your Selection</a></h6>
 
                     </div><!-- card-body -->
 
                 </div>
             </div>
+
 
             <div id="loadingIconId" class="container card-body col-12 col-sm-12  mg-t-20" [style.display]="showLoadingIconOnEditClick ? 'block':'none' " style="height:200px; padding-top: 100px;">
                 <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
@@ -352,10 +355,10 @@
                                                 </h4>
 
                                                 <ul class="custom-nav">
-                                                    <li (click)="changeConsumerSegmentType('Home')"><a class="home-custom" href="javscript:void(0)" id="subCatHome"><i></i><span>HOME </span></a></li>
-                                                    <li (click)="changeConsumerSegmentType('Town')"><a class="home-custom" href="javscript:void(0)" id="subCatTownHome"><i></i><span>TOWNHOME  </span></a></li>
-                                                    <li (click)="changeConsumerSegmentType('Family')"><a class="multi-custom" href="javscript:void(0)" id="subCatMultiFamily"><i></i><span>MULTI-FAMILY </span></a></li>
-                                                    <li (click)="changeConsumerSegmentType('Land')"><a class="land-custom" href="javscript:void(0)" id="subCatLand"><i></i><span>LAND  </span></a></li>
+                                                    <li (click)="changeConsumerSegmentType('Home')"><a class="home-custom" href="javscript:void(0)" id="subCatHome"><img src="AngularAssociate/assets/images/icon_home.png" /><span>HOME </span></a></li>
+                                                    <li (click)="changeConsumerSegmentType('Town')"><a class="home-custom" href="javscript:void(0)" id="subCatTownHome"><img src="AngularAssociate/assets/images/icon_home.png" /><span>TOWNHOME  </span></a></li>
+                                                    <li (click)="changeConsumerSegmentType('Family')"><a class="multi-custom" href="javscript:void(0)" id="subCatMultiFamily"><img src="AngularAssociate/assets/images/icon_land_hover.png" /><span>MULTI-FAMILY </span></a></li>
+                                                    <li (click)="changeConsumerSegmentType('Land')"><a class="land-custom" href="javscript:void(0)" id="subCatLand"><img src="AngularAssociate/assets/images/icon_group.png" /><span>LAND  </span></a></li>
                                                 </ul>
                                             </div>
                                             <div class="form-group" [ngClass]="{'has-error': formErrorsPA.subCat}">
@@ -511,7 +514,7 @@
                                                     <label>
                                                         Additional Features
                                                     </label>
-                                                    <ckeditor [editor]="editor" [data]="data" formControlName="additionalFeature"></ckeditor>
+                                                    <ckeditor [editor]="editor" [data]="data" [config]="config" formControlName="additionalFeature"></ckeditor>
                                                     <!--<textarea id="desc" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Price" formControlName="desc" (blur)="logValidationErrors()" rows="10"></textarea>-->
                                                     <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.additionalFeature">
                                                         {{formErrorsPA.additionalFeature}}

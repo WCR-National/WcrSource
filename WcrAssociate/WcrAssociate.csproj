@@ -141,9 +141,11 @@
     <Content Include="AngularAssociate\assets\color.css" />
     <Content Include="AngularAssociate\assets\images\amex.jpg" />
     <Content Include="AngularAssociate\assets\images\discover.jpg" />
+    <Content Include="AngularAssociate\assets\images\icon_group.png" />
     <Content Include="AngularAssociate\assets\images\icon_group_hover.png" />
     <Content Include="AngularAssociate\assets\images\icon_home.png" />
     <Content Include="AngularAssociate\assets\images\icon_land.png" />
+    <Content Include="AngularAssociate\assets\images\icon_land_hover.png" />
     <Content Include="AngularAssociate\assets\images\imagebox.jpg" />
     <Content Include="AngularAssociate\assets\images\mastercard_logo.png" />
     <Content Include="AngularAssociate\assets\images\notfound.png" />

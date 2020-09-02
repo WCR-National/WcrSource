@@ -38,7 +38,10 @@ export class ListPropertiesComponent implements OnInit {
     TotalCount: string = '';
     showSuccessMessage: string = '';
     isAddButtonPA: boolean = true;
-
+    isPostButtonGreen: boolean = true;
+    config = {
+        height: 188
+    }
     validationMessagesPA = {
 
         'consumerSegmentType': {
@@ -230,7 +233,7 @@ export class ListPropertiesComponent implements OnInit {
     public dTableSA: any = null;
     public dTableAPZC: any = null;
 
-
+    public data = "";
 
     constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
         private fb: FormBuilder, private listpropertiesService: ListPropertiesService, private purchaseZipCodeService: PurchaseZipCodeService, private modalService: NgbModal,
@@ -1487,7 +1490,8 @@ export class ListPropertiesComponent implements OnInit {
                                 thisStatus.arrayOfImages.push(imageObject);
                                 images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
                             }
-                            thisStatus.uploadedAdvertisementImages = images;
+                            $('#previewImages').html(images);
+                            //thisStatus.uploadedAdvertisementImages = images;
 
 
                             //$("#SubCategory").val($(docs).find("subcategoryID").text());
@@ -1514,7 +1518,7 @@ export class ListPropertiesComponent implements OnInit {
                     this.cdr.detectChanges();
                 });
 
-
+        this.cdr.detectChanges();
     }
 
     submitPostForm() {
@@ -1613,11 +1617,11 @@ export class ListPropertiesComponent implements OnInit {
         this.PostAdvertisement.get('titlePA').setValue('');
         //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
         this.PostAdvertisement.get('stAddressPA').setValue('');
-        this.PostAdvertisement.get('contactNoPA').setValue('');
+        //this.PostAdvertisement.get('contactNoPA').setValue('');
         this.PostAdvertisement.get('descPA').setValue('');
         this.PostAdvertisement.get('countryPA').setValue('');
-        this.stateDataPA = null;
-        this.zipCodeDataPA = null;
+        //this.stateDataPA = null;
+        //this.zipCodeDataPA = null;
         this.PostAdvertisement.get('cityPA').setValue('');
         this.PostAdvertisement.get('pricePA').setValue('');
         this.PostAdvertisement.get('subCat').setValue('');
@@ -2253,8 +2257,22 @@ export class ListPropertiesComponent implements OnInit {
 
     onclickNewPurchase() {
 
+        if (this.isPostButtonGreen) {
+            this.isPostButtonGreen = false;
+        }
+        else {
+            this.isPostButtonGreen = true;
+        }
+
+        if (!this.isPostAdvertisementFormVisible ) {
+            this.isPostAdvertisementFormVisible = true;
+        }
+        else {
+            this.isPostAdvertisementFormVisible = false;
+            return;
+        }
+
         this.isAddButtonPA = true;
-        this.isPostAdvertisementFormVisible = true;
         this.isDesiredConsumerSegmentVisible = true;
 
         $("#subCatHome").removeClass("active");
@@ -2286,6 +2304,8 @@ export class ListPropertiesComponent implements OnInit {
         //$("#subCatLand").removeClass("diable-sidelink");
         //}
     }
+
+
 
     markAsDirty() {
         var subCat = this.PostAdvertisement.get('subCat').value;

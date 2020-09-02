@@ -72108,18 +72108,19 @@ ul.footer-links {
             font-weight: bold;
         }
 
-.home-custom i, .home-custom.disabled i, .home-custom.disabled:hover i {
+.home-custom img, .home-custom.disabled img, .home-custom.disabled:hover img {
     display: inline-block;
-    width: 100%;
+    width: 40px;
     transition: none;
     height: 25px;
-    /*background: url('../../../assets/images/icon_home.png') no-repeat center;*/
+
+    /*background: url() no-repeat center;*/
     background-size: 25px auto;
 }
 
 .land-custom i, .land-custom:hover i, .land-custom.active i {
     display: inline-block;
-    width: 100%;
+    width: 40px;
     height: 25px;
     /*background: url('../../../assets/images/icon_land_hover.png') no-repeat center;*/
     background-size: 25px auto;
@@ -72127,7 +72128,7 @@ ul.footer-links {
 
 .multi-custom i, .multi-custom.disabled i, .multi-custom.disabled:hover i {
     display: inline-block;
-    width: 100%;
+    width: 40px;
     height: 25px;
     /* background: url('../../../assets/images/icon_group.png')no-repeat center;*/
     background-size: 25px auto;
@@ -72361,4 +72362,7 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
     left: 0;
     right: 0;
     bottom: 0;
+}
+.card-project-green.card-hover:hover, .card-project-green.card-hover:focus {
+    border-color: #22d273;
 }
