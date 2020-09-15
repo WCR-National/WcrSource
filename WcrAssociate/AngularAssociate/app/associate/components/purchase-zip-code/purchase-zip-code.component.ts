@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -36,6 +36,7 @@ export class PurchaseZipCodeComponent implements OnInit {
     cardForm: FormGroup;
     searchForm: FormGroup;
     isAddOrUpdateButton: boolean = true;
+    overlayLoadingOnPurchase: boolean = false;
 
     @ViewChild('ctdTabset') ctdTabset;
 
@@ -243,7 +244,7 @@ export class PurchaseZipCodeComponent implements OnInit {
 
     public thisStatus: any = null;
     public monthlyBllingDate: string = "";
-    constructor(private route: ActivatedRoute, private router: Router, private purchaseZipCodeService: PurchaseZipCodeService, private ngZone: NgZone,
+    constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router, private purchaseZipCodeService: PurchaseZipCodeService, private ngZone: NgZone,
         private paymentService: PaymentService, private xmlToJson: XMLToJSON,
         private fb: FormBuilder, private modalService: NgbModal, private toaster: Toaster) { }
 
@@ -565,6 +566,7 @@ export class PurchaseZipCodeComponent implements OnInit {
 
     changeCategorySearch() {
         debugger;
+        this.isSearchingStart = true;
         var subCategoryId;
         var zipCode = this.searchForm.get('zipCode').value != null ? this.searchForm.get('zipCode').value : null;
         var categoryId = this.searchForm.get('categorySearch').value != null ? this.searchForm.get('categorySearch').value.value : null;
@@ -816,10 +818,20 @@ export class PurchaseZipCodeComponent implements OnInit {
                                 if (i == 0) {
                                     val = $(docs).find("id").text();
                                     label = $(docs).find("categoryname").text();
-                                    startValueCategory = { "value": $(docs).find("id").text(), "label": $(docs).find("categoryname").text() };
+                                    var str = $(docs).find("categoryname").text();
+                                    if (str.indexOf('s') != -1)
+                                    {
+                                        str = str.slice(0, -1);
+                                    }
+                                    startValueCategory = { "value": $(docs).find("id").text(), "label": str + ' Services' };
                                 }
+                                var strCat = $(docs).find("categoryname").text();
+                                if (strCat.indexOf('s') != -1) {
+                                    strCat = strCat.slice(0, -1);
+                                }
+                                strCat = strCat + ' Services';
 
-                                cartd.push({ "value": $(docs).find("id").text(), "label": $(docs).find("categoryname").text() });
+                                cartd.push({ "value": $(docs).find("id").text(), "label": strCat });
                             });
 
 
@@ -948,16 +960,17 @@ export class PurchaseZipCodeComponent implements OnInit {
 
                         if (selectedTab == 'cityState') {
                             zipCode = this.searchForm.get('zipCodeSearchCS').value.value;
-                            categoryName = this.searchForm.get('subCategorySearchCS').value.label;
+                            categoryName = this.searchForm.get('categorySearchCS').value.label;
                             subCategoryName = this.searchForm.get('subCategorySearchCS').value.label;
-                            categoryId = this.searchForm.get('subCategorySearchCS').value.value;
+                            categoryId = this.searchForm.get('categorySearchCS').value.value;
                             subCategoryId = this.searchForm.get('subCategorySearchCS').value.value;
                         }
                         else if (selectedTab == 'zipCode') {
+                            debugger;
                             zipCode = this.searchForm.get('zipCode').value;
-                            categoryName = this.searchForm.get('subCategorySearch').value.label;
+                            categoryName = this.searchForm.get('categorySearch').value.label;
                             subCategoryName = this.searchForm.get('subCategorySearch').value.label;
-                            categoryId = this.searchForm.get('subCategorySearch').value.value;
+                            categoryId = this.searchForm.get('categorySearch').value.value;
                             subCategoryId = this.searchForm.get('subCategorySearch').value.value;
                         }
                         var arrSearchedZipCode = [];
@@ -968,6 +981,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                     else {
                         this.formErrorMessageSearch = "Something went wrong, Try Again!!!"
                     }
+                    this.isSearchingStart = false;
                 }
             );
 
@@ -1016,12 +1030,12 @@ export class PurchaseZipCodeComponent implements OnInit {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove purchase">Purchase</a>'
+                    defaultContent: '<a href="" class="editor_remove purchase tx-green tx-700">Purchase</a>'
                 },
                 {
                     data: null,
-                    className: "center",
-                    defaultContent: '<a href="" class="editor_remove cancel">Cancel</a>'
+                    className: "center ",
+                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Cancel</a>'
                 },
             ],
             "bDestroy": true,
@@ -1038,6 +1052,22 @@ export class PurchaseZipCodeComponent implements OnInit {
                     className: "hide_column"
                 },
                 {
+                    targets: [1],
+                    className: "dt-head-center dt-body-left"
+                },
+                {
+                    targets: [2],
+                    className: " dt-head-center dt-body-left"
+                },
+                {
+                    targets: [3],
+                    className: "hide_column"
+                },
+                {
+                    targets: [4],
+                    className: "dt-head-center dt-body-left"
+                },
+                {
                     targets: [5],
                     className: "hide_column"
                 },
@@ -1050,6 +1080,7 @@ export class PurchaseZipCodeComponent implements OnInit {
         });
 
         $('#searchedZipCodes').on('click', 'a.purchase', function (e) {
+            debugger;
             e.preventDefault();
 
 
@@ -1064,21 +1095,10 @@ export class PurchaseZipCodeComponent implements OnInit {
             var priceValues = rowData['Price'];
             var categoryId = rowData['CategoryId'];
             var subCategoryId = rowData['SubCategoryId'];
-            thisStatus.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
-
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-
-            ////get the real row index, even if the table is sorted 
-            //var index = dTable.fnGetPosition(tr[0]);
-            ////alert the content of the hidden first column 
-            //console.log(dTable.fnGetData(index)[0]);
-
-            //dTable.api().row($(this).parents('tr')).remove().draw(false);
-            //$.each(actionColumnData, function (i, value) {
-            //    alert(value.displayValue)
-            //});
+            thisStatus.ngZone.run(() => {
+                thisStatus.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
+                thisStatus.overlayLoadingOnPurchase = true;
+            });
         });
 
         $('#searchedZipCodes').on('click', 'a.cancel', function (e) {
@@ -1090,6 +1110,10 @@ export class PurchaseZipCodeComponent implements OnInit {
             var id = $(this).closest('tr').children('td:first').text();
 
 
+            //thisStatus.ngZone.run(() => {
+            //    thisStatus.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
+            //});
+
             //thisStatus.purchaseZipCodeService
             //    .PermananetlyRemoveCategory(id)
             //    .subscribe(
@@ -1099,19 +1123,6 @@ export class PurchaseZipCodeComponent implements OnInit {
         });
 
     }
-
-    RemoveSearchedZipCodes()
-    {
-        if (this.dTableSearching !== undefined && this.dTableSearching != null)
-        {
-            this.dTableSearching.DataTable().clear().destroy();
-            this.dTableSearching.off('click');
-        }
-        //if (this.dTableSearching !== undefined && this.dTableSearching != null) {
-        //    this.dTableSearching.dataTable().fnClearTable();
-        //}
-    }
-
 
     CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode) {
         this.purchaseZipCodeService
@@ -1137,6 +1148,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                             }
                         });
                     }
+                    this.cdr.detectChanges();
                 }
             );
     }
@@ -1147,18 +1159,20 @@ export class PurchaseZipCodeComponent implements OnInit {
             .subscribe(
                 data => {
 
-                    debugger;
-                    if (data.d.length > 0) {
+                    var a = 0;
+                    var b = 0;
+                    var c = 0;
+                    //this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
 
+                    debugger;
+                    //ye niche wala active krna hai.
+                    if (data.d.length > 0) {
                         var chk = 1;
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("CheckAssoCard");
-
                         if (parseInt($(docs).find("id").text()) >= 1) {
-                            var a = 0;
-                            var b = 0;
-                            var c = 0;
+                           
                             // ApplycoponCode(a, b, c);
                             this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
                         }
@@ -1181,18 +1195,26 @@ export class PurchaseZipCodeComponent implements OnInit {
 
                     debugger;
                     if (data.d == "1") {
+
+
                         var monthValue = 1;// MemberShip.value;
                         //var totalAmount = $("#lblprice").text();
 
                         const results: any = await Promise.apply(this.purchaseZipCodeService.InsertCategory(cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode)).ajaxSuccess(subData => {
-
+                            debugger;
                             if (subData.d == "1") {
                                 this.showToast('Success', "Zip code successfully purchased!");
                                 this.showToast('Success', "Credit card has been successfully charged.");
+                                this.overlayLoadingOnPurchase = false;
+
                                 this.AssociateAlreadyCategories();
+
                             }
                             if (subData.d == "0") {
+
                                 this.showToast('danger', "Failed to buy zip code, already exist.");
+                                this.overlayLoadingOnPurchase = false;
+
                             }
                             if (subData.d == "3") {
                                 this.showToast('danger', "Error, Something went wrong. Reload page, Try Again!!!");
@@ -1201,10 +1223,16 @@ export class PurchaseZipCodeComponent implements OnInit {
 
                         if (data.d == "0") {
                             this.showToast('danger', "Failed to buy zip code, already exist.");
+                            this.overlayLoadingOnPurchase = false;
+
                         }
                         if (data.d == "3") {
                             this.showToast('danger', "Error, Something went wrong. Reload page, Try Again!!!");
+                            this.overlayLoadingOnPurchase = false;
+
                         }
+
+
                     }
                     else {
 
@@ -1212,19 +1240,29 @@ export class PurchaseZipCodeComponent implements OnInit {
                             //this.AssociateAlreadyCategories();
                             this.onOpenModalClick();
                             this._Counter++;
-
                         }
                         else {
                             this._Counter++;
 
                             this.showToast("danger", "We can not complete this Zip Code Purchase at this time!!");
                             this.showToast("danger", "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
-
+                            this.overlayLoadingOnPurchase = false;
                         }
                     }
                 }
             );
     }
+
+    RemoveSearchedZipCodes() {
+        if (this.dTableSearching !== undefined && this.dTableSearching != null) {
+            this.dTableSearching.DataTable().clear().destroy();
+            this.dTableSearching.off('click');
+        }
+        //if (this.dTableSearching !== undefined && this.dTableSearching != null) {
+        //    this.dTableSearching.dataTable().fnClearTable();
+        //}
+    }
+
 
     RemoveCurrentPurchasedZipCode()
     {
@@ -1326,7 +1364,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove cancel">Delete</a>'
+                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Delete</a>'
                 },
                 {
                     data: 'Zipcode',
@@ -1386,7 +1424,8 @@ export class PurchaseZipCodeComponent implements OnInit {
     ViewAllPurchasedZipCode() {
         debugger;
         this.purchaseZipCodeService
-            .GetPurchasedAllRecords()
+            //.GetPurchasedAllRecords()
+            .SelectCurrentPurchasedZipCodes()
             .subscribe(
                 data => {
 
@@ -1396,18 +1435,18 @@ export class PurchaseZipCodeComponent implements OnInit {
                         var chk = 1;
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
-                        var docs = xml.find("Table1");
+                        var docs = xml.find("MyCategories");
 
                         var json = this.xmlToJson.xml2json(xmlDoc, "");
                         var resultJson: any = [];
                         var dataJson = JSON.parse(json);
 
-                        if (dataJson.PurCategories != null) {
-                            if (!Array.isArray(dataJson.Table1)) {
-                                resultJson.push(dataJson.Table1);
-                                dataJson.Table1 = resultJson;
+                        if (dataJson.NewDataSet.MyCategories != null) {
+                            if (!Array.isArray(dataJson.NewDataSet.MyCategories)) {
+                                resultJson.push(dataJson.NewDataSet.MyCategories);
+                                dataJson.NewDataSet.MyCategories = resultJson;
                             }
-                            this.InitializedDataTableAllPurchasedZipCodes(dataJson.Table1);
+                            this.InitializedDataTableAllPurchasedZipCodes(dataJson.NewDataSet.MyCategories);
                         }
                         else {
                             this.InitializedDataTableAllPurchasedZipCodes(undefined);
@@ -1429,7 +1468,7 @@ export class PurchaseZipCodeComponent implements OnInit {
 
     InitializedDataTableAllPurchasedZipCodes(asyncData) {
         console.log(asyncData);
-        $("#allPurchasedZipCodes").DataTable().clear().destroy();
+        //$("#allPurchasedZipCodes").DataTable().clear().destroy();
 
         debugger;
         this.dTableAPZC = $('#allPurchasedZipCodes');
@@ -1437,10 +1476,10 @@ export class PurchaseZipCodeComponent implements OnInit {
         if (asyncData === undefined) {
             asyncData = {
                 'id': '',
-                'Zip': '',
-                'Category': '',
-                'Subcategory': "",
-                'Cost': ""
+                'zipCode': '',
+                'categoryname': '',
+                //'Name': "",
+                'amount': ''
             };
         }
         this.dTableAPZC.dataTable({
@@ -1450,34 +1489,30 @@ export class PurchaseZipCodeComponent implements OnInit {
                     data: 'id'
                 },
                 {
-                    data: 'zipcode'
+                    data: 'zipCode'
                 },
                 {
                     data: "categoryname",
                 },
-                {
-                    data: "Name",
-                },
+                //{
+                //    data: "Name",
+                //},
                 {
                     data: "amount",
                 },
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove cancel">Delete</a>'
-                },
-                {
-                    data: 'Zipcode',
+                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Cancel</a>'
                 },
                 {
                     data: 'subCategoryID',
                 }
+                
             ],
-
             "autoWidth": true,
             searching: false,
             paging: false,
-            info: false,
             buttons: [
                 'excel', 'pdf'
             ],
@@ -1487,11 +1522,19 @@ export class PurchaseZipCodeComponent implements OnInit {
                     className: "hide_column"
                 },
                 {
-                    targets: [6],
-                    className: "hide_column"
+                    "render": function (data, type, row) {
+                        // here you can convert data from base64 to hex and return it
+                        if (data.indexOf('s') != -1) {
+                            data = data.slice(0, -1);
+                        }
+                        data = data + ' Services';
+
+                        return data
+                    },
+                    targets: [2],
                 },
                 {
-                    targets: [7],
+                    targets: [5],
                     className: "hide_column"
                 }
             ],
@@ -1509,9 +1552,9 @@ export class PurchaseZipCodeComponent implements OnInit {
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
 
-            this.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
+            thisStatus.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
 
-
+            thisStatus.ngZone.run(() => {
             thisStatus.purchaseZipCodeService
                 .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
                 .subscribe(
@@ -1520,6 +1563,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                         //thisStatus.getServicesCount();
                         //thisStatus.getTotalSalesAndServicesCount();
                     });
+            });
         });
     }
 
@@ -1565,6 +1609,19 @@ export class PurchaseZipCodeComponent implements OnInit {
         this.ctdTabset.select(id);
     }
 
+    
+
+
+    showToast(toastrType, text) {
+        const type = toastrType;
+        this.toaster.open({
+            text: text,
+            caption: type + ' notification',
+            type: type,
+            duration: 8000
+        });
+    }
+
     ApplyCoponCode(cCode, disc, duration) {
 
         var categoryId, subCategoryId, planId, priceValues, zipCode;
@@ -1608,17 +1665,6 @@ export class PurchaseZipCodeComponent implements OnInit {
                     }
                 }
             );
-    }
-
-
-    showToast(toastrType, text) {
-        const type = toastrType;
-        this.toaster.open({
-            text: text,
-            caption: type + ' notification',
-            type: type,
-            duration: 8000
-        });
     }
 
 }

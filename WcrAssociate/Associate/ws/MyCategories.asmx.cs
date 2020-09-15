@@ -35,6 +35,23 @@ namespace WcrAssociate.Associate.ws
             }
         }
 
+        [WebMethod(EnableSession = true)]
+        public string SelectCurrentPurchasedZipCodes()
+        {
+            try
+            {
+                BllMyAccount ObjMyAccount = new BllMyAccount();
+                string res = ObjMyAccount.SelectCurrentPurchasedZipCodes(Convert.ToInt16(Session["associate"]).ToString());
+                return res;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        
+
         /// <summary>
         /// This Method is used to get all purchased Category either from Sales or Services
         /// </summary>

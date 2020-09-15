@@ -30,13 +30,6 @@ var CustomerSupportService = /** @class */ (function () {
             return data;
         }));
     };
-    CustomerSupportService.prototype.uploadimage = function (image) {
-        debugger;
-        var urlToUploadImage = "Associate/ws/UpdatePic.ashx";
-        this.http.post(urlToUploadImage, image);
-        //return this.apiService.post(urlToUploadImage, { image })
-        //    
-    };
     CustomerSupportService = tslib_1.__decorate([
         Injectable(),
         tslib_1.__metadata("design:paramtypes", [User,

@@ -172,6 +172,10 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.totalAmountSA = 0;
         this.dTableSA = null;
         this.dTableAPZC = null;
+        this.isCollapsedOpenImages = false;
+        this.isCollapsedOverviewAndAdditionalFeatures = false;
+        this.isCollapsedLocation = false;
+        this.data = "";
     }
     ListPropertiesComponent.prototype.ngOnInit = function () {
         this.setValidationOnForm();
@@ -581,16 +585,16 @@ var ListPropertiesComponent = /** @class */ (function () {
                 var chk = 1;
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
-                var docs = xml.find("PurCategories");
+                var docs = xml.find("MyCategories");
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var resultJson = [];
                 var dataJson = JSON.parse(json);
-                if (dataJson.NewDataSet.PurCategories != null) {
-                    if (!Array.isArray(dataJson.NewDataSet.PurCategories)) {
-                        resultJson.push(dataJson.NewDataSet.PurCategories);
-                        dataJson.NewDataSet.PurCategories = resultJson;
+                if (dataJson.NewDataSet.MyCategories != null) {
+                    if (!Array.isArray(dataJson.NewDataSet.MyCategories)) {
+                        resultJson.push(dataJson.NewDataSet.MyCategories);
+                        dataJson.NewDataSet.MyCategories = resultJson;
                     }
-                    _this.InitializedDataTableCurrentPurchasedZipCodes(dataJson.NewDataSet.PurCategories);
+                    _this.InitializedDataTableCurrentPurchasedZipCodes(dataJson.NewDataSet.MyCategories);
                 }
                 else {
                     //this.InitializedDataTableCurrentPurchasedZipCodes(undefined);
@@ -817,7 +821,9 @@ var ListPropertiesComponent = /** @class */ (function () {
             var Zipcode = rowData['Zipcode'];
             var subCategoryID = rowData['subCategoryID'];
             var CategoryID = rowData['CategoryID'];
-            this.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
+            thisStatus.ngZone.run(function () {
+                thisStatus.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
+            });
         });
         $('#ViewRcd').on('click', 'a.cancel', function (e) {
             e.preventDefault();
@@ -830,7 +836,9 @@ var ListPropertiesComponent = /** @class */ (function () {
             var id = rowData['id'];
             var SubCategoryName = rowData['SubCategoryName'];
             var subCategoryID = rowData['subCategoryID'];
-            this.CancelRecord(subCategoryID, SubCategoryName, id);
+            thisStatus.ngZone.run(function () {
+                thisStatus.CancelRecord(subCategoryID, SubCategoryName, id);
+            });
         });
     };
     ListPropertiesComponent.prototype.PurchaseRcd = function (CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id) {
@@ -1244,7 +1252,8 @@ var ListPropertiesComponent = /** @class */ (function () {
                         thisStatus.arrayOfImages.push(imageObject);
                         images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
                     }
-                    thisStatus.uploadedAdvertisementImages = images;
+                    $('#previewImages').html(images);
+                    //thisStatus.uploadedAdvertisementImages = images;
                     //$("#SubCategory").val($(docs).find("subcategoryID").text());
                     thisStatus.PostAdvertisement.get('titlePA').setValue($(docs).find("title").text());
                     thisStatus.PostAdvertisement.get('additionalFeature').setValue($(docs).find("features").text());

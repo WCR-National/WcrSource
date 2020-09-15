@@ -42,6 +42,37 @@ namespace ClsLibrary.Dal.Associate
             }
 
         }
+
+        public string SelectCurrentPurchasedZipCodes(string associateID)
+        {
+            if (associateID != null && associateID != "")
+            {
+                SqlCommand cmd = new SqlCommand("proc_MyAccount", objCon.Con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@associateID", Convert.ToInt16(associateID));
+                cmd.Parameters.AddWithValue("@action", "view_services_current_purchase_zip_code");
+                SqlDataAdapter adpt = new SqlDataAdapter();
+                DataSet ds = new DataSet();
+                if (objCon.Con.State == ConnectionState.Open)
+                { }
+                else
+                {
+                    objCon.Con.Open();
+                }
+                cmd.Connection = objCon.Con;
+                adpt.SelectCommand = cmd;
+                adpt.Fill(ds, "MyCategories");
+                objCon.Con.Close();
+                return ds.GetXml();
+            }
+            else
+            {
+                return "Not Valid";
+            }
+
+        }
+
+
         /// <summary>
         /// This Method is used to get all purchased Category either from Sales or Services
         /// </summary>

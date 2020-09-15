@@ -27,6 +27,25 @@ namespace ClsLibrary.Bal.Associate
                 objMyAccount = null;
             }
         }
+
+        public string SelectCurrentPurchasedZipCodes(string associateID)
+        {
+            DllMyAccount objMyAccount = new DllMyAccount();
+            try
+            {
+                return objMyAccount.SelectCurrentPurchasedZipCodes(associateID);
+            }
+            catch (Exception info)
+            {
+                throw info;
+            }
+            finally
+            {
+                objMyAccount = null;
+            }
+        }
+
+        
         /// <summary>
         /// This Method is used to get all purchased Category either from Sales or Services
         /// </summary>

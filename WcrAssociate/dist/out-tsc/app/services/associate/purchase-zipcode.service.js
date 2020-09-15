@@ -141,6 +141,13 @@ var PurchaseZipCodeService = /** @class */ (function () {
             return data;
         }));
     };
+    PurchaseZipCodeService.prototype.SelectCurrentPurchasedZipCodes = function () {
+        var urlToMurchantPurchaseCategory = "Associate/ws/MyCategories.asmx/SelectCurrentPurchasedZipCodes";
+        return this.apiService.post(urlToMurchantPurchaseCategory, { JobType: '1' })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    };
     PurchaseZipCodeService.prototype.ZipCodePurchase = function () {
         var urlToInsertCategory = "Associate/ws/Sale.asmx/CountPurchasedZipcode";
         return this.apiService.post(urlToInsertCategory, {})

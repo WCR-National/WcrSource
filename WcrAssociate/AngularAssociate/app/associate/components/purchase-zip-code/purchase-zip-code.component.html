@@ -57,57 +57,57 @@
                     <div class="card-body">
                         <div class="row row-sm">
                             <div class="col-sm-12 col-md-12">
-                                <label class="tx-medium tx-14 tx-color-01 mg-b-2">Your Current Purchase Code</label>
+                                <label class="tx-medium tx-14 tx-color-01 mg-b-2">Your Current Zip Code Purchase Details</label>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer bg-transparent">
+                    <div class="card-footer bg-transparent ht-127">
                         <div class="row no-gutters">
+                            <div class="col-12 col-xs-12 col-sm-12">
+                                <div class="col-4 col-xs-4 col-sm-4">
+                                    <div class="d-flex align-items-baseline mg-b-5">
+                                        <h4 class="tx-numeric tx-normal">
+                                            <span id="lblPurchasedZipCodes">{{totalNoOfPurchasedItems}}</span>
+                                        </h4>
+                                        <!--<span class="card-value-sub tx-success"><i class="icon ion-android-arrow-up"></i> 3.8%</span>-->
+                                    </div>
+                                    <h5 class="card-title tx-primary">Items Purchased</h5>
+                                    <label class="content-label content-label-xs">Total count of items purchased</label>
+                                </div><!-- col -->
+                                <div class="col-4 col-xs-4 col-sm-4">
+                                    <div class="d-flex align-items-baseline mg-b-5">
+                                        <h4 class="tx-numeric tx-normal">
+                                            <span id="lblTotalamount">{{totalPurchasedAmount}}</span>
+                                        </h4>
+                                        <!--<span class="card-value-sub tx-danger"><i class="icon ion-android-arrow-down"></i> 0.3%</span>-->
+                                    </div>
+                                    <h5 class="card-title tx-pink">Total Amount</h5>
 
-                            <div class="col-4 col-xs-4 col-sm-6">
-                                <div class="d-flex align-items-baseline mg-b-5">
-                                    <h4 class="tx-numeric tx-normal">
-                                        <span id="lblPurchasedZipCodes">{{totalNoOfPurchasedItems}}</span>
-                                    </h4>
-                                    <!--<span class="card-value-sub tx-success"><i class="icon ion-android-arrow-up"></i> 3.8%</span>-->
-                                </div>
-                                <h5 class="card-title tx-primary">Items Purchased</h5>
-                                <label class="content-label content-label-xs">Total count of items purchased</label>
-                            </div><!-- col -->
-                            <div class="col-4 col-xs-4 col-sm-6">
-                                <div class="d-flex align-items-baseline mg-b-5">
-                                    <h4 class="tx-numeric tx-normal">
-                                        <span id="lblTotalamount">{{totalPurchasedAmount}}</span>
-                                    </h4>
-                                    <!--<span class="card-value-sub tx-danger"><i class="icon ion-android-arrow-down"></i> 0.3%</span>-->
-                                </div>
-                                <h5 class="card-title tx-pink">Total Amount</h5>
-
-                                <label class="content-label content-label-xs">Total amount due at the start of next billing cycle</label>
-                            </div><!-- col -->
-                            <div class="col-4 col-xs-4 col-sm-6">
-                                <div class="d-flex align-items-baseline mg-b-5">
-                                    <h4 class="tx-numeric tx-normal">
-                                        <span id="lblBillingDate">{{nextBillingCycleStart}}</span>
-                                    </h4>
-                                    <!--<span class="card-value-sub tx-danger"><i class="icon ion-android-arrow-down"></i> 0.3%</span>-->
-                                </div>
-                                <h5 class="card-title tx-teal">Next billing</h5>
-                                <label class="content-label content-label-xs">Next billing cycle starts </label>
-                            </div><!-- col -->
-
+                                    <label class="content-label content-label-xs">Total amount due at the start of next billing cycle</label>
+                                </div><!-- col -->
+                                <div class="col-4 col-xs-4 col-sm-4">
+                                    <div class="d-flex align-items-baseline mg-b-5">
+                                        <h4 class="tx-numeric tx-normal">
+                                            <span id="lblBillingDate">{{nextBillingCycleStart}}</span>
+                                        </h4>
+                                        <!--<span class="card-value-sub tx-danger"><i class="icon ion-android-arrow-down"></i> 0.3%</span>-->
+                                    </div>
+                                    <h5 class="card-title tx-teal">Next billing</h5>
+                                    <label class="content-label content-label-xs">Next billing cycle starts </label>
+                                </div><!-- col -->
+                            </div>
                         </div><!-- row -->
                     </div><!-- card-footer -->
                 </div><!-- card -->
             </div>
 
-            <div class="col-12 col-xs-12 col-sm-4 col-xl-4 pd-xs-t-20">
+            <div class="col-12 col-xs-12 col-sm-4 col-xl-4 ht-186">
 
                 <div class="card ht-100p overflow-hidden card-hover card-project-pink">
                     <!--<div class="marker pos-absolute t-10 l-10">Card Marker</div>-->
 
                     <div class="card-body" style="padding:22px;">
-                        <span class="badge bg-danger tx-white"><i class="fas fa-fw fa-info-circle tx-14"></i> Warning</span>
+                        <span class="badge bg-danger tx-white"><i class="fas fa-fw fa-info-circle tx-14"></i> Please Note:</span>
                         <h5 class="card-title pd-t-20">A maximum limit of 10 Zip Code/Service Category purchases is allowed</h5>
                         <h5 class="card-title">Zip code rates vary depending on population.</h5>
                     </div>
@@ -131,7 +131,64 @@
                             <fieldset>
 
                                 <ngb-tabset #ctdTabset="ngbTabset">
-                                    <ngb-tab title="" id="cityStateTabId">
+                                    <ngb-tab id="zipCodeTabId">
+                                        <ng-template ngbTabTitle><b (click)="onClickTabZipCode()">By Zip Code</b></ng-template>
+                                        <ng-template ngbTabContent>
+
+                                            <div class="pd-t-60">
+                                                <div class="row ">
+                                                    <div class="col-sm-12 has-error">
+                                                        <p class="red-text">{{formErrorMessageSearch}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-xs-12 col-sm-12">
+                                                        <div class="col-xl-4 col-sm-4 col-xs-12 ">
+                                                            <input type="text" aria-label="Zip Code" class="form-control" formControlName="zipCode" placeholder="Zip Code" (change)="changeZipCodeSearch()" />
+                                                        </div>
+
+                                                        <div class="col-xl-4 col-sm-4 col-xs-12 ">
+                                                            <button type="button" class="btn btn-primary btn-block ht-50-f" (click)="onClickBtnSearchZipCode()" [disabled]="isSearchingStart">Search</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mg-t-20-f" [style.display]="!isSearchingStart ? 'block':'none' ">
+                                                    <div class="col-12 col-xs-12 col-sm-12">
+                                                        <!--<div class="col-12 col-xl-12 col-sm-12 col-xs-12 " [style.display]="divShowCategorySearch ? 'block': 'none'">
+                                                            <p> Your search criteria returned the following zip code(s): </p>
+                                                        </div>-->
+                                                                                                    <!--<div class="col-12 col-xl-6 col-sm-6 col-xs-12 " [style.display]="divShowCategorySearch ? 'block': 'none'">
+                                                            <ng-select [items]="zipCodeSearchData" [(ngModel)]="startValueZipCodeSearch" (ngModelChange)="changeZipCodeSearch()" formControlName="zipCodeSearch" [searchable]="false"> </ng-select>
+                                                        </div>-->
+                                                        <!--<div class="col-12 col-xs-6 col-sm-6"></div>-->
+                                                        <div class="col-xl-6 col-sm-6 col-xs-12 " [style.display]="divShowCategorySearch ? 'block': 'none'">
+                                                            <ng-select [items]="categorySearchData" [(ngModel)]="startValueCategorySearch" (ngModelChange)="changeCategorySearch()" formControlName="categorySearch" [searchable]="false"> </ng-select>
+                                                        </div>
+                                                        <!--[style.display]="divShowSubCategorySearch ? 'block': 'none'"-->
+                                                        <div class="col-xl-6 col-sm-6 col-xs-12" style="display:none;">
+                                                            <ng-select [items]="subCategorySearchData" [(ngModel)]="startValueSubCategorySearch" (ngModelChange)="changeSubCategorySearch()" formControlName="subCategorySearch" [searchable]="false"> </ng-select>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="row" [style.display]="isSearchingStart ? 'block':'none' ">
+                                                    <div class="col-md-12" style="height:200px; padding-top: 100px;">
+                                                        <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
+                                                            <div class="progress" style="top:50%;">
+                                                                <div class="indeterminate"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </ng-template>
+                                    </ngb-tab>
+
+                                    <ngb-tab title="" id="cityStateTabId" [disabled]="true">
                                         <ng-template ngbTabTitle><b (click)="onClickTabCityState()">By City & State</b></ng-template>
                                         <ng-template ngbTabContent>
 
@@ -205,59 +262,7 @@
                                         </ng-template>
                                     </ngb-tab>
 
-                                    <ngb-tab id="zipCodeTabId">
-                                        <ng-template ngbTabTitle><b (click)="onClickTabZipCode()">By Zip Code</b></ng-template>
-                                        <ng-template ngbTabContent>
 
-                                            <div class="pd-t-60">
-                                                <div class="row ">
-                                                    <div class="col-sm-12 has-error">
-                                                        <p class="red-text">{{formErrorMessageSearch}}</p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-12 col-xs-12 col-sm-12">
-                                                        <div class="col-xl-4 col-sm-4 col-xs-12 ">
-                                                            <input type="text" aria-label="Zip Code" class="form-control" formControlName="zipCode" placeholder="Zip Code" (change)="changeZipCodeSearch()" />
-                                                        </div>
-
-                                                        <div class="col-xl-4 col-sm-4 col-xs-12 ">
-                                                            <button type="button" class="btn btn-primary btn-block ht-50-f" (click)="onClickBtnSearchZipCode()" [disabled]="isSearchingStart">Search</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row" [style.display]="isSearchingStart ? 'block':'none' ">
-                                                    <div class="col-md-12" style="height:200px; padding-top: 100px;">
-                                                        <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
-                                                            <div class="progress" style="top:50%;">
-                                                                <div class="indeterminate"></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mg-t-20-f" [style.display]="!isSearchingStart ? 'block':'none' ">
-                                                    <div class="col-12 col-xs-12 col-sm-12">
-                                                        <!--<div class="col-12 col-xl-12 col-sm-12 col-xs-12 " [style.display]="divShowCategorySearch ? 'block': 'none'">
-                                                            <p> Your search criteria returned the following zip code(s): </p>
-                                                        </div>-->
-                                                        <!--<div class="col-12 col-xl-6 col-sm-6 col-xs-12 " [style.display]="divShowCategorySearch ? 'block': 'none'">
-                                                            <ng-select [items]="zipCodeSearchData" [(ngModel)]="startValueZipCodeSearch" (ngModelChange)="changeZipCodeSearch()" formControlName="zipCodeSearch" [searchable]="false"> </ng-select>
-                                                        </div>-->
-                                                        <!--<div class="col-12 col-xs-6 col-sm-6"></div>-->
-                                                        <div class="col-xl-6 col-sm-6 col-xs-12 " [style.display]="divShowCategorySearch ? 'block': 'none'">
-                                                            <ng-select [items]="categorySearchData" [(ngModel)]="startValueCategorySearch" (ngModelChange)="changeCategorySearch()" formControlName="categorySearch" [searchable]="false"> </ng-select>
-                                                        </div>
-                                                        <div class="col-xl-6 col-sm-6 col-xs-12 " [style.display]="divShowSubCategorySearch ? 'block': 'none'">
-                                                            <ng-select [items]="subCategorySearchData" [(ngModel)]="startValueSubCategorySearch" (ngModelChange)="changeSubCategorySearch()" formControlName="subCategorySearch" [searchable]="false"> </ng-select>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-
-                                            </div>
-                                        </ng-template>
-                                    </ngb-tab>
 
                                 </ngb-tabset>
 
@@ -265,7 +270,19 @@
                         </form>
                     </div>
 
-                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12 mg-t-15 mg-sm-t-20" [style.display]="divShowTableSelectedSearch ? 'block': 'none'">
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12 mg-t-15 mg-sm-t-20 aoa_wrap pd-l-30 pd-r-30" [style.display]="divShowTableSelectedSearch ? 'block': 'none'">
+
+                        <div id="aoa55a92" class="aoa_overlay" [style.display]="overlayLoadingOnPurchase ? 'block' : 'none'">
+                            <div class="aoa_object">
+                                <div class="col-12 col-sm-12">
+                                    <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
+                                        <div class="progress" style="top:30%;">
+                                            <div class="indeterminate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="card card-hover card-deal shadow-none">
                             <div class="card-header bg-transparent bd-b-0">
@@ -295,7 +312,7 @@
 
                     </div>
 
-                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12 mg-t-15 mg-sm-t-20" [style.display]="divShowCurrentPurchasedZipCodes ? 'block':'none'">
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12 mg-t-15 mg-sm-t-20 pd-l-30 pd-r-30" [style.display]="divShowCurrentPurchasedZipCodes ? 'block':'none'">
 
                         <div class="card card-hover card-deal shadow-none">
                             <div class="card-header bg-transparent bd-b-0">
@@ -314,6 +331,7 @@
                                                 <th>Subcategory </th>
                                                 <th>Cost </th>
                                                 <th>Cancel</th>
+                                                <th>Sub Category ID</th>
                                             </tr>
                                         </thead>
                                     </table>
@@ -329,25 +347,28 @@
 
                     </div>
 
-                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12 mg-t-15 mg-sm-t-20" style="display:none;">
+                    <div class="col-12 col-xs-12 col-sm-12 col-md-12 col-xl-12 mg-t-15 mg-sm-t-20 mg-b-50 pd-l-30 pd-r-30">
 
                         <div class="card card-hover card-deal shadow-none">
                             <div class="card-header bg-transparent bd-b-0">
-                                <h6 class="card-title mg-b-0">All Purchased Zip Codes </h6>
+                                <!--<h6 class="card-title mg-b-0">All Purchased Zip Codes </h6>-->
+                                <h6 class="card-title mg-b-0">
+                                    YOUR CURRENT ZIPCODE PURCHASES
+                                </h6>
                             </div>
+
                             <div class="card-body pd-0">
                                 <div class="table-responsive pd-l-0-f pd-r-0-f">
                                     <table id="allPurchasedZipCodes" class="table" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th>id</th>
-                                                <th>Zip </th>
-                                                <th>Category </th>
-                                                <th>Subcategory </th>
-                                                <th>Cost </th>
-                                                <th>Delete</th>
                                                 <th>Zip Code</th>
-                                                <th>Sub Category Id</th>
+                                                <th>Category </th>
+                                                <!--<th>Sub Category </th>-->
+                                                <th>Cost </th>
+                                                <th>Cancel</th>
+                                                <th>Sub Category ID</th>
                                             </tr>
                                         </thead>
                                     </table>

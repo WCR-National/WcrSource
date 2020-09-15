@@ -40,14 +40,6 @@ export class CustomerSupportService {
             ));
     }
 
-    uploadimage(image){
-        
-        debugger;
-        let urlToUploadImage: string = "Associate/ws/UpdatePic.ashx";
-        this.http.post(urlToUploadImage, image);
 
-        //return this.apiService.post(urlToUploadImage, { image })
-        //    
-    }
     
 }

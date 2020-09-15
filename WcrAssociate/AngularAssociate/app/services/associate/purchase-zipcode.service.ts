@@ -156,7 +156,8 @@ export class PurchaseZipCodeService {
             ));
     }
 
-    InsertCategory(cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode) {
+    InsertCategory(cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode)
+    {
         if (categoryId == 2) {
             subCategoryId = 5;
         }
@@ -200,6 +201,21 @@ export class PurchaseZipCodeService {
                 }
             ));
     }
+
+
+    SelectCurrentPurchasedZipCodes(): Observable<any> {
+
+        let urlToMurchantPurchaseCategory: string = "Associate/ws/MyCategories.asmx/SelectCurrentPurchasedZipCodes";
+        return this.apiService.post(urlToMurchantPurchaseCategory, { JobType: '1' })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
+
+
+    
 
     ZipCodePurchase() {
         let urlToInsertCategory: string = "Associate/ws/Sale.asmx/CountPurchasedZipcode";
