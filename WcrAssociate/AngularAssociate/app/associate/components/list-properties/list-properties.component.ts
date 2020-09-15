@@ -233,6 +233,11 @@ export class ListPropertiesComponent implements OnInit {
     public dTableSA: any = null;
     public dTableAPZC: any = null;
 
+    public isCollapsedOpenImages = true;
+    public isCollapsedOverviewAndAdditionalFeatures = true;
+    public isCollapsedLocation = true;
+
+
     public data = "";
 
     constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
@@ -273,9 +278,6 @@ export class ListPropertiesComponent implements OnInit {
         this.ViewAllSalesAdvertisement();
 
     }
-
-
-
 
     InitializrEventsAndControlsPA() {
         var thisStatus = this;
@@ -723,18 +725,18 @@ export class ListPropertiesComponent implements OnInit {
                         var chk = 1;
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
-                        var docs = xml.find("PurCategories");
+                        var docs = xml.find("MyCategories");
 
                         var json = this.xmlToJson.xml2json(xmlDoc, "");
                         var resultJson: any = [];
                         var dataJson = JSON.parse(json);
 
-                        if (dataJson.NewDataSet.PurCategories != null) {
-                            if (!Array.isArray(dataJson.NewDataSet.PurCategories)) {
-                                resultJson.push(dataJson.NewDataSet.PurCategories);
-                                dataJson.NewDataSet.PurCategories = resultJson;
+                        if (dataJson.NewDataSet.MyCategories != null) {
+                            if (!Array.isArray(dataJson.NewDataSet.MyCategories)) {
+                                resultJson.push(dataJson.NewDataSet.MyCategories);
+                                dataJson.NewDataSet.MyCategories = resultJson;
                             }
-                            this.InitializedDataTableCurrentPurchasedZipCodes(dataJson.NewDataSet.PurCategories);
+                            this.InitializedDataTableCurrentPurchasedZipCodes(dataJson.NewDataSet.MyCategories);
                         }
                         else {
                             //this.InitializedDataTableCurrentPurchasedZipCodes(undefined);
@@ -790,7 +792,7 @@ export class ListPropertiesComponent implements OnInit {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove cancel">Delete</a>'
+                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Cancel</a>'
                 },
                 {
                     data: 'zipcode',
@@ -988,8 +990,9 @@ export class ListPropertiesComponent implements OnInit {
             var subCategoryID = rowData['subCategoryID'];
             var CategoryID = rowData['CategoryID'];
 
-
-            this.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
+            thisStatus.ngZone.run(() => {
+                thisStatus.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
+            });
         });
         $('#ViewRcd').on('click', 'a.cancel', function (e) {
             e.preventDefault();
@@ -1005,7 +1008,9 @@ export class ListPropertiesComponent implements OnInit {
             var id = rowData['id'];
             var SubCategoryName = rowData['SubCategoryName'];
             var subCategoryID = rowData['subCategoryID'];
-            this.CancelRecord(subCategoryID, SubCategoryName, id);
+            thisStatus.ngZone.run(() => {
+                thisStatus.CancelRecord(subCategoryID, SubCategoryName, id);
+            });
         });
     }
 
@@ -1122,7 +1127,7 @@ export class ListPropertiesComponent implements OnInit {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove cancel">Cancel</a>'
+                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Cancel</a>'
                 },
                 {
                     data: 'zipcode',
