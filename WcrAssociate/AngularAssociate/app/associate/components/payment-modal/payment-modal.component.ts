@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional } from '@angular/core';
+import { Component, OnInit, Optional, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -32,6 +32,7 @@ export class PaymentModalComponent implements OnInit {
     showSuccessMessage: string = '';
     cardForm: FormGroup;
     isAddOrUpdateButton: boolean = true;
+    defaultDeisableUpdateButton: boolean = true;
 
     validationMessages = {
 
@@ -163,6 +164,11 @@ export class PaymentModalComponent implements OnInit {
     public cardTypeSelector: string;
 
     public formErrorMessage = "";
+
+    @Output() dismissParentCall: EventEmitter<any> = new EventEmitter();
+    @Output() updateParentCall: EventEmitter<any> = new EventEmitter();
+
+
     constructor(private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
         private fb: FormBuilder, @Optional() private activeModal: NgbActiveModal, private toaster: Toaster) {
 
@@ -180,6 +186,16 @@ export class PaymentModalComponent implements OnInit {
         this.bindYear();
 
         this.getCardDataDetails();
+        var thisStatus = this;
+        setTimeout(function () {
+            thisStatus.cardForm.valueChanges.subscribe(() => {
+                debugger;
+                if (thisStatus.cardForm.valid) {
+                    thisStatus.defaultDeisableUpdateButton = false;
+                }
+            });
+        }, 8000)
+       
     }
 
     //public confirm(): void {
@@ -191,7 +207,10 @@ export class PaymentModalComponent implements OnInit {
 
     public dismiss(): void {
         if (this.activeModal)
+        {
             this.activeModal.dismiss();
+            this.dismissParentCall.emit('cancel');
+        }
     }
 
     initializeEventAndControls() {
@@ -471,11 +490,14 @@ export class PaymentModalComponent implements OnInit {
                             this.showToast('success', "Your credit card info has been Inserted Successfully.");
 
                             this.activeModal.close();
-                          
+                            this.updateParentCall.emit('update');
+
 
                         }
                         else if (data == "-1") {
                             this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                            this.activeModal.close();
+                            this.updateParentCall.emit('update');
                         }
                         else { }
                     });
@@ -507,9 +529,13 @@ export class PaymentModalComponent implements OnInit {
                         }
                         else if (data == "0") {
                             this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                            this.activeModal.close();
+                            this.updateParentCall.emit('update');
                         }
                         else if (data == "-1") {
                             this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                            this.activeModal.close();
+                            this.updateParentCall.emit('update');
                         }
                         else { }
                         this.isSubmitting = false;
