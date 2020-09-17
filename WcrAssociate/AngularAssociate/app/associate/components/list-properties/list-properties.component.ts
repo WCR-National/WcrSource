@@ -295,7 +295,7 @@ export class ListPropertiesComponent implements OnInit {
         this.PostAdvertisement = this.fb.group({
             consumerSegmentType: [''],
             titlePA: ['', [Validators.required, patternValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
-            pricePA: ['', [Validators.required, patternValidator(/^[0-9]+$/, { numericOnly: true })]],
+            pricePA: ['', [Validators.required, patternValidator(/^[+-]?\d+(\.\d+)?$/, { Numeric: true })]],
             descPA: ['', [Validators.required, patternValidator(/^[a-zA-Z0-9\-\s]+$/, { letterOnly: true })]],
             additionalFeature: ['', [Validators.required]],
             contactNoPA: ['', [Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })]],
@@ -2501,8 +2501,17 @@ export class ListPropertiesComponent implements OnInit {
         const modal: NgbModalRef = this.modalService.open(PaymentModalComponent, { size: 'lg', backdrop: "static" });
         const modalComponent: PaymentModalComponent = modal.componentInstance;
 
-        modal.result.then(
-            (result) => {
+        modal.componentInstance.dismissParentCall.subscribe((data) => {
+            debugger;
+            console.log(data);
+            //this.overlayLoadingOnPurchase = false;
+        });
+
+        modal.componentInstance.updateParentCall.subscribe((data) => {
+
+
+        //modal.result.then(
+        //    (result) => {
                 debugger;
                 this.PostAds();
                 //var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);

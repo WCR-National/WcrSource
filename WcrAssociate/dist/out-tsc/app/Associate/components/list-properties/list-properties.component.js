@@ -172,9 +172,9 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.totalAmountSA = 0;
         this.dTableSA = null;
         this.dTableAPZC = null;
-        this.isCollapsedOpenImages = false;
-        this.isCollapsedOverviewAndAdditionalFeatures = false;
-        this.isCollapsedLocation = false;
+        this.isCollapsedOpenImages = true;
+        this.isCollapsedOverviewAndAdditionalFeatures = true;
+        this.isCollapsedLocation = true;
         this.data = "";
     }
     ListPropertiesComponent.prototype.ngOnInit = function () {
@@ -643,7 +643,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove cancel">Delete</a>'
+                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Cancel</a>'
                 },
                 {
                     data: 'zipcode',
@@ -936,7 +936,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove cancel">Cancel</a>'
+                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Cancel</a>'
                 },
                 {
                     data: 'zipcode',

@@ -325,7 +325,7 @@
                             <div class="col-12 col-xs-12 col-sm-12 mg-b-20">
                                 <div class="card card-project-three card-project-pink red-border">
                                     <div class="card-body">
-                                        <span class="badge bg-info tx-white"><i class="fas fa-fw fa-info-circle tx-14"></i> Please Note:</span>
+                                        <span class="badge bg-black-4 tx-15-f red-text tx-bold" style=" color: rgb(220 53 69); background:#fff; "><i class="fas fa-fw fa-info-circle tx-14"></i> Please Note:</span>
 
                                         <h5 class="tx-13 tx-gray-600">A maximum limit of 15 sales advertisement purchases is allowed.</h5>
                                         <h5 class="tx-13 tx-gray-600">
@@ -398,250 +398,306 @@
                                                 </div>
                                             </div>
 
+                                            <div class="col-12 col-xs-12 col-sm-12 mg-b-20 pd-l-30 pd-sm-l-30 pd-r-30 pd-sm-r-30">
+                                                <a class="btn btn-primary mg-t-20 mg-b-20" (click)="isCollapsedOpenImages = !isCollapsedOpenImages" [attr.aria-expanded]="!isCollapsedOpenImages" aria-controls="collapseOpenImages" style=" width: 100%; text-align: left; color:#fff !important;">1 - PRIMARY IMAGES</a>
+                                                <div class="mg-t-5 collapse show" id="collapseOpenImages" [ngbCollapse]="isCollapsedOpenImages">
+                                                    <!--[style.display]="isUploadImageVisible ? 'block' : 'none'"-->
+                                                    <div class="col-12 col-xs-12 col-sm-12 mg-b-20   pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                        <div class="form-group">
 
-                                            <a class="btn btn-dark mg-t-20 mg-b-20" (click)="isCollapsedOpenImages = !isCollapsedOpenImages" [attr.aria-expanded]="!isCollapsedOpenImages" aria-controls="collapseOpenImages" style=" width: 100%; text-align: left">Open Images</a>
-                                            <div class="mg-t-5 collapse show" id="collapseOpenImages" [ngbCollapse]="isCollapsedOpenImages">
-                                                <!--[style.display]="isUploadImageVisible ? 'block' : 'none'"-->
-                                                <div class="col-12 col-xs-12 col-sm-12 mg-b-20   pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                    <div class="form-group">
 
+                                                            <!--[innerHTML]="uploadedAdvertisementImages"-->
+                                                            <div class="col-12 col-xs-12 col-sm-12" id="previewImages">
+                                                            </div>
+                                                            <div class="col-12 col-xs-12 col-sm-12">
+                                                                <h4>
+                                                                    Upload Images
+                                                                </h4>
+                                                                <ul class="image-upload">
+                                                                    <li>
+                                                                        <div class="block-box full-row">
+                                                                            <p>Upload Images  </p>
+                                                                            <div id="image-holder">
+                                                                                <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
+                                                                            </div>
+                                                                            <div class="custom-browse">
+                                                                                <input type="file" class="form-control" (change)="onSelectFile($event, '0')" id="FileUpload1">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>PRIMARY IMAGES</p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="block-box full-row">
+                                                                            <p>Upload Image </p>
+                                                                            <div id="image-holder2">
+                                                                                <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
+                                                                            </div>
+                                                                            <div class="custom-browse">
+                                                                                <input type="file" class="form-control" (change)="onSelectFile($event, '1')" id="FileUpload2">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>SECONDARY IMAGE </p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="block-box full-row">
+                                                                            <p>Upload Image  </p>
+                                                                            <div id="image-holder3">
+                                                                                <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
+                                                                            </div>
+                                                                            <div class="custom-browse">
+                                                                                <input type="file" class="form-control" (change)="onSelectFile($event, '2')" id="FileUpload3">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>ADDITIONAL IMAGE </p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <div class="block-box full-row">
+                                                                            <p>Upload Image  </p>
+                                                                            <div id="image-holder4">
+                                                                                <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
+                                                                            </div>
+                                                                            <div class="custom-browse">
+                                                                                <input type="file" class="form-control" (change)="onSelectFile($event, '3')" id="FileUpload4">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>ADDITIONAL IMAGE </p>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
 
-                                                        <!--[innerHTML]="uploadedAdvertisementImages"-->
-                                                        <div class="col-12 col-xs-12 col-sm-12" id="previewImages">
                                                         </div>
-                                                        <div class="col-12 col-xs-12 col-sm-12">
-                                                            <h4>
-                                                                Upload Images
-                                                            </h4>
-                                                            <ul class="image-upload">
-                                                                <li>
-                                                                    <div class="block-box full-row">
-                                                                        <p>Upload Images  </p>
-                                                                        <div id="image-holder">
-                                                                            <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
-                                                                        </div>
-                                                                        <div class="custom-browse">
-                                                                            <input type="file" class="form-control" (change)="onSelectFile($event, '0')" id="FileUpload1">
-                                                                        </div>
-                                                                    </div>
-                                                                    <p>PRIMARY IMAGES</p>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="block-box full-row">
-                                                                        <p>Upload Image </p>
-                                                                        <div id="image-holder2">
-                                                                            <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
-                                                                        </div>
-                                                                        <div class="custom-browse">
-                                                                            <input type="file" class="form-control" (change)="onSelectFile($event, '1')" id="FileUpload2">
-                                                                        </div>
-                                                                    </div>
-                                                                    <p>SECONDARY IMAGE </p>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="block-box full-row">
-                                                                        <p>Upload Image  </p>
-                                                                        <div id="image-holder3">
-                                                                            <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
-                                                                        </div>
-                                                                        <div class="custom-browse">
-                                                                            <input type="file" class="form-control" (change)="onSelectFile($event, '2')" id="FileUpload3">
-                                                                        </div>
-                                                                    </div>
-                                                                    <p>ADDITIONAL IMAGE </p>
-                                                                </li>
-                                                                <li>
-                                                                    <div class="block-box full-row">
-                                                                        <p>Upload Image  </p>
-                                                                        <div id="image-holder4">
-                                                                            <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
-                                                                        </div>
-                                                                        <div class="custom-browse">
-                                                                            <input type="file" class="form-control" (change)="onSelectFile($event, '3')" id="FileUpload4">
-                                                                        </div>
-                                                                    </div>
-                                                                    <p>ADDITIONAL IMAGE </p>
-                                                                </li>
-                                                            </ul>
+                                                        <div class="form-group" [ngClass]="{'has-error': formErrorsPA.image}">
+                                                            <input type="hidden" class="form-control" formControlName="image" id="img" />
+                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.image">
+                                                                {{formErrorsPA.image}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <a class="btn btn-primary mg-b-20" (click)="isCollapsedOverviewAndAdditionalFeatures = !isCollapsedOverviewAndAdditionalFeatures" [attr.aria-expanded]="!isCollapsedOverviewAndAdditionalFeatures" aria-controls="collapseOverviewAndAF" style=" width: 100%; text-align: left; color:#fff !important;">2 - OVERVIEW & ADDITIONAL FEATURES</a>
+                                                <div class="mg-t-5 collapse show" id="collapseOverviewAndAF" [ngbCollapse]="isCollapsedOverviewAndAdditionalFeatures">
+                                                    <!--[style.display]="isOverviewAndAdditionalVisible ? 'block' : 'none'"-->
+                                                    <div class="col-12 xol-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                        <h4 class="pd-l-15 pd-r-15">
+                                                            OverView & Additional Features
+                                                        </h4>
+
+                                                        <div class="col-12 xol-xs-12 col-sm-6 pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                            <div class="form-group" [ngClass]="{'has-error': formErrorsPA.titlePA}">
+
+                                                                <label>
+                                                                    Title
+                                                                </label>
+                                                                <input id="title" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Title" formControlName="titlePA" (blur)="logValidationErrorsPA()">
+                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.titlePA">
+                                                                    {{formErrorsPA.titlePA}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12 col-xs-12 col-sm-6 pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                            <div class="form-group" [ngClass]="{'has-error': formErrorsPA.pricePA}">
+
+                                                                <label>
+                                                                    Price ($)
+                                                                </label>
+                                                                <input id="price" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter price as a whole dollar value" formControlName="pricePA" (blur)="logValidationErrorsPA()">
+                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.pricePA">
+                                                                    {{formErrorsPA.pricePA}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                            <div class="form-group" [ngClass]="{'has-error': formErrorsPA.descPA}">
+
+                                                                <label>
+                                                                    Description
+                                                                </label>
+                                                                <textarea id="desc" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Description" formControlName="descPA" (blur)="logValidationErrorsPA()" rows="5"></textarea>
+                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.descPA">
+                                                                    {{formErrorsPA.descPA}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                            <div class="form-group" [ngClass]="{'has-error': formErrorsPA.additionalFeature}">
+
+                                                                <label>
+                                                                    Additional Features
+                                                                </label>
+                                                                <ckeditor [editor]="editor" [data]="data" [config]="config" formControlName="additionalFeature"></ckeditor>
+                                                                <!--<textarea id="desc" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Price" formControlName="desc" (blur)="logValidationErrors()" rows="10"></textarea>-->
+                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.additionalFeature">
+                                                                    {{formErrorsPA.additionalFeature}}
+                                                                </div>
+                                                            </div>
                                                         </div>
 
                                                     </div>
-                                                    <div class="form-group" [ngClass]="{'has-error': formErrorsPA.image}">
-                                                        <input type="hidden" class="form-control" formControlName="image" id="img" />
-                                                        <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.image">
-                                                            {{formErrorsPA.image}}
+                                                </div>
+
+
+                                                <a class="btn btn-primary mg-b-20" (click)="isCollapsedLocation = !isCollapsedLocation" [attr.aria-expanded]="!isCollapsedLocation" aria-controls="collapseLocation" style=" width: 100%; text-align: left; color:#fff !important;">3 - Location</a>
+                                                <div class="mg-t-5 collapse show" id="collapseLocation" [ngbCollapse]="isCollapsedLocation">
+                                                    <!--[style.display]="isLocationAndAddressVisible ? 'block' : 'none' "-->
+                                                    <div class="col-12 xol-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                        <h3 class="pd-l-15 pd-r-15">
+                                                            Location
+                                                        </h3>
+                                                        <h5 class="pd-l-15 pd-r-15">
+                                                            Location & Address
+                                                        </h5>
+
+                                                        <div class="col-12 col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                            <div class="form-group" [ngClass]="{'has-error': formErrorsPA.contactNoPA}">
+                                                                <label>
+                                                                    Contact No
+                                                                </label>
+                                                                <input id="contactNoPA" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Contact No" formControlName="contactNoPA" (blur)="logValidationErrorsPA()">
+                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.contactNoPA">
+                                                                    {{formErrorsPA.contactNoPA}}
+                                                                </div>
+                                                            </div>
                                                         </div>
+
+                                                        <div class="col-12 col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                            <div class="form-group" [ngClass]="{'has-error': formErrorsPA.stAddressPA}">
+
+                                                                <label>
+                                                                    Street Address
+                                                                </label>
+                                                                <input id="stAddress" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Street Address" formControlName="stAddressPA" (blur)="logValidationErrorsPA()">
+                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.stAddressPA">
+                                                                    {{formErrorsPA.stAddressPA}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row">
+                                                            <div class="col-12 col-sm-12">
+                                                                <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                                    <div class="form-group" [ngClass]="{'has-error': formErrorsPA.cityPA}">
+
+                                                                        <label>
+                                                                            City
+                                                                        </label>
+                                                                        <input id="city" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter City" formControlName="cityPA" (blur)="logValidationErrorsPA()">
+
+                                                                        <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.cityPA">
+                                                                            {{formErrorsPA.cityPA}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                                    <div class="form-group" [ngClass]="{'has-error': formErrorsPA.statePA}">
+
+                                                                        <label>
+                                                                            State
+                                                                        </label>
+                                                                        <ng-select [items]="stateDataPA" [(ngModel)]="startValueStatePA" (ngModelChange)="changeStatePA()" formControlName="statePA" [searchable]="false"> </ng-select>
+
+                                                                        <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.statePA">
+                                                                            {{formErrorsPA.statePA}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                                    <div class="form-group" [ngClass]="{'has-error': formErrorsPA.countryPA}">
+
+                                                                        <label>
+                                                                            Country
+                                                                        </label>
+                                                                        <input id="country" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Country" formControlName="countryPA" (blur)="logValidationErrorsPA()" disabled />
+
+                                                                        <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.countryPA">
+                                                                            {{formErrorsPA.countryPA}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
+                                                            <div class="form-group" [ngClass]="{'has-error': formErrorsPA.zipCodePA}">
+
+                                                                <label>
+                                                                    Zip Code
+                                                                </label>
+                                                                <ng-select [items]="zipCodeDataPA" [(ngModel)]="startValueZipCodePA" (ngModelChange)="changeZipCodePA()" formControlName="zipCodePA" [searchable]="false"> </ng-select>
+                                                                <input type="hidden" formControlName="lblzipCodeprice" />
+                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.zipCodePA">
+                                                                    {{formErrorsPA.zipCodePA}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
 
 
-                                            <a class="btn btn-dark mg-b-20" (click)="isCollapsedOverviewAndAdditionalFeatures = !isCollapsedOverviewAndAdditionalFeatures" [attr.aria-expanded]="!isCollapsedOverviewAndAdditionalFeatures" aria-controls="collapseOverviewAndAF" style=" width: 100%; text-align: left">Overview & Additional Features</a>
-                                            <div class="mg-t-5 collapse show" id="collapseOverviewAndAF" [ngbCollapse]="isCollapsedOverviewAndAdditionalFeatures">
-                                                <!--[style.display]="isOverviewAndAdditionalVisible ? 'block' : 'none'"-->
-                                                <div class="col-12 xol-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                    <h4 class="pd-l-15 pd-r-15">
-                                                        OverView & Additional Features
-                                                    </h4>
 
-                                                    <div class="col-12 xol-xs-12 col-sm-6 pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                        <div class="form-group" [ngClass]="{'has-error': formErrorsPA.titlePA}">
+                                            <div [style.display]="(isPostAdvertisementFormVisible) ? 'block':'none'" class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right mg-t-30">
+                                                <div class="form-group">
 
-                                                            <label>
-                                                                Title
-                                                            </label>
-                                                            <input id="title" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Title" formControlName="titlePA" (blur)="logValidationErrorsPA()">
-                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.titlePA">
-                                                                {{formErrorsPA.titlePA}}
+                                                    <div class="col-xs-6 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddButtonPA ? 'block': 'none'">
+                                                        <button [disabled]="!PostAdvertisement.valid" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit" (click)="submitPostForm()">
+                                                            <span [style.display]="!isSubmittingPA ? 'block': 'none'">Submit</span>
+                                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingPA ? 'inline-block': 'none'" style="margin-top:4px;">
+                                                                <div class="spinner-layer spinner-white-only">
+                                                                    <div class="circle-clipper left">
+                                                                        <div class="circle"></div>
+                                                                    </div><div class="gap-patch">
+                                                                        <div class="circle"></div>
+                                                                    </div><div class="circle-clipper right">
+                                                                        <div class="circle"></div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        </button>
+
                                                     </div>
 
-                                                    <div class="col-12 col-xs-12 col-sm-6 pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                        <div class="form-group" [ngClass]="{'has-error': formErrorsPA.pricePA}">
-
-                                                            <label>
-                                                                Price ($)
-                                                            </label>
-                                                            <input id="price" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter price as a whole dollar value" formControlName="pricePA" (blur)="logValidationErrorsPA()">
-                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.pricePA">
-                                                                {{formErrorsPA.pricePA}}
+                                                    <div class="col-xs-6  col-sm-2 mg-b-20 pd-l-0-f pd-r-0-f" [style.display]="!isAddButtonPA ? 'block': 'none'">
+                                                        <button [disabled]="!PostAdvertisement.valid" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit">
+                                                            <span [style.display]="!isSubmittingPA ? 'block': 'none'" (click)="updatePostForm()">Update</span>
+                                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingPA ? 'inline-block': 'none'" style="margin-top:4px;">
+                                                                <div class="spinner-layer spinner-white-only">
+                                                                    <div class="circle-clipper left">
+                                                                        <div class="circle"></div>
+                                                                    </div><div class="gap-patch">
+                                                                        <div class="circle"></div>
+                                                                    </div><div class="circle-clipper right">
+                                                                        <div class="circle"></div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        </button>
                                                     </div>
 
-                                                    <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                        <div class="form-group" [ngClass]="{'has-error': formErrorsPA.descPA}">
-
-                                                            <label>
-                                                                Description
-                                                            </label>
-                                                            <textarea id="desc" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Description" formControlName="descPA" (blur)="logValidationErrorsPA()" rows="5"></textarea>
-                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.descPA">
-                                                                {{formErrorsPA.descPA}}
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-xs-6  col-sm-2 mg-b-20" [style.display]="!isResetButtonVisible ? 'block': 'none'">
+                                                        <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="button">
+                                                            <span (click)="resetPostForm()">Reset</span>
+                                                        </button>
                                                     </div>
 
-                                                    <div class="col-xs-12 col-sm-12  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                        <div class="form-group" [ngClass]="{'has-error': formErrorsPA.additionalFeature}">
-
-                                                            <label>
-                                                                Additional Features
-                                                            </label>
-                                                            <ckeditor [editor]="editor" [data]="data" [config]="config" formControlName="additionalFeature"></ckeditor>
-                                                            <!--<textarea id="desc" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Price" formControlName="desc" (blur)="logValidationErrors()" rows="10"></textarea>-->
-                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.additionalFeature">
-                                                                {{formErrorsPA.additionalFeature}}
-                                                            </div>
-                                                        </div>
+                                                    <div class="col-xs-3  col-sm-2 mg-b-20">
+                                                        <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="button" (click)="cancelPostForm()">
+                                                            <span>Cancel</span>
+                                                        </button>
                                                     </div>
 
                                                 </div>
                                             </div>
-
-
-                                            <a class="btn btn-dark mg-b-20" (click)="isCollapsedLocation = !isCollapsedLocation" [attr.aria-expanded]="!isCollapsedLocation" aria-controls="collapseLocation" style=" width: 100%; text-align: left">Location</a>
-                                            <div class="mg-t-5 collapse show" id="collapseLocation" [ngbCollapse]="isCollapsedLocation">
-                                                <!--[style.display]="isLocationAndAddressVisible ? 'block' : 'none' "-->
-                                                <div class="col-12 xol-xs-12 col-sm-12 mg-b-20  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                    <h3 class="pd-l-15 pd-r-15">
-                                                        Location
-                                                    </h3>
-                                                    <h5 class="pd-l-15 pd-r-15">
-                                                        Location & Address
-                                                    </h5>
-
-                                                    <div class="col-12 col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                        <div class="form-group" [ngClass]="{'has-error': formErrorsPA.contactNoPA}">
-                                                            <label>
-                                                                Contact No
-                                                            </label>
-                                                            <input id="contactNoPA" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Contact No" formControlName="contactNoPA" (blur)="logValidationErrorsPA()">
-                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.contactNoPA">
-                                                                {{formErrorsPA.contactNoPA}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12 col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                        <div class="form-group" [ngClass]="{'has-error': formErrorsPA.stAddressPA}">
-
-                                                            <label>
-                                                                Street Address
-                                                            </label>
-                                                            <input id="stAddress" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Street Address" formControlName="stAddressPA" (blur)="logValidationErrorsPA()">
-                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.stAddressPA">
-                                                                {{formErrorsPA.stAddressPA}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-12 col-sm-12">
-                                                            <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                                <div class="form-group" [ngClass]="{'has-error': formErrorsPA.cityPA}">
-
-                                                                    <label>
-                                                                        City
-                                                                    </label>
-                                                                    <input id="city" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter City" formControlName="cityPA" (blur)="logValidationErrorsPA()">
-
-                                                                    <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.cityPA">
-                                                                        {{formErrorsPA.cityPA}}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                                <div class="form-group" [ngClass]="{'has-error': formErrorsPA.statePA}">
-
-                                                                    <label>
-                                                                        State
-                                                                    </label>
-                                                                    <ng-select [items]="stateDataPA" [(ngModel)]="startValueStatePA" (ngModelChange)="changeStatePA()" formControlName="statePA" [searchable]="false"> </ng-select>
-
-                                                                    <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.statePA">
-                                                                        {{formErrorsPA.statePA}}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                                <div class="form-group" [ngClass]="{'has-error': formErrorsPA.countryPA}">
-
-                                                                    <label>
-                                                                        Country
-                                                                    </label>
-                                                                    <input id="country" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Country" formControlName="countryPA" (blur)="logValidationErrorsPA()" [disabled]="true">
-
-                                                                    <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.countryPA">
-                                                                        {{formErrorsPA.countryPA}}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                        <div class="form-group" [ngClass]="{'has-error': formErrorsPA.zipCodePA}">
-
-                                                            <label>
-                                                                Zip Code
-                                                            </label>
-                                                            <ng-select [items]="zipCodeDataPA" [(ngModel)]="startValueZipCodePA" (ngModelChange)="changeZipCodePA()" formControlName="zipCodePA" [searchable]="false"> </ng-select>
-                                                            <input type="hidden" formControlName="lblzipCodeprice" />
-                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.zipCodePA">
-                                                                {{formErrorsPA.zipCodePA}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-
+                                        
+                                        
                                         </div>
 
 
@@ -649,58 +705,7 @@
                                     </div>
                                 </div>
                                 <!--<div>Is my form  valid? {{PostAdvertisement.valid}}</div>-->
-                                <div [style.display]="(isPostAdvertisementFormVisible) ? 'block':'none'" class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right">
-                                    <div class="form-group">
-
-                                        <div class="col-xs-6 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddButtonPA ? 'block': 'none'">
-                                            <button [disabled]="!PostAdvertisement.valid" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit" (click)="submitPostForm()">
-                                                <span [style.display]="!isSubmittingPA ? 'block': 'none'">Submit</span>
-                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingPA ? 'inline-block': 'none'" style="margin-top:4px;">
-                                                    <div class="spinner-layer spinner-white-only">
-                                                        <div class="circle-clipper left">
-                                                            <div class="circle"></div>
-                                                        </div><div class="gap-patch">
-                                                            <div class="circle"></div>
-                                                        </div><div class="circle-clipper right">
-                                                            <div class="circle"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </button>
-
-                                        </div>
-
-                                        <div class="col-xs-6  col-sm-2 mg-b-20 pd-l-0-f pd-r-0-f" [style.display]="!isAddButtonPA ? 'block': 'none'">
-                                            <button [disabled]="!PostAdvertisement.valid" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit">
-                                                <span [style.display]="!isSubmittingPA ? 'block': 'none'" (click)="updatePostForm()">Update</span>
-                                                <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingPA ? 'inline-block': 'none'" style="margin-top:4px;">
-                                                    <div class="spinner-layer spinner-white-only">
-                                                        <div class="circle-clipper left">
-                                                            <div class="circle"></div>
-                                                        </div><div class="gap-patch">
-                                                            <div class="circle"></div>
-                                                        </div><div class="circle-clipper right">
-                                                            <div class="circle"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-xs-6  col-sm-2 mg-b-20" [style.display]="!isResetButtonVisible ? 'block': 'none'">
-                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="button">
-                                                <span (click)="resetPostForm()">Reset</span>
-                                            </button>
-                                        </div>
-
-                                        <div class="col-xs-3  col-sm-2 mg-b-20">
-                                            <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="button" (click)="cancelPostForm()" >
-                                                <span>Cancel</span>
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </div>
+                                
                             </div>
                         </form>
                     </div>
