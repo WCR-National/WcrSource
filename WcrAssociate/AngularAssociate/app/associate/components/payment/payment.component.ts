@@ -170,7 +170,7 @@ export class PaymentComponent implements OnInit {
 
     ngOnInit() {
 
-        debugger;
+        
         this.initializeEventAndControls();
 
         this.setValidationOnForm();
@@ -246,7 +246,7 @@ export class PaymentComponent implements OnInit {
     }
 
     selectCountry() {
-        debugger;
+        
         this.paymentService
             .selectCountry()
             .subscribe(
@@ -266,16 +266,16 @@ export class PaymentComponent implements OnInit {
     }
 
     getCardDataDetails() {
-        debugger;
+        
         let thisStatus: any = this;
         this.paymentService
             .getCardAndBillinInfo()
             .subscribe(
                 data => {
-                    debugger;
+                    
                     if (data != "" && data != undefined && data != null && data != "-1" && data != -1) {
                         if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
-                            debugger;
+                            
 
 
                             this.crdId = data._crdID;
@@ -439,7 +439,7 @@ export class PaymentComponent implements OnInit {
     }
 
     submitCardForm() {
-        debugger;
+        
 
         if (this.cardForm.valid) {
             const credentials = this.cardForm.value;
@@ -475,7 +475,7 @@ export class PaymentComponent implements OnInit {
     }
 
     updateCardForm() {
-        debugger;
+        
         
         const credentials = this.cardForm.value;
         this.isSubmitting = true;
@@ -514,7 +514,7 @@ export class PaymentComponent implements OnInit {
 
     checkCardNumber()
     {
-        debugger;
+        
         let cardNumber = this.cardForm.get('cardNumber').value;
         if (cardNumber.charAt(0) == "3") {
             this.isVisaOrMCOrAmexOrDisc = "amex";
@@ -535,7 +535,7 @@ export class PaymentComponent implements OnInit {
     }
 
     changeCity() {
-        debugger;
+        
         let city_value = this.cardForm.get('city').value;
         let state_value: any = this.cardForm.get('state').value;
 
@@ -543,7 +543,7 @@ export class PaymentComponent implements OnInit {
     }
 
     changeState() {
-        debugger;
+        
         let city_value = this.cardForm.get('city').value;
         let state_value:any = this.cardForm.get('state').value;
 
@@ -601,14 +601,14 @@ export class PaymentComponent implements OnInit {
 
     bindStateWiseZipCode(state, city) {
 
-        debugger;
+        
         if (state !== undefined) {
             const countryId = "US";//this.cardForm.get('country').value;
             this.paymentService
                 .bindStateWiseZipCode(state, city)
                 .subscribe(
                     data => {
-                        debugger;
+                        
 
                         if (data.d.length > 0) {
                             var xmlDoc = $.parseXML(data.d);
@@ -650,7 +650,7 @@ export class PaymentComponent implements OnInit {
     }
 
     cancelForm() {
-        debugger;
+        
         this.isCreditCardFormVisible = false;
     }
 
@@ -735,7 +735,7 @@ export class PaymentComponent implements OnInit {
 
 function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
-        debugger;
+        
         if (!control.value) {
             // if control is empty return no error
             return null;

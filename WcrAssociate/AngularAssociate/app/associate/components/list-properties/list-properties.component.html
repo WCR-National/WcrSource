@@ -237,7 +237,7 @@
 
         <div class="col-12 col-xl-12 col-xs-12 mg-b-20 pd-l-0-f pd-r-0-f">
 
-            <div class="col-sx-12 col-sm-8 col-md-8 col-xl-8 ht-127">
+            <div class="col-sx-12 col-sm-8 col-md-8 col-xl-8 ht-186">
                 <div class="card card-hover card-analytics-one">
 
                     <div class="card-body">
@@ -416,19 +416,19 @@
                                                                 <ul class="image-upload">
                                                                     <li>
                                                                         <div class="block-box full-row">
-                                                                            <p>Upload Images  </p>
+                                                                            <p id="uploadImage01Id">Upload Images  </p>
                                                                             <div id="image-holder">
                                                                                 <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
                                                                             </div>
                                                                             <div class="custom-browse">
-                                                                                <input type="file" class="form-control" (change)="onSelectFile($event, '0')" id="FileUpload1">
+                                                                                <input type="file" class="form-control" (change)="onSelectFile($event, '0')" (click)="reset('1')" #FileUpload1 id="FileUpload1">
                                                                             </div>
                                                                         </div>
                                                                         <p>PRIMARY IMAGES</p>
                                                                     </li>
                                                                     <li>
                                                                         <div class="block-box full-row">
-                                                                            <p>Upload Image </p>
+                                                                            <p id="uploadImage02Id">Upload Image </p>
                                                                             <div id="image-holder2">
                                                                                 <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
                                                                             </div>
@@ -440,7 +440,7 @@
                                                                     </li>
                                                                     <li>
                                                                         <div class="block-box full-row">
-                                                                            <p>Upload Image  </p>
+                                                                            <p id="uploadImage03Id">Upload Image  </p>
                                                                             <div id="image-holder3">
                                                                                 <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
                                                                             </div>
@@ -452,7 +452,7 @@
                                                                     </li>
                                                                     <li>
                                                                         <div class="block-box full-row">
-                                                                            <p>Upload Image  </p>
+                                                                            <p id="uploadImage04Id">Upload Image  </p>
                                                                             <div id="image-holder4">
                                                                                 <img height="75" src="AngularAssociate/assets/images/imagebox.jpg">
                                                                             </div>

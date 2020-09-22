@@ -39,7 +39,7 @@ export class UserService {
     //// Verify JWT in localstorage with server & load user's info.
     //// This runs once on application startup.
     populate() {
-        debugger;
+        
         // If JWT detected, attempt to get & store user's info
         if (localStorage.getItem('jwtToken')) {
             var user: any = JSON.parse(localStorage.getItem('jwtToken'));
@@ -108,7 +108,7 @@ export class UserService {
     }
 
     setAuth(user: User) {
-        debugger;
+        
         // Save JWT sent from server in localstorage
         this.jwtService.saveToken(user);
         // Set current user data into observable
@@ -145,7 +145,7 @@ export class UserService {
         return this.apiService.post(urlToSignUp, { EmailID: credentials.email })
             .pipe(map(
                 data => {
-                    debugger;
+                    
 
                     //if (data.d.length > 0) {
                     //    this.user.email = credentials.email;
@@ -161,7 +161,7 @@ export class UserService {
         //return this.apiService.post( urlToSignUp, {})
         //    .pipe(map(
         //        data => {
-        //            debugger;
+        //            
 
         //            if (data > '0') {
         //                this.user.email = credentials.email;
@@ -187,7 +187,7 @@ export class UserService {
 
 
     async attemptAssociateAuth(type, credentials) {
-        debugger;
+        
 
         let urlToSignIn: string = "ws/AssociateRegistration.asmx/AssociateLogin";
         return await this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
@@ -203,7 +203,7 @@ export class UserService {
         //return await this.apiService.post(urlToSignIn, {})
         //    .pipe(map(
         //        data => {
-        //            debugger;
+        //            
         //            this.user.email = credentials.email;
         //            this.user.password = credentials.password;
         //            this.user.token = this.token();
@@ -214,7 +214,7 @@ export class UserService {
     }
 
     async attemptConsumerAuth(type, credentials) {
-        debugger;
+        
         //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
         let urlToSignIn: string = "ws/AssociateRegistration.asmx/ConsumerLogin";
         return await this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
@@ -227,7 +227,7 @@ export class UserService {
 
     async consumerLoginSessionActivate(type, credentials, associateID) {
 
-        debugger;
+        
         let urlToSignInSessionActivation: string = "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate";
         return await this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
             .pipe(map(
@@ -248,7 +248,7 @@ export class UserService {
 
     async associateLoginSessionActivate(type, credentials, associateID) {
         //{'username':'" + uname + "','assoID':'" + $(docs).find("AssociateId").text() + "
-        debugger;
+        
         let urlToSignInSessionActivation: string = "ws/AssociateRegistration.asmx/AssociateLoginSessionActivate";
         return await this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
             .pipe(map(
@@ -277,7 +277,7 @@ export class UserService {
     }
 
     attemptRegisterAssociate(type, credentials): Observable<any> {
-        debugger;
+        
         //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
 
         let urlToSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateData";
@@ -293,7 +293,7 @@ export class UserService {
     }
 
     attemptRegisterationAssociate(credentials): Observable<any> {
-        debugger;
+        
 
         let urlToAssociateSignUp: string = "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + credentials.firstName + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
 

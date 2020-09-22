@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, NgZone, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, NgZone, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debug } from 'util';
 import { LightboxModule, LightboxEvent, Lightbox, IAlbum } from 'ngx-lightbox';
@@ -236,8 +236,18 @@ export class ListPropertiesComponent implements OnInit {
     public isCollapsedOpenImages = true;
     public isCollapsedOverviewAndAdditionalFeatures = true;
     public isCollapsedLocation = true;
+    public isFirstTimePageBind = true;
+    public isTableCurrentPurchasedZipCodesLoadedFirstTime = true;
+    public isTableSelectedChoicesFirstTime = true;
+    public isTablePurchasedZipCodesLoaded = true;
+    public isTableSalesAdvertisementLoadedFirstTime = true;
 
+    @ViewChild('FileUpload1') fileUpload1: ElementRef;
+    @ViewChild('FileUpload2') fileUpload2: ElementRef;
+    @ViewChild('FileUpload3') fileUpload3: ElementRef;
+    @ViewChild('FileUpload4') fileUpload4: ElementRef;
 
+    
     public data = "";
 
     constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
@@ -286,8 +296,9 @@ export class ListPropertiesComponent implements OnInit {
             thisStatus.isUploadImageVisible = true;
             //thisStatus.isOverviewAndAdditionalVisible = false;
             //thisStatus.isLocationAndAddressVisible = false;
-
         });
+
+
     }
 
     setValidationOnForm() {
@@ -378,7 +389,7 @@ export class ListPropertiesComponent implements OnInit {
     }
 
     onSelectFile(event, imageIndex) {
-        debugger;
+
 
         if (event.target.files && event.target.files[0]) {
 
@@ -388,58 +399,137 @@ export class ListPropertiesComponent implements OnInit {
                 return;
             }
 
-            var reader = new FileReader();
+           
             var imageExist = false;
 
-
-            for (var i = 0; i < this.arrayOfImages.length; i++) {
-                if (this.arrayOfImages[i] !== undefined && this.arrayOfImages[i].imageIndex == imageIndex) {
+            for (var i = 0; i < this.arrayOfImages.length; i++)
+            {
+                if (this.arrayOfImages[i] !== undefined && this.arrayOfImages[i].imageIndex == imageIndex)
+                {
                     this.g_i = i;
 
-                    reader.onload = (event: any) => { // called once readAsDataURL is completed
-
-                        this.imageUrl = event.target.result;
-                        this.arrayOfImages[this.g_i].imageUrl = this.imageUrl;
-                        this.arrayOfImages[this.g_i].previewUrl = this.imageUrl;
-                        $('#previewImages').html('');
-                        var images = '';
-                        for (let i = 0; i < this.arrayOfImages.length; i++) {
-                            images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') ></div>";
-                        }
-                        $('#previewImages').html(images);
+                    var reader1 = new FileReader();
+                    reader1.readAsDataURL(event.target.files[0]); // read file as data url
+                    reader1.onload = (e: any) => { // called once readAsDataURL is completed
+                        this.resetImages(e, imageIndex);
                     }
                     imageExist = true;
+                    debugger;
                 }
             }
 
             if (!imageExist) {
+                var reader = new FileReader();
+                reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-                reader.onload = (event: any) => { // called once readAsDataURL is completed
-                    debugger;
-                    this.imageUrl = event.target.result;
-                    let imageObject = { 'srcUrl': this.imageUrl, 'previewUrl': this.imageUrl, 'imageIndex': imageIndex };
-                    this.arrayOfImages.push(imageObject);
-
-                    $('#previewImages').html('');
-                    var images = '';
-                    for (let i = 0; i < this.arrayOfImages.length; i++) {
-                        images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') ></div>";
-                    }
-                    $('#previewImages').html(images);
+                reader.onload = (e1: any) => { // called once readAsDataURL is completed
+                    this.resetImageFirstTime(e1, imageIndex);
                 }
+                debugger;
             }
-            reader.readAsDataURL(event.target.files[0]); // read file as data url
 
-            this.PostAdvertisement.get('image').setValue(this.arrayOfImages.toString());
+            
+        }
+    }
 
-            //if (imageIndex == '0')
-            //    this.UpdateImages($('#FileUpload1'), this.PostAdvertisement.get('advId').value, 'Associate/ws/UpdateAdvertisementImges.ashx');
-            //else if (imageIndex == '1')
-            //    this.UpdateImages($('#FileUpload2'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateAdvertisementSecondImage.ashx');
-            //else if (imageIndex == '2')
-            //    this.UpdateImages($('#FileUpload3'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateThirdImg.ashx');
-            //else if (imageIndex == '3')
-            //    this.UpdateImages($('#FileUpload4'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateFourthImg.ashx');
+    resetImageFirstTime(e1, imageIndex)
+    {
+        debugger;
+        var l_imageUrlFT = e1.target.result;
+        let imageObject = { 'srcUrl': l_imageUrlFT, 'previewUrl': l_imageUrlFT, 'imageIndex': imageIndex };
+        this.arrayOfImages.push(imageObject);
+
+        $('#previewImages').html('');
+        var images = '';
+        for (let i = 0; i < this.arrayOfImages.length; i++) {
+            //images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') ></div>";
+            images += "<div class='col-12 col-xs-12 col-sm-3'>";
+            images += "<div id='wrapperImage" + i + "Id' class='wrapper_image'>"
+            images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
+            images += "<span id='image" + i + "Id' class='close_image'></span>";
+            images += "</div>";
+            images += "</div>";
+        }
+        $('#previewImages').html(images);
+
+        this.PostAdvertisement.get('image').setValue(this.arrayOfImages.toString());
+        //if (this.isFirstTimePageBind) {
+
+            this.closeImageClick();
+            this.isFirstTimePageBind = false;
+        //}
+        //this.fileUpload1.nativeElement.value = "";
+        this.cdr.detectChanges();
+    }
+
+    resetImages(e, imageIndex)
+    {
+        debugger;
+        var l_imageUrl = e.target.result;
+        this.arrayOfImages[this.g_i].srcUrl = '';
+        this.arrayOfImages[this.g_i].previewUrl = '';
+        this.arrayOfImages[this.g_i].srcUrl = l_imageUrl;
+        this.arrayOfImages[this.g_i].previewUrl = l_imageUrl;
+        $('#previewImages').html('');
+        var images = '';
+        for (let i = 0; i < this.arrayOfImages.length; i++) {
+            images += "<div class='col-12 col-xs-12 col-sm-3'>";
+            images += "<div id='wrapperImage" + i + "Id' class='wrapper_image'>"
+            images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].previewUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
+            images += "<span id='image" + i + "Id' class='close_image'></span>";
+            images += "</div>";
+            images += "</div>";
+        }
+        $('#previewImages').html(images);
+
+        this.PostAdvertisement.get('image').setValue(this.arrayOfImages.toString());
+        //if (this.isFirstTimePageBind) {
+
+        this.closeImageClick();
+        this.isFirstTimePageBind = false;
+        //}
+        //this.fileUpload1.nativeElement.value = "";
+
+        this.cdr.detectChanges();
+    }
+
+    closeImageClick()
+    {
+        var thisStatus = this;
+        $('.close_image').click(function () {
+
+            var id = $(this).attr('id');
+            if (id == "image0Id") {
+                thisStatus.arrayOfImages[0].imageUrl = '';
+                thisStatus.arrayOfImages[0].previewUrl = '';
+                $('#wrapperImage0Id').empty();
+            }
+            else if (id == "image1Id") {
+                thisStatus.arrayOfImages[1].imageUrl = '';
+                thisStatus.arrayOfImages[1].previewUrl = '';
+                $('#wrapperImage1Id').empty();
+            }
+            else if (id == "image2Id") {
+                thisStatus.arrayOfImages[2].imageUrl = '';
+                thisStatus.arrayOfImages[2].previewUrl = '';
+                $('#wrapperImage2Id').empty();
+            }
+            else if (id == "image3Id") {
+                thisStatus.arrayOfImages[3].imageUrl = '';
+                thisStatus.arrayOfImages[3].previewUrl = '';
+                $('#wrapperImage3Id').empty();
+            }
+        });
+        this.cdr.detectChanges();
+    }
+
+    reset(fileUploadId) {
+        debugger;
+        if (fileUploadId == '1')
+        {
+            console.log(this.fileUpload1.nativeElement.files);
+            this.fileUpload1.nativeElement.value = "";
+            console.log(this.fileUpload1.nativeElement.files);
         }
     }
 
@@ -760,6 +850,7 @@ export class ListPropertiesComponent implements OnInit {
     InitializedDataTableCurrentPurchasedZipCodes(asyncData) {
         debugger;
         console.log(asyncData);
+        $('#ViewAllCategoriesPurchased').DataTable().clear().destroy();
 
         let dTable: any = $('#ViewAllCategoriesPurchased');
         let thisStatus: any = this;
@@ -824,25 +915,28 @@ export class ListPropertiesComponent implements OnInit {
             ],
             order: [[1, 'asc']]
         });
+        if (this.isTableCurrentPurchasedZipCodesLoadedFirstTime)
+        {
+            $('#ViewAllCategoriesPurchased').on('click', 'a.cancel', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                dTable.api().row($(this).parents('tr')).remove().draw(false);
 
-        $('#ViewAllCategoriesPurchased').on('click', 'a.cancel', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            dTable.api().row($(this).parents('tr')).remove().draw(false);
 
-
-            thisStatus
-                .purchaseZipCodeService
-                .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
-                .subscribe(
-                    data => {
-                        //thisStatus.getClientDetailsServicesData();
-                        //thisStatus.getServicesCount();
-                        //thisStatus.getTotalSalesAndServicesCount();
-                    });
-        });
+                thisStatus
+                    .purchaseZipCodeService
+                    .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
+                    .subscribe(
+                        data => {
+                            //thisStatus.getClientDetailsServicesData();
+                            //thisStatus.getServicesCount();
+                            //thisStatus.getTotalSalesAndServicesCount();
+                        });
+            });
+            this.isTableCurrentPurchasedZipCodesLoadedFirstTime = false;
+        }
     }
 
 
@@ -894,6 +988,7 @@ export class ListPropertiesComponent implements OnInit {
 
     InitializedDataTableSelectedChoices(asyncData) {
         console.log(asyncData);
+        $('#ViewRcd').DataTable().clear().destroy();
 
         let dTable: any = $('#ViewRcd');
         let thisStatus: any = this;
@@ -972,46 +1067,50 @@ export class ListPropertiesComponent implements OnInit {
             order: [[1, 'asc']]
         });
 
-        $('#ViewRcd').on('click', 'a.purchase', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
+        if (this.isTableSelectedChoicesFirstTime) {
 
-            var row = dTable.fnGetPosition($(this).closest('tr')[0]);
-            var rowData = dTable.fnGetData(row);
-            //var rowColumns = rowData[rowData.length - 1];
+            $('#ViewRcd').on('click', 'a.purchase', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
 
-            var id = rowData['id'];
-            var CategoryName = rowData['CategoryName'];
-            var SubCategoryName = rowData['SubCategoryName'];
-            var Price = rowData['Price'];
-            var Zipcode = rowData['Zipcode'];
-            var subCategoryID = rowData['subCategoryID'];
-            var CategoryID = rowData['CategoryID'];
+                var row = dTable.fnGetPosition($(this).closest('tr')[0]);
+                var rowData = dTable.fnGetData(row);
+                //var rowColumns = rowData[rowData.length - 1];
 
-            thisStatus.ngZone.run(() => {
-                thisStatus.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
+                var id = rowData['id'];
+                var CategoryName = rowData['CategoryName'];
+                var SubCategoryName = rowData['SubCategoryName'];
+                var Price = rowData['Price'];
+                var Zipcode = rowData['Zipcode'];
+                var subCategoryID = rowData['subCategoryID'];
+                var CategoryID = rowData['CategoryID'];
+
+                thisStatus.ngZone.run(() => {
+                    thisStatus.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
+                });
             });
-        });
-        $('#ViewRcd').on('click', 'a.cancel', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
+            $('#ViewRcd').on('click', 'a.cancel', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
 
 
-            var row = dTable.fnGetPosition($(this).closest('tr')[0]);
-            var rowData = dTable.fnGetData(row);
-            //var rowColumns = rowData[rowData.length - 1];
+                var row = dTable.fnGetPosition($(this).closest('tr')[0]);
+                var rowData = dTable.fnGetData(row);
+                //var rowColumns = rowData[rowData.length - 1];
 
-            var id = rowData['id'];
-            var SubCategoryName = rowData['SubCategoryName'];
-            var subCategoryID = rowData['subCategoryID'];
-            thisStatus.ngZone.run(() => {
-                thisStatus.CancelRecord(subCategoryID, SubCategoryName, id);
+                var id = rowData['id'];
+                var SubCategoryName = rowData['SubCategoryName'];
+                var subCategoryID = rowData['subCategoryID'];
+                thisStatus.ngZone.run(() => {
+                    thisStatus.CancelRecord(subCategoryID, SubCategoryName, id);
+                });
             });
-        });
+            this.isTableSelectedChoicesFirstTime = false;
+        }
     }
 
     PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id) {
@@ -1093,6 +1192,7 @@ export class ListPropertiesComponent implements OnInit {
 
     InitializedDataTablePurchasedZipCodes(asyncData) {
         console.log(asyncData);
+        $('#viewAllPurchasedZipCodes').DataTable().clear().destroy();
 
         this.dTableAPZC = $('#viewAllPurchasedZipCodes');
         let thisStatus: any = this;
@@ -1159,22 +1259,25 @@ export class ListPropertiesComponent implements OnInit {
             ],
             order: [[1, 'asc']]
         });
+        if (this.isTablePurchasedZipCodesLoaded)
+        {
+            $('#viewAllPurchasedZipCodes').on('click', 'a.cancel', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
 
-        $('#viewAllPurchasedZipCodes').on('click', 'a.cancel', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
+                ////get the real row index, even if the table is sorted 
+                //var index = dTable.fnGetPosition(tr[0]);
+                ////alert the content of the hidden first column 
+                //console.log(dTable.fnGetData(index)[0]);
 
-            ////get the real row index, even if the table is sorted 
-            //var index = dTable.fnGetPosition(tr[0]);
-            ////alert the content of the hidden first column 
-            //console.log(dTable.fnGetData(index)[0]);
+                thisStatus.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
 
-            thisStatus.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
-
-            this.RemoveRcd1($(this).closest('tr').children('td:first').text());
-        });
+                thisStatus.RemoveRcd1($(this).closest('tr').children('td:first').text());
+            });
+            this.isTablePurchasedZipCodesLoaded = false;
+        }
     }
 
     RemoveRcd1(rrr) {
@@ -1219,28 +1322,32 @@ export class ListPropertiesComponent implements OnInit {
                         var json = this.xmlToJson.xml2json(xmlDoc, "");
                         var resultJson: any = [];
                         var dataJson = JSON.parse(json);
-
-                        if (dataJson.NewDataSet.ViewAdvertisment != null) {
-                            if (!Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
-                                resultJson.push(dataJson.NewDataSet.ViewAdvertisment);
-                                dataJson.NewDataSet.ViewAdvertisment = resultJson;
+                        if (dataJson.NewDataSet != null) {
+                            if (dataJson.NewDataSet.ViewAdvertisment != null) {
+                                if (!Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
+                                    resultJson.push(dataJson.NewDataSet.ViewAdvertisment);
+                                    dataJson.NewDataSet.ViewAdvertisment = resultJson;
+                                }
+                                this.InitializedDataTableSalesAdvertisement(dataJson.NewDataSet.ViewAdvertisment);
                             }
-                            this.InitializedDataTableSalesAdvertisement(dataJson.NewDataSet.ViewAdvertisment);
+                            else {
+                                this.InitializedDataTableSalesAdvertisement(undefined);
+                            }
+
+                            var cc = 0;
+                            var count = 0;
+                            var totalAmount1 = 0;
+                            $.each(docs, function (i, docs) {
+                                var a = $(docs).find("amount").text();
+                                totalAmount1 = totalAmount1 + parseInt(a);
+                                count++;
+                            });
+                            this.totalCountOfPostAdvertisementSA = count;
+                            var row = "<tr>   <td colspan='7' ><b> Total Amount:- $" + totalAmount1 + "</b></td><td></td></tr>";
                         }
                         else {
                             this.InitializedDataTableSalesAdvertisement(undefined);
                         }
-
-                        var cc = 0;
-                        var count = 0;
-                        var totalAmount1 = 0;
-                        $.each(docs, function (i, docs) {
-                            var a = $(docs).find("amount").text();
-                            totalAmount1 = totalAmount1 + parseInt(a);
-                            count++;
-                        });
-                        this.totalCountOfPostAdvertisementSA = count;
-                        var row = "<tr>   <td colspan='7' ><b> Total Amount:- $" + totalAmount1 + "</b></td><td></td></tr>";
                         this.cdr.detectChanges();
                     }
                 }
@@ -1249,7 +1356,7 @@ export class ListPropertiesComponent implements OnInit {
 
     InitializedDataTableSalesAdvertisement(asyncData) {
         console.log(asyncData);
-
+        $('#salesAdvertisement').DataTable().clear().destroy();
         this.dTableSA = $('#salesAdvertisement');
         let thisStatus: any = this;
         if (asyncData === undefined) {
@@ -1316,6 +1423,7 @@ export class ListPropertiesComponent implements OnInit {
                     className: "hide_column"
                 }
             ],
+
             "autoWidth": true,
             searching: false,
             paging: false,
@@ -1325,29 +1433,32 @@ export class ListPropertiesComponent implements OnInit {
             ],
             order: [[1, 'asc']]
         });
-
-        $('#salesAdvertisement').on('click', 'a.edit', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            thisStatus.ngZone.run(() => {
-                thisStatus.EditRecords($(this).closest('tr').children('td:first').text());
+        if (this.isTableSalesAdvertisementLoadedFirstTime) {
+            $('#salesAdvertisement').on('click', 'a.edit', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                thisStatus.ngZone.run(() => {
+                    thisStatus.EditRecords($(this).closest('tr').children('td:first').text());
+                });
             });
-        });
 
-        $('#salesAdvertisement').on('click', 'a.remove', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
+            $('#salesAdvertisement').on('click', 'a.remove', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
 
-            thisStatus.dTableSA.api().row($(this).parents('tr')).remove().draw(false);
-            thisStatus.ngZone.run(() => {
+                thisStatus.dTableSA.api().row($(this).parents('tr')).remove().draw(false);
+                thisStatus.ngZone.run(() => {
 
-                thisStatus.DeleteRecords($(this).closest('tr').children('td:first').text());
+                    thisStatus.DeleteRecords($(this).closest('tr').children('td:first').text());
+                });
             });
-        });
+            this.isTableSalesAdvertisementLoadedFirstTime = false;
+        }
+
     }
 
     RemoveTableSalesAdvertisement() {
@@ -1403,7 +1514,7 @@ export class ListPropertiesComponent implements OnInit {
                     if (data.d.length > 0) {
 
                         $('html, body').animate({ scrollTop: $('#loadingIconId').offset().top }, 'slow');
-
+                        $('#previewImages').html('');
 
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
@@ -1467,33 +1578,61 @@ export class ListPropertiesComponent implements OnInit {
                             //CKEDITOR.instances.txtFeatures.setData($(docs).find("additionalFeature").text());
                             var images = '';
 
-                            if (($(docs).find("advMainImage").text()) !== undefined) {
+                            if (($(docs).find("advMainImage").text()) !== undefined && ($(docs).find("advMainImage").text()) != null) {
 
                                 thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text();
                                 let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1' };
                                 thisStatus.arrayOfImages.push(imageObject);
 
-                                images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
+                                //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
+
+
+                                images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                                images += "<div class='wrapper_image'>"
+                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advMainImage").text() + "'>";
+                                images += "<span id='image0Id' class='close_image'></span>";
+                                images += "</div>";
+                                images += "</div>";
                             }
-                            if (($(docs).find("advMainImage").text()) !== undefined) {
+                            if (($(docs).find("advImage1").text()) !== undefined && ($(docs).find("advImage1").text()) != null) {
 
                                 thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage1").text();
                                 let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                                 thisStatus.arrayOfImages.push(imageObject);
 
-                                images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
+                                //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
+                                images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                                images += "<div class='wrapper_image'>"
+                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage1").text() + "'>";
+                                images += "<span id='image1Id'  class='close_image'></span>";
+                                images += "</div>";
+                                images += "</div>";
+
                             }
-                            if (($(docs).find("advMainImage").text()) !== undefined) {
+                            if (($(docs).find("advImage2").text()) !== undefined && ($(docs).find("advImage2").text()) != null) {
                                 thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage2").text();
                                 let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                                 thisStatus.arrayOfImages.push(imageObject);
-                                images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage2").text() + '/></div>';
+                                //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' +  + '/></div>';
+                                images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                                images += "<div class='wrapper_image'>"
+                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage2").text() + "'>";
+                                images += "<span id='image2Id' class='close_image'></span>";
+                                images += "</div>";
+                                images += "</div>";
                             }
-                            if (($(docs).find("advMainImage").text()) !== undefined) {
+                            if (($(docs).find("advImage3").text()) !== undefined && ($(docs).find("advImage3").text()) != null) {
                                 thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage3").text();
                                 let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                                 thisStatus.arrayOfImages.push(imageObject);
-                                images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
+                                //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
+
+                                images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                                images += "<div class='wrapper_image'>"
+                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage3").text() + "'>";
+                                images += "<span id='image3Id' class='close_image'></span>";
+                                images += "</div>";
+                                images += "</div>";
                             }
                             $('#previewImages').html(images);
                             //thisStatus.uploadedAdvertisementImages = images;
@@ -1511,15 +1650,36 @@ export class ListPropertiesComponent implements OnInit {
                             thisStatus.PostAdvertisement.get('cityPA').setValue($(docs).find("CityID").text());
                             thisStatus.startValueState = { "value": $(docs).find("StateID").text(), "label": $(docs).find("StateID").text() };
                             thisStatus.BindStateWiseZipCodeForSearch($(docs).find("StateID").text(), $(docs).find("CityID").text(), $(docs).find("ZipCode").text());
-
+                            if (images !== undefined || images != '')
+                            {
+                                if (thisStatus.isFirstTimePageBind) {
+                                    $('.close_image').click(function () {
+                                        debugger;
+                                        var id = $(this).attr('id');
+                                        if (id == "image0Id") {
+                                            $('#wrapperImage0Id').empty();
+                                        }
+                                        else if (id == "image1Id") {
+                                            $('#wrapperImage1Id').empty();
+                                        }
+                                        else if (id == "image2Id") {
+                                            $('#wrapperImage2Id').empty();
+                                        }
+                                        else if (id == "image3Id") {
+                                            $('#wrapperImage3Id').empty();
+                                        }
+                                    });
+                                    thisStatus.isFirstTimePageBind = true;
+                                }
+                            }
                         });
 
                         thisStatus.showLoadingIconOnEditClick = false;
                         thisStatus.isPostAdvertisementFormVisible = true;
                         thisStatus.isDesiredConsumerSegmentVisible = true;
                         thisStatus.isConsumerSegmentAdvertisementVisible = true;
-
                     }
+
                     this.cdr.detectChanges();
                 });
 
@@ -1577,9 +1737,12 @@ export class ListPropertiesComponent implements OnInit {
                 data => {
                     if (data.d == "-1") {
                         this.showToast('danger', "This Record is Already Exists");
+                        this.isSubmittingPA = false;
+
                     }
                     if (data.d == "3") {
                         this.showToast('danger', "Unsucessfull, Try again!!!");
+                        this.isSubmittingPA = false;
                     }
                     else if (data.d >= "1") {
                         this.showToast('success', "Updated Successfully.");
@@ -1598,7 +1761,7 @@ export class ListPropertiesComponent implements OnInit {
                         //$('#divImage').css("display", "none");
                         //$('#btnUpdate').css("visibility", "hidden");
                         //$("#btnAddNew").attr("disabled", true);
-
+                        this.cdr.detectChanges();
                     }
                 }
             );
@@ -1657,6 +1820,11 @@ export class ListPropertiesComponent implements OnInit {
                             //$('#completeConsumerProfile').modal('show');
                         }
                     }
+                    else {
+
+                        this.isSubmittingPA = false;
+                        this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
+                    }
                 });
     }
 
@@ -1687,6 +1855,10 @@ export class ListPropertiesComponent implements OnInit {
                             }
                         });
                     }
+                    else {
+
+                        this.isSubmittingPA = false;
+                        this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");}
                 });
         // }
         // else
@@ -1731,37 +1903,40 @@ export class ListPropertiesComponent implements OnInit {
                 data => {
                     debugger;
                     if (parseInt(data.d) == 1) {
-                    var CategoryId = 1;
-                    var subCategoryId = $("#SubCategory").val();
-                    //this.PostAdvertisement.get('');
+                        var CategoryId = 1;
+                        var subCategoryId = $("#SubCategory").val();
+                        //this.PostAdvertisement.get('');
 
-                    var title = this.PostAdvertisement.get('titlePA').value;
-                    var featurs = this.PostAdvertisement.get('additionalFeature').value;;//CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
-                    var address = this.PostAdvertisement.get('stAddressPA').value;
-                    var contactNo = this.PostAdvertisement.get('contactNoPA').value;
-                    var description = this.PostAdvertisement.get('descPA').value;
-                    var countryID = this.PostAdvertisement.get('countryPA').value;
-                    var stateID = this.PostAdvertisement.get('statePA').value.value;
-                    var cityId = this.PostAdvertisement.get('cityPA').value;
-                    var price = this.PostAdvertisement.get('pricePA').value;
-                    var zipcod = this.PostAdvertisement.get('zipCodePA').value.value;
+                        var title = this.PostAdvertisement.get('titlePA').value;
+                        var featurs = this.PostAdvertisement.get('additionalFeature').value;;//CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+                        var address = this.PostAdvertisement.get('stAddressPA').value;
+                        var contactNo = this.PostAdvertisement.get('contactNoPA').value;
+                        var description = this.PostAdvertisement.get('descPA').value;
+                        var countryID = this.PostAdvertisement.get('countryPA').value;
+                        var stateID = this.PostAdvertisement.get('statePA').value.value;
+                        var cityId = this.PostAdvertisement.get('cityPA').value;
+                        var price = this.PostAdvertisement.get('pricePA').value;
+                        var zipcod = this.PostAdvertisement.get('zipCodePA').value.value;
 
-                    var isFeatured = 0;
-                    var jobtype = 1;
-                    var amount = 0;
+                        var isFeatured = 0;
+                        var jobtype = 1;
+                        var amount = 0;
 
-                    var adsPrice = this.PostAdvertisement.get('lblzipCodeprice').value;
-                    if (price == "") {
-                        amount = 0;
-                    }
-                    else {
-                        amount = parseInt(price);
-                    }
+                        var adsPrice = this.PostAdvertisement.get('lblzipCodeprice').value;
+                        if (price == "") {
+                            amount = 0;
+                        }
+                        else {
+                            amount = parseInt(price);
+                        }
 
-                    this.SavePostAdvertisementsData(CategoryId, subCategoryId, title, featurs, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice);
+                        this.SavePostAdvertisementsData(CategoryId, subCategoryId, title, featurs, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice);
 
 
-                    this.isSubmittingPA = false;
+                        this.isSubmittingPA = false;
+                    } else {
+                        this.isSubmittingPA = false;
+                        this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
                     }
 
                 }
@@ -1880,18 +2055,29 @@ export class ListPropertiesComponent implements OnInit {
                 thisStatus.RemoveTableSalesAdvertisement();
                 thisStatus.ViewAllSalesAdvertisement();
                 thisStatus.isSubmittingPA = false;
+
+                thisStatus.isCollapsedOpenImages = true;
+                thisStatus.isCollapsedOverviewAndAdditionalFeatures = true;
+                thisStatus.isCollapsedLocation = true;
+                if (thisStatus.isPostButtonGreen) {
+                    thisStatus.isPostButtonGreen = false;
+                }
+                else {
+                    thisStatus.isPostButtonGreen = true;
+                }
+                thisStatus.isPostAdvertisementFormVisible = false;
                 thisStatus.showToast('success', "Successfully Sales Advertisment Purchased!");
                 thisStatus.showToast('success', "Your credit card has been Successfully charged!!!");
-                this.cdr.detectChanges();
+                thisStatus.cdr.detectChanges();
             },
             error: function (err) {
                 alert(err.statusText);
+                this.isSubmittingPA = false;
+                this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
             }
         });
 
     }
-
-
 
     PurchasedCategorybyAssociate(CatID, SubCatID, PlanID, Price, Zipcode, CouponCode, Discount, Duration) {
         debugger;
@@ -2049,8 +2235,9 @@ export class ListPropertiesComponent implements OnInit {
 
                                 //$('#zipCodeTabId').tab('show');
                             }
-
-
+                        }
+                        else {
+                            this.zipCodeDataPA = [];
                         }
                     }
                 )
@@ -2178,10 +2365,20 @@ export class ListPropertiesComponent implements OnInit {
 
 
     changeCityPA() {
-        debugger;
-        this.BindCityWiseStatesPA(this.PostAdvertisement.get('city').value);
-        this.markAsDirty();
 
+        debugger; 
+        var state = this.PostAdvertisement.get('statePA').value != null ? this.PostAdvertisement.get('statePA').value.value : null;
+
+        var city = this.PostAdvertisement.get('cityPA').value;
+
+        if (state !== undefined && state != null)
+        {
+            this.BindStateWiseZipCodeForSearch(state, city);
+        }
+        else {
+            this.BindCityWiseStatesPA(this.PostAdvertisement.get('cityPA').value);
+            this.markAsDirty();
+        }
     }
 
     changeStatePA() {
@@ -2196,7 +2393,7 @@ export class ListPropertiesComponent implements OnInit {
         debugger;
 
         var zipCodeVal = this.PostAdvertisement.get('zipCodePA').value != null ? this.PostAdvertisement.get('zipCodePA').value.value : null;
-        var subCategory = this.PostAdvertisement.get('subCat').value != null ? this.PostAdvertisement.get('subCat').value.value : null;
+        var subCategory = this.PostAdvertisement.get('subCat').value != null ? this.PostAdvertisement.get('subCat').value : null;
 
 
         if (zipCodeVal == null || zipCodeVal == undefined || zipCodeVal == '') {
@@ -2340,7 +2537,6 @@ export class ListPropertiesComponent implements OnInit {
             $("#subCatTownHome").removeClass("active");
             $("#subCatMultiFamily").removeClass("active");
             $("#subCatLand").removeClass("active");
-            this.PostAdvertisement.get('subCat').setValue('Home');
 
             $('#SubCategory option').each(function () {
                 if ($(this).val() == 1) {
@@ -2358,6 +2554,8 @@ export class ListPropertiesComponent implements OnInit {
                 _select.append($('<option></option>').val(1).html("Home"));
                 $('#SubCategory').append(_select.html());
             }
+            this.PostAdvertisement.get('subCat').setValue('1');
+
         }
         else if (type == 'Town') {
             $("#SubCategory").empty();
@@ -2369,7 +2567,6 @@ export class ListPropertiesComponent implements OnInit {
             $("#subCatHome").removeClass("active");
             $("#subCatMultiFamily").removeClass("active");
             $("#subCatLand").removeClass("active");
-            this.PostAdvertisement.get('subCat').setValue('TownHome');
 
             var flg = 0;
             $('#SubCategory option').each(function () {
@@ -2389,6 +2586,8 @@ export class ListPropertiesComponent implements OnInit {
                 _select.append($('<option></option>').val(2).html("TownHome"));
                 $('#SubCategory').append(_select.html());
             }
+            this.PostAdvertisement.get('subCat').setValue('2');
+
         }
         else if (type == 'Family') {
             $("#SubCategory").empty();
@@ -2400,7 +2599,6 @@ export class ListPropertiesComponent implements OnInit {
             $("#subCatHome").removeClass("active");
             $("#subCatLand").removeClass("active");
 
-            this.PostAdvertisement.get('subCat').setValue('MultiFamily');
 
             var flg = 0;
             $('#SubCategory option').each(function () {
@@ -2418,6 +2616,8 @@ export class ListPropertiesComponent implements OnInit {
                 _select.append($('<option></option>').val(3).html("MultiFamily"));
                 $('#SubCategory').append(_select.html());
             }
+            this.PostAdvertisement.get('subCat').setValue('3');
+
         }
         else if (type == 'Land') {
             $("#SubCategory").empty();
@@ -2428,8 +2628,6 @@ export class ListPropertiesComponent implements OnInit {
             $("#subCatMultiFamily").removeClass("active");
             $("#subCatTownHome").removeClass("active");
             $("#subCatHome").removeClass("active");
-
-            this.PostAdvertisement.get('subCat').setValue('Land');
 
             var flg = 0;
             $('#SubCategory option').each(function () {
@@ -2447,6 +2645,8 @@ export class ListPropertiesComponent implements OnInit {
                 _select.append($('<option></option>').val(4).html("Land"));
                 $('#SubCategory').append(_select.html());
             }
+            this.PostAdvertisement.get('subCat').setValue('4');
+
         }
         this.isConsumerSegmentAdvertisementVisible = true;
     }

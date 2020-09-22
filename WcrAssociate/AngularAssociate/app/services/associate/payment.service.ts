@@ -75,7 +75,7 @@ export class PaymentService {
 
     addCardAndBillinInfo(cardData) {
         //url: "..,
-        debugger;
+
         let urlToCardAndBillingInfo: string = "ws/AssociateSignUp.ashx?action=CardData&CardNumber=" + cardData.cardNumber + "&Cardholder_FirstName=" + cardData.firstName + "&Cardholder_LastName=" + cardData.lastName + "&Cardholder_Address=" + cardData.address + "&Cardholder_City=" + cardData.city + "&Cardholder_State=" + cardData.state.value + "&Cardholder_Country=" + cardData.country + "&Cardholder_Zip=" + cardData.zipCode.value + "&cvv=" + cardData.CVCNumber + "&ExpMonth=" + cardData.expMonth.value + "&ExpYear=" + cardData.expYear.value + "&CardType=" + cardData.cardType + "&totalamount=" + cardData.totalAmount + "";
         return this.apiService.post(urlToCardAndBillingInfo, {  })
             .pipe(map(
