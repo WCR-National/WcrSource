@@ -28,7 +28,6 @@ var DashboardComponent = /** @class */ (function () {
         this.attemptToCountPurchasedCategories("1");
         this.attemptToCountPurchaseZipCode();
         this.attemptToCountAllPurchasedCategories();
-        debugger;
         this.attemptToInterestedCustomerData();
         this.attemptToCategoriesData();
         this.attemptToMyPropertyListingsData();
@@ -172,16 +171,13 @@ var DashboardComponent = /** @class */ (function () {
                 _this.dashboardService
                     .attemptToInterestedCustomerServicesData()
                     .then(function (data) {
-                    debugger;
                     if (data.d.length > 0) {
-                        debugger;
                         var xmlDoc = $.parseXML(data.d);
                         var json = _this.xmlToJson.xml2json(xmlDoc, "");
                         var dataJsonServices = JSON.parse(json);
                         console.log(dataJsonServices);
                         if (dataJsonServices.NewDataSet != null) {
                             $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
-                                debugger;
                                 dataJson.NewDataSet.InterestedConsumer.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
                             });
                             _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
@@ -194,7 +190,6 @@ var DashboardComponent = /** @class */ (function () {
                                 _this.initialiseInterestedCustomerDataTable(undefined);
                             }
                         }
-                        debugger;
                         added_1 = true;
                     }
                     else {
@@ -205,7 +200,6 @@ var DashboardComponent = /** @class */ (function () {
         });
     };
     DashboardComponent.prototype.initialiseInterestedCustomerDataTable = function (asyncData) {
-        debugger;
         var dTable = $('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
@@ -268,7 +262,6 @@ var DashboardComponent = /** @class */ (function () {
         // Delete a record
         $('#interestedCustomers').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            debugger;
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
             ////get the real row index, even if the table is sorted 
@@ -421,7 +414,6 @@ var DashboardComponent = /** @class */ (function () {
                     .column(4)
                     .data()
                     .reduce(function (a, b) {
-                    debugger;
                     return (a.toString().replace(/[\$,]/g, '') * 1) + (b.Amount * 1.0);
                 }, 0);
                 // Update footer by showing the total with the reference of the column index 

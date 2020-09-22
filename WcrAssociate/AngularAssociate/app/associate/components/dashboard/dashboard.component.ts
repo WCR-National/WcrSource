@@ -48,7 +48,7 @@ export class DashboardComponent implements OnInit {
 
         this.attemptToCountAllPurchasedCategories();
 
-        debugger;
+        
         this.attemptToInterestedCustomerData();
 
         this.attemptToCategoriesData();
@@ -211,9 +211,9 @@ export class DashboardComponent implements OnInit {
                     this.dashboardService
                         .attemptToInterestedCustomerServicesData()
                         .then((data: any) => {
-                            debugger;
+                            
                             if (data.d.length > 0) {
-                                debugger;
+                                
                                 var xmlDoc = $.parseXML(data.d);
                                 var json = this.xmlToJson.xml2json(xmlDoc, "");
                                 var dataJsonServices = JSON.parse(json);
@@ -221,7 +221,7 @@ export class DashboardComponent implements OnInit {
 
                                 if (dataJsonServices.NewDataSet != null) {
                                     $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
-                                        debugger;
+                                        
                                         dataJson.NewDataSet.InterestedConsumer.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
                                     });
                                     this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
@@ -236,7 +236,7 @@ export class DashboardComponent implements OnInit {
 
                                     }
                                 }
-                                debugger;
+                                
                                
                                 added = true;
                             }
@@ -249,7 +249,7 @@ export class DashboardComponent implements OnInit {
     }
 
     initialiseInterestedCustomerDataTable(asyncData) {
-        debugger;
+        
         let dTable: any = $('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
@@ -316,7 +316,7 @@ export class DashboardComponent implements OnInit {
         // Delete a record
         $('#interestedCustomers').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            debugger;
+            
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
 
@@ -502,7 +502,7 @@ export class DashboardComponent implements OnInit {
                     .column(4)
                     .data()
                     .reduce(function (a, b) {
-                        debugger;
+                        
                         return (a.toString().replace(/[\$,]/g, '') * 1) + (b.Amount * 1.0);
                     }, 0);
 

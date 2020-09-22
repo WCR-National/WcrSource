@@ -108,6 +108,7 @@ var PurchaseZipCodeService = /** @class */ (function () {
         }));
     };
     PurchaseZipCodeService.prototype.InsertCategory = function (cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode) {
+        debugger;
         if (categoryId == 2) {
             subCategoryId = 5;
         }
@@ -122,12 +123,15 @@ var PurchaseZipCodeService = /** @class */ (function () {
         var urlToInsertCategory = "Associate/ws/CategoryPurchase.asmx/InsertCategory";
         return this.apiService.post(urlToInsertCategory, {
             categoryID: categoryId, SubcategoryID: subCategoryId, PlanID: '1', pricevalues: priceValues, zipcodeID: zipCode, Couponcode: cCode, Discount: disc, Duration: duration
-        })
-            .pipe(map(function (data) {
-            return data;
-        }));
+        }).toPromise();
+        //.pipe(map(
+        //    data => {
+        //        return data;
+        //    }
+        //));
     };
     PurchaseZipCodeService.prototype.PermananetlyRemoveCategory = function (id) {
+        debugger;
         var urlToInsertCategory = "Associate/ws/MyCategories.asmx/DeletePurchasedCategories";
         return this.apiService.post(urlToInsertCategory, { id: id })
             .pipe(map(function (data) {

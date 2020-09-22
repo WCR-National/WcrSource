@@ -32,7 +32,6 @@ var UserService = /** @class */ (function () {
     //// This runs once on application startup.
     UserService.prototype.populate = function () {
         var _this = this;
-        debugger;
         // If JWT detected, attempt to get & store user's info
         if (localStorage.getItem('jwtToken')) {
             var user = JSON.parse(localStorage.getItem('jwtToken'));
@@ -95,7 +94,6 @@ var UserService = /** @class */ (function () {
         }
     };
     UserService.prototype.setAuth = function (user) {
-        debugger;
         // Save JWT sent from server in localstorage
         this.jwtService.saveToken(user);
         // Set current user data into observable
@@ -124,7 +122,6 @@ var UserService = /** @class */ (function () {
         var urlToSignUp = "ws/AssociateRegistration.asmx/AssociateAccountExists"; // + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
         return this.apiService.post(urlToSignUp, { EmailID: credentials.email })
             .pipe(map(function (data) {
-            debugger;
             //if (data.d.length > 0) {
             //    this.user.email = credentials.email;
             //    this.user.password = credentials.password;
@@ -137,7 +134,7 @@ var UserService = /** @class */ (function () {
         //return this.apiService.post( urlToSignUp, {})
         //    .pipe(map(
         //        data => {
-        //            debugger;
+        //            
         //            if (data > '0') {
         //                this.user.email = credentials.email;
         //                this.user.password = credentials.password;
@@ -168,7 +165,6 @@ var UserService = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        debugger;
                         urlToSignIn = "ws/AssociateRegistration.asmx/AssociateLogin";
                         return [4 /*yield*/, this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
                                 .pipe(map(function (data) {
@@ -185,7 +181,6 @@ var UserService = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        debugger;
                         urlToSignIn = "ws/AssociateRegistration.asmx/ConsumerLogin";
                         return [4 /*yield*/, this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
                                 .pipe(map(function (data) {
@@ -203,7 +198,6 @@ var UserService = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        debugger;
                         urlToSignInSessionActivation = "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate";
                         return [4 /*yield*/, this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
                                 .pipe(map(function (data) {
@@ -228,8 +222,6 @@ var UserService = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        //{'username':'" + uname + "','assoID':'" + $(docs).find("AssociateId").text() + "
-                        debugger;
                         urlToSignInSessionActivation = "ws/AssociateRegistration.asmx/AssociateLoginSessionActivate";
                         return [4 /*yield*/, this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
                                 .pipe(map(function (data) {
@@ -257,7 +249,6 @@ var UserService = /** @class */ (function () {
         }));
     };
     UserService.prototype.attemptRegisterAssociate = function (type, credentials) {
-        debugger;
         //url: "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + FullName + "&LastName=" + LName + "&EmailID=" + emailID + "&Password=" + password + "&Mobile=" + mobileNo + "&ZipCode=" + ZipCode + "&LicenseState=" + LicenseState + "&LicenseID=" + LicenseID + "&ReferralID=" + RefID + "",
         var urlToSignUp = "ws/AssociateSignUp.ashx?action=AssociateData";
         urlToSignUp += "&FullName=" + "0" + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
@@ -268,7 +259,6 @@ var UserService = /** @class */ (function () {
         }));
     };
     UserService.prototype.attemptRegisterationAssociate = function (credentials) {
-        debugger;
         var urlToAssociateSignUp = "ws/AssociateSignUp.ashx?action=AssociateData&FullName=" + credentials.firstName + "&LastName=" + "0" + "&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "&Mobile=" + "0" + "&ZipCode=" + "0" + "&LicenseState=" + "0" + "&LicenseID=" + "0" + "&ReferralID=" + 0 + "";
         return this.apiService.post(urlToAssociateSignUp, {})
             .pipe(map(function (data) {

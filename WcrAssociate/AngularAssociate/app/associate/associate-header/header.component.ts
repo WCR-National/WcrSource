@@ -59,7 +59,7 @@ export class AssociateHeaderComponent implements OnInit {
                                 thisStatus.profileImage = '../AssociatePhoto/0.png';
                             }
                         });
-                        debugger;
+
                         
                         $("#profilePicHeader").attr('src', thisStatus.profileImage);
                   

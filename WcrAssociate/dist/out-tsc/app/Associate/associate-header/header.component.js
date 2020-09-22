@@ -42,7 +42,6 @@ var AssociateHeaderComponent = /** @class */ (function () {
                         thisStatus.profileImage = '../AssociatePhoto/0.png';
                     }
                 });
-                debugger;
                 $("#profilePicHeader").attr('src', thisStatus.profileImage);
                 $("#profilePic").attr('src', thisStatus.profileImage);
             }

@@ -115,7 +115,6 @@ var PaymentComponent = /** @class */ (function () {
         this.formErrorMessage = "";
     }
     PaymentComponent.prototype.ngOnInit = function () {
-        debugger;
         this.initializeEventAndControls();
         this.setValidationOnForm();
         this.bindMonth();
@@ -178,7 +177,6 @@ var PaymentComponent = /** @class */ (function () {
     };
     PaymentComponent.prototype.selectCountry = function () {
         var _this = this;
-        debugger;
         this.paymentService
             .selectCountry()
             .subscribe(function (data) {
@@ -196,15 +194,12 @@ var PaymentComponent = /** @class */ (function () {
     };
     PaymentComponent.prototype.getCardDataDetails = function () {
         var _this = this;
-        debugger;
         var thisStatus = this;
         this.paymentService
             .getCardAndBillinInfo()
             .subscribe(function (data) {
-            debugger;
             if (data != "" && data != undefined && data != null && data != "-1" && data != -1) {
                 if (data._crdID != undefined && data._crdID != "" && data._crdID != null) {
-                    debugger;
                     _this.crdId = data._crdID;
                     _this.crd = data._crd;
                     _this.firstName = data._fstName;
@@ -338,7 +333,6 @@ var PaymentComponent = /** @class */ (function () {
     };
     PaymentComponent.prototype.submitCardForm = function () {
         var _this = this;
-        debugger;
         if (this.cardForm.valid) {
             var credentials = this.cardForm.value;
             //this.abbrState(credentials.state, 'to');
@@ -370,7 +364,6 @@ var PaymentComponent = /** @class */ (function () {
     };
     PaymentComponent.prototype.updateCardForm = function () {
         var _this = this;
-        debugger;
         var credentials = this.cardForm.value;
         this.isSubmitting = true;
         if (this.cardForm.valid) {
@@ -402,7 +395,6 @@ var PaymentComponent = /** @class */ (function () {
         }
     };
     PaymentComponent.prototype.checkCardNumber = function () {
-        debugger;
         var cardNumber = this.cardForm.get('cardNumber').value;
         if (cardNumber.charAt(0) == "3") {
             this.isVisaOrMCOrAmexOrDisc = "amex";
@@ -422,13 +414,11 @@ var PaymentComponent = /** @class */ (function () {
         }
     };
     PaymentComponent.prototype.changeCity = function () {
-        debugger;
         var city_value = this.cardForm.get('city').value;
         var state_value = this.cardForm.get('state').value;
         this.bindStateWiseZipCode(state_value.value, city_value);
     };
     PaymentComponent.prototype.changeState = function () {
-        debugger;
         var city_value = this.cardForm.get('city').value;
         var state_value = this.cardForm.get('state').value;
         this.bindStateWiseZipCode(state_value.value, city_value);
@@ -475,13 +465,11 @@ var PaymentComponent = /** @class */ (function () {
     };
     PaymentComponent.prototype.bindStateWiseZipCode = function (state, city) {
         var _this = this;
-        debugger;
         if (state !== undefined) {
             var countryId = "US"; //this.cardForm.get('country').value;
             this.paymentService
                 .bindStateWiseZipCode(state, city)
                 .subscribe(function (data) {
-                debugger;
                 if (data.d.length > 0) {
                     var xmlDoc = $.parseXML(data.d);
                     var xml = $(xmlDoc);
@@ -515,7 +503,6 @@ var PaymentComponent = /** @class */ (function () {
         this.isCreditCardFormVisible = true;
     };
     PaymentComponent.prototype.cancelForm = function () {
-        debugger;
         this.isCreditCardFormVisible = false;
     };
     PaymentComponent.prototype.smallLettersToCapitalLetters = function (value) {
@@ -604,7 +591,6 @@ var PaymentComponent = /** @class */ (function () {
 export { PaymentComponent };
 function patternValidator(regex, error) {
     return function (control) {
-        debugger;
         if (!control.value) {
             // if control is empty return no error
             return null;

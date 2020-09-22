@@ -79,7 +79,6 @@ var ClientDetailsComponent = /** @class */ (function () {
                 var xml = $(xmlDoc);
                 var docs = xml.find("TotalInterestedConsumer");
                 var cartd = [];
-                debugger;
                 $.each(docs, function (i, docs) {
                     countTotalCutomers = $(docs).find("TotalCount").text();
                 });
@@ -180,7 +179,6 @@ var ClientDetailsComponent = /** @class */ (function () {
         });
         $('#sales').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            debugger;
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
             ////get the real row index, even if the table is sorted 
@@ -280,7 +278,6 @@ var ClientDetailsComponent = /** @class */ (function () {
         });
         $('#services').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            debugger;
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
             ////get the real row index, even if the table is sorted 

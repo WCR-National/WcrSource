@@ -56,7 +56,7 @@ export class CustomerSupportComponent implements OnInit {
         this.setValidationOnForm();
 
         this.helpDeskForm.get('message').valueChanges.subscribe((data) => {
-            debugger;
+            
             if (data == "") {
                 this.ifMessageEmpty = true;
             }
@@ -87,7 +87,7 @@ export class CustomerSupportComponent implements OnInit {
                 if (abstractControl.errors != null) {
                     for (const errorKey in abstractControl.errors) {
                         if (errorKey) {
-                            debugger;
+                            
                             if (messages[errorKey] !== undefined) {
                                 this.formErrors[key] += messages[errorKey] + ' ';
                             }
@@ -103,7 +103,7 @@ export class CustomerSupportComponent implements OnInit {
     }
 
     submmitHelpDeskForm() {
-        debugger;
+        
         this.isSubmitting = true;
 
         if (this.helpDeskForm.valid) {
@@ -145,7 +145,7 @@ export class CustomerSupportComponent implements OnInit {
 
 function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
-        debugger;
+        
         if (!control.value) {
             // if control is empty return no error
             return null;

@@ -601,7 +601,7 @@ export class AuthComponent implements OnInit {
     }
 
     submitLoginFormAfterActivation(email = "", password = "") {
-        debugger;
+        
         this.isSubmitting = true;
         this.loginErrorMessage = "";
         //this.errors = { errors: {} };
@@ -880,7 +880,7 @@ export class AuthComponent implements OnInit {
                 //return thisUserService.emailAlreadyTaken(control.value)
                 //    .subscribe(
                 //        (data) => {
-                //            debugger;
+                //            
                 //            if (Number(data) >= 1) {
                 //                console.log("Email validate" + data);
 
@@ -930,7 +930,7 @@ export class AuthComponent implements OnInit {
             this.associateRegister();
         }
         else if (this.authForm.get('consumer').value == true) {
-            debugger;
+            
             this.consumerRegister();
         }
 
@@ -992,14 +992,14 @@ export class AuthComponent implements OnInit {
     }
 
     consumerRegister() {
-        debugger;
+        
 
         const credentials = this.authForm.value;
         this.userService
             .attemptRegisterConsumer(this.authType, credentials)
             .subscribe(
                 data => {
-                    debugger;
+                    
                     if (data >= 1) {
 
                         this.isSubmitting = false;
@@ -1039,7 +1039,7 @@ export class AuthComponent implements OnInit {
     * *************************************************
     **/
     submitActivationForm() {
-        debugger;
+        
         this.isSubmitting = true;
 
         const credentials = this.authForm.value;
@@ -1104,7 +1104,7 @@ export class AuthComponent implements OnInit {
 
                                     if (data.d.length > 0)
                                     {
-                                        debugger;
+                                        
                                         //this.ngZone.run(() => this.router.navigate(['/associates/profile']));
 
                                         //$(location).attr('href', 'Associate/ViewProfile.aspx');
@@ -1257,7 +1257,7 @@ export class AuthComponent implements OnInit {
     }
 
     submitFormResetPassword() {
-        debugger;
+        
         let thisStatus = this;
         const credentials = this.authForm.value;
         this.userService

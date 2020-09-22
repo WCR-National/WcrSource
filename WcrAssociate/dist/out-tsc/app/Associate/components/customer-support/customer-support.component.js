@@ -34,7 +34,6 @@ var CustomerSupportComponent = /** @class */ (function () {
         var _this = this;
         this.setValidationOnForm();
         this.helpDeskForm.get('message').valueChanges.subscribe(function (data) {
-            debugger;
             if (data == "") {
                 _this.ifMessageEmpty = true;
             }
@@ -61,7 +60,6 @@ var CustomerSupportComponent = /** @class */ (function () {
                 if (abstractControl.errors != null) {
                     for (var errorKey in abstractControl.errors) {
                         if (errorKey) {
-                            debugger;
                             if (messages[errorKey] !== undefined) {
                                 _this.formErrors[key] += messages[errorKey] + ' ';
                             }
@@ -76,7 +74,6 @@ var CustomerSupportComponent = /** @class */ (function () {
     };
     CustomerSupportComponent.prototype.submmitHelpDeskForm = function () {
         var _this = this;
-        debugger;
         this.isSubmitting = true;
         if (this.helpDeskForm.valid) {
             var credentials = this.helpDeskForm.value;
@@ -121,7 +118,6 @@ var CustomerSupportComponent = /** @class */ (function () {
 export { CustomerSupportComponent };
 function patternValidator(regex, error) {
     return function (control) {
-        debugger;
         if (!control.value) {
             // if control is empty return no error
             return null;

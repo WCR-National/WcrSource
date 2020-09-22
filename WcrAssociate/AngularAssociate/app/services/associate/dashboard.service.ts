@@ -177,12 +177,12 @@ export class DashboardService {
 
     //
     deleteCustomerRecords(id): Observable<any> {
-        debugger;
+        
         let urlToDeleteCustomerRecords: string = "Associate/ws/Sale.asmx/DeleteCustomerRecords";
         return this.apiService.post(urlToDeleteCustomerRecords, { ID: id})
             .pipe(map(
                 data => {
-                    debugger;
+                    
                     return data;
                 }
             ));

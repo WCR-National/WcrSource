@@ -136,11 +136,9 @@ var DashboardService = /** @class */ (function () {
     };
     //
     DashboardService.prototype.deleteCustomerRecords = function (id) {
-        debugger;
         var urlToDeleteCustomerRecords = "Associate/ws/Sale.asmx/DeleteCustomerRecords";
         return this.apiService.post(urlToDeleteCustomerRecords, { ID: id })
             .pipe(map(function (data) {
-            debugger;
             return data;
         }));
     }; //all purchased categories

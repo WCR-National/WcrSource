@@ -110,7 +110,7 @@ export class ClientDetailsComponent implements OnInit {
                         var xml = $(xmlDoc);
                         var docs = xml.find("TotalInterestedConsumer");
                         var cartd = [];
-                        debugger;
+                        
                         $.each(docs, function (i, docs) {
 
                             countTotalCutomers = $(docs).find("TotalCount").text();
@@ -223,7 +223,7 @@ export class ClientDetailsComponent implements OnInit {
 
         $('#sales').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            debugger;
+            
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
 
@@ -340,7 +340,7 @@ export class ClientDetailsComponent implements OnInit {
 
         $('#services').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            debugger;
+            
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
 

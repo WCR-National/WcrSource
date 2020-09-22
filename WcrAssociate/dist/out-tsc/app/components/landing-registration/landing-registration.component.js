@@ -67,7 +67,6 @@ var LandingRegistrationComponent = /** @class */ (function () {
     }
     LandingRegistrationComponent.prototype.ngOnInit = function () {
         var _this = this;
-        debugger;
         $('#header').hide();
         this.setValidationOnform();
         this.changeValuesOfFormsEvents();
@@ -97,7 +96,6 @@ var LandingRegistrationComponent = /** @class */ (function () {
     };
     LandingRegistrationComponent.prototype.open = function (content) {
         var _this = this;
-        debugger;
         this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(function (result) {
             _this.closeResult = "Closed with: " + result;
         }, function (reason) {

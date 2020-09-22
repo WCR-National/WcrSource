@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Component, Optional } from '@angular/core';
+import { Component, Optional, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
@@ -23,6 +23,7 @@ var PaymentModalComponent = /** @class */ (function () {
         this.TotalCount = '';
         this.showSuccessMessage = '';
         this.isAddOrUpdateButton = true;
+        this.defaultDeisableUpdateButton = true;
         this.validationMessages = {
             'firstName': {
                 'required': 'First Name is required',
@@ -117,6 +118,8 @@ var PaymentModalComponent = /** @class */ (function () {
         this.g_selectedYear = null;
         this.isVisaOrMCOrAmexOrDisc = null;
         this.formErrorMessage = "";
+        this.dismissParentCall = new EventEmitter();
+        this.updateParentCall = new EventEmitter();
     }
     PaymentModalComponent.prototype.ngOnInit = function () {
         debugger;
@@ -125,6 +128,15 @@ var PaymentModalComponent = /** @class */ (function () {
         this.bindMonth();
         this.bindYear();
         this.getCardDataDetails();
+        var thisStatus = this;
+        setTimeout(function () {
+            thisStatus.cardForm.valueChanges.subscribe(function () {
+                debugger;
+                if (thisStatus.cardForm.valid) {
+                    thisStatus.defaultDeisableUpdateButton = false;
+                }
+            });
+        }, 8000);
     };
     //public confirm(): void {
     //    if (this.activeModal)
@@ -133,8 +145,10 @@ var PaymentModalComponent = /** @class */ (function () {
     //        this.model.updated.next();
     //}
     PaymentModalComponent.prototype.dismiss = function () {
-        if (this.activeModal)
+        if (this.activeModal) {
             this.activeModal.dismiss();
+            this.dismissParentCall.emit('cancel');
+        }
     };
     PaymentModalComponent.prototype.initializeEventAndControls = function () {
         this.startValueZip = '';
@@ -363,9 +377,12 @@ var PaymentModalComponent = /** @class */ (function () {
                 else if (data == "0") {
                     _this.showToast('success', "Your credit card info has been Inserted Successfully.");
                     _this.activeModal.close();
+                    _this.updateParentCall.emit('update');
                 }
                 else if (data == "-1") {
                     _this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                    _this.activeModal.close();
+                    _this.updateParentCall.emit('update');
                 }
                 else { }
             });
@@ -392,9 +409,13 @@ var PaymentModalComponent = /** @class */ (function () {
                 }
                 else if (data == "0") {
                     _this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                    _this.activeModal.close();
+                    _this.updateParentCall.emit('update');
                 }
                 else if (data == "-1") {
                     _this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                    _this.activeModal.close();
+                    _this.updateParentCall.emit('update');
                 }
                 else { }
                 _this.isSubmitting = false;
@@ -597,6 +618,14 @@ var PaymentModalComponent = /** @class */ (function () {
             type: type,
         });
     };
+    tslib_1.__decorate([
+        Output(),
+        tslib_1.__metadata("design:type", EventEmitter)
+    ], PaymentModalComponent.prototype, "dismissParentCall", void 0);
+    tslib_1.__decorate([
+        Output(),
+        tslib_1.__metadata("design:type", EventEmitter)
+    ], PaymentModalComponent.prototype, "updateParentCall", void 0);
     PaymentModalComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-payment-modal-page',

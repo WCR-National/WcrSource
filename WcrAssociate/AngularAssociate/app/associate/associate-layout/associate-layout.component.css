@@ -1,4 +1,4 @@
-@import "~@ng-select/ng-select/themes/material.theme.css";
+﻿@import "~@ng-select/ng-select/themes/material.theme.css";
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700|Oswald:300,400,500|Fira+Sans:300,400,500,600|Archivo+Narrow:400,500,600&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Mono|Roboto+Slab:300,400,700|Roboto+Condensed:300,400,700&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");
@@ -72569,4 +72569,26 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
 }
 .red-border {
     border-color:#dc3545;
+}
+.wrapper_image {
+    position: relative;
+    display: inline-block;
+}
+
+.close_image:before {
+    content: '✕';
+}
+
+.close_image {
+    position: absolute;
+    top: -16px;
+    right: -10px;
+    cursor: pointer;
+    background: #f6f6f6;
+    border-radius: 50%;
+    padding: 9px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #eee;
+    padding-top: 5px;
 }

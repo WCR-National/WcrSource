@@ -479,7 +479,6 @@ var AuthComponent = /** @class */ (function () {
         var _this = this;
         if (email === void 0) { email = ""; }
         if (password === void 0) { password = ""; }
-        debugger;
         this.isSubmitting = true;
         this.loginErrorMessage = "";
         //this.errors = { errors: {} };
@@ -700,7 +699,7 @@ var AuthComponent = /** @class */ (function () {
                 //return thisUserService.emailAlreadyTaken(control.value)
                 //    .subscribe(
                 //        (data) => {
-                //            debugger;
+                //            
                 //            if (Number(data) >= 1) {
                 //                console.log("Email validate" + data);
                 //                this.showOnValidateEmail = false;
@@ -738,7 +737,6 @@ var AuthComponent = /** @class */ (function () {
             this.associateRegister();
         }
         else if (this.authForm.get('consumer').value == true) {
-            debugger;
             this.consumerRegister();
         }
         //this.errors = { errors: {} };
@@ -791,12 +789,10 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.consumerRegister = function () {
         var _this = this;
-        debugger;
         var credentials = this.authForm.value;
         this.userService
             .attemptRegisterConsumer(this.authType, credentials)
             .subscribe(function (data) {
-            debugger;
             if (data >= 1) {
                 _this.isSubmitting = false;
                 _this.request = credentials.email;
@@ -828,7 +824,6 @@ var AuthComponent = /** @class */ (function () {
     **/
     AuthComponent.prototype.submitActivationForm = function () {
         var _this = this;
-        debugger;
         this.isSubmitting = true;
         var credentials = this.authForm.value;
         var urlComponent;
@@ -878,7 +873,6 @@ var AuthComponent = /** @class */ (function () {
                     .attemptVerifiedActivationCodeAssociate(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        debugger;
                         //this.ngZone.run(() => this.router.navigate(['/associates/profile']));
                         //$(location).attr('href', 'Associate/ViewProfile.aspx');
                         //this.router.navigateByUrl('/login');
@@ -998,7 +992,6 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.submitFormResetPassword = function () {
         var _this = this;
-        debugger;
         var thisStatus = this;
         var credentials = this.authForm.value;
         this.userService

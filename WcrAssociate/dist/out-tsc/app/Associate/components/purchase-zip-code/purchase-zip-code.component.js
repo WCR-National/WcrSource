@@ -178,6 +178,8 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         this.dTableCPZC = null;
         this.dTableSearching = null;
         this.dTableAPZC = null;
+        this.firstTimeCalling = true;
+        this.loadFirstTimeOnlyAllPurchasedZipCodes = true;
         this.thisStatus = null;
         this.monthlyBllingDate = "";
     }
@@ -361,11 +363,9 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.bindStateSearch = function () {
         var _this = this;
-        debugger;
         this.purchaseZipCodeService
             .BindState()
             .subscribe(function (data) {
-            debugger;
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
@@ -407,7 +407,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         this.bindCityWiseState(this.searchForm.get('city').value);
     };
     PurchaseZipCodeComponent.prototype.changeZipCodeSearch = function () {
-        debugger;
         this.divShowCategorySearch = false;
         var zipCode = this.searchForm.get('zipCodeSearch').value != null ? this.searchForm.get('zipCodeSearch').value.value : null;
         this.BindCategoryZip(zipCode, 'zipCode');
@@ -423,7 +422,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         }
     };
     PurchaseZipCodeComponent.prototype.changeCategorySearchCS = function () {
-        debugger;
         var subCategoryId;
         var zipCode = this.searchForm.get('zipCodeSearchCS').value != null ? this.searchForm.get('zipCodeSearchCS').value.value : null;
         var categoryId = this.searchForm.get('categorySearchCS').value != null ? this.searchForm.get('categorySearchCS').value.value : null;
@@ -443,7 +441,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         }
     };
     PurchaseZipCodeComponent.prototype.changeCategorySearch = function () {
-        debugger;
         this.isSearchingStart = true;
         var subCategoryId;
         var zipCode = this.searchForm.get('zipCode').value != null ? this.searchForm.get('zipCode').value : null;
@@ -463,10 +460,12 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
             }
             this.SetSearchedZipCodes(zipCode, subCategoryId, 'zipCode');
             this.divShowSubCategorySearch = true;
+            if (this.isPageLoadCatSrch) {
+                this.divShowTableSelectedSearch = true;
+            }
         }
     };
     PurchaseZipCodeComponent.prototype.changeSubCategorySearchCS = function () {
-        debugger;
         var zipCode = this.searchForm.get('zipCodeSearchCS').value != null ? this.searchForm.get('zipCodeSearchCS').value.value : null;
         var subCategoryId = this.searchForm.get('subCategorySearchCS').value != null ? this.searchForm.get('subCategorySearchCS').value.value : null;
         if ((zipCode !== undefined && zipCode != null) && (subCategoryId !== undefined && subCategoryId != null)) {
@@ -483,12 +482,11 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         this.isSearchingStartCS = false;
     };
     PurchaseZipCodeComponent.prototype.changeSubCategorySearch = function () {
-        debugger;
         var zipCode = this.searchForm.get('zipCode').value;
         var subCategoryId = this.searchForm.get('subCategorySearch').value != null ? this.searchForm.get('subCategorySearch').value.value : null;
         if ((zipCode !== undefined && zipCode != null) && (subCategoryId !== undefined && subCategoryId != null)) {
             this.divShowSubCategorySearch = true;
-            this.SetSearchedZipCodes(zipCode, subCategoryId, 'zipCode');
+            //this.SetSearchedZipCodes(zipCode, subCategoryId, 'zipCode');
         }
         else {
             //this.dTableSearching.dataTable().fnClearTable();
@@ -501,13 +499,11 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.bindCityWiseState = function (city) {
         var _this = this;
-        debugger;
         if (city !== undefined) {
             var countryId = "US"; //this.cardForm.get('country').value;
             this.purchaseZipCodeService
                 .BindCityWiseState(city)
                 .subscribe(function (data) {
-                debugger;
                 if (data.d.length > 0) {
                     var xmlDoc = $.parseXML(data.d);
                     var xml = $(xmlDoc);
@@ -544,13 +540,11 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.bindStateWiseZipCodeForSearch = function (state, city) {
         var _this = this;
-        debugger;
         if (state !== undefined) {
             var countryId = "US"; //this.cardForm.get('country').value;
             this.paymentService
                 .bindStateWiseZipCode(state, city)
                 .subscribe(function (data) {
-                debugger;
                 if (data.d.length > 0) {
                     var xmlDoc = $.parseXML(data.d);
                     var xml = $(xmlDoc);
@@ -595,7 +589,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         this.purchaseZipCodeService
             .BindZipCodesByUserZipCode(zipCode)
             .subscribe(function (data) {
-            debugger;
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
@@ -631,18 +624,15 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.BindCategoryZip = function (zipCode, selectedTab) {
         var _this = this;
-        debugger;
         this.purchaseZipCodeService
             .BindCategoryZipCode(zipCode)
             .subscribe(function (data) {
-            debugger;
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
                 var docs = xml.find("AvailZipCodes");
                 var cartd = [];
                 if (($(docs).find("id").text() == '')) {
-                    debugger;
                     _this.divShowCategorySearchCS = false;
                     _this.isSearchingStartCS = false;
                     _this.isSearchingStart = false;
@@ -660,13 +650,15 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                             val = $(docs).find("id").text();
                             label = $(docs).find("categoryname").text();
                             var str = $(docs).find("categoryname").text();
-                            if (str.indexOf('s') != -1) {
+                            var stringLength_1 = str.length; // this will be 16
+                            if (str.lastIndexOf('s') != -1) {
                                 str = str.slice(0, -1);
                             }
                             startValueCategory = { "value": $(docs).find("id").text(), "label": str + ' Services' };
                         }
                         var strCat = $(docs).find("categoryname").text();
-                        if (strCat.indexOf('s') != -1) {
+                        var stringLength = strCat.length; // this will be 16
+                        if (strCat.lastIndexOf('s') != -1) {
                             strCat = strCat.slice(0, -1);
                         }
                         strCat = strCat + ' Services';
@@ -703,7 +695,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         this.purchaseZipCodeService
             .BindSubCategoryZipCode(zipCode, categoryId)
             .subscribe(function (data) {
-            debugger;
             if (data.d.length > 0) {
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
@@ -764,12 +755,10 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.SetSearchedZipCodes = function (zipCode, subCategorySearch, selectedTab) {
         var _this = this;
-        debugger;
         var categoryName, subCategoryName, categoryId, subCategoryId, planId, priceValues, zipCode;
         this.purchaseZipCodeService
             .GetSubCategoryPrice(zipCode, subCategorySearch)
             .subscribe(function (data) {
-            debugger;
             if (data.d.length > 0) {
                 var chk = 1;
                 var xmlDoc = $.parseXML(data.d);
@@ -786,12 +775,11 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                     subCategoryId = _this.searchForm.get('subCategorySearchCS').value.value;
                 }
                 else if (selectedTab == 'zipCode') {
-                    debugger;
                     zipCode = _this.searchForm.get('zipCode').value;
                     categoryName = _this.searchForm.get('categorySearch').value.label;
-                    subCategoryName = _this.searchForm.get('subCategorySearch').value.label;
+                    subCategoryName = ''; // this.searchForm.get('subCategorySearch').value.label;
                     categoryId = _this.searchForm.get('categorySearch').value.value;
-                    subCategoryId = _this.searchForm.get('subCategorySearch').value.value;
+                    subCategoryId = ''; // this.searchForm.get('subCategorySearch').value.value;
                 }
                 var arrSearchedZipCode = [];
                 var searchedObject = { 'id': 0, 'Zipcode': zipCode, "CategoryName": categoryName, "SubCategoryName": subCategoryName, "Price": priceValues, "CategoryId": categoryId, "SubCategoryId": subCategoryId };
@@ -845,15 +833,15 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove purchase tx-green tx-700">Purchase</a>'
+                    defaultContent: '<a id="purchaseId" href="javascript:void(0)" class="editor_remove purchaseId tx-green tx-700">Purchase</a>'
                 },
                 {
                     data: null,
                     className: "center ",
-                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Cancel</a>'
+                    defaultContent: '<a  href="javascript:void(0)" class="editor_remove cancel tx-danger tx-700">Cancel</a>'
                 },
             ],
-            "bDestroy": true,
+            destroy: true,
             "autoWidth": true,
             searching: false,
             paging: false,
@@ -893,40 +881,55 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
             ],
             order: [[1, 'asc']]
         });
-        $('#searchedZipCodes').on('click', 'a.purchase', function (e) {
-            debugger;
-            e.preventDefault();
-            var row = thisStatus.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
-            var rowData = thisStatus.dTableSearching.fnGetData(row);
-            // var rowColumns = rowData[rowData.length - 1];
-            var id = rowData['id'];
-            var zipCode = rowData['Zipcode'];
-            var categoryText = rowData['CategoryName'];
-            var subCategoryText = rowData['SubCategoryName'];
-            var priceValues = rowData['Price'];
-            var categoryId = rowData['CategoryId'];
-            var subCategoryId = rowData['SubCategoryId'];
-            thisStatus.ngZone.run(function () {
-                thisStatus.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
-                thisStatus.overlayLoadingOnPurchase = true;
+        if (this.firstTimeCalling) {
+            $('#searchedZipCodes tbody').on('click', '.purchaseId', function (e) {
+                //alert('entered');
+                var row = thisStatus.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
+                var rowData = thisStatus.dTableSearching.fnGetData(row);
+                // var rowColumns = rowData[rowData.length - 1];
+                var id = rowData['id'];
+                var zipCode = rowData['Zipcode'];
+                var categoryText = rowData['CategoryName'];
+                var subCategoryText = rowData['SubCategoryName'];
+                var priceValues = rowData['Price'];
+                var categoryId = rowData['CategoryId'];
+                var subCategoryId = rowData['SubCategoryId'];
+                if (categoryId == 2) {
+                    subCategoryId = 5;
+                }
+                else if (categoryId == 5) {
+                    subCategoryId = 13;
+                }
+                else if (categoryId == 3) {
+                    subCategoryId = 8;
+                }
+                else {
+                }
+                thisStatus.ngZone.run(function () {
+                    thisStatus.CheckOutClick(categoryText, '', categoryId, subCategoryId, '1', priceValues, zipCode);
+                    thisStatus.overlayLoadingOnPurchase = true;
+                });
             });
-        });
-        $('#searchedZipCodes').on('click', 'a.cancel', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            thisStatus.dTableSearching.api().row($(this).parents('tr')).remove().draw(false);
-            var id = $(this).closest('tr').children('td:first').text();
-            //thisStatus.ngZone.run(() => {
-            //    thisStatus.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
-            //});
-            //thisStatus.purchaseZipCodeService
-            //    .PermananetlyRemoveCategory(id)
-            //    .subscribe(
-            //        data => {
-            //            console.log('deleted')
-            //        });
+            $('#searchedZipCodes').on('click', 'a.cancel', function (e) {
+                e.preventDefault();
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                thisStatus.dTableSearching.api().row($(this).parents('tr')).remove().draw(false);
+                var id = $(this).closest('tr').children('td:first').text();
+                thisStatus.ngZone.run(function () {
+                    thisStatus.RemoveSearchedZipCodes();
+                });
+                //thisStatus.purchaseZipCodeService
+                //    .PermananetlyRemoveCategory(id)
+                //    .subscribe(
+                //        data => {
+                //            console.log('deleted')
+                //        });
+            });
+            this.firstTimeCalling = false;
+        }
+        this.dTableSearching.on('destroy.dt', function (e, settings) {
+            $(this).off('click', '.purchaseId');
         });
     };
     PurchaseZipCodeComponent.prototype.CheckOutClick = function (categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode) {
@@ -934,7 +937,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         this.purchaseZipCodeService
             .ZipCodePurchase()
             .subscribe(function (data) {
-            debugger;
             if (data.d.length > 0) {
                 var chk = 1;
                 var xmlDoc = $.parseXML(data.d);
@@ -991,35 +993,35 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        debugger;
                         if (!(data.d == "1")) return [3 /*break*/, 2];
                         monthValue = 1;
-                        return [4 /*yield*/, Promise.apply(this.purchaseZipCodeService.InsertCategory(cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode)).ajaxSuccess(function (subData) {
-                                debugger;
-                                if (subData.d == "1") {
-                                    _this.showToast('Success', "Zip code successfully purchased!");
-                                    _this.showToast('Success', "Credit card has been successfully charged.");
-                                    _this.overlayLoadingOnPurchase = false;
-                                    _this.AssociateAlreadyCategories();
+                        return [4 /*yield*/, Promise.apply(this.purchaseZipCodeService
+                                .InsertCategory(cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode)
+                                .then(function (subData) {
+                                if (subData !== undefined && subData != "" && subData != null) {
+                                    if (subData.d == "1") {
+                                        _this.showToast('success', "Zip code successfully purchased!");
+                                        _this.showToast('success', "Credit card has been successfully charged.");
+                                        _this.overlayLoadingOnPurchase = false;
+                                        debugger;
+                                        _this.dTableSearching.DataTable().clear().destroy();
+                                        _this.AssociateAlreadyCategories();
+                                    }
+                                    if (subData.d == "0") {
+                                        _this.showToast('danger', "Failed to buy zip code, already exist.");
+                                        _this.overlayLoadingOnPurchase = false;
+                                    }
+                                    if (subData.d == "3") {
+                                        _this.showToast('danger', "Error, Something went wrong. Reload page, Try Again!!!");
+                                    }
                                 }
-                                if (subData.d == "0") {
-                                    _this.showToast('danger', "Failed to buy zip code, already exist.");
-                                    _this.overlayLoadingOnPurchase = false;
-                                }
-                                if (subData.d == "3") {
+                                else {
                                     _this.showToast('danger', "Error, Something went wrong. Reload page, Try Again!!!");
                                 }
-                            })];
+                                _this.cdr.detectChanges();
+                            }))];
                     case 1:
                         results = _a.sent();
-                        if (data.d == "0") {
-                            this.showToast('danger', "Failed to buy zip code, already exist.");
-                            this.overlayLoadingOnPurchase = false;
-                        }
-                        if (data.d == "3") {
-                            this.showToast('danger', "Error, Something went wrong. Reload page, Try Again!!!");
-                            this.overlayLoadingOnPurchase = false;
-                        }
                         return [3 /*break*/, 3];
                     case 2:
                         if (this._Counter == 0) {
@@ -1034,15 +1036,18 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                             this.overlayLoadingOnPurchase = false;
                         }
                         _a.label = 3;
-                    case 3: return [2 /*return*/];
+                    case 3:
+                        this.cdr.detectChanges();
+                        return [2 /*return*/];
                 }
             });
         }); });
     };
     PurchaseZipCodeComponent.prototype.RemoveSearchedZipCodes = function () {
         if (this.dTableSearching !== undefined && this.dTableSearching != null) {
-            this.dTableSearching.DataTable().clear().destroy();
-            this.dTableSearching.off('click');
+            //this.dTableSearching.off('click');
+            //this.dTableSearching.DataTable().clear().destroy();
+            //this.dTableSearching.find("tbody").empty();
         }
         //if (this.dTableSearching !== undefined && this.dTableSearching != null) {
         //    this.dTableSearching.dataTable().fnClearTable();
@@ -1060,10 +1065,11 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     PurchaseZipCodeComponent.prototype.AssociateAlreadyCategories = function () {
         var _this = this;
         this.purchaseZipCodeService
-            .MurchantPurchaseCategories()
+            .SelectCurrentPurchasedZipCodes()
             .subscribe(function (data) {
             debugger;
             if (data.d.length > 0) {
+                _this.dTableAPZC.DataTable().clear().destroy();
                 var chk = 1;
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
@@ -1071,17 +1077,17 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var resultJson = [];
                 var dataJson = JSON.parse(json);
-                if (dataJson.PurCategories != null) {
-                    if (!Array.isArray(dataJson.PurCategories)) {
-                        resultJson.push(dataJson.PurCategories);
-                        dataJson.PurCategories = resultJson;
+                if (dataJson.NewDataSet.MyCategories != null) {
+                    if (!Array.isArray(dataJson.NewDataSet.MyCategories)) {
+                        resultJson.push(dataJson.NewDataSet.MyCategories);
+                        dataJson.NewDataSet.MyCategories = resultJson;
                     }
-                    _this.InitializedDataTableAllCurrentPurchasedZipCodes(dataJson.PurCategories);
+                    _this.InitializedDataTableAllPurchasedZipCodes(dataJson.NewDataSet.MyCategories);
                 }
                 else {
-                    _this.InitializedDataTableAllCurrentPurchasedZipCodes(undefined);
+                    _this.InitializedDataTableAllPurchasedZipCodes(undefined);
                 }
-                _this.divShowCurrentPurchasedZipCodes = true;
+                //this.divShowCurrentPurchasedZipCodes = true;
                 var cc = 0;
                 var totalNoOfPurchasedZiCodes = 1;
                 var totalPurchasedAmount = 0;
@@ -1096,99 +1102,12 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
             }
         });
     };
-    PurchaseZipCodeComponent.prototype.InitializedDataTableAllCurrentPurchasedZipCodes = function (asyncData) {
-        console.log(asyncData);
-        $("#allCurrentPurchasedZipCodes").DataTable().clear().destroy();
-        this.dTableCPZC = $('#allCurrentPurchasedZipCodes');
-        var thisStatus = this;
-        if (asyncData === undefined) {
-            asyncData = {
-                'id': '',
-                'Zip': '',
-                'Category': '',
-                'Subcategory': "",
-                'Cost': "",
-                'Cancel': ""
-            };
-        }
-        this.dTableCPZC.dataTable({
-            data: asyncData,
-            columns: [
-                {
-                    data: 'id'
-                },
-                {
-                    data: 'zipcode'
-                },
-                {
-                    data: "categoryname",
-                },
-                {
-                    data: "Name",
-                },
-                {
-                    data: "amount",
-                },
-                {
-                    data: null,
-                    className: "center",
-                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Delete</a>'
-                },
-                {
-                    data: 'Zipcode',
-                },
-                {
-                    data: 'subCategoryID',
-                }
-            ],
-            "autoWidth": true,
-            searching: false,
-            paging: false,
-            info: false,
-            buttons: [
-                'excel', 'pdf'
-            ],
-            columnDefs: [
-                {
-                    targets: [0],
-                    className: "hide_column"
-                },
-                {
-                    targets: [6],
-                    className: "hide_column"
-                },
-                {
-                    targets: [7],
-                    className: "hide_column"
-                }
-            ],
-            order: [[1, 'asc']]
-        });
-        $('#viewAllCurrentPurchasedZipCodes').on('click', 'a.cancel', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            this.dTableCPZC.api().row($(this).parents('tr')).remove().draw(false);
-            thisStatus.purchaseZipCodeService
-                .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
-                .subscribe(function (data) {
-                //thisStatus.getClientDetailsServicesData();
-                //thisStatus.getServicesCount();
-                //thisStatus.getTotalSalesAndServicesCount();
-            });
-        });
-    };
-    PurchaseZipCodeComponent.prototype.RemoveAllPurchasedZipCode = function () {
-    };
     PurchaseZipCodeComponent.prototype.ViewAllPurchasedZipCode = function () {
         var _this = this;
-        debugger;
         this.purchaseZipCodeService
             //.GetPurchasedAllRecords()
             .SelectCurrentPurchasedZipCodes()
             .subscribe(function (data) {
-            debugger;
             if (data.d != null && data.d.length > 0) {
                 var chk = 1;
                 var xmlDoc = $.parseXML(data.d);
@@ -1260,6 +1179,7 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                     data: 'subCategoryID',
                 }
             ],
+            "bDestroy": true,
             "autoWidth": true,
             searching: false,
             paging: false,
@@ -1292,7 +1212,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         $('#allPurchasedZipCodes').on('click', 'a.cancel', function (e) {
             var _this = this;
             e.preventDefault();
-            debugger;
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
             ////get the real row index, even if the table is sorted 
@@ -1308,13 +1227,14 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                     //thisStatus.getServicesCount();
                     //thisStatus.getTotalSalesAndServicesCount();
                 });
+                thisStatus.RemoveAllPurchasedZipCodes();
             });
         });
     };
     PurchaseZipCodeComponent.prototype.RemoveAllPurchasedZipCodes = function () {
         if (this.dTableAPZC !== undefined && this.dTableSearching != null) {
+            $('#allPurchasedZipCodes').off('click');
             this.dTableAPZC.DataTable().clear().destroy();
-            this.dTableAPZC.off('click');
         }
         //if (this.dTableAPZC !== undefined && this.dTableAPZC != null) {
         //    this.dTableAPZC.dataTable().fnClearTable();
@@ -1322,11 +1242,27 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.onOpenModalClick = function () {
         var _this = this;
-        debugger;
         var modal = this.modalService.open(PaymentModalComponent, { size: 'lg', backdrop: "static" });
         var modalComponent = modal.componentInstance;
+        modal.componentInstance.dismissParentCall.subscribe(function (data) {
+            console.log(data);
+            _this.overlayLoadingOnPurchase = false;
+        });
+        modal.componentInstance.updateParentCall.subscribe(function (data) {
+            _this.showToast('success', 'Purchasing is in process');
+            var row = _this.dTableSearching.fnGetPosition($(_this).closest('tr')[0]);
+            var rowData = _this.dTableSearching.fnGetData(row);
+            // var rowColumns = rowData[rowData.length - 1];
+            var id = rowData['id'];
+            var zipCode = rowData['Zipcode'];
+            var categoryText = rowData['CategoryName'];
+            var subCategoryText = rowData['SubCategoryName'];
+            var priceValues = rowData['Price'];
+            var categoryId = rowData['CategoryId'];
+            var subCategoryId = rowData['SubCategoryId'];
+            _this.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
+        });
         modal.result.then(function (result) {
-            debugger;
             var row = _this.dTableSearching.fnGetPosition($(_this).closest('tr')[0]);
             var rowData = _this.dTableSearching.fnGetData(row);
             // var rowColumns = rowData[rowData.length - 1];
@@ -1364,7 +1300,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        debugger;
                         if (!(data.d == "1")) return [3 /*break*/, 2];
                         monthValue = 1;
                         totalAmount = $("#lblprice").text();
@@ -1397,6 +1332,93 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
             });
         }); });
     };
+    PurchaseZipCodeComponent.prototype.InitializedDataTableAllCurrentPurchasedZipCodes = function (asyncData) {
+        console.log(asyncData);
+        $("#allCurrentPurchasedZipCodes").DataTable().clear().destroy();
+        this.dTableCPZC = $('#allCurrentPurchasedZipCodes');
+        var thisStatus = this;
+        if (asyncData === undefined) {
+            asyncData = {
+                'id': '',
+                'Zip': '',
+                'Category': '',
+                'Subcategory': "",
+                'Cost': "",
+                'Cancel': ""
+            };
+        }
+        this.dTableCPZC.dataTable({
+            data: asyncData,
+            columns: [
+                {
+                    data: 'id'
+                },
+                {
+                    data: 'zipcode'
+                },
+                {
+                    data: "categoryname",
+                },
+                {
+                    data: "Name",
+                },
+                {
+                    data: "amount",
+                },
+                {
+                    data: null,
+                    className: "center",
+                    defaultContent: '<a href="" class="editor_remove cancel tx-danger tx-700">Delete</a>'
+                },
+                {
+                    data: 'Zipcode',
+                },
+                {
+                    data: 'subCategoryID',
+                }
+            ],
+            "autoWidth": true,
+            searching: false,
+            paging: false,
+            info: false,
+            buttons: [
+                'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    targets: [0],
+                    className: "hide_column"
+                },
+                {
+                    targets: [6],
+                    className: "hide_column"
+                },
+                {
+                    targets: [7],
+                    className: "hide_column"
+                }
+            ],
+            order: [[1, 'asc']]
+        });
+        if (this.loadFirstTimeOnlyAllPurchasedZipCodes) {
+            $('#viewAllCurrentPurchasedZipCodes').on('click', 'a.cancel', function (e) {
+                e.preventDefault();
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                this.dTableCPZC.api().row($(this).parents('tr')).remove().draw(false);
+                thisStatus.purchaseZipCodeService
+                    .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
+                    .subscribe(function (data) {
+                    //thisStatus.getClientDetailsServicesData();
+                    //thisStatus.getServicesCount();
+                    //thisStatus.getTotalSalesAndServicesCount();
+                });
+            });
+            this.loadFirstTimeOnlyAllPurchasedZipCodes = false;
+        }
+    };
+    PurchaseZipCodeComponent.prototype.RemoveAllCurrentPurchasedZipCode = function () {
+    };
     tslib_1.__decorate([
         ViewChild('ctdTabset'),
         tslib_1.__metadata("design:type", Object)
@@ -1415,7 +1437,6 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
 export { PurchaseZipCodeComponent };
 function patternValidator(regex, error) {
     return function (control) {
-        debugger;
         if (!control.value) {
             // if control is empty return no error
             return null;

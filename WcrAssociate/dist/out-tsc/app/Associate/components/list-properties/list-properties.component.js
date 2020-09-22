@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Component, NgZone, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, NgZone, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Lightbox } from 'ngx-lightbox';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -175,6 +175,11 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.isCollapsedOpenImages = true;
         this.isCollapsedOverviewAndAdditionalFeatures = true;
         this.isCollapsedLocation = true;
+        this.isFirstTimePageBind = true;
+        this.isTableCurrentPurchasedZipCodesLoadedFirstTime = true;
+        this.isTableSelectedChoicesFirstTime = true;
+        this.isTablePurchasedZipCodesLoaded = true;
+        this.isTableSalesAdvertisementLoadedFirstTime = true;
         this.data = "";
     }
     ListPropertiesComponent.prototype.ngOnInit = function () {
@@ -207,7 +212,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.PostAdvertisement = this.fb.group({
             consumerSegmentType: [''],
             titlePA: ['', [Validators.required, patternValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
-            pricePA: ['', [Validators.required, patternValidator(/^[0-9]+$/, { numericOnly: true })]],
+            pricePA: ['', [Validators.required, patternValidator(/^[+-]?\d+(\.\d+)?$/, { Numeric: true })]],
             descPA: ['', [Validators.required, patternValidator(/^[a-zA-Z0-9\-\s]+$/, { letterOnly: true })]],
             additionalFeature: ['', [Validators.required]],
             contactNoPA: ['', [Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })]],
@@ -278,56 +283,119 @@ var ListPropertiesComponent = /** @class */ (function () {
     };
     ListPropertiesComponent.prototype.onSelectFile = function (event, imageIndex) {
         var _this = this;
-        debugger;
         if (event.target.files && event.target.files[0]) {
             var mimeType = event.target.files[0].type;
             if (mimeType.match(/image\/*/) == null) {
                 this.showToast("danger", "Only images are supported.");
                 return;
             }
-            var reader = new FileReader();
             var imageExist = false;
             for (var i = 0; i < this.arrayOfImages.length; i++) {
                 if (this.arrayOfImages[i] !== undefined && this.arrayOfImages[i].imageIndex == imageIndex) {
                     this.g_i = i;
-                    reader.onload = function (event) {
-                        _this.imageUrl = event.target.result;
-                        _this.arrayOfImages[_this.g_i].imageUrl = _this.imageUrl;
-                        _this.arrayOfImages[_this.g_i].previewUrl = _this.imageUrl;
-                        $('#previewImages').html('');
-                        var images = '';
-                        for (var i_1 = 0; i_1 < _this.arrayOfImages.length; i_1++) {
-                            images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + _this.arrayOfImages[i_1].srcUrl + "' openImage('" + _this.arrayOfImages[i_1].imageIndex + "') ></div>";
-                        }
-                        $('#previewImages').html(images);
+                    var reader1 = new FileReader();
+                    reader1.readAsDataURL(event.target.files[0]); // read file as data url
+                    reader1.onload = function (e) {
+                        _this.resetImages(e, imageIndex);
                     };
                     imageExist = true;
+                    debugger;
                 }
             }
             if (!imageExist) {
-                reader.onload = function (event) {
-                    debugger;
-                    _this.imageUrl = event.target.result;
-                    var imageObject = { 'srcUrl': _this.imageUrl, 'previewUrl': _this.imageUrl, 'imageIndex': imageIndex };
-                    _this.arrayOfImages.push(imageObject);
-                    $('#previewImages').html('');
-                    var images = '';
-                    for (var i_2 = 0; i_2 < _this.arrayOfImages.length; i_2++) {
-                        images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + _this.arrayOfImages[i_2].srcUrl + "' openImage('" + _this.arrayOfImages[i_2].imageIndex + "') ></div>";
-                    }
-                    $('#previewImages').html(images);
+                var reader = new FileReader();
+                reader.readAsDataURL(event.target.files[0]); // read file as data url
+                reader.onload = function (e1) {
+                    _this.resetImageFirstTime(e1, imageIndex);
                 };
+                debugger;
             }
-            reader.readAsDataURL(event.target.files[0]); // read file as data url
-            this.PostAdvertisement.get('image').setValue(this.arrayOfImages.toString());
-            //if (imageIndex == '0')
-            //    this.UpdateImages($('#FileUpload1'), this.PostAdvertisement.get('advId').value, 'Associate/ws/UpdateAdvertisementImges.ashx');
-            //else if (imageIndex == '1')
-            //    this.UpdateImages($('#FileUpload2'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateAdvertisementSecondImage.ashx');
-            //else if (imageIndex == '2')
-            //    this.UpdateImages($('#FileUpload3'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateThirdImg.ashx');
-            //else if (imageIndex == '3')
-            //    this.UpdateImages($('#FileUpload4'), this.PostAdvertisement.get('advId').value, 'Associate/UpdateFourthImg.ashx');
+        }
+    };
+    ListPropertiesComponent.prototype.resetImageFirstTime = function (e1, imageIndex) {
+        debugger;
+        var l_imageUrlFT = e1.target.result;
+        var imageObject = { 'srcUrl': l_imageUrlFT, 'previewUrl': l_imageUrlFT, 'imageIndex': imageIndex };
+        this.arrayOfImages.push(imageObject);
+        $('#previewImages').html('');
+        var images = '';
+        for (var i = 0; i < this.arrayOfImages.length; i++) {
+            //images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') ></div>";
+            images += "<div class='col-12 col-xs-12 col-sm-3'>";
+            images += "<div id='wrapperImage" + i + "Id' class='wrapper_image'>";
+            images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
+            images += "<span id='image" + i + "Id' class='close_image'></span>";
+            images += "</div>";
+            images += "</div>";
+        }
+        $('#previewImages').html(images);
+        this.PostAdvertisement.get('image').setValue(this.arrayOfImages.toString());
+        //if (this.isFirstTimePageBind) {
+        this.closeImageClick();
+        this.isFirstTimePageBind = false;
+        //}
+        this.fileUpload1.nativeElement.value = "";
+        this.cdr.detectChanges();
+    };
+    ListPropertiesComponent.prototype.resetImages = function (e, imageIndex) {
+        debugger;
+        var l_imageUrl = e.target.result;
+        this.arrayOfImages[this.g_i].srcUrl = '';
+        this.arrayOfImages[this.g_i].previewUrl = '';
+        this.arrayOfImages[this.g_i].srcUrl = l_imageUrl;
+        this.arrayOfImages[this.g_i].previewUrl = l_imageUrl;
+        $('#previewImages').html('');
+        var images = '';
+        for (var i = 0; i < this.arrayOfImages.length; i++) {
+            images += "<div class='col-12 col-xs-12 col-sm-3'>";
+            images += "<div id='wrapperImage" + i + "Id' class='wrapper_image'>";
+            images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].previewUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
+            images += "<span id='image" + i + "Id' class='close_image'></span>";
+            images += "</div>";
+            images += "</div>";
+        }
+        $('#previewImages').html(images);
+        this.PostAdvertisement.get('image').setValue(this.arrayOfImages.toString());
+        //if (this.isFirstTimePageBind) {
+        this.closeImageClick();
+        this.isFirstTimePageBind = false;
+        //}
+        this.fileUpload1.nativeElement.value = "";
+        this.cdr.detectChanges();
+    };
+    ListPropertiesComponent.prototype.closeImageClick = function () {
+        var thisStatus = this;
+        $('.close_image').click(function () {
+            var id = $(this).attr('id');
+            if (id == "image0Id") {
+                thisStatus.arrayOfImages[0].imageUrl = '';
+                thisStatus.arrayOfImages[0].previewUrl = '';
+                $('#wrapperImage0Id').empty();
+            }
+            else if (id == "image1Id") {
+                thisStatus.arrayOfImages[1].imageUrl = '';
+                thisStatus.arrayOfImages[1].previewUrl = '';
+                $('#wrapperImage1Id').empty();
+            }
+            else if (id == "image2Id") {
+                thisStatus.arrayOfImages[2].imageUrl = '';
+                thisStatus.arrayOfImages[2].previewUrl = '';
+                $('#wrapperImage2Id').empty();
+            }
+            else if (id == "image3Id") {
+                thisStatus.arrayOfImages[3].imageUrl = '';
+                thisStatus.arrayOfImages[3].previewUrl = '';
+                $('#wrapperImage3Id').empty();
+            }
+        });
+        this.cdr.detectChanges();
+    };
+    ListPropertiesComponent.prototype.reset = function (fileUploadId) {
+        debugger;
+        if (fileUploadId == '1') {
+            console.log(this.fileUpload1.nativeElement.files);
+            this.fileUpload1.nativeElement.value = "";
+            console.log(this.fileUpload1.nativeElement.files);
         }
     };
     ListPropertiesComponent.prototype.showImagesUsingFAncyBox = function (p_arrayOImages) {
@@ -614,6 +682,7 @@ var ListPropertiesComponent = /** @class */ (function () {
     ListPropertiesComponent.prototype.InitializedDataTableCurrentPurchasedZipCodes = function (asyncData) {
         debugger;
         console.log(asyncData);
+        $('#ViewAllCategoriesPurchased').DataTable().clear().destroy();
         var dTable = $('#ViewAllCategoriesPurchased');
         var thisStatus = this;
         if (asyncData === undefined) {
@@ -675,21 +744,24 @@ var ListPropertiesComponent = /** @class */ (function () {
             ],
             order: [[1, 'asc']]
         });
-        $('#ViewAllCategoriesPurchased').on('click', 'a.cancel', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            dTable.api().row($(this).parents('tr')).remove().draw(false);
-            thisStatus
-                .purchaseZipCodeService
-                .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
-                .subscribe(function (data) {
-                //thisStatus.getClientDetailsServicesData();
-                //thisStatus.getServicesCount();
-                //thisStatus.getTotalSalesAndServicesCount();
+        if (this.isTableCurrentPurchasedZipCodesLoadedFirstTime) {
+            $('#ViewAllCategoriesPurchased').on('click', 'a.cancel', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                dTable.api().row($(this).parents('tr')).remove().draw(false);
+                thisStatus
+                    .purchaseZipCodeService
+                    .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
+                    .subscribe(function (data) {
+                    //thisStatus.getClientDetailsServicesData();
+                    //thisStatus.getServicesCount();
+                    //thisStatus.getTotalSalesAndServicesCount();
+                });
             });
-        });
+            this.isTableCurrentPurchasedZipCodesLoadedFirstTime = false;
+        }
     };
     ListPropertiesComponent.prototype.SelectedChoicesForPurchase = function () {
         var _this = this;
@@ -731,6 +803,7 @@ var ListPropertiesComponent = /** @class */ (function () {
     }; //BindData  //GetAllRecords
     ListPropertiesComponent.prototype.InitializedDataTableSelectedChoices = function (asyncData) {
         console.log(asyncData);
+        $('#ViewRcd').DataTable().clear().destroy();
         var dTable = $('#ViewRcd');
         var thisStatus = this;
         if (asyncData === undefined) {
@@ -806,40 +879,43 @@ var ListPropertiesComponent = /** @class */ (function () {
             ],
             order: [[1, 'asc']]
         });
-        $('#ViewRcd').on('click', 'a.purchase', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            var row = dTable.fnGetPosition($(this).closest('tr')[0]);
-            var rowData = dTable.fnGetData(row);
-            //var rowColumns = rowData[rowData.length - 1];
-            var id = rowData['id'];
-            var CategoryName = rowData['CategoryName'];
-            var SubCategoryName = rowData['SubCategoryName'];
-            var Price = rowData['Price'];
-            var Zipcode = rowData['Zipcode'];
-            var subCategoryID = rowData['subCategoryID'];
-            var CategoryID = rowData['CategoryID'];
-            thisStatus.ngZone.run(function () {
-                thisStatus.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
+        if (this.isTableSelectedChoicesFirstTime) {
+            $('#ViewRcd').on('click', 'a.purchase', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                var row = dTable.fnGetPosition($(this).closest('tr')[0]);
+                var rowData = dTable.fnGetData(row);
+                //var rowColumns = rowData[rowData.length - 1];
+                var id = rowData['id'];
+                var CategoryName = rowData['CategoryName'];
+                var SubCategoryName = rowData['SubCategoryName'];
+                var Price = rowData['Price'];
+                var Zipcode = rowData['Zipcode'];
+                var subCategoryID = rowData['subCategoryID'];
+                var CategoryID = rowData['CategoryID'];
+                thisStatus.ngZone.run(function () {
+                    thisStatus.PurchaseRcd(CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id);
+                });
             });
-        });
-        $('#ViewRcd').on('click', 'a.cancel', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            var row = dTable.fnGetPosition($(this).closest('tr')[0]);
-            var rowData = dTable.fnGetData(row);
-            //var rowColumns = rowData[rowData.length - 1];
-            var id = rowData['id'];
-            var SubCategoryName = rowData['SubCategoryName'];
-            var subCategoryID = rowData['subCategoryID'];
-            thisStatus.ngZone.run(function () {
-                thisStatus.CancelRecord(subCategoryID, SubCategoryName, id);
+            $('#ViewRcd').on('click', 'a.cancel', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                var row = dTable.fnGetPosition($(this).closest('tr')[0]);
+                var rowData = dTable.fnGetData(row);
+                //var rowColumns = rowData[rowData.length - 1];
+                var id = rowData['id'];
+                var SubCategoryName = rowData['SubCategoryName'];
+                var subCategoryID = rowData['subCategoryID'];
+                thisStatus.ngZone.run(function () {
+                    thisStatus.CancelRecord(subCategoryID, SubCategoryName, id);
+                });
             });
-        });
+            this.isTableSelectedChoicesFirstTime = false;
+        }
     };
     ListPropertiesComponent.prototype.PurchaseRcd = function (CategoryID, subCategoryID, CategoryName, SubCategoryName, Price, Zipcode, id) {
         var _this = this;
@@ -904,6 +980,7 @@ var ListPropertiesComponent = /** @class */ (function () {
     };
     ListPropertiesComponent.prototype.InitializedDataTablePurchasedZipCodes = function (asyncData) {
         console.log(asyncData);
+        $('#viewAllPurchasedZipCodes').DataTable().clear().destroy();
         this.dTableAPZC = $('#viewAllPurchasedZipCodes');
         var thisStatus = this;
         if (asyncData === undefined) {
@@ -968,18 +1045,21 @@ var ListPropertiesComponent = /** @class */ (function () {
             ],
             order: [[1, 'asc']]
         });
-        $('#viewAllPurchasedZipCodes').on('click', 'a.cancel', function (e) {
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            ////get the real row index, even if the table is sorted 
-            //var index = dTable.fnGetPosition(tr[0]);
-            ////alert the content of the hidden first column 
-            //console.log(dTable.fnGetData(index)[0]);
-            thisStatus.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
-            this.RemoveRcd1($(this).closest('tr').children('td:first').text());
-        });
+        if (this.isTablePurchasedZipCodesLoaded) {
+            $('#viewAllPurchasedZipCodes').on('click', 'a.cancel', function (e) {
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                ////get the real row index, even if the table is sorted 
+                //var index = dTable.fnGetPosition(tr[0]);
+                ////alert the content of the hidden first column 
+                //console.log(dTable.fnGetData(index)[0]);
+                thisStatus.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
+                thisStatus.RemoveRcd1($(this).closest('tr').children('td:first').text());
+            });
+            this.isTablePurchasedZipCodesLoaded = false;
+        }
     };
     ListPropertiesComponent.prototype.RemoveRcd1 = function (rrr) {
         var _this = this;
@@ -1039,6 +1119,7 @@ var ListPropertiesComponent = /** @class */ (function () {
     };
     ListPropertiesComponent.prototype.InitializedDataTableSalesAdvertisement = function (asyncData) {
         console.log(asyncData);
+        $('#salesAdvertisement').DataTable().clear().destroy();
         this.dTableSA = $('#salesAdvertisement');
         var thisStatus = this;
         if (asyncData === undefined) {
@@ -1113,27 +1194,30 @@ var ListPropertiesComponent = /** @class */ (function () {
             ],
             order: [[1, 'asc']]
         });
-        $('#salesAdvertisement').on('click', 'a.edit', function (e) {
-            var _this = this;
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            thisStatus.ngZone.run(function () {
-                thisStatus.EditRecords($(_this).closest('tr').children('td:first').text());
+        if (this.isTableSalesAdvertisementLoadedFirstTime) {
+            $('#salesAdvertisement').on('click', 'a.edit', function (e) {
+                var _this = this;
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                thisStatus.ngZone.run(function () {
+                    thisStatus.EditRecords($(_this).closest('tr').children('td:first').text());
+                });
             });
-        });
-        $('#salesAdvertisement').on('click', 'a.remove', function (e) {
-            var _this = this;
-            e.preventDefault();
-            debugger;
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-            thisStatus.dTableSA.api().row($(this).parents('tr')).remove().draw(false);
-            thisStatus.ngZone.run(function () {
-                thisStatus.DeleteRecords($(_this).closest('tr').children('td:first').text());
+            $('#salesAdvertisement').on('click', 'a.remove', function (e) {
+                var _this = this;
+                e.preventDefault();
+                debugger;
+                var tr = $(this).closest('tr');
+                console.log($(this).closest('tr').children('td:first').text());
+                thisStatus.dTableSA.api().row($(this).parents('tr')).remove().draw(false);
+                thisStatus.ngZone.run(function () {
+                    thisStatus.DeleteRecords($(_this).closest('tr').children('td:first').text());
+                });
             });
-        });
+            this.isTableSalesAdvertisementLoadedFirstTime = false;
+        }
     };
     ListPropertiesComponent.prototype.RemoveTableSalesAdvertisement = function () {
         if (this.dTableSA !== undefined && this.dTableSA != null) {
@@ -1232,25 +1316,49 @@ var ListPropertiesComponent = /** @class */ (function () {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text();
                         var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1' };
                         thisStatus.arrayOfImages.push(imageObject);
-                        images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
+                        //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
+                        images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                        images += "<div class='wrapper_image'>";
+                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advMainImage").text() + "'>";
+                        images += "<span id='image0Id' class='close_image'></span>";
+                        images += "</div>";
+                        images += "</div>";
                     }
                     if (($(docs).find("advMainImage").text()) !== undefined) {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage1").text();
                         var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                         thisStatus.arrayOfImages.push(imageObject);
-                        images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
+                        //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
+                        images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                        images += "<div class='wrapper_image'>";
+                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage1").text() + "'>";
+                        images += "<span id='image1Id'  class='close_image'></span>";
+                        images += "</div>";
+                        images += "</div>";
                     }
                     if (($(docs).find("advMainImage").text()) !== undefined) {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage2").text();
                         var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                         thisStatus.arrayOfImages.push(imageObject);
-                        images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage2").text() + '/></div>';
+                        //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' +  + '/></div>';
+                        images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                        images += "<div class='wrapper_image'>";
+                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage2").text() + "'>";
+                        images += "<span id='image2Id' class='close_image'></span>";
+                        images += "</div>";
+                        images += "</div>";
                     }
                     if (($(docs).find("advMainImage").text()) !== undefined) {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage3").text();
                         var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                         thisStatus.arrayOfImages.push(imageObject);
-                        images += '<div class="col-12 col-xs-12 col-sm-4"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
+                        //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
+                        images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                        images += "<div class='wrapper_image'>";
+                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage3").text() + "'>";
+                        images += "<span id='image3Id' class='close_image'></span>";
+                        images += "</div>";
+                        images += "</div>";
                     }
                     $('#previewImages').html(images);
                     //thisStatus.uploadedAdvertisementImages = images;
@@ -1265,6 +1373,27 @@ var ListPropertiesComponent = /** @class */ (function () {
                     thisStatus.PostAdvertisement.get('cityPA').setValue($(docs).find("CityID").text());
                     thisStatus.startValueState = { "value": $(docs).find("StateID").text(), "label": $(docs).find("StateID").text() };
                     thisStatus.BindStateWiseZipCodeForSearch($(docs).find("StateID").text(), $(docs).find("CityID").text(), $(docs).find("ZipCode").text());
+                    if (images !== undefined || images != '') {
+                        if (thisStatus.isFirstTimePageBind) {
+                            $('.close_image').click(function () {
+                                debugger;
+                                var id = $(this).attr('id');
+                                if (id == "image0Id") {
+                                    $('#wrapperImage0Id').empty();
+                                }
+                                else if (id == "image1Id") {
+                                    $('#wrapperImage1Id').empty();
+                                }
+                                else if (id == "image2Id") {
+                                    $('#wrapperImage2Id').empty();
+                                }
+                                else if (id == "image3Id") {
+                                    $('#wrapperImage3Id').empty();
+                                }
+                            });
+                            thisStatus.isFirstTimePageBind = true;
+                        }
+                    }
                 });
                 thisStatus.showLoadingIconOnEditClick = false;
                 thisStatus.isPostAdvertisementFormVisible = true;
@@ -1736,6 +1865,9 @@ var ListPropertiesComponent = /** @class */ (function () {
                         //$('#zipCodeTabId').tab('show');
                     }
                 }
+                else {
+                    _this.zipCodeDataPA = [];
+                }
             });
         }
     };
@@ -2110,7 +2242,14 @@ var ListPropertiesComponent = /** @class */ (function () {
         debugger;
         var modal = this.modalService.open(PaymentModalComponent, { size: 'lg', backdrop: "static" });
         var modalComponent = modal.componentInstance;
-        modal.result.then(function (result) {
+        modal.componentInstance.dismissParentCall.subscribe(function (data) {
+            debugger;
+            console.log(data);
+            //this.overlayLoadingOnPurchase = false;
+        });
+        modal.componentInstance.updateParentCall.subscribe(function (data) {
+            //modal.result.then(
+            //    (result) => {
             debugger;
             _this.PostAds();
             //var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
@@ -2127,6 +2266,22 @@ var ListPropertiesComponent = /** @class */ (function () {
             //this.updateBindings();
         }, function () { });
     };
+    tslib_1.__decorate([
+        ViewChild('FileUpload1'),
+        tslib_1.__metadata("design:type", ElementRef)
+    ], ListPropertiesComponent.prototype, "fileUpload1", void 0);
+    tslib_1.__decorate([
+        ViewChild('FileUpload2'),
+        tslib_1.__metadata("design:type", ElementRef)
+    ], ListPropertiesComponent.prototype, "fileUpload2", void 0);
+    tslib_1.__decorate([
+        ViewChild('FileUpload3'),
+        tslib_1.__metadata("design:type", ElementRef)
+    ], ListPropertiesComponent.prototype, "fileUpload3", void 0);
+    tslib_1.__decorate([
+        ViewChild('FileUpload4'),
+        tslib_1.__metadata("design:type", ElementRef)
+    ], ListPropertiesComponent.prototype, "fileUpload4", void 0);
     ListPropertiesComponent = tslib_1.__decorate([
         Component({
             selector: 'list-properties',

@@ -251,7 +251,7 @@ namespace ClsLibrary.Dal
 
         public string ZipCodeStateWise(string StateID, string CityID, string userName)
         {
-            if (userName != null && userName != "")
+            if (userName != null || userName == "")
             {
                 SqlCommand cmd = new SqlCommand("proc_ZipCode", objCon.Con);
                 cmd.CommandType = CommandType.StoredProcedure;
