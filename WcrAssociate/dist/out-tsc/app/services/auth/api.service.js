@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -39,10 +39,10 @@ var ApiService = /** @class */ (function () {
         return this.http.delete("" + this.apiEndPoint + path).pipe(catchError(this.formatErrors));
     };
     ApiService.prototype.abc = function () { };
-    ApiService = tslib_1.__decorate([
+    var _a, _b;
+    ApiService = __decorate([
         Injectable(),
-        tslib_1.__metadata("design:paramtypes", [HttpClient,
-            PlatformLocation])
+        __metadata("design:paramtypes", [typeof (_a = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _a : Object, typeof (_b = typeof PlatformLocation !== "undefined" && PlatformLocation) === "function" ? _b : Object])
     ], ApiService);
     return ApiService;
 }());

@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -21,9 +21,10 @@ var UserService = /** @class */ (function () {
     UserService.prototype.delete = function (id) {
         return this.http.delete(environment.apiEndPoint + "/users/" + id);
     };
-    UserService = tslib_1.__decorate([
+    var _a;
+    UserService = __decorate([
         Injectable({ providedIn: 'root' }),
-        tslib_1.__metadata("design:paramtypes", [HttpClient])
+        __metadata("design:paramtypes", [typeof (_a = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _a : Object])
     ], UserService);
     return UserService;
 }());

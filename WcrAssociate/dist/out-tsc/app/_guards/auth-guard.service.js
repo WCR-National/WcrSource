@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -18,10 +18,10 @@ var AuthGuard = /** @class */ (function () {
         }
         return this.userService.isAuthenticated.pipe(take(1));
     };
-    AuthGuard = tslib_1.__decorate([
+    var _a;
+    AuthGuard = __decorate([
         Injectable(),
-        tslib_1.__metadata("design:paramtypes", [Router,
-            UserService])
+        __metadata("design:paramtypes", [typeof (_a = typeof Router !== "undefined" && Router) === "function" ? _a : Object, UserService])
     ], AuthGuard);
     return AuthGuard;
 }());

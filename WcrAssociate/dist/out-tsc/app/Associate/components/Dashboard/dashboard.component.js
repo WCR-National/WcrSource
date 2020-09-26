@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DashboardService } from 'AngularAssociate/app/services/associate/dashboard.service';
@@ -513,12 +513,13 @@ var DashboardComponent = /** @class */ (function () {
     };
     DashboardComponent.prototype.attemptToAllAdvertisement = function () {
     };
-    DashboardComponent = tslib_1.__decorate([
+    var _a, _b;
+    DashboardComponent = __decorate([
         Component({
             selector: 'associate-dashboard-page',
             templateUrl: './dashboard.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, DashboardService, XMLToJSON, ProfileService, MessageService])
+        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, DashboardService, XMLToJSON, ProfileService, MessageService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

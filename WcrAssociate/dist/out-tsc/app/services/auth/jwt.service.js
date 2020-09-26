@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate } from "tslib";
 import { Injectable } from '@angular/core';
 var JwtService = /** @class */ (function () {
     function JwtService() {
@@ -16,7 +16,7 @@ var JwtService = /** @class */ (function () {
     JwtService.prototype.destroyToken = function () {
         window.localStorage.removeItem('jwtToken');
     };
-    JwtService = tslib_1.__decorate([
+    JwtService = __decorate([
         Injectable()
     ], JwtService);
     return JwtService;
