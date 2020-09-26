@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Subject } from 'rxjs';
@@ -35,9 +35,10 @@ var AlertService = /** @class */ (function () {
     AlertService.prototype.getMessage = function () {
         return this.subject.asObservable();
     };
-    AlertService = tslib_1.__decorate([
+    var _a;
+    AlertService = __decorate([
         Injectable({ providedIn: 'root' }),
-        tslib_1.__metadata("design:paramtypes", [Router])
+        __metadata("design:paramtypes", [typeof (_a = typeof Router !== "undefined" && Router) === "function" ? _a : Object])
     ], AlertService);
     return AlertService;
 }());

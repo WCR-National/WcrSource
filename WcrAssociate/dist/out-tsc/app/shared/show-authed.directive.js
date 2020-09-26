@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 import { UserService } from '../../app/services/auth';
 var ShowAuthedDirective = /** @class */ (function () {
@@ -25,16 +25,15 @@ var ShowAuthedDirective = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
-    tslib_1.__decorate([
+    var _a, _b;
+    __decorate([
         Input(),
-        tslib_1.__metadata("design:type", Boolean),
-        tslib_1.__metadata("design:paramtypes", [Boolean])
+        __metadata("design:type", Boolean),
+        __metadata("design:paramtypes", [Boolean])
     ], ShowAuthedDirective.prototype, "appShowAuthed", null);
-    ShowAuthedDirective = tslib_1.__decorate([
+    ShowAuthedDirective = __decorate([
         Directive({ selector: '[appShowAuthed]' }),
-        tslib_1.__metadata("design:paramtypes", [TemplateRef,
-            UserService,
-            ViewContainerRef])
+        __metadata("design:paramtypes", [typeof (_a = typeof TemplateRef !== "undefined" && TemplateRef) === "function" ? _a : Object, UserService, typeof (_b = typeof ViewContainerRef !== "undefined" && ViewContainerRef) === "function" ? _b : Object])
     ], ShowAuthedDirective);
     return ShowAuthedDirective;
 }());

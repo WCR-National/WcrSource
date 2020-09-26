@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Component, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -1051,13 +1051,13 @@ var AuthComponent = /** @class */ (function () {
     AuthComponent.prototype.hideErrors = function () {
         this.showErrorsPassword = false;
     };
-    AuthComponent = tslib_1.__decorate([
+    var _a, _b, _c, _d, _e;
+    AuthComponent = __decorate([
         Component({
             selector: 'app-auth-page',
             templateUrl: './auth.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder,
-            HttpClient, NgZone])
+        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, UserService, typeof (_c = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _c : Object, typeof (_d = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _d : Object, typeof (_e = typeof NgZone !== "undefined" && NgZone) === "function" ? _e : Object])
     ], AuthComponent);
     return AuthComponent;
 }());

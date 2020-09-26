@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __awaiter, __decorate, __generator, __metadata } from "tslib";
 import { Component, NgZone, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -987,10 +987,10 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         var _this = this;
         this.purchaseZipCodeService
             .ApplyCoponCodeNew(1, priceValues, categoryText, zipCode)
-            .subscribe(function (data) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+            .subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
             var monthValue, results;
             var _this = this;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!(data.d == "1")) return [3 /*break*/, 2];
@@ -1294,10 +1294,10 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         var categoryId, subCategoryId, planId, priceValues, zipCode;
         this.purchaseZipCodeService
             .ApplyCoponCode(cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode)
-            .subscribe(function (data) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
+            .subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
             var monthValue, totalAmount, results;
             var _this = this;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!(data.d == "1")) return [3 /*break*/, 2];
@@ -1419,18 +1419,17 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.RemoveAllCurrentPurchasedZipCode = function () {
     };
-    tslib_1.__decorate([
+    var _a, _b, _c, _d, _e, _f, _g;
+    __decorate([
         ViewChild('ctdTabset'),
-        tslib_1.__metadata("design:type", Object)
+        __metadata("design:type", Object)
     ], PurchaseZipCodeComponent.prototype, "ctdTabset", void 0);
-    PurchaseZipCodeComponent = tslib_1.__decorate([
+    PurchaseZipCodeComponent = __decorate([
         Component({
             selector: 'purchase-zip-code',
             templateUrl: './purchase-zip-code.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ChangeDetectorRef, ActivatedRoute, Router, PurchaseZipCodeService, NgZone,
-            PaymentService, XMLToJSON,
-            FormBuilder, NgbModal, Toaster])
+        __metadata("design:paramtypes", [typeof (_a = typeof ChangeDetectorRef !== "undefined" && ChangeDetectorRef) === "function" ? _a : Object, typeof (_b = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _b : Object, typeof (_c = typeof Router !== "undefined" && Router) === "function" ? _c : Object, PurchaseZipCodeService, typeof (_d = typeof NgZone !== "undefined" && NgZone) === "function" ? _d : Object, PaymentService, XMLToJSON, typeof (_e = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _e : Object, typeof (_f = typeof NgbModal !== "undefined" && NgbModal) === "function" ? _f : Object, typeof (_g = typeof Toaster !== "undefined" && Toaster) === "function" ? _g : Object])
     ], PurchaseZipCodeComponent);
     return PurchaseZipCodeComponent;
 }());

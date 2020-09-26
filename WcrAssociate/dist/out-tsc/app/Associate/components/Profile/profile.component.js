@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Component, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -358,18 +358,18 @@ var ProfileComponent = /** @class */ (function () {
         //isProfileImageFormVisisble
         //profileImagePath
     };
-    tslib_1.__decorate([
+    var _a, _b, _c, _d, _e, _f;
+    __decorate([
         ViewChild('fileInput'),
-        tslib_1.__metadata("design:type", ElementRef)
+        __metadata("design:type", typeof (_a = typeof ElementRef !== "undefined" && ElementRef) === "function" ? _a : Object)
     ], ProfileComponent.prototype, "el", void 0);
-    ProfileComponent = tslib_1.__decorate([
+    ProfileComponent = __decorate([
         Component({
             selector: 'associate-profile-page',
             templateUrl: './profile.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, ProfileService,
-            XMLToJSON, FormBuilder, NgbModal, ChangeDetectorRef,
-            MessageService])
+        __metadata("design:paramtypes", [typeof (_b = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _b : Object, typeof (_c = typeof Router !== "undefined" && Router) === "function" ? _c : Object, ProfileService,
+            XMLToJSON, typeof (_d = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _d : Object, typeof (_e = typeof NgbModal !== "undefined" && NgbModal) === "function" ? _e : Object, typeof (_f = typeof ChangeDetectorRef !== "undefined" && ChangeDetectorRef) === "function" ? _f : Object, MessageService])
     ], ProfileComponent);
     return ProfileComponent;
 }());

@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Component } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,12 +34,13 @@ var HeaderComponent = /** @class */ (function () {
             alert("OOPS Something goes wrong !");
         });
     };
-    HeaderComponent = tslib_1.__decorate([
+    var _a, _b;
+    HeaderComponent = __decorate([
         Component({
             selector: 'app-layout-header',
             templateUrl: './header.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, MessageService,
+        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, MessageService,
             UserService])
     ], HeaderComponent);
     return HeaderComponent;

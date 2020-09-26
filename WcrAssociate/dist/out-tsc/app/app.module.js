@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
-    AppModule = tslib_1.__decorate([
+    AppModule = __decorate([
         NgModule({
             declarations: [
                 AppComponent,
@@ -71,7 +71,7 @@ var AppModule = /** @class */ (function () {
             ],
             bootstrap: [AppComponent]
         }),
-        tslib_1.__metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [])
     ], AppModule);
     return AppModule;
 }());

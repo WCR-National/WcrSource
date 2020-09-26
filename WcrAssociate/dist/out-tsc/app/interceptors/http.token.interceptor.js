@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Injectable } from '@angular/core';
 import { JwtService } from '../services/auth';
 var HttpTokenInterceptor = /** @class */ (function () {
@@ -17,9 +17,9 @@ var HttpTokenInterceptor = /** @class */ (function () {
         var request = req.clone({ setHeaders: headersConfig });
         return next.handle(request);
     };
-    HttpTokenInterceptor = tslib_1.__decorate([
+    HttpTokenInterceptor = __decorate([
         Injectable(),
-        tslib_1.__metadata("design:paramtypes", [JwtService])
+        __metadata("design:paramtypes", [JwtService])
     ], HttpTokenInterceptor);
     return HttpTokenInterceptor;
 }());

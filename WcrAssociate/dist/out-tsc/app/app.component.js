@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Component } from '@angular/core';
 import { UserService } from './services/auth';
 var AppComponent = /** @class */ (function () {
@@ -8,13 +8,13 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.ngOnInit = function () {
         this.userService.populate();
     };
-    AppComponent = tslib_1.__decorate([
+    AppComponent = __decorate([
         Component({
             selector: 'wcr-Associate-app',
             templateUrl: './app.component.html',
             styleUrls: ['./app.component.css']
         }),
-        tslib_1.__metadata("design:paramtypes", [UserService])
+        __metadata("design:paramtypes", [UserService])
     ], AppComponent);
     return AppComponent;
 }());

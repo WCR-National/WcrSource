@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Injectable } from '@angular/core';
 import { AuthenticationService } from '../../app/services/authentication/authentication.service';
 var JwtInterceptor = /** @class */ (function () {
@@ -17,9 +17,9 @@ var JwtInterceptor = /** @class */ (function () {
         }
         return next.handle(request);
     };
-    JwtInterceptor = tslib_1.__decorate([
+    JwtInterceptor = __decorate([
         Injectable(),
-        tslib_1.__metadata("design:paramtypes", [AuthenticationService])
+        __metadata("design:paramtypes", [AuthenticationService])
     ], JwtInterceptor);
     return JwtInterceptor;
 }());
