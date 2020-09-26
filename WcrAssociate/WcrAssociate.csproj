@@ -1809,9 +1809,6 @@
     <Folder Include="details-page-slider\css\" />
     <Folder Include="details-page-slider\images\" />
     <Folder Include="details-page-slider\js\" />
-    <Folder Include="dist\css\skins\" />
-    <Folder Include="dist\img\credit\" />
-    <Folder Include="dist\js\pages\" />
     <Folder Include="js\vendor\" />
     <Folder Include="Scripts\libs\assets\images\" />
   </ItemGroup>
