@@ -16,19 +16,17 @@
         <div class="container-cassie page">
 
             <div class="uk-background-primary uk-light">
-                <section class="mg-t-60-f" >
+                <section class="mg-t-60-f">
                     <div class="col-sm-12 col-xs-12 pd-l-50-f">
                         <p class="tx-18 tx-medium" style="color:#686868;"> STEP 1 - Type your message</p>
-                        <p class="tx-18 tx-medium" style="color:#686868;"> STEP 2 - Click SUBMIT</p>
-                        <p class="tx-18 tx-medium" style="color:#686868;"> STEP 3 - A WCR Customer Service Representative will respond by email with in 24-48 hrs</p>
                     </div>
-                    
+
                     <p style="color: rgb(59, 103, 0); " class="pd-lg-x-15 pd-l-50-f pd-r-100-f pd-t-30 tx-17 tx-bold" [style.display]="isMessageTobeshown? 'block':'none'"> {{responseMessage}}</p>
 
 
                     <form [formGroup]="helpDeskForm" class="mg-t-40-f" [style.display]="isFormVisible? 'block':'none'">
                         <div class="col-xs-12 col-sm-12 pd-lg-x-15 pd-l-50-f mg-b-20-f">
-                            <label class="uk-form-label mg-b-10 tx-20-f tx-600" for="form-stacked-text" style="color:#686868;">Message</label>
+                            <!--<label class="uk-form-label mg-b-10 tx-20-f tx-600" for="form-stacked-text" style="color:#686868;">Message</label>-->
                             <div class="uk-form-controls" [ngClass]="{'has-error': formErrors.message}">
                                 <textarea class="uk-textarea uk-form-large tm-form-xlarge uk-border-rounded" formControlName="message" placeholder="Enter your message" style="border-color: #686868; color: #686868;" id="form-textarea" (blue)="logValidationErrors()"></textarea>
                                 <div class="invalid-data" *ngIf="formErrors.message">
@@ -37,6 +35,10 @@
                             </div>
 
                         </div>
+                        <div class="col-xs-12 col-sm-12 pd-lg-x-15 pd-l-50-f">
+                            <p class="tx-18 tx-medium mg-t-15 mg-b-15" style="color:#686868;"> STEP 2 - Click SUBMIT</p>
+                        </div>
+
                         <div class="uk-text col-xs-3 col-sm-3 pd-l-50-f">
                             <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-xs-10-f" type="submit" [disabled]="ifMessageEmpty">
                                 <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submmitHelpDeskForm()">SUBMIT</span>
@@ -52,6 +54,10 @@
                                     </div>
                                 </div>
                             </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 pd-lg-x-15 pd-l-50-f mg-b-20-f">
+                            <p class="tx-18 tx-medium mg-t-15 mg-b-15" style="color:#686868;"> STEP 3 - A WCR Customer Service Representative will respond by email with in 24-48 hrs</p>
+
                         </div>
                     </form>
 

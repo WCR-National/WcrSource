@@ -334,7 +334,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.closeImageClick();
         this.isFirstTimePageBind = false;
         //}
-        this.fileUpload1.nativeElement.value = "";
+        //this.fileUpload1.nativeElement.value = "";
         this.cdr.detectChanges();
     };
     ListPropertiesComponent.prototype.resetImages = function (e, imageIndex) {
@@ -360,7 +360,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.closeImageClick();
         this.isFirstTimePageBind = false;
         //}
-        this.fileUpload1.nativeElement.value = "";
+        //this.fileUpload1.nativeElement.value = "";
         this.cdr.detectChanges();
     };
     ListPropertiesComponent.prototype.closeImageClick = function () {
@@ -1093,26 +1093,31 @@ var ListPropertiesComponent = /** @class */ (function () {
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var resultJson = [];
                 var dataJson = JSON.parse(json);
-                if (dataJson.NewDataSet.ViewAdvertisment != null) {
-                    if (!Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
-                        resultJson.push(dataJson.NewDataSet.ViewAdvertisment);
-                        dataJson.NewDataSet.ViewAdvertisment = resultJson;
+                if (dataJson.NewDataSet != null) {
+                    if (dataJson.NewDataSet.ViewAdvertisment != null) {
+                        if (!Array.isArray(dataJson.NewDataSet.ViewAdvertisment)) {
+                            resultJson.push(dataJson.NewDataSet.ViewAdvertisment);
+                            dataJson.NewDataSet.ViewAdvertisment = resultJson;
+                        }
+                        _this.InitializedDataTableSalesAdvertisement(dataJson.NewDataSet.ViewAdvertisment);
                     }
-                    _this.InitializedDataTableSalesAdvertisement(dataJson.NewDataSet.ViewAdvertisment);
+                    else {
+                        _this.InitializedDataTableSalesAdvertisement(undefined);
+                    }
+                    var cc = 0;
+                    var count = 0;
+                    var totalAmount1 = 0;
+                    $.each(docs, function (i, docs) {
+                        var a = $(docs).find("amount").text();
+                        totalAmount1 = totalAmount1 + parseInt(a);
+                        count++;
+                    });
+                    _this.totalCountOfPostAdvertisementSA = count;
+                    var row = "<tr>   <td colspan='7' ><b> Total Amount:- $" + totalAmount1 + "</b></td><td></td></tr>";
                 }
                 else {
                     _this.InitializedDataTableSalesAdvertisement(undefined);
                 }
-                var cc = 0;
-                var count = 0;
-                var totalAmount1 = 0;
-                $.each(docs, function (i, docs) {
-                    var a = $(docs).find("amount").text();
-                    totalAmount1 = totalAmount1 + parseInt(a);
-                    count++;
-                });
-                _this.totalCountOfPostAdvertisementSA = count;
-                var row = "<tr>   <td colspan='7' ><b> Total Amount:- $" + totalAmount1 + "</b></td><td></td></tr>";
                 _this.cdr.detectChanges();
             }
         });
@@ -1263,6 +1268,7 @@ var ListPropertiesComponent = /** @class */ (function () {
             debugger;
             if (data.d.length > 0) {
                 $('html, body').animate({ scrollTop: $('#loadingIconId').offset().top }, 'slow');
+                $('#previewImages').html('');
                 var xmlDoc = $.parseXML(data.d);
                 var xml = $(xmlDoc);
                 var docs = xml.find("FullDetailsAdvertisments");
@@ -1312,7 +1318,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                     }
                     //CKEDITOR.instances.txtFeatures.setData($(docs).find("additionalFeature").text());
                     var images = '';
-                    if (($(docs).find("advMainImage").text()) !== undefined) {
+                    if (($(docs).find("advMainImage").text()) !== undefined && ($(docs).find("advMainImage").text()) != null) {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text();
                         var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1' };
                         thisStatus.arrayOfImages.push(imageObject);
@@ -1324,7 +1330,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                         images += "</div>";
                         images += "</div>";
                     }
-                    if (($(docs).find("advMainImage").text()) !== undefined) {
+                    if (($(docs).find("advImage1").text()) !== undefined && ($(docs).find("advImage1").text()) != null) {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage1").text();
                         var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                         thisStatus.arrayOfImages.push(imageObject);
@@ -1336,7 +1342,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                         images += "</div>";
                         images += "</div>";
                     }
-                    if (($(docs).find("advMainImage").text()) !== undefined) {
+                    if (($(docs).find("advImage2").text()) !== undefined && ($(docs).find("advImage2").text()) != null) {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage2").text();
                         var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                         thisStatus.arrayOfImages.push(imageObject);
@@ -1348,7 +1354,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                         images += "</div>";
                         images += "</div>";
                     }
-                    if (($(docs).find("advMainImage").text()) !== undefined) {
+                    if (($(docs).find("advImage3").text()) !== undefined && ($(docs).find("advImage3").text()) != null) {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage3").text();
                         var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                         thisStatus.arrayOfImages.push(imageObject);
@@ -1449,9 +1455,11 @@ var ListPropertiesComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data.d == "-1") {
                 _this.showToast('danger', "This Record is Already Exists");
+                _this.isSubmittingPA = false;
             }
             if (data.d == "3") {
                 _this.showToast('danger', "Unsucessfull, Try again!!!");
+                _this.isSubmittingPA = false;
             }
             else if (data.d >= "1") {
                 _this.showToast('success', "Updated Successfully.");
@@ -1466,6 +1474,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 //$('#divImage').css("display", "none");
                 //$('#btnUpdate').css("visibility", "hidden");
                 //$("#btnAddNew").attr("disabled", true);
+                _this.cdr.detectChanges();
             }
         });
     };
@@ -1515,6 +1524,10 @@ var ListPropertiesComponent = /** @class */ (function () {
                     //$('#completeConsumerProfile').modal('show');
                 }
             }
+            else {
+                _this.isSubmittingPA = false;
+                _this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
+            }
         });
     };
     ListPropertiesComponent.prototype.InsertPostAdvsData = function () {
@@ -1541,6 +1554,10 @@ var ListPropertiesComponent = /** @class */ (function () {
                         return false;
                     }
                 });
+            }
+            else {
+                _this.isSubmittingPA = false;
+                _this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
             }
         });
         // }
@@ -1608,6 +1625,10 @@ var ListPropertiesComponent = /** @class */ (function () {
                 }
                 _this.SavePostAdvertisementsData(CategoryId, subCategoryId, title, featurs, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice);
                 _this.isSubmittingPA = false;
+            }
+            else {
+                _this.isSubmittingPA = false;
+                _this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
             }
         });
     };
@@ -1712,12 +1733,24 @@ var ListPropertiesComponent = /** @class */ (function () {
                 thisStatus.RemoveTableSalesAdvertisement();
                 thisStatus.ViewAllSalesAdvertisement();
                 thisStatus.isSubmittingPA = false;
+                thisStatus.isCollapsedOpenImages = true;
+                thisStatus.isCollapsedOverviewAndAdditionalFeatures = true;
+                thisStatus.isCollapsedLocation = true;
+                if (thisStatus.isPostButtonGreen) {
+                    thisStatus.isPostButtonGreen = false;
+                }
+                else {
+                    thisStatus.isPostButtonGreen = true;
+                }
+                thisStatus.isPostAdvertisementFormVisible = false;
                 thisStatus.showToast('success', "Successfully Sales Advertisment Purchased!");
                 thisStatus.showToast('success', "Your credit card has been Successfully charged!!!");
-                this.cdr.detectChanges();
+                thisStatus.cdr.detectChanges();
             },
             error: function (err) {
                 alert(err.statusText);
+                this.isSubmittingPA = false;
+                this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
             }
         });
     };
@@ -1971,8 +2004,15 @@ var ListPropertiesComponent = /** @class */ (function () {
     };
     ListPropertiesComponent.prototype.changeCityPA = function () {
         debugger;
-        this.BindCityWiseStatesPA(this.PostAdvertisement.get('city').value);
-        this.markAsDirty();
+        var state = this.PostAdvertisement.get('statePA').value != null ? this.PostAdvertisement.get('statePA').value.value : null;
+        var city = this.PostAdvertisement.get('cityPA').value;
+        if (state !== undefined && state != null) {
+            this.BindStateWiseZipCodeForSearch(state, city);
+        }
+        else {
+            this.BindCityWiseStatesPA(this.PostAdvertisement.get('cityPA').value);
+            this.markAsDirty();
+        }
     };
     ListPropertiesComponent.prototype.changeStatePA = function () {
         debugger;
@@ -1985,7 +2025,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         var _this = this;
         debugger;
         var zipCodeVal = this.PostAdvertisement.get('zipCodePA').value != null ? this.PostAdvertisement.get('zipCodePA').value.value : null;
-        var subCategory = this.PostAdvertisement.get('subCat').value != null ? this.PostAdvertisement.get('subCat').value.value : null;
+        var subCategory = this.PostAdvertisement.get('subCat').value != null ? this.PostAdvertisement.get('subCat').value : null;
         if (zipCodeVal == null || zipCodeVal == undefined || zipCodeVal == '') {
             //this.showToast('danger', 'Select your desired consumer segment');
         }
@@ -2098,7 +2138,6 @@ var ListPropertiesComponent = /** @class */ (function () {
             $("#subCatTownHome").removeClass("active");
             $("#subCatMultiFamily").removeClass("active");
             $("#subCatLand").removeClass("active");
-            this.PostAdvertisement.get('subCat').setValue('Home');
             $('#SubCategory option').each(function () {
                 if ($(this).val() == 1) {
                     flg = 1;
@@ -2114,6 +2153,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 _select.append($('<option></option>').val(1).html("Home"));
                 $('#SubCategory').append(_select.html());
             }
+            this.PostAdvertisement.get('subCat').setValue('1');
         }
         else if (type == 'Town') {
             $("#SubCategory").empty();
@@ -2123,7 +2163,6 @@ var ListPropertiesComponent = /** @class */ (function () {
             $("#subCatHome").removeClass("active");
             $("#subCatMultiFamily").removeClass("active");
             $("#subCatLand").removeClass("active");
-            this.PostAdvertisement.get('subCat').setValue('TownHome');
             var flg = 0;
             $('#SubCategory option').each(function () {
                 if ($(this).val() == 2) {
@@ -2140,6 +2179,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 _select.append($('<option></option>').val(2).html("TownHome"));
                 $('#SubCategory').append(_select.html());
             }
+            this.PostAdvertisement.get('subCat').setValue('2');
         }
         else if (type == 'Family') {
             $("#SubCategory").empty();
@@ -2149,7 +2189,6 @@ var ListPropertiesComponent = /** @class */ (function () {
             $("#subCatTownHome").removeClass("active");
             $("#subCatHome").removeClass("active");
             $("#subCatLand").removeClass("active");
-            this.PostAdvertisement.get('subCat').setValue('MultiFamily');
             var flg = 0;
             $('#SubCategory option').each(function () {
                 if ($(this).val() == 3) {
@@ -2166,6 +2205,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 _select.append($('<option></option>').val(3).html("MultiFamily"));
                 $('#SubCategory').append(_select.html());
             }
+            this.PostAdvertisement.get('subCat').setValue('3');
         }
         else if (type == 'Land') {
             $("#SubCategory").empty();
@@ -2175,7 +2215,6 @@ var ListPropertiesComponent = /** @class */ (function () {
             $("#subCatMultiFamily").removeClass("active");
             $("#subCatTownHome").removeClass("active");
             $("#subCatHome").removeClass("active");
-            this.PostAdvertisement.get('subCat').setValue('Land');
             var flg = 0;
             $('#SubCategory option').each(function () {
                 if ($(this).val() == 4) {
@@ -2192,6 +2231,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 _select.append($('<option></option>').val(4).html("Land"));
                 $('#SubCategory').append(_select.html());
             }
+            this.PostAdvertisement.get('subCat').setValue('4');
         }
         this.isConsumerSegmentAdvertisementVisible = true;
     };

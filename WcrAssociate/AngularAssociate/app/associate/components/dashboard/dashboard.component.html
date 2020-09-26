@@ -11,9 +11,9 @@
             <p class="mg-t-15-f">
                 <strong> Your dashboard shows details of activity regarding your listings displayed below. </strong>
             </p>
-                <p> Interested customers are displayed in the ‘My Clients’ section. </p>
-                <p>  Your current Property Listings are displayed in the ‘My Property Listings’ section. </p>
-                <p> The ‘My Zip Codes’ sections displays which zip codes you are offering your services in. </p>
+            <p> Interested customers are displayed in the ‘My Clients’ section. </p>
+            <p>  Your current Property Listings are displayed in the ‘My Property Listings’ section. </p>
+            <p> The ‘My Zip Codes’ sections displays which zip codes you are offering your services in. </p>
         </div>
     </div>
 </div><!-- content-header -->
@@ -34,7 +34,7 @@
                 </a><!-- card-body -->
             </div><!-- card -->
         </div><!-- col -->
-        <div class="col-sm-4 col-xl mg-t-15 mg-sm-t-0">
+        <div class="col-sm-4 col-xl mg-t-15 mg-sm-t-0" style="display:none;">
             <div class="card card-hover card-social-one">
                 <a id="aPurchaseAdvertisement" class="card-body" href='PostAdvertisement.aspx?pid=1'>
                     <div class="d-flex align-items-center justify-content-between mg-b-10">
@@ -74,7 +74,9 @@
         <div class="col-sm-12 col-xl">
             <div class="card card-hover card-social-one">
                 <div class="card-body">
-                    <h5 class="card-title tx-primary">My Clients</h5>
+                    <a [routerLink]="['/associates/client-details']">
+                        <h5 class="card-title tx-primary">My Clients</h5>
+                    </a>
                     <div class="table-responsive pd-l-0-f pd-r-0-f" #tableInterestedCustomers>
                         <table id="interestedCustomers" class="table">
                             <thead>
@@ -89,35 +91,37 @@
                                     <th>Delete</th>
                                 </tr>
                             </thead>
-                        </table>  
+                        </table>
                     </div>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div>
     </div>
 
-    <div class="row row-sm mg-t-30">
-        <div class="col-sm-3  col-xl">
+    <div class="row row-sm mg-t-30" >
+        <div class="col-sm-3  col-xl" style="display:none;">
             <div class="card card-hover card-social-one">
                 <div class="card-body">
                     <h5 class="card-title tx-primary">Selected Categories</h5>
-                    <div  class="table-responsive pd-l-0-f pd-r-0-f" #tableSelectedCategories>
+                    <div class="table-responsive pd-l-0-f pd-r-0-f" #tableSelectedCategories>
                         <table id="selectedCategories" class="table">
                             <thead>
                                 <tr>
                                     <th>Category/ SubCategory</th>
                                 </tr>
                             </thead>
-                        </table>  
+                        </table>
                     </div>
                 </div><!-- card-body -->
             </div><!-- card -->
         </div>
-         
-        <div class="col-sm-5 col-xl">
+
+        <div class="col-sm-6 col-xl">
             <div class="card card-hover card-social-one">
                 <div class="card-body">
-                    <h5 class="card-title tx-primary">My Property Listings</h5>
+                    <a [routerLink]="['/associates/list-properties']">
+                        <h5 class="card-title tx-primary">My Property Listings</h5>
+                    </a>
                     <div class="table-responsive pd-l-0-f pd-r-0-f" #tableMyPropertyListings>
                         <table id="myPropertyListings" class="table">
                             <thead>
@@ -135,11 +139,13 @@
             </div><!-- card -->
         </div>
 
-        <div class="col-sm-4  col-xl">
+        <div class="col-sm-6  col-xl">
             <div class="card card-hover card-social-one">
                 <div class="card-body">
-                    <h5 class="card-title tx-primary">My Zip Codes</h5>
-                    <div  class="table-responsive pd-l-0-f pd-r-0-f">
+                    <a [routerLink]="['/associates/purchase-zip-code']">
+                        <h5 class="card-title tx-primary">My Zip Codes</h5>
+                    </a>
+                    <div class="table-responsive pd-l-0-f pd-r-0-f">
                         <table id="myZipCode" class="table">
                             <thead>
                                 <tr>

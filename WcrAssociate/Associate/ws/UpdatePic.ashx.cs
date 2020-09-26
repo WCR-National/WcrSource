@@ -41,12 +41,29 @@ namespace WcrAssociate.Associate.ws
                             fname = file.FileName;
                             assId = fname;
                         }
-                        fname = Path.Combine(context.Server.MapPath("../../AssociatePhoto/"), context.Session["associate"].ToString() + ".png");
-                        File.Delete(fname); 
-                            file.SaveAs(fname);
+
+                        BllAssociateRegistration bllass = new BllAssociateRegistration();
+                        string str = bllass.AssociateBasicDetail(Convert.ToInt16(context.Session["associate"].ToString()), context.Session["userName"].ToString());
+                        if (!(string.IsNullOrEmpty(str)) && (str.Contains(".png") || str.Contains(".jpg") || str.Contains(".tiff") || str.Contains(".jpeg") ))
+                        {
+                            if (str.IndexOf("<Photo>") != -1)
+                            {
+                                int index = str.IndexOf("<Photo>");
+                                int lastIndex = str.IndexOf("</Photo>");
+                                str = str.Substring(index + 7, lastIndex - (index + 7));
+                            }
+                            fname = Path.Combine(context.Server.MapPath("../../AssociatePhoto/"), str);
+                            File.Delete(fname);
+                        }
+
+                        string guid = Guid.NewGuid().ToString();
+                        string nfileName = guid + "_" + context.Session["associate"].ToString() + ".png";
+                        fname = Path.Combine(context.Server.MapPath("../../AssociatePhoto/"), nfileName);
+                        file.SaveAs(fname);
                            // _associateImg = assId + ".png";
-                            _associateImg = context.Session["associate"].ToString() + ".png";               
+                        _associateImg = nfileName;               
                     }
+
                     BllAssociateRegistration objAssociate = new BllAssociateRegistration();
                     PropAssociateRegistration objAssociateRegistration = new PropAssociateRegistration();
                     objAssociateRegistration.Photo = _associateImg;

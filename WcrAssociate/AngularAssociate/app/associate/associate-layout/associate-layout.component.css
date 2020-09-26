@@ -17720,7 +17720,7 @@ body {
     .profile-sidebar-header span {
         display: block;
         color: #919fac;
-        font-size: 0.8125rem;
+        /*font-size: 0.8125rem;*/
     }
 
 .profile-sidebar-body {

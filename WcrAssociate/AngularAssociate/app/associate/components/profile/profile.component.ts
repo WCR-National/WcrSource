@@ -134,6 +134,7 @@ export class ProfileComponent implements OnInit {
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("ViewAssociateBasicDetail");
+
                         $.each(docs, function (i, docs) {
 
                             var pic = '';

@@ -9,7 +9,7 @@
         <div class="row mg-t-50">
             <div class="col-md-5 offset-md-3 col-xs-12 card-main pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center" style="border-top: 5px solid #0e3a6b;">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-xs-12 col-sm-12">
                         <h2 class="text-xs-center" [style.text-align]="authType == 'activate' || authType == 'resetPassword' ? 'left':'center'">{{ title }}</h2>
                     </div>
 
@@ -30,12 +30,12 @@
 
                             <div class="form-group" [ngClass]="{'has-error': formErrors.activationCode}"
                                  *ngIf="authType == 'activate'">
-                                <div class="col-sm-12 mg-b-35 mg-t-10">
+                                <div class="col-xs-12 col-sm-12 mg-b-35 mg-t-10">
                                     <p class="grey-text text-darken-1 tx-medium" *ngIf="authType == 'activate'">
                                         Activation code was sent to the Email address that was supplied for this account.
                                     </p>
                                 </div>
-                                <div class="col-sm-12 mg-b-20">
+                                <div class="col-xs-12 col-sm-12 mg-b-20">
                                     <input placeholder="Activation code" id="activationCode" type="text" class="form-control pd-l-45-force" formControlName="activationCode" (blur)="logValidationErrors()">
                                     <span class="large material-icons form-control-feedback icon">vpn_key</span>
                                     <div class="invalid-data" *ngIf="formErrors.activationCode">
@@ -45,7 +45,7 @@
 
                                 </div>
 
-                                <div class="col-sm-12">
+                                <div class="col-xs-12 col-sm-12">
 
                                     <button type="submit" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'activate')"
                                             [disabled]="!authForm.valid">
@@ -65,7 +65,7 @@
                                 </div>
 
 
-                                <div class="col-sm-12">
+                                <div class="col-xs-12 col-sm-12">
                                     <!--*ngIf="formErrors.loginCredentials"-->
                                     <div class="pd-t-30 mg-b-5">
                                         Resend New Activation Code: <a class="blue-text text-darken-4 tx-medium" (click)="onClickResendVerificationCode()" style="cursor: pointer;">Resend</a>
@@ -112,7 +112,7 @@
                                  *ngIf="(authType == 'register' || authType == 'login' || authType == 'resetPassword')"
                                  [style.display]="resetPassword ? 'none': 'block'">
 
-                                <div class="col-sm-12 mg-b-20">
+                                <div class="col-xs-12 col-sm-12 mg-b-20">
                                     <!--(blur)="showPreloaderIcon();"-->
                                     <input id="email" type="text" class="form-control pd-l-45-force" formControlName="email" placeholder="Email" (blur)="logValidationErrors()" />
                                     <span class="large material-icons form-control-feedback icon">email</span>
@@ -131,7 +131,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 pd-l-0-force" *ngIf="formErrors.email || isEmailTaken()">
+                                    <div class="col-xs-12 col-sm-12 pd-l-0-force" *ngIf="formErrors.email || isEmailTaken()">
                                         {{formErrors.email}}
                                     </div>
                                     <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force" *ngIf="(authType == 'register')" [style.display]="showEmailVerification ? 'block':'none'">
@@ -144,11 +144,9 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
                                 <div formGroupName="passwordGroup">
-                                    <div class="col-sm-12 pd-b-7" *ngIf="authType == 'login'">
-                                        <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-4 tx-medium "> <i class="material-icons form-control-feedback pd-b-4-force" style="font-size:15px;">vpn_key</i>Forgot password</a>
-                                    </div>
+                                   
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.password}"
                                          *ngIf="(authType == 'register' || authType == 'login' ) ">
                                         <div class="col-sm-12  mg-b-20">
@@ -227,7 +225,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.associate}" *ngIf="authType == 'register'  ">
                                     <div class="col-sm-12 mg-b-20">
                                         <label>
@@ -241,7 +239,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.consumer}" *ngIf="authType == 'register'  ">
                                     <div class="col-sm-12 mg-b-20">
                                         <label>
@@ -255,7 +253,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.terms}" *ngIf="(authType == 'register') ">
                                     <div class="col-sm-12 mg-b-20">
                                         <label>
@@ -270,7 +268,7 @@
 
                             </div>
 
-                            <div class="col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
                                 <div class="form-group" *ngIf="authType == 'login'">
                                     <div class="invalid-data" *ngIf="formErrors.credentials">
                                         {{formErrors.loginCredentials}}
@@ -278,9 +276,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-12 pd-l-0-force pd-r-0-force">
+
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
                                 <div class="form-group">
-                                    <div class="col-sm-12 mg-b-20">
+                                    <div class="col-xs-12 col-sm-12 mg-b-20">
                                         <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'register')" type="submit" [disabled]="!FormFilledSuccessfully">
                                             <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitRegistrationForm()">CREATE AN ACCOUNT</span>
                                             <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
@@ -310,6 +309,10 @@
                                                 </div>
                                             </div>
                                         </button>
+
+                                        <div class="col-xs-12 col-sm-12 pd-t-20 pd-b-7 center" *ngIf="authType == 'login'">
+                                            <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-4 tx-medium "> <i class="material-icons form-control-feedback pd-b-4-force" style="font-size:15px;">vpn_key</i>Forgot password</a>
+                                        </div>
 
 
                                         <button [style.display]="resetPassword ? 'none': 'block'" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'resetPassword')" type="submit" [disabled]="!authForm.valid">
