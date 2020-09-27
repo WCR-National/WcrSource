@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
@@ -307,12 +307,13 @@ var ClientDetailsComponent = /** @class */ (function () {
             }, 2000);
         });
     };
-    ClientDetailsComponent = tslib_1.__decorate([
+    var _a, _b;
+    ClientDetailsComponent = __decorate([
         Component({
             selector: 'associate-client-details-page',
             templateUrl: './client-details.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, ClientDetailsService, XMLToJSON])
+        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, ClientDetailsService, XMLToJSON])
     ], ClientDetailsComponent);
     return ClientDetailsComponent;
 }());

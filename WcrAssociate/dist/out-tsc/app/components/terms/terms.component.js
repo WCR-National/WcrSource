@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 var TermsComponent = /** @class */ (function () {
@@ -7,12 +7,13 @@ var TermsComponent = /** @class */ (function () {
     }
     TermsComponent.prototype.ngOnInit = function () {
     };
-    TermsComponent = tslib_1.__decorate([
+    var _a;
+    TermsComponent = __decorate([
         Component({
             selector: 'app-terms',
             templateUrl: './terms.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute])
+        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object])
     ], TermsComponent);
     return TermsComponent;
 }());

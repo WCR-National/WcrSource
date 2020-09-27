@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Component, NgZone } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -81,12 +81,13 @@ var SidebarComponent = /** @class */ (function () {
             alert('Something wrong');
         });
     };
-    SidebarComponent = tslib_1.__decorate([
+    var _a, _b, _c;
+    SidebarComponent = __decorate([
         Component({
             selector: 'associate-layout-sidebar',
             templateUrl: './sidebar.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, MessageService, Router, UserService, ProfileService, NgZone])
+        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, MessageService, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, UserService, ProfileService, typeof (_c = typeof NgZone !== "undefined" && NgZone) === "function" ? _c : Object])
     ], SidebarComponent);
     return SidebarComponent;
 }());

@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __awaiter, __decorate, __generator, __metadata } from "tslib";
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
@@ -146,9 +146,9 @@ var UserService = /** @class */ (function () {
         //    ));
     };
     UserService.prototype.attempConsumerAccountExists = function (type, credentials) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var urlToSignUp;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToSignUp = "ws/AssociateRegistration.asmx/ConsumerAccountExists";
@@ -160,9 +160,9 @@ var UserService = /** @class */ (function () {
         });
     };
     UserService.prototype.attemptAssociateAuth = function (type, credentials) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var urlToSignIn;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToSignIn = "ws/AssociateRegistration.asmx/AssociateLogin";
@@ -176,9 +176,9 @@ var UserService = /** @class */ (function () {
         });
     };
     UserService.prototype.attemptConsumerAuth = function (type, credentials) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var urlToSignIn;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToSignIn = "ws/AssociateRegistration.asmx/ConsumerLogin";
@@ -192,10 +192,10 @@ var UserService = /** @class */ (function () {
         });
     };
     UserService.prototype.consumerLoginSessionActivate = function (type, credentials, associateID) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var urlToSignInSessionActivation;
             var _this = this;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToSignInSessionActivation = "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate";
@@ -216,10 +216,10 @@ var UserService = /** @class */ (function () {
         });
     };
     UserService.prototype.associateLoginSessionActivate = function (type, credentials, associateID) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var urlToSignInSessionActivation;
             var _this = this;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToSignInSessionActivation = "ws/AssociateRegistration.asmx/AssociateLoginSessionActivate";
@@ -294,9 +294,9 @@ var UserService = /** @class */ (function () {
         }));
     };
     UserService.prototype.attemptVerifiedActivationCodeAssociate = function (type, email) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var urlToGetActivationCode;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
@@ -315,9 +315,9 @@ var UserService = /** @class */ (function () {
         }));
     };
     UserService.prototype.attemptVerifiedActivationCodeConsumer = function (type, email) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
+        return __awaiter(this, void 0, void 0, function () {
             var urlToGetActivationCode;
-            return tslib_1.__generator(this, function (_a) {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
@@ -340,8 +340,8 @@ var UserService = /** @class */ (function () {
         }));
     };
     UserService.prototype.attemptResetAssociatePassword = function (email) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            return tslib_1.__generator(this, function (_a) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.apiService.post("ws/AssociateSignUp.ashx?action=ResetAssociatePassNew&EmailID=" + email + "", {}).pipe(map(function (data) {
                             return data;
@@ -352,8 +352,8 @@ var UserService = /** @class */ (function () {
         });
     };
     UserService.prototype.attemptResetConsumerPassword = function (email) {
-        return tslib_1.__awaiter(this, void 0, void 0, function () {
-            return tslib_1.__generator(this, function (_a) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.apiService.post("ws/AssociateSignUp.ashx?action=ResetConsumerPassNew&EmailID=" + email + "").toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
@@ -391,16 +391,11 @@ var UserService = /** @class */ (function () {
             return data.user;
         }));
     };
-    UserService = tslib_1.__decorate([
+    var _a, _b, _c, _d, _e;
+    UserService = __decorate([
         Injectable(),
-        tslib_1.__metadata("design:paramtypes", [User,
-            ApiService,
-            HttpClient,
-            JwtService,
-            Router,
-            ActivatedRoute,
-            PlatformLocation,
-            NgZone])
+        __metadata("design:paramtypes", [User,
+            ApiService, typeof (_a = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _a : Object, JwtService, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, typeof (_c = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _c : Object, typeof (_d = typeof PlatformLocation !== "undefined" && PlatformLocation) === "function" ? _d : Object, typeof (_e = typeof NgZone !== "undefined" && NgZone) === "function" ? _e : Object])
     ], UserService);
     return UserService;
 }());

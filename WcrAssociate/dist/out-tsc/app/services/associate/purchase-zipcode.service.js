@@ -1,4 +1,4 @@
-import * as tslib_1 from "tslib";
+import { __decorate, __metadata } from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
@@ -173,13 +173,11 @@ var PurchaseZipCodeService = /** @class */ (function () {
             return data;
         }));
     };
-    PurchaseZipCodeService = tslib_1.__decorate([
+    var _a, _b;
+    PurchaseZipCodeService = __decorate([
         Injectable(),
-        tslib_1.__metadata("design:paramtypes", [User,
-            ApiService,
-            HttpClient,
-            JwtService,
-            Router])
+        __metadata("design:paramtypes", [User,
+            ApiService, typeof (_a = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _a : Object, JwtService, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object])
     ], PurchaseZipCodeService);
     return PurchaseZipCodeService;
 }());
