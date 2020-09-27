@@ -165,7 +165,7 @@ var PurchaseZipCodeService = /** @class */ (function () {
             .pipe(map(function (data) {
             return data;
         }));
-    };
+    }; //Check Card Exist or not
     PurchaseZipCodeService.prototype.IsZipCodeExist = function (zipCode) {
         var urlToInsertCategory = "Associate/ws/CategoryPurchase.asmx/ZipCodeExists";
         return this.apiService.post(urlToInsertCategory, { Zipcode: zipCode })

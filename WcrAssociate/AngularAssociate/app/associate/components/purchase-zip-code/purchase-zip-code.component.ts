@@ -824,7 +824,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                                     const stringLength = str.length; // this will be 16
 
 
-                                    if (str.lastIndexOf('s') != -1)
+                                    if (str.substr(str.length - 1) == 's') 
                                     {
                                         str = str.slice(0, -1);
                                     }
@@ -834,7 +834,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                                 const stringLength = strCat.length; // this will be 16
 
 
-                                if (strCat.lastIndexOf('s') != -1) {
+                                if (strCat.substr(strCat.length - 1) == 's' ) {
                                     strCat = strCat.slice(0, -1);
                                 }
                                 strCat = strCat + ' Services';

@@ -228,6 +228,7 @@ export class PurchaseZipCodeService {
                 }
             ));
     }
+
     ZipCodePurchaseCode() {
         let urlToInsertCategory: string = "Associate/ws/CategoryPurchase.asmx/AssociateCardExists";
         return this.apiService.post(urlToInsertCategory, { })
@@ -236,7 +237,7 @@ export class PurchaseZipCodeService {
                     return data;
                 }
             ));
-    }
+    } //Check Card Exist or not
 
     IsZipCodeExist(zipCode)
     {
