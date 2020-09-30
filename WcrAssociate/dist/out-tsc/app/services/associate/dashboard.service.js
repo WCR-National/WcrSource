@@ -1,4 +1,4 @@
-import { __awaiter, __decorate, __generator, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
@@ -67,63 +67,63 @@ var DashboardService = /** @class */ (function () {
         }));
     }; //all purchased categories
     DashboardService.prototype.attemptToZipcodeData = function () {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToCountAllPurchasedCategories;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 urlToCountAllPurchasedCategories = "Associate/ws/MyCategories.asmx/MuPurchaseCategories";
                 return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, { 'JobType': '2' }).toPromise()];
             });
         });
     }; //zip code data
     DashboardService.prototype.attemptToCategoriesData = function () {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToCountAllPurchasedCategories;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 urlToCountAllPurchasedCategories = "Associate/ws/MyCategories.asmx/AllPurchasedCategories";
                 return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise()];
             });
         });
     }; //categories data
     DashboardService.prototype.attemptToInterestedCustomerData = function () {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetVisitorsInfo;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 urlToGetVisitorsInfo = "Associate/ws/Sale.asmx/GetVisitorsInfo";
                 return [2 /*return*/, this.apiService.post(urlToGetVisitorsInfo, {}).toPromise()];
             });
         });
     }; //interested consumer
     DashboardService.prototype.attemptToInterestedCustomerServicesData = function () {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetVisitorsInfoServices;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 urlToGetVisitorsInfoServices = "Associate/ws/Sale.asmx/GetVisitorsInfoServices";
                 return [2 /*return*/, this.apiService.post(urlToGetVisitorsInfoServices, {}).toPromise()];
             });
         });
     }; //interested consumer
     DashboardService.prototype.attemptToMyPropertyListingsData = function () {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToCountAllPurchasedCategories;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 urlToCountAllPurchasedCategories = "Associate/ws/Sale.asmx/SelectAdvertisement";
                 return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, { Jobtype: 1 }).toPromise()];
             });
         });
     }; //my property listings
     DashboardService.prototype.attemptToAllAdvertisement = function () {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToCountAllPurchasedCategories;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 urlToCountAllPurchasedCategories = "Associate/ws/Sale.asmx/SelectAllAdvertisement";
                 return [2 /*return*/, this.apiService.post(urlToCountAllPurchasedCategories, {}).toPromise()];
             });
         });
     }; //All advertisement listings
     DashboardService.prototype.attempConsumerAccountExists = function (type, credentials) {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToSignUp;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToSignUp = "Associate/ws/AssociateRegistration.asmx/ConsumerAccountExists";
@@ -164,11 +164,13 @@ var DashboardService = /** @class */ (function () {
             return data.user;
         }));
     };
-    var _a, _b;
-    DashboardService = __decorate([
+    DashboardService = tslib_1.__decorate([
         Injectable(),
-        __metadata("design:paramtypes", [User,
-            ApiService, typeof (_a = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _a : Object, JwtService, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object])
+        tslib_1.__metadata("design:paramtypes", [User,
+            ApiService,
+            HttpClient,
+            JwtService,
+            Router])
     ], DashboardService);
     return DashboardService;
 }());

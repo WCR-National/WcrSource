@@ -1,4 +1,4 @@
-import { __decorate } from "tslib";
+import * as tslib_1 from "tslib";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -39,7 +39,7 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
 var AssociateModule = /** @class */ (function () {
     function AssociateModule() {
     }
-    AssociateModule = __decorate([
+    AssociateModule = tslib_1.__decorate([
         NgModule({
             declarations: [
                 AssociateLayoutComponent,

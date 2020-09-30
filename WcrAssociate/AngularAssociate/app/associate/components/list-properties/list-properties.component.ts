@@ -306,7 +306,7 @@ export class ListPropertiesComponent implements OnInit {
         this.PostAdvertisement = this.fb.group({
             consumerSegmentType: [''],
             titlePA: ['', [Validators.required, patternValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
-            pricePA: ['', [Validators.required, patternValidator(/^[+-]?\d+(\.\d+)?$/, { Numeric: true })]],
+            pricePA: ['', [Validators.required, patternValidator(/^\d+$/, { Numeric: true })]],
             descPA: ['', [Validators.required, patternValidator(/^[a-zA-Z0-9\-\s]+$/, { letterOnly: true })]],
             additionalFeature: ['', [Validators.required]],
             contactNoPA: ['', [Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })]],

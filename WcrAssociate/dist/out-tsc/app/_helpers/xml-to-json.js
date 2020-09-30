@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 var XMLToJSON = /** @class */ (function () {
     function XMLToJSON() {
@@ -155,9 +155,9 @@ var XMLToJSON = /** @class */ (function () {
         var json = X.toJson(X.toObj(X.removeWhite(xml)), xml.nodeName, "\t");
         return "{\n" + tab + (tab ? json.replace(/\t/g, tab) : json.replace(/\t|\n/g, "")) + "\n}";
     };
-    XMLToJSON = __decorate([
+    XMLToJSON = tslib_1.__decorate([
         Injectable(),
-        __metadata("design:paramtypes", [])
+        tslib_1.__metadata("design:paramtypes", [])
     ], XMLToJSON);
     return XMLToJSON;
 }());

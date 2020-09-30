@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
@@ -51,11 +51,13 @@ var ProfileService = /** @class */ (function () {
         //return this.apiService.post(urlToUploadImage, { image })
         //    
     };
-    var _a, _b;
-    ProfileService = __decorate([
+    ProfileService = tslib_1.__decorate([
         Injectable(),
-        __metadata("design:paramtypes", [User,
-            ApiService, typeof (_a = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _a : Object, JwtService, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object])
+        tslib_1.__metadata("design:paramtypes", [User,
+            ApiService,
+            HttpClient,
+            JwtService,
+            Router])
     ], ProfileService);
     return ProfileService;
 }());

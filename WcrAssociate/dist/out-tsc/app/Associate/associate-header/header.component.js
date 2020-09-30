@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -61,13 +61,12 @@ var AssociateHeaderComponent = /** @class */ (function () {
             alert('Something wrong');
         });
     };
-    var _a, _b;
-    AssociateHeaderComponent = __decorate([
+    AssociateHeaderComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-layout-header',
             templateUrl: './header.component.html'
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, DashboardService, UserService, XMLToJSON])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, DashboardService, UserService, XMLToJSON])
     ], AssociateHeaderComponent);
     return AssociateHeaderComponent;
 }());

@@ -1,4 +1,4 @@
-import { __decorate } from "tslib";
+import * as tslib_1 from "tslib";
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { CustomValidator } from './validators';
 var SharedModule = /** @class */ (function () {
     function SharedModule() {
     }
-    SharedModule = __decorate([
+    SharedModule = tslib_1.__decorate([
         NgModule({
             imports: [
                 CommonModule,

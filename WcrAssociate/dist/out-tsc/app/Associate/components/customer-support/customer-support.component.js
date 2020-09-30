@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Component, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -103,16 +103,15 @@ var CustomerSupportComponent = /** @class */ (function () {
     CustomerSupportComponent.prototype.showHideForm = function () {
         this.isFormVisible = true;
     };
-    var _a, _b, _c, _d, _e;
-    CustomerSupportComponent = __decorate([
+    CustomerSupportComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-customer-support-page',
             templateUrl: './customer-support.component.html',
             styleUrls: ['./customer-support.component.css'],
             encapsulation: ViewEncapsulation.None
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, CustomerSupportService,
-            XMLToJSON, typeof (_c = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _c : Object, typeof (_d = typeof NgbModal !== "undefined" && NgbModal) === "function" ? _d : Object, typeof (_e = typeof ChangeDetectorRef !== "undefined" && ChangeDetectorRef) === "function" ? _e : Object])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, CustomerSupportService,
+            XMLToJSON, FormBuilder, NgbModal, ChangeDetectorRef])
     ], CustomerSupportComponent);
     return CustomerSupportComponent;
 }());

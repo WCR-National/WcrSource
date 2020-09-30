@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Component, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -270,14 +270,14 @@ var LandingRegistrationComponent = /** @class */ (function () {
     LandingRegistrationComponent.prototype.hideErrors = function () {
         this.showErrorsPassword = false;
     };
-    var _a, _b, _c, _d, _e, _f;
-    LandingRegistrationComponent = __decorate([
+    LandingRegistrationComponent = tslib_1.__decorate([
         Component({
             selector: 'app-landing-registration-page',
             templateUrl: './landing-registration.component.html',
             styleUrls: ['./landing-registration.component.css']
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, UserService, typeof (_c = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _c : Object, typeof (_d = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _d : Object, typeof (_e = typeof NgbModal !== "undefined" && NgbModal) === "function" ? _e : Object, typeof (_f = typeof NgZone !== "undefined" && NgZone) === "function" ? _f : Object])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder,
+            HttpClient, NgbModal, NgZone])
     ], LandingRegistrationComponent);
     return LandingRegistrationComponent;
 }());

@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -19,9 +19,9 @@ var ErrorInterceptor = /** @class */ (function () {
             return throwError(error);
         }));
     };
-    ErrorInterceptor = __decorate([
+    ErrorInterceptor = tslib_1.__decorate([
         Injectable(),
-        __metadata("design:paramtypes", [AuthenticationService])
+        tslib_1.__metadata("design:paramtypes", [AuthenticationService])
     ], ErrorInterceptor);
     return ErrorInterceptor;
 }());

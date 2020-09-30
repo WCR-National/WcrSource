@@ -1,4 +1,4 @@
-import { __awaiter, __decorate, __generator, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
@@ -26,9 +26,9 @@ var SearchService = /** @class */ (function () {
         }));
     };
     SearchService.prototype.viewAdvanceSearchByZipcode = function (zipc, subCategoryId) {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToAdvanceSearch, result;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearch1";
@@ -51,9 +51,9 @@ var SearchService = /** @class */ (function () {
         }));
     };
     SearchService.prototype.getViewAdvanceSearchForServices = function (categoryId, zipc) {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToJobTypeWiseCategory;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToJobTypeWiseCategory = "ws/TopSearch.asmx/ViewAdvanceSearchForServices";
@@ -79,9 +79,9 @@ var SearchService = /** @class */ (function () {
         }));
     };
     SearchService.prototype.getAdvanceSearchCityStateWise = function (state, city, subCategoryId) {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToAdvanceSearch;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchCityStateWise";
@@ -100,9 +100,9 @@ var SearchService = /** @class */ (function () {
         }));
     };
     SearchService.prototype.getAdvanceSearchServicesCityStateWise = function (state, city, subCategoryId) {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToAdvanceSearch;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToAdvanceSearch = "ws/TopSearch.asmx/ViewAdvanceSearchServicesCityStateWise";
@@ -133,9 +133,9 @@ var SearchService = /** @class */ (function () {
     //        )).toPromise();
     //}
     SearchService.prototype.attemptGetZipCodeByIPAddress = function (_ipAddress) {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetZipCodeByIpAddress;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToGetZipCodeByIpAddress = "ws/TopSearch.asmx/GetZipCodeIpAddress";
@@ -145,10 +145,11 @@ var SearchService = /** @class */ (function () {
             });
         });
     };
-    var _a;
-    SearchService = __decorate([
+    SearchService = tslib_1.__decorate([
         Injectable(),
-        __metadata("design:paramtypes", [ApiService, typeof (_a = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _a : Object, JwtService])
+        tslib_1.__metadata("design:paramtypes", [ApiService,
+            HttpClient,
+            JwtService])
     ], SearchService);
     return SearchService;
 }());

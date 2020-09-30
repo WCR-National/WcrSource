@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -578,13 +578,13 @@ var PaymentComponent = /** @class */ (function () {
             }
         }
     };
-    var _a, _b, _c;
-    PaymentComponent = __decorate([
+    PaymentComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-payment-page',
             templateUrl: './payment.component.html'
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, PaymentService, XMLToJSON, typeof (_c = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _c : Object])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, PaymentService, XMLToJSON,
+            FormBuilder])
     ], PaymentComponent);
     return PaymentComponent;
 }());

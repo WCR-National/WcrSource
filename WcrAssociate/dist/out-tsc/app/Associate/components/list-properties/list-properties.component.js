@@ -1,4 +1,4 @@
-import { __awaiter, __decorate, __generator, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Component, ViewChild, NgZone, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Lightbox } from 'ngx-lightbox';
@@ -212,7 +212,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.PostAdvertisement = this.fb.group({
             consumerSegmentType: [''],
             titlePA: ['', [Validators.required, patternValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
-            pricePA: ['', [Validators.required, patternValidator(/^[+-]?\d+(\.\d+)?$/, { Numeric: true })]],
+            pricePA: ['', [Validators.required, patternValidator(/^\d+$/, { Numeric: true })]],
             descPA: ['', [Validators.required, patternValidator(/^[a-zA-Z0-9\-\s]+$/, { letterOnly: true })]],
             additionalFeature: ['', [Validators.required]],
             contactNoPA: ['', [Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })]],
@@ -571,10 +571,10 @@ var ListPropertiesComponent = /** @class */ (function () {
             var CatIdValue = [];
             this.listpropertiesService
                 .SelectAllPurchasedCartData()
-                .subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
+                .subscribe(function (data) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                 var xmlDoc, xml, docs, results;
                 var _this = this;
-                return __generator(this, function (_a) {
+                return tslib_1.__generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
                             debugger;
@@ -589,10 +589,10 @@ var ListPropertiesComponent = /** @class */ (function () {
                                 CatIdValue.push($(docs).find("CategoryID").text());
                             });
                             return [4 /*yield*/, Promise.apply(this.purchaseZipCodeService.InsertCategory(cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode))
-                                    .ajaxSuccess(function (subData1) { return __awaiter(_this, void 0, void 0, function () {
+                                    .ajaxSuccess(function (subData1) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
                                     var monthValue, totalAmount, results_1;
                                     var _this = this;
-                                    return __generator(this, function (_a) {
+                                    return tslib_1.__generator(this, function (_a) {
                                         switch (_a.label) {
                                             case 0:
                                                 if (!(subData1.d == "1")) return [3 /*break*/, 3];
@@ -1763,10 +1763,10 @@ var ListPropertiesComponent = /** @class */ (function () {
         });
     };
     ListPropertiesComponent.prototype.PurchaseSalesCategory = function () {
-        return __awaiter(this, void 0, void 0, function () {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
             var SubCategoryPrice;
             var _this = this;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.listpropertiesService
                             .AssociateCategoryExistsOrNot()
@@ -2306,30 +2306,31 @@ var ListPropertiesComponent = /** @class */ (function () {
             //this.updateBindings();
         }, function () { });
     };
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
-    __decorate([
+    tslib_1.__decorate([
         ViewChild('FileUpload1'),
-        __metadata("design:type", typeof (_a = typeof ElementRef !== "undefined" && ElementRef) === "function" ? _a : Object)
+        tslib_1.__metadata("design:type", ElementRef)
     ], ListPropertiesComponent.prototype, "fileUpload1", void 0);
-    __decorate([
+    tslib_1.__decorate([
         ViewChild('FileUpload2'),
-        __metadata("design:type", typeof (_b = typeof ElementRef !== "undefined" && ElementRef) === "function" ? _b : Object)
+        tslib_1.__metadata("design:type", ElementRef)
     ], ListPropertiesComponent.prototype, "fileUpload2", void 0);
-    __decorate([
+    tslib_1.__decorate([
         ViewChild('FileUpload3'),
-        __metadata("design:type", typeof (_c = typeof ElementRef !== "undefined" && ElementRef) === "function" ? _c : Object)
+        tslib_1.__metadata("design:type", ElementRef)
     ], ListPropertiesComponent.prototype, "fileUpload3", void 0);
-    __decorate([
+    tslib_1.__decorate([
         ViewChild('FileUpload4'),
-        __metadata("design:type", typeof (_d = typeof ElementRef !== "undefined" && ElementRef) === "function" ? _d : Object)
+        tslib_1.__metadata("design:type", ElementRef)
     ], ListPropertiesComponent.prototype, "fileUpload4", void 0);
-    ListPropertiesComponent = __decorate([
+    ListPropertiesComponent = tslib_1.__decorate([
         Component({
             selector: 'list-properties',
             templateUrl: './list-properties.component.html',
             changeDetection: ChangeDetectionStrategy.OnPush
         }),
-        __metadata("design:paramtypes", [typeof (_e = typeof ChangeDetectorRef !== "undefined" && ChangeDetectorRef) === "function" ? _e : Object, typeof (_f = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _f : Object, typeof (_g = typeof Router !== "undefined" && Router) === "function" ? _g : Object, PaymentService, XMLToJSON, typeof (_h = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _h : Object, ListPropertiesService, PurchaseZipCodeService, typeof (_j = typeof NgbModal !== "undefined" && NgbModal) === "function" ? _j : Object, typeof (_k = typeof NgZone !== "undefined" && NgZone) === "function" ? _k : Object, typeof (_l = typeof Lightbox !== "undefined" && Lightbox) === "function" ? _l : Object, typeof (_m = typeof Toaster !== "undefined" && Toaster) === "function" ? _m : Object])
+        tslib_1.__metadata("design:paramtypes", [ChangeDetectorRef, ActivatedRoute, Router, PaymentService, XMLToJSON,
+            FormBuilder, ListPropertiesService, PurchaseZipCodeService, NgbModal,
+            NgZone, Lightbox, Toaster])
     ], ListPropertiesComponent);
     return ListPropertiesComponent;
 }());

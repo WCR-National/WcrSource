@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
@@ -109,9 +109,9 @@ var FakeBackendInterceptor = /** @class */ (function () {
             .pipe(delay(500))
             .pipe(dematerialize());
     };
-    FakeBackendInterceptor = __decorate([
+    FakeBackendInterceptor = tslib_1.__decorate([
         Injectable(),
-        __metadata("design:paramtypes", [])
+        tslib_1.__metadata("design:paramtypes", [])
     ], FakeBackendInterceptor);
     return FakeBackendInterceptor;
 }());

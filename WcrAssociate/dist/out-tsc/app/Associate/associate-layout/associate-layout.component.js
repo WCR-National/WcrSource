@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Component, ViewEncapsulation } from '@angular/core';
 import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -54,15 +54,14 @@ var AssociateLayoutComponent = /** @class */ (function () {
             alert("OOPS Something goes wrong !");
         });
     };
-    var _a, _b;
-    AssociateLayoutComponent = __decorate([
+    AssociateLayoutComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-layout',
             templateUrl: './associate-layout.component.html',
             styleUrls: ['./associate-layout.component.css'],
             encapsulation: ViewEncapsulation.None
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _a : Object, typeof (_b = typeof Router !== "undefined" && Router) === "function" ? _b : Object, MessageService,
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, MessageService,
             UserService])
     ], AssociateLayoutComponent);
     return AssociateLayoutComponent;

@@ -1,4 +1,4 @@
-import { __decorate } from "tslib";
+import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 var MessageService = /** @class */ (function () {
@@ -11,7 +11,7 @@ var MessageService = /** @class */ (function () {
     MessageService.prototype.filter = function (filterBy) {
         this._listners.next(filterBy);
     };
-    MessageService = __decorate([
+    MessageService = tslib_1.__decorate([
         Injectable()
     ], MessageService);
     return MessageService;

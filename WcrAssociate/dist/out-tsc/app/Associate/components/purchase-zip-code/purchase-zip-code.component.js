@@ -1,4 +1,4 @@
-import { __awaiter, __decorate, __generator, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Component, NgZone, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,6 +10,7 @@ import * as $ from 'jquery';
 import * as moment from 'moment'; // add this 1 of 4
 import { Toaster } from "ngx-toast-notifications";
 import { PaymentModalComponent } from '../payment-modal/payment-modal.component';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 var PurchaseZipCodeComponent = /** @class */ (function () {
     function PurchaseZipCodeComponent(cdr, route, router, purchaseZipCodeService, ngZone, paymentService, xmlToJson, fb, modalService, toaster) {
         this.cdr = cdr;
@@ -651,14 +652,14 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                             label = $(docs).find("categoryname").text();
                             var str = $(docs).find("categoryname").text();
                             var stringLength_1 = str.length; // this will be 16
-                            if (str.lastIndexOf('s') != -1) {
+                            if (str.substr(str.length - 1) == 's') {
                                 str = str.slice(0, -1);
                             }
                             startValueCategory = { "value": $(docs).find("id").text(), "label": str + ' Services' };
                         }
                         var strCat = $(docs).find("categoryname").text();
                         var stringLength = strCat.length; // this will be 16
-                        if (strCat.lastIndexOf('s') != -1) {
+                        if (strCat.substr(strCat.length - 1) == 's') {
                             strCat = strCat.slice(0, -1);
                         }
                         strCat = strCat + ' Services';
@@ -987,10 +988,10 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         var _this = this;
         this.purchaseZipCodeService
             .ApplyCoponCodeNew(1, priceValues, categoryText, zipCode)
-            .subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
+            .subscribe(function (data) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
             var monthValue, results;
             var _this = this;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!(data.d == "1")) return [3 /*break*/, 2];
@@ -1218,16 +1219,8 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
             //var index = dTable.fnGetPosition(tr[0]);
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
-            thisStatus.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
             thisStatus.ngZone.run(function () {
-                thisStatus.purchaseZipCodeService
-                    .PermananetlyRemoveCategory($(_this).closest('tr').children('td:first').text())
-                    .subscribe(function (data) {
-                    //thisStatus.getClientDetailsServicesData();
-                    //thisStatus.getServicesCount();
-                    //thisStatus.getTotalSalesAndServicesCount();
-                });
-                thisStatus.RemoveAllPurchasedZipCodes();
+                thisStatus.onOpenModalConfirmationClick($(_this));
             });
         });
     };
@@ -1277,6 +1270,27 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
             //this.updateBindings();
         }, function () { });
     };
+    PurchaseZipCodeComponent.prototype.onOpenModalConfirmationClick = function (deleteow) {
+        var _this = this;
+        var modal = this.modalService.open(ConfirmationModalComponent, { size: 'lg', backdrop: "static" });
+        var modalComponent = modal.componentInstance;
+        //Case for cancel
+        modal.componentInstance.dismissConfirmation.subscribe(function (data) {
+            console.log('dismiss confirmation');
+            //this.overlayLoadingOnPurchase = false;
+        });
+        //Case for confirmation 
+        modal.componentInstance.CancelConfirmation.subscribe(function (data) {
+            //this.showToast('success', 'Purchasing is in process');
+            console.log('cnacel confirmation');
+            _this.purchaseZipCodeService
+                .PermananetlyRemoveCategory(deleteow.closest('tr').children('td:first').text())
+                .subscribe(function (data) {
+                _this.dTableAPZC.api().row(deleteow.parents('tr')).remove().draw(false);
+                _this.showToast('success', 'Zip Code successfully removed.');
+            });
+        });
+    };
     PurchaseZipCodeComponent.prototype.switchNgBTab = function (id) {
         this.ctdTabset.select(id);
     };
@@ -1294,10 +1308,10 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
         var categoryId, subCategoryId, planId, priceValues, zipCode;
         this.purchaseZipCodeService
             .ApplyCoponCode(cCode, disc, duration, categoryId, subCategoryId, planId, priceValues, zipCode)
-            .subscribe(function (data) { return __awaiter(_this, void 0, void 0, function () {
+            .subscribe(function (data) { return tslib_1.__awaiter(_this, void 0, void 0, function () {
             var monthValue, totalAmount, results;
             var _this = this;
-            return __generator(this, function (_a) {
+            return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         if (!(data.d == "1")) return [3 /*break*/, 2];
@@ -1419,17 +1433,18 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.RemoveAllCurrentPurchasedZipCode = function () {
     };
-    var _a, _b, _c, _d, _e, _f, _g;
-    __decorate([
+    tslib_1.__decorate([
         ViewChild('ctdTabset'),
-        __metadata("design:type", Object)
+        tslib_1.__metadata("design:type", Object)
     ], PurchaseZipCodeComponent.prototype, "ctdTabset", void 0);
-    PurchaseZipCodeComponent = __decorate([
+    PurchaseZipCodeComponent = tslib_1.__decorate([
         Component({
             selector: 'purchase-zip-code',
             templateUrl: './purchase-zip-code.component.html'
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof ChangeDetectorRef !== "undefined" && ChangeDetectorRef) === "function" ? _a : Object, typeof (_b = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _b : Object, typeof (_c = typeof Router !== "undefined" && Router) === "function" ? _c : Object, PurchaseZipCodeService, typeof (_d = typeof NgZone !== "undefined" && NgZone) === "function" ? _d : Object, PaymentService, XMLToJSON, typeof (_e = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _e : Object, typeof (_f = typeof NgbModal !== "undefined" && NgbModal) === "function" ? _f : Object, typeof (_g = typeof Toaster !== "undefined" && Toaster) === "function" ? _g : Object])
+        tslib_1.__metadata("design:paramtypes", [ChangeDetectorRef, ActivatedRoute, Router, PurchaseZipCodeService, NgZone,
+            PaymentService, XMLToJSON,
+            FormBuilder, NgbModal, Toaster])
     ], PurchaseZipCodeComponent);
     return PurchaseZipCodeComponent;
 }());

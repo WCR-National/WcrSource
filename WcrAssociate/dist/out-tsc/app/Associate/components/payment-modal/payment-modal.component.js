@@ -1,4 +1,4 @@
-import { __decorate, __metadata, __param } from "tslib";
+import * as tslib_1 from "tslib";
 import { Component, Optional, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -618,22 +618,22 @@ var PaymentModalComponent = /** @class */ (function () {
             type: type,
         });
     };
-    var _a, _b, _c, _d, _e, _f, _g;
-    __decorate([
+    tslib_1.__decorate([
         Output(),
-        __metadata("design:type", typeof (_a = typeof EventEmitter !== "undefined" && EventEmitter) === "function" ? _a : Object)
+        tslib_1.__metadata("design:type", EventEmitter)
     ], PaymentModalComponent.prototype, "dismissParentCall", void 0);
-    __decorate([
+    tslib_1.__decorate([
         Output(),
-        __metadata("design:type", typeof (_b = typeof EventEmitter !== "undefined" && EventEmitter) === "function" ? _b : Object)
+        tslib_1.__metadata("design:type", EventEmitter)
     ], PaymentModalComponent.prototype, "updateParentCall", void 0);
-    PaymentModalComponent = __decorate([
+    PaymentModalComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-payment-modal-page',
             templateUrl: './payment-modal.component.html'
         }),
-        __param(5, Optional()),
-        __metadata("design:paramtypes", [typeof (_c = typeof ActivatedRoute !== "undefined" && ActivatedRoute) === "function" ? _c : Object, typeof (_d = typeof Router !== "undefined" && Router) === "function" ? _d : Object, PaymentService, XMLToJSON, typeof (_e = typeof FormBuilder !== "undefined" && FormBuilder) === "function" ? _e : Object, typeof (_f = typeof NgbActiveModal !== "undefined" && NgbActiveModal) === "function" ? _f : Object, typeof (_g = typeof Toaster !== "undefined" && Toaster) === "function" ? _g : Object])
+        tslib_1.__param(5, Optional()),
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, PaymentService, XMLToJSON,
+            FormBuilder, NgbActiveModal, Toaster])
     ], PaymentModalComponent);
     return PaymentModalComponent;
 }());

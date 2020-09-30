@@ -1,4 +1,4 @@
-import { __decorate } from "tslib";
+import * as tslib_1 from "tslib";
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AssociateLayoutComponent } from './associate-layout';
@@ -46,7 +46,7 @@ var associateRoutes = [
 var AssociateRoutingModule = /** @class */ (function () {
     function AssociateRoutingModule() {
     }
-    AssociateRoutingModule = __decorate([
+    AssociateRoutingModule = tslib_1.__decorate([
         NgModule({
             imports: [RouterModule.forChild(associateRoutes)],
             exports: [RouterModule]

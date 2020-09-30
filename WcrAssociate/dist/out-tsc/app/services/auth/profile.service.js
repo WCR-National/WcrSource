@@ -1,4 +1,4 @@
-import { __decorate, __metadata } from "tslib";
+import * as tslib_1 from "tslib";
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
@@ -21,11 +21,12 @@ var ProfilesService = /** @class */ (function () {
         this.isAuthenticatedSubject = new ReplaySubject(1);
         this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
     }
-    var _a;
-    ProfilesService = __decorate([
+    ProfilesService = tslib_1.__decorate([
         Injectable(),
-        __metadata("design:paramtypes", [User,
-            ApiService, typeof (_a = typeof HttpClient !== "undefined" && HttpClient) === "function" ? _a : Object, JwtService])
+        tslib_1.__metadata("design:paramtypes", [User,
+            ApiService,
+            HttpClient,
+            JwtService])
     ], ProfilesService);
     return ProfilesService;
 }());
