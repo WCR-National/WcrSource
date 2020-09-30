@@ -132,7 +132,7 @@ export class PaymentModalComponent implements OnInit {
     public selectedZip = null;
     public g_selectedZip = null;
 
-    public startValueMonth=null;
+    public startValueMonth = null;
     public selectedMonth = null;
     public g_selectedMonth = null;
 
@@ -191,11 +191,25 @@ export class PaymentModalComponent implements OnInit {
             thisStatus.cardForm.valueChanges.subscribe(() => {
                 debugger;
                 if (thisStatus.cardForm.valid) {
+                    //thisStatus.cardForm.setErrors({ 'invalid': true });
                     thisStatus.defaultDeisableUpdateButton = false;
                 }
+                else {
+                    thisStatus.defaultDeisableUpdateButton = true;
+                }
             });
-        }, 8000)
-       
+        }, 8000);
+
+        //setTimeout(function () {
+        //    debugger;
+        //    thisStatus.cardForm.valueChanges.subscribe((data) => {
+        //        debugger;
+        //        if (/^[a-zA-Z]+$/.test(thisStatus.cardForm.controls['firstName'].value))
+        //        {
+        //            thisStatus.defaultDeisableUpdateButton = false;
+        //        }
+        //    });
+        //}, 8000)
     }
 
     //public confirm(): void {
@@ -206,8 +220,7 @@ export class PaymentModalComponent implements OnInit {
     //}
 
     public dismiss(): void {
-        if (this.activeModal)
-        {
+        if (this.activeModal) {
             this.activeModal.dismiss();
             this.dismissParentCall.emit('cancel');
         }
@@ -404,7 +417,8 @@ export class PaymentModalComponent implements OnInit {
                                 //CheckBox3.Checked = true;
                             }
                             this.isAddOrUpdateButton = false;
-
+                            //this.cardForm.setErrors({ 'incorrect': true });
+                            //this.cardForm.controls['firstName'].setErrors({ 'incorrect': true });
                             return false;
                         }
                         else {
@@ -419,6 +433,10 @@ export class PaymentModalComponent implements OnInit {
                         this.isAddOrUpdateButton = true;
                         thisStatus.cardForm.get('country').setValue("US");
                     }
+
+                    //this.cardForm.setErrors({ 'incorrect': true });
+                    //this.cardForm.controls['firstName'].setErrors({ 'incorrect': true });
+
                 });
     }
 

@@ -44,6 +44,7 @@ import { LightboxModule } from 'ngx-lightbox';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ListPropertiesService } from '../services/associate/list-properties.service';
 import { PaymentModalComponent } from './components/payment-modal/payment-modal.component';
+import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
     declarations: [
@@ -58,7 +59,8 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
         ListPropertiesComponent,
         BillingHistoryComponent,
         PurchaseZipCodeComponent,
-        PaymentModalComponent
+        PaymentModalComponent,
+        ConfirmationModalComponent
     ],
     imports: [
         CommonModule,
@@ -77,7 +79,7 @@ import { PaymentModalComponent } from './components/payment-modal/payment-modal.
         LightboxModule
         
     ],
-    entryComponents: [PaymentModalComponent],
+    entryComponents: [PaymentModalComponent, ConfirmationModalComponent],
 
     providers: [
         ApiService,

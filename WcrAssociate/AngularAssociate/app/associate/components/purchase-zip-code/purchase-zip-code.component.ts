@@ -19,6 +19,7 @@ import { ToastConfig, Toaster, ToastType } from "ngx-toast-notifications";
 import { debug } from 'util';
 import { PaymentComponent } from '../payment/payment.component';
 import { PaymentModalComponent } from '../payment-modal/payment-modal.component';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 
 @Component({
@@ -235,7 +236,7 @@ export class PurchaseZipCodeComponent implements OnInit {
     public showOnSearchState: boolean = false;
     public showOnLoadState: boolean = true;
 
-    
+
     public _Counter = 0;
     public dTableCPZC: any = null;
     public dTableSearching: any = null;
@@ -714,8 +715,8 @@ export class PurchaseZipCodeComponent implements OnInit {
                             });
                             if (arrZipCode.length == 0 || arrZipCode == null || arrZipCode == undefined) {
 
-                               this.RemoveSearchedZipCodes();
-                                
+                                this.RemoveSearchedZipCodes();
+
 
                                 this.formErrorMessageSearch = "City/State Combination is not valid. Try Again";
                                 this.divShowZipCodeCS = false;
@@ -820,12 +821,11 @@ export class PurchaseZipCodeComponent implements OnInit {
                                 if (i == 0) {
                                     val = $(docs).find("id").text();
                                     label = $(docs).find("categoryname").text();
-                                    var str = $(docs).find("categoryname").text(); 
+                                    var str = $(docs).find("categoryname").text();
                                     const stringLength = str.length; // this will be 16
 
 
-                                    if (str.substr(str.length - 1) == 's') 
-                                    {
+                                    if (str.substr(str.length - 1) == 's') {
                                         str = str.slice(0, -1);
                                     }
                                     startValueCategory = { "value": $(docs).find("id").text(), "label": str + ' Services' };
@@ -834,7 +834,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                                 const stringLength = strCat.length; // this will be 16
 
 
-                                if (strCat.substr(strCat.length - 1) == 's' ) {
+                                if (strCat.substr(strCat.length - 1) == 's') {
                                     strCat = strCat.slice(0, -1);
                                 }
                                 strCat = strCat + ' Services';
@@ -989,7 +989,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                         var arrSearchedZipCode = [];
                         var searchedObject = { 'id': 0, 'Zipcode': zipCode, "CategoryName": categoryName, "SubCategoryName": subCategoryName, "Price": priceValues, "CategoryId": categoryId, "SubCategoryId": subCategoryId };
                         arrSearchedZipCode.push(searchedObject);
-                       
+
                         this.initializedDataTableSearchedZipCodes(arrSearchedZipCode);
                     }
                     else {
@@ -1003,7 +1003,7 @@ export class PurchaseZipCodeComponent implements OnInit {
     }
 
     initializedDataTableSearchedZipCodes(asyncData) {
-       
+
         console.log(asyncData);
         $("#searchedZipCodes").DataTable().clear().destroy();
 
@@ -1093,8 +1093,7 @@ export class PurchaseZipCodeComponent implements OnInit {
             ],
             order: [[1, 'asc']]
         });
-        if (this.firstTimeCalling)
-        {
+        if (this.firstTimeCalling) {
             $('#searchedZipCodes tbody').on('click', '.purchaseId', function (e) {
 
                 //alert('entered');
@@ -1140,6 +1139,7 @@ export class PurchaseZipCodeComponent implements OnInit {
 
 
                 thisStatus.ngZone.run(() => {
+
                     thisStatus.RemoveSearchedZipCodes();
                 });
 
@@ -1152,7 +1152,7 @@ export class PurchaseZipCodeComponent implements OnInit {
             });
             this.firstTimeCalling = false;
         }
-        
+
 
         this.dTableSearching.on('destroy.dt', function (e, settings) {
 
@@ -1208,11 +1208,12 @@ export class PurchaseZipCodeComponent implements OnInit {
                         var xml = $(xmlDoc);
                         var docs = xml.find("CheckAssoCard");
                         if (parseInt($(docs).find("id").text()) >= 1) {
-                           
+
                             // ApplycoponCode(a, b, c);
                             this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
                         }
                         else {
+                            this.overlayLoadingOnPurchase = false;
                             this.onOpenModalClick();
                             //this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
                         }
@@ -1289,7 +1290,7 @@ export class PurchaseZipCodeComponent implements OnInit {
             //this.dTableSearching.off('click');
             //this.dTableSearching.DataTable().clear().destroy();
             //this.dTableSearching.find("tbody").empty();
-            
+
         }
         //if (this.dTableSearching !== undefined && this.dTableSearching != null) {
         //    this.dTableSearching.dataTable().fnClearTable();
@@ -1297,8 +1298,7 @@ export class PurchaseZipCodeComponent implements OnInit {
     }
 
 
-    RemoveCurrentPurchasedZipCode()
-    {
+    RemoveCurrentPurchasedZipCode() {
         if (this.dTableCPZC !== undefined && this.dTableCPZC != null) {
             this.dTableCPZC.DataTable().clear().destroy();
             this.dTableCPZC.off('click');
@@ -1328,8 +1328,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                         var dataJson = JSON.parse(json);
 
                         if (dataJson.NewDataSet.MyCategories != null) {
-                            if (!Array.isArray(dataJson.NewDataSet.MyCategories))
-                            {
+                            if (!Array.isArray(dataJson.NewDataSet.MyCategories)) {
                                 resultJson.push(dataJson.NewDataSet.MyCategories);
                                 dataJson.NewDataSet.MyCategories = resultJson;
                             }
@@ -1445,7 +1444,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                 {
                     data: 'subCategoryID',
                 }
-                
+
             ],
             "bDestroy": true,
             "autoWidth": true,
@@ -1490,21 +1489,12 @@ export class PurchaseZipCodeComponent implements OnInit {
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
 
-            thisStatus.dTableAPZC.api().row($(this).parents('tr')).remove().draw(false);
+
 
             thisStatus.ngZone.run(() => {
-            thisStatus.purchaseZipCodeService
-                .PermananetlyRemoveCategory($(this).closest('tr').children('td:first').text())
-                .subscribe(
-                    data => {
-                        //thisStatus.getClientDetailsServicesData();
-                        //thisStatus.getServicesCount();
-                        //thisStatus.getTotalSalesAndServicesCount();
-                    });
-                thisStatus.RemoveAllPurchasedZipCodes();
-            });
 
-           
+                thisStatus.onOpenModalConfirmationClick($(this));
+            });
         });
     }
 
@@ -1513,7 +1503,7 @@ export class PurchaseZipCodeComponent implements OnInit {
         if (this.dTableAPZC !== undefined && this.dTableSearching != null) {
             $('#allPurchasedZipCodes').off('click');
             this.dTableAPZC.DataTable().clear().destroy();
-            
+
         }
         //if (this.dTableAPZC !== undefined && this.dTableAPZC != null) {
         //    this.dTableAPZC.dataTable().fnClearTable();
@@ -1522,6 +1512,7 @@ export class PurchaseZipCodeComponent implements OnInit {
 
     onOpenModalClick(): void {
 
+        this.overlayLoadingOnPurchase = false;
         const modal: NgbModalRef = this.modalService.open(PaymentModalComponent, { size: 'lg', backdrop: "static" });
         const modalComponent: PaymentModalComponent = modal.componentInstance;
 
@@ -1549,7 +1540,7 @@ export class PurchaseZipCodeComponent implements OnInit {
 
         modal.result.then(
             (result) => {
-               
+
                 var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
                 var rowData = this.dTableSearching.fnGetData(row);
                 // var rowColumns = rowData[rowData.length - 1];
@@ -1568,11 +1559,38 @@ export class PurchaseZipCodeComponent implements OnInit {
             () => { });
     }
 
+    onOpenModalConfirmationClick(deleteow): void {
+
+        const modal: NgbModalRef = this.modalService.open(ConfirmationModalComponent, { size: 'lg', backdrop: "static" });
+        const modalComponent: ConfirmationModalComponent = modal.componentInstance;
+
+        //Case for cancel
+        modal.componentInstance.dismissConfirmationEvent.subscribe((data) => {
+            console.log('dismiss confirmation');
+            //this.overlayLoadingOnPurchase = false;
+        });
+
+        //Case for confirmation 
+        modal.componentInstance.CancelConfirmationEvent.subscribe((data) => {
+            //this.showToast('success', 'Purchasing is in process');
+            console.log('cnacel confirmation');
+            this.purchaseZipCodeService
+                .PermananetlyRemoveCategory(deleteow.closest('tr').children('td:first').text())
+                .subscribe(
+                    data => {
+                        this.dTableAPZC.api().row(deleteow.parents('tr')).remove().draw(false);
+                        this.showToast('success', 'Zip Code successfully removed.');
+                    });
+        });
+
+    }
+
+
     switchNgBTab(id: string) {
         this.ctdTabset.select(id);
     }
 
-    
+
 
 
     showToast(toastrType, text) {
