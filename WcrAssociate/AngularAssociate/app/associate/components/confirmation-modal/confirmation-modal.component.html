@@ -100,18 +100,18 @@
 
 
 <div class="modal-header flex-column">
-    <div class="icon-box">
+    <!--<div class="icon-box">
         <i class="material-icons">&#xE5CD;</i>
-    </div>
-    <h4 class="modal-title w-100">Are you sure?</h4>
-    <button type="button" class="close"  (click)="dismissConfirmation()">&times;</button>
+    </div>-->
+    <h4 class="modal-title w-100">Please confirm deleting zip code: {{dataToTakeAsInputForZipCode}}</h4>
+    <!--<button type="button" class="close"  (click)="dismissConfirmation()">&times;</button>-->
 </div>
 <div class="modal-body">
-    <p>Do you really want to delete these records? This process cannot be undone.</p>
+    <p>This process cannot be undone.</p>
 </div>
 <div class="modal-footer justify-content-center">
     <button type="button" class="btn btn-secondary" (click)="dismissConfirmation()" >Cancel</button>
-    <button type="button" class="btn btn-danger" (click)="CancelConfirmation()" >Delete</button>
+    <button type="button" class="btn btn-danger" (click)="CancelConfirmation()" >CONFIRM</button>
 </div>
 
 

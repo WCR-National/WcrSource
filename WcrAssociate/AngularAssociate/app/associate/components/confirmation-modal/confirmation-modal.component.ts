@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Optional, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -26,10 +26,10 @@ export class ConfirmationModalComponent implements OnInit {
     isSubmitting: boolean = false;
     isCreditCardFormVisible: boolean = false;
 
-
     @Output() dismissConfirmationEvent: EventEmitter<any> = new EventEmitter();
     @Output() CancelConfirmationEvent: EventEmitter<any> = new EventEmitter();
 
+    @Input() dataToTakeAsInputForZipCode: any;
 
     constructor(private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
         private fb: FormBuilder, @Optional() private activeModal: NgbActiveModal, private toaster: Toaster) {

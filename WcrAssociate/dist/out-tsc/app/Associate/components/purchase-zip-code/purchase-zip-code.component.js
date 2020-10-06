@@ -978,6 +978,7 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
                     _this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
                 }
                 else {
+                    _this.overlayLoadingOnPurchase = false;
                     _this.onOpenModalClick();
                     //this.ApplyCoponCodeNew(a, b, c, categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
                 }
@@ -1235,6 +1236,7 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     };
     PurchaseZipCodeComponent.prototype.onOpenModalClick = function () {
         var _this = this;
+        this.overlayLoadingOnPurchase = false;
         var modal = this.modalService.open(PaymentModalComponent, { size: 'lg', backdrop: "static" });
         var modalComponent = modal.componentInstance;
         modal.componentInstance.dismissParentCall.subscribe(function (data) {
@@ -1273,14 +1275,15 @@ var PurchaseZipCodeComponent = /** @class */ (function () {
     PurchaseZipCodeComponent.prototype.onOpenModalConfirmationClick = function (deleteow) {
         var _this = this;
         var modal = this.modalService.open(ConfirmationModalComponent, { size: 'lg', backdrop: "static" });
+        modal.componentInstance.dataToTakeAsInputForZipCode = deleteow.closest('tr').children('td:nth-child(2)').text();
         var modalComponent = modal.componentInstance;
         //Case for cancel
-        modal.componentInstance.dismissConfirmation.subscribe(function (data) {
+        modal.componentInstance.dismissConfirmationEvent.subscribe(function (data) {
             console.log('dismiss confirmation');
             //this.overlayLoadingOnPurchase = false;
         });
         //Case for confirmation 
-        modal.componentInstance.CancelConfirmation.subscribe(function (data) {
+        modal.componentInstance.CancelConfirmationEvent.subscribe(function (data) {
             //this.showToast('success', 'Purchasing is in process');
             console.log('cnacel confirmation');
             _this.purchaseZipCodeService

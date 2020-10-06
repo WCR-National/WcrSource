@@ -133,10 +133,24 @@ var PaymentModalComponent = /** @class */ (function () {
             thisStatus.cardForm.valueChanges.subscribe(function () {
                 debugger;
                 if (thisStatus.cardForm.valid) {
+                    //thisStatus.cardForm.setErrors({ 'invalid': true });
                     thisStatus.defaultDeisableUpdateButton = false;
+                }
+                else {
+                    thisStatus.defaultDeisableUpdateButton = true;
                 }
             });
         }, 8000);
+        //setTimeout(function () {
+        //    debugger;
+        //    thisStatus.cardForm.valueChanges.subscribe((data) => {
+        //        debugger;
+        //        if (/^[a-zA-Z]+$/.test(thisStatus.cardForm.controls['firstName'].value))
+        //        {
+        //            thisStatus.defaultDeisableUpdateButton = false;
+        //        }
+        //    });
+        //}, 8000)
     };
     //public confirm(): void {
     //    if (this.activeModal)
@@ -302,6 +316,8 @@ var PaymentModalComponent = /** @class */ (function () {
                         //CheckBox3.Checked = true;
                     }
                     _this.isAddOrUpdateButton = false;
+                    //this.cardForm.setErrors({ 'incorrect': true });
+                    //this.cardForm.controls['firstName'].setErrors({ 'incorrect': true });
                     return false;
                 }
                 else {
@@ -315,6 +331,8 @@ var PaymentModalComponent = /** @class */ (function () {
                 _this.isAddOrUpdateButton = true;
                 thisStatus.cardForm.get('country').setValue("US");
             }
+            //this.cardForm.setErrors({ 'incorrect': true });
+            //this.cardForm.controls['firstName'].setErrors({ 'incorrect': true });
         });
     };
     PaymentModalComponent.prototype.bindMonth = function () {

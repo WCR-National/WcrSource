@@ -2036,7 +2036,7 @@ var ListPropertiesComponent = /** @class */ (function () {
             this.listpropertiesService
                 .GetPostAdvertisementPrice(zipCodeVal, subCategory)
                 .subscribe(function (data) {
-                if (data.d.length > 0) {
+                if (data.d != "Not Valid" && data.d.length > 0) {
                     var xmlDoc = $.parseXML(data.d);
                     var xml = $(xmlDoc);
                     var docs = xml.find("GetPricePostAdvts");
@@ -2047,6 +2047,9 @@ var ListPropertiesComponent = /** @class */ (function () {
                         //this.IsP
                         //$('#btnSubmit').prop('disabled', false);
                     });
+                }
+                else {
+                    //this.showToast("danger", "Please choose different zip code, Price are not available for this zip code.")
                 }
             });
             //$("#lblsegmentsMessage").text("");

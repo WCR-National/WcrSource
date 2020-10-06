@@ -1562,6 +1562,8 @@ export class PurchaseZipCodeComponent implements OnInit {
     onOpenModalConfirmationClick(deleteow): void {
 
         const modal: NgbModalRef = this.modalService.open(ConfirmationModalComponent, { size: 'lg', backdrop: "static" });
+        (<ConfirmationModalComponent>modal.componentInstance).dataToTakeAsInputForZipCode = deleteow.closest('tr').children('td:nth-child(2)').text();
+
         const modalComponent: ConfirmationModalComponent = modal.componentInstance;
 
         //Case for cancel

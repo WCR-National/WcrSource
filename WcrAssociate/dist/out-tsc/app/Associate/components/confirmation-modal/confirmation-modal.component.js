@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Component, Optional, Output, EventEmitter } from '@angular/core';
+import { Component, Optional, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
@@ -17,31 +17,35 @@ var ConfirmationModalComponent = /** @class */ (function () {
         this.toaster = toaster;
         this.isSubmitting = false;
         this.isCreditCardFormVisible = false;
-        this.dismissParentCall = new EventEmitter();
-        this.updateParentCall = new EventEmitter();
+        this.dismissConfirmationEvent = new EventEmitter();
+        this.CancelConfirmationEvent = new EventEmitter();
     }
     ConfirmationModalComponent.prototype.ngOnInit = function () {
     };
     ConfirmationModalComponent.prototype.dismissConfirmation = function () {
         if (this.activeModal) {
             this.activeModal.dismiss();
-            this.dismissParentCall.emit('cancelDeclined');
+            this.dismissConfirmationEvent.emit('cancelDeclined');
         }
     };
     ConfirmationModalComponent.prototype.CancelConfirmation = function () {
         if (this.activeModal) {
             this.activeModal.dismiss();
-            this.updateParentCall.emit('cancelConfirmed');
+            this.CancelConfirmationEvent.emit('cancelConfirmed');
         }
     };
     tslib_1.__decorate([
         Output(),
         tslib_1.__metadata("design:type", EventEmitter)
-    ], ConfirmationModalComponent.prototype, "dismissParentCall", void 0);
+    ], ConfirmationModalComponent.prototype, "dismissConfirmationEvent", void 0);
     tslib_1.__decorate([
         Output(),
         tslib_1.__metadata("design:type", EventEmitter)
-    ], ConfirmationModalComponent.prototype, "updateParentCall", void 0);
+    ], ConfirmationModalComponent.prototype, "CancelConfirmationEvent", void 0);
+    tslib_1.__decorate([
+        Input(),
+        tslib_1.__metadata("design:type", Object)
+    ], ConfirmationModalComponent.prototype, "dataToTakeAsInputForZipCode", void 0);
     ConfirmationModalComponent = tslib_1.__decorate([
         Component({
             selector: 'associate-confiramtion-modal-page',

@@ -546,7 +546,7 @@ namespace ClsLibrary.Dal.Associate
 
         public string PostAdvertisementPrice(string associateID, int zipCode, int subCategoryID)
         {
-            if (associateID != null && associateID != "")
+            if (associateID != null )
             {
                 SqlCommand cmd = new SqlCommand("proc_PostAdvertisementPrice", objCon.Con);
                 cmd.CommandType = CommandType.StoredProcedure;

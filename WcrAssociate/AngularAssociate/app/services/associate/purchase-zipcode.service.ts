@@ -52,7 +52,6 @@ export class PurchaseZipCodeService {
             ));
     }
     
-
     BindZipCodesByUserZipCode(zipCode): Observable<any> {
 
         let urlToCountryWiseState: string = "Associate/ws/Category.asmx/AvailableZipCodesForServices";
@@ -204,7 +203,6 @@ export class PurchaseZipCodeService {
             ));
     }
 
-
     SelectCurrentPurchasedZipCodes(): Observable<any> {
 
         let urlToMurchantPurchaseCategory: string = "Associate/ws/MyCategories.asmx/SelectCurrentPurchasedZipCodes";
@@ -249,9 +247,5 @@ export class PurchaseZipCodeService {
                 }
             ));
     }
-
-
-
-    //""
-    
+ 
 }   

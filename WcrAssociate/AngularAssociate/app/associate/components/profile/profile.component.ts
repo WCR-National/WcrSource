@@ -138,7 +138,8 @@ export class ProfileComponent implements OnInit {
                         $.each(docs, function (i, docs) {
 
                             var pic = '';
-                            if ($(docs).find("Photo").text() != null || $(docs).find("Photo").text() == "") {
+                            if ($(docs).find("Photo").text() != null || $(docs).find("Photo").text() == "")
+                            {
                                 let image: string = $(docs).find('Photo').text();
                                 pic = '../AssociatePhoto/' + image + '';
                             }
