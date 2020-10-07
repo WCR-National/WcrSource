@@ -1935,8 +1935,17 @@ export class ListPropertiesComponent implements OnInit {
 
                         this.isSubmittingPA = false;
                     } else {
-                        this.isSubmittingPA = false;
-                        this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
+                        if (this._Counter == 0) {
+                            //this.AssociateAlreadyCategories();
+                            this.onOpenModalClick();
+                            this._Counter++;
+                        }
+                        else {
+                            this._Counter++;
+                            this.isSubmittingPA = false;
+                            this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
+                        }
+
                     }
 
                 }
