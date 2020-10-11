@@ -1627,8 +1627,16 @@ var ListPropertiesComponent = /** @class */ (function () {
                 _this.isSubmittingPA = false;
             }
             else {
-                _this.isSubmittingPA = false;
-                _this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
+                if (_this._Counter == 0) {
+                    //this.AssociateAlreadyCategories();
+                    _this.onOpenModalClick();
+                    _this._Counter++;
+                }
+                else {
+                    _this._Counter++;
+                    _this.isSubmittingPA = false;
+                    _this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
+                }
             }
         });
     };

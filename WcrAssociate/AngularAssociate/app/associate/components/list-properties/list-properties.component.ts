@@ -237,6 +237,7 @@ export class ListPropertiesComponent implements OnInit {
     public isCollapsedOverviewAndAdditionalFeatures = true;
     public isCollapsedLocation = true;
     public isFirstTimePageBind = true;
+    public isFirstTimePageBindEdit = true;
     public isTableCurrentPurchasedZipCodesLoadedFirstTime = true;
     public isTableSelectedChoicesFirstTime = true;
     public isTablePurchasedZipCodesLoaded = true;
@@ -247,7 +248,7 @@ export class ListPropertiesComponent implements OnInit {
     @ViewChild('FileUpload3') fileUpload3: ElementRef;
     @ViewChild('FileUpload4') fileUpload4: ElementRef;
 
-    
+
     public data = "";
 
     constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
@@ -286,6 +287,10 @@ export class ListPropertiesComponent implements OnInit {
         this.InitializrEventsAndControlsPA();
 
         this.ViewAllSalesAdvertisement();
+
+
+        
+
 
     }
 
@@ -326,6 +331,10 @@ export class ListPropertiesComponent implements OnInit {
             subCategorySearch: ['']
         });
 
+        this.PostAdvertisement.valueChanges.subscribe((data) => {
+            
+            this.PostAdvertisement.get('image').patchValue(this.arrayOfImages.toString(), { emitEvent: false });
+        });
     }
 
     RemoveCardSessions() {
@@ -398,14 +407,10 @@ export class ListPropertiesComponent implements OnInit {
                 this.showToast("danger", "Only images are supported.");
                 return;
             }
-
-           
             var imageExist = false;
 
-            for (var i = 0; i < this.arrayOfImages.length; i++)
-            {
-                if (this.arrayOfImages[i] !== undefined && this.arrayOfImages[i].imageIndex == imageIndex)
-                {
+            for (var i = 0; i < this.arrayOfImages.length; i++) {
+                if (this.arrayOfImages[i] !== undefined && this.arrayOfImages[i].imageIndex == imageIndex) {
                     this.g_i = i;
 
                     var reader1 = new FileReader();
@@ -428,57 +433,90 @@ export class ListPropertiesComponent implements OnInit {
                 debugger;
             }
 
-            
+
         }
     }
 
-    resetImageFirstTime(e1, imageIndex)
-    {
+    resetImageFirstTime(e1, imageIndex) {
         debugger;
         var l_imageUrlFT = e1.target.result;
         let imageObject = { 'srcUrl': l_imageUrlFT, 'previewUrl': l_imageUrlFT, 'imageIndex': imageIndex };
-        this.arrayOfImages.push(imageObject);
+        for (var ii = 0; ii < (parseInt(imageIndex) + 1); ii++)
+        {
+
+            if (ii == imageIndex) {
+                if (this.arrayOfImages[ii] !== undefined && this.arrayOfImages[ii].imageIndex == imageIndex) {
+                    this.arrayOfImages[this.g_i].srcUrl = l_imageUrlFT;
+                    this.arrayOfImages[this.g_i].previewUrl = l_imageUrlFT;
+                }
+                else {
+                    this.arrayOfImages.push(imageObject);
+                }
+            }
+            else {
+                if (this.arrayOfImages[ii] === undefined)
+                {
+                    this.arrayOfImages.push({ 'srcUrl': '', 'previewUrl': '', 'imageIndex': ii });
+                }
+            }
+        }
+        
 
         $('#previewImages').html('');
         var images = '';
         for (let i = 0; i < this.arrayOfImages.length; i++) {
+
+
+
             //images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') ></div>";
             images += "<div class='col-12 col-xs-12 col-sm-3'>";
             images += "<div id='wrapperImage" + i + "Id' class='wrapper_image'>"
-            images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
-            images += "<span id='image" + i + "Id' class='close_image'></span>";
+            if (this.arrayOfImages[i].previewUrl != '') {
+                
+                images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
+                images += "<span id='image" + i + "Id' class='close_image'></span>";
+               
+            }
             images += "</div>";
             images += "</div>";
+
+
         }
         $('#previewImages').html(images);
 
         this.PostAdvertisement.get('image').setValue(this.arrayOfImages.toString());
         //if (this.isFirstTimePageBind) {
 
-            this.closeImageClick();
-            this.isFirstTimePageBind = false;
+        this.closeImageClick();
+        this.isFirstTimePageBind = false;
         //}
         //this.fileUpload1.nativeElement.value = "";
         this.cdr.detectChanges();
     }
 
-    resetImages(e, imageIndex)
-    {
+    resetImages(e, imageIndex) {
         debugger;
         var l_imageUrl = e.target.result;
         this.arrayOfImages[this.g_i].srcUrl = '';
         this.arrayOfImages[this.g_i].previewUrl = '';
         this.arrayOfImages[this.g_i].srcUrl = l_imageUrl;
         this.arrayOfImages[this.g_i].previewUrl = l_imageUrl;
+
         $('#previewImages').html('');
         var images = '';
         for (let i = 0; i < this.arrayOfImages.length; i++) {
+
             images += "<div class='col-12 col-xs-12 col-sm-3'>";
             images += "<div id='wrapperImage" + i + "Id' class='wrapper_image'>"
-            images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].previewUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
-            images += "<span id='image" + i + "Id' class='close_image'></span>";
+            if (this.arrayOfImages[i].previewUrl != '') {
+                
+                images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].previewUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
+                images += "<span id='image" + i + "Id' class='close_image'></span>";
+                
+            }
             images += "</div>";
             images += "</div>";
+
         }
         $('#previewImages').html(images);
 
@@ -493,8 +531,7 @@ export class ListPropertiesComponent implements OnInit {
         this.cdr.detectChanges();
     }
 
-    closeImageClick()
-    {
+    closeImageClick() {
         var thisStatus = this;
         $('.close_image').click(function () {
 
@@ -525,8 +562,7 @@ export class ListPropertiesComponent implements OnInit {
 
     reset(fileUploadId) {
         debugger;
-        if (fileUploadId == '1')
-        {
+        if (fileUploadId == '1') {
             console.log(this.fileUpload1.nativeElement.files);
             this.fileUpload1.nativeElement.value = "";
             console.log(this.fileUpload1.nativeElement.files);
@@ -915,8 +951,7 @@ export class ListPropertiesComponent implements OnInit {
             ],
             order: [[1, 'asc']]
         });
-        if (this.isTableCurrentPurchasedZipCodesLoadedFirstTime)
-        {
+        if (this.isTableCurrentPurchasedZipCodesLoadedFirstTime) {
             $('#ViewAllCategoriesPurchased').on('click', 'a.cancel', function (e) {
                 e.preventDefault();
                 debugger;
@@ -1259,8 +1294,7 @@ export class ListPropertiesComponent implements OnInit {
             ],
             order: [[1, 'asc']]
         });
-        if (this.isTablePurchasedZipCodesLoaded)
-        {
+        if (this.isTablePurchasedZipCodesLoaded) {
             $('#viewAllPurchasedZipCodes').on('click', 'a.cancel', function (e) {
                 e.preventDefault();
                 debugger;
@@ -1574,65 +1608,81 @@ export class ListPropertiesComponent implements OnInit {
                                 thisStatus.PostAdvertisement.get('subCat').setValue('Land');
 
                             }
-
+                            debugger;
                             //CKEDITOR.instances.txtFeatures.setData($(docs).find("additionalFeature").text());
                             var images = '';
-
-                            if (($(docs).find("advMainImage").text()) !== undefined && ($(docs).find("advMainImage").text()) != null) {
+                            thisStatus.arrayOfImages = [];
+                            if (($(docs).find("advMainImage").text()) !== undefined && ($(docs).find("advMainImage").text()) != null && ($(docs).find("advMainImage").text()) != "") {
 
                                 thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text();
-                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1' };
+                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '0' };
                                 thisStatus.arrayOfImages.push(imageObject);
 
                                 //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
 
 
                                 images += "<div class='col-12 col-xs-12 col-sm-3'>";
-                                images += "<div class='wrapper_image'>"
-                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advMainImage").text() + "'>";
+                                images += "<div id='wrapperImage0Id' class='wrapper_image'>"
+                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/" + $(docs).find("advMainImage").text() + "'>";
                                 images += "<span id='image0Id' class='close_image'></span>";
                                 images += "</div>";
                                 images += "</div>";
                             }
-                            if (($(docs).find("advImage1").text()) !== undefined && ($(docs).find("advImage1").text()) != null) {
+                            else {
+                                let imageObject = { 'srcUrl': '', 'previewUrl': '', 'imageIndex': '0' };
+                                thisStatus.arrayOfImages.push(imageObject);
+                            }
+                            if (($(docs).find("advImage1").text()) !== undefined && ($(docs).find("advImage1").text()) != null && ($(docs).find("advImage1").text()) != "") {
 
                                 thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage1").text();
-                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1' };
                                 thisStatus.arrayOfImages.push(imageObject);
 
                                 //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
                                 images += "<div class='col-12 col-xs-12 col-sm-3'>";
-                                images += "<div class='wrapper_image'>"
-                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage1").text() + "'>";
+                                images += "<div id='wrapperImage1Id' class='wrapper_image'>"
+                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/" + $(docs).find("advImage1").text() + "'>";
                                 images += "<span id='image1Id'  class='close_image'></span>";
                                 images += "</div>";
                                 images += "</div>";
 
                             }
-                            if (($(docs).find("advImage2").text()) !== undefined && ($(docs).find("advImage2").text()) != null) {
+                            else {
+                                let imageObject = { 'srcUrl': '', 'previewUrl': '', 'imageIndex': '1' };
+                                thisStatus.arrayOfImages.push(imageObject);
+                            }
+                            if (($(docs).find("advImage2").text()) !== undefined && ($(docs).find("advImage2").text()) != null && ($(docs).find("advImage2").text()) != "") {
                                 thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage2").text();
                                 let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
                                 thisStatus.arrayOfImages.push(imageObject);
                                 //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' +  + '/></div>';
                                 images += "<div class='col-12 col-xs-12 col-sm-3'>";
-                                images += "<div class='wrapper_image'>"
-                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage2").text() + "'>";
+                                images += "<div id='wrapperImage2Id' class='wrapper_image'>"
+                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/" + $(docs).find("advImage2").text() + "'>";
                                 images += "<span id='image2Id' class='close_image'></span>";
                                 images += "</div>";
                                 images += "</div>";
                             }
-                            if (($(docs).find("advImage3").text()) !== undefined && ($(docs).find("advImage3").text()) != null) {
+                            else {
+                                let imageObject = { 'srcUrl': '', 'previewUrl': '', 'imageIndex': '2' };
+                                thisStatus.arrayOfImages.push(imageObject);
+                            }
+                            if (($(docs).find("advImage3").text()) !== undefined && ($(docs).find("advImage3").text()) != null && ($(docs).find("advImage3").text()) != "") {
                                 thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage3").text();
-                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                                let imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '3' };
                                 thisStatus.arrayOfImages.push(imageObject);
                                 //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
 
                                 images += "<div class='col-12 col-xs-12 col-sm-3'>";
-                                images += "<div class='wrapper_image'>"
-                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage3").text() + "'>";
+                                images += "<div id='wrapperImage3Id' class='wrapper_image'>"
+                                images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/" + $(docs).find("advImage3").text() + "'>";
                                 images += "<span id='image3Id' class='close_image'></span>";
                                 images += "</div>";
                                 images += "</div>";
+                            }
+                            else {
+                                let imageObject = { 'srcUrl': '', 'previewUrl': '', 'imageIndex': '3' };
+                                thisStatus.arrayOfImages.push(imageObject);
                             }
                             $('#previewImages').html(images);
                             //thisStatus.uploadedAdvertisementImages = images;
@@ -1648,11 +1698,10 @@ export class ListPropertiesComponent implements OnInit {
                             thisStatus.PostAdvertisement.get('pricePA').setValue($(docs).find("cost").text());
                             thisStatus.PostAdvertisement.get('countryPA').setValue($(docs).find("CountryID").text());
                             thisStatus.PostAdvertisement.get('cityPA').setValue($(docs).find("CityID").text());
-                            thisStatus.startValueState = { "value": $(docs).find("StateID").text(), "label": $(docs).find("StateID").text() };
+                            thisStatus.startValueStatePA = { "value": $(docs).find("StateID").text(), "label": $(docs).find("StateID").text() };
                             thisStatus.BindStateWiseZipCodeForSearch($(docs).find("StateID").text(), $(docs).find("CityID").text(), $(docs).find("ZipCode").text());
-                            if (images !== undefined || images != '')
-                            {
-                                if (thisStatus.isFirstTimePageBind) {
+                            if (images !== undefined || images != '') {
+                                if (thisStatus.isFirstTimePageBindEdit) {
                                     $('.close_image').click(function () {
                                         debugger;
                                         var id = $(this).attr('id');
@@ -1669,7 +1718,7 @@ export class ListPropertiesComponent implements OnInit {
                                             $('#wrapperImage3Id').empty();
                                         }
                                     });
-                                    thisStatus.isFirstTimePageBind = true;
+                                    thisStatus.isFirstTimePageBindEdit = false;
                                 }
                             }
                         });
@@ -1858,7 +1907,8 @@ export class ListPropertiesComponent implements OnInit {
                     else {
 
                         this.isSubmittingPA = false;
-                        this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");}
+                        this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
+                    }
                 });
         // }
         // else
@@ -2375,13 +2425,12 @@ export class ListPropertiesComponent implements OnInit {
 
     changeCityPA() {
 
-        debugger; 
+        debugger;
         var state = this.PostAdvertisement.get('statePA').value != null ? this.PostAdvertisement.get('statePA').value.value : null;
 
         var city = this.PostAdvertisement.get('cityPA').value;
 
-        if (state !== undefined && state != null)
-        {
+        if (state !== undefined && state != null) {
             this.BindStateWiseZipCodeForSearch(state, city);
         }
         else {
@@ -2430,8 +2479,7 @@ export class ListPropertiesComponent implements OnInit {
                                 //$('#btnSubmit').prop('disabled', false);
                             });
                         }
-                        else
-                        {
+                        else {
                             //this.showToast("danger", "Please choose different zip code, Price are not available for this zip code.")
                         }
                     });
@@ -2479,7 +2527,7 @@ export class ListPropertiesComponent implements OnInit {
             this.isPostButtonGreen = true;
         }
 
-        if (!this.isPostAdvertisementFormVisible ) {
+        if (!this.isPostAdvertisementFormVisible) {
             this.isPostAdvertisementFormVisible = true;
         }
         else {
@@ -2717,31 +2765,32 @@ export class ListPropertiesComponent implements OnInit {
         modal.componentInstance.dismissParentCall.subscribe((data) => {
             debugger;
             console.log(data);
+            this.isSubmittingPA = false;
             //this.overlayLoadingOnPurchase = false;
         });
 
         modal.componentInstance.updateParentCall.subscribe((data) => {
 
 
-        //modal.result.then(
-        //    (result) => {
-                debugger;
-                this.PostAds();
-                //var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
-                //var rowData = this.dTableSearching.fnGetData(row);
-                //// var rowColumns = rowData[rowData.length - 1];
+            //modal.result.then(
+            //    (result) => {
+            debugger;
+            this.PostAds();
+            //var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
+            //var rowData = this.dTableSearching.fnGetData(row);
+            //// var rowColumns = rowData[rowData.length - 1];
 
-                //var id = rowData['id'];
-                //var zipCode = rowData['Zipcode'];
-                //var categoryText = rowData['CategoryName'];
-                //var subCategoryText = rowData['SubCategoryName'];
-                //var priceValues = rowData['Price'];
-                //var categoryId = rowData['CategoryId'];
-                //var subCategoryId = rowData['SubCategoryId'];
-                //this.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
+            //var id = rowData['id'];
+            //var zipCode = rowData['Zipcode'];
+            //var categoryText = rowData['CategoryName'];
+            //var subCategoryText = rowData['SubCategoryName'];
+            //var priceValues = rowData['Price'];
+            //var categoryId = rowData['CategoryId'];
+            //var subCategoryId = rowData['SubCategoryId'];
+            //this.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
 
-                //this.updateBindings();
-            },
+            //this.updateBindings();
+        },
             () => { });
     }
 
