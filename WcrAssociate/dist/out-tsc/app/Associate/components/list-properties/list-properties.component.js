@@ -176,6 +176,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.isCollapsedOverviewAndAdditionalFeatures = true;
         this.isCollapsedLocation = true;
         this.isFirstTimePageBind = true;
+        this.isFirstTimePageBindEdit = true;
         this.isTableCurrentPurchasedZipCodesLoadedFirstTime = true;
         this.isTableSelectedChoicesFirstTime = true;
         this.isTablePurchasedZipCodesLoaded = true;
@@ -209,6 +210,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         });
     };
     ListPropertiesComponent.prototype.setValidationOnForm = function () {
+        var _this = this;
         this.PostAdvertisement = this.fb.group({
             consumerSegmentType: [''],
             titlePA: ['', [Validators.required, patternValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
@@ -229,6 +231,20 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.categorySearchForm = this.fb.group({
             categorySearch: [''],
             subCategorySearch: ['']
+        });
+        this.PostAdvertisement.valueChanges.subscribe(function (data) {
+            var status = false;
+            for (var i = 0; i < _this.arrayOfImages.length; i++) {
+                if (_this.arrayOfImages[i].previewUrl != '') {
+                    status = true;
+                }
+            }
+            if (status) {
+                _this.PostAdvertisement.get('image').patchValue(_this.arrayOfImages.toString(), { emitEvent: false });
+            }
+            else {
+                _this.PostAdvertisement.get('image').patchValue('', { emitEvent: false });
+            }
         });
     };
     ListPropertiesComponent.prototype.RemoveCardSessions = function () {
@@ -315,16 +331,33 @@ var ListPropertiesComponent = /** @class */ (function () {
     ListPropertiesComponent.prototype.resetImageFirstTime = function (e1, imageIndex) {
         debugger;
         var l_imageUrlFT = e1.target.result;
-        var imageObject = { 'srcUrl': l_imageUrlFT, 'previewUrl': l_imageUrlFT, 'imageIndex': imageIndex };
-        this.arrayOfImages.push(imageObject);
+        var imageObject = { 'srcUrl': l_imageUrlFT, 'previewUrl': l_imageUrlFT, 'imageIndex': imageIndex, 'isDeleted': '' };
+        for (var ii = 0; ii < (parseInt(imageIndex) + 1); ii++) {
+            if (ii == imageIndex) {
+                if (this.arrayOfImages[ii] !== undefined && this.arrayOfImages[ii].imageIndex == imageIndex) {
+                    this.arrayOfImages[this.g_i].srcUrl = l_imageUrlFT;
+                    this.arrayOfImages[this.g_i].previewUrl = l_imageUrlFT;
+                }
+                else {
+                    this.arrayOfImages.push(imageObject);
+                }
+            }
+            else {
+                if (this.arrayOfImages[ii] === undefined) {
+                    this.arrayOfImages.push({ 'srcUrl': '', 'previewUrl': '', 'imageIndex': ii });
+                }
+            }
+        }
         $('#previewImages').html('');
         var images = '';
         for (var i = 0; i < this.arrayOfImages.length; i++) {
             //images += "<div class='col-12 col-xs-12 col-sm-3'><img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') ></div>";
             images += "<div class='col-12 col-xs-12 col-sm-3'>";
             images += "<div id='wrapperImage" + i + "Id' class='wrapper_image'>";
-            images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
-            images += "<span id='image" + i + "Id' class='close_image'></span>";
+            if (this.arrayOfImages[i].previewUrl != '') {
+                images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].srcUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
+                images += "<span id='image" + i + "Id' class='close_image'></span>";
+            }
             images += "</div>";
             images += "</div>";
         }
@@ -344,13 +377,16 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.arrayOfImages[this.g_i].previewUrl = '';
         this.arrayOfImages[this.g_i].srcUrl = l_imageUrl;
         this.arrayOfImages[this.g_i].previewUrl = l_imageUrl;
+        this.arrayOfImages[this.g_i].isDeleted = '';
         $('#previewImages').html('');
         var images = '';
         for (var i = 0; i < this.arrayOfImages.length; i++) {
             images += "<div class='col-12 col-xs-12 col-sm-3'>";
             images += "<div id='wrapperImage" + i + "Id' class='wrapper_image'>";
-            images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].previewUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
-            images += "<span id='image" + i + "Id' class='close_image'></span>";
+            if (this.arrayOfImages[i].previewUrl != '') {
+                images += "<img class='img-responsive ht-150' src='" + this.arrayOfImages[i].previewUrl + "' openImage('" + this.arrayOfImages[i].imageIndex + "') >";
+                images += "<span id='image" + i + "Id' class='close_image'></span>";
+            }
             images += "</div>";
             images += "</div>";
         }
@@ -370,21 +406,25 @@ var ListPropertiesComponent = /** @class */ (function () {
             if (id == "image0Id") {
                 thisStatus.arrayOfImages[0].imageUrl = '';
                 thisStatus.arrayOfImages[0].previewUrl = '';
+                thisStatus.arrayOfImages[0].isDeleted = 'Deleted';
                 $('#wrapperImage0Id').empty();
             }
             else if (id == "image1Id") {
                 thisStatus.arrayOfImages[1].imageUrl = '';
                 thisStatus.arrayOfImages[1].previewUrl = '';
+                thisStatus.arrayOfImages[1].isDeleted = 'Deleted';
                 $('#wrapperImage1Id').empty();
             }
             else if (id == "image2Id") {
                 thisStatus.arrayOfImages[2].imageUrl = '';
                 thisStatus.arrayOfImages[2].previewUrl = '';
+                thisStatus.arrayOfImages[2].isDeleted = 'Deleted';
                 $('#wrapperImage2Id').empty();
             }
             else if (id == "image3Id") {
                 thisStatus.arrayOfImages[3].imageUrl = '';
                 thisStatus.arrayOfImages[3].previewUrl = '';
+                thisStatus.arrayOfImages[3].isDeleted = 'Deleted';
                 $('#wrapperImage3Id').empty();
             }
         });
@@ -1165,12 +1205,12 @@ var ListPropertiesComponent = /** @class */ (function () {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="edit">Edit</a>'
+                    defaultContent: '<a href="javascript:void(0)" class="edit">Edit</a>'
                 },
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="remove">Delete</a>'
+                    defaultContent: '<a href="javascript:void(0)" class="remove">Delete</a>'
                 },
             ],
             columnDefs: [
@@ -1199,17 +1239,17 @@ var ListPropertiesComponent = /** @class */ (function () {
             ],
             order: [[1, 'asc']]
         });
-        if (this.isTableSalesAdvertisementLoadedFirstTime) {
-            $('#salesAdvertisement').on('click', 'a.edit', function (e) {
-                var _this = this;
-                e.preventDefault();
-                debugger;
-                var tr = $(this).closest('tr');
-                console.log($(this).closest('tr').children('td:first').text());
-                thisStatus.ngZone.run(function () {
-                    thisStatus.EditRecords($(_this).closest('tr').children('td:first').text());
-                });
+        $('#salesAdvertisement').on('click', 'a.edit', function (e) {
+            var _this = this;
+            e.preventDefault();
+            debugger;
+            var tr = $(this).closest('tr');
+            console.log($(this).closest('tr').children('td:first').text());
+            thisStatus.ngZone.run(function () {
+                thisStatus.EditRecords($(_this).closest('tr').children('td:first').text());
             });
+        });
+        if (this.isTableSalesAdvertisementLoadedFirstTime) {
             $('#salesAdvertisement').on('click', 'a.remove', function (e) {
                 var _this = this;
                 e.preventDefault();
@@ -1262,6 +1302,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.isAddButtonPA = false;
         this.showLoadingIconOnEditClick = true;
         this.isResetButtonVisible = false;
+        this.onclickUpdatePurchase();
         this.listpropertiesService
             .GetAdvertisementDetails(parseInt(advId))
             .subscribe(function (data) {
@@ -1316,55 +1357,89 @@ var ListPropertiesComponent = /** @class */ (function () {
                         $('#SubCategory').append(_select.html());
                         thisStatus.PostAdvertisement.get('subCat').setValue('Land');
                     }
+                    debugger;
                     //CKEDITOR.instances.txtFeatures.setData($(docs).find("additionalFeature").text());
                     var images = '';
-                    if (($(docs).find("advMainImage").text()) !== undefined && ($(docs).find("advMainImage").text()) != null) {
+                    thisStatus.arrayOfImages = [];
+                    if (($(docs).find("advMainImage").text()) !== undefined && ($(docs).find("advMainImage").text()) != null && ($(docs).find("advMainImage").text()) != "") {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text();
-                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1' };
+                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '0', isDeleted: '' };
                         thisStatus.arrayOfImages.push(imageObject);
                         //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advMainImage").text() + '/></div>';
                         images += "<div class='col-12 col-xs-12 col-sm-3'>";
-                        images += "<div class='wrapper_image'>";
-                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advMainImage").text() + "'>";
+                        images += "<div id='wrapperImage0Id' class='wrapper_image'>";
+                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/" + $(docs).find("advMainImage").text() + "'>";
                         images += "<span id='image0Id' class='close_image'></span>";
                         images += "</div>";
                         images += "</div>";
                     }
-                    if (($(docs).find("advImage1").text()) !== undefined && ($(docs).find("advImage1").text()) != null) {
+                    else {
+                        images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                        images += "<div id='wrapperImage0Id' class='wrapper_image'>";
+                        images += "</div>";
+                        images += "</div>";
+                        var imageObject = { 'srcUrl': '', 'previewUrl': '', 'imageIndex': '0', isDeleted: '' };
+                        thisStatus.arrayOfImages.push(imageObject);
+                    }
+                    if (($(docs).find("advImage1").text()) !== undefined && ($(docs).find("advImage1").text()) != null && ($(docs).find("advImage1").text()) != "") {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage1").text();
-                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '1', isDeleted: '' };
                         thisStatus.arrayOfImages.push(imageObject);
                         //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage1").text() + '/></div>';
                         images += "<div class='col-12 col-xs-12 col-sm-3'>";
-                        images += "<div class='wrapper_image'>";
-                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage1").text() + "'>";
+                        images += "<div id='wrapperImage1Id' class='wrapper_image'>";
+                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/" + $(docs).find("advImage1").text() + "'>";
                         images += "<span id='image1Id'  class='close_image'></span>";
                         images += "</div>";
                         images += "</div>";
                     }
-                    if (($(docs).find("advImage2").text()) !== undefined && ($(docs).find("advImage2").text()) != null) {
+                    else {
+                        images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                        images += "<div id='wrapperImage1Id' class='wrapper_image'>";
+                        images += "</div>";
+                        images += "</div>";
+                        var imageObject = { 'srcUrl': '', 'previewUrl': '', 'imageIndex': '1', isDeleted: '' };
+                        thisStatus.arrayOfImages.push(imageObject);
+                    }
+                    if (($(docs).find("advImage2").text()) !== undefined && ($(docs).find("advImage2").text()) != null && ($(docs).find("advImage2").text()) != "") {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage2").text();
-                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2', isDeleted: '' };
                         thisStatus.arrayOfImages.push(imageObject);
                         //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' +  + '/></div>';
                         images += "<div class='col-12 col-xs-12 col-sm-3'>";
-                        images += "<div class='wrapper_image'>";
-                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage2").text() + "'>";
+                        images += "<div id='wrapperImage2Id' class='wrapper_image'>";
+                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/" + $(docs).find("advImage2").text() + "'>";
                         images += "<span id='image2Id' class='close_image'></span>";
                         images += "</div>";
                         images += "</div>";
                     }
-                    if (($(docs).find("advImage3").text()) !== undefined && ($(docs).find("advImage3").text()) != null) {
+                    else {
+                        images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                        images += "<div id='wrapperImage2Id' class='wrapper_image'>";
+                        images += "</div>";
+                        images += "</div>";
+                        var imageObject = { 'srcUrl': '', 'previewUrl': '', 'imageIndex': '2', isDeleted: '' };
+                        thisStatus.arrayOfImages.push(imageObject);
+                    }
+                    if (($(docs).find("advImage3").text()) !== undefined && ($(docs).find("advImage3").text()) != null && ($(docs).find("advImage3").text()) != "") {
                         thisStatus.imageUrl = '../../../../Associate/Adv_img/' + $(docs).find("advImage3").text();
-                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '2' };
+                        var imageObject = { 'srcUrl': thisStatus.imageUrl, 'previewUrl': thisStatus.imageUrl, 'imageIndex': '3', isDeleted: '' };
                         thisStatus.arrayOfImages.push(imageObject);
                         //images += '<div class="col-12 col-xs-12 col-sm-3"><img class="thumb-image img-responsive ht-150" src="../../../../Associate/Adv_img/' + $(docs).find("advImage3").text() + '/></div>';
                         images += "<div class='col-12 col-xs-12 col-sm-3'>";
-                        images += "<div class='wrapper_image'>";
-                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/'" + $(docs).find("advImage3").text() + "'>";
+                        images += "<div id='wrapperImage3Id' class='wrapper_image'>";
+                        images += "<img class='thumb-image img-responsive ht-150' src='../../../../Associate/Adv_img/" + $(docs).find("advImage3").text() + "'>";
                         images += "<span id='image3Id' class='close_image'></span>";
                         images += "</div>";
                         images += "</div>";
+                    }
+                    else {
+                        images += "<div class='col-12 col-xs-12 col-sm-3'>";
+                        images += "<div id='wrapperImage3Id' class='wrapper_image'>";
+                        images += "</div>";
+                        images += "</div>";
+                        var imageObject = { 'srcUrl': '', 'previewUrl': '', 'imageIndex': '3', isDeleted: '' };
+                        thisStatus.arrayOfImages.push(imageObject);
                     }
                     $('#previewImages').html(images);
                     //thisStatus.uploadedAdvertisementImages = images;
@@ -1377,29 +1452,41 @@ var ListPropertiesComponent = /** @class */ (function () {
                     thisStatus.PostAdvertisement.get('pricePA').setValue($(docs).find("cost").text());
                     thisStatus.PostAdvertisement.get('countryPA').setValue($(docs).find("CountryID").text());
                     thisStatus.PostAdvertisement.get('cityPA').setValue($(docs).find("CityID").text());
-                    thisStatus.startValueState = { "value": $(docs).find("StateID").text(), "label": $(docs).find("StateID").text() };
+                    thisStatus.startValueStatePA = { "value": $(docs).find("StateID").text(), "label": $(docs).find("StateID").text() };
                     thisStatus.BindStateWiseZipCodeForSearch($(docs).find("StateID").text(), $(docs).find("CityID").text(), $(docs).find("ZipCode").text());
                     if (images !== undefined || images != '') {
-                        if (thisStatus.isFirstTimePageBind) {
-                            $('.close_image').click(function () {
-                                debugger;
-                                var id = $(this).attr('id');
-                                if (id == "image0Id") {
-                                    $('#wrapperImage0Id').empty();
-                                }
-                                else if (id == "image1Id") {
-                                    $('#wrapperImage1Id').empty();
-                                }
-                                else if (id == "image2Id") {
-                                    $('#wrapperImage2Id').empty();
-                                }
-                                else if (id == "image3Id") {
-                                    $('#wrapperImage3Id').empty();
-                                }
-                            });
-                            thisStatus.isFirstTimePageBind = true;
-                        }
+                        // if (thisStatus.isFirstTimePageBindEdit) {
+                        $('.close_image').click(function () {
+                            debugger;
+                            var id = $(this).attr('id');
+                            if (id == "image0Id") {
+                                $('#wrapperImage0Id').empty();
+                                thisStatus.arrayOfImages[0].imageUrl = '';
+                                thisStatus.arrayOfImages[0].previewUrl = '';
+                                thisStatus.arrayOfImages[0].isDeleted = 'Deleted';
+                            }
+                            else if (id == "image1Id") {
+                                $('#wrapperImage1Id').empty();
+                                thisStatus.arrayOfImages[1].imageUrl = '';
+                                thisStatus.arrayOfImages[1].previewUrl = '';
+                                thisStatus.arrayOfImages[1].isDeleted = 'Deleted';
+                            }
+                            else if (id == "image2Id") {
+                                $('#wrapperImage2Id').empty();
+                                thisStatus.arrayOfImages[2].imageUrl = '';
+                                thisStatus.arrayOfImages[2].previewUrl = '';
+                                thisStatus.arrayOfImages[2].isDeleted = 'Deleted';
+                            }
+                            else if (id == "image3Id") {
+                                $('#wrapperImage3Id').empty();
+                                thisStatus.arrayOfImages[3].imageUrl = '';
+                                thisStatus.arrayOfImages[3].previewUrl = '';
+                                thisStatus.arrayOfImages[3].isDeleted = 'Deleted';
+                            }
+                        });
+                        thisStatus.isFirstTimePageBindEdit = false;
                     }
+                    //}
                 });
                 thisStatus.showLoadingIconOnEditClick = false;
                 thisStatus.isPostAdvertisementFormVisible = true;
@@ -1413,70 +1500,83 @@ var ListPropertiesComponent = /** @class */ (function () {
     ListPropertiesComponent.prototype.submitPostForm = function () {
         debugger;
         this.isSubmittingPA = true;
-        if (this.PostAdvertisement.valid) {
-            this.PostAds();
+        if (this.arrayOfImages[0].previewUrl == '') {
+            this.showToast('danger', "Please upload main image.");
         }
         else {
-            this.formErrorMessagePA = "Please make sure, you entered correct data.";
-            this.logValidationErrorsPA(this.PostAdvertisement);
-            this.isSubmittingPA = false;
+            if (this.PostAdvertisement.valid) {
+                this.PostAds();
+            }
+            else {
+                this.formErrorMessagePA = "Please make sure, you entered correct data.";
+                this.logValidationErrorsPA(this.PostAdvertisement);
+                this.isSubmittingPA = false;
+            }
         }
     };
     ListPropertiesComponent.prototype.updatePostForm = function () {
         var _this = this;
         debugger;
-        var teamlist = [];
-        //$("#divFeatures input[id*='chk']:checked").each(function () {
-        //    teamlist.push($(this).val());
-        //});
-        //var rowID = $("label[for='lblRowId']").text();
-        var msg = [];
-        var CategoryId = 1;
-        var SubCategoryId = $("#SubCategory").val();
-        var advertisementId = this.PostAdvertisement.get('advId').value;
-        //this.PostAdvertisement.get('');
-        var title = this.PostAdvertisement.get('titlePA').value;
-        var Features = ''; //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
-        var address = this.PostAdvertisement.get('stAddressPA').value;
-        var contactNo = this.PostAdvertisement.get('contactNoPA').value;
-        var description = this.PostAdvertisement.get('descPA').value;
-        var countryID = this.PostAdvertisement.get('countryPA').value;
-        var StateID = this.PostAdvertisement.get('statePA').value.value;
-        var cityID = this.PostAdvertisement.get('cityPA').value;
-        var price = this.PostAdvertisement.get('pricePA').value;
-        var zipcode = this.PostAdvertisement.get('zipCodePA').value.value;
-        //var zipcode = this.PostAdvertisement.get('subCat').value.value;
-        var isFeatured = 0;
-        var jobtype = 1;
-        var amount = 0;
-        var adsPrice = this.PostAdvertisement.get('lblzipCodeprice').value;
-        this.listpropertiesService
-            .UpdateSale(CategoryId, SubCategoryId, title, Features, address, contactNo, description, countryID, StateID, cityID, zipcode, amount, advertisementId)
-            .subscribe(function (data) {
-            if (data.d == "-1") {
-                _this.showToast('danger', "This Record is Already Exists");
-                _this.isSubmittingPA = false;
-            }
-            if (data.d == "3") {
-                _this.showToast('danger', "Unsucessfull, Try again!!!");
-                _this.isSubmittingPA = false;
-            }
-            else if (data.d >= "1") {
-                _this.showToast('success', "Updated Successfully.");
-                _this.isPostAdvertisementFormVisible = false;
-                _this.isDesiredConsumerSegmentVisible = false;
-                _this.isConsumerSegmentAdvertisementVisible = false;
-                _this.AdvertisementImages(parseInt(advertisementId));
-                _this.ClearText();
-                //this.RemoveTableSalesAdvertisement();
-                //this.ViewAllSalesAdvertisement();
-                //$('#divsave').css("visibility", "hidden");
-                //$('#divImage').css("display", "none");
-                //$('#btnUpdate').css("visibility", "hidden");
-                //$("#btnAddNew").attr("disabled", true);
-                _this.cdr.detectChanges();
-            }
-        });
+        if (this.arrayOfImages[0].previewUrl == '') {
+            this.showToast('danger', "Please upload main image.");
+        }
+        else {
+            this.isSubmittingPA = true;
+            var teamlist = [];
+            //$("#divFeatures input[id*='chk']:checked").each(function () {
+            //    teamlist.push($(this).val());
+            //});
+            //var rowID = $("label[for='lblRowId']").text();
+            var msg = [];
+            var CategoryId = 1;
+            var SubCategoryId = $("#SubCategory").val();
+            var advertisementId = this.PostAdvertisement.get('advId').value;
+            //this.PostAdvertisement.get('');
+            var title = this.PostAdvertisement.get('titlePA').value;
+            var Features = this.PostAdvertisement.get('additionalFeature').value; // CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+            var address = this.PostAdvertisement.get('stAddressPA').value;
+            var contactNo = this.PostAdvertisement.get('contactNoPA').value;
+            var description = this.PostAdvertisement.get('descPA').value;
+            var countryID = this.PostAdvertisement.get('countryPA').value;
+            var StateID = this.PostAdvertisement.get('statePA').value.value;
+            var cityID = this.PostAdvertisement.get('cityPA').value;
+            var price = this.PostAdvertisement.get('pricePA').value;
+            var zipcode = this.PostAdvertisement.get('zipCodePA').value.value;
+            //var amount = this.PostAdvertisement.get('c').value;
+            //var zipcode = this.PostAdvertisement.get('subCat').value.value;
+            var isFeatured = 0;
+            var jobtype = 1;
+            var amount = 0;
+            var adsPrice = this.PostAdvertisement.get('lblzipCodeprice').value;
+            this.listpropertiesService
+                .UpdateSale(CategoryId, SubCategoryId, title, Features, address, contactNo, description, countryID, StateID, cityID, zipcode, price, advertisementId)
+                .subscribe(function (data) {
+                debugger;
+                if (data.d == "-1") {
+                    _this.showToast('danger', "This Record is Already Exists");
+                    _this.isSubmittingPA = false;
+                }
+                if (data.d == "3") {
+                    _this.showToast('danger', "Unsucessfull, Try again!!!");
+                    _this.isSubmittingPA = false;
+                }
+                else if (data.d >= "1") {
+                    debugger;
+                    _this.AdvertisementImages(parseInt(advertisementId), "Yes");
+                    //this.RemoveTableSalesAdvertisement();
+                    //this.ViewAllSalesAdvertisement();
+                    //$('#divsave').css("visibility", "hidden");
+                    //$('#divImage').css("display", "none");
+                    //$('#btnUpdate').css("visibility", "hidden");
+                    //$("#btnAddNew").attr("disabled", true);
+                    //this.isPostAdvertisementFormVisible = false;
+                    //this.isDesiredConsumerSegmentVisible = false;
+                    //this.isConsumerSegmentAdvertisementVisible = false;
+                    //this.ClearText();
+                    _this.cdr.detectChanges();
+                }
+            });
+        }
     };
     ListPropertiesComponent.prototype.resetPostForm = function () {
         debugger;
@@ -1495,13 +1595,18 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.PostAdvertisement.get('stAddressPA').setValue('');
         //this.PostAdvertisement.get('contactNoPA').setValue('');
         this.PostAdvertisement.get('descPA').setValue('');
-        this.PostAdvertisement.get('countryPA').setValue('');
+        //this.PostAdvertisement.get('countryPA').setValue('');
         //this.stateDataPA = null;
         //this.zipCodeDataPA = null;
         this.PostAdvertisement.get('cityPA').setValue('');
         this.PostAdvertisement.get('pricePA').setValue('');
         this.PostAdvertisement.get('subCat').setValue('');
         $("#SubCategory").html('');
+        $('#previewImages').html('');
+        $('#FileUpload1').val('');
+        $('#FileUpload2').val('');
+        $('#FileUpload3').val('');
+        $('#FileUpload4').val('');
     };
     ListPropertiesComponent.prototype.PostAds = function () {
         var _this = this;
@@ -1673,7 +1778,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                 //this.PostAdvertisement.get('cityPA').setValue('');
                 //this.PostAdvertisement.get('pricePA').setValue('0');
                 debugger;
-                _this.AdvertisementImages(parseInt(data.d));
+                _this.AdvertisementImages(parseInt(data.d), "No");
             }
             else {
                 _this.showToast('danger', "We can not complete this sales Advertisement Purchase at this time!!");
@@ -1686,8 +1791,69 @@ var ListPropertiesComponent = /** @class */ (function () {
             return 0;
         });
     };
-    ListPropertiesComponent.prototype.AdvertisementImages = function (rowID) {
+    ListPropertiesComponent.prototype.AdvertisementImages = function (rowID, isUpdating) {
+        //debugger;
+        //var thisStatus = this;
+        //var test = new FormData();
+        //var deletePic1 = '';
+        //var deletePic2 = '';
+        //var deletePic3 = '';
+        //var deletePic4 = '';
+        //if(thisStatus.arrayOfImages[0].imageUrl != '')
+        //{
+        //    if ($("#FileUpload1").val() == '') { }
+        //    else
+        //    {
+        //    var fileUpload: any = $("#FileUpload1").get(0);
+        //    var files = fileUpload.files;
+        //    test.append(files[0].name, files[0], rowID);
+        //    }
+        //}
+        //else {
+        //    deletePic1 = "Deleted";
+        //}
+        //if (thisStatus.arrayOfImages[1].imageUrl != '')
+        //{
+        //    if ($("#FileUpload2").val() == '') { }
+        //    else {
+        //        var fileUpload: any = $("#FileUpload2").get(0);
+        //        var files = fileUpload.files;
+        //        test.append(files[0].name, files[0], rowID);
+        //    }
+        //}
+        //else {
+        //    deletePic2 = "Deleted";
+        //}
+        //if (thisStatus.arrayOfImages[2].imageUrl != '')
+        //{
+        //    if ($("#FileUpload3").val() == '') { }
+        //    else {
+        //        var fileUpload: any = $("#FileUpload3").get(0);
+        //        var files = fileUpload.files;
+        //        test.append(files[0].name, files[0], rowID);
+        //    }
+        //}
+        //else {
+        //    deletePic3 = "Deleted";
+        //}
+        //if (thisStatus.arrayOfImages[3].imageUrl != '')
+        //{
+        //    if ($("#FileUpload4").val() == '') { }
+        //    else {
+        //    var fileUpload: any = $("#FileUpload4").get(0);
+        //    var files = fileUpload.files;
+        //    test.append(files[0].name, files[0], rowID);
+        //    }
+        //}
+        //else
+        //{
+        //    deletePic4 = "Deleted";
+        //}
         debugger;
+        var deletePic1 = '';
+        var deletePic2 = '';
+        var deletePic3 = '';
+        var deletePic4 = '';
         var thisStatus = this;
         var fileUpload = $("#FileUpload1").get(0);
         var files = fileUpload.files;
@@ -1698,24 +1864,52 @@ var ListPropertiesComponent = /** @class */ (function () {
         var files3 = thirdupload.files;
         var fourthupload = $("#FileUpload4").get(0);
         var files4 = fourthupload.files;
-        for (var i = 0; i < files.length; i++) {
-            test.append(files[i].name, files[i], rowID);
-            if ($("#FileUpload2").val() == '') {
-            }
-            else {
-                test.append(files2[i].name, files2[i], rowID);
-            }
-            if ($("#FileUpload3").val() == '') {
-            }
-            else {
-                test.append(files3[i].name, files3[i], rowID);
-            }
-            if ($("#FileUpload4").val() == '') {
-            }
-            else {
-                test.append(files4[i].name, files4[i], rowID);
+        //for (var i = 0; i < files.length; i++)
+        //{
+        if ($("#FileUpload1").val() == '') {
+        }
+        else {
+            test.append(files[0].name, files[0], "0," + rowID);
+        }
+        if ($("#FileUpload2").val() == '') {
+        }
+        else {
+            test.append(files2[0].name, files2[0], "1," + rowID);
+        }
+        if ($("#FileUpload3").val() == '') {
+        }
+        else {
+            test.append(files3[0].name, files3[0], "2," + rowID);
+        }
+        if ($("#FileUpload4").val() == '') {
+        }
+        else {
+            test.append(files4[0].name, files4[0], "3," + rowID);
+        }
+        //}
+        if (thisStatus.arrayOfImages[0].isDeleted == 'Deleted') {
+            deletePic1 = "Deleted";
+        }
+        if (thisStatus.arrayOfImages.length > 1) {
+            if (thisStatus.arrayOfImages[1].isDeleted == 'Deleted') {
+                deletePic2 = "Deleted";
             }
         }
+        if (thisStatus.arrayOfImages.length > 2) {
+            if (thisStatus.arrayOfImages[2].isDeleted == 'Deleted') {
+                deletePic3 = "Deleted";
+            }
+        }
+        if (thisStatus.arrayOfImages.length > 3) {
+            if (thisStatus.arrayOfImages[3].isDeleted == 'Deleted') {
+                deletePic4 = "Deleted";
+            }
+        }
+        test.append("assId", rowID);
+        test.append("deletePic1", deletePic1);
+        test.append("deletePic2", deletePic2);
+        test.append("deletePic3", deletePic3);
+        test.append("deletePic4", deletePic4);
         $.ajax({
             url: "Associate/UploadHandler.ashx",
             type: "POST",
@@ -1751,8 +1945,16 @@ var ListPropertiesComponent = /** @class */ (function () {
                     thisStatus.isPostButtonGreen = true;
                 }
                 thisStatus.isPostAdvertisementFormVisible = false;
-                thisStatus.showToast('success', "Successfully Sales Advertisment Purchased!");
-                thisStatus.showToast('success', "Your credit card has been Successfully charged!!!");
+                if (isUpdating == "No") {
+                    thisStatus.showToast('success', "Successfully Sales Advertisment Purchased!");
+                    thisStatus.showToast('success', "Your credit card has been Successfully charged!!!");
+                }
+                else {
+                    this.isPostAdvertisementFormVisible = false;
+                    this.isDesiredConsumerSegmentVisible = false;
+                    this.isConsumerSegmentAdvertisementVisible = false;
+                    this.showToast('success', "Updated Successfully.");
+                }
                 thisStatus.cdr.detectChanges();
             },
             error: function (err) {
@@ -2107,6 +2309,46 @@ var ListPropertiesComponent = /** @class */ (function () {
         $("#subCatTownHome").removeClass("active");
         $("#subCatMultiFamily").removeClass("active");
         $("#subCatLand").removeClass("active");
+        //this.ClearText();
+        //if (this.sts1 == 0) {
+        //    //$('html, body').animate({
+        //    //    'scrollTop': $("#select-yourdesired").position().top
+        //    //});
+        //    $(".button-block1").addClass("disable");
+        //    //this.isConsumerSegmentAdvertisementVisible = true;
+        //    this.sts1 = 1;
+        //}
+        //else if (this.sts1 == 1) {
+        //    //this.isConsumerSegmentAdvertisementVisible = false;
+        //    this.isPostAdvertisementFormVisible = false;
+        //    // window.location.href = "PostAdvertisement.aspx";
+        //    this.sts1 = 0;
+        //    $("#SubCategory").html("");
+        //$("#subCatHome").removeClass("diable-sidelink");
+        //$("#subCatTownHome").removeClass("diable-sidelink");
+        //$("#subCatMultiFamily").removeClass("diable-sidelink");
+        //$("#subCatLand").removeClass("diable-sidelink");
+        //}
+    };
+    ListPropertiesComponent.prototype.onclickUpdatePurchase = function () {
+        if (this.isPostButtonGreen) {
+            this.isPostButtonGreen = false;
+        }
+        else {
+            this.isPostButtonGreen = true;
+        }
+        if (!this.isPostAdvertisementFormVisible) {
+            this.isPostAdvertisementFormVisible = true;
+        }
+        else {
+            this.isPostAdvertisementFormVisible = false;
+            return;
+        }
+        $("#subCatHome").removeClass("active");
+        $("#subCatTownHome").removeClass("active");
+        $("#subCatMultiFamily").removeClass("active");
+        $("#subCatLand").removeClass("active");
+        //this.ClearText();
         //if (this.sts1 == 0) {
         //    //$('html, body').animate({
         //    //    'scrollTop': $("#select-yourdesired").position().top
@@ -2296,6 +2538,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         modal.componentInstance.dismissParentCall.subscribe(function (data) {
             debugger;
             console.log(data);
+            _this.isSubmittingPA = false;
             //this.overlayLoadingOnPurchase = false;
         });
         modal.componentInstance.updateParentCall.subscribe(function (data) {

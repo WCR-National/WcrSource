@@ -125,6 +125,7 @@ var ListPropertiesService = /** @class */ (function () {
         }));
     };
     ListPropertiesService.prototype.UpdateSale = function (CategoryId, SubCategoryId, title, Features, address, contactNo, description, countryID, StateID, cityID, zipcode, amount, id) {
+        debugger;
         var urlToUpdateSale = "Associate/ws/Sale.asmx/UpdateSale";
         return this.apiService.post(urlToUpdateSale, {
             'CategoryId': CategoryId, 'SubCategoryId': parseInt(SubCategoryId), 'title': title, 'Features': Features, 'address': address.trim(),

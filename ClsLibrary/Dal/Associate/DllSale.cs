@@ -248,7 +248,6 @@ namespace ClsLibrary.Dal.Associate
             {
                 return "Not Valid";
             }
-
         }
         public string UpdateAdvertisementPics(string associateID, string ImgName, string Img1, string Img2, string Img3, int AdvertiseID)
         {

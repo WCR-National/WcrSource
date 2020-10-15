@@ -183,6 +183,7 @@ export class ListPropertiesService {
 
 
     UpdateSale(CategoryId, SubCategoryId, title, Features, address, contactNo, description, countryID, StateID, cityID, zipcode, amount, id) {
+        debugger;
         let urlToUpdateSale: string = "Associate/ws/Sale.asmx/UpdateSale";
         return this.apiService.post(urlToUpdateSale, {
             'CategoryId': CategoryId, 'SubCategoryId': parseInt(SubCategoryId), 'title': title, 'Features': Features, 'address': address.trim(),
