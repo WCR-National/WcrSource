@@ -15,6 +15,12 @@
         opacity: 0;
         cursor: pointer;
     }
+    .ng-select {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        padding-bottom: 0px;
+    }
 </style>
 
 <div class="content-header justify-content-between pd-b-20-f">
@@ -291,10 +297,10 @@
             </div>
 
             <div class="col-sx-12 col-sm-4 col-xl-4 ht-186">
-                <div class="card card-hover card-event-one  card-project-three card-project-pink"  [ngClass]="{'card-project-green': isPostButtonGreen }">
+                <div class="card card-hover card-event-one  card-project-three card-project-pink"  [ngClass]="{'card-project-blue': isPostButtonGreen }">
 
                     <div class="card-body pd-t-50-f button-block1" (click)="onclickNewPurchase()">
-                        <div class="event-logo bg-teal tx-white mg-b-15" [style.display]="!isPostAdvertisementFormVisible ? 'flex': 'none'">
+                        <div class="event-logo bg-teal tx-white mg-b-15" style="    background-color: #0e3a6b;" [style.display]="!isPostAdvertisementFormVisible ? 'flex': 'none'">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus wd-20-f ht-25-f"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                         </div>
 
@@ -492,7 +498,7 @@
                                                                 <label>
                                                                     Title
                                                                 </label>
-                                                                <input id="title" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Title" formControlName="titlePA" (blur)="logValidationErrorsPA()">
+                                                                <input id="title" type="text" class="form-control  form-control" placeholder="Enter Title" formControlName="titlePA" (blur)="logValidationErrorsPA()">
                                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.titlePA">
                                                                     {{formErrorsPA.titlePA}}
                                                                 </div>
@@ -505,7 +511,7 @@
                                                                 <label>
                                                                     Price ($)
                                                                 </label>
-                                                                <input id="price" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter price as a whole dollar value" formControlName="pricePA" (blur)="logValidationErrorsPA()">
+                                                                <input id="price" type="text" class="form-control  form-control" placeholder="Enter price as a whole dollar value" formControlName="pricePA" (blur)="logValidationErrorsPA()">
                                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.pricePA">
                                                                     {{formErrorsPA.pricePA}}
                                                                 </div>
@@ -518,7 +524,7 @@
                                                                 <label>
                                                                     Description
                                                                 </label>
-                                                                <textarea id="desc" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Description" formControlName="descPA" (blur)="logValidationErrorsPA()" rows="5"></textarea>
+                                                                <textarea id="desc" type="text" class="form-control  form-control" placeholder="Enter Description" formControlName="descPA" (blur)="logValidationErrorsPA()" rows="5"></textarea>
                                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.descPA">
                                                                     {{formErrorsPA.descPA}}
                                                                 </div>
@@ -532,7 +538,7 @@
                                                                     Additional Features
                                                                 </label>
                                                                 <ckeditor [editor]="editor" [data]="data" [config]="config" formControlName="additionalFeature"></ckeditor>
-                                                                <!--<textarea id="desc" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Price" formControlName="desc" (blur)="logValidationErrors()" rows="10"></textarea>-->
+                                                                <!--<textarea id="desc" type="text" class="form-control  form-control" placeholder="Enter Price" formControlName="desc" (blur)="logValidationErrors()" rows="10"></textarea>-->
                                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.additionalFeature">
                                                                     {{formErrorsPA.additionalFeature}}
                                                                 </div>
@@ -559,7 +565,7 @@
                                                                 <label>
                                                                     Contact No
                                                                 </label>
-                                                                <input id="contactNoPA" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Contact No" formControlName="contactNoPA" (blur)="logValidationErrorsPA()">
+                                                                <input id="contactNoPA" type="text" class="form-control  form-control" placeholder="Enter Contact No" formControlName="contactNoPA" (blur)="logValidationErrorsPA()">
                                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.contactNoPA">
                                                                     {{formErrorsPA.contactNoPA}}
                                                                 </div>
@@ -572,22 +578,22 @@
                                                                 <label>
                                                                     Street Address
                                                                 </label>
-                                                                <input id="stAddress" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Street Address" formControlName="stAddressPA" (blur)="logValidationErrorsPA()">
+                                                                <input id="stAddress" type="text" class="form-control  form-control" placeholder="Enter Street Address" formControlName="stAddressPA" (blur)="logValidationErrorsPA()">
                                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.stAddressPA">
                                                                     {{formErrorsPA.stAddressPA}}
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <div class="row">
-                                                            <div class="col-12 col-sm-12">
+                                                        <!--<div class="row">
+                                                            <div class="col-12 col-sm-12">-->
                                                                 <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
                                                                     <div class="form-group" [ngClass]="{'has-error': formErrorsPA.cityPA}">
 
                                                                         <label>
                                                                             City
                                                                         </label>
-                                                                        <input id="city" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter City" formControlName="cityPA" (blur)="logValidationErrorsPA()">
+                                                                        <input id="city" type="text" class="form-control  form-control" placeholder="Enter City" formControlName="cityPA" (blur)="logValidationErrorsPA()">
 
                                                                         <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.cityPA">
                                                                             {{formErrorsPA.cityPA}}
@@ -596,7 +602,7 @@
                                                                 </div>
 
                                                                 <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
-                                                                    <div class="form-group" [ngClass]="{'has-error': formErrorsPA.statePA}">
+                                                                    <div class="form-group" [ngClass]="{'has-error': formErrorsPA.statePA}" style="margin-bottom:0px;">
 
                                                                         <label>
                                                                             State
@@ -615,15 +621,15 @@
                                                                         <label>
                                                                             Country
                                                                         </label>
-                                                                        <input id="country" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter Country" formControlName="countryPA" (blur)="logValidationErrorsPA()" disabled />
+                                                                        <input id="country" type="text" class="form-control  form-control" placeholder="Enter Country" formControlName="countryPA" (blur)="logValidationErrorsPA()" disabled />
 
                                                                         <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.countryPA">
                                                                             {{formErrorsPA.countryPA}}
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                            <!--</div>
+                                                        </div>-->
 
 
                                                         <div class="col-12 col-xs-12 col-sm-4  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15">
@@ -690,7 +696,7 @@
                                                         </button>
                                                     </div>
 
-                                                    <div class="col-xs-3  col-sm-2 mg-b-20">
+                                                    <div class="col-xs-3  col-sm-2 mg-b-20 pd-l-0-f">
                                                         <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="button" (click)="cancelPostForm()">
                                                             <span>Cancel</span>
                                                         </button>

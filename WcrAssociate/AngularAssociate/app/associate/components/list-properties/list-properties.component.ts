@@ -835,20 +835,26 @@ export class ListPropertiesComponent implements OnInit {
                                                     }
                                                     if (subData.d == "0") {
                                                         this.showToast('danger', "Failed, Already exist!!!");
+                                                        this.isSubmittingPA = false;
+
                                                         //$('#fail_message').modal('show');
                                                     }
                                                     if (subData.d == "3") {
                                                         this.showToast('danger', "Error, Something went wrong. Try Again!!!");
-
+                                                        this.isSubmittingPA = false;
                                                     }
 
                                                 });
 
                                                 if (data.d == "0") {
                                                     this.showToast('danger', "Failure, Already. Try Again!!!");
+                                                    this.isSubmittingPA = false;
+
                                                 }
                                                 if (data.d == "3") {
                                                     this.showToast('danger', "Error, Something went wrong. Try Again!!!");
+                                                    this.isSubmittingPA = false;
+
                                                 }
                                             }
 
@@ -1552,9 +1558,13 @@ export class ListPropertiesComponent implements OnInit {
 
                         if (data.d == "-1") {
                             this.showToast('danger', "Failure, Already Exist!!!");
+                            this.isSubmittingPA = false;
+
                         }
                         if (data.d == "3") {
                             this.showToast('danger', "Error, Something went wrong. Try Again!!!");
+                            this.isSubmittingPA = false;
+
                         }
                         else if (data.d = "1") {
                             this.showToast('success', "Success, Deleted Succesfully.");
@@ -2002,6 +2012,7 @@ export class ListPropertiesComponent implements OnInit {
                             else {
                                 thisStatus.showToast('danger', 'Maximum Limit is expired.');
                                 thisStatus.showToast('danger', 'You have reached maximum allowed number of sales advertisement.');
+                                thisStatus.isSubmittingPA = false;
 
                                 return false;
                             }
@@ -2086,17 +2097,19 @@ export class ListPropertiesComponent implements OnInit {
                         this.SavePostAdvertisementsData(CategoryId, subCategoryId, title, featurs, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice);
 
 
-                        this.isSubmittingPA = false;
+                        //this.isSubmittingPA = false;
                     } else {
                         if (this._Counter == 0) {
                             //this.AssociateAlreadyCategories();
-                            this.onOpenModalClick();
                             this._Counter++;
+                            this.onOpenModalClick();
                         }
                         else {
-                            this._Counter++;
                             this.isSubmittingPA = false;
                             this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
+                            this.cdr.detectChanges();
+                            this._Counter++;
+
                         }
 
                     }
@@ -2332,7 +2345,7 @@ export class ListPropertiesComponent implements OnInit {
                 thisStatus.ClearText();
                 thisStatus.RemoveTableSalesAdvertisement();
                 thisStatus.ViewAllSalesAdvertisement();
-                thisStatus.isSubmittingPA = false;
+                
 
                 thisStatus.isCollapsedOpenImages = true;
                 thisStatus.isCollapsedOverviewAndAdditionalFeatures = true;
@@ -2349,17 +2362,21 @@ export class ListPropertiesComponent implements OnInit {
                     thisStatus.showToast('success', "Your credit card has been Successfully charged!!!");
                 }
                 else {
-                    this.isPostAdvertisementFormVisible = false;
-                    this.isDesiredConsumerSegmentVisible = false;
-                    this.isConsumerSegmentAdvertisementVisible = false;
-                    this.showToast('success', "Updated Successfully.");
+                    thisStatus.isPostAdvertisementFormVisible = false;
+                    thisStatus.isDesiredConsumerSegmentVisible = false;
+                    thisStatus.isConsumerSegmentAdvertisementVisible = false;
+                    thisStatus.showToast('success', "Updated Successfully!!!");
                 }
+                thisStatus.isSubmittingPA = false;
                 thisStatus.cdr.detectChanges();
             },
             error: function (err) {
+                thisStatus.isSubmittingPA = false;
+                thisStatus.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!!");
+                thisStatus.cdr.detectChanges();
+
                 alert(err.statusText);
-                this.isSubmittingPA = false;
-                this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
+
             }
         });
 
@@ -3050,6 +3067,7 @@ export class ListPropertiesComponent implements OnInit {
             //modal.result.then(
             //    (result) => {
             debugger;
+            this.showToast('info', 'Please be patient, we are processing.')
             this.PostAds();
             //var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
             //var rowData = this.dTableSearching.fnGetData(row);
