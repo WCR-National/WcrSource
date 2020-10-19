@@ -361,7 +361,7 @@ var DashboardComponent = /** @class */ (function () {
         var dataTable = $('#myPropertyListings');
         if (asyncData === undefined) {
             asyncData = {
-                'S.N': '',
+                'advertisementID': '',
                 'title': "",
                 'categoryname': "",
                 'ZipCode': "",
@@ -372,13 +372,13 @@ var DashboardComponent = /** @class */ (function () {
             data: asyncData,
             columns: [
                 {
-                    data: "",
+                    data: "advertisementID",
                 },
                 {
                     data: "title",
                 },
                 {
-                    data: "categoryname",
+                    data: "name",
                 },
                 {
                     data: "ZipCode",
@@ -391,11 +391,11 @@ var DashboardComponent = /** @class */ (function () {
                     }
                 },
             ],
-            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                var index = iDisplayIndex + 1;
-                $('td:eq(0)', nRow).html(index);
-                return nRow;
-            },
+            //"fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            //    var index = iDisplayIndex + 1;
+            //    $('td:eq(0)', nRow).html(index);
+            //    return nRow; 
+            //},
             buttons: [
                 'excel', 'pdf'
             ],

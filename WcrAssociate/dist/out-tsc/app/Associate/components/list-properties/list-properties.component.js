@@ -655,19 +655,23 @@ var ListPropertiesComponent = /** @class */ (function () {
                                                         }
                                                         if (subData.d == "0") {
                                                             _this.showToast('danger', "Failed, Already exist!!!");
+                                                            _this.isSubmittingPA = false;
                                                             //$('#fail_message').modal('show');
                                                         }
                                                         if (subData.d == "3") {
                                                             _this.showToast('danger', "Error, Something went wrong. Try Again!!!");
+                                                            _this.isSubmittingPA = false;
                                                         }
                                                     })];
                                             case 2:
                                                 results_1 = _a.sent();
                                                 if (data.d == "0") {
                                                     this.showToast('danger', "Failure, Already. Try Again!!!");
+                                                    this.isSubmittingPA = false;
                                                 }
                                                 if (data.d == "3") {
                                                     this.showToast('danger', "Error, Something went wrong. Try Again!!!");
+                                                    this.isSubmittingPA = false;
                                                 }
                                                 _a.label = 3;
                                             case 3: return [2 /*return*/];
@@ -1284,9 +1288,11 @@ var ListPropertiesComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data.d == "-1") {
                 _this.showToast('danger', "Failure, Already Exist!!!");
+                _this.isSubmittingPA = false;
             }
             if (data.d == "3") {
                 _this.showToast('danger', "Error, Something went wrong. Try Again!!!");
+                _this.isSubmittingPA = false;
             }
             else if (data.d = "1") {
                 _this.showToast('success', "Success, Deleted Succesfully.");
@@ -1664,6 +1670,7 @@ var ListPropertiesComponent = /** @class */ (function () {
                     else {
                         thisStatus.showToast('danger', 'Maximum Limit is expired.');
                         thisStatus.showToast('danger', 'You have reached maximum allowed number of sales advertisement.');
+                        thisStatus.isSubmittingPA = false;
                         return false;
                     }
                 });
@@ -1737,18 +1744,19 @@ var ListPropertiesComponent = /** @class */ (function () {
                     amount = parseInt(price);
                 }
                 _this.SavePostAdvertisementsData(CategoryId, subCategoryId, title, featurs, address, contactNo, description, countryID, stateID, cityId, zipcod, isFeatured, jobtype, amount, adsPrice);
-                _this.isSubmittingPA = false;
+                //this.isSubmittingPA = false;
             }
             else {
                 if (_this._Counter == 0) {
                     //this.AssociateAlreadyCategories();
-                    _this.onOpenModalClick();
                     _this._Counter++;
+                    _this.onOpenModalClick();
                 }
                 else {
-                    _this._Counter++;
                     _this.isSubmittingPA = false;
                     _this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
+                    _this.cdr.detectChanges();
+                    _this._Counter++;
                 }
             }
         });
@@ -1942,7 +1950,6 @@ var ListPropertiesComponent = /** @class */ (function () {
                 thisStatus.ClearText();
                 thisStatus.RemoveTableSalesAdvertisement();
                 thisStatus.ViewAllSalesAdvertisement();
-                thisStatus.isSubmittingPA = false;
                 thisStatus.isCollapsedOpenImages = true;
                 thisStatus.isCollapsedOverviewAndAdditionalFeatures = true;
                 thisStatus.isCollapsedLocation = true;
@@ -1958,17 +1965,19 @@ var ListPropertiesComponent = /** @class */ (function () {
                     thisStatus.showToast('success', "Your credit card has been Successfully charged!!!");
                 }
                 else {
-                    this.isPostAdvertisementFormVisible = false;
-                    this.isDesiredConsumerSegmentVisible = false;
-                    this.isConsumerSegmentAdvertisementVisible = false;
-                    this.showToast('success', "Updated Successfully.");
+                    thisStatus.isPostAdvertisementFormVisible = false;
+                    thisStatus.isDesiredConsumerSegmentVisible = false;
+                    thisStatus.isConsumerSegmentAdvertisementVisible = false;
+                    thisStatus.showToast('success', "Updated Successfully!!!");
                 }
+                thisStatus.isSubmittingPA = false;
                 thisStatus.cdr.detectChanges();
             },
             error: function (err) {
+                thisStatus.isSubmittingPA = false;
+                thisStatus.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!!");
+                thisStatus.cdr.detectChanges();
                 alert(err.statusText);
-                this.isSubmittingPA = false;
-                this.showToast('danger', "Something went wrong, We can not complete this sales Advertisement Purchase at this time. Refresh Page!!");
             }
         });
     };
@@ -2553,6 +2562,7 @@ var ListPropertiesComponent = /** @class */ (function () {
             //modal.result.then(
             //    (result) => {
             debugger;
+            _this.showToast('info', 'Please be patient, we are processing.');
             _this.PostAds();
             //var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
             //var rowData = this.dTableSearching.fnGetData(row);

@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Component, Optional, Output, EventEmitter } from '@angular/core';
+import { Component, Optional, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
@@ -8,7 +8,8 @@ import { Toaster } from "ngx-toast-notifications";
 import * as $ from 'jquery';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 var PaymentModalComponent = /** @class */ (function () {
-    function PaymentModalComponent(route, router, paymentService, xmlToJson, fb, activeModal, toaster) {
+    function PaymentModalComponent(cdr, route, router, paymentService, xmlToJson, fb, activeModal, toaster) {
+        this.cdr = cdr;
         this.route = route;
         this.router = router;
         this.paymentService = paymentService;
@@ -139,8 +140,10 @@ var PaymentModalComponent = /** @class */ (function () {
                 else {
                     thisStatus.defaultDeisableUpdateButton = true;
                 }
+                thisStatus.cdr.detectChanges();
             });
         }, 8000);
+        this.cdr.detectChanges();
         //setTimeout(function () {
         //    debugger;
         //    thisStatus.cardForm.valueChanges.subscribe((data) => {
@@ -426,12 +429,12 @@ var PaymentModalComponent = /** @class */ (function () {
                     _this.showToast('danger', "Something goes wrong. Please Try again.");
                 }
                 else if (data == "0") {
-                    _this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                    _this.showToast('success', "Your credit card info has been updated Successfully.");
                     _this.activeModal.close();
                     _this.updateParentCall.emit('update');
                 }
                 else if (data == "-1") {
-                    _this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                    _this.showToast('success', "Your credit card info has been updated Successfully.");
                     _this.activeModal.close();
                     _this.updateParentCall.emit('update');
                 }
@@ -649,8 +652,8 @@ var PaymentModalComponent = /** @class */ (function () {
             selector: 'associate-payment-modal-page',
             templateUrl: './payment-modal.component.html'
         }),
-        tslib_1.__param(5, Optional()),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, PaymentService, XMLToJSON,
+        tslib_1.__param(6, Optional()),
+        tslib_1.__metadata("design:paramtypes", [ChangeDetectorRef, ActivatedRoute, Router, PaymentService, XMLToJSON,
             FormBuilder, NgbActiveModal, Toaster])
     ], PaymentModalComponent);
     return PaymentModalComponent;

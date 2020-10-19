@@ -1463,7 +1463,10 @@ export class PurchaseZipCodeComponent implements OnInit {
                 {
                     "render": function (data, type, row) {
                         // here you can convert data from base64 to hex and return it
-                        if (data.indexOf('s') != -1) {
+
+
+
+                        if (data.substr(data.length - 1) == 's') {
                             data = data.slice(0, -1);
                         }
                         data = data + ' Services';
