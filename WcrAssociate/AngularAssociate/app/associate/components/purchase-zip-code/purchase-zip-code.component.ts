@@ -240,6 +240,7 @@ export class PurchaseZipCodeComponent implements OnInit {
     public _Counter = 0;
     public dTableCPZC: any = null;
     public dTableSearching: any = null;
+    public gRowDataState: any = null;
     public dTableAPZC: any = null;
 
     public firstTimeCalling = true;
@@ -1097,8 +1098,9 @@ export class PurchaseZipCodeComponent implements OnInit {
             $('#searchedZipCodes tbody').on('click', '.purchaseId', function (e) {
 
                 //alert('entered');
-
-                var row = thisStatus.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
+                var rowDataState = $(this).closest('tr')[0];
+                thisStatus.gRowDataState = rowDataState;
+                var row = thisStatus.dTableSearching.fnGetPosition(rowDataState);
                 var rowData = thisStatus.dTableSearching.fnGetData(row);
                 // var rowColumns = rowData[rowData.length - 1];
 
@@ -1522,9 +1524,11 @@ export class PurchaseZipCodeComponent implements OnInit {
         });
 
         modal.componentInstance.updateParentCall.subscribe((data) => {
+            debugger;
+
             this.showToast('success', 'Purchasing is in process');
 
-            var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
+            var row = this.dTableSearching.fnGetPosition(this.gRowDataState);
             var rowData = this.dTableSearching.fnGetData(row);
             // var rowColumns = rowData[rowData.length - 1];
 
@@ -1535,28 +1539,41 @@ export class PurchaseZipCodeComponent implements OnInit {
             var priceValues = rowData['Price'];
             var categoryId = rowData['CategoryId'];
             var subCategoryId = rowData['SubCategoryId'];
+
+            if (categoryId == 2) {
+                subCategoryId = 5;
+            }
+            else if (categoryId == 5) {
+                subCategoryId = 13;
+            }
+            else if (categoryId == 3) {
+                subCategoryId = 8;
+            }
+            else {
+            }
+
             this.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
         });
 
-        modal.result.then(
-            (result) => {
+        //modal.result.then(
+        //    (result) => {
 
-                var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
-                var rowData = this.dTableSearching.fnGetData(row);
-                // var rowColumns = rowData[rowData.length - 1];
+        //        var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
+        //        var rowData = this.dTableSearching.fnGetData(row);
+        //        // var rowColumns = rowData[rowData.length - 1];
 
-                var id = rowData['id'];
-                var zipCode = rowData['Zipcode'];
-                var categoryText = rowData['CategoryName'];
-                var subCategoryText = rowData['SubCategoryName'];
-                var priceValues = rowData['Price'];
-                var categoryId = rowData['CategoryId'];
-                var subCategoryId = rowData['SubCategoryId'];
-                this.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
+        //        var id = rowData['id'];
+        //        var zipCode = rowData['Zipcode'];
+        //        var categoryText = rowData['CategoryName'];
+        //        var subCategoryText = rowData['SubCategoryName'];
+        //        var priceValues = rowData['Price'];
+        //        var categoryId = rowData['CategoryId'];
+        //        var subCategoryId = rowData['SubCategoryId'];
+        //        this.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
 
-                //this.updateBindings();
-            },
-            () => { });
+        //        //this.updateBindings();
+        //    },
+        //    () => { });
     }
 
     onOpenModalConfirmationClick(deleteow): void {

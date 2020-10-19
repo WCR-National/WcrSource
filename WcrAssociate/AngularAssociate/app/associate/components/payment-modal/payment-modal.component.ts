@@ -1,4 +1,4 @@
-import { Component, OnInit, Optional, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Optional, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -169,7 +169,7 @@ export class PaymentModalComponent implements OnInit {
     @Output() updateParentCall: EventEmitter<any> = new EventEmitter();
 
 
-    constructor(private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
+    constructor(private cdr: ChangeDetectorRef, private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
         private fb: FormBuilder, @Optional() private activeModal: NgbActiveModal, private toaster: Toaster) {
 
     }
@@ -197,8 +197,11 @@ export class PaymentModalComponent implements OnInit {
                 else {
                     thisStatus.defaultDeisableUpdateButton = true;
                 }
+                thisStatus.cdr.detectChanges();
+                
             });
         }, 8000);
+        this.cdr.detectChanges();
 
         //setTimeout(function () {
         //    debugger;
@@ -546,12 +549,12 @@ export class PaymentModalComponent implements OnInit {
                             this.showToast('danger', "Something goes wrong. Please Try again.");
                         }
                         else if (data == "0") {
-                            this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                            this.showToast('success', "Your credit card info has been updated Successfully.");
                             this.activeModal.close();
                             this.updateParentCall.emit('update');
                         }
                         else if (data == "-1") {
-                            this.showToast('success', "Your credit card info has been Inserted Successfully.");
+                            this.showToast('success', "Your credit card info has been updated Successfully.");
                             this.activeModal.close();
                             this.updateParentCall.emit('update');
                         }

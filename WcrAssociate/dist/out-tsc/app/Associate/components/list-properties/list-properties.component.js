@@ -38,7 +38,8 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.isAddButtonPA = true;
         this.isPostButtonGreen = true;
         this.config = {
-            height: 188
+            height: 188,
+            removeButtons: 'Image',
         };
         this.validationMessagesPA = {
             'consumerSegmentType': {
@@ -1249,18 +1250,20 @@ var ListPropertiesComponent = /** @class */ (function () {
                 thisStatus.EditRecords($(_this).closest('tr').children('td:first').text());
             });
         });
-        if (this.isTableSalesAdvertisementLoadedFirstTime) {
-            $('#salesAdvertisement').on('click', 'a.remove', function (e) {
-                var _this = this;
-                e.preventDefault();
-                debugger;
+        $('#salesAdvertisement').on('click', 'a.remove', function (e) {
+            var _this = this;
+            e.preventDefault();
+            debugger;
+            if (confirm("Are you sure?")) {
                 var tr = $(this).closest('tr');
                 console.log($(this).closest('tr').children('td:first').text());
                 thisStatus.dTableSA.api().row($(this).parents('tr')).remove().draw(false);
                 thisStatus.ngZone.run(function () {
                     thisStatus.DeleteRecords($(_this).closest('tr').children('td:first').text());
                 });
-            });
+            }
+        });
+        if (this.isTableSalesAdvertisementLoadedFirstTime) {
             this.isTableSalesAdvertisementLoadedFirstTime = false;
         }
     };
@@ -1275,23 +1278,22 @@ var ListPropertiesComponent = /** @class */ (function () {
     };
     ListPropertiesComponent.prototype.DeleteRecords = function (advId) {
         var _this = this;
-        if (confirm("Are you sure?")) {
-            var msg = [];
-            this.listpropertiesService
-                .DeleteDataFromAdvertisement(parseInt(advId))
-                .subscribe(function (data) {
-                if (data.d == "-1") {
-                    _this.showToast('danger', "Failure, Already Exist!!!");
-                }
-                if (data.d == "3") {
-                    _this.showToast('danger', "Error, Something went wrong. Try Again!!!");
-                }
-                else if (data.d = "1") {
-                    _this.showToast('success', "Success, Deleted Succesfully.");
-                    _this.isPostAdvertisementFormVisible = false;
-                }
-            });
-        }
+        var msg = [];
+        this.listpropertiesService
+            .DeleteDataFromAdvertisement(parseInt(advId))
+            .subscribe(function (data) {
+            if (data.d == "-1") {
+                _this.showToast('danger', "Failure, Already Exist!!!");
+            }
+            if (data.d == "3") {
+                _this.showToast('danger', "Error, Something went wrong. Try Again!!!");
+            }
+            else if (data.d = "1") {
+                _this.showToast('success', "Success, Deleted Succesfully.");
+                _this.isPostAdvertisementFormVisible = false;
+            }
+        });
+        //}
     };
     ListPropertiesComponent.prototype.EditRecords = function (advId) {
         var _this = this;
@@ -1584,6 +1586,12 @@ var ListPropertiesComponent = /** @class */ (function () {
     };
     ListPropertiesComponent.prototype.cancelPostForm = function () {
         this.isPostAdvertisementFormVisible = false;
+        if (this.isPostButtonGreen) {
+            this.isPostButtonGreen = false;
+        }
+        else {
+            this.isPostButtonGreen = true;
+        }
     };
     ListPropertiesComponent.prototype.ClearText = function () {
         $("#subCatHome").removeClass("active");
@@ -1922,14 +1930,14 @@ var ListPropertiesComponent = /** @class */ (function () {
                 $("#FileUpload2").val("");
                 $("#FileUpload3").val("");
                 $("#FileUpload4").val("");
-                $("#image-holder").empty();
-                $("#image-holder2").empty();
-                $("#image-holder3").empty();
-                $("#image-holder4").empty();
-                $("#Allimage-holder").empty();
-                $("#Allimage-holder1").empty();
-                $("#Allimage-holder2").empty();
-                $("#Allimage-holder3").empty();
+                //$("#image-holder").empty();
+                //$("#image-holder2").empty();
+                //$("#image-holder3").empty();
+                //$("#image-holder4").empty();
+                //$("#Allimage-holder").empty();
+                //$("#Allimage-holder1").empty();
+                //$("#Allimage-holder2").empty();
+                //$("#Allimage-holder3").empty();
                 $("#btnAddNew").removeAttr('disabled');
                 thisStatus.ClearText();
                 thisStatus.RemoveTableSalesAdvertisement();

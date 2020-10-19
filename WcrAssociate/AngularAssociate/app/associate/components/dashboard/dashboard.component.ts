@@ -444,7 +444,7 @@ export class DashboardComponent implements OnInit {
         let dataTable: any = $('#myPropertyListings');
         if (asyncData === undefined) {
             asyncData = {
-                'S.N': '',
+                'advertisementID': '',
                 'title': "",
                 'categoryname': "",
                 'ZipCode': "",
@@ -455,13 +455,13 @@ export class DashboardComponent implements OnInit {
             data: asyncData,
             columns: [
                 {
-                    data: "",
+                    data: "advertisementID",
                 },
                 {
                     data: "title",
                 },
                 {
-                    data: "categoryname",
+                    data: "name",//"categoryname",
                 },
                 {
                     data: "ZipCode",
@@ -473,14 +473,12 @@ export class DashboardComponent implements OnInit {
                         return '$' + full['Amount'];
                     }
                 },
-            ]
-            ,
-            "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                var index = iDisplayIndex + 1;
-                $('td:eq(0)', nRow).html(index);
-                return nRow; 
-            }
-            ,
+            ],
+            //"fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+            //    var index = iDisplayIndex + 1;
+            //    $('td:eq(0)', nRow).html(index);
+            //    return nRow; 
+            //},
             buttons: [
                 'excel', 'pdf'
             ],

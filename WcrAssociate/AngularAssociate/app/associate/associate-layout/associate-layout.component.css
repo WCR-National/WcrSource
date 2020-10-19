@@ -9615,9 +9615,8 @@ textarea.form-control {
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
-
 /*.form-fieldset {
     background-color: #fff;
     border: 1px solid rgba(230, 231, 239, 0.85);
@@ -20352,6 +20351,17 @@ body {
     border-color: #22d273;
     background-color: #f6fdf9;
 }
+.card-project-blue {
+    box-shadow: none;
+    border-color: #0e3a6b;
+    background-color: #0079ff24;
+}
+
+
+    .card-project-blue .avatar img,
+    .card-project-blue .avatar-initial {
+        box-shadow: none;
+    }
 
     .card-project-green .avatar img,
     .card-project-green .avatar-initial {
@@ -72536,6 +72546,11 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
 .card-project-green.card-hover:hover, .card-project-green.card-hover:focus {
     border-color: #22d273;
 }
+
+.card-project-blue.card-hover:hover, .card-project-blue.card-hover:focus {
+    border-color: #0e3a6b;
+}
+
 
 .aoa_wrap {
     position: relative;
