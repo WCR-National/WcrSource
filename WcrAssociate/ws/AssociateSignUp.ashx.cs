@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using WcrClassLibrary;
+
 namespace WcrAssociate.ws
 {
     /// <summary>

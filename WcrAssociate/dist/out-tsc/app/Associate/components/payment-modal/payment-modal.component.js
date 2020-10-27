@@ -142,7 +142,7 @@ var PaymentModalComponent = /** @class */ (function () {
                 }
                 thisStatus.cdr.detectChanges();
             });
-        }, 8000);
+        }, 5000);
         this.cdr.detectChanges();
         //setTimeout(function () {
         //    debugger;
@@ -321,6 +321,8 @@ var PaymentModalComponent = /** @class */ (function () {
                     _this.isAddOrUpdateButton = false;
                     //this.cardForm.setErrors({ 'incorrect': true });
                     //this.cardForm.controls['firstName'].setErrors({ 'incorrect': true });
+                    $('#formDivId').focus();
+                    $('#formDivId').focusin();
                     return false;
                 }
                 else {
