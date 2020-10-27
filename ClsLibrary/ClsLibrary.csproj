@@ -73,7 +73,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WcrClassLibrary">
+    <Reference Include="WcrClassLibrary, Version=2.0.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Dependencies\WcrClassLibrary.dll</HintPath>
     </Reference>
     <Reference Include="WcrVault">
