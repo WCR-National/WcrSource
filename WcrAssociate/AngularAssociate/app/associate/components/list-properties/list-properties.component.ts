@@ -1454,6 +1454,9 @@ export class ListPropertiesComponent implements OnInit {
                     data: "name",
                 },
                 {
+                    data: "ZipCode",
+                },
+                {
                     data: "title",
                 },
                 {
@@ -1462,6 +1465,7 @@ export class ListPropertiesComponent implements OnInit {
                 {
                     data: "Amount",
                 },
+               
                 {
                     data: null,
                     className: "center",
@@ -1480,10 +1484,6 @@ export class ListPropertiesComponent implements OnInit {
                         debugger;
                         return '<img class="ht-100" src="../../../../Associate/Adv_img/' + data + '">'
                     }
-                },
-                {
-                    targets: [5],
-                    className: "hide_column"
                 },
                 {
                     targets: [6],
@@ -1924,6 +1924,8 @@ export class ListPropertiesComponent implements OnInit {
 
     cancelPostForm() {
         this.isPostAdvertisementFormVisible = false;
+        this.ClearText();
+
         if (this.isPostButtonGreen) {
             this.isPostButtonGreen = false;
         }
@@ -1933,6 +1935,7 @@ export class ListPropertiesComponent implements OnInit {
     }
 
     ClearText() {
+        debugger;
         $("#subCatHome").removeClass("active");
         $("#subCatTownHome").removeClass("active");
         $("#subCatMultiFamily").removeClass("active");
@@ -1940,12 +1943,16 @@ export class ListPropertiesComponent implements OnInit {
 
         this.PostAdvertisement.get('titlePA').setValue('');
         //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+
+        this.PostAdvertisement.get('additionalFeature').setValue('');
         this.PostAdvertisement.get('stAddressPA').setValue('');
         //this.PostAdvertisement.get('contactNoPA').setValue('');
         this.PostAdvertisement.get('descPA').setValue('');
         //this.PostAdvertisement.get('countryPA').setValue('');
-        //this.stateDataPA = null;
-        //this.zipCodeDataPA = null;
+
+        this.stateDataPA = null;
+        this.zipCodeDataPA = null;
+
         this.PostAdvertisement.get('cityPA').setValue('');
         this.PostAdvertisement.get('pricePA').setValue('');
         this.PostAdvertisement.get('subCat').setValue('');
@@ -1957,6 +1964,7 @@ export class ListPropertiesComponent implements OnInit {
         $('#FileUpload3').val('');
         $('#FileUpload4').val('');
 
+        this.arrayOfImages = [];
     }
 
 
@@ -2802,7 +2810,6 @@ export class ListPropertiesComponent implements OnInit {
         //    //this.isConsumerSegmentAdvertisementVisible = false;
         //    this.isPostAdvertisementFormVisible = false;
         //    // window.location.href = "PostAdvertisement.aspx";
-
         //    this.sts1 = 0;
         //    $("#SubCategory").html("");
 
@@ -3053,38 +3060,25 @@ export class ListPropertiesComponent implements OnInit {
         debugger;
         const modal: NgbModalRef = this.modalService.open(PaymentModalComponent, { size: 'lg', backdrop: "static" });
         const modalComponent: PaymentModalComponent = modal.componentInstance;
-
+        let thisStatus = this;
         modal.componentInstance.dismissParentCall.subscribe((data) => {
             debugger;
             console.log(data);
             this.isSubmittingPA = false;
+            thisStatus.isSubmittingPA = false;
+            this.cdr.detectChanges();
+            thisStatus.cdr.detectChanges();
             //this.overlayLoadingOnPurchase = false;
         });
 
         modal.componentInstance.updateParentCall.subscribe((data) => {
 
-
-            //modal.result.then(
-            //    (result) => {
             debugger;
             this.showToast('info', 'Please be patient, we are processing.')
             this.PostAds();
-            //var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
-            //var rowData = this.dTableSearching.fnGetData(row);
-            //// var rowColumns = rowData[rowData.length - 1];
 
-            //var id = rowData['id'];
-            //var zipCode = rowData['Zipcode'];
-            //var categoryText = rowData['CategoryName'];
-            //var subCategoryText = rowData['SubCategoryName'];
-            //var priceValues = rowData['Price'];
-            //var categoryId = rowData['CategoryId'];
-            //var subCategoryId = rowData['SubCategoryId'];
-            //this.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
-
-            //this.updateBindings();
         },
-            () => { });
+        () => { });
     }
 
 }

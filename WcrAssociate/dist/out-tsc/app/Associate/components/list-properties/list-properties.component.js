@@ -1592,6 +1592,7 @@ var ListPropertiesComponent = /** @class */ (function () {
     };
     ListPropertiesComponent.prototype.cancelPostForm = function () {
         this.isPostAdvertisementFormVisible = false;
+        this.ClearText();
         if (this.isPostButtonGreen) {
             this.isPostButtonGreen = false;
         }
