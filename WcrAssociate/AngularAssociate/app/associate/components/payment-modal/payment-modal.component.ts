@@ -197,10 +197,8 @@ export class PaymentModalComponent implements OnInit {
                 else {
                     thisStatus.defaultDeisableUpdateButton = true;
                 }
-                thisStatus.cdr.detectChanges();
-                
             });
-        }, 8000);
+        }, 6000);
         this.cdr.detectChanges();
 
         //setTimeout(function () {
@@ -373,11 +371,18 @@ export class PaymentModalComponent implements OnInit {
 
                             setTimeout(function () {
                                 thisStatus.startValueState = { value: data._state, label: data._state };
+                                thisStatus.defaultDeisableUpdateButton = true;
+                                thisStatus.cdr.detectChanges();
+
                             }, 2000);
 
                             setTimeout(function () {
                                 thisStatus.startValueZip = { value: data._zip, label: data._zip };
-                            }, 4000);
+                                
+                                thisStatus.defaultDeisableUpdateButton = true;
+
+                                thisStatus.cdr.detectChanges();
+                            }, 3000);
 
                             //required to change to set selected values
                             //thisStatus.cardForm.get('expYear').setValue(data._year);
@@ -422,6 +427,10 @@ export class PaymentModalComponent implements OnInit {
                             this.isAddOrUpdateButton = false;
                             //this.cardForm.setErrors({ 'incorrect': true });
                             //this.cardForm.controls['firstName'].setErrors({ 'incorrect': true });
+
+                            $('#formDivId').focus();
+                            $('#formDivId').focusin();
+                            this.defaultDeisableUpdateButton = true;
                             return false;
                         }
                         else {

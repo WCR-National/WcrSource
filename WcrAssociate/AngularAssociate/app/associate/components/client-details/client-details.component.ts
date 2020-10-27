@@ -29,7 +29,7 @@ export class ClientDetailsComponent implements OnInit {
     servicesCount: string = '';
     TotalCount: string = '';
     showSuccessMessage: string = '';
-    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: ClientDetailsService, private xmlToJson: XMLToJSON) {
+    constructor(private route: ActivatedRoute, private router: Router, private clientDetailsService: ClientDetailsService, private xmlToJson: XMLToJSON) {
 
     }
 
@@ -49,7 +49,7 @@ export class ClientDetailsComponent implements OnInit {
     }
 
     getServicesCount() {
-        this.dashboardService
+        this.clientDetailsService
             .getServicesCount()
             .subscribe(
                 data => {
@@ -74,7 +74,7 @@ export class ClientDetailsComponent implements OnInit {
     }
 
     getSalesCount() {
-        this.dashboardService
+        this.clientDetailsService
             .getSalesCount()
             .subscribe(
                 data => {
@@ -99,7 +99,7 @@ export class ClientDetailsComponent implements OnInit {
     }
 
     getTotalSalesAndServicesCount() {
-        this.dashboardService
+        this.clientDetailsService
             .getTotalSalesAndServicesCount()
             .subscribe(
                 data => {
@@ -128,7 +128,7 @@ export class ClientDetailsComponent implements OnInit {
     getClientDetailsSalesData() {
         //sales
         //getClientDetailsSalesData
-        this.dashboardService
+        this.clientDetailsService
             .getClientDetailsSalesData()
             .subscribe(
                 data => {
@@ -235,7 +235,7 @@ export class ClientDetailsComponent implements OnInit {
             dTable.api().row($(this).parents('tr')).remove().draw(false);
 
 
-            thisStatus.dashboardService
+            thisStatus.clientDetailsService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(
                     data => {
@@ -249,7 +249,7 @@ export class ClientDetailsComponent implements OnInit {
 
     getClientDetailsServicesData() {
         //services
-        this.dashboardService
+        this.clientDetailsService
             .getClientDetailsServicesData()
             .subscribe(
                 data => {
@@ -352,7 +352,7 @@ export class ClientDetailsComponent implements OnInit {
             dTable.api().row($(this).parents('tr')).remove().draw(false);
 
 
-            thisStatus.dashboardService
+            thisStatus.clientDetailsService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(
                     data => {
@@ -366,7 +366,7 @@ export class ClientDetailsComponent implements OnInit {
 
     deleteCustomerRecords(id) {
         //services
-        this.dashboardService
+        this.clientDetailsService
             .deleteCustomerRecords(id)
             .subscribe(
                 data => {

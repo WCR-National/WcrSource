@@ -10355,7 +10355,7 @@ button.btn-floating {
     }
 
 .card-main-image-section {
-    height: 130px;
+    height: 160px;
     text-align: center !important;
 }
 
@@ -10366,7 +10366,7 @@ button.btn-floating {
 
 .card-main-image-size {
     width: 100%;
-    height: 130px;
+    height: 160px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
 }
@@ -48739,13 +48739,13 @@ label {
 
     .card-main-image-size {
         width: 100%;
-        height: 175px;
+        height: 190px;
         border-top-right-radius: 5px;
         border-top-left-radius: 5px;
     }
 
     .card-main-image-section {
-        height: 175px;
+        height: 190px;
         text-align: center !important;
     }
 
@@ -48766,13 +48766,13 @@ label {
 
     .card-main-image-size {
         width: 100%;
-        height: 245px;
+        height: 260px;
         border-top-right-radius: 5px;
         border-top-left-radius: 5px;
     }
 
     .card-main-image-section {
-        height: 245px;
+        height: 260px;
         text-align: center !important;
     }
 

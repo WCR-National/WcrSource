@@ -16,6 +16,7 @@ import * as $ from 'jquery';
 import 'datatables.net';
 import { MessageService } from 'AngularAssociate/app/services/search';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
+import { ClientDetailsService } from 'AngularAssociate/app/services/associate/client-details.service';
 
 
 
@@ -24,7 +25,7 @@ import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.
     templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
-    
+
     interestedCustomers: string = '';
     selectedCategories: string = '';
     myPropertyListings: string = '';
@@ -32,7 +33,7 @@ export class DashboardComponent implements OnInit {
     showInformation = false;
 
 
-    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private xmlToJson: XMLToJSON, private profileService: ProfileService, private _messageService: MessageService) {
+    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private clientDetailsService: ClientDetailsService, private xmlToJson: XMLToJSON, private profileService: ProfileService, private _messageService: MessageService) {
 
     }
     ngOnInit() {
@@ -48,7 +49,7 @@ export class DashboardComponent implements OnInit {
 
         this.attemptToCountAllPurchasedCategories();
 
-        
+
         this.attemptToInterestedCustomerData();
 
         this.attemptToCategoriesData();
@@ -201,47 +202,65 @@ export class DashboardComponent implements OnInit {
             .attemptToInterestedCustomerData()
             .then((data: any) => {
                 if (data.d.length > 0) {
-                    
+
                     let added: Boolean = false;
                     var xmlDoc = $.parseXML(data.d);
                     var json = this.xmlToJson.xml2json(xmlDoc, "");
                     var dataJson = JSON.parse(json);
                     console.log(dataJson);
 
+                    var interesterConsumersDataArr = [];
+                    if (dataJson.NewDataSet != null)
+                    {
+                        if (!Array.isArray(dataJson.NewDataSet.InterestedConsumer)) {
+                            interesterConsumersDataArr.push(dataJson.NewDataSet.InterestedConsumer);
+                        }
+                        else {
+                            $.each(dataJson.NewDataSet.InterestedConsumer, function (i) {
+                                interesterConsumersDataArr.push(dataJson.NewDataSet.InterestedConsumer[i]);
+                            });
+                        }
+                    }
+                   
+
                     this.dashboardService
                         .attemptToInterestedCustomerServicesData()
                         .then((data: any) => {
-                            
-                            if (data.d.length > 0) {
-                                
+                            debugger;
+                            if (data.d.length > 0)
+                            {
+
                                 var xmlDoc = $.parseXML(data.d);
                                 var json = this.xmlToJson.xml2json(xmlDoc, "");
                                 var dataJsonServices = JSON.parse(json);
                                 console.log(dataJsonServices);
 
                                 if (dataJsonServices.NewDataSet != null) {
+
                                     $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
-                                        
-                                        dataJson.NewDataSet.InterestedConsumer.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
+                                        interesterConsumersDataArr.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
                                     });
-                                    this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                                    this.initialiseInterestedCustomerDataTable(interesterConsumersDataArr);
+
                                 }
                                 else {
-                                    if (dataJsonServices.NewDataSet == null) {
-                                        this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet);
-
-                                    }
-                                    else {
+                                    if (interesterConsumersDataArr == null) {
                                         this.initialiseInterestedCustomerDataTable(undefined);
 
                                     }
+                                    else {
+                                        this.initialiseInterestedCustomerDataTable(interesterConsumersDataArr);
+                                    }
                                 }
-                                
-                               
                                 added = true;
                             }
                             else {
-                                this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                                if (interesterConsumersDataArr == null || interesterConsumersDataArr.length == 0) {
+                                    this.initialiseInterestedCustomerDataTable(undefined);
+                                }
+                                else {
+                                    this.initialiseInterestedCustomerDataTable(interesterConsumersDataArr);
+                                }
                             }
                         });
                 }
@@ -249,7 +268,7 @@ export class DashboardComponent implements OnInit {
     }
 
     initialiseInterestedCustomerDataTable(asyncData) {
-        
+
         let dTable: any = $('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
@@ -294,7 +313,7 @@ export class DashboardComponent implements OnInit {
                     defaultContent: '<a href="" class="editor_remove">Delete</a>'
                 }
             ],
-            "autoWidth": true,   
+            "autoWidth": true,
             searching: false,
             paging: false,
             info: false,
@@ -309,14 +328,14 @@ export class DashboardComponent implements OnInit {
             ],
             order: [[1, 'asc']]
         });
-        
+
         //dTable.api().column(0).visible(false);;
 
         var thisStatus = this;
         // Delete a record
         $('#interestedCustomers').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            
+
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
 
@@ -500,7 +519,7 @@ export class DashboardComponent implements OnInit {
                     .column(4)
                     .data()
                     .reduce(function (a, b) {
-                        
+
                         return (a.toString().replace(/[\$,]/g, '') * 1) + (b.Amount * 1.0);
                     }, 0);
 
