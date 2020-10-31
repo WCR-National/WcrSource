@@ -1199,6 +1199,9 @@ var ListPropertiesComponent = /** @class */ (function () {
                     data: "name",
                 },
                 {
+                    data: "ZipCode",
+                },
+                {
                     data: "title",
                 },
                 {
@@ -1225,10 +1228,6 @@ var ListPropertiesComponent = /** @class */ (function () {
                         debugger;
                         return '<img class="ht-100" src="../../../../Associate/Adv_img/' + data + '">';
                     }
-                },
-                {
-                    targets: [5],
-                    className: "hide_column"
                 },
                 {
                     targets: [6],
@@ -1601,18 +1600,20 @@ var ListPropertiesComponent = /** @class */ (function () {
         }
     };
     ListPropertiesComponent.prototype.ClearText = function () {
+        debugger;
         $("#subCatHome").removeClass("active");
         $("#subCatTownHome").removeClass("active");
         $("#subCatMultiFamily").removeClass("active");
         $("#subCatLand").removeClass("active");
         this.PostAdvertisement.get('titlePA').setValue('');
         //CKEDITOR.instances.txtFeatures.getData();// $("#ContentPlaceHolder1_txtFeatures").val();
+        this.PostAdvertisement.get('additionalFeature').setValue('');
         this.PostAdvertisement.get('stAddressPA').setValue('');
         //this.PostAdvertisement.get('contactNoPA').setValue('');
         this.PostAdvertisement.get('descPA').setValue('');
         //this.PostAdvertisement.get('countryPA').setValue('');
-        //this.stateDataPA = null;
-        //this.zipCodeDataPA = null;
+        this.stateDataPA = null;
+        this.zipCodeDataPA = null;
         this.PostAdvertisement.get('cityPA').setValue('');
         this.PostAdvertisement.get('pricePA').setValue('');
         this.PostAdvertisement.get('subCat').setValue('');
@@ -1622,6 +1623,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         $('#FileUpload2').val('');
         $('#FileUpload3').val('');
         $('#FileUpload4').val('');
+        this.arrayOfImages = [];
     };
     ListPropertiesComponent.prototype.PostAds = function () {
         var _this = this;
@@ -2553,30 +2555,20 @@ var ListPropertiesComponent = /** @class */ (function () {
         debugger;
         var modal = this.modalService.open(PaymentModalComponent, { size: 'lg', backdrop: "static" });
         var modalComponent = modal.componentInstance;
+        var thisStatus = this;
         modal.componentInstance.dismissParentCall.subscribe(function (data) {
             debugger;
             console.log(data);
             _this.isSubmittingPA = false;
+            thisStatus.isSubmittingPA = false;
+            _this.cdr.detectChanges();
+            thisStatus.cdr.detectChanges();
             //this.overlayLoadingOnPurchase = false;
         });
         modal.componentInstance.updateParentCall.subscribe(function (data) {
-            //modal.result.then(
-            //    (result) => {
             debugger;
             _this.showToast('info', 'Please be patient, we are processing.');
             _this.PostAds();
-            //var row = this.dTableSearching.fnGetPosition($(this).closest('tr')[0]);
-            //var rowData = this.dTableSearching.fnGetData(row);
-            //// var rowColumns = rowData[rowData.length - 1];
-            //var id = rowData['id'];
-            //var zipCode = rowData['Zipcode'];
-            //var categoryText = rowData['CategoryName'];
-            //var subCategoryText = rowData['SubCategoryName'];
-            //var priceValues = rowData['Price'];
-            //var categoryId = rowData['CategoryId'];
-            //var subCategoryId = rowData['SubCategoryId'];
-            //this.CheckOutClick(categoryText, subCategoryText, categoryId, subCategoryId, '1', priceValues, zipCode);
-            //this.updateBindings();
         }, function () { });
     };
     tslib_1.__decorate([

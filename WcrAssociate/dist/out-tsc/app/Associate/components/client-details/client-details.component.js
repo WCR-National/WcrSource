@@ -6,10 +6,10 @@ import { ClientDetailsService } from 'AngularAssociate/app/services/associate/cl
 import * as $ from 'jquery';
 import 'datatables.net';
 var ClientDetailsComponent = /** @class */ (function () {
-    function ClientDetailsComponent(route, router, dashboardService, xmlToJson) {
+    function ClientDetailsComponent(route, router, clientDetailsService, xmlToJson) {
         this.route = route;
         this.router = router;
-        this.dashboardService = dashboardService;
+        this.clientDetailsService = clientDetailsService;
         this.xmlToJson = xmlToJson;
         this.salesCount = '';
         this.servicesCount = '';
@@ -26,7 +26,7 @@ var ClientDetailsComponent = /** @class */ (function () {
     };
     ClientDetailsComponent.prototype.getServicesCount = function () {
         var _this = this;
-        this.dashboardService
+        this.clientDetailsService
             .getServicesCount()
             .subscribe(function (data) {
             var countInterestedCutomers = '0';
@@ -48,7 +48,7 @@ var ClientDetailsComponent = /** @class */ (function () {
     };
     ClientDetailsComponent.prototype.getSalesCount = function () {
         var _this = this;
-        this.dashboardService
+        this.clientDetailsService
             .getSalesCount()
             .subscribe(function (data) {
             var countInterestedCutomers = '0';
@@ -70,7 +70,7 @@ var ClientDetailsComponent = /** @class */ (function () {
     };
     ClientDetailsComponent.prototype.getTotalSalesAndServicesCount = function () {
         var _this = this;
-        this.dashboardService
+        this.clientDetailsService
             .getTotalSalesAndServicesCount()
             .subscribe(function (data) {
             var countTotalCutomers = '0';
@@ -94,7 +94,7 @@ var ClientDetailsComponent = /** @class */ (function () {
         var _this = this;
         //sales
         //getClientDetailsSalesData
-        this.dashboardService
+        this.clientDetailsService
             .getClientDetailsSalesData()
             .subscribe(function (data) {
             var countInterestedCutomers = '0';
@@ -186,7 +186,7 @@ var ClientDetailsComponent = /** @class */ (function () {
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
             dTable.api().row($(this).parents('tr')).remove().draw(false);
-            thisStatus.dashboardService
+            thisStatus.clientDetailsService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(function (data) {
                 thisStatus.getClientDetailsSalesData();
@@ -198,7 +198,7 @@ var ClientDetailsComponent = /** @class */ (function () {
     ClientDetailsComponent.prototype.getClientDetailsServicesData = function () {
         var _this = this;
         //services
-        this.dashboardService
+        this.clientDetailsService
             .getClientDetailsServicesData()
             .subscribe(function (data) {
             if (data.d.length > 0) {
@@ -285,7 +285,7 @@ var ClientDetailsComponent = /** @class */ (function () {
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
             dTable.api().row($(this).parents('tr')).remove().draw(false);
-            thisStatus.dashboardService
+            thisStatus.clientDetailsService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(function (data) {
                 thisStatus.getClientDetailsServicesData();
@@ -297,7 +297,7 @@ var ClientDetailsComponent = /** @class */ (function () {
     ClientDetailsComponent.prototype.deleteCustomerRecords = function (id) {
         var _this = this;
         //services
-        this.dashboardService
+        this.clientDetailsService
             .deleteCustomerRecords(id)
             .subscribe(function (data) {
             _this.showSuccessMessage = "Data Deleted Succesfully.";

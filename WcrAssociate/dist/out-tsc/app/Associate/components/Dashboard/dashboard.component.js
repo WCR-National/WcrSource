@@ -7,11 +7,13 @@ import * as $ from 'jquery';
 import 'datatables.net';
 import { MessageService } from 'AngularAssociate/app/services/search';
 import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
+import { ClientDetailsService } from 'AngularAssociate/app/services/associate/client-details.service';
 var DashboardComponent = /** @class */ (function () {
-    function DashboardComponent(route, router, dashboardService, xmlToJson, profileService, _messageService) {
+    function DashboardComponent(route, router, dashboardService, clientDetailsService, xmlToJson, profileService, _messageService) {
         this.route = route;
         this.router = router;
         this.dashboardService = dashboardService;
+        this.clientDetailsService = clientDetailsService;
         this.xmlToJson = xmlToJson;
         this.profileService = profileService;
         this._messageService = _messageService;
@@ -168,9 +170,21 @@ var DashboardComponent = /** @class */ (function () {
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
                 var dataJson = JSON.parse(json);
                 console.log(dataJson);
+                var interesterConsumersDataArr = [];
+                if (dataJson.NewDataSet != null) {
+                    if (!Array.isArray(dataJson.NewDataSet.InterestedConsumer)) {
+                        interesterConsumersDataArr.push(dataJson.NewDataSet.InterestedConsumer);
+                    }
+                    else {
+                        $.each(dataJson.NewDataSet.InterestedConsumer, function (i) {
+                            interesterConsumersDataArr.push(dataJson.NewDataSet.InterestedConsumer[i]);
+                        });
+                    }
+                }
                 _this.dashboardService
                     .attemptToInterestedCustomerServicesData()
                     .then(function (data) {
+                    debugger;
                     if (data.d.length > 0) {
                         var xmlDoc = $.parseXML(data.d);
                         var json = _this.xmlToJson.xml2json(xmlDoc, "");
@@ -178,22 +192,27 @@ var DashboardComponent = /** @class */ (function () {
                         console.log(dataJsonServices);
                         if (dataJsonServices.NewDataSet != null) {
                             $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
-                                dataJson.NewDataSet.InterestedConsumer.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
+                                interesterConsumersDataArr.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
                             });
-                            _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                            _this.initialiseInterestedCustomerDataTable(interesterConsumersDataArr);
                         }
                         else {
-                            if (dataJsonServices.NewDataSet == null) {
-                                _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet);
+                            if (interesterConsumersDataArr == null) {
+                                _this.initialiseInterestedCustomerDataTable(undefined);
                             }
                             else {
-                                _this.initialiseInterestedCustomerDataTable(undefined);
+                                _this.initialiseInterestedCustomerDataTable(interesterConsumersDataArr);
                             }
                         }
                         added_1 = true;
                     }
                     else {
-                        _this.initialiseInterestedCustomerDataTable(dataJson.NewDataSet.InterestedConsumer);
+                        if (interesterConsumersDataArr == null || interesterConsumersDataArr.length == 0) {
+                            _this.initialiseInterestedCustomerDataTable(undefined);
+                        }
+                        else {
+                            _this.initialiseInterestedCustomerDataTable(interesterConsumersDataArr);
+                        }
                     }
                 });
             }
@@ -518,7 +537,7 @@ var DashboardComponent = /** @class */ (function () {
             selector: 'associate-dashboard-page',
             templateUrl: './dashboard.component.html'
         }),
-        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, DashboardService, XMLToJSON, ProfileService, MessageService])
+        tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, DashboardService, ClientDetailsService, XMLToJSON, ProfileService, MessageService])
     ], DashboardComponent);
     return DashboardComponent;
 }());

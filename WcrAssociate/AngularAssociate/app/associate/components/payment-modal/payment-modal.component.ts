@@ -198,7 +198,7 @@ export class PaymentModalComponent implements OnInit {
                     thisStatus.defaultDeisableUpdateButton = true;
                 }
             });
-        }, 6000);
+        }, 4000);
         this.cdr.detectChanges();
 
         //setTimeout(function () {

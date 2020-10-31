@@ -140,9 +140,8 @@ var PaymentModalComponent = /** @class */ (function () {
                 else {
                     thisStatus.defaultDeisableUpdateButton = true;
                 }
-                thisStatus.cdr.detectChanges();
             });
-        }, 5000);
+        }, 6000);
         this.cdr.detectChanges();
         //setTimeout(function () {
         //    debugger;
@@ -281,10 +280,14 @@ var PaymentModalComponent = /** @class */ (function () {
                     //this.bindStateWiseZipCode(data._state, data._city);
                     setTimeout(function () {
                         thisStatus.startValueState = { value: data._state, label: data._state };
+                        thisStatus.defaultDeisableUpdateButton = true;
+                        thisStatus.cdr.detectChanges();
                     }, 2000);
                     setTimeout(function () {
                         thisStatus.startValueZip = { value: data._zip, label: data._zip };
-                    }, 4000);
+                        thisStatus.defaultDeisableUpdateButton = true;
+                        thisStatus.cdr.detectChanges();
+                    }, 3000);
                     //required to change to set selected values
                     //thisStatus.cardForm.get('expYear').setValue(data._year);
                     //thisStatus.cardForm.get('zipCode').setValue(data._zip
@@ -323,6 +326,7 @@ var PaymentModalComponent = /** @class */ (function () {
                     //this.cardForm.controls['firstName'].setErrors({ 'incorrect': true });
                     $('#formDivId').focus();
                     $('#formDivId').focusin();
+                    _this.defaultDeisableUpdateButton = true;
                     return false;
                 }
                 else {

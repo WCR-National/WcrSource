@@ -198,11 +198,12 @@ export class DashboardComponent implements OnInit {
 
 
     attemptToInterestedCustomerData() {
-        this.dashboardService
-            .attemptToInterestedCustomerData()
-            .then((data: any) => {
-                if (data.d.length > 0) {
 
+        this.clientDetailsService
+            .getClientDetailsSalesData()
+            .subscribe((data: any) => {
+                if (data.d.length > 0) {
+                    debugger;
                     let added: Boolean = false;
                     var xmlDoc = $.parseXML(data.d);
                     var json = this.xmlToJson.xml2json(xmlDoc, "");
@@ -223,12 +224,14 @@ export class DashboardComponent implements OnInit {
                     }
                    
 
-                    this.dashboardService
-                        .attemptToInterestedCustomerServicesData()
-                        .then((data: any) => {
+                    this.clientDetailsService
+                        .getClientDetailsServicesData()
+                        .subscribe(
+                            (data: any) => {
                             debugger;
                             if (data.d.length > 0)
                             {
+                                debugger;
 
                                 var xmlDoc = $.parseXML(data.d);
                                 var json = this.xmlToJson.xml2json(xmlDoc, "");
@@ -237,9 +240,15 @@ export class DashboardComponent implements OnInit {
 
                                 if (dataJsonServices.NewDataSet != null) {
 
-                                    $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
-                                        interesterConsumersDataArr.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
-                                    });
+                                    if (!Array.isArray(dataJsonServices.NewDataSet.InterestedConsumerser)) {
+                                        interesterConsumersDataArr.push(dataJsonServices.NewDataSet.InterestedConsumerser);
+                                    }
+                                    else {
+                                        $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
+                                            interesterConsumersDataArr.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
+                                        });
+                                    }
+                                   
                                     this.initialiseInterestedCustomerDataTable(interesterConsumersDataArr);
 
                                 }
@@ -347,7 +356,7 @@ export class DashboardComponent implements OnInit {
             dTable.api().row($(this).parents('tr')).remove().draw(false);
 
 
-            thisStatus.dashboardService
+            thisStatus.clientDetailsService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(
                     data => { });

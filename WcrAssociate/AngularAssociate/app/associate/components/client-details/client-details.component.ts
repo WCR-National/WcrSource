@@ -164,8 +164,10 @@ export class ClientDetailsComponent implements OnInit {
         console.log(asyncData);
         let dTable: any = $('#sales');
         let thisStatus: any = this;
-        if (asyncData === undefined) {
-            asyncData = {
+        if (asyncData === undefined)
+        {
+            asyncData =
+            {
                 'id': '',
                 'name': '',
                 'Mob': "",
@@ -243,7 +245,6 @@ export class ClientDetailsComponent implements OnInit {
                         thisStatus.getSalesCount();
                         thisStatus.getTotalSalesAndServicesCount();
                     });
-
         });
     }
 

@@ -1952,6 +1952,8 @@ export class ListPropertiesComponent implements OnInit {
 
         this.stateDataPA = null;
         this.zipCodeDataPA = null;
+        this.startValueZipCodePA = { "value": '', "label": '' };
+        this.startValueStatePA = { 'value': '', 'label': '' };
 
         this.PostAdvertisement.get('cityPA').setValue('');
         this.PostAdvertisement.get('pricePA').setValue('');
@@ -2150,6 +2152,10 @@ export class ListPropertiesComponent implements OnInit {
                         this.PostAdvertisement.get('countryPA').setValue('');
                         this.stateDataPA = null;
                         this.zipCodeDataPA = null;
+
+                        this.startValueStatePA = { 'value': '', 'label': '' };
+                        this.startValueZipCodePA = { "value": '', "label": '' };
+
                         this.PostAdvertisement.get('cityPA').setValue('');
                         this.PostAdvertisement.get('pricePA').setValue('');
                         this.PostAdvertisement.get('subCat').setValue('');
