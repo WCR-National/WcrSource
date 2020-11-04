@@ -141,7 +141,7 @@ var PaymentModalComponent = /** @class */ (function () {
                     thisStatus.defaultDeisableUpdateButton = true;
                 }
             });
-        }, 6000);
+        }, 4000);
         this.cdr.detectChanges();
         //setTimeout(function () {
         //    debugger;

@@ -161,10 +161,11 @@ var DashboardComponent = /** @class */ (function () {
     };
     DashboardComponent.prototype.attemptToInterestedCustomerData = function () {
         var _this = this;
-        this.dashboardService
-            .attemptToInterestedCustomerData()
-            .then(function (data) {
+        this.clientDetailsService
+            .getClientDetailsSalesData()
+            .subscribe(function (data) {
             if (data.d.length > 0) {
+                debugger;
                 var added_1 = false;
                 var xmlDoc = $.parseXML(data.d);
                 var json = _this.xmlToJson.xml2json(xmlDoc, "");
@@ -181,19 +182,25 @@ var DashboardComponent = /** @class */ (function () {
                         });
                     }
                 }
-                _this.dashboardService
-                    .attemptToInterestedCustomerServicesData()
-                    .then(function (data) {
+                _this.clientDetailsService
+                    .getClientDetailsServicesData()
+                    .subscribe(function (data) {
                     debugger;
                     if (data.d.length > 0) {
+                        debugger;
                         var xmlDoc = $.parseXML(data.d);
                         var json = _this.xmlToJson.xml2json(xmlDoc, "");
                         var dataJsonServices = JSON.parse(json);
                         console.log(dataJsonServices);
                         if (dataJsonServices.NewDataSet != null) {
-                            $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
-                                interesterConsumersDataArr.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
-                            });
+                            if (!Array.isArray(dataJsonServices.NewDataSet.InterestedConsumerser)) {
+                                interesterConsumersDataArr.push(dataJsonServices.NewDataSet.InterestedConsumerser);
+                            }
+                            else {
+                                $.each(dataJsonServices.NewDataSet.InterestedConsumerser, function (i) {
+                                    interesterConsumersDataArr.push(dataJsonServices.NewDataSet.InterestedConsumerser[i]);
+                                });
+                            }
                             _this.initialiseInterestedCustomerDataTable(interesterConsumersDataArr);
                         }
                         else {
@@ -288,7 +295,7 @@ var DashboardComponent = /** @class */ (function () {
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
             dTable.api().row($(this).parents('tr')).remove().draw(false);
-            thisStatus.dashboardService
+            thisStatus.clientDetailsService
                 .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
                 .subscribe(function (data) { });
         });

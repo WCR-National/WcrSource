@@ -122,15 +122,16 @@ var ClientDetailsComponent = /** @class */ (function () {
         var dTable = $('#sales');
         var thisStatus = this;
         if (asyncData === undefined) {
-            asyncData = {
-                'id': '',
-                'name': '',
-                'Mob': "",
-                'EmailID': "",
-                'title': "",
-                'categoryName': "",
-                'SubCategory': "",
-            };
+            asyncData =
+                {
+                    'id': '',
+                    'name': '',
+                    'Mob': "",
+                    'EmailID': "",
+                    'title': "",
+                    'categoryName': "",
+                    'SubCategory': "",
+                };
         }
         dTable.dataTable({
             data: asyncData,

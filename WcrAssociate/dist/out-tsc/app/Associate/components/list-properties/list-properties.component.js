@@ -1213,12 +1213,12 @@ var ListPropertiesComponent = /** @class */ (function () {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="javascript:void(0)" class="edit">Edit</a>'
+                    defaultContent: '<a href="javascript:void(0)" class="edit tx-info tx-700">Edit</a>'
                 },
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="javascript:void(0)" class="remove">Delete</a>'
+                    defaultContent: '<a href="javascript:void(0)" class="remove tx-danger tx-info">Delete</a>'
                 },
             ],
             columnDefs: [
@@ -1613,7 +1613,9 @@ var ListPropertiesComponent = /** @class */ (function () {
         this.PostAdvertisement.get('descPA').setValue('');
         //this.PostAdvertisement.get('countryPA').setValue('');
         this.stateDataPA = null;
-        this.zipCodeDataPA = null;
+        //this.zipCodeDataPA = null;
+        this.startValueZipCodePA = { "value": '', "label": '' };
+        this.startValueStatePA = { 'value': '', 'label': '' };
         this.PostAdvertisement.get('cityPA').setValue('');
         this.PostAdvertisement.get('pricePA').setValue('');
         this.PostAdvertisement.get('subCat').setValue('');
@@ -1785,6 +1787,8 @@ var ListPropertiesComponent = /** @class */ (function () {
                 _this.PostAdvertisement.get('countryPA').setValue('');
                 _this.stateDataPA = null;
                 _this.zipCodeDataPA = null;
+                _this.startValueStatePA = { 'value': '', 'label': '' };
+                _this.startValueZipCodePA = { "value": '', "label": '' };
                 _this.PostAdvertisement.get('cityPA').setValue('');
                 _this.PostAdvertisement.get('pricePA').setValue('');
                 _this.PostAdvertisement.get('subCat').setValue('');

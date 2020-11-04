@@ -593,7 +593,7 @@
                                                                         <label>
                                                                             City
                                                                         </label>
-                                                                        <input id="city" type="text" class="form-control  form-control" placeholder="Enter City" formControlName="cityPA" (blur)="logValidationErrorsPA()">
+                                                                        <input id="city" type="text" class="form-control  form-control" placeholder="Enter City" formControlName="cityPA" (change)="changeCityPA()" >
 
                                                                         <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.cityPA">
                                                                             {{formErrorsPA.cityPA}}

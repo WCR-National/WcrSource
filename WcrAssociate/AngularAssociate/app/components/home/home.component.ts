@@ -274,7 +274,7 @@ export class HomeComponent implements OnInit {
                                     if ($(doc).find("id").text() == $(docs1[0]).find("Subcategoryid").text()) {
 
 
-                                        innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
+                                        innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                         innerHtmlSales += "   <div class='card-main white darken-1' >";
 
                                         $.each(docs1, function (i, doc1)
@@ -319,7 +319,7 @@ export class HomeComponent implements OnInit {
                             if (!data.d.includes("GetCategoriesinfo1")) {
                                 if (flag == 1) { }
                                 else {
-                                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
+                                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                     innerHtmlSales += "   <div class='card-main white darken-1' >";
 
                                     innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section' >";
@@ -392,7 +392,7 @@ export class HomeComponent implements OnInit {
                                     var xml1 = $(xmlDoc1);
                                     var docs1 = xml1.find("GetCategoriesinfoservices");
                                     if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
-                                        innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
+                                        innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                         innerHtmlServices += "  <div class='card-main white darken-1' >";
                                         $.each(docs1, function (i, docs1) {
                                             if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
@@ -444,7 +444,7 @@ export class HomeComponent implements OnInit {
                                     //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "</p>";
                                     //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
 
-                                    innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
+                                    innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                     innerHtmlServices += "  <div class='card-main white darken-1' >";
 
                                     innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
@@ -525,7 +525,7 @@ export class HomeComponent implements OnInit {
 
                                     if ($(docs).find("id").text() == $(docs1).find("Subcategoryid").text()) {
 
-                                        innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
+                                        innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                         innerHtmlSales += "  <div class='card-main white darken-1' >";
 
                                         $.each(docs1, function (i, docs1) {
@@ -592,7 +592,7 @@ export class HomeComponent implements OnInit {
 
 
 
-                                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30'>";
+                                    innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                     innerHtmlSales += "  <div class='card-main white darken-1' >";
 
                                     innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section' >";
@@ -671,7 +671,7 @@ export class HomeComponent implements OnInit {
                                     var docs1 = xml1.find("GetsubCategoriesinfoservices");
                                     if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
 
-                                        innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                        innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center pd-sm-r-0'>";
                                         innerHtmlServices += "  <div class='card-main white darken-1' >";
 
                                         $.each(docs1, function (i, docs1) {
@@ -729,7 +729,7 @@ export class HomeComponent implements OnInit {
                                 if (flag == 1) { }
                                 else {
 
-                                    innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                                    innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center pd-sm-r-0'>";
                                     innerHtmlServices += "  <div class='card-main white darken-1' >";
 
                                     let urlToSalesAdvertisement: string = "ServiceProfileList.html?ca=0&id=" + ($(docs).find("ID").text()) + "&zipcode=0&name=" + ($(docs).find("name").text()) + "&jtype=Services&catName=RealEstate";
@@ -856,7 +856,7 @@ export class HomeComponent implements OnInit {
                         console.log(results);
                         $.each(docs, function (i, doc) {
 
-                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center'>";
+                            innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center pd-sm-r-0'>";
                             innerHtmlSales += " <div class='fullrow innerblock card-main pd-20 mg-b-30' >";
 
                             //innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";

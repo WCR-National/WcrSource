@@ -4620,9 +4620,9 @@ html {
     line-height: 1.3;
 }*/
 
-    h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-        font-weight: inherit;
-    }
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    font-weight: inherit;
+}
 
 h1 {
     font-size: 3rem;
@@ -5851,7 +5851,7 @@ body.keyboard-focused .dropdown-content li:focus {
 }
 
 /* Firefox Bug: link not triggered */
-            .waves-effect .waves-ripple {
+.waves-effect .waves-ripple {
     z-index: -1;
 }
 
@@ -10366,9 +10366,10 @@ button.btn-floating {
 
 .card-main-image-size {
     width: 100%;
-    height: 160px;
+    height: 176px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+    object-fit: cover;
 }
 
 .collapsible {
@@ -48788,27 +48789,3 @@ label {
         height: 90px;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
