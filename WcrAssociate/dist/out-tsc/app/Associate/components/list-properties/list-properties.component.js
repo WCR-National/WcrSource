@@ -1213,12 +1213,12 @@ var ListPropertiesComponent = /** @class */ (function () {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="javascript:void(0)" class="edit tx-info tx-700">Edit</a>'
+                    defaultContent: '<a href="javascript:void(0)" class="edit tx-info tx-700" style="color:#090bfc;">Edit</a>'
                 },
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="javascript:void(0)" class="remove tx-danger tx-info">Delete</a>'
+                    defaultContent: '<a href="javascript:void(0)" class="remove tx-danger tx-700">Delete</a>'
                 },
             ],
             columnDefs: [
@@ -1612,7 +1612,7 @@ var ListPropertiesComponent = /** @class */ (function () {
         //this.PostAdvertisement.get('contactNoPA').setValue('');
         this.PostAdvertisement.get('descPA').setValue('');
         //this.PostAdvertisement.get('countryPA').setValue('');
-        this.stateDataPA = null;
+        //this.stateDataPA = null;
         //this.zipCodeDataPA = null;
         this.startValueZipCodePA = { "value": '', "label": '' };
         this.startValueStatePA = { 'value': '', 'label': '' };

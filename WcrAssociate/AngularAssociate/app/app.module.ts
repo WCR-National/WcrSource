@@ -46,7 +46,7 @@ import {
     encrypt_decrypt
 
 } from './services/auth';
-import { SearchService, MessageService} from './services/search';
+import { SearchService, MessageService } from './services/search';
 //import { AssociateLayoutComponent } from './shared/associate-layout';
 import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
 //import { SidebarComponent } from './shared/associate-sidebar';
@@ -54,6 +54,16 @@ import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.comp
 import { AssociateModule } from './associate/associate.module';
 import { XMLToJSON } from './_helpers/xml-to-json';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SupportComponent } from './components/support/support.component';
+import { BookmarkComponent } from './components/bookmark/bookmark.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ConsumerDashabordComponent } from './components/consumer-dashboard/consumer-dashboard.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { SalesAdvertisementsComponent } from './components/sales-advertisements/sales-advertisements.component';
+import { SalesAdvertisementsService } from './services/sales-advertisements/sales-advertisements.service';
+import { ServiceProfileComponent } from './components/service-profile/service-profile.component';
+import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -67,6 +77,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         TermsComponent,
         ShowAuthedDirective,
         LandingRegistrationComponent,
+        SupportComponent,
+        BookmarkComponent,
+        ProfileComponent,
+        ConsumerDashabordComponent,
+        SalesAdvertisementsComponent,
+        ServiceProfileComponent,
+        AuthModalComponent
+
+
     ],
     imports: [
         BrowserModule,
@@ -77,7 +96,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         AssociateModule,
         SharedModule,
         AppRoutingModule,
-        NgbModule
+        NgbModule,
+        NgSelectModule,
+
+    ],
+    entryComponents: [
+        AuthModalComponent
     ],
     providers: [
         AuthGuard,
@@ -89,6 +113,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         ProfilesService,
         UserService,
         SearchService,
+        SalesAdvertisementsService,
         User,
         encrypt_decrypt,
         MessageService,
@@ -97,6 +122,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     bootstrap: [AppComponent]
 })
 export class AppModule {
-        constructor() {
+    constructor() {
     }
 }

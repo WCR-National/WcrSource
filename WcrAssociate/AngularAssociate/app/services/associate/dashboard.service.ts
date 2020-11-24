@@ -41,6 +41,16 @@ export class DashboardService {
             ));
     } //select categories
 
+    initializeConsumerHeader(): Observable<any> {
+
+        let urlToCountHeader: string = "ws/AssociateRegistration.asmx/ViewConsumerBasicDetails";
+        return this.apiService.post(urlToCountHeader, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    } //select categories
 
     attemptToCountInterestedCustomers(): Observable<any> {
 

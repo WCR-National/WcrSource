@@ -1,0 +1,314 @@
+<!--<div id="divLandingPage" class="parallax" data-background="AngularAssociate/assets/images/background.jpg" data-color="#0e3a6b" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+
+    <div class="container">
+
+    </div>
+
+</div>-->
+<style>
+    .spinner-white, .spinner-white-only {
+        color: #ffffff !important;
+        border-color: #fff;
+    }
+    .s130 {
+        min-height: 0vh;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: center;
+        justify-content: center;
+        font-family: 'Poppins', sans-serif;
+        padding: 15px;
+    }
+
+        .s130 form {
+            width: 100%;
+            max-width: 650px;
+            padding-top: 5vh;
+        }
+
+            .s130 form .inner-form {
+                display: -ms-flexbox;
+                display: flex;
+                width: 100%;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+                -ms-flex-align: center;
+                align-items: center;
+                box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+                border-radius: 34px;
+                overflow: hidden;
+                margin-bottom: 30px;
+                border-bottom: 1px solid rgba(23, 30, 37, 0.1);
+                box-shadow: 0 4px 12px 0 rgba(131, 146, 165, 0.15);
+            }
+
+                .s130 form .inner-form .input-field {
+                    height: 55px;
+                }
+
+                    .s130 form .inner-form .input-field input {
+                        height: 100%;
+                        background: transparent;
+                        border: 0;
+                        display: block;
+                        width: 100%;
+                        padding: 10px 0;
+                        font-size: 16px;
+                        color: #000;
+                    }
+
+                        .s130 form .inner-form .input-field input.placeholder {
+                            color: #222;
+                            font-size: 16px;
+                        }
+
+                        .s130 form .inner-form .input-field input:-moz-placeholder {
+                            color: #222;
+                            font-size: 16px;
+                        }
+
+                        .s130 form .inner-form .input-field input::-webkit-input-placeholder {
+                            color: #222;
+                            font-size: 16px;
+                        }
+
+                        .s130 form .inner-form .input-field input:hover, .s130 form .inner-form .input-field input:focus {
+                            box-shadow: none;
+                            outline: 0;
+                        }
+
+                    .s130 form .inner-form .input-field.first-wrap {
+                        -ms-flex-positive: 1;
+                        flex-grow: 1;
+                        display: -ms-flexbox;
+                        display: flex;
+                        -ms-flex-align: center;
+                        align-items: center;
+                        background: #fff;
+                    }
+
+                        .s130 form .inner-form .input-field.first-wrap input {
+                            -ms-flex-positive: 1;
+                            flex-grow: 1;
+                        }
+
+                        .s130 form .inner-form .input-field.first-wrap .svg-wrapper {
+                            min-width: 80px;
+                            display: -ms-flexbox;
+                            display: flex;
+                            -ms-flex-pack: center;
+                            justify-content: center;
+                            -ms-flex-align: center;
+                            align-items: center;
+                        }
+
+                        .s130 form .inner-form .input-field.first-wrap svg {
+                            width: 28px;
+                            height: 30px;
+                            fill: #222;
+                        }
+
+                    .s130 form .inner-form .input-field.second-wrap {
+                        min-width: 150px;
+                    }
+
+                        .s130 form .inner-form .input-field.second-wrap .btn-search {
+                            height: 100%;
+                            width: 100%;
+                            white-space: nowrap;
+                            font-size: 16px;
+                            color: #fff;
+                            border: 0;
+                            cursor: pointer;
+                            position: relative;
+                            z-index: 0;
+                            background: #0e3a6b;
+                            transition: all .2s ease-out, color .2s ease-out;
+                            font-weight: 300;
+                        }
+
+                            .s130 form .inner-form .input-field.second-wrap .btn-search:hover {
+                                background: #184e8b;
+                            }
+
+                            .s130 form .inner-form .input-field.second-wrap .btn-search:focus {
+                                outline: 0;
+                                box-shadow: none;
+                            }
+
+            .s130 form .info {
+                font-size: 15px;
+                color: #ccc;
+                padding-left: 26px;
+            }
+
+    @media screen and (max-width: 992px) {
+        .s130 form .inner-form .input-field {
+            height: 50px;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        .s130 form .inner-form .input-field.first-wrap .svg-wrapper {
+            min-width: 40px;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .s130 form .inner-form .input-field.first-wrap svg {
+            width: 26px;
+            height: 26px;
+            fill: #222;
+        }
+
+        .s130 form .inner-form .input-field.second-wrap {
+            min-width: 100px;
+        }
+
+            .s130 form .inner-form .input-field.second-wrap .btn-search {
+                font-size: 13px;
+            }
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 s130" style="text-align:center;">
+            <form [formGroup]="searchForm">
+                <div class="inner-form">
+                    <div class="input-field first-wrap">
+                        <div class="svg-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                            </svg>
+                        </div>
+                        <input id="search" type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter)="onPressEnterSearchData()" />
+                        
+                        <div class="svg-wrapper" [style.display]="show_check ? 'block': 'none'">
+                            <span class="large material-icons form-control-feedback" style="font-size:25px; font-weight:700;color: green;">check</span>
+                        </div>
+                    </div>
+                    <div class="input-field second-wrap">
+                        <button class="btn-search" type="button" (click)="onClickSearch()">
+                           
+                            <span [style.display]="!isSearchingStartMatIcon ? 'block': 'none'"> SEARCH</span>
+                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSearchingStartMatIcon ? 'inline-block': 'none'" style="margin-top:4px;">
+                                <div class="spinner-layer spinner-white-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="invalid-data" *ngIf="formErrors.txtSearch" [ngClass]="{'has-error': formErrors.txtSearch}" style="font-weight: 700; float: left;    padding-top: 7px;">
+                    {{formErrors.txtSearch}}
+                </div>
+                <!--<span class="info">ex. Game, Music, Video, Photography</span>-->
+            </form>
+
+
+            <!--<div class="search-container">
+                <div class="row with-forms search-background">
+                    <div class="col-md-12" >
+
+                        <div class="main-search-input">
+                            <input type="text" />
+                            <span class="large material-icons form-control-feedback icon icon-right" [style.display]="show_check ? 'block': 'none'">check</span>
+                            <button class="button waves-effect waves-light btn" ">
+                                <i class="large material-icons form-control-feedback text-xs-27 pd-t-9-force">search</i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>-->
+
+        </div>
+    </div>
+</div>
+
+
+<!--style='background-color:#f9f9f9;border-top: 5px solid #0e3a6b;-->
+<!-- Fullwidth Section -->
+<section id="salesServicesDivId" class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-bottom-50" #divSalesServices>
+
+    <!-- Content -->
+    <div class="container">
+
+        <!---->
+        <div class="row" [style.display]="isSearchingStart ? 'block':'none' ">
+            <div class="col-md-12" style="height:400px; padding-top: 150px;">
+                <div class="col-xs-3 col-md-4 div-center">
+                    <div class="progress" style="top:50%;">
+                        <div class="indeterminate"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" [style.display]="resultContent ? 'block':'none' ">
+            <div class="col-md-12">
+
+                <div class="row text-center">
+                    <div class="red-text text-darken-4 tx-medium" style="float:none;">{{errorMessage}}</div>
+                </div>
+
+                <div class="row text-xs-center text-center mg-b-25">
+                    <div class="col-md-12">
+                        <h2 class="theme-text-color text-center mg-t-0-f mg-b-10-f">GET ACCESS TO <span style="color:#f25f2a">WCR SALES</span></h2>
+                        <p class="grey-text">
+                            This is just a simple text made for this unique and awesome template, you can replace it with any text.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row" id="innerHtmlSales" [innerHtml]="innerHtmlSales"> </div>
+
+                <div class="row text-xs-center text-center mg-b-50 mg-t-60 pd-t-30" style="border-top: 1px solid #eee;">
+                    <div class="col-md-12">
+                        <h2 class="theme-text-color text-center mg-t-0-f  mg-b-10-f">GET ACCESS TO <span style="color:#f25f2a">WCR SERVICES</span></h2>
+                        <p class="grey-text">
+                            This is just a simple text made for this unique and awesome template, you can replace it with any text.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row" id="innerHtmlServices" [innerHtml]="innerHtmlServices"></div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+<!-- Fullwidth Section / End -->
+<!--<div class="row">
+    <div class="col-sm-3">
+        <div class="card white darken-1 ">
+            <div class="card-contentpd-0-force">
+                <img class="card-image-size" src="../../../Associate/Adv_img/2main.png" />
+            </div>
+            <div class="card-content black-text pd-b-0-force">
+                <span class="card-title">Card Title</span>
+                <p class="grey-text elipsis-text">
+                    I am a very simple card. I am good at containing small bits of information.
+                    I am convenient because I require little markup to use effectively.
+                </p>
+            </div>
+            <div class="card-action text-center">
+                <a class='waves-effect waves-light btn'>View More</a>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!--<div class="row" [style.display]="ifError"></div>-->

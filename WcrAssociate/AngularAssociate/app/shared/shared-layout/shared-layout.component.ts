@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, Input, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Router, NavigationStart, NavigationCancel, NavigationEnd } from '@angular/router';
 import { UserService } from '../../services/auth';
 import { User } from '../../entities/user';
-import { ActivatedRoute, Router } from '@angular/router';
-import { debug } from 'util';
-import { HomeComponent } from 'AngularAssociate/app/components/home/home.component';
 import { MessageService } from 'AngularAssociate/app/services/search';
+import { filter } from 'rxjs/operators';
+import * as $ from 'jquery';
 
 @Component({
     selector: 'app-shared-layout',
@@ -20,6 +20,8 @@ export class SharedLayoutComponent implements OnInit {
     ) { }
 
     currentUser: User;
+    routerSubscription: any;
+    location: any;
 
     ngOnInit() {
         this.userService.currentUser.subscribe(
@@ -27,6 +29,7 @@ export class SharedLayoutComponent implements OnInit {
                 this.currentUser = userData;
             }
         );
+       
     }
 
     onClickGetAds() {

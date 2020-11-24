@@ -1,6 +1,7 @@
 ﻿
 
 var ca = GetParameterValues('ca');
+
 function GetParameterValues(param) {
     var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     for (var i = 0; i < url.length; i++) {
@@ -10,9 +11,6 @@ function GetParameterValues(param) {
         }
     }
 }
-
-
-
 
 function CheckUserLogin() {
     var a = 0;
@@ -61,7 +59,6 @@ function CheckUserLogininHome() {
     });
     return a;
 }
-
 
 function BindSalesCategory(zipc) {
     var cartd = [];
@@ -118,6 +115,7 @@ function BindSalesCategory(zipc) {
     });
     return cartd;
 }
+
 ////function BindServiesCategory(zipc) {
 ////    var cartd = [];
 ////    $.ajax({

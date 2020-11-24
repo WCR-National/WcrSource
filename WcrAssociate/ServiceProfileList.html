@@ -1269,6 +1269,7 @@
             }
         });
     });
+
     function consumerVerification(username, pass) {
         var zipcode = GetParameterValues('zipcode');
         function GetParameterValues(param) {
@@ -1424,6 +1425,7 @@
             }
         });
     }
+
     function BindServiesList(zipc, CategoryID, CatName) {
         $.ajax({
             type: "POST", url: "ws/TopSearch.asmx/SelectServicesListData",
@@ -1432,6 +1434,7 @@
             dataType: "json",
             async: false,
             success: function (r1) {
+                debugger;
                 if (r1.d.length > 0) {
                     var cnt = 1;
                     var xmlDoc1 = $.parseXML(r1.d);
@@ -1493,6 +1496,7 @@
         });
 
     }
+
     function showinterest1(advId, assID, jobtype, zipcode, pnlID, contactorbookmark) {
         hidAdvertisementID.value = advId;
         hidAssociateID.value = assID;
@@ -1503,6 +1507,7 @@
         jQuery.noConflict();
         $('#choose-consumer').modal({ display: 'show', backdrop: 'static', keyboard: false });
     }
+
     function InterestedConsumers(dyr, pnlID) {
         var CompulsoryData = CheckConsumerEmailAndMobileExists();
         if (CompulsoryData == "0") {
@@ -1536,7 +1541,6 @@
             else { }
         }
     }
-
 
     function ContactAssociate(dynar) {
         var _returnValue;
@@ -1612,10 +1616,8 @@
         });
 
         return _returnValue;
-
-
-
     }
+
     function BookMarkInsert(AdvID) {
         var zipcode = GetParameterValues('zipcode');
         function GetParameterValues(param) {

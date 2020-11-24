@@ -1,0 +1,238 @@
+<style>
+    .ts-block {
+        padding-bottom: 4rem;
+        padding-top: 4rem;
+    }
+
+    .ts-text-color-primary {
+        color: #00f;
+    }
+
+    .ts-text-color-light {
+        color: rgba(0, 0, 0, .5);
+    }
+
+    .tabs {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 223px;
+        height: 360px;
+        padding: 30px 20px;
+        background: #f5f5f5;
+        /* box-shadow: 5px 5px 10px 5px #ccc; */
+        overflow: hidden;
+    }
+
+        .tabs .tab-headerr {
+            float: left;
+            width: 180px;
+            height: 100%;
+            border-right: 1px solid #ccc;
+            padding: 50px 0px;
+        }
+
+            .tabs .tab-headerr > div {
+                height: 50px;
+                line-height: 50px;
+                font-size: 16px;
+                font-weight: 600;
+                color: #888;
+                cursor: pointer;
+                padding-left: 10px;
+            }
+
+                .tabs .tab-headerr > div:hover,
+                .tabs .tab-headerr > div.active {
+                    color: #00acee;
+                }
+
+            .tabs .tab-headerr div i {
+                display: inline-block;
+                margin-left: 10px;
+                margin-right: 5px;
+            }
+
+        .tabs .tab-contentt {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+        }
+
+            .tabs .tab-contentt > div > i {
+                display: inline-block;
+                width: 50px;
+                height: 50px;
+                background: #555;
+                color: #f5f5f5;
+                font-size: 25px;
+                font-weight: 600;
+                text-align: center;
+                line-height: 50px;
+                border-radius: 50%;
+            }
+
+            .tabs .tab-contentt > div {
+                position: absolute;
+                text-align: center;
+                padding: 40px 20px;
+                top: -200%;
+                transition: all 500ms ease-in-out;
+            }
+
+                .tabs .tab-contentt > div.active {
+                    top: 0px;
+                }
+
+        .tabs .tab-indicatorr {
+            position: absolute;
+            width: 4px;
+            height: 50px;
+            background: #00acee;
+            left: 198px;
+            top: 80px;
+            transition: all 500ms ease-in-out;
+        }
+</style>
+
+<!-- Content
+================================================== -->
+<div class="container-fluid">
+    <div class="row">
+
+
+        <div class="col-xs-12 col-sm-2 mg-t-100 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:350px; ">
+            <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
+        </div>
+
+        <section id="submitted" class="col-xs-12 col-md-8 ts-block mg-t-100 mg-b-100" [style.display]="!IsDataFound ? 'block' : 'none'">
+            <div class="">
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <div class="tabs mg-t-120">
+                            <div class="tab-headerr">
+                                <div class="active" (click)="GetSalesAdvFromTabs('1')">
+                                    <i class=""></i> Home
+                                </div>
+                                <div (click)="GetSalesAdvFromTabs('2')">
+                                    <i class=""></i> Town Home
+                                </div>
+                                <div (click)="GetSalesAdvFromTabs('3')">
+                                    <i class=""></i> Multi Family
+                                </div>
+                                <div (click)="GetSalesAdvFromTabs('4')">
+                                    <i class=""></i> Land
+                                </div>
+                            </div>
+                            <div class="tab-indicatorr"></div>
+                        </div>
+
+                    </div>
+                    <div class="offset-2 col-xs-12 col-sm-8 col-md-8 text-center">
+                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 50%;" />
+                        <h1 class="ts-text-color-primary">No Sales found</h1>
+                        <h4 class="ts-text-color-light">Sales are not available !!!</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="col-xs-12 col-sm-8  mg-t-100 mg-b-100" [style.display]="IsDataFound ? 'block' : 'none'">
+            <!-- Widget -->
+            <div class="col-md-4">
+                <div class="tabs">
+                    <div class="tab-headerr">
+                        <div class="active" (click)="GetSalesAdvFromTabs('1')">
+                            <i class=""></i> 
+                            Home
+                        </div>
+                        <div (click)="GetSalesAdvFromTabs('2')">
+                            <i class=""></i> Town Home
+                        </div>
+                        <div (click)="GetSalesAdvFromTabs('3')">
+                            <i class=""></i> Multi Family
+                        </div>
+                        <div (click)="GetSalesAdvFromTabs('4')">
+                            <i class=""></i> Land
+                        </div>
+                    </div>
+                    <div class="tab-indicatorr"></div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div id="innerHtmlListServicesId" class="listings-container list-layout" [style.display]="isloadingIconVisible ? 'block' : 'none'">
+
+
+                </div>
+                <!-- Listing Item -->
+                <!-- Listing Item / End -->
+                <input type="text" id="hiddenFieldAssociateId" />
+            </div>
+            <!-- Listings Container / End -->
+        </div>
+
+        <div class="col-xs-12 col-sm-2 mg-t-100 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:350px; ">
+            <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!--<div class="listing-item">
+
+    <a href="javascript:void(0)" class="listing-img-container">
+
+
+        <div class="listing-img-content">
+            <span class="listing-price">$ {{cost}} <i></i></span>
+
+        </div>
+
+        <div class="listing-carousel">
+            <div *ngIf=' item.advMainImage == undefined && item.advMainImage != null && item.advMainImage != "" '><img src='../../../../Associate/Adv_img/" + item.advMainImage + \"' \" alt=''></div>
+            <div *ngIf=' item.advImage1 == undefined && item.advImage1 != null && item.advImage1 != "" '><img src='../../../../Associate/Adv_img/" + item.advImage1 + \"' \" alt=''></div>
+            <div *ngIf=' item.advImage2 == undefined && item.advImage2 != null && item.advImage2 != "" '><img src='../../../../Associate/Adv_img/" + item.advImage2 + \"' \" alt=''></div>
+            <div *ngIf=' item.advImage3 == undefined && item.advImage3 != null && item.advImage3 != "" '><img src='../../../../Associate/Adv_img/" + item.advImage3 + \"' \" alt=''></div>
+        </div>
+    </a>
+
+    <div class="listing-content">
+
+        <div class="listing-title">
+            <h4><a href="single-property-page-1.html">{{item.title}}</a></h4>
+            <a href="https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom" class="listing-address popup-gmaps">
+                <i class="fa fa-map-marker"></i>
+                {{item.address + ". " + item.CityID + ", " + item.StateID}}
+            </a>
+
+            <a href="javascript:void(0)" class="details button border">Details</a>
+            <div *ngIf="item.description.length > 150"> {{ item.description.substring(0, 150) + "..." }}</div>
+            <div *ngIf="item.description.length < 150"> {{ item.description }} </div>
+
+        </div>
+
+        <ul class="listing-details">
+            <li> License # {{item.LicenseId}}</li>
+            <li>  Associate ID: {{item.associateid}}</li>
+            <li *ngIf="item.subcategoryID == '1'"> Category Name: Home</li>
+            <li *ngIf="item.subcategoryID == '2'"> Category Name: Town Home </li>
+            <li *ngIf="item.subcategoryID == '3'"> Category Name: Multi Family</li>
+            <li *ngIf="item.subcategoryID == '4'"> Category Name: Land</li>
+
+        </ul>
+
+        <div class="listing-footer">
+            {{ item.advertisementID + "," + item.associateID + ",1,0," + count }}
+            <a href="javascript:void(0)" class="btn button border" (click)="ContactAssociate('')">Contact Associates</a>
+            <span>Zip Code: {{item.zipCode}}</span>
+            <a id="bookMarkId{{item.advertisementID}}" href="javascript:void(0)" class="btn button border" (click)="SaveBookmark(item.advertisementID)">Bookmark</a>
+        </div>
+        {{ count+1 }}
+    </div>
+
+</div>-->

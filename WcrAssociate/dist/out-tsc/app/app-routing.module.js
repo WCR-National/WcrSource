@@ -8,12 +8,22 @@ import { AuthComponent } from '.././app/components/auth/auth.component';
 import { TermsComponent } from '.././app/components/terms/terms.component';
 import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
 import { NoAuthGuard } from './_guards/no-auth-guard.service';
+import { AuthGuard } from './_guards/auth-guard.service';
 import { LandingRegistrationComponent } from './components/landing-registration/landing-registration.component';
+import { ConsumerDashabordComponent } from './components/consumer-dashboard/consumer-dashboard.component';
+import { SupportComponent } from './components/support/support.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { BookmarkComponent } from './components/bookmark/bookmark.component';
+import { SalesAdvertisementsComponent } from './components/sales-advertisements/sales-advertisements.component';
+import { ServiceProfileComponent } from './components/service-profile/service-profile.component';
 var routes = [
     {
         path: '',
         component: SharedLayoutComponent,
         children: [
+            {
+                path: '', component: ConsumerDashabordComponent, canActivate: [AuthGuard]
+            },
             {
                 path: '',
                 component: HomeComponent,
@@ -54,6 +64,38 @@ var routes = [
                 component: LandingRegistrationComponent,
                 canActivate: [NoAuthGuard]
             },
+            {
+                path: 'consumer-dashboard',
+                component: ConsumerDashabordComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'bookmark',
+                component: BookmarkComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'profile',
+                component: ProfileComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path: 'support',
+                component: SupportComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                path: 'sales-advertisements',
+                component: SalesAdvertisementsComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                path: 'service-profile',
+                component: ServiceProfileComponent,
+                canActivate: [AuthGuard]
+            }
         ]
     }
 ];

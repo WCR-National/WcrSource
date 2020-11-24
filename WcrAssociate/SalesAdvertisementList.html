@@ -318,7 +318,9 @@
 
 <script>
     $(function () {
+
         ViewDiv();
+
         var d = CheckUserLogin();
         if (d == 0) {
             hidLogin.value = "0";
@@ -330,12 +332,15 @@
         }
         $('.footer').load("consumerFooter.html");
     });
+
     function showLoader() {
         $("#pageloader").css("display", "block");
     }
+
     function hideLoader() {
         $("#pageloader").css("display", "none");
     }
+
     $(document).on('keypress', '#txtSearch', function (e) {
         if (e.keyCode == 13) {  // detect the enter key
             if (txtSearch.value == "") {
@@ -351,6 +356,7 @@
             }
         }
     });
+
     $(document).on("click", "a[name='tpsrc']", function (e) {
         if (txtSearch.value == "") {
             $("#lblfai").css("display", "block");
@@ -364,6 +370,7 @@
             }, 500);
         }
     });
+
     function Searching() {
         $("#lblfai").css("display", "none");
         if (txtSearch.value == "") {
@@ -419,6 +426,7 @@
         }
         hideLoader();
     }
+
     $(document).on("click", "a[name='wcrServiceLink']", function (e) {
         $("#divBody").addClass("result");
         //$("#DivWithoutSearchAds").css("display", "none");
@@ -430,6 +438,7 @@
         }, 2500);
 
     });
+
     $(document).on("click", "a[name='wcrServiceLink1']", function (e) {
         $("#divBody").addClass("result");
         $("#toplogo").css("display", "none");
@@ -443,6 +452,7 @@
             GetSalesAdts();
         }, 2500);
     });
+
     function GetSalesAdts() {
         //showLoader();
         var _IPAddress;
@@ -468,11 +478,13 @@
         }, "jsonp");
         hideLoader();
     }
+
     function ViewDiv() {
         $("#toplogo").css("display", "block");
         $("#tabheader").css("display", "block");
         $("#tabcontent").css("display", "block");
     }
+
     function HideDiv() {
         $("#toplogo").css("display", "none");
         $("#tabheader").css("display", "none");
@@ -491,6 +503,7 @@
 
 
 <script type="text/javascript">
+
     $(document).ready(function () {
         $('#EmailAddressReg').prop('disabled', true);
         $("#mobile").change(function (e) {
@@ -518,25 +531,33 @@
         $("#btnActClose").click(function () {
             window.location.reload();
         });
+
         function showLoader1() {
             $("#pageloader1").css("display", "block");
         }
+
         function hideLoader1() {
             setTimeout(function () {
                 $("#pageloader1").css("display", "none");
             }, 1500);
         }
+
         $('#btnRegistration').css("background-color", "#808080");
+
         $('#btnRegistration').prop('disabled', true);
+
         $('#RPassword').prop('disabled', true); //TO DISABLED FORGOT PASSWORD BUTTON
+
         $('#cPassword').prop('disabled', true); //TO
 
         $("#RPassword").focusin(function () {
             $("#message1").css("display", "block");
         });
+
         $("#RPassword").blur(function () {
             $("#message1").css("display", "none");
         });
+
         $("#EmailAddressReg").change(function (e) {
             var emailID = EmailAddressReg.value;
             var filter1 = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
@@ -1196,7 +1217,7 @@
                                                                                         else {
                                                                                             $("#choose-consumer").modal("hide");
                                                                                             BookMarkInsert(hidAdvertisementID.value);
-                                                                                           
+
                                                                                             //alert("Advertisement bookmarked successfully.");
                                                                                             //setTimeout(function () {
                                                                                             //    window.location.reload();
@@ -1241,11 +1262,11 @@
             var uname = lbluserName1.value;
             var pass = lblpassword1.value;
             consumerVerification(uname, pass);
-           // $("#pageloaderVerify").css("display", "block");
+            // $("#pageloaderVerify").css("display", "block");
             //setTimeout(function () {
             //    consumerVerification(uname, pass);
             //}, 200);
-           
+
         });
         $('#btnresend1').click(function () {
             var emailID = lbluserName1.value;
@@ -1495,6 +1516,7 @@
         });
 
     });
+
     function BindAdvertisements(subID, DivID) {
         var ca = GetParameterValues('ca');
         var id = subID; //GetParameterValues('id');
@@ -1611,12 +1633,12 @@
         $('#choose-consumer').modal({ display: 'show', backdrop: 'static', keyboard: false });
     }
 
-
     function InterestedConsumers(dyr, pnlID) {
         var CompulsoryData = CheckConsumerEmailAndMobileExists();
         if (CompulsoryData == "0") {
             jQuery.noConflict();
-            $("#lblFailureTitle").text("You cannot contact this Associate at this time");
+            $("#lblFailureTitle").text("You cannot contact this Associate at this tim
+e");
             $("#lblFailureDetail").text("Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number");
             $('#fail_message').modal('show');
         }
@@ -1644,16 +1666,21 @@
             else { }
         }
     }
+
     function BookMarkInsert(AdvID) {
-        if (hidLogin.value == "0")
-        { }
+        if (hidLogin.value == "0") { }
         else if (hidLogin.value == "1") {
             $.ajax({
                 type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
                 success: function (r) {
                     if (r.d > 0) {
                         $.ajax({
-                            type: "POST", url: "ws/InnerPage.asmx/InsertSavedAdts", data: "{'AdvertisementID':" + AdvID + ",'zipCode':'0','jtype':'1'}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+                            type: "POST",
+                            url: "ws/InnerPage.asmx/InsertSavedAdts",
+                            data: "{'AdvertisementID':" + AdvID + ",'zipCode':'0','jtype':'1'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: false,
                             success: function (r) {
                                 if (r.d == "0") {
                                     jQuery.noConflict();
@@ -1662,12 +1689,11 @@
                                     $('#fail_message').modal('show');
                                 }
                                 else {
-                                   
-                                        jQuery.noConflict();
-                                        $("#lblSuccess").text("Success");
-                                        $("#lbldetail").text("Advertisement bookmarked successfully.");
-                                        $('#success-message').modal('show');
-                                   
+
+                                    jQuery.noConflict();
+                                    $("#lblSuccess").text("Success");
+                                    $("#lbldetail").text("Advertisement bookmarked successfully.");
+                                    $('#success-message').modal('show');
                                 }
                             }
                         });
@@ -1680,6 +1706,7 @@
         }
         else { }
     }
+
     function ShowPopUpNew(StuID) {
         $.ajax({
             type: "POST", url: "ws/ConsumerRegistration.asmx/ConsumerIsLogin", data: "{}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
@@ -1709,4 +1736,5 @@
             }
         });
     }
+
 </script>

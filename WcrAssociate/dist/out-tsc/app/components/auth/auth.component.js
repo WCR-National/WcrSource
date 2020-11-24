@@ -462,13 +462,15 @@ var AuthComponent = /** @class */ (function () {
     };
     AuthComponent.prototype.consumerLoginSessionActivate = function (docs) {
         var _this = this;
+        debugger;
         var credentials = this.authForm.value;
         this.userService
             .consumerLoginSessionActivate(this.authType, credentials, $(docs).find("Id").text())
             .then(function (data) {
             if (data.d == "1") {
                 //this.router.navigate([this.returnUrl]);
-                $(location).attr('href', '/ConsumerDashboard.html');
+                //$(location).attr('href', '/ConsumerDashboard.html');
+                _this.ngZone.run(function () { return _this.router.navigate(['/consumer-dashboard']); });
             }
         }, function (err) {
             _this.loginErrorMessage = "Some internal error occurred.";
@@ -907,7 +909,7 @@ var AuthComponent = /** @class */ (function () {
                     .then(function (data) {
                     if (data.d.length > 0) {
                         //this.router.navigateByUrl('/login');
-                        $(location).attr('href', '/ConsumerDashboard.html');
+                        _this.ngZone.run(function () { return _this.router.navigate(['/consumer-dashboard']); });
                         //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
                     }
                     _this.isSubmitting = false;

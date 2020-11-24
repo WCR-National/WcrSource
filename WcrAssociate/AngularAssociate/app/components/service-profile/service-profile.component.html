@@ -1,0 +1,78 @@
+<style>
+    .ts-block {
+        padding-bottom: 4rem;
+        padding-top: 4rem;
+    }
+
+    .ts-text-color-primary {
+        color: #00f;
+    }
+
+    .ts-text-color-light {
+        color: rgba(0, 0, 0, .5);
+    }
+    .btn {
+        text-transform:none;
+    }
+</style>
+
+<!-- Content
+================================================== -->
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- Widget -->
+        <!--<div class="col-md-4">
+        <div class="sidebar left">
+
+            <div class="my-account-nav-container">
+
+                <ul class="my-account-nav">
+                    <li class="sub-nav-title">Manage Listings</li>
+                    <li (click)="GetListings('Home')"><a href="javascript:void(0);" class="current"><i class="sl sl-icon-user"></i> Home</a></li>
+                    <li (click)="GetListings('TownHome')"><a href="javascript:void(0);"><i class="sl sl-icon-star"></i> Town Home</a></li>
+                    <li (click)="GetListings('MultiFamily')"><a href="javascript:void(0);"><i class="sl sl-icon-star"></i> Multi Family</a></li>
+                    <li (click)="GetListings('Land')"><a href="javascript:void(0);"><i class="sl sl-icon-star"></i> Land</a></li>
+                </ul>
+
+            </div>
+
+        </div>
+    </div>-->
+
+
+
+        <div class="col-xs-12 col-sm-2 mg-t-100 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:350px; ">
+            <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
+        </div>
+
+        <section id="submitted" class="col-xs-12 col-md-8 ts-block" [style.display]="!IsDataFound ? 'block' : 'none'">
+            <div class="">
+                <div class="row">
+                    <div class="offset-2 col-xs-12 col-sm-12 col-md-12 text-center">
+                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 50%;" />
+                        <h1 class="ts-text-color-primary">No Services found</h1>
+                        <h4 class="ts-text-color-light">Services are not available !!!</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="col-xs-12 col-sm-8 col-md-8 mg-t-100 mg-b-100" [style.display]="IsDataFound ? 'block' : 'none'">
+
+            <div id="innerHtmlListServicesId" class="listings-container list-layout" [style.display] = "isloadingIconVisible ? 'block' : 'none'">
+                <!-- Listing Item -->
+                
+                <!-- Listing Item / End -->
+            </div>
+
+
+
+        </div>
+        <!-- Listings Container / End -->
+
+        <div class="col-xs-12 col-sm-2 mg-t-100 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:350px; ">
+            <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
+        </div>
+    </div>
+</div>

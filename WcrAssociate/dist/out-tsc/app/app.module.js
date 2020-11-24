@@ -27,6 +27,14 @@ import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.comp
 import { AssociateModule } from './associate/associate.module';
 import { XMLToJSON } from './_helpers/xml-to-json';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SupportComponent } from './components/support/support.component';
+import { BookmarkComponent } from './components/bookmark/bookmark.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ConsumerDashabordComponent } from './components/consumer-dashboard/consumer-dashboard.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { SalesAdvertisementsComponent } from './components/sales-advertisements/sales-advertisements.component';
+import { SalesAdvertisementsService } from './services/sales-advertisements/sales-advertisements.service';
+import { ServiceProfileComponent } from './components/service-profile/service-profile.component';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -42,6 +50,12 @@ var AppModule = /** @class */ (function () {
                 TermsComponent,
                 ShowAuthedDirective,
                 LandingRegistrationComponent,
+                SupportComponent,
+                BookmarkComponent,
+                ProfileComponent,
+                ConsumerDashabordComponent,
+                SalesAdvertisementsComponent,
+                ServiceProfileComponent
             ],
             imports: [
                 BrowserModule,
@@ -52,7 +66,8 @@ var AppModule = /** @class */ (function () {
                 AssociateModule,
                 SharedModule,
                 AppRoutingModule,
-                NgbModule
+                NgbModule,
+                NgSelectModule
             ],
             providers: [
                 AuthGuard,
@@ -64,6 +79,7 @@ var AppModule = /** @class */ (function () {
                 ProfilesService,
                 UserService,
                 SearchService,
+                SalesAdvertisementsService,
                 User,
                 encrypt_decrypt,
                 MessageService,

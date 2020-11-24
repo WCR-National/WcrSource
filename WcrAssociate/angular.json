@@ -51,13 +51,17 @@
               "AngularAssociate/assets/color.css",
               //"./node_modules/ngx-lightbox/lightbox.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css"
+
               //"node_modules/select2/dist/css/select2.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/crypto-js/crypto-js.js",
-              //"AngularAssociate/assets/js/croppie.min.js",
-              "AngularAssociate/assets/js/imguploader.js",
+              //"",
+              //"node_modules/crypto-js/crypto-js.js",
+              ////"AngularAssociate/assets/js/croppie.min.js",
+              //"AngularAssociate/assets/js/imguploader.js",
+              //"AngularAssociate/assets/js/mmenu.min.js",
+              //"AngularAssociate/assets/js/main.js"
+
               //"node_modules/select2/dist/js/select2.min.js"
             ],
             "es5BrowserSupport": true
@@ -114,20 +118,12 @@
             "tsConfig": "AngularAssociate/tsconfig.spec.json",
             "karmaConfig": "AngularAssociate/karma.conf.js",
             "styles": [
-              "AngularAssociate/styles.css",
-              "AngularAssociate/assets/style.css",
-              "AngularAssociate/assets/color.css",
-              "./node_modules/ngx-lightbox/lightbox.css",
-              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
+              "AngularAssociate/styles.css"
 
               //"node_modules/select2/dist/css/select2.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/crypto-js/crypto-js.js",
-              //"AngularAssociate/assets/js/croppie.min.js",
-              "AngularAssociate/assets/js/imguploader.js",
-              //"node_modules/select2/dist/js/select2.min.js"
+
             ],
             "assets": [
               "AngularAssociate/assets",

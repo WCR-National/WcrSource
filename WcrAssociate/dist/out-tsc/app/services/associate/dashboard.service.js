@@ -31,6 +31,13 @@ var DashboardService = /** @class */ (function () {
             return data;
         }));
     }; //select categories
+    DashboardService.prototype.initializeConsumerHeader = function () {
+        var urlToCountHeader = "ws/AssociateRegistration.asmx/ViewConsumerBasicDetails";
+        return this.apiService.post(urlToCountHeader, {})
+            .pipe(map(function (data) {
+            return data;
+        }));
+    }; //select categories
     DashboardService.prototype.attemptToCountInterestedCustomers = function () {
         var urlToCountInterestedCustomers = "Associate/ws/Sale.asmx/CountTotalVisitors";
         return this.apiService.post(urlToCountInterestedCustomers, {})

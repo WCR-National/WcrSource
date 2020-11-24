@@ -189,6 +189,14 @@ namespace WcrAssociate.ws
             Session["userName"] = username;
             return "1";
         }
+        [WebMethod(EnableSession = true)]
+        public string ViewConsumerBasicDetails()
+        {
+            string str = string.Empty;
+            BllAssociateRegistration bllass = new BllAssociateRegistration();
+            str = Session["userName"]?.ToString();
+            return str;
+        }
 
         [WebMethod]
         public string ResendActivationCode(string EmailID)

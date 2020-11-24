@@ -1,7 +1,7 @@
 import * as tslib_1 from "tslib";
 import { Component, ViewEncapsulation } from '@angular/core';
-import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../services/auth';
 import { MessageService } from 'AngularAssociate/app/services/search';
 var SharedLayoutComponent = /** @class */ (function () {
     function SharedLayoutComponent(route, router, _messageService, userService) {
