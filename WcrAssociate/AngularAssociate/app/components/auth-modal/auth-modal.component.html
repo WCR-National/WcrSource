@@ -1,0 +1,360 @@
+﻿<!--<div class="col-lg-12 col-md-12 col-sm-12 mg-b-20 col-xs-12" style="text-align:center;">
+    <div class="loader-wrap" id="LoadingImageLogin" [hidden]="!isSubmitting">
+        <div class="loader"><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span><span class="loader-item"></span></div>
+    </div>
+</div>-->
+
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" (click)="dismiss()">&times;</button>
+</div>
+<div class="modal-body">
+    <div class="auth-page mg-b-60-force">
+        <div class="row mg-t-50">
+            <div class="col-md-8 offset-md-3 col-xs-12 card-main pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center" style="border-top: 5px solid #0e3a6b;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <h2 class="text-xs-center" [style.text-align]="authType == 'activate' || authType == 'resetPassword' ? 'left':'center'">{{ title }}</h2>
+                    </div>
+
+                    <p class="text-xs-center">
+                        <a (click)="setSignInOrSignUpOrActivateOrReset('login')" *ngIf="authType == 'login'" class="green-text text-darken-1" style="margin: 0 auto;">Don't have an account? Sign up now!</a>
+                        <a (click)="setSignInOrSignUpOrActivateOrReset('register')" *ngIf="authType == 'register'" class="green-text text-darken-1" style="margin: 0 auto;">Already have an account? Sign in!</a>
+                    </p>
+                    <form [formGroup]="authForm" autocomplete="off" class="pd-t-20" style="width: 100%">
+                        <fieldset [disabled]="isSubmitting">
+                            <div class="form-group" *ngIf="authType == 'login'">
+                                <div class="col-sm-12">
+                                    <span class="red-text text-darken-4 tx-14-f pd-b-30">
+                                        {{ loginErrorMessage }}
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group" [ngClass]="{'has-error': formErrors.activationCode}"
+                                 *ngIf="authType == 'activate'">
+                                <div class="col-xs-12 col-sm-12 mg-b-35 mg-t-10">
+                                    <p class="grey-text text-darken-1 tx-medium" *ngIf="authType == 'activate'">
+                                        Activation code was sent to the Email address that was supplied for this account.
+                                    </p>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 mg-b-20">
+                                    <input placeholder="Activation code" id="activationCode" type="text" class="form-control pd-l-45-force" formControlName="activationCode" (blur)="logValidationErrors()">
+                                    <span class="large material-icons form-control-feedback icon">vpn_key</span>
+                                    <div class="invalid-data" *ngIf="formErrors.activationCode">
+                                        {{formErrors.activationCode}}
+                                    </div>
+                                    <span class="grey-text text-darken-1 tx-medium" *ngIf="authType == 'activate'" [style.display]="activationSent ? 'block':'none'">Activation code has been resend to your registered Email.</span>
+
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12">
+
+                                    <button type="submit" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'activate')"
+                                            [disabled]="!authForm.valid">
+                                        <span [style.display]="!isSubmitting ? 'block': 'none' " (click)="submitActivationForm()">VERIFY</span>
+                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                            <div class="spinner-layer spinner-blue-only spinner-blue">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div><div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div><div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+
+
+                                <div class="col-xs-12 col-sm-12">
+                                    <!--*ngIf="formErrors.loginCredentials"-->
+                                    <div class="pd-t-30 mg-b-5">
+                                        Resend New Activation Code: <a class="blue-text text-darken-4 tx-medium" (click)="onClickResendVerificationCode()" style="cursor: pointer;">Resend</a>
+                                        <div class="preloader-wrapper preloader-wrapper-button small active size-16" [style.display]="resentCode ? 'block': 'none'">
+                                            <div class="spinner-layer spinner-blue-only spinner-blue">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grey-text text-darken-1 tx-medium">
+                                        If you experience problems activating your account,
+                                        please forward your activation code email to support@wcrnational.com
+                                        Our support team will complete your account activation within 24-48 hours.
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group" *ngIf="authType == 'resetPassword'">
+                                <div class="col-sm-12 mg-t-40 mg-b-40">
+                                    <div class="green-text text-darken-4 tx-medium" [style.display]="resetPassword ? 'block':'none'">
+                                        <i class="material-icons">  check_circle </i>
+                                        {{loginErrorMessage}}
+                                        <div class="grey-text text-darken-1 tx-medium mg-t-20">
+                                            If you experience problems activating your account,
+                                            please forward your reset password email to support@wcrnational.com
+                                            Our support team will complete your account activation within 24-48 hours.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="validateEmailDiv" class="form-group" [ngClass]="{'has-error': formErrors.email}"
+                                 *ngIf="(authType == 'register' || authType == 'login' || authType == 'resetPassword')"
+                                 [style.display]="resetPassword ? 'none': 'block'">
+
+                                <div class="col-xs-12 col-sm-12 mg-b-20">
+                                    <!--(blur)="showPreloaderIcon();"-->
+                                    <input id="email" type="text" class="form-control pd-l-45-force" formControlName="email" placeholder="Email" (blur)="logValidationErrors()" />
+                                    <span class="large material-icons form-control-feedback icon">email</span>
+
+
+                                    <div class="preloader-wrapper preloader-wrapper-input small active"
+                                         *ngIf="(authType == 'register')">
+                                        <div class="spinner-layer spinner-green-only"
+                                             [style.display]="showOnValidateEmail ? 'block': 'none'">
+                                            <div class="circle-clipper left">
+                                                <div class="circle"></div>
+                                            </div><div class="gap-patch">
+                                                <div class="circle"></div>
+                                            </div><div class="circle-clipper right">
+                                                <div class="circle"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 pd-l-0-force" *ngIf="formErrors.email || isEmailTaken()">
+                                        {{formErrors.email}}
+                                    </div>
+                                    <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force" *ngIf="(authType == 'register')" [style.display]="showEmailVerification ? 'block':'none'">
+                                        Email is already in use.
+                                    </div>
+
+                                    <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force" *ngIf="(authType == 'resetPassword')" [style.display]="showEmailVerification ? 'block':'none'">
+                                        Please make sure email is correct.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                                <div formGroupName="passwordGroup">
+
+                                    <div class="form-group" [ngClass]="{'has-error': formErrors.password}"
+                                         *ngIf="(authType == 'register' || authType == 'login' ) ">
+                                        <div class="col-sm-12  mg-b-20">
+                                            <input id="password" placeholder="Password" type="password" class=" form-control pd-l-45-force" [ngClass]="{'password': (authType == 'register')}" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
+                                                   autocomplete="new-password">
+                                            <span class="large material-icons form-control-feedback icon">lock</span>
+
+                                            <!--<label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required')  ? 'text-danger' : 'text-success'">
+                                                <i class="material-icons">
+                                                    {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ? 'cancel' :  'check_circle' }}
+                                                </i>
+                                                Password is required
+                                            </label>-->
+
+                                            <div class="col-sm-12 pd-l-0" *ngIf="(authType == 'register')" [style.display]="showErrorsPassword ? 'block':'none'">
+                                                <label class="col mg-t-5" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('minlength') ? 'cancel' :  'check_circle' }}
+                                                    </i>
+                                                    Must be at least 8 characters!
+                                                </label>
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('maxlength') ? 'cancel' :  'check_circle' }}
+                                                    </i>
+                                                    Must be less than 20 characters!
+                                                </label>
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('number') ? 'cancel' : 'check_circle'}}
+                                                    </i>
+                                                    Must contain at least 1 number!
+                                                </label>
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') ||  authForm.controls['passwordGroup'].controls['password'].hasError('upperLetter') ? 'cancel' :  'check_circle'   }}
+                                                    </i>
+                                                    Must contain at least 1 in Capital Case!
+                                                </label>
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter')  ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('lowerLetter') ? 'cancel' :  'check_circle'  }}
+                                                    </i>
+                                                    Must contain at least 1 Letter in Small Case!
+                                                </label>
+
+                                                <label class="col" [ngClass]="authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+                                                    <i class="material-icons">
+                                                        {{ authForm.controls['passwordGroup'].controls['password'].hasError('required') || authForm.controls['passwordGroup'].controls['password'].hasError('hasSpecialCharacters') ? 'cancel' : 'check_circle' }}
+                                                    </i>
+                                                    Must contain at least 1 Special Character!
+                                                </label>
+                                                <!--<div class="col-sm-12 pd-l-0-force" *ngIf="formErrors.password">
+                                                    {{formErrors.password}}
+                                                </div>-->
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" [ngClass]="{'has-error': formErrors.confirmPassword || formErrors.passwordGroup}"
+                                         *ngIf="(authType == 'register') ">
+                                        <div class="col-sm-12 mg-b-20">
+                                            <input id="confirmPassword" type="password" class="form-control pd-l-45-force"
+                                                   formControlName="confirmPassword" (blur)="logValidationErrors()" placeholder="Confirm Password" autocomplete="new-password">
+                                            <span class="large material-icons form-control-feedback icon">lock</span>
+
+                                            <div class="col-sm-12 pd-l-0-force"
+                                                 *ngIf="formErrors.confirmPassword || formErrors.passwordGroup">
+
+                                                {{  formErrors.confirmPassword ? formErrors.confirmPassword : formErrors.passwordGroup  }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.associate}" *ngIf="authType == 'register'  ">
+                                    <div class="col-sm-12 mg-b-20">
+                                        <label>
+                                            <input type="checkbox" class="filled-in" formControlName="associate" (blur)="logValidationErrors()" checked="checked" />
+                                            <span>Yes- I want to advertise</span>
+                                        </label>
+                                        <div class="col-sm-12 pd-l-0-force" *ngIf="formErrors.associate">
+                                            {{formErrors.associate}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.consumer}" *ngIf="authType == 'register'  ">
+                                    <div class="col-sm-12 mg-b-20">
+                                        <label>
+                                            <input type="checkbox" class="filled-in" formControlName="consumer" (blur)="logValidationErrors()" checked="checked" />
+                                            <span>No- I do not</span>
+                                        </label>
+                                        <div class="invalid-data" *ngIf="formErrors.consumer">
+                                            {{formErrors.consumer}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                                <div class="form-group" [ngClass]="{'has-error': formErrors.terms}" *ngIf="(authType == 'register') ">
+                                    <div class="col-sm-12 mg-b-20">
+                                        <label>
+                                            <input type="checkbox" class="filled-in" formControlName="terms" (blur)="logValidationErrors()" checked="checked" />
+                                            <span>I agree with <a routerLink="/terms" class="blue-text text-darken-4" style="font-size:13px; font-weight:600; text-decoration: underline;">Terms and Conditions</a></span>
+                                        </label>
+                                        <div class="invalid-data" *ngIf="formErrors.terms">
+                                            {{formErrors.terms}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                                <div class="form-group" *ngIf="authType == 'login'">
+                                    <div class="invalid-data" *ngIf="formErrors.credentials">
+                                        {{formErrors.loginCredentials}}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-12 mg-b-20">
+                                        <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'register')" type="submit" [disabled]="!FormFilledSuccessfully">
+                                            <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitRegistrationForm()">CREATE AN ACCOUNT</span>
+                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                <div class="spinner-layer spinner-white-only">
+                                                    <div class="circle-clipper left">
+                                                        <div class="circle"></div>
+                                                    </div><div class="gap-patch">
+                                                        <div class="circle"></div>
+                                                    </div><div class="circle-clipper right">
+                                                        <div class="circle"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </button>
+
+                                        <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'login')" type="submit" [disabled]="!authForm.valid ">
+                                            <span [style.display]="!isSubmitting ? 'block': 'none' " (click)="submitLoginForm()">SIGN TO MY ACCOUNT</span>
+                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                <div class="spinner-layer spinner-blue-only">
+                                                    <div class="circle-clipper left">
+                                                        <div class="circle"></div>
+                                                    </div><div class="gap-patch">
+                                                        <div class="circle"></div>
+                                                    </div><div class="circle-clipper right">
+                                                        <div class="circle"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </button>
+
+                                        <div class="col-xs-12 col-sm-12 pd-t-20 pd-b-7 center" *ngIf="authType == 'login'">
+                                            <a (click)="setSignInOrSignUpOrActivateOrReset('resetPassword')" class="text-xs-left blue-text text-darken-4 tx-medium "> <i class="material-icons form-control-feedback pd-b-4-force" style="font-size:15px;">vpn_key</i>Forgot password</a>
+                                        </div>
+
+
+                                        <button [style.display]="resetPassword ? 'none': 'block'" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'resetPassword')" type="submit" [disabled]="!authForm.valid">
+                                            <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="submitFormResetPassword()">RESET PASSWORD</span>
+                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'">
+                                                <div class="spinner-layer spinner-blue-only">
+                                                    <div class="circle-clipper left">
+                                                        <div class="circle"></div>
+                                                    </div><div class="gap-patch">
+                                                        <div class="circle"></div>
+                                                    </div><div class="circle-clipper right">
+                                                        <div class="circle"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </button>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!--  -->
+
+
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!--<div class="row mg-t-60 text-center" *ngIf="authType == 'register'">
+                    <small>
+                        By clicking the "Create an Account" button you agree with our
+                        <button [routerLink]="['/resetPassword']" class="btn waves-ripple blue-grey lighten-5 blue-grey-text text-accent-4">Terms And Conditions</button>
+                    </small>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>

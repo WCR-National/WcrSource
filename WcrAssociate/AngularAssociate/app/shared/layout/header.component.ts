@@ -6,29 +6,116 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debug } from 'util';
 import { HomeComponent } from 'AngularAssociate/app/components/home/home.component';
 import { MessageService } from 'AngularAssociate/app/services/search';
+import { DashboardService } from 'AngularAssociate/app/services/associate/dashboard.service';
+import * as $ from 'jquery';
+
 
 @Component({
     selector: 'app-layout-header',
     templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+    isNavbarCollapsed = true;
 
-
-    constructor(private route: ActivatedRoute, private router: Router, private _messageService: MessageService,
+    constructor(private route: ActivatedRoute, private router: Router, private _messageService: MessageService, private dashboardService: DashboardService,
         private userService: UserService
     ) { }
-
+    public userName: string;
     currentUser: User;
+    public isLoggedIn = false;
+    public isMobileScreen = false;
     ngOnInit() {
+        this.checkWidthOrHeightForMobile();
+        this.initializeHeader();
         this.userService.currentUser.subscribe(
             (userData) => {
+                debugger;
                 this.currentUser = userData;
+                if (this.currentUser !== undefined && this.currentUser != null && Object.keys(this.currentUser).length !== 0 && this.currentUser.constructor !== Object) {
+                    this.isLoggedIn = true;
+                }
+            });
+
+        this._messageService.listen().subscribe((data: any) => {
+            debugger;
+            if (data != 'updateUserName')
+            {
+                this.initializeHeader();
             }
-        );
+            //if (data == "updateHeader")
+            //{
+            //    if (this.isLoggedIn) {
+            //        this.isLoggedIn = false;
+            //    }
+            //    else {
+            //        this.isLoggedIn = true;
+            //    }
+            //}
+        });
     }
+
     onClickGetAds() {
         this._messageService.filter('showAds');
     }
+
+    initializeHeader() {
+        let thisStatus: any = this;
+        this.dashboardService
+            .initializeConsumerHeader()
+            .subscribe(
+                data => {
+                    debugger;
+                    if (data.d.length > 0) {
+                        this.userName = data.d.split('@')[0];
+
+                        //var xmlDoc = $.parseXML(data.d);
+                        //var xml = $(xmlDoc);
+                        //var docs = xml.find("ViewAssociateBasicDetail");
+                        //var cartd = [];
+                        //var sd = [];
+                        //$.each(docs, function (i, docs) {
+
+                        //    thisStatus.wcrID = $(docs).find("AssociateId").text();
+                        //    thisStatus.LicenseID = $(docs).find("LicenseId").text();
+                        //    thisStatus.Contact = $(docs).find("MobileNo").text();
+                        //    thisStatus.Email = $(docs).find("Email").text();
+                        //    thisStatus.userName = $(docs).find("FullName").text() + ' ' + $(docs).find("LastName").text();
+
+
+                        //    if ($(docs).find("Photo").text() != null || $(docs).find("Photo").text() == "") {
+                        //        //cartd.push("<img class='img-circle user-img' alt='User Image' src='../AssociatePhoto/" + $(docs).find("Photo").text() + "'/>");
+                        //        thisStatus.profileImage = '../AssociatePhoto/' + $(docs).find("Photo").text();
+                        //    }
+                        //    else {
+                        //        thisStatus.profileImage = '../AssociatePhoto/0.png';
+                        //    }
+                        //});
+
+                        //$("#profilePicHeader").attr('src', thisStatus.profileImage);
+                        //$("#profilePic").attr('src', thisStatus.profileImage);
+                    }
+                });
+        //../../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails
+    }
+
+    checkWidthOrHeightForMobile() {
+        debugger;
+        var ratio = window.devicePixelRatio || 1;
+        var w = window.innerWidth;
+        var h = window.innerHeight;
+
+        if (w <= 768) {
+            this.isMobileScreen = true;
+        }
+        else {
+            this.isMobileScreen = false;
+        }
+
+
+    }
+
+    //mmenuInit() {
+    //}
 
     onClickLogout() {
         this.userService
@@ -36,7 +123,9 @@ export class HeaderComponent implements OnInit {
             .subscribe(
                 data => {
                     if (data == "0") {
-                        this.router.navigateByUrl('/home');
+                        this.userService.purgeAuth();
+                        this.isLoggedIn = false;
+                        this.router.navigateByUrl('/');
                     }
                     else {
                         alert("OOPS Something goes wrong !");
@@ -46,7 +135,6 @@ export class HeaderComponent implements OnInit {
                     alert("OOPS Something goes wrong !");
                 }
             );
-
     }
 
 

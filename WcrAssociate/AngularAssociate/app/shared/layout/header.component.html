@@ -1,20 +1,156 @@
 <!-- Header Container
 ================================================== -->
-<header id="header-container">
 
+<style>
+    .row {
+        display: block;
+    }
+    .dropdown-loggeduser {
+        margin-left: 10px;
+    }
+
+    .dropup, .dropright, .dropdown, .dropleft {
+        position: relative;
+    }
+    .dropdown-toggle {
+        white-space: nowrap;
+    }
+    .dropdown-menu[x-placement^="top"], .dropdown-menu[x-placement^="right"], .dropdown-menu[x-placement^="bottom"], .dropdown-menu[x-placement^="left"] {
+        right: auto;
+        bottom: auto;
+    }
+    #logo {
+        margin-right: 14%;
+    }
+</style>
+<header id="header-container" class="header-style-2">
     <!-- Header -->
-    <div id="header" >
-        <div class="container">
+    <div id="header">
 
+        <!--Mobile navigation Logged in-->
+        <div class="container pd-t-35" *ngIf="isLoggedIn" [style.display]="isMobileScreen ? 'block':'none'">
             <!-- Left Side Content -->
             <div class="left-side">
 
                 <!-- Logo -->
-                <div id="logo">
-                    <a href="javascript:void(0)" (click)="onClickGetAds()" ><img src="img/wcr-logo.png" alt=""></a>
+                <div id="logo" style="margin: 0 auto;">
+                    <a href="javascript:void(0)" (click)="onClickGetAds()"><img src="img/wcr-logo.png" alt=""></a>
+                </div>
+                <!-- Mobile Navigation -->
+                <div class="mmenu-trigger">
+                    <button class="hamburger hamburger--collapse" type="button">
+                        <span class="hamburger-box">
+                            <span class="hamburger-inner"></span>
+                        </span>
+                    </button>
                 </div>
 
+            </div>
+            <!-- Left Side Content / End -->
+        </div>
 
+        <nav id="navigation" class="style-2" *ngIf="isLoggedIn" style="box-shadow:none;" [style.display]="isMobileScreen ? 'block':'none'">
+            <div class="container">
+                <ul id="responsive">
+
+                    <li>
+                        <a class="current" routerLink="/consumer-dashboard" style="width:260px;">Home</a>
+                    </li>
+                    <li>
+                        <a routerLink="/profile" style="width:260px;">Profile</a>
+                    </li>
+                    <li>
+                        <a routerLink="/bookmark" style="width:260px;">Bookmark</a>
+                    </li>
+                    <li>
+                        <a routerLink="/support" style="width:260px;">Support</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!--Mobile navigation Logged in-->
+
+        <!--Desktop navigation Logged in-->
+        <nav id="navigation1" class="style-2" *ngIf="isLoggedIn" style="background:#fff; box-shadow:none;" [style.display]="!isMobileScreen ? 'block':'none'">
+            <div class="container">
+                <ul id="responsive">
+
+                    <div id="logo">
+                        <a href="javascript:void(0)" (click)="onClickGetAds()"><img src="img/wcr-logo.png" alt=""></a>
+                    </div>
+                    <li>
+                        <a class="current" routerLink="/consumer-dashboard">Home</a>
+                    </li>
+                    <li>
+                        <a routerLink="/profile">Profile</a>
+                    </li>
+                    <li>
+                        <a routerLink="/bookmark">Bookmark</a>
+                    </li>
+                    <li>
+                        <a routerLink="/support">Support</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+        <!--Desktop navigation Logged in-->
+
+        <!-- Logged in Desktop username dropdown -->
+        <div class="container" *ngIf="isLoggedIn">
+            <div class="row">
+                <div class="user-menu-container mg-xs-l-0">
+                    <div class="user-menu pd-xs-l-0 mg-xs-l-0">
+
+                        <div class="dropdown dropdown-loggeduser" ngbDropdown>
+                            <a id="dropdownMenuButton" class="dropdown-link" href="javascript:void(0)" style="float:right;" ngbDropdownToggle>
+                                <div class="col-xs-12 col-sm-1 pd-xs-l-0" style="padding-right: 22px;">
+                                    <span class="font-weight tx-12 tx-sm-18 tx-primary tx-bold">Hi, {{userName}}</span>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right " ngbDropdownMenu aria-labelledby="dropdownMenuButton">
+                                <!--<div class="dropdown-menu-header">
+                                <div class="media align-items-center">
+                                    <div class="avatar">
+                                        <img id="profilePicHeader" class="rounded-circle" alt="">
+                                    </div>
+                                    <div class="media-body mg-l-10">
+                                        <h6>{{userName}}</h6>
+                                    </div>
+                                </div>
+                            </div>-->
+
+                                <div class="dropdown-menu-body">
+                                    <a routerLink="/profile" class="dropdown-item tx-16-f" ngbDropdownItem><i data-feather="user"></i> View Profile</a>
+                                    <a href="javascript:void(0);" (click)="onClickLogout()" class="dropdown-item tx-16-f" ngbDropdownItem><i data-feather="log-out"></i> Log Out</a>
+                                </div>
+
+                            </div><!-- dropdown-menu -->
+                        </div>
+
+                        <!--<div class="user-name"><span><img src="images/agent-03.jpg" alt=""></span>Hi, {{userName}}</div>
+                    <ul>
+                        <li><a routerLink="/associates/profile"><i class="sl sl-icon-user"></i> My Profile</a></li>
+                        <li><a href="javascript:void(0)" (click)="logout()"><i class="sl sl-icon-power"></i> Log Out</a></li>
+                    </ul>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Logged in Desktop username dropdown -->
+
+        <!-- Not logged in navbar-->
+        <div class="container" *ngIf="!isLoggedIn">
+
+            <!-- Left Side Content -->
+            <div class="left-side">
+                <!-- Logo -->
+                <div id="logo">
+                    <a href="javascript:void(0)" (click)="onClickGetAds()"><img src="img/wcr-logo.png" alt=""></a>
+                </div>
                 <!-- Mobile Navigation -->
                 <div class="mmenu-trigger">
                     <button class="hamburger hamburger--collapse" type="button">
@@ -24,12 +160,13 @@
                     </button>
                 </div>
             </div>
+
             <!-- Left Side Content / End -->
             <!-- Right Side Content / End -->
             <div class="right-side">
                 <!-- Header Widget -->
                 <div class="header-widget">
-                    <a class="sign-in" routerLink="/login" routerLinkActive="active">LOG IN </a> <!--<i class="fa fa-user"></i>--> 
+                    <a class="sign-in" routerLink="/login" routerLinkActive="active">LOG IN </a> <!--<i class="fa fa-user"></i>-->
                     <a class="waves-effect waves-light btn mg-t-10" routerLink="/register" routerLinkActive="active">Sign up</a>
                 </div>
                 <!-- Header Widget / End -->
@@ -37,15 +174,18 @@
             <!-- Right Side Content / End -->
 
         </div>
+        <!--Not logged in navbar-->
+
+
+        <div class="clearfix"></div>
+        <!-- Main Navigation / End -->
+
     </div>
     <!-- Header / End -->
 
 </header>
 <div class="clearfix"></div>
 <!-- Header Container / End -->
-
-
-
 <!-- Main Navigation -->
 <!--<nav id="navigation" class="style-1">
     <ul id="responsive">

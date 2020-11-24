@@ -49,12 +49,13 @@ export class UserService {
 
                 this.associateLoginSessionActivate("", credentials, user.id)
                     .then((data: any) => {
-                        if (data.d == "1") {
+                        if (data.d == "1")
+                        {
                             this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
                             if (this.returnUrl == '') {
      
                                 let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-                                this.ngZone.run(() => this.router.navigate([url]));
+                                this.ngZone.run(() => this.router.navigate(['/associates']));
                                 //this.router.navigateByUrl(url);
                             }
                             else {
@@ -63,40 +64,51 @@ export class UserService {
                             }
                         }
                         else {
-                            this.ngZone.run(() => this.router.navigate(['/']));
+                            //this.ngZone.run(() => this.router.navigate(['/']));
 
                             //this.router.navigateByUrl('/');
+
+                            this.purgeAuth();
+                            let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                            this.ngZone.run(() => this.router.navigate([url]));
                         }
                     });
             }
             else if (user.type == "2") {
+                debugger;
+
                 var credentials: any = {};
                 credentials.email = user.email;
-                window.location.href = "ConsumerDashboard.html";
+                //window.location.href = "ConsumerDashboard.html";
                 //this.ngZone.run(() => this.router.navigate(['/ConsumerDashboard.html']));
-                //this.consumerLoginSessionActivate("", credentials, user.id)
-                //    .then((data: any) => {
-                //        if (data.d == "1") {
-                //            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
-                //            if (this.returnUrl == '') {
+                this.consumerLoginSessionActivate("", credentials, user.id)
+                    .then((data: any) => {
+                        if (data.d == "1")
+                        {
+                            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+                            if (this.returnUrl == '') {
 
-                //                let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-                //                this.ngZone.run(() => this.router.navigate([url]));
-                //                //this.router.navigateByUrl(url);
-                //            }
-                //            else {
-                //                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
-                //                //this.router.navigateByUrl('');
-                //            }
+                                let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                                this.ngZone.run(() => this.router.navigate([url]));
+                                //this.router.navigateByUrl(url);
+                            }
+                            else {
+                                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+                                //this.router.navigateByUrl('');
+                            }
+                            //this.ngZone.run(() => this.router.navigate(['/']));
+                            //this.router.navigateByUrl('/');
+                        }
+                        else
+                        {
+                            //this.ngZone.run(() => this.router.navigate(['/consumer-dashboard']));
+                            //this.router.navigateByUrl('/');
 
-                //            //this.ngZone.run(() => this.router.navigate(['/']));
-                //            //this.router.navigateByUrl('/');
-                //        }
-                //        else {
-                //            this.ngZone.run(() => this.router.navigate(['/']));
-                //            //this.router.navigateByUrl('/');
-                //        }
-                //    });
+                            this.purgeAuth();
+                            let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                            this.ngZone.run(() => this.router.navigate([url]));
+                        }
+                    });
             }
         }
         else {
@@ -127,7 +139,6 @@ export class UserService {
         this.currentUserSubject.next({} as User);
         // Set auth status to false
         this.isAuthenticatedSubject.next(false);
-
         this.isAuthenticated_extra = false;
     }
 

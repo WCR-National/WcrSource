@@ -22,9 +22,11 @@ export class AssociateHeaderComponent implements OnInit {
     Email: string;
     userName: string;
 
-    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private userService: UserService, private xmlToJson: XMLToJSON) {
+    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private userService: UserService, private xmlToJson: XMLToJSON)
+    {
 
     }
+
     ngOnInit() {
         this.initializeHeader();
     }
@@ -78,7 +80,7 @@ export class AssociateHeaderComponent implements OnInit {
                 data => {
                     if (data == "0") {
                         this.userService.purgeAuth();
-                        this.router.navigateByUrl('/');
+                        this.router.navigateByUrl('/login');
 
                     }
                 },
