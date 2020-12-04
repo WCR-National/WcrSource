@@ -193,7 +193,7 @@ export class ServiceProfileComponent implements OnInit {
                 html += '<a href="javascript:void(0)" class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '" (click) ="showInterestContactAssociates(\'' + strParamContactAssociateShowInterest + '\')" > Contact Associates < /a>';
             }
             else {
-                html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '" (click) ="ContactAssociate(\'' + strParamContactAssociate + '\')" > Contact Associates </a>';
+                html += '<a href="javascript:void(0)" class="btn button border bookMarked contactAssociateClass" data-id="' + strParamContactAssociate + '" (click) ="ContactAssociate(\'' + strParamContactAssociate + '\')" > Contact Associates </a>';
             }
             html += '<span> Zip Code: ' + item.zipcode + '</span>';
             html += '</div>';
@@ -222,18 +222,19 @@ export class ServiceProfileComponent implements OnInit {
                     (data) => {
                         debugger;
 
-                        if (data.d == 0) {
+                        if (data.d > 0) {
                             thisStatus.salesAdvertisements
                                 .UpdateSavedBookmarks(advId)
                                 .subscribe(
                                     data => {
 
                                         if (data.d == "0") {
-                                            $(this).prop("disabled", true);
+                                            $(this).addClass('bookMarked');
+
                                             thisStatus.showToast('warning', "You have already saved this advertisement.");
                                         }
                                         else {
-                                            $(this).prop("disabled", true);
+                                            $(this).addClass('bookMarked');
                                             thisStatus.showToast('success', "Advertisement bookmarked successfully.");
                                         }
                                     },
@@ -319,7 +320,7 @@ export class ServiceProfileComponent implements OnInit {
                                     if (data.d == "0") {
                                         $('.SaveBookmarkId').each(function () {
                                             if (advId == $(this).attr('data-id')) {
-                                                $(this).prop("disabled", true);
+                                                $(this).addClass("bookMarked");
                                             }
                                         });
                                         thisStatus.showToast('warning', "You have already saved this advertisement.");
@@ -327,7 +328,7 @@ export class ServiceProfileComponent implements OnInit {
                                     else {
                                         $('.SaveBookmarkId').each(function () {
                                             if (advId == $(this).attr('data-id')) {
-                                                $(this).prop("disabled", true);
+                                                $(this).addClass("bookMarked");
                                             }
                                         }); thisStatus.showToast('success', "Advertisement bookmarked successfully.");
                                     }
@@ -421,10 +422,11 @@ export class ServiceProfileComponent implements OnInit {
                             (data1) => {
                                 if (data.d == "1") {
                                     //$("#msg" + pnlID).css("display", "block");
-                                    setTimeout(function () {
-                                        //window.location.reload();
-                                        //$('#msg' + pnlID).fadeOut('fast');
-                                    }, 2000);
+                                    //setTimeout(function () {
+                                    //    //window.location.reload();
+                                    //    //$('#msg' + pnlID).fadeOut('fast');
+                                    //}, 2000);
+                                    this.showToast("success", "Agent has been notified. For Additional Questions, please contact support at 866.456.7331.")
                                 }
                                 else if (data.d == "0") {
                                     this.showToast("danger", "Already exist")
@@ -516,5 +518,119 @@ export class ServiceProfileComponent implements OnInit {
             type: type,
             duration: 8000
         });
+    }
+
+    contactAssocistesAndAdvertisement(advIdAndAssociateId)
+    {
+        let l_type = '';
+
+        var adverID;
+        var associateID;
+        var jobtypeID;
+        var zipcode;
+        var array = advIdAndAssociateId.split(",");
+        for (var i in array) {
+            if (parseInt(i) == 0) {
+                if (array[parseInt(i)] == '') {
+                }
+                else {
+                    adverID = array[parseInt(i)];
+                }
+            }
+            else if (parseInt(i) == 1) {
+                if (array[parseInt(i)] == '') {
+                }
+                else {
+                    associateID = array[parseInt(i)];
+                }
+            }
+            else if (parseInt(i) == 2) {
+                if (array[parseInt(i)] == '') {
+                }
+                else {
+                    jobtypeID = array[i];
+                }
+            }
+            else if (parseInt(i) == 3) {
+                if (array[parseInt(i)] == '') {
+                }
+                else {
+                    zipcode = array[parseInt(i)];
+                }
+            }
+        }
+
+        this.salesAdvertisements
+            .InsertConsumerInterest(adverID, associateID, jobtypeID, zipcode)
+            .subscribe(
+                data => {
+
+                    this.salesAdvertisements
+                        .SendConsumerDetail(associateID, adverID, jobtypeID, zipcode)
+                        .subscribe(
+                            (data1) => {
+                                if (data.d == "1") {
+                                    //$("#msg" + pnlID).css("display", "block");
+                                    //setTimeout(function () {
+                                    //    //window.location.reload();
+                                    //    //$('#msg' + pnlID).fadeOut('fast');
+                                    //}, 2000);
+                                    this.showToast("success", "Agent has been notified. For Additional Questions, please contact support at 866.456.7331.")
+                                }
+                                else if (data.d == "0") {
+                                    this.showToast("danger", "Already exist")
+                                }
+                                else if (data.d == "3") {
+                                    this.showToast("danger", "OOPS Error ! Please try again.")
+                                }
+                            }
+                        );
+                },
+                err => {
+                }
+            );
+
+    }
+
+    insertionBookmarksinContactAssociates(advId)
+    {
+        let thisStatus = this;
+        thisStatus.salesAdvertisements
+            .ConsumerIsLogin()
+            .subscribe(
+                (data) => {
+                    debugger;
+
+                    if (data.d == 0) {
+                        thisStatus.salesAdvertisements
+                            .UpdateSavedBookmarks(advId)
+                            .subscribe(
+                                data => {
+
+                                    if (data.d == "0") {
+                                        $('.SaveBookmarkId').each(function () {
+                                            if (advId == $(this).attr('data-id')) {
+                                                $(this).addClass("bookMarked");
+                                            }
+                                        });
+                                        thisStatus.showToast('warning', "You have already saved this advertisement.");
+                                    }
+                                    else {
+                                        $('.SaveBookmarkId').each(function () {
+                                            if (advId == $(this).attr('data-id')) {
+                                                $(this).addClass("bookMarked");
+                                            }
+                                        }); thisStatus.showToast('success', "Advertisement bookmarked successfully.");
+                                    }
+                                },
+                                err => {
+                                }
+                            );
+                    }
+                    else {
+                        thisStatus.showToast("danger", "You need to sign in");
+                        thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+                    }
+                });
     }
 }

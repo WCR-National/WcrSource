@@ -188,7 +188,7 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             //    <span>For Rent < /span>
             //        < /div>-->
             html += '<div class="listing-img-content" >';
-            //html += '<span class="listing-price" > $ ' + item.cost + ' <i></i></span >';
+            html += '<span class="listing-price" > $ ' + item.cost.text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' <i></i></span >';
             //<!--< span class="like-icon with-tip" data - tip - content="Add to Bookmarks" > </span>
             //    < span class="compare-button with-tip" data - tip - content="Add to Compare" > </span>-->
             html += '</div>';
@@ -213,11 +213,11 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             html += item.cityID + ". " + item.StateID + ", " + item.zipcode;
             html += '</a>';
             if (thisStatus.isLoggedInValue == "0") {
-                var params = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
-                html += '<a href = "javascript:void(0)" class="details button border" (click)="showInterestBookMark(' + params + ')" > Bookmark </a>';
+                var params = item.advertisementID + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
+                html += '<a href = "javascript:void(0)" class="details button border showInterestBookMarkClass" data-id="' + params + '" (click)="showInterestBookMark(\'' + params + '\')" > Bookmark </a>';
             }
             else {
-                html += '<a href = "javascript:void(0)" class="details button border" (click) = "SaveBookmark(' + thisStatus.id + ')" > Bookmark </a>';
+                html += '<a href = "javascript:void(0)" class="details button border bookMarked saveBookmarkClass" data-id="' + item.advertisementID + '" (click) = "SaveBookmark(\'' + item.advertisementID + '\')" > Bookmark </a>';
             }
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
@@ -239,13 +239,13 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             html += '</ul>';
             html += '<div class="listing-footer" >';
             //{{  }}
-            var strParamContactAssociateShowInterest = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
-            var strParamContactAssociate = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count;
+            var strParamContactAssociateShowInterest = item.advertisementID + "," + item.associateID + ",1,0," + count + ",1";
+            var strParamContactAssociate = item.advertisementID + "," + item.associateID + ",1,0" + "," + count;
             if (thisStatus.isLoggedInValue == "0") {
-                html += '<a href="javascript:void(0)" class="btn button border" (click) ="showInterestContactAssociates(' + strParamContactAssociateShowInterest + ')" > Contact Associates < /a>';
+                html += '<a href="javascript:void(0)" class="btn button border contactAssociateShowInterestClass" data-id="' + strParamContactAssociateShowInterest + '" (click) ="showInterestContactAssociates(\'' + strParamContactAssociateShowInterest + '\')" > Contact Associates < /a>';
             }
             else {
-                html += '<a href="javascript:void(0)" class="btn button border" (click) ="ContactAssociate(' + strParamContactAssociate + ')" > Contact Associates </a>';
+                html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '" (click) ="ContactAssociate(\'' + strParamContactAssociate + '\')" > Contact Associates </a>';
             }
             html += '<span> Zip Code: ' + item.zipcode + '</span>';
             html += '</div>';
@@ -255,7 +255,81 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             count++;
         });
         $('#innerHtmlListServicesId').html(html);
+        this.InitializeEvents();
         //gridLayoutSwitcher();
+    };
+    SalesAdvertisementsComponent.prototype.InitializeEvents = function () {
+        var thisStatus = this;
+        $('.contactAssociateShowInterestClass').click(function () {
+            var advIdnAndAssociateId = $(this).attr('data-id');
+            thisStatus.onOpenModalClickAssociate(advIdnAndAssociateId);
+        });
+        $('.contactAssociateClass').click(function () {
+            var advIdAndAssociateId = $(this).attr('data-id');
+            thisStatus.salesAdvertisements
+                .ConsumerIsLogin()
+                .subscribe(function (data) {
+                if (data.d > 0) {
+                    thisStatus.salesAdvertisements
+                        .CheckEmailAndPhNo()
+                        .subscribe(function (data) {
+                        if (thisStatus.isLoggedInValue == "0") {
+                        }
+                        else if (thisStatus.isLoggedInValue == "1") {
+                            thisStatus.ContactAssociates(advIdAndAssociateId);
+                        }
+                        else {
+                            thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
+                            thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+                        }
+                    }, function (err) {
+                        return false;
+                    });
+                }
+                else {
+                    thisStatus.showToast("danger", "You need to sign in");
+                    thisStatus.onOpenModalClickAssociate(advIdAndAssociateId);
+                }
+            });
+        });
+        $('.showInterestBookMarkClass').click(function () {
+            var advId = $(this).attr('data-id');
+            thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+        });
+        $('.saveBookmarkClass').click(function () {
+            var advId = $(this).attr('data-id');
+            thisStatus.salesAdvertisements
+                .ConsumerIsLogin()
+                .subscribe(function (data) {
+                if (data.d > 0) {
+                    thisStatus.salesAdvertisements
+                        .UpdateSavedBookmarks(advId)
+                        .subscribe(function (data) {
+                        if (data.d == "0") {
+                            $('.saveBookmarkClass').each(function () {
+                                if (advId == $(this).attr('data-id')) {
+                                    $(this).addClass('bookMarked');
+                                }
+                            });
+                            thisStatus.showToast('warning', "You have already saved this advertisement.");
+                        }
+                        else {
+                            $('.saveBookmarkClass').each(function () {
+                                if (advId == $(this).attr('data-id')) {
+                                    $(this).addClass('bookMarked');
+                                }
+                            });
+                            thisStatus.showToast('success', "Advertisement bookmarked successfully.");
+                        }
+                    }, function (err) {
+                    });
+                }
+                else {
+                    thisStatus.showToast("danger", "You need to sign in");
+                    thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+                }
+            });
+        });
     };
     SalesAdvertisementsComponent.prototype.ContactAssociate = function (advIdAndAssociateId, pnlID) {
         var _this = this;
@@ -336,6 +410,7 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
                     //    window.location.reload();
                     //    //$('#msg' + pnlID).fadeOut('fast');
                     //}, 2000);
+                    _this.showToast("success", "Agent has been notified. For Additional Questions, please contact support at 866.456.7331.");
                 }
                 else if (data.d == "0") {
                     _this.showToast("danger", "Already exist");
@@ -357,11 +432,19 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
                     .UpdateSavedBookmarks(advId)
                     .subscribe(function (data) {
                     if (data.d == "0") {
-                        $("#bookmarkId" + advId).prop("disabled", true);
+                        $('.saveBookmarkClass').each(function () {
+                            if (advId == $(this).attr('data-id')) {
+                                $(this).addClass('bookMarked');
+                            }
+                        });
                         _this.showToast('warning', "You have already saved this advertisement.");
                     }
                     else {
-                        $("#bookmarkId" + advId).prop("disabled", true);
+                        $('.saveBookmarkClass').each(function () {
+                            if (advId == $(this).attr('data-id')) {
+                                $(this).addClass('bookMarked');
+                            }
+                        });
                         _this.showToast('success', "Advertisement bookmarked successfully.");
                     }
                 }, function (err) {

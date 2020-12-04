@@ -27,9 +27,19 @@ var HeaderComponent = /** @class */ (function () {
             }
         });
         this._messageService.listen().subscribe(function (data) {
+            debugger;
             if (data != 'updateUserName') {
                 _this.initializeHeader();
             }
+            //if (data == "updateHeader")
+            //{
+            //    if (this.isLoggedIn) {
+            //        this.isLoggedIn = false;
+            //    }
+            //    else {
+            //        this.isLoggedIn = true;
+            //    }
+            //}
         });
     };
     HeaderComponent.prototype.onClickGetAds = function () {
@@ -90,6 +100,7 @@ var HeaderComponent = /** @class */ (function () {
             .subscribe(function (data) {
             if (data == "0") {
                 _this.userService.purgeAuth();
+                _this.isLoggedIn = false;
                 _this.router.navigateByUrl('/');
             }
             else {

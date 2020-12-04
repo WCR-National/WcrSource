@@ -9,14 +9,16 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'AngularAssociate/environments/environment';
 import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MessageService } from 'AngularAssociate/app/services/search';
 var AuthComponent = /** @class */ (function () {
-    function AuthComponent(route, router, userService, fb, http, ngZone) {
+    function AuthComponent(route, router, userService, fb, http, ngZone, _messageService) {
         this.route = route;
         this.router = router;
         this.userService = userService;
         this.fb = fb;
         this.http = http;
         this.ngZone = ngZone;
+        this._messageService = _messageService;
         this.authType = '';
         this.title = '';
         this.errors = { errors: {} };
@@ -908,6 +910,7 @@ var AuthComponent = /** @class */ (function () {
                     .attemptVerifiedActivationCodeConsumer(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
+                        _this._messageService.filter("updateUserName");
                         //this.router.navigateByUrl('/login');
                         _this.ngZone.run(function () { return _this.router.navigate(['/consumer-dashboard']); });
                         //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
@@ -1059,7 +1062,7 @@ var AuthComponent = /** @class */ (function () {
             templateUrl: './auth.component.html'
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder,
-            HttpClient, NgZone])
+            HttpClient, NgZone, MessageService])
     ], AuthComponent);
     return AuthComponent;
 }());

@@ -11831,7 +11831,7 @@ body .search-container button:before {
 /* 01. Import Section
 ---------------------------------------------------------------------- */
 /*@import url("bootstrap.css"); /* Default Reset, Typography, Forms, Responsive Grid etc. */ */
-/*@import url("icons.css"); /* Webfont Icons: FontAwesome, Line, Simple Line */
+/*@import url("icons.css"); /* Webfont Icons: Font Awesome 5 Free, Line, Simple Line */
 */
 /*@import url("http://fonts.googleapis.com/css?family=Varela+Round");*/
 -------------------------------------------------------------------
@@ -11933,7 +11933,7 @@ ul.top-bar-menu {
 
     .top-bar-dropdown span:after {
         content: "\f0d7";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 14px;
         color: #fff;
         top: 1px;
@@ -12397,7 +12397,7 @@ ul.footer-links {
         }
 
     .footer-links li:before {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 20px;
         content: "\f105";
         position: absolute;
@@ -12502,7 +12502,7 @@ body #backtotop a {
 
 #backtotop a:after {
     content: "\f106";
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     position: relative;
     display: block;
     top: 50%;
@@ -12725,7 +12725,7 @@ button {
     }
 
     .pick-price.tip:after {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         content: "\f24d";
         line-height: 28px;
     }
@@ -12819,7 +12819,7 @@ button.widget-button {
 .widget-button .like-icon:before,
 .widget-button .like-icon:after {
     transition: opacity 0.3s, transform 0.43s cubic-bezier(.0,-.41,.19,2);
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     position: absolute;
     right: 0;
 }
@@ -12936,7 +12936,7 @@ button.widget-button {
         /* Indicator Arrow */
         #navigation ul li a:after,
         #navigation ul ul li a:after {
-            font-family: "FontAwesome";
+            font-family: "Font Awesome 5 Free";
             opacity: 0.5;
         }
 
@@ -13132,7 +13132,7 @@ button.widget-button {
 
         .user-menu .user-name:after {
             content: "\f107";
-            font-family: "FontAwesome";
+            font-family: "Font Awesome 5 Free";
             transition: 0.2s;
             transform: rotate(0deg);
             display: inline-block;
@@ -14554,7 +14554,7 @@ h4.search-title {
 
     .more-search-options-trigger:before {
         content: "\f055";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         padding-right: 7px;
     }
 
@@ -14808,7 +14808,7 @@ span.like-icon {
 
 .like-icon .tip-content:after,
 .compare-button .tip-content:after {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     content: "\f0da";
     position: absolute;
     top: 50%;
@@ -14847,7 +14847,7 @@ span.like-icon {
 
     .csm-trigger:before {
         content: "\f104";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         display: inline-block;
         transition: 0.3s ease-in-out;
     }
@@ -14872,7 +14872,7 @@ span.like-icon {
 
     .csm-mobile-trigger:before {
         content: "\f00d";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
     }
 
 /* Content */
@@ -15130,7 +15130,7 @@ body #compare-list li div:last-child .clp-title {
         content: "\f00c";
         color: #2ab160;
         font-size: 18px;
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         display: inline-block;
     }
 
@@ -15307,7 +15307,7 @@ span.like-icon {
 .like-icon:before,
 .like-icon:after {
     transition: opacity 0.3s, transform 0.4s cubic-bezier(.0,-.41,.19,2.5);
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     position: absolute;
     right: 0;
 }
@@ -15614,7 +15614,7 @@ ul.listing-details {
 
 .details.button.border:after {
     content: "\f105";
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     font-size: 18px;
     position: absolute;
     opacity: 0;
@@ -15821,7 +15821,7 @@ section.fullwidth {
 
     .checkboxes input[type=checkbox]:checked + label:before {
         content: "\f00c";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 12px;
         color: #fff;
         text-align: center;
@@ -15896,7 +15896,7 @@ section.fullwidth {
 
     .checkboxes input[type=checkbox]:checked + label:before {
         content: "\f00c";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 12px;
         color: #fff;
         text-align: center;
@@ -16049,7 +16049,7 @@ section.fullwidth {
 
             #breadcrumbs ul li:before {
                 content: "\f105";
-                font-family: "FontAwesome";
+                font-family: "Font Awesome 5 Free";
                 color: #a0a0a0;
                 font-size: 14px;
                 margin-right: 15px;
@@ -16567,7 +16567,7 @@ button.mfp-close {
 
 .mfp-gallery .mfp-close:after,
 .mfp-gallery .mfp-close:before {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     font-size: 29px;
     top: 4px;
     left: 50%;
@@ -16598,7 +16598,7 @@ button.mfp-close {
     .og-close:before,
     .mfp-close:after,
     .mfp-close:before {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 29px;
         top: 21px;
         left: 50%;
@@ -16706,7 +16706,7 @@ button.mfp-close {
 
     .mfp-arrow.mfp-arrow-left,
     .mfp-arrow.mfp-arrow-right {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 29px;
     }
 
@@ -17693,7 +17693,7 @@ img.mfp-img {
 
         .chosen-container-single .chosen-single div b:after {
             content: "\f0d7";
-            font-family: "FontAwesome";
+            font-family: "Font Awesome 5 Free";
             font-size: 14px;
             margin: 0 14px 0 0;
             top: -1px;
@@ -17730,7 +17730,7 @@ img.mfp-img {
 
     .chosen-container-single .chosen-search:before {
         content: "\f002";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 15px;
         margin: 0 15px 0 0;
         top: 12px;
@@ -17971,7 +17971,7 @@ img.mfp-img {
 
                 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close:before {
                     content: "\f00d";
-                    font-family: "FontAwesome";
+                    font-family: "Font Awesome 5 Free";
                     font-size: 13px;
                     top: 1px;
                     position: relative;
@@ -18309,7 +18309,7 @@ a.button {
     .list-3 li:before,
     .list-2 li:before,
     .list-1 li:before {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         margin: 0;
         position: relative;
         color: #66676b;
@@ -19081,7 +19081,7 @@ body .notification strong {
 
 .notification.closeable a.close:before {
     content: "\f00d";
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     position: absolute;
     right: 25px;
     top: 0;
@@ -20436,7 +20436,7 @@ body .notification strong {
         left: 35px;
         bottom: -10px;
         content: "\f0dd";
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 42px;
         color: #fff;
         text-shadow: 0px 2px 6px rgba(0,0,0,0.1);
@@ -21099,7 +21099,7 @@ body .notification strong {
     text-align: center;
     border-radius: 50%;
     cursor: pointer;
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
 }
 
     .qtyInc:before {
@@ -49571,8 +49571,8 @@ label {
 .container-fluid {
     margin-right: auto;
     margin-left: auto;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 
@@ -49588,3 +49588,16 @@ label {
 .sl {
     height: 22px;
 }
+
+.bookMarked {
+    background-color: #7d7d7d !important;
+    border: 1px solid #7d7d7d;
+            color:#fff;
+
+}
+
+    .bookMarked:hover, .bookMarked:active, .bookMarked:focus {
+        background-color: #7d7d7db0 !important;
+        border: 1px solid #7d7d7d;
+        color: #fff;
+    }

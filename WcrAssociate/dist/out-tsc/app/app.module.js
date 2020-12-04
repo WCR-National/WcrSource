@@ -35,6 +35,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SalesAdvertisementsComponent } from './components/sales-advertisements/sales-advertisements.component';
 import { SalesAdvertisementsService } from './services/sales-advertisements/sales-advertisements.service';
 import { ServiceProfileComponent } from './components/service-profile/service-profile.component';
+import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -55,7 +56,8 @@ var AppModule = /** @class */ (function () {
                 ProfileComponent,
                 ConsumerDashabordComponent,
                 SalesAdvertisementsComponent,
-                ServiceProfileComponent
+                ServiceProfileComponent,
+                AuthModalComponent
             ],
             imports: [
                 BrowserModule,
@@ -67,7 +69,10 @@ var AppModule = /** @class */ (function () {
                 SharedModule,
                 AppRoutingModule,
                 NgbModule,
-                NgSelectModule
+                NgSelectModule,
+            ],
+            entryComponents: [
+                AuthModalComponent
             ],
             providers: [
                 AuthGuard,

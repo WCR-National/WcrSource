@@ -126,10 +126,10 @@ var ServiceProfileComponent = /** @class */ (function () {
             html += '</a>';
             if (thisStatus.isLoggedInValue == "0") {
                 var params = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
-                html += '<button class="details button border showInterestBookMarkId" data-id="' + params + '" (click)="showInterestBookMark(\'' + params + '\')" > Bookmark </button>';
+                html += '<a class="details button border showInterestBookMarkId" data-id="' + params + '" (click)="showInterestBookMark(\'' + params + '\')" > Bookmark </a>';
             }
             else {
-                html += '<button class="details button border SaveBookmarkId" data-id="' + thisStatus.id + '" (click)="SaveBookmark(\'' + thisStatus.id + '\')" > Bookmark </button>';
+                html += '<a class="details button border SaveBookmarkId" data-id="' + thisStatus.id + '" (click)="SaveBookmark(\'' + thisStatus.id + '\')" > Bookmark </a>';
             }
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
@@ -157,7 +157,7 @@ var ServiceProfileComponent = /** @class */ (function () {
                 html += '<a href="javascript:void(0)" class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '" (click) ="showInterestContactAssociates(\'' + strParamContactAssociateShowInterest + '\')" > Contact Associates < /a>';
             }
             else {
-                html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '" (click) ="ContactAssociate(\'' + strParamContactAssociate + '\')" > Contact Associates </a>';
+                html += '<a href="javascript:void(0)" class="btn button border bookMarked contactAssociateClass" data-id="' + strParamContactAssociate + '" (click) ="ContactAssociate(\'' + strParamContactAssociate + '\')" > Contact Associates </a>';
             }
             html += '<span> Zip Code: ' + item.zipcode + '</span>';
             html += '</div>';
@@ -170,68 +170,6 @@ var ServiceProfileComponent = /** @class */ (function () {
         this.InitializeEventsDynamicHtml();
         //gridLayoutSwitcher();
     };
-    ServiceProfileComponent.prototype.ContactAssociates = function (advIdAndAssociateId) {
-        var _this = this;
-        debugger;
-        var _returnValue;
-        var adverID;
-        var associateID;
-        var jobtypeID;
-        var zipcode;
-        var array = advIdAndAssociateId.split(",");
-        for (var i in array) {
-            if (parseInt(i) == 0) {
-                if (array[parseInt(i)] == '') {
-                }
-                else {
-                    adverID = array[parseInt(i)];
-                }
-            }
-            else if (parseInt(i) == 1) {
-                if (array[parseInt(i)] == '') {
-                }
-                else {
-                    associateID = array[parseInt(i)];
-                }
-            }
-            else if (parseInt(i) == 2) {
-                if (array[parseInt(i)] == '') {
-                }
-                else {
-                    jobtypeID = array[i];
-                }
-            }
-            else if (parseInt(i) == 3) {
-                if (array[parseInt(i)] == '') {
-                }
-                else {
-                    zipcode = array[parseInt(i)];
-                }
-            }
-        }
-        this.salesAdvertisements
-            .InsertConsumerInterest(adverID, associateID, jobtypeID, zipcode)
-            .subscribe(function (data) {
-            _this.salesAdvertisements
-                .SendConsumerDetail(associateID, adverID, jobtypeID, zipcode)
-                .subscribe(function (data1) {
-                if (data.d == "1") {
-                    //$("#msg" + pnlID).css("display", "block");
-                    setTimeout(function () {
-                        //window.location.reload();
-                        //$('#msg' + pnlID).fadeOut('fast');
-                    }, 2000);
-                }
-                else if (data.d == "0") {
-                    _this.showToast("danger", "Already exist");
-                }
-                else if (data.d == "3") {
-                    _this.showToast("danger", "OOPS Error ! Please try again.");
-                }
-            });
-        }, function (err) {
-        });
-    };
     ServiceProfileComponent.prototype.InitializeEventsDynamicHtml = function () {
         var thisStatus = this;
         $('.SaveBookmarkId').click(function () {
@@ -242,16 +180,16 @@ var ServiceProfileComponent = /** @class */ (function () {
                 .ConsumerIsLogin()
                 .subscribe(function (data) {
                 debugger;
-                if (data.d == 0) {
+                if (data.d > 0) {
                     thisStatus.salesAdvertisements
                         .UpdateSavedBookmarks(advId)
                         .subscribe(function (data) {
                         if (data.d == "0") {
-                            $(_this).prop("disabled", true);
+                            $(_this).addClass('bookMarked');
                             thisStatus.showToast('warning', "You have already saved this advertisement.");
                         }
                         else {
-                            $(_this).prop("disabled", true);
+                            $(_this).addClass('bookMarked');
                             thisStatus.showToast('success', "Advertisement bookmarked successfully.");
                         }
                     }, function (err) {
@@ -316,7 +254,7 @@ var ServiceProfileComponent = /** @class */ (function () {
                     if (data.d == "0") {
                         $('.SaveBookmarkId').each(function () {
                             if (advId == $(this).attr('data-id')) {
-                                $(this).prop("disabled", true);
+                                $(this).addClass("bookMarked");
                             }
                         });
                         thisStatus.showToast('warning', "You have already saved this advertisement.");
@@ -324,7 +262,7 @@ var ServiceProfileComponent = /** @class */ (function () {
                     else {
                         $('.SaveBookmarkId').each(function () {
                             if (advId == $(this).attr('data-id')) {
-                                $(this).prop("disabled", true);
+                                $(this).addClass("bookMarked");
                             }
                         });
                         thisStatus.showToast('success', "Advertisement bookmarked successfully.");
@@ -358,6 +296,69 @@ var ServiceProfileComponent = /** @class */ (function () {
         modal.componentInstance.updateParentCall.subscribe(function (data) {
             debugger;
             _this.showToast('success', 'Purchasing is in process');
+        });
+    };
+    ServiceProfileComponent.prototype.ContactAssociates = function (advIdAndAssociateId) {
+        var _this = this;
+        debugger;
+        var _returnValue;
+        var adverID;
+        var associateID;
+        var jobtypeID;
+        var zipcode;
+        var array = advIdAndAssociateId.split(",");
+        for (var i in array) {
+            if (parseInt(i) == 0) {
+                if (array[parseInt(i)] == '') {
+                }
+                else {
+                    adverID = array[parseInt(i)];
+                }
+            }
+            else if (parseInt(i) == 1) {
+                if (array[parseInt(i)] == '') {
+                }
+                else {
+                    associateID = array[parseInt(i)];
+                }
+            }
+            else if (parseInt(i) == 2) {
+                if (array[parseInt(i)] == '') {
+                }
+                else {
+                    jobtypeID = array[i];
+                }
+            }
+            else if (parseInt(i) == 3) {
+                if (array[parseInt(i)] == '') {
+                }
+                else {
+                    zipcode = array[parseInt(i)];
+                }
+            }
+        }
+        this.salesAdvertisements
+            .InsertConsumerInterest(adverID, associateID, jobtypeID, zipcode)
+            .subscribe(function (data) {
+            _this.salesAdvertisements
+                .SendConsumerDetail(associateID, adverID, jobtypeID, zipcode)
+                .subscribe(function (data1) {
+                if (data.d == "1") {
+                    //$("#msg" + pnlID).css("display", "block");
+                    //setTimeout(function () {
+                    //    //window.location.reload();
+                    //    //$('#msg' + pnlID).fadeOut('fast');
+                    //}, 2000);
+                    _this.showToast("success", "Agent has been notified. For Additional Questions, please contact support at 866.456.7331.");
+                }
+                else if (data.d == "0") {
+                    _this.showToast("danger", "Already exist");
+                }
+                else if (data.d == "3") {
+                    _this.showToast("danger", "OOPS Error ! Please try again.");
+                }
+            });
+        }, function (err) {
         });
     };
     ServiceProfileComponent.prototype.ContactAssociate = function (advIdnAndAssociateId) {

@@ -110,7 +110,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                     else {
                         this.isLoggedInValue = "1";
                     }
-                }
+                }  
             );
     }
 
@@ -265,7 +265,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                 html += '<a href = "javascript:void(0)" class="details button border showInterestBookMarkClass" data-id="' + params + '" (click)="showInterestBookMark(\'' + params + '\')" > Bookmark </a>';
             }
             else {
-                html += '<a href = "javascript:void(0)" class="details button border saveBookmarkClass" data-id="' + item.advertisementID + '" (click) = "SaveBookmark(\'' + item.advertisementID + '\')" > Bookmark </a>';
+                html += '<a href = "javascript:void(0)" class="details button border bookMarked saveBookmarkClass" data-id="' + item.advertisementID + '" (click) = "SaveBookmark(\'' + item.advertisementID + '\')" > Bookmark </a>';
             }
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
@@ -372,7 +372,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                 .subscribe(
                     (data) => {
 
-                        if (data.d == 0) {
+                        if (data.d > 0) {
                             thisStatus.salesAdvertisements
                                 .UpdateSavedBookmarks(advId)
                                 .subscribe(
@@ -381,18 +381,18 @@ export class SalesAdvertisementsComponent implements OnInit {
                                         if (data.d == "0") {
                                             $('.saveBookmarkClass').each(function () {
                                                 if (advId == $(this).attr('data-id')) {
-                                                    $(this).prop("disabled", true);
+                                                    $(this).addClass('bookMarked');
                                                 }
                                             });
                                             thisStatus.showToast('warning', "You have already saved this advertisement.");
                                         }
                                         else {
-
                                             $('.saveBookmarkClass').each(function () {
                                                 if (advId == $(this).attr('data-id')) {
-                                                    $(this).prop("disabled", true);
+                                                    $(this).addClass('bookMarked');
                                                 }
                                             });
+
                                             thisStatus.showToast('success', "Advertisement bookmarked successfully.");
                                         }
                                     },
@@ -406,10 +406,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                         }
                     }
                 );
-
-
         });
-
     }
 
     ContactAssociate(advIdAndAssociateId, pnlID = 0) {
@@ -504,6 +501,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                                     //    //$('#msg' + pnlID).fadeOut('fast');
                                     //}, 2000);
 
+                                    this.showToast("success", "Agent has been notified. For Additional Questions, please contact support at 866.456.7331.")
 
                                 }
                                 else if (data.d == "0") {
@@ -536,13 +534,20 @@ export class SalesAdvertisementsComponent implements OnInit {
 
                                     if (data.d == "0") {
 
-                                        $("#bookmarkId" + advId).prop("disabled", true);
+                                        $('.saveBookmarkClass').each(function () {
+                                            if (advId == $(this).attr('data-id')) {
+                                                $(this).addClass('bookMarked');
+                                            }
+                                        });
                                         this.showToast('warning', "You have already saved this advertisement.");
                                     }
                                     else {
 
-                                        $("#bookmarkId" + advId).prop("disabled", true);
-                                        this.showToast('success', "Advertisement bookmarked successfully.");
+                                        $('.saveBookmarkClass').each(function () {
+                                            if (advId == $(this).attr('data-id')) {
+                                                $(this).addClass('bookMarked');
+                                            }
+                                        });                                        this.showToast('success', "Advertisement bookmarked successfully.");
                                     }
                                 },
                                 err => {
