@@ -175,7 +175,7 @@
     <Content Include="AngularAssociate\assets\js\bootstrap.bundle.min.js" />
     <Content Include="AngularAssociate\assets\js\croppie.min.js" />
     <Content Include="AngularAssociate\assets\js\imguploader.js" />
-    <Content Include="AngularAssociate\assets\js\main.js" />
+    <Content Include="AngularAssociate\assets\js\main_custom.js" />
     <Content Include="AngularAssociate\assets\js\mmenu.min.js" />
     <Content Include="AngularAssociate\assets\js\owl.carousel.min.js" />
     <Content Include="AngularAssociate\assets\js\select2.min.js" />

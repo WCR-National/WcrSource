@@ -30,13 +30,14 @@ const routes: Routes = [
         path: '',
         component: SharedLayoutComponent,
         children: [
-            {
-                path: '', component: ConsumerDashabordComponent, canActivate: [AuthGuard]
-            },
+            
             {
                 path: '',
                 component: HomeComponent,
                 canActivate: [NoAuthGuard]
+            },
+            {
+                path: '', component: ConsumerDashabordComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'login',
