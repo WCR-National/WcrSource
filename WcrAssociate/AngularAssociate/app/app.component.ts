@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
         setTimeout(function () {
             mmenuInit();
             $(window).resize(function () { mmenuInit(); });
-        }, 1200);
+        }, 3000);
 
 
         /*  User Menu */

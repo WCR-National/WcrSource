@@ -12,7 +12,7 @@ function myTest() {
 //});
 
 function mmenuInit() {
-
+    debugger;
     var wi = $(window).width();
     if (wi <= '992') {
 
