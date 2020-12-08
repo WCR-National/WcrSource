@@ -110,7 +110,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                     else {
                         this.isLoggedInValue = "1";
                     }
-                }  
+                }
             );
     }
 
@@ -547,7 +547,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                                             if (advId == $(this).attr('data-id')) {
                                                 $(this).addClass('bookMarked');
                                             }
-                                        });                                        this.showToast('success', "Advertisement bookmarked successfully.");
+                                        }); this.showToast('success', "Advertisement bookmarked successfully.");
                                     }
                                 },
                                 err => {
@@ -565,54 +565,53 @@ export class SalesAdvertisementsComponent implements OnInit {
 
     onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId): void {
 
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        const modalComponent: AuthModalComponent = modal.componentInstance;
+        //const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        //const modalComponent: AuthModalComponent = modal.componentInstance;
 
-        modal.componentInstance.dismissParentCall.subscribe((data) => {
-            console.log(data);
-            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
-                if (data == "update") {
-                    this.isLoggedInValue = "1";
-                    this.SaveBookmark(advId);
-                }
-                else {
-                    this.isLoggedInValue = "0";
-                    this.showToast('danger', "Something went wrong. Please try again. Refresh page");
-                }
-            }
-        });
+        //modal.componentInstance.dismissParentCall.subscribe((data) => {
+        //    console.log(data);
+        //    if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+        //        if (data == "update") {
+        //            this.isLoggedInValue = "1";
+        //            this.SaveBookmark(advId);
+        //        }
+        //        else {
+        //            this.isLoggedInValue = "0";
+        //            this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+        //        }
+        //    }
+        //});
 
-        modal.componentInstance.updateParentCall.subscribe((data) => {
-            debugger;
-
-            this.showToast('success', 'Purchasing is in process');
-        });
+        //modal.componentInstance.updateParentCall.subscribe((data) => {
+        //    debugger;
+        //    this.showToast('success', 'Purchasing is in process');
+        //});
 
     }
 
     onOpenModalClickAssociate(advIdnAndAssociateId): void {
 
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        const modalComponent: AuthModalComponent = modal.componentInstance;
+        //const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        //const modalComponent: AuthModalComponent = modal.componentInstance;
 
-        modal.componentInstance.dismissParentCall.subscribe((data) => {
-            console.log(data);
+        //modal.componentInstance.dismissParentCall.subscribe((data) => {
+        //    console.log(data);
 
-            if (data == "update") {
-                //book
-                this.isLoggedInValue = "1";
-                this.ContactAssociate(advIdnAndAssociateId);
-            }
-            else {
-                this.isLoggedInValue = "0";
-                this.showToast('danger', "Something went wrong. Please try again.");
-            }
-        });
+        //    if (data == "update") {
+        //        //book
+        //        this.isLoggedInValue = "1";
+        //        this.ContactAssociate(advIdnAndAssociateId);
+        //    }
+        //    else {
+        //        this.isLoggedInValue = "0";
+        //        this.showToast('danger', "Something went wrong. Please try again.");
+        //    }
+        //});
 
-        modal.componentInstance.updateParentCall.subscribe((data) => {
-            debugger;
-            this.showToast('success', 'Purchasing is in process');
-        });
+        //modal.componentInstance.updateParentCall.subscribe((data) => {
+        //    debugger;
+        //    this.showToast('success', 'Purchasing is in process');
+        //});
 
     }
 

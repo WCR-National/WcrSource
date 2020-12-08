@@ -1862,8 +1862,8 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\profile\profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth-modal\auth-modal.component.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\components\service-profile\service-profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\sales-advertisements\sales-advertisements.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\components\service-profile\service-profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\support\support.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\consumer-dashboard\consumer-dashboard.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\landing-registration\landing-registration.component.ts" />
