@@ -890,7 +890,7 @@ export class ListPropertiesComponent implements OnInit {
                         var resultJson: any = [];
                         var dataJson = JSON.parse(json);
 
-                        if (dataJson.NewDataSet.MyCategories != null) {
+                        if (dataJson.NewDataSet != null) {
                             if (!Array.isArray(dataJson.NewDataSet.MyCategories)) {
                                 resultJson.push(dataJson.NewDataSet.MyCategories);
                                 dataJson.NewDataSet.MyCategories = resultJson;
