@@ -23,6 +23,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import { SalesAdvertisementsComponent } from './components/sales-advertisements/sales-advertisements.component';
 import { ServiceProfileComponent } from './components/service-profile/service-profile.component';
+import { PropertySalesAdvertisementsComponent } from './components/property-sales-advertisement/property-sales-advertisement.component';
 
 
 const routes: Routes = [
@@ -98,14 +99,21 @@ const routes: Routes = [
                 //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                 path: 'sales-advertisements', ///:category/:id/:zipcode/:name/:jtype/:catName
                 component: SalesAdvertisementsComponent,
-                canActivate: [AuthGuard]
+                canActivate: [NoAuthGuard]
             },
             {
                 //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                 path: 'service-profile', //:category/:id/:zipcode/:name/:jtype/:catName
                 component: ServiceProfileComponent,
-                canActivate: [AuthGuard]
-            }
+                canActivate: [NoAuthGuard]
+            },
+            {
+                //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
+                path: 'property-sale-advertisement', //:category/:id/:zipcode/:name/:jtype/:catName
+                component: PropertySalesAdvertisementsComponent,
+                canActivate: [NoAuthGuard]
+            },
+            { path: '**', component: HomeComponent }
         ]
     }
 ];

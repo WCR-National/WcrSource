@@ -34,6 +34,11 @@ export class ServiceProfileComponent implements OnInit {
     public IsDataFound = true;
     public dataServicesList;
 
+    public isTabMortgageStart: boolean = true;
+    public isTabInsuranceStart: boolean = true;
+    public isMultiFamilyStartCS: boolean = true;
+    public isTabRealtorsStart: boolean = true;
+    @ViewChild('ctdTabset') ctdTabset;
 
     constructor(private fb: FormBuilder, private renderer: Renderer2, private searchService: SearchService, @Inject(PLATFORM_ID) private platformId: Object,
         private _messageService: MessageService, private router: Router, private salesAdvertisements: SalesAdvertisementsService, private xmlToJson: XMLToJSON,
@@ -42,8 +47,11 @@ export class ServiceProfileComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.checkUserIsLogin();
+
         //this.show_check = true;
         //$('html, body').animate({ scrollTop: $('#header-container').offset().top }, 'slow');
+
         this.route.url.subscribe(data => {
             debugger;
         });
@@ -63,6 +71,31 @@ export class ServiceProfileComponent implements OnInit {
 
             });
     }
+
+
+    checkUserIsLogin() {
+        this.salesAdvertisements
+            .ConsumerIsLogin()
+            .subscribe(
+                (data) => {
+
+                    if (data.d == 0) {
+                        this.isLoggedInValue = "0";
+                    }
+                    else {
+                        this.isLoggedInValue = "1";
+                    }
+                }
+            );
+    }
+
+    GetSalesAdvFromTabs(id) {
+
+        this.isloadingIconVisible = true;
+        this.GetSalesAdvListings(id, this.zipcode, this.name, this.jtype, this.catName);
+       
+    }
+
 
     GetSalesAdvListings(id, zipcode, name, jtype, catName) {
         debugger;
@@ -84,20 +117,22 @@ export class ServiceProfileComponent implements OnInit {
                             if (typeof (dataJson.NewDataSet.GetServicesList) == "object") { // Returns: "object"
 
                                 this.dataServicesList.push(dataJson.NewDataSet.GetServicesList);
-                                this.AddListOfServices(this.dataServicesList);
+                                this.AddListOfServices(this.dataServicesList, id);
 
                             }
                             else {
                                 $.each(dataJson.NewDataSet.GetServicesList, function (index, item) {
                                     this.dataServicesList.push(item);
                                 });
-                                this.AddListOfServices(this.dataServicesList);
+                                this.AddListOfServices(this.dataServicesList, id);
                             }
                         }
-                        this.IsDataFound = true;
                     }
                     else {
                         this.IsDataFound = false;
+                        this.isTabMortgageStart = false;
+                        this.isTabInsuranceStart = false;
+                        this.isTabRealtorsStart = false;
                     }
 
                     setTimeout(function () {
@@ -110,7 +145,7 @@ export class ServiceProfileComponent implements OnInit {
             });
     }
 
-    AddListOfServices(dataServicesLst) {
+    AddListOfServices(dataServicesLst, id) {
 
         $('#innerHtmlListServicesId').html('');
         let count = 0;
@@ -154,11 +189,18 @@ export class ServiceProfileComponent implements OnInit {
             html += item.cityID + ". " + item.StateID + ", " + item.zipcode
             html += '</a>';
             if (thisStatus.isLoggedInValue == "0") {
+
                 var params = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
                 html += '<a class="details button border showInterestBookMarkId" data-id="' + params + '" (click)="showInterestBookMark(\'' + params + '\')" > Bookmark </a>';
             }
             else {
-                html += '<a class="details button border SaveBookmarkId" data-id="' + thisStatus.id + '" (click)="SaveBookmark(\'' + thisStatus.id + '\')" > Bookmark </a>';
+                if (item.consumerID != null) {
+                    html += '<a class="details button border bookMarked SaveBookmarkId" data-id="' + thisStatus.id + '" data-zipcode="' + item.zipcode +'" > Bookmark </a>';
+                }
+                else {
+                    html += '<a class="details button border SaveBookmarkId" data-id="' + thisStatus.id + '"  > Bookmark </a>';
+
+                }
             }
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
@@ -190,10 +232,10 @@ export class ServiceProfileComponent implements OnInit {
             var strParamContactAssociate = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count;
 
             if (thisStatus.isLoggedInValue == "0") {
-                html += '<a href="javascript:void(0)" class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '" (click) ="showInterestContactAssociates(\'' + strParamContactAssociateShowInterest + '\')" > Contact Associates < /a>';
+                html += '<a href="javascript:void(0)" class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '"> Contact Associates </a>';
             }
             else {
-                html += '<a href="javascript:void(0)" class="btn button border bookMarked contactAssociateClass" data-id="' + strParamContactAssociate + '" (click) ="ContactAssociate(\'' + strParamContactAssociate + '\')" > Contact Associates </a>';
+                html += '<a href="javascript:void(0)" class="btn button border bookMarked contactAssociateClass" data-id="' + strParamContactAssociate + '" > Contact Associates </a>';
             }
             html += '<span> Zip Code: ' + item.zipcode + '</span>';
             html += '</div>';
@@ -203,7 +245,20 @@ export class ServiceProfileComponent implements OnInit {
             html += '</div>';
             count++;
         });
-        $('#innerHtmlListServicesId').html(html);
+
+        if (id == 1) {
+            $('#innerHtmlListMortgageId').html(html);
+            this.isTabMortgageStart = false;
+        }
+        else if (id == 2) {
+            $('#innerHtmlListInsuranceId').html(html);
+            this.isTabInsuranceStart = false;
+        }
+        else if (id == 3) {
+            $('#innerHtmlListRealtorsId').html(html);
+            this.isTabRealtorsStart = false;
+        }
+        //$('#innerHtmlListServicesId').html(html);
         this.InitializeEventsDynamicHtml();
         //gridLayoutSwitcher();
     }
@@ -215,84 +270,90 @@ export class ServiceProfileComponent implements OnInit {
         $('.SaveBookmarkId').click(function () {
 
             var advId = $(this).attr('data-id');
+            var zipcode = $(this).attr('data-zipcode');
+
             debugger;
             thisStatus.salesAdvertisements
-                .ConsumerIsLogin()
+                .UpdateSavedBookmarksService(advId, zipcode)
                 .subscribe(
-                    (data) => {
-                        debugger;
+                    data => {
 
-                        if (data.d > 0) {
-                            thisStatus.salesAdvertisements
-                                .UpdateSavedBookmarks(advId)
-                                .subscribe(
-                                    data => {
+                        if (data.d == "0") {
+                            $(this).addClass('bookMarked');
 
-                                        if (data.d == "0") {
-                                            $(this).addClass('bookMarked');
-
-                                            thisStatus.showToast('warning', "You have already saved this advertisement.");
-                                        }
-                                        else {
-                                            $(this).addClass('bookMarked');
-                                            thisStatus.showToast('success', "Advertisement bookmarked successfully.");
-                                        }
-                                    },
-                                    err => {
-                                    }
-                                );
+                            thisStatus.showToast('warning', "You have already saved this advertisement.");
                         }
                         else {
-                            thisStatus.showToast("danger", "You need to sign in");
-                            thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+                            $(this).addClass('bookMarked');
+                            thisStatus.showToast('success', "Advertisement bookmarked successfully.");
                         }
-                    });
+                    },
+                    err => {
+                    }
+            );
+
+            //thisStatus.salesAdvertisements
+            //    .ConsumerIsLogin()
+            //    .subscribe(
+            //        (data) => {
+            //            debugger;
+
+            //            if (data.d > 0) {
+                            
+            //            }
+            //            else {
+            //                thisStatus.showToast("danger", "You need to sign in");
+            //                thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+            //            }
+            //        });
         });
 
         $('.showInterestBookMarkId').click(function () {
             var advId = $(this).attr('data-id');
-            thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+            var zipcode = $(this).attr('data-zipcode');
+            thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId, zipcode);
         });
 
         $('.contactAssociateClass').click(function () {
 
             var advIdAndAssociateId = $(this).attr('data-id');
-            thisStatus
-                .salesAdvertisements
-                .ConsumerIsLogin()
+            thisStatus.salesAdvertisements
+                .CheckEmailAndPhNo()
                 .subscribe(
-                    (data) => {
+                    (data1) => {
                         debugger;
 
-                        if (data.d > 0) {
+                        if (thisStatus.isLoggedInValue == "0") {
 
-                            thisStatus.salesAdvertisements
-                                .CheckEmailAndPhNo()
-                                .subscribe(
-                                    (data1) => {
-                                        debugger;
-
-                                        if (thisStatus.isLoggedInValue == "0") {
-
-                                        }
-                                        else if (thisStatus.isLoggedInValue == "1") {
-                                            thisStatus.ContactAssociates(advIdAndAssociateId);
-                                        }
-                                        else {
-                                            thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
-                                            thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
-                                        }
-                                    },
-                                    err => {
-                                        return false;
-                                    }
-                                );
+                        }
+                        else if (thisStatus.isLoggedInValue == "1") {
+                            thisStatus.ContactAssociates(advIdAndAssociateId);
                         }
                         else {
-                            thisStatus.showToast("danger", "You need to sign in");
-                            thisStatus.onOpenModalClickAssociate(advIdAndAssociateId);
+                            thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
+                            thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
                         }
-                    });
+                    },
+                    err => {
+                        return false;
+                    }
+                );
+            //thisStatus
+            //    .salesAdvertisements
+            //    .ConsumerIsLogin()
+            //    .subscribe(
+            //        (data) => {
+            //            debugger;
+
+            //            if (data.d > 0) {
+
+                            
+            //            }
+            //            else {
+            //                thisStatus.showToast("danger", "You need to sign in");
+            //                thisStatus.onOpenModalClickAssociate(advIdAndAssociateId);
+            //            }
+            //        });
         });
 
         $('.contactAssociateInterestClass').click(function () {
@@ -303,71 +364,84 @@ export class ServiceProfileComponent implements OnInit {
         });
     }
 
-    SaveBookmark(advId) {
+    SaveBookmark(advId, zipcode) {
+        
         let thisStatus = this;
         thisStatus.salesAdvertisements
-            .ConsumerIsLogin()
+            .UpdateSavedBookmarksService(advId, zipcode)
             .subscribe(
-                (data) => {
-                    debugger;
+                data => {
 
-                    if (data.d == 0) {
-                        thisStatus.salesAdvertisements
-                            .UpdateSavedBookmarks(advId)
-                            .subscribe(
-                                data => {
-
-                                    if (data.d == "0") {
-                                        $('.SaveBookmarkId').each(function () {
-                                            if (advId == $(this).attr('data-id')) {
-                                                $(this).addClass("bookMarked");
-                                            }
-                                        });
-                                        thisStatus.showToast('warning', "You have already saved this advertisement.");
-                                    }
-                                    else {
-                                        $('.SaveBookmarkId').each(function () {
-                                            if (advId == $(this).attr('data-id')) {
-                                                $(this).addClass("bookMarked");
-                                            }
-                                        }); thisStatus.showToast('success', "Advertisement bookmarked successfully.");
-                                    }
-                                },
-                                err => {
-                                }
-                            );
+                    if (data.d == "0") {
+                        $('.SaveBookmarkId').each(function () {
+                            if (advId == $(this).attr('data-id')) {
+                                $(this).addClass("bookMarked");
+                            }
+                        });
+                        thisStatus.showToast('warning', "You have already saved this advertisement.");
                     }
                     else {
-                        thisStatus.showToast("danger", "You need to sign in");
-                        thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+                        $('.SaveBookmarkId').each(function () {
+                            if (advId == $(this).attr('data-id')) {
+                                $(this).addClass("bookMarked");
+                            }
+                        }); thisStatus.showToast('success', "Advertisement bookmarked successfully.");
                     }
-                });
+                },
+                err => {
+                }
+            );
+        //thisStatus.salesAdvertisements
+        //    .ConsumerIsLogin()
+        //    .subscribe(
+        //        (data) => {
+        //            debugger;
+
+        //            if (data.d == 0) {
+                        
+        //            }
+        //            else {
+        //                thisStatus.showToast("danger", "You need to sign in");
+        //                thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+        //            }
+        //        });
     }
 
-    onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId): void {
+    onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId, zipcode): void {
 
-        //const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        //const modalComponent: AuthModalComponent = modal.componentInstance;
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        (modal.componentInstance as AuthModalComponent).isBookmark = true;
 
-        //modal.componentInstance.dismissParentCall.subscribe((data) => {
-        //    console.log(data);
-        //    if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
-        //        if (data == "update") {
-        //            this.isLoggedInValue = "1";
-        //            this.SaveBookmark(advId);
-        //        }
-        //        else {
-        //            this.isLoggedInValue = "0";
-        //            this.showToast('danger', "Something went wrong. Please try again. Refresh page");
-        //        }
-        //    }
-        //});
+        const modalComponent: AuthModalComponent = modal.componentInstance;
 
-        //modal.componentInstance.updateParentCall.subscribe((data) => {
-        //    debugger;
+        modal.componentInstance.dismissParentCall.subscribe((data) => {
+            console.log(data);
+            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+                if (data == "update") {
+                    this.isLoggedInValue = "1";
+                    this.SaveBookmark(advId, zipcode);
+                }
+                else {
+                    this.isLoggedInValue = "0";
+                    this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+                }
+            }
+        });
 
-        //    this.showToast('success', 'Purchasing is in process');
-        //});
+        modal.componentInstance.updateParentCall.subscribe((data) => {
+            debugger;
+            this.showToast('success', 'Saving Bookmark is in process');
+            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+                if (data == "update") {
+                    this.isLoggedInValue = "1";
+                    this.SaveBookmark(advId, zipcode);
+                }
+                else {
+                    this.isLoggedInValue = "0";
+                    this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+                }
+            }
+        });
 
     }
 
@@ -446,67 +520,69 @@ export class ServiceProfileComponent implements OnInit {
     ContactAssociate(advIdnAndAssociateId)
     {
         var thisStatus = this;
-        var advIdAndAssociateId = $(this).attr('data-id');
-        thisStatus
-            .salesAdvertisements
-            .ConsumerIsLogin()
+        //var advIdnAndAssociateId = $(this).attr('data-id');
+        thisStatus.salesAdvertisements
+            .CheckEmailAndPhNo()
             .subscribe(
-                (data) => {
+                (data1) => {
                     debugger;
 
-                    if (data.d > 0) {
+                    if (thisStatus.isLoggedInValue == "0") {
 
-                        thisStatus.salesAdvertisements
-                            .CheckEmailAndPhNo()
-                            .subscribe(
-                                (data1) => {
-                                    debugger;
-
-                                    if (thisStatus.isLoggedInValue == "0") {
-
-                                    }
-                                    else if (thisStatus.isLoggedInValue == "1") {
-                                        thisStatus.ContactAssociates(advIdAndAssociateId);
-                                    }
-                                    else {
-                                        thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
-                                        thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
-                                    }
-                                },
-                                err => {
-                                    return false;
-                                }
-                            );
+                    }
+                    else if (thisStatus.isLoggedInValue == "1") {
+                        thisStatus.ContactAssociates(advIdnAndAssociateId);
                     }
                     else {
-                        thisStatus.showToast("danger", "You need to sign in");
-                        thisStatus.onOpenModalClickAssociate(advIdAndAssociateId);
+                        thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
+                        thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
                     }
-                });
+                },
+                err => {
+                    return false;
+                }
+            );
+        //thisStatus
+        //    .salesAdvertisements
+        //    .ConsumerIsLogin()
+        //    .subscribe(
+        //        (data) => {
+        //            debugger;
+
+        //            if (data.d > 0) {
+
+
+        //            }
+        //            else {
+        //                thisStatus.showToast("danger", "You need to sign in");
+        //                thisStatus.onOpenModalClickAssociate(advIdAndAssociateId);
+        //            }
+        //        });
     }
 
     onOpenModalClickAssociate(advIdnAndAssociateId): void
     {
-        //const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        //const modalComponent: AuthModalComponent = modal.componentInstance;
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        (modal.componentInstance as AuthModalComponent).isContactAssociate = true;
+        const modalComponent: AuthModalComponent = modal.componentInstance;
 
-        //modal.componentInstance.dismissParentCall.subscribe((data) => {
-        //    console.log(data);
-        //    if (data == "update") {
-        //        //book
-        //        this.isLoggedInValue = "1";
-        //        this.ContactAssociate(advIdnAndAssociateId);
-        //    }
-        //    else {
-        //        this.isLoggedInValue = "0";
-        //        this.showToast('danger', "Something went wrong. Please try again.");
-        //    }
-        //});
+        modal.componentInstance.dismissParentCall.subscribe((data) => {
+            console.log(data);
+            if (data == "update") {
+                //book
+                this.isLoggedInValue = "1";
+                this.ContactAssociate(advIdnAndAssociateId);
+            }
+            else {
+                this.isLoggedInValue = "0";
+                this.showToast('danger', "Something went wrong. Please try again.");
+            }
+        });
 
-        //modal.componentInstance.updateParentCall.subscribe((data) => {
-        //    debugger;
-        //    this.showToast('success', 'Purchasing is in process');
-        //});
+        modal.componentInstance.updateParentCall.subscribe((data) => {
+            debugger;
+            this.showToast('success', 'Purchasing is in process');
+        });
     }
 
     showToast(toastrType, text) {
@@ -591,7 +667,7 @@ export class ServiceProfileComponent implements OnInit {
 
     }
 
-    insertionBookmarksinContactAssociates(advId)
+    insertionBookmarksinContactAssociates(advId, zipcode)
     {
         let thisStatus = this;
         thisStatus.salesAdvertisements
@@ -602,7 +678,7 @@ export class ServiceProfileComponent implements OnInit {
 
                     if (data.d == 0) {
                         thisStatus.salesAdvertisements
-                            .UpdateSavedBookmarks(advId)
+                            .UpdateSavedBookmarksService(advId, zipcode)
                             .subscribe(
                                 data => {
 
@@ -628,7 +704,7 @@ export class ServiceProfileComponent implements OnInit {
                     }
                     else {
                         thisStatus.showToast("danger", "You need to sign in");
-                        thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+                        thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId, zipcode);
                     }
                 });
     }
