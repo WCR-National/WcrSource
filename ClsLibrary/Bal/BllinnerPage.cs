@@ -124,12 +124,12 @@ namespace ClsLibrary.Bal
         /// <param name="adID"></param>
         /// <returns></returns>
 
-        public string SelectFullDetail(int adID)
+        public string SelectFullDetail(int adID, int consumerId = 0)
         {
             DllinnerPage objDal = new DllinnerPage();
             try
             {
-                return objDal.AdvertisementDetail(adID);
+                return objDal.AdvertisementDetail(adID, consumerId);
             }
             catch (Exception info)
             {

@@ -1473,10 +1473,12 @@
                         cartd.push("<span class='price'>Zipcode:- " + $(docs).find("zipcode").text() + " </span>");
                         if (hidLogin.value == "0") {
                             //cartd.push("<a class='btn btn-block btn-primary' href='#' data-toggle='modal' data-yourparameter='1' data-target='#choose-consumer'> Contact Associate </a><a class='btn btn-block btn-primary' href='#' data-toggle='modal' data-yourparameter='2' data-target='#choose-consumer'><i class='fa fa-bookmark-o'></i> Bookmark </a>");
-                            cartd.push("<input type='button' class='btn btn-block btn-primary'    onclick=showinterest1(" + CategoryID + "," + $(docs).find("associateid").text() + ",2," + $(docs).find("zipcode").text() + "," + cnt + ",1) value='Contact Associate'> <button class='btn btn-block btn-primary' onclick=showinterest1(" + CategoryID + "," + $(docs).find("associateid").text() + ",2," + $(docs).find("zipcode").text() + "," + cnt + ",2)><i class='fa fa-bookmark-o'></i>    Bookmark </button> ");
+                            cartd.push("<input type='button' class='btn btn-block btn-primary'    onclick=showinterest1(" + CategoryID + "," + $(docs).find("associateid").text() + ",2," + $(docs).find("zipcode").text() + "," + cnt + ",1) value='Contact Associate'>
+                                < button class= 'btn btn-block btn-primary' onclick = showinterest1(" + CategoryID + ", " + $(docs).find("associateid").text() + ", 2, " + $(docs).find("zipcode").text() + ", " + cnt + ", 2) > <i class='fa fa-bookmark-o'></i>    Bookmark </button > ");
                         }
                         else {
-                            cartd.push("<button class='btn btn-block btn-primary' onclick=InterestedConsumers('" + CategoryID + "," + $(docs).find("associateid").text() + ",2," + $(docs).find("zipcode").text() + "'," + cnt + ") id='btnContactAssociate'> Contact Associate </button><button onclick=BookMarkInsert('" + CategoryID + "') class='btn btn-block btn-primary btn-default enabled'> <i class='fa fa-bookmark-o'></i>  Bookmark </button>");
+                            cartd.push("<button class='btn btn-block btn-primary' onclick=InterestedConsumers('" + CategoryID + "," + $(docs).find("associateid").text() + ",2," + $(docs).find("zipcode").text() + "'," + cnt + ") id='btnContactAssociate'> Contact Associate </button>
+                                < button onclick = BookMarkInsert('" + CategoryID + "') class= 'btn btn-block btn-primary btn-default enabled' > <i class='fa fa-bookmark-o'></i>  Bookmark </button > ");
                         }
                         //cartd.push(" <button class='btn btn-block btn-primary'> Contact Associate </button>");
                         //cartd.push("<button class='btn btn-block btn-primary'> <i class='fa fa-bookmark-o'></i>  Bookmark </button>");

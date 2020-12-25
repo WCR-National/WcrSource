@@ -1597,7 +1597,8 @@
                         cartd.push("<a href='#' id='btnDelete' class='btnclose'><img onclick=DeletePermanent(" + $(docs).find("advertisementID").text() + ")  src='images/icons/btn-close.png' alt='' /> </a>");
                         cartd.push("<span class='price'>PRICE $ " + $(docs).find("cost").text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + " </span>");
                         if (hidLogin.value == "0") {
-                            cartd.push("<input type='button' class='btn btn-block btn-primary'     onclick=showinterest1(" + $(docs).find("advertisementID").text() + "," + $(docs).find("associateID").text() + ",1,0," + cnt + ",1) value='Contact Associate'> <button class='btn btn-block btn-primary' onclick=showinterest1(" + $(docs).find("advertisementID").text() + "," + $(docs).find("associateID").text() + ",1,0," + cnt + ",2)><i class='fa fa-bookmark-o'></i>    Bookmark </button> ");
+                            cartd.push("<input type='button' class='btn btn-block btn-primary'     onclick=showinterest1(" + $(docs).find("advertisementID").text() + "," + $(docs).find("associateID").text() + ",1,0," + cnt + ",1) value='Contact Associate'>
+                                < button class= 'btn btn-block btn-primary' onclick = showinterest1(" + $(docs).find("advertisementID").text() + ", " + $(docs).find("associateID").text() + ", 1, 0, " + cnt + ", 2) > <i class='fa fa-bookmark-o'></i>    Bookmark </button > ");
                         }
                         else {
                             cartd.push("<button class='btn btn-block btn-primary'   onclick=InterestedConsumers('" + $(docs).find("advertisementID").text() + "," + $(docs).find("associateID").text() + ",1,0'," + cnt + ") id='btnContactAssociate'> Contact Associate </button>");

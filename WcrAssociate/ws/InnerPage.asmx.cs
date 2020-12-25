@@ -73,7 +73,12 @@ namespace WcrAssociate.ws
         {
             string str = string.Empty;
             BllinnerPage objInnerpage = new BllinnerPage();
-            str = objInnerpage.SelectFullDetail(adID);
+            int consumerId = 0;
+            if (!string.IsNullOrEmpty(Session["consumer"].ToString()))
+            {
+                consumerId = Convert.ToInt16(Session["consumer"].ToString());
+            }
+            str = objInnerpage.SelectFullDetail(adID, consumerId);
             return str;
         }
         [WebMethod(EnableSession = true)]

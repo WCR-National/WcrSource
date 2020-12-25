@@ -138,12 +138,14 @@ namespace ClsLibrary.Dal
         /// </summary>
         /// <param name="advertismentID"></param>
         /// <returns></returns>
-        public string AdvertisementDetail(int advertismentID)
+        public string AdvertisementDetail(int advertismentID, int consumerId = 0)
         {
             SqlCommand cmd = new SqlCommand("proc_DisplayAdvertisements", objCon.Con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Action", "FullDetails");
             cmd.Parameters.AddWithValue("@advertisementID", advertismentID);
+            cmd.Parameters.AddWithValue("@consumerId", consumerId);
+
             cmd.Parameters.AddWithValue("@Passphrase", WcrCryptography.SqlPassphrase);
             SqlDataAdapter adpt = new SqlDataAdapter();
             DataSet ds = new DataSet();

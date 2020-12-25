@@ -47,7 +47,11 @@ export class AuthModalComponent implements OnInit {
     responce: string;
 
     loginErrorMessage: string = "";
+    showMessageForBookmarkSuccessSignup: boolean = false;
+    showMessageForContactSuccessSignup: boolean = false;
 
+    isBookmark: boolean = false;
+    isContactAssociate = false;
     validationMessages = {
         'email': {
             'required': 'Email is required',
@@ -559,6 +563,7 @@ export class AuthModalComponent implements OnInit {
                         //this.router.navigate([this.returnUrl]);
 
                         //$(location).attr('href', '/ConsumerDashboard.html');
+                        this.activeModal.close();
                         this.updateParentCall.emit('update');
 
                         //this.ngZone.run(() => this.router.navigate(['/consumer-dashboard']));
@@ -902,6 +907,23 @@ export class AuthModalComponent implements OnInit {
 
                     if (data >= 1) {
 
+                        if (this.isBookmark) {
+                            this.showMessageForBookmarkSuccessSignup = true;
+                        }
+                        else {
+                            this.showMessageForBookmarkSuccessSignup = false;
+                        }
+
+                        if (this.isContactAssociate) {
+                            this.showMessageForContactSuccessSignup = true;
+                        }
+                        else {
+                            this.showMessageForContactSuccessSignup = false;
+                        }
+
+                        //this.activeModal.close();
+                        this.updateParentCall.emit('update');
+
                         this.isSubmitting = false;
 
                         this.request = credentials.email;
@@ -921,6 +943,12 @@ export class AuthModalComponent implements OnInit {
                     }
                     else {
                         this.isSubmitting = false;
+                        if (this.isBookmark) {
+                            this.showMessageForBookmarkSuccessSignup = true;
+                        }
+                        else {
+                            this.showMessageForBookmarkSuccessSignup = false;
+                        }
                     }
                 },
                 err => {

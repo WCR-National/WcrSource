@@ -63,7 +63,7 @@ import { SalesAdvertisementsComponent } from './components/sales-advertisements/
 import { SalesAdvertisementsService } from './services/sales-advertisements/sales-advertisements.service';
 import { ServiceProfileComponent } from './components/service-profile/service-profile.component';
 import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
-import { RouterModule } from '@angular/router';
+import { PropertySalesAdvertisementsComponent } from './components/property-sales-advertisement/property-sales-advertisement.component';
 
 
 @NgModule({
@@ -83,8 +83,8 @@ import { RouterModule } from '@angular/router';
         ConsumerDashabordComponent,
         SalesAdvertisementsComponent,
         ServiceProfileComponent,
-        AuthModalComponent
-
+        AuthModalComponent,
+        PropertySalesAdvertisementsComponent
 
     ],
     imports: [

@@ -6,10 +6,20 @@
 
 </div>-->
 <style>
+    a:not([href]):not([tabindex]) {
+        cursor: pointer;
+    }
+
+    span i a {
+        background-color: transparent !important;
+        color: #fff;
+    }
+
     .spinner-white, .spinner-white-only {
         color: #ffffff !important;
         border-color: #fff;
     }
+
     .s130 {
         min-height: 0vh;
         display: -ms-flexbox;
@@ -188,14 +198,14 @@
                             </svg>
                         </div>
                         <input id="search" type="text" formControlName="txtSearch" placeholder="Enter address e.g. street, city or state" value="" (keyup.enter)="onPressEnterSearchData()" />
-                        
+
                         <div class="svg-wrapper" [style.display]="show_check ? 'block': 'none'">
                             <span class="large material-icons form-control-feedback" style="font-size:25px; font-weight:700;color: green;">check</span>
                         </div>
                     </div>
                     <div class="input-field second-wrap">
                         <button class="btn-search" type="button" (click)="onClickSearch()">
-                           
+
                             <span [style.display]="!isSearchingStartMatIcon ? 'block': 'none'"> SEARCH</span>
                             <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSearchingStartMatIcon ? 'inline-block': 'none'" style="margin-top:4px;">
                                 <div class="spinner-layer spinner-white-only">

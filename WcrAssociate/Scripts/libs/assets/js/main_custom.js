@@ -55,6 +55,154 @@ function mmenuInit() {
 }
 
 
+function InitializeFullWidthSlider() {
+
+    /*----------------------------------------------------*/
+    /*  Inline CSS replacement for backgrounds etc.
+    /*----------------------------------------------------*/
+    function inlineCSS() {
+        debugger;
+        // Common Inline CSS
+        $(".some-classes, section.fullwidth, .img-box-background, .flip-banner, .property-slider .item, .fullwidth-property-slider .item, .fullwidth-home-slider .item, .address-container").each(function () {
+            var attrImageBG = $(this).attr('data-background-image');
+            var attrColorBG = $(this).attr('data-background-color');
+
+            if (attrImageBG !== undefined) {
+                $(this).css('background-image', 'url(' + attrImageBG + ')');
+            }
+
+            if (attrColorBG !== undefined) {
+                $(this).css('background', '' + attrColorBG + '');
+            }
+        });
+
+    }
+    // Init
+    inlineCSS();
+
+    debugger;
+
+    /*----------------------------------------------------*/
+    /*  Mortgage Calculator
+    /*----------------------------------------------------*/
+
+    //// Gets property price
+    //var propertyPricing = parseFloat($('.property-price').text().replace(/[^0-9\.]+/g, ""));
+    //if (propertyPricing > 0) {
+    //    $('.pick-price').on('click', function () {
+    //        $('#amount').val(parseInt(propertyPricing));
+    //    });
+    //}
+
+    //// replacing comma with dot
+    //$(document).on('change', function () {
+    //    $("#interest").val($("#interest").val().replace(/,/g, '.'));
+    //});
+
+    //// Calculator
+    //function mortgageCalc() {
+
+    //    var amount = parseFloat($("#amount").val().replace(/[^0-9\.]+/g, "")),
+    //        months = parseFloat($("#years").val().replace(/[^0-9\.]+/g, "") * 12),
+    //        down = parseFloat($("#downpayment").val().replace(/[^0-9\.]+/g, "")),
+    //        annInterest = parseFloat($("#interest").val().replace(/[^0-9\.]+/g, "")),
+    //        monInt = annInterest / 1200,
+    //        calculation = ((monInt + monInt / (Math.pow(1 + monInt, months) - 1)) * (amount - (down || 0))).toFixed(2);
+
+    //    if (calculation > 0) {
+    //        $(".calc-output-container").css({ 'opacity': '1', 'max-height': '200px' });
+    //        $(".calc-output").hide().html(calculation + ' ' + $('.mortgageCalc').attr("data-calc-currency")).fadeIn(300);
+    //    }
+    //}
+
+    //// Calculate
+    //$('.calc-button').on('click', function () {
+    //    mortgageCalc();
+    //});
+
+
+    /*----------------------------------------------------*/
+    /*  Show More Button
+    /*----------------------------------------------------*/
+    $('.show-more-button').on('click', function (e) {
+        e.preventDefault();
+        $('.show-more').toggleClass('visible');
+    });
+
+    /*----------------------------------------------------*/
+    /*  Slick Carousel
+    /*----------------------------------------------------*/
+
+    $('.fullwidth-property-slider').slick({
+        centerMode: true,
+        centerPadding: '20%',
+        slidesToShow: 1,
+        responsive: [
+            {
+                breakpoint: 1367,
+                settings: {
+                    centerPadding: '15%'
+                }
+            },
+            {
+                breakpoint: 993,
+                settings: {
+                    centerPadding: '0'
+                }
+            }
+        ]
+    });
+
+    /*----------------------------------------------------*/
+    /*  Magnific Popup
+    /*----------------------------------------------------*/
+    $('body').magnificPopup({
+        type: 'image',
+        delegate: 'a.mfp-gallery',
+
+        fixedContentPos: true,
+        fixedBgPos: true,
+
+        overflowY: 'auto',
+
+        closeBtnInside: false,
+        preloader: true,
+
+        removalDelay: 0,
+        mainClass: 'mfp-fade',
+
+        gallery: { enabled: true }
+    });
+
+    $('.popup-with-zoom-anim').magnificPopup({
+        type: 'inline',
+
+        fixedContentPos: false,
+        fixedBgPos: true,
+
+        overflowY: 'auto',
+
+        closeBtnInside: true,
+        preloader: false,
+
+        midClick: true,
+        removalDelay: 300,
+        mainClass: 'my-mfp-zoom-in'
+    });
+
+    $('.mfp-image').magnificPopup({
+        type: 'image',
+        closeOnContentClick: true,
+        mainClass: 'mfp-fade',
+        image: {
+            verticalFit: true
+        }
+    });
+
+    // ------------------ End Document ------------------ //
+}
+
+
 
 /*----------------------------------------------------*/
 /*  Listing Layout Switcher

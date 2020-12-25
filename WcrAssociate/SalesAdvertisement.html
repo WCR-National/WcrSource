@@ -291,6 +291,7 @@
 
 <script src="js/customjs.js"></script>
 <script>
+
     $(function () {
         ViewDiv();
         var d = CheckUserLogin();
@@ -308,11 +309,11 @@
     function showLoader() {
         $("#pageloader").css("display", "block");
     }
+
     function hideLoader() {       
             $("#pageloader").css("display", "none");        
     }
    
-
     $(document).on('keypress', '#txtSearch', function (e) {
         if (e.keyCode == 13) {  // detect the enter key     
             if (txtSearch.value == "") {
@@ -330,7 +331,6 @@
         }
     });
 
-
     $(document).on("click", "a[name='tpsrc']", function (e) {
         if (txtSearch.value == "") {
             $("#lblfai").css("display", "block");
@@ -344,6 +344,7 @@
             }, 500);
         }
     });
+
     function Searching() {
         $("#lblfai").css("display", "none");
         if (txtSearch.value == "") {
@@ -400,8 +401,6 @@
         hideLoader();
     }
 
-
-
     $(document).on("click", "a[name='wcrServiceLink']", function (e) {
         $("#divBody").addClass("result");
         $("#DivWithoutSearchAds").css("display", "none");
@@ -415,6 +414,7 @@
 
 
     });
+
     $(document).on("click", "a[name='wcrServiceLink1']", function (e) {
         $("#divBody").addClass("result");
         $("#toplogo").css("display", "none");
@@ -426,6 +426,7 @@
             GetSalesAdts();
         }, 2500);
     });
+
     function GetSalesAdts() {
         //showLoader();
         var _IPAddress;
@@ -451,16 +452,19 @@
         }, "jsonp");
         hideLoader();
     }
+
     function ViewDiv() {
         $("#toplogo").css("display", "block");
         $("#divAdtsDetail").css("display", "block");
 
     }
+
     function HideDiv() {
         $("#toplogo").css("display", "none");
         $("#divAdtsDetail").css("display", "none");
     }
 </script>
+
 <script>
     //$('#choose-consumer').on('show.bs.modal', function (e) {
     //    var parameterValue = e.relatedTarget.dataset.yourparameter;
@@ -1282,8 +1286,6 @@
         });
     });
 
-
-
     function ConsumerValid() {
         var returnValue;
         // var filter = /(.+)@(.+){2,}\.(.+){2,}/;
@@ -1339,6 +1341,7 @@
         }
         return returnValue;
     }
+
     function BindAdvertisements() {
         var id = GetParameterValues('id');
         hidAdvertisementID.value = id;
@@ -1353,7 +1356,8 @@
             }
         }
         $.ajax({
-            type: "POST", url: "ws/InnerPage.asmx/ViewAdvertisementDetails", data: "{'adID':" + id + "}", contentType: "application/json; charset=utf-8", dataType: "json", async: false,
+            type: "POST", url: "ws/InnerPage.asmx/ViewAdvertisementDetails", data: "{'adID':" + id + "}", contentType: "application/json; charset=utf-8",
+            dataType: "json", async: false,
             success: function (r) {
                 if (r.d.length > 0) {
                     var xmlDoc = $.parseXML(r.d);
@@ -1460,7 +1464,8 @@
             }
         });
     }
-    function showinterest1(advId, assID, jobtype, zipcode,  contactorbookmark) {
+
+    function showinterest1(advId, assID, jobtype, zipcode, contactorbookmark) {
         hidAdvertisementID.value = advId;
         hidAssociateID.value = assID;
         hidjobtypeID.value = jobtype;
@@ -1508,6 +1513,7 @@
             else { }
         }
     }
+
     function BookMarkInsert(AdvID) {
         if (hidLogin.value == "0")
         { }

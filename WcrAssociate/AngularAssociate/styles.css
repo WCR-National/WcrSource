@@ -130,6 +130,8 @@
     .modal-header .close {
         padding: 1rem 1rem;
         margin: -1rem -1rem -1rem auto;
+        background: transparent !important;
+        border: 0px;
     }
 
 .modal-title {

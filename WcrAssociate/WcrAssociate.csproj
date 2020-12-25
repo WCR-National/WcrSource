@@ -130,6 +130,7 @@
     <Content Include="AngularAssociate\app\associate\components\profile\profile.component.html" />
     <Content Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.html" />
     <Content Include="AngularAssociate\app\components\auth-modal\auth-modal.component.html" />
+    <Content Include="AngularAssociate\app\components\property-sales-advertisement\property-sales-advertisement.component.html" />
     <Content Include="AngularAssociate\app\components\service-profile\service-profile.component.html" />
     <Content Include="AngularAssociate\app\components\sales-advertisements\sales-advertisements.component.html" />
     <Content Include="AngularAssociate\app\components\support\support.component.html" />
@@ -175,10 +176,12 @@
     <Content Include="AngularAssociate\assets\js\bootstrap.bundle.min.js" />
     <Content Include="AngularAssociate\assets\js\croppie.min.js" />
     <Content Include="AngularAssociate\assets\js\imguploader.js" />
+    <Content Include="AngularAssociate\assets\js\magnific-popup.min.js" />
     <Content Include="AngularAssociate\assets\js\main_custom.js" />
     <Content Include="AngularAssociate\assets\js\mmenu.min.js" />
     <Content Include="AngularAssociate\assets\js\owl.carousel.min.js" />
     <Content Include="AngularAssociate\assets\js\select2.min.js" />
+    <Content Include="AngularAssociate\assets\js\slick.min.js" />
     <Content Include="AngularAssociate\assets\select2.min.css" />
     <Content Include="AngularAssociate\assets\style.css" />
     <Content Include="AngularAssociate\styles.css" />
@@ -1862,6 +1865,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\profile\profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth-modal\auth-modal.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\components\property-sales-advertisement\property-sales-advertisement.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\sales-advertisements\sales-advertisements.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\service-profile\service-profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\support\support.component.ts" />
@@ -1871,6 +1875,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\components\profile\profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\entities\property-sales-advertisement.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\purchase-zipcode.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\list-properties.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\associate\client-details.service.ts" />

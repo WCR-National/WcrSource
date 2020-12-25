@@ -59,6 +59,8 @@
               "AngularAssociate/assets/js/croppie.min.js",
               "AngularAssociate/assets/js/imguploader.js",
               "AngularAssociate/assets/js/mmenu.min.js",
+              "AngularAssociate/assets/js/magnific-popup.min.js",
+              "AngularAssociate/assets/js/slick.min.js",
               "AngularAssociate/assets/js/main_custom.js",
               "node_modules/select2/dist/js/select2.min.js"
             ],

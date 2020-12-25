@@ -1,0 +1,238 @@
+
+
+<div id="titlebar" class="property-titlebar margin-bottom-0">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <a href="listings-list-with-sidebar.html" class="back-to-listings"></a>
+                <div class="property-title">
+                    <h2>{{title}} <span class="property-badge">For Sale</span></h2>
+                    <span>
+                        <a href="#location" class="listing-address">
+                            <i class="fa fa-map-marker"></i>
+                            {{address}}
+                        </a>
+                    </span>
+                </div>
+
+                <div class="property-pricing">
+                    <div class="property-price">{{cost}}</div>
+                    <!--<div class="sub-price">$770 / sq ft</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Content
+
+================================================== -->
+<div class="container-fluid" style="background-color:#fff;">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 mg-b-20" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:100px; ">
+            <h4 class="center" style="color: #204876;">Google AdSense</h4>
+        </div>
+    </div>
+</div>
+
+<!-- Slider -->
+<div class="fullwidth-property-slider margin-bottom-50">
+    <a style="background-size: cover;" *ngIf="advMainImage != undefined && advMainImage != null && advMainImage != ''" href="{{ 'Associate/Adv_img/' + advMainImage }}" [attr.data-background-image]="'Associate/Adv_img/' + advMainImage" class="item mfp-gallery"></a>
+    <a style="background-size: cover;" *ngIf="advImage1 != undefined && advImage1 != null && advImage1 != ''" href="{{ 'Associate/Adv_img/' + advImage1 }}" [attr.data-background-image]="'Associate/Adv_img/' + advImage1" class="item mfp-gallery"></a>
+    <a style="background-size: cover;" *ngIf="advImage2 != undefined && advImage2 != null && advImage2 != ''" href="{{ 'Associate/Adv_img/' + advImage2 }}" [attr.data-background-image]="'Associate/Adv_img/' + advImage2" class="item mfp-gallery"></a>
+    <a style="background-size: cover;" *ngIf="advImage3 != undefined && advImage3 != null && advImage3 != ''" href="{{ 'Associate/Adv_img/' + advImage3 }}" [attr.data-background-image]="'Associate/Adv_img/' + advImage3" class="item mfp-gallery"></a>
+</div>
+
+<div class="container-fluid" style="background-color:#fff;">
+    <div class="row">
+
+        <div class="container">
+            <div class="row">
+
+                <!-- Property Description -->
+                <div class="col-lg-8 col-md-7 pd-t-50-force pd-l-25">
+                    <div class="property-description">
+
+                        <!-- Main Features -->
+                        <ul class="property-main-features pd-l-25">
+                            <!--<li>Area <span>1450 sq ft</span></li>-->
+                            <li>State: <span>{{StateID}}</span></li>
+                            <li>City: <span>{{CityID}}</span></li>
+                            <li>ZipCode: <span>{{ZipCode}}</span></li>
+                        </ul>
+
+                        <!-- Description -->
+                        <h3 class="desc-headline">Description</h3>
+                        <div class="show-more">
+                            <p>
+                                {{description}}
+                            </p>
+                            <a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
+                        </div>
+
+                        <!-- Details -->
+                        <h3 class="desc-headline">Details</h3>
+                        <ul class="property-features margin-top-0">
+
+                            <li>Advertisement Id: <span>{{advertisementID}}</span></li>
+                            <li>License Id: <span>{{LicenseId}}</span></li>
+                            <li>Associate Id: <span>{{associateid}}</span></li>
+                            <li>Contact No <span>{{contactNo}}</span></li>
+                            <li>Sewer: <span>Public/City</span></li>
+                            <!--<li>Water: <span>City</span></li>-->
+                        </ul>
+
+                        <!-- Features -->
+                        <h3 *ngIf="features != null && features != ''" class="desc-headline">Features</h3>
+                        <ul class="property-features checkboxes margin-top-0">
+                            {{features}}
+                        </ul>
+
+                        <!-- Location -->
+                        <h3 *ngIf="location != null && location != ''" class="desc-headline no-border" id="location">Location</h3>
+                        <div id="propertyMap-container">
+                            <div id="propertyMap" data-latitude="40.7427837" data-longitude="-73.11445617675781"></div>
+                            <a href="#" id="streetView">Street View</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Property Description / End -->
+                <!-- Sidebar -->
+                <div class="col-lg-4 col-md-5">
+
+                    <div class="sidebar sticky right">
+
+
+                        <!-- Widget -->
+                        <!--<div class="widget margin-bottom-30">
+                            <button class="widget-button with-tip" data-tip-content="Print"><i class="sl sl-icon-printer"></i><div class="tip-content">Print</div></button>
+                            <button class="widget-button with-tip" data-tip-content="Add to Bookmarks"><i class="fa fa-star-o"></i><div class="tip-content">Add to Bookmarks</div></button>
+                            <button class="widget-button with-tip compare-widget-button" data-tip-content="Add to Compare"><i class="icon-compare"></i><div class="tip-content">Add to Compare</div></button>
+                            <div class="clearfix"></div>
+                        </div>-->
+                        <!-- Widget / End -->
+                        <!-- Booking Widget -->
+                        <div class="widget">
+                            <!-- Book Now -->
+                            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
+                                <h3><i class="fa fa-calendar-check-o "></i> Contact Or Bookmark</h3>
+                                <div class="row with-forms  margin-top-0"> </div>
+
+                                <!-- Book Now -->
+                                <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" data-id="{{params}}" class="btn button border margin-top-5 showInterestBookMarkClass">Book Mark</a>
+                                <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" [ngClass]="consumerID != null ? 'bookMarked': ''" data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass">Book Mark</a>
+
+                                <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" class="btn button border  margin-top-5 contactAssociateShowInterestClass" data-id="{{strParamContactAssociateShowInterest}}">Contact Associate</a>
+                                <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" class="btn button border margin-top-5 contactAssociateClass" data-id="{{strParamContactAssociate}}">Contact Associate</a>
+
+                            </div>
+                            <!-- Book Now / End -->
+                        </div>
+
+
+
+                        <div class="widget">
+                            <div class="col-xs-12 col-sm-12 mg-t-50 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:250px; ">
+                                <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
+                            </div>
+                        </div>
+                        <!-- Booking Widget / End -->
+                        <!-- Widget -->
+                        <!--<div class="widget">
+                            <h3 class="margin-bottom-30 margin-top-30">Mortgage Calculator</h3>
+
+                            <form action="javascript:void(0);" autocomplete="off" class="mortgageCalc" data-calc-currency="USD">
+                                <div class="calc-input">
+                                    <div class="pick-price tip" data-tip-content="Set This Property Price"><div class="tip-content">Set This Property Price</div></div>
+                                    <input type="text" id="amount" name="amount" placeholder="Sale Price" required="">
+                                    <label for="amount" class="fa fa-usd"></label>
+                                </div>
+
+                                <div class="calc-input">
+                                    <input type="text" id="downpayment" placeholder="Down Payment">
+                                    <label for="downpayment" class="fa fa-usd"></label>
+                                </div>
+
+                                <div class="calc-input">
+                                    <input type="text" id="years" placeholder="Loan Term (Years)" required="">
+                                    <label for="years" class="fa fa-calendar-o"></label>
+                                </div>
+
+                                <div class="calc-input">
+                                    <input type="text" id="interest" placeholder="Interest Rate" required="">
+                                    <label for="interest" class="fa fa-percent"></label>
+                                </div>
+
+                                <button class="button calc-button" formvalidate="">Calculate</button>
+                                <div class="calc-output-container"><div class="notification success">Monthly Payment: <strong class="calc-output"></strong></div></div>
+                            </form>
+                        </div>-->
+                        <!-- Widget / End -->
+                    </div>
+                </div>
+                <!-- Sidebar / End -->
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+
+<!--<div class="listing-item">
+
+    <a href="javascript:void(0)" class="listing-img-container">
+
+
+        <div class="listing-img-content">
+            <span class="listing-price">$ {{cost}} <i></i></span>
+
+        </div>
+
+        <div class="listing-carousel">
+            <div *ngIf=' item.advMainImage == undefined && item.advMainImage != null && item.advMainImage != "" '><img src='../../../../Associate/Adv_img/" + item.advMainImage + \"' \" alt=''></div>
+            <div *ngIf=' item.advImage1 == undefined && item.advImage1 != null && item.advImage1 != "" '><img src='../../../../Associate/Adv_img/" + item.advImage1 + \"' \" alt=''></div>
+            <div *ngIf=' item.advImage2 == undefined && item.advImage2 != null && item.advImage2 != "" '><img src='../../../../Associate/Adv_img/" + item.advImage2 + \"' \" alt=''></div>
+            <div *ngIf=' item.advImage3 == undefined && item.advImage3 != null && item.advImage3 != "" '><img src='../../../../Associate/Adv_img/" + item.advImage3 + \"' \" alt=''></div>
+        </div>
+    </a>
+
+    <div class="listing-content">
+
+        <div class="listing-title">
+            <h4><a href="single-property-page-1.html">{{item.title}}</a></h4>
+            <a href="https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom" class="listing-address popup-gmaps">
+                <i class="fa fa-map-marker"></i>
+                {{item.address + ". " + item.CityID + ", " + item.StateID}}
+            </a>
+
+            <a href="javascript:void(0)" class="details button border">Details</a>
+            <div *ngIf="item.description.length > 150"> {{ item.description.substring(0, 150) + "..." }}</div>
+            <div *ngIf="item.description.length < 150"> {{ item.description }} </div>
+
+        </div>
+
+        <ul class="listing-details">
+            <li> License # {{item.LicenseId}}</li>
+            <li>  Associate ID: {{item.associateid}}</li>
+            <li *ngIf="item.subcategoryID == '1'"> Category Name: Home</li>
+            <li *ngIf="item.subcategoryID == '2'"> Category Name: Town Home </li>
+            <li *ngIf="item.subcategoryID == '3'"> Category Name: Multi Family</li>
+            <li *ngIf="item.subcategoryID == '4'"> Category Name: Land</li>
+
+        </ul>
+
+        <div class="listing-footer">
+            {{ item.advertisementID + "," + item.associateID + ",1,0," + count }}
+            <a href="javascript:void(0)" class="btn button border" (click)="ContactAssociate('')">Contact Associates</a>
+            <span>Zip Code: {{item.zipCode}}</span>
+            <a id="bookMarkId{{item.advertisementID}}" href="javascript:void(0)" class="btn button border" (click)="SaveBookmark(item.advertisementID)">Bookmark</a>
+        </div>
+        {{ count+1 }}
+    </div>
+
+</div>-->

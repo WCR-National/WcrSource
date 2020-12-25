@@ -14,6 +14,27 @@
         <div class="row mg-t-50">
             <div class="col-md-8 offset-md-3 col-xs-12 card-main pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center" style="border-top: 5px solid #0e3a6b;">
                 <div class="row">
+
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="notification success large margin-bottom-55" [style.display]="showMessageForContactSuccessSignup ? 'block': 'none'">
+                            <p>Congratulation on Signing up for a WCR Consumer Account.</p>
+
+                            <p>Your activation code has been sent to the email that you provided.</p>
+
+                            <p>Please use this code to activate your wcr consumer account.</p>
+
+                            <p>The Associate has been notified of your interest and you will be contacted shortly.</p>
+
+                            <p>If you have any additional questions, please contact WCR support at 800.XXX.XXXX.</p>
+                        </div>
+                        <div class="notification success large margin-bottom-55" [style.display]="showMessageForBookmarkSuccessSignup ? 'block': 'none'">
+                            <p>Congratulation on Signing up for a WCR Consumer Account.</p>
+                            <p>Your activation code has been sent to the email that you provided.</p>
+                            <p>Please use this code to activate your wcr consumer account.</p>
+                            <p> Additionally, this advertisement item has been added to your bookmarks.</p>
+                            <p> If you have any additional questions, please contact WCR support at 800.XXX.XXXX.</p>
+                        </div>
+                    </div>
                     <div class="col-xs-12 col-sm-12">
                         <h2 class="text-xs-center" [style.text-align]="authType == 'activate' || authType == 'resetPassword' ? 'left':'center'">{{ title }}</h2>
                     </div>

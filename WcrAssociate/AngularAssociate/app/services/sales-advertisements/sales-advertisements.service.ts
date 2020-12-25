@@ -51,6 +51,17 @@ export class SalesAdvertisementsService {
             ));
     } //select categories
 
+    GetPropertySalesAdevertisementData(id): Observable<any> {
+
+        let urlToViewAdvertisementDetails: string = "ws/InnerPage.asmx/ViewAdvertisementDetails";
+        return this.apiService.post(urlToViewAdvertisementDetails, { 'adID' : id})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    } //select categories
+
     GetCatOrSubCatServices(id): Observable<any> {
 
         let urlToSelectCatSubCategory: string = "Associate/ws/SubCategory.asmx/SelectCatSubCategory";
@@ -95,15 +106,26 @@ export class SalesAdvertisementsService {
             ));
     } //select categories
 
-    UpdateSavedBookmarks(advId) {
+    UpdateSavedBookmarksSales(advId, zipcode) {
+
         let urlToInsertSavedAdts: string = "ws/InnerPage.asmx/InsertSavedAdts";
-        return this.apiService.post(urlToInsertSavedAdts, { 'AdvertisementID': advId, 'zipCode': '0', 'jtype': '1' })
+        return this.apiService.post(urlToInsertSavedAdts, { 'AdvertisementID': advId, 'zipCode': zipcode, 'jtype': '1' })
             .pipe(map(
                 data => {
                     return data;
                 }
             ));
+    }
 
+    UpdateSavedBookmarksService(advId, zipcode) {
+
+        let urlToInsertSavedAdts: string = "ws/InnerPage.asmx/InsertSavedAdts";
+        return this.apiService.post(urlToInsertSavedAdts, { 'AdvertisementID': advId, 'zipCode': zipcode, 'jtype': '2' })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
     }
 
     CheckEmailAndPhNo()
