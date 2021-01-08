@@ -32,13 +32,18 @@ export class SalesAdvertisementsComponent implements OnInit {
     public name: string;
     public jtype: string;
     public catName: string;
-    public IsDataFound: boolean;
+    public isDataNotFound: boolean;
+    public isDataNotFoundForHome = false;
+    public isDataNotFoundForTownHome = false;
+    public isDataNotFoundForMultiFamily = false;
+    public isDataNotFoundForLand = false;
+
     public dataServicesList;
 
     public isTabHomeStart: boolean = true;
-    public isTabTownHomeStart: boolean = true; 
-    public isMultiFamilyStartCS: boolean = true; 
-    public isTabLandStart: boolean = true; 
+    public isTabTownHomeStart: boolean = true;
+    public isMultiFamilyStartCS: boolean = true;
+    public isTabLandStart: boolean = true;
     @ViewChild('ctdTabset') ctdTabset;
 
 
@@ -112,39 +117,77 @@ export class SalesAdvertisementsComponent implements OnInit {
     GetSalesAdvFromTabs(id) {
 
         this.isloadingIconVisible = true;
+        if (id == '1') {
+            this.isTabHomeStart = true;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = false;
+        }
+        else if (id == '2') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = true;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = false;
+        }
+        else if (id == '3') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = true;
+            this.isTabLandStart = false;
+        }
+        else if (id == '4') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = true;
+        }
+        var html = '';
+        $('#innerHtmlListHomeSalesId').html(html);
+        $('#innerHtmlListTownHomeSalesId').html(html);
+        $('#innerHtmlListMultiFamilySalesId').html(html);
+        $('#innerHtmlListLandSalesId').html(html);
+        this.isDataNotFoundForHome = false;
+        this.isDataNotFoundForTownHome = false;
+        this.isDataNotFoundForMultiFamily = false;
+        this.isDataNotFoundForLand = false;
+
+
         this.ViewAdvertisements(id, this.zipcode, this.name, this.jtype, this.catName);
-        //if (id == 1) {
-        //    $('#homeId').addClass('active');
-        //    $('#THId').removeClass('active');
-        //    $('#MFId').removeClass('active');
-        //    $('#landId').removeClass('active');
-        //}
-        //else if (id == 2) {
-        //    $('#homeId').removeClass('active');
-        //    $('#THId').addClass('active');
-        //    $('#MFId').removeClass('active');
-        //    $('#landId').removeClass('active');
-        //}
-        //else if (id == 3) {
-        //    $('#homeId').removeClass('active');
-        //    $('#THId').removeClass('active');
-        //    $('#MFId').addClass('active');
-        //    $('#landId').removeClass('active');
-        //}
-        //else if (id == 4) {
-        //    $('#homeId').removeClass('active');
-        //    $('#THId').removeClass('active');
-        //    $('#MFId').removeClass('active');
-        //    $('#landId').addClass('active');
-        //}
     }
 
     GetSalesAdvListings(id, zipcode, name, jtype, catName) {
         this.isloadingIconVisible = true;
+
+        if (id == '1') {
+            this.isTabHomeStart = true;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = false;
+        }
+        else if (id == '2') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = true;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = false;
+        }
+        else if (id == '3') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = true;
+            this.isTabLandStart = false;
+        }
+        else if (id == '4') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = true;
+        }
+
         this.ViewAdvertisements(id, zipcode, name, jtype, catName);
     }
 
     ViewAdvertisements(id, zipcode, name, jtype, catName) {
+
         if (jtype == 'Services') {
             $.ajax({
                 type: "POST", url: "Associate/ws/SubCategory.asmx/SelectCatSubCategory",
@@ -180,8 +223,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                         var json = this.xmlToJson.xml2json(xmlDoc, "");
                         var dataJson = JSON.parse(json);
 
-                        if (dataJson.NewDataSet != undefined && dataJson.NewDataSet != null && dataJson.NewDataSet != '')
-                        {
+                        if (dataJson.NewDataSet != undefined && dataJson.NewDataSet != null && dataJson.NewDataSet != '') {
                             this.dataServicesList = [];
                             if (dataJson.NewDataSet.HViewAdvertismentsWithParam != undefined && dataJson.NewDataSet.HViewAdvertismentsWithParam != null && dataJson.NewDataSet.HViewAdvertismentsWithParam != '') {
                                 if (typeof (dataJson.NewDataSet.HViewAdvertismentsWithParam) == "object") { // Returns: "object"
@@ -199,10 +241,16 @@ export class SalesAdvertisementsComponent implements OnInit {
                             else {
 
                             }
-                           
+                            this.isDataNotFoundForHome = false;
+                            this.isDataNotFoundForTownHome = false;
+                            this.isDataNotFoundForMultiFamily = false;
+                            this.isDataNotFoundForLand = false;
                         }
                         else {
-                            this.IsDataFound = false;
+                            this.isDataNotFoundForHome = true;
+                            this.isDataNotFoundForTownHome = true;
+                            this.isDataNotFoundForMultiFamily = true;
+                            this.isDataNotFoundForLand = true;
                             this.isTabHomeStart = false;
                             this.isTabTownHomeStart = false;
                             this.isMultiFamilyStartCS = false;
@@ -215,20 +263,17 @@ export class SalesAdvertisementsComponent implements OnInit {
                     }
                     else {
                         this.isloadingIconVisible = false;
-
                     }
                 });
     }
 
     AddListOfSales(dataSalesList, id) {
-
+        let count = 0;
+        var html = '';
         $('#innerHtmlListHomeSalesId').html(html);
         $('#innerHtmlListTownHomeSalesId').html(html);
         $('#innerHtmlListMultiFamilySalesId').html(html);
         $('#innerHtmlListLandSalesId').html(html);
-
-        let count = 0;
-        var html = '';
         var thisStatus = this;
         $.each(dataSalesList, function (index, item) {
             debugger;
@@ -247,7 +292,7 @@ export class SalesAdvertisementsComponent implements OnInit {
             html += '<div class="listing-carousel" >';
             if (item.advMainImage != undefined && item.advMainImage != null && item.advMainImage != "") {
                 let advMainImg = "../../../../Associate/Adv_img/" + item.advMainImage;
-                html += '<div><img class="imageServices" src="' + advMainImg +'" alt=""></div>';
+                html += '<div><img class="imageServices" src="' + advMainImg + '" alt=""></div>';
             }
             //if (item.advImage1 == undefined && item.advImage1 != null && item.advImage1 != "")
             //    html += '<div><img src="../../../../Associate/Adv_img/"' + item.advMainImage + ' alt=""></div>';
@@ -269,7 +314,7 @@ export class SalesAdvertisementsComponent implements OnInit {
             html += '<i class="fa fa-map-marker" > </i>';
             html += item.City + ". " + item.State + ", " + item.ZipCode
             html += '</a>';
-            
+
 
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
@@ -297,7 +342,7 @@ export class SalesAdvertisementsComponent implements OnInit {
 
             html += '<div class="listing-footer" >';
             //{{  }}
-            var strParamContactAssociateShowInterest = item.advertisementID+ "," + item.associateID + ",1,0," + count + ",1";
+            var strParamContactAssociateShowInterest = item.advertisementID + "," + item.associateID + ",1,0," + count + ",1";
             var strParamContactAssociate = item.advertisementID + "," + item.associateID + ",1,0" + "," + count;
 
             //if (thisStatus.isLoggedInValue == "0") {
@@ -313,7 +358,8 @@ export class SalesAdvertisementsComponent implements OnInit {
                 html += '<a href = "javascript:void(0)" class="btn button border showInterestBookMarkClass" data-id="' + params + '"> Bookmark </a>';
             }
             else {
-                if (item.consumerID != null) {
+                debugger;
+                if (item.consumerID != 0) {
                     html += '<a href = "javascript:void(0)" class="btn button border  bookMarked saveBookmarkClass" data-id="' + item.advertisementID + '"> Bookmark </a>';
                 }
                 else {
@@ -329,8 +375,7 @@ export class SalesAdvertisementsComponent implements OnInit {
             html += '</div>';
             count++;
         });
-        if (id == 1)
-        {
+        if (id == 1) {
             $('#innerHtmlListHomeSalesId').html(html);
             this.isTabHomeStart = false;
         }
@@ -381,7 +426,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                     err => {
                         return false;
                     }
-            );
+                );
 
             //thisStatus.salesAdvertisements
             //    .ConsumerIsLogin()
@@ -390,7 +435,7 @@ export class SalesAdvertisementsComponent implements OnInit {
 
             //            if (data.d > 0) {
 
-                            
+
             //            }
             //            else {
             //                thisStatus.showToast("danger", "You need to sign in");
@@ -434,15 +479,15 @@ export class SalesAdvertisementsComponent implements OnInit {
                     },
                     err => {
                     }
-            );
+                );
 
             //thisStatus.salesAdvertisements
             //    .ConsumerIsLogin()
             //    .subscribe(
             //        (data) => {
-                        
+
             //            if (data.d > 0) {
-                            
+
             //            }
             //            else {
             //                debugger;
@@ -498,7 +543,7 @@ export class SalesAdvertisementsComponent implements OnInit {
 
         //            if (data.d > 0) {
 
-                        
+
         //            }
         //            else {
         //                this.showToast("danger", "You need to sign in");
@@ -590,21 +635,16 @@ export class SalesAdvertisementsComponent implements OnInit {
                     debugger;
                     if (data.d == "0") {
 
-                        $('.saveBookmarkClass').each(function ()
-                        {
-                            if (advId == $(this).attr('data-id'))
-                            {
+                        $('.saveBookmarkClass').each(function () {
+                            if (advId == $(this).attr('data-id')) {
                                 $(this).addClass('bookMarked');
                             }
                         });
                         this.showToast('warning', "You have already saved this advertisement.");
                     }
-                    else
-                    {
-                        $('.saveBookmarkClass').each(function ()
-                        {
-                            if (advId == $(this).attr('data-id'))
-                            {
+                    else {
+                        $('.saveBookmarkClass').each(function () {
+                            if (advId == $(this).attr('data-id')) {
                                 $(this).addClass('bookMarked');
                             }
                         });
@@ -621,7 +661,7 @@ export class SalesAdvertisementsComponent implements OnInit {
         //        (data) => {
 
         //            if (data.d == 0) {
-                        
+
         //            }
         //            else {
         //                this.showToast("danger", "You need to sign in");

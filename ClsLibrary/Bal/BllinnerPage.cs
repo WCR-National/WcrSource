@@ -259,12 +259,12 @@ namespace ClsLibrary.Bal
             }
         }
 
-        public string SelectHomePWithParam(int subCategoryID, string param)
+        public string SelectHomePWithParam(int subCategoryID, string param, int consumerId)
         {
             DllinnerPage objDal = new DllinnerPage();
             try
             {
-                return objDal.SelectHomePageAdvertisementWithSearching(subCategoryID, param);
+                return objDal.SelectHomePageAdvertisementWithSearching(subCategoryID, param, consumerId);
             }
             catch (Exception info)
             {

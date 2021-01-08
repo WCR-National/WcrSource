@@ -30,7 +30,7 @@
 <div class="container-fluid" style="background-color:#fff;">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 mg-b-20" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:100px; ">
+        <div class="col-xs-12 col-sm-12 mg-b-20" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:100px; line-height: 4;">
             <h4 class="center" style="color: #204876;">Google AdSense</h4>
         </div>
     </div>
@@ -51,11 +51,11 @@
             <div class="row">
 
                 <!-- Property Description -->
-                <div class="col-lg-8 col-md-7 pd-t-50-force pd-l-25">
+                <div class="col-lg-8 col-md-7 pd-t-35-force pd-l-25">
                     <div class="property-description">
 
                         <!-- Main Features -->
-                        <ul class="property-main-features pd-l-25">
+                        <ul class="property-main-features pd-l-25-force">
                             <!--<li>Area <span>1450 sq ft</span></li>-->
                             <li>State: <span>{{StateID}}</span></li>
                             <li>City: <span>{{CityID}}</span></li>
@@ -100,76 +100,78 @@
                 <!-- Property Description / End -->
                 <!-- Sidebar -->
                 <div class="col-lg-4 col-md-5">
+                    <div class="row">
+                        <div class="sidebar sticky right">
 
-                    <div class="sidebar sticky right">
 
-
-                        <!-- Widget -->
-                        <!--<div class="widget margin-bottom-30">
-                            <button class="widget-button with-tip" data-tip-content="Print"><i class="sl sl-icon-printer"></i><div class="tip-content">Print</div></button>
-                            <button class="widget-button with-tip" data-tip-content="Add to Bookmarks"><i class="fa fa-star-o"></i><div class="tip-content">Add to Bookmarks</div></button>
-                            <button class="widget-button with-tip compare-widget-button" data-tip-content="Add to Compare"><i class="icon-compare"></i><div class="tip-content">Add to Compare</div></button>
-                            <div class="clearfix"></div>
-                        </div>-->
-                        <!-- Widget / End -->
-                        <!-- Booking Widget -->
-                        <div class="widget">
-                            <!-- Book Now -->
-                            <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
-                                <h3><i class="fa fa-calendar-check-o "></i> Contact Or Bookmark</h3>
-                                <div class="row with-forms  margin-top-0"> </div>
-
+                            <!-- Widget -->
+                            <!--<div class="widget margin-bottom-30">
+                                <button class="widget-button with-tip" data-tip-content="Print"><i class="sl sl-icon-printer"></i><div class="tip-content">Print</div></button>
+                                <button class="widget-button with-tip" data-tip-content="Add to Bookmarks"><i class="fa fa-star-o"></i><div class="tip-content">Add to Bookmarks</div></button>
+                                <button class="widget-button with-tip compare-widget-button" data-tip-content="Add to Compare"><i class="icon-compare"></i><div class="tip-content">Add to Compare</div></button>
+                                <div class="clearfix"></div>
+                            </div>-->
+                            <!-- Widget / End -->
+                            <!-- Booking Widget -->
+                            <div class="widget">
                                 <!-- Book Now -->
-                                <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" data-id="{{params}}" class="btn button border margin-top-5 showInterestBookMarkClass">Book Mark</a>
-                                <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" [ngClass]="consumerID != null ? 'bookMarked': ''" data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass">Book Mark</a>
+                                <div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
+                                    <h3><i class="fa fa-calendar-check-o "></i> Contact Or Bookmark</h3>
+                                    <div class="row with-forms  margin-top-0"> </div>
 
-                                <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" class="btn button border  margin-top-5 contactAssociateShowInterestClass" data-id="{{strParamContactAssociateShowInterest}}">Contact Associate</a>
-                                <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" class="btn button border margin-top-5 contactAssociateClass" data-id="{{strParamContactAssociate}}">Contact Associate</a>
+                                    <!-- Book Now -->
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="showInterestBookMarkId" data-id="{{params}}" class="btn button border margin-top-5 showInterestBookMarkClass">Bookmark</a>
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="saveBookmarkId" data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass" [ngClass]="consumerID != 0 ? 'bookMarked': ''" >Bookmark</a>
 
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="contactAssociateShowInterestId" data-id="{{strParamContactAssociateShowInterest}}" class="btn button border  margin-top-5 contactAssociateShowInterestClass" >Contact Associate</a>
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="contactAssociateId" data-id="{{strParamContactAssociate}}" class="btn button border margin-top-5 contactAssociateClass" >Contact Associate</a>
+
+                                </div>
+                                <!-- Book Now / End -->
                             </div>
-                            <!-- Book Now / End -->
-                        </div>
 
 
 
-                        <div class="widget">
-                            <div class="col-xs-12 col-sm-12 mg-t-50 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:250px; ">
-                                <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
+                            <div class="widget">
+                                <div class="col-xs-12 col-sm-12 mg-t-50 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:250px; ">
+                                    <h4 class="vertical-center" style="color: #204876; line-height:5;">Google AdSense</h4>
+                                </div>
                             </div>
+                            <!-- Booking Widget / End -->
+                            <!-- Widget -->
+                            <!--<div class="widget">
+                                <h3 class="margin-bottom-30 margin-top-30">Mortgage Calculator</h3>
+
+                                <form action="javascript:void(0);" autocomplete="off" class="mortgageCalc" data-calc-currency="USD">
+                                    <div class="calc-input">
+                                        <div class="pick-price tip" data-tip-content="Set This Property Price"><div class="tip-content">Set This Property Price</div></div>
+                                        <input type="text" id="amount" name="amount" placeholder="Sale Price" required="">
+                                        <label for="amount" class="fa fa-usd"></label>
+                                    </div>
+
+                                    <div class="calc-input">
+                                        <input type="text" id="downpayment" placeholder="Down Payment">
+                                        <label for="downpayment" class="fa fa-usd"></label>
+                                    </div>
+
+                                    <div class="calc-input">
+                                        <input type="text" id="years" placeholder="Loan Term (Years)" required="">
+                                        <label for="years" class="fa fa-calendar-o"></label>
+                                    </div>
+
+                                    <div class="calc-input">
+                                        <input type="text" id="interest" placeholder="Interest Rate" required="">
+                                        <label for="interest" class="fa fa-percent"></label>
+                                    </div>
+
+                                    <button class="button calc-button" formvalidate="">Calculate</button>
+                                    <div class="calc-output-container"><div class="notification success">Monthly Payment: <strong class="calc-output"></strong></div></div>
+                                </form>
+                            </div>-->
+                            <!-- Widget / End -->
                         </div>
-                        <!-- Booking Widget / End -->
-                        <!-- Widget -->
-                        <!--<div class="widget">
-                            <h3 class="margin-bottom-30 margin-top-30">Mortgage Calculator</h3>
-
-                            <form action="javascript:void(0);" autocomplete="off" class="mortgageCalc" data-calc-currency="USD">
-                                <div class="calc-input">
-                                    <div class="pick-price tip" data-tip-content="Set This Property Price"><div class="tip-content">Set This Property Price</div></div>
-                                    <input type="text" id="amount" name="amount" placeholder="Sale Price" required="">
-                                    <label for="amount" class="fa fa-usd"></label>
-                                </div>
-
-                                <div class="calc-input">
-                                    <input type="text" id="downpayment" placeholder="Down Payment">
-                                    <label for="downpayment" class="fa fa-usd"></label>
-                                </div>
-
-                                <div class="calc-input">
-                                    <input type="text" id="years" placeholder="Loan Term (Years)" required="">
-                                    <label for="years" class="fa fa-calendar-o"></label>
-                                </div>
-
-                                <div class="calc-input">
-                                    <input type="text" id="interest" placeholder="Interest Rate" required="">
-                                    <label for="interest" class="fa fa-percent"></label>
-                                </div>
-
-                                <button class="button calc-button" formvalidate="">Calculate</button>
-                                <div class="calc-output-container"><div class="notification success">Monthly Payment: <strong class="calc-output"></strong></div></div>
-                            </form>
-                        </div>-->
-                        <!-- Widget / End -->
                     </div>
+
                 </div>
                 <!-- Sidebar / End -->
 

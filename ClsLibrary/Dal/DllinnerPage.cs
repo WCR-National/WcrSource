@@ -172,6 +172,7 @@ namespace ClsLibrary.Dal
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@Action", "ShowAdvertisementFeatures");
             cmd.Parameters.AddWithValue("@advertisementID", advertismentID);
+
             SqlDataAdapter adpt = new SqlDataAdapter();
             DataSet ds = new DataSet();
             if (objCon.Con.State == ConnectionState.Open)
@@ -343,7 +344,7 @@ namespace ClsLibrary.Dal
         }
 
 
-        public string SelectHomePageAdvertisementWithSearching(int subCategoryID, string param)
+        public string SelectHomePageAdvertisementWithSearching(int subCategoryID, string param, int consumerId = 0)
         {
             SqlCommand cmd = new SqlCommand("proc_DisplayAdvertisements", objCon.Con);
             cmd.CommandType = CommandType.StoredProcedure;
@@ -351,6 +352,8 @@ namespace ClsLibrary.Dal
             cmd.Parameters.AddWithValue("@subCategoryID", subCategoryID);
             cmd.Parameters.AddWithValue("@ZipCode", param);
             cmd.Parameters.AddWithValue("@Passphrase", WcrCryptography.SqlPassphrase);
+            cmd.Parameters.AddWithValue("@consumerId", consumerId);
+
             SqlDataAdapter adpt = new SqlDataAdapter();
             DataSet ds = new DataSet();
             if (objCon.Con.State == ConnectionState.Open)

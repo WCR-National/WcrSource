@@ -50,8 +50,9 @@
 
                             <div class="pd-t-60">
                                 <div class="row ">
-                                    <div class="col-sm-12"  [style.display]="isDataFound ? 'block':'none'">
-                                        <p class="tx-20 pd-l-30"> Data Not Found!</p>
+                                    <div class="col-sm-12" [style.display]="isDataNotFoundForHome ? 'block':'none'" style=" margin: 0 auto; text-align: center;">
+                                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 30%;" />
+                                        <h4 class="ts-text-color-light">Home sales advertisements are not available !!!</h4>
                                     </div>
                                     <div class="col-sm-12" id="innerHtmlListHomeSalesId"  [style.display]="!isTabHomeStart ? 'block':'none'">
 
@@ -78,8 +79,9 @@
 
                             <div class="pd-t-60" >
                                 <div class="row ">
-                                    <div class="col-sm-12" [style.display]="isDataFound ? 'block':'none'">
-                                        <p class="tx-20 pd-l-30"> Data Not Found!</p>
+                                    <div class="col-sm-12" [style.display]="isDataNotFoundForTownHome ? 'block':'none'" style=" margin: 0 auto; text-align: center;">
+                                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 30%;" />
+                                        <h4 class="ts-text-color-light">TownHome sales advertisements are not available !!!</h4>
                                     </div>
                                     <div class="col-sm-12" id="innerHtmlListTownHomeSalesId" [style.display]="!isTabTownHomeStart ? 'block':'none'">
 
@@ -107,8 +109,9 @@
 
                             <div class="pd-t-60" >
                                 <div class="row ">
-                                    <div class="col-sm-12" [style.display]="isDataFound ? 'block':'none'">
-                                        <p class="tx-20 pd-l-30"> Data Not Found!</p>
+                                    <div class="col-sm-12" [style.display]="isDataNotFoundForMultiFamily ? 'block':'none'" style=" margin: 0 auto; text-align: center;">
+                                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 30%;" />
+                                        <h4 class="ts-text-color-light">Multi-Family sales advertisements are not available !!!</h4>
                                     </div>
                                     <div class="col-sm-12" id="innerHtmlListMultiFamilySalesId" [style.display]="!isMultiFamilyStartCS ? 'block':'none'">
 
@@ -136,8 +139,9 @@
 
                             <div class="pd-t-60" >
                                 <div class="row ">
-                                     <div class="col-sm-12" [style.display]="isDataFound ? 'block':'none'">
-                                        <p class="tx-20 pd-l-30"> Data Not Found!</p>
+                                    <div class="col-sm-12" [style.display]="isDataNotFoundForLand ? 'block':'none'"    style=" margin: 0 auto; text-align: center;">
+                                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 30%;" />
+                                        <h4 class="ts-text-color-light">Land sales advertisements are not available !!!</h4>
                                     </div>
                                     <div class="col-sm-12" id="innerHtmlListLandSalesId" [style.display]="!isTabLandStart ? 'block':'none'">
 

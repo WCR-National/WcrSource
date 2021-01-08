@@ -181,14 +181,17 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                             thisStatus.CityID = $(docs).find("CityID").text();
                             thisStatus.StateID = $(docs).find("StateID").text();
                             thisStatus.ZipCode = $(docs).find("ZipCode").text();
+                            debugger;
                             thisStatus.consumerID = $(docs).find("consumerID").text();
 
                         });
                     }
+
                     setTimeout(function () {
                         InitializeFullWidthSlider();
-
                     }, 3000);
+
+                    this.InitializeEvents();
                 }
             );
     }

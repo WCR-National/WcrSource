@@ -12,7 +12,7 @@ function myTest() {
 //});
 
 function mmenuInit() {
-    debugger;
+
     var wi = $(window).width();
     if (wi <= '992') {
 
@@ -61,7 +61,7 @@ function InitializeFullWidthSlider() {
     /*  Inline CSS replacement for backgrounds etc.
     /*----------------------------------------------------*/
     function inlineCSS() {
-        debugger;
+
         // Common Inline CSS
         $(".some-classes, section.fullwidth, .img-box-background, .flip-banner, .property-slider .item, .fullwidth-property-slider .item, .fullwidth-home-slider .item, .address-container").each(function () {
             var attrImageBG = $(this).attr('data-background-image');
@@ -80,7 +80,6 @@ function InitializeFullWidthSlider() {
     // Init
     inlineCSS();
 
-    debugger;
 
     /*----------------------------------------------------*/
     /*  Mortgage Calculator

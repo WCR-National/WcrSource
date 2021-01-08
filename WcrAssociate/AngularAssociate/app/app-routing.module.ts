@@ -98,29 +98,26 @@ const routes: Routes = [
             {
                 //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                 path: 'sales-advertisements', ///:category/:id/:zipcode/:name/:jtype/:catName
-                component: SalesAdvertisementsComponent,
-                canActivate: [NoAuthGuard]
+                component: SalesAdvertisementsComponent
             },
             {
                 //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                 path: 'service-profile', //:category/:id/:zipcode/:name/:jtype/:catName
                 component: ServiceProfileComponent,
-                canActivate: [NoAuthGuard]
             },
             {
                 //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                 path: 'property-sale-advertisement', //:category/:id/:zipcode/:name/:jtype/:catName
                 component: PropertySalesAdvertisementsComponent,
-                canActivate: [NoAuthGuard]
-            },
-            { path: '**', component: HomeComponent }
+            }
+            //{ path: '**', component: HomeComponent }
         ]
     }
 ];
 
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, { enableTracing: true })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

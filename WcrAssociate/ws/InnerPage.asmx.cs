@@ -165,6 +165,7 @@ namespace WcrAssociate.ws
 
             PropSaveAdvertisements objSave = new PropSaveAdvertisements();
             objSave.ConsumerID = Convert.ToInt16(Session["consumer"].ToString());
+
             objSave.AdvertisementID = AdvertisementID;
             BllinnerPage objSaveads = new BllinnerPage();
             str = objSaveads.RecordInsert(objSave, zipCode, jtype);
@@ -193,7 +194,12 @@ namespace WcrAssociate.ws
         {
             string str = string.Empty;
             BllinnerPage objInnerpage = new BllinnerPage();
-            str = objInnerpage.SelectHomePWithParam(subCategoryID, param);
+            int consumerId = 0;
+            if (!string.IsNullOrEmpty(Session["consumer"]?.ToString()))
+            {
+                consumerId = Convert.ToInt16(Session["consumer"].ToString());
+            }
+            str = objInnerpage.SelectHomePWithParam(subCategoryID, param, consumerId);
             return str;
         }
 

@@ -12551,7 +12551,7 @@ body #backtotop a {
 
 @media (min-width: 992px) {
     .dropdown-loggeduser .dropdown-menu {
-        margin-top: 22px;
+        margin-top: 10px;
     }
 }
 
@@ -15757,7 +15757,7 @@ section.fullwidth {
     position: relative;
     padding: 90px 0;
     margin: 50px 0;
-    background-color: #f7f7f7;
+    background-color: #fafafa;
 }
 
     section.fullwidth.border-top {
@@ -49605,18 +49605,25 @@ label {
 
 .bookMarked {
     background-color: #7d7d7d !important;
-    border: 1px solid #7d7d7d;
-            color:#fff;
-
+    border: 1px solid #7d7d7d !important;
+    color: #fff;
 }
 
-    .bookMarked:hover, .bookMarked:active, .bookMarked:focus {
-        background-color: #7d7d7db0 !important;
-        border: 1px solid #7d7d7d;
-        color: #fff;
-    }
+.bookMarked:hover, .bookMarked:active, .bookMarked:focus {
+    background-color: #7d7d7db0 !important;
+    border: 1px solid #7d7d7d !important;
+    color: #fff;
+}
+
+.booking-widget .saveBookmarkClass,
+.booking-widget .contactAssociateClass,
+.booking-widget .showInterestBookMarkClass,
+.booking-widget .contactAssociateShowInterestClass {
+    width: 100%;
+}
+
 a:not([href]):not([tabindex]) {
-     color: #fff; 
+    color: #fff;
     text-decoration: none;
 }
 
@@ -49708,6 +49715,7 @@ a:not([href]):not([tabindex]) {
 .tab-content > .active {
     display: block;
 }
+
 .nav-tabs .nav-link {
     background-color: rgba(230, 231, 239, 0.85);
     border-color: rgba(230, 231, 239, 0.85);
@@ -49722,6 +49730,7 @@ a:not([href]):not([tabindex]) {
     height: 38px;
     transition: background-color 0.2s;
 }
+
 .nav-tabs .nav-item {
     margin-bottom: -1px;
     margin-bottom: 0;
@@ -49730,13 +49739,14 @@ a:not([href]):not([tabindex]) {
     flex-grow: 1 !important;
     text-align: center !important;
 }
+
 #titlebar.property-titlebar {
     background: linear-gradient(to bottom, #f7f7f7 0%, rgba(255,255,255,0.5));
     padding: 55px 0;
     padding-bottom: 45px;
 }
 
-    #titlebar.property-titlebar span.property-badge{
+    #titlebar.property-titlebar span.property-badge {
         background-color: #274abb;
     }
 
@@ -49752,6 +49762,7 @@ a:not([href]):not([tabindex]) {
         top: -4px;
         margin-left: 4px;
     }
+
 .nav-tabs .nav-item + .nav-item {
     margin-left: 5px;
 }
@@ -50651,3 +50662,34 @@ img.mfp-img {
         margin-left: 3px;
     }
 
+.form-group {
+    margin-bottom: 0px;
+}
+
+.wd-100 {
+    width: 100px;
+}
+
+.wd-35 {
+    width: 35px;
+}
+
+.ht-35 {
+    height: 35px;
+}
+
+#navigation.style-2 .current, #navigation.style-2 ul li:hover {
+    background-color: rgba(255,255,255,0.12);
+}
+
+/*@media (min-width: 992px) {
+    .container {
+        width: 996px;
+    }
+}*/
+tablist a.nav-link {
+    padding: 0px;
+}
+a.nav-link b {
+    width: 100%;
+}
