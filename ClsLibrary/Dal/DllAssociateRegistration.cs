@@ -15,6 +15,8 @@ namespace ClsLibrary.Dal
     {
 
         readonly ConnectionClass objCon = new ConnectionClass();
+        readonly bool DebugEvironment = System.Configuration.ConfigurationManager.AppSettings["Debug"].ToString().Equals("Yes") ? true : false;
+
         /// <summary>
         /// This Method is used to Post data into tbl_sale table
         /// </summary>
@@ -27,7 +29,7 @@ namespace ClsLibrary.Dal
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
             WcrClassLibrary.DataObjects.EmailAddress sqlParams = new WcrClassLibrary.DataObjects.EmailAddress();
             sqlParams.Email = crypto.WcrSimpleEncrypt(_Email);
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
             {
                 resp = client.PutAsJsonAsync("api/AccountCreation/ResendActivationCode", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -56,7 +58,7 @@ namespace ClsLibrary.Dal
             sqlParams.LicenseId = crypto.WcrSimpleEncrypt(objAssociateRegistration.LicenseID);
             sqlParams.ForMonths = "1";
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))  //using (WcrHttpClient client = new WcrHttpClient(objAssociateRegistration.EmailID, objAssociateRegistration.Password))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))  //using (WcrHttpClient client = new WcrHttpClient(objAssociateRegistration.EmailID, objAssociateRegistration.Password))
             {
                 resp = client.PostAsJsonAsync("api/AccountCreation/AssociateRegistrationAdd", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -249,7 +251,7 @@ namespace ClsLibrary.Dal
             WcrCryptography crypto = new WcrCryptography();
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
 
-            using (WcrHttpClient client = new WcrHttpClient(userName))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, userName))
             {
                 resp = client.PostAsJsonAsync("api/AssociateTransactions/GetAssociateDetail", AdvertismentID).Result;
                 // DataSet ds = new DataSet();
@@ -300,7 +302,7 @@ namespace ClsLibrary.Dal
 
             WcrCryptography crypto = new WcrCryptography();
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(userName))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, userName))
             {
                 //resp = client.GetAsync($"api/AssociateTransactions/AssociateRegistrationView?inAssociateId={associateID}").Result;
                 resp = client.GetAsync(string.Format("api/AssociateTransactions/AssociateRegistrationView?inAssociateId={0}", associateID)).Result;
@@ -574,7 +576,7 @@ namespace ClsLibrary.Dal
                 }
 
                 HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-                using (WcrHttpClient client = new WcrHttpClient(currentEmailID))
+                using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, currentEmailID))
                 {
                     resp = client.PostAsJsonAsync("api/AssociateTransactions/AssociateRegistrationEditRcd", sqlParams).Result;
                     int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -602,7 +604,7 @@ namespace ClsLibrary.Dal
                 sqlParams.Photo = objAssociateRegistration.Photo;
                 sqlParams.AssociateId = Convert.ToInt32(associateID);
                 HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-                using (WcrHttpClient client = new WcrHttpClient(userName))
+                using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, userName))
                 {
                     resp = client.PostAsJsonAsync("api/AssociateTransactions/AssociateRegistrationEditPic", sqlParams).Result;
                     int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -628,7 +630,7 @@ namespace ClsLibrary.Dal
             sqlParams.EmailId = crypto.EncryptUserName(objAssociateRegistration.EmailID);
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
             //using (WcrHttpClient client = new WcrHttpClient(objAssociateRegistration.EmailID))  //using (WcrHttpClient client = new WcrHttpClient(objAssociateRegistration.EmailID))
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
             {
                 resp = client.PostAsJsonAsync("api/AssociateTransactions/AssociateRegistrationRecordExists", sqlParams).Result;
 
@@ -677,7 +679,7 @@ namespace ClsLibrary.Dal
             sqlParams.EmailId = crypto.WcrSimpleEncrypt(objAssociateRegistration.EmailID);
             sqlParams.Action = "associate";
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
             {
                 resp = client.PostAsJsonAsync("api/AccountCreation/AssociateAccountExists", sqlParams).Result;
 
@@ -713,7 +715,7 @@ namespace ClsLibrary.Dal
             sqlParams.EmailId = crypto.WcrSimpleEncrypt(objAssociateRegistration.EmailID);
             sqlParams.Action = "consumer";
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
             {
                 resp = client.PostAsJsonAsync("api/AccountCreation/ConsumerAccountExists", sqlParams).Result;
                 if (resp.IsSuccessStatusCode != true)
@@ -747,7 +749,7 @@ namespace ClsLibrary.Dal
             string oStr = string.Empty;
 
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
             {
                 string endpoint = "api/AccountCreation/GetAssociateEmailById?inAssociateId=" + inAssociateId.ToString();
                 resp = client.GetAsync(endpoint).Result;
