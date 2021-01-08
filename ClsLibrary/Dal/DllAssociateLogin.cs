@@ -28,7 +28,7 @@ namespace ClsLibrary.Dal
             sqlParams.Password = crypto.EncryptPassword(objassociate.Password);
             string ddd = WcrCryptography.SqlPassphrase;
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objassociate.Mob))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objassociate.Mob))
             {
                 resp = client.PostAsJsonAsync("api/AssociateTransactions/AssociateLogin", sqlParams).Result;
                 AssociateLogin_ReturnDataModel returnModel = JsonConvert.DeserializeObject<AssociateLogin_ReturnDataModel>(resp.Content.ReadAsStringAsync().Result);
