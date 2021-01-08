@@ -21,13 +21,12 @@ export class AuthGuard implements CanActivate {
         if (localStorage.getItem('jwtToken') == null)
         {
             var subject = new Subject<boolean>();
-            //this.router.navigate(['login'], { queryParams: { returnUrl: state.url } });
-            this.router.navigate(['/']);
+            this.router.navigate(['login'], { queryParams: { returnUrl: state.url } });
+            //this.router.navigate(['/']);
 
             subject.next(false);
             return subject.asObservable();
         }
-
         return this.userService.isAuthenticated.pipe(take(1));
     }
 }

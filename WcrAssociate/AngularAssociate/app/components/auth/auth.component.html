@@ -13,7 +13,7 @@
                         <h2 class="text-xs-center" [style.text-align]="authType == 'activate' || authType == 'resetPassword' ? 'left':'center'">{{ title }}</h2>
                     </div>
 
-                    <p class="text-xs-center">
+                    <p class="text-xs-center" style="margin: 0 auto;">
                         <a routerLink="/register" *ngIf="authType == 'login'" class="green-text text-darken-1" style="margin: 0 auto;">Don't have an account? Sign up now!</a>
                         <a routerLink="/login" *ngIf="authType == 'register'" class="green-text text-darken-1" style="margin: 0 auto;">Already have an account? Sign in!</a>
                     </p>

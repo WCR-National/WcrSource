@@ -11,10 +11,12 @@
     .ts-text-color-light {
         color: rgba(0, 0, 0, .5);
     }
+
     .btn {
-        text-transform:none;
+        text-transform: none;
     }
 </style>
+
 <div class="row">
     <div id="titlebar" class="property-titlebar margin-bottom-0">
         <div class="container">
@@ -35,103 +37,111 @@
 </div>
 <!-- Content
 ================================================== -->
-<div class="container-fluid">
+<div class="container-fluid" style="background-color:#fff;">
     <div class="row">
+
         <div class="col-xs-12 col-sm-2 mg-t-50 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:350px; ">
             <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
         </div>
 
-        <ngb-tabset #ctdTabset="ngbTabset">
+        <section id="submitted" class="col-xs-12 col-md-8 ts-block mg-t-50 mg-b-100 pd-t-0-force">
+            <div class="row">
+                <ngb-tabset #ctdTabset="ngbTabset">
 
-            <ngb-tab id="mortgageTabId">
-                <ng-template ngbTabTitle><b (click)="GetSalesAdvFromTabs('1')">By MORTGAGES</b></ng-template>
-                <ng-template ngbTabContent>
+                    <ngb-tab id="mortgageTabId">
+                        <ng-template ngbTabTitle><b (click)="GetSalesAdvFromTabs('2')">By MORTGAGES</b></ng-template>
+                        <ng-template ngbTabContent>
 
-                    <div class="pd-t-60">
-                        <div class="row ">
-                            <div class="col-sm-12" [style.display]="isDataFound ? 'block':'none'">
-                                <p class="tx-20 pd-l-30"> Data Not Found!</p>
-                            </div>
-                            <div class="col-sm-12" id="innerHtmlListMortgageId" [style.display]="!isTabMortgageStart ? 'block':'none'">
+                            <div class="pd-t-60">
+                                <div class="row ">
+                                    <div class="col-sm-12" [style.display]="isDataNotFoundForMortgage ? 'block':'none'" style="margin: 0 auto; align-items: center; text-align: center;">
+                                        <!--<p class="tx-20 pd-l-30"> Data Not Found!</p>-->
+                                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 30%;" />
+                                        <h4 class="ts-text-color-light">Mortgage services are not available !!!</h4>
+                                    </div>
+                                    <div class="col-sm-12" id="innerHtmlListMortgageId" [style.display]="!isTabMortgageStart ? 'block':'none'">
 
-                            </div>
-                        </div>
-
-                        <div class="row" [style.display]="isTabMortgageStart ? 'block':'none' ">
-                            <div class="col-md-12" style="height:200px; padding-top: 100px;">
-                                <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
-                                    <div class="progress" style="top:50%;">
-                                        <div class="indeterminate"></div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </ng-template>
-            </ngb-tab>
-
-            <ngb-tab title="" id="insuranceTabId">
-                <ng-template ngbTabTitle><b (click)="GetSalesAdvFromTabs('2')">By INSURANCE</b></ng-template>
-                <ng-template ngbTabContent>
-
-                    <div class="pd-t-60">
-                        <div class="row ">
-                            <div class="col-sm-12" [style.display]="isDataFound ? 'block':'none'">
-                                <p class="tx-20 pd-l-30"> Data Not Found!</p>
-                            </div>
-                            <div class="col-sm-12" id="innerHtmlListInsuranceId" [style.display]="!isTabInsuranceStart ? 'block':'none'">
-
-                            </div>
-                        </div>
-                        <div class="row" [style.display]="isTabTownHomeStart ? 'block':'none' ">
-                            <div class="col-12 col-sm-12" style="height:200px; padding-top: 100px;">
-                                <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
-                                    <div class="progress" style="top:30%;">
-                                        <div class="indeterminate"></div>
+                                <div class="row" [style.display]="isTabMortgageStart ? 'block':'none' ">
+                                    <div class="col-md-12" style="height:200px; padding-top: 100px;">
+                                        <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
+                                            <div class="progress" style="top:50%;">
+                                                <div class="indeterminate"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                </ng-template>
-            </ngb-tab>
-
-            <ngb-tab title="" id="realtorsTabId">
-                <ng-template ngbTabTitle><b (click)="GetSalesAdvFromTabs('3')">By REALTORS</b></ng-template>
-                <ng-template ngbTabContent>
-
-                    <div class="pd-t-60">
-                        <div class="row ">
-                            <div class="col-sm-12" [style.display]="isDataFound ? 'block':'none'">
-                                <p class="tx-20 pd-l-30"> Data Not Found!</p>
-                            </div>
-                            <div class="col-sm-12" id="innerHtmlListRealtorsId" [style.display]="!isTabRealtorsStart ? 'block':'none'">
 
                             </div>
-                        </div>
-                        <div class="row" [style.display]="isMultiFamilyStartCS ? 'block':'none' ">
-                            <div class="col-12 col-sm-12" style="height:200px; padding-top: 100px;">
-                                <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
-                                    <div class="progress" style="top:30%;">
-                                        <div class="indeterminate"></div>
+                        </ng-template>
+                    </ngb-tab>
+
+                    <ngb-tab title="" id="insuranceTabId">
+                        <ng-template ngbTabTitle><b (click)="GetSalesAdvFromTabs('3')">By INSURANCE</b></ng-template>
+                        <ng-template ngbTabContent>
+
+                            <div class="pd-t-60">
+                                <div class="row ">
+                                    <div class="col-sm-12" [style.display]="isDataNotFoundForInsurance ? 'block':'none'" style="margin: 0 auto; align-items: center; text-align: center;">
+                                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 30%;" />
+                                        <h4 class="ts-text-color-light">Insurance services are not available !!!</h4>
+                                    </div>
+                                    <div class="col-sm-12" id="innerHtmlListInsuranceId" [style.display]="!isTabInsuranceStart ? 'block':'none'">
+
                                     </div>
                                 </div>
+                                <div class="row" [style.display]="isTabInsuranceStart ? 'block':'none' ">
+                                    <div class="col-12 col-sm-12" style="height:200px; padding-top: 100px;">
+                                        <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
+                                            <div class="progress" style="top:30%;">
+                                                <div class="indeterminate"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
                             </div>
-                        </div>
 
+                        </ng-template>
+                    </ngb-tab>
 
-                    </div>
+                    <ngb-tab title="" id="realtorsTabId">
+                        <ng-template ngbTabTitle><b (click)="GetSalesAdvFromTabs('5')">By REALTORS</b></ng-template>
+                        <ng-template ngbTabContent>
 
-                </ng-template>
-            </ngb-tab>
+                            <div class="pd-t-60">
 
-        </ngb-tabset>
+                                <div class="row ">
+                                    <div class="col-sm-12" [style.display]="isDataNotFoundForRealtors ? 'block':'none'" style="margin: 0 auto; align-items: center; text-align: center;">
+                                        <img src="AngularAssociate/assets/images/noDataFound.png" style="width: 30%;" />
+                                        <h4 class="ts-text-color-light">Realtors services are not available !!!</h4>
+                                    </div>
+                                    <div class="col-sm-12" id="innerHtmlListRealtorsId" [style.display]="!isTabRealtorsStart ? 'block':'none'">
+                                    </div>
+                                </div>
+                                <div class="row" [style.display]="isTabRealtorsStart ? 'block':'none' ">
+                                    <div class="col-12 col-sm-12" style="height:200px; padding-top: 100px;">
+                                        <div class="col-xs-3 col-sm-offset-3 col-sm-6 div-center">
+                                            <div class="progress" style="top:30%;">
+                                                <div class="indeterminate"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-        <section id="submitted" class="col-xs-12 col-md-8 ts-block" [style.display]="!IsDataFound ? 'block' : 'none'">
+                            </div>
+
+                        </ng-template>
+                    </ngb-tab>
+
+                </ngb-tabset>
+            </div>
+        </section>
+
+        <!--<section id="submitted" class="col-xs-12 col-md-8 ts-block" [style.display]="!isDataNotFound ? 'block' : 'none'">
             <div class="">
                 <div class="row">
                     <div class="offset-2 col-xs-12 col-sm-12 col-md-12 text-center">
@@ -141,21 +151,15 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <div class="col-xs-12 col-sm-8 col-md-8 mg-t-100 mg-b-100" [style.display]="IsDataFound ? 'block' : 'none'">
+        </section>-->
+        <!--<div class="col-xs-12 col-sm-8 col-md-8 mg-t-100 mg-b-100" [style.display]="isDataNotFound ? 'block' : 'none'">
 
             <div id="innerHtmlListServicesId" class="listings-container list-layout" [style.display]="isloadingIconVisible ? 'block' : 'none'">
-                <!-- Listing Item -->
-                <!-- Listing Item / End -->
             </div>
-
-
-
-        </div>
+        </div>-->
         <!-- Listings Container / End -->
 
-        <div class="col-xs-12 col-sm-2 mg-t-100 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:350px; ">
+        <div class="col-xs-12 col-sm-2 mg-t-50 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:350px; ">
             <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
         </div>
     </div>

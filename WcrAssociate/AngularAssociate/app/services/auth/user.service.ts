@@ -22,6 +22,9 @@ export class UserService {
 
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+    public isAssociate = 0;
+    public isConsumer = 0;
+
 
     public isAuthenticated_extra = false;
 
@@ -39,7 +42,7 @@ export class UserService {
     //// Verify JWT in localstorage with server & load user's info.
     //// This runs once on application startup.
     populate() {
-        
+        debugger;
         // If JWT detected, attempt to get & store user's info
         if (localStorage.getItem('jwtToken')) {
             var user: any = JSON.parse(localStorage.getItem('jwtToken'));
@@ -53,7 +56,8 @@ export class UserService {
                         {
                             this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
                             if (this.returnUrl == '') {
-     
+
+                                this.isAssociate = 1;
                                 let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
                                 this.ngZone.run(() => this.router.navigate(['/associates']));
                                 //this.router.navigateByUrl(url);
@@ -67,10 +71,11 @@ export class UserService {
                             //this.ngZone.run(() => this.router.navigate(['/']));
 
                             //this.router.navigateByUrl('/');
+                            this.isAssociate = 0;
 
                             this.purgeAuth();
-                            let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-                            this.ngZone.run(() => this.router.navigate([url]));
+                            //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                            //this.ngZone.run(() => this.router.navigate([url]));
                         }
                     });
             }
@@ -85,9 +90,9 @@ export class UserService {
                     .then((data: any) => {
                         if (data.d == "1")
                         {
+                            this.isConsumer = 1;
                             this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
                             if (this.returnUrl == '') {
-
                                 let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
                                 this.ngZone.run(() => this.router.navigate([url]));
                                 //this.router.navigateByUrl(url);
@@ -103,10 +108,11 @@ export class UserService {
                         {
                             //this.ngZone.run(() => this.router.navigate(['/consumer-dashboard']));
                             //this.router.navigateByUrl('/');
-
+                            this.isConsumer = 0;
                             this.purgeAuth();
-                            let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-                            this.ngZone.run(() => this.router.navigate([url]));
+
+                            //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                            //this.ngZone.run(() => this.router.navigate([url]));
                         }
                     });
             }
@@ -114,8 +120,8 @@ export class UserService {
         else {
             // Remove any potential remnants of previous auth states
             this.purgeAuth();
-            let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-            this.ngZone.run(() => this.router.navigate([url]));
+            //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+            //this.ngZone.run(() => this.router.navigate([url]));
         }
     }
 

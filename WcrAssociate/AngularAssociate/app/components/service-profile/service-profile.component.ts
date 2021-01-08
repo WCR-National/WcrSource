@@ -31,7 +31,10 @@ export class ServiceProfileComponent implements OnInit {
     public catName: string;
     public isLoggedInValue: string;
     public count: number = 0;
-    public IsDataFound = true;
+    public isDataNotFound = true;
+    public isDataNotFoundForMortgage = false;
+    public isDataNotFoundForInsurance = false;
+    public isDataNotFoundForRealtors = false;
     public dataServicesList;
 
     public isTabMortgageStart: boolean = true;
@@ -67,6 +70,23 @@ export class ServiceProfileComponent implements OnInit {
                 this.zipcode = params['zipcode'];
                 this.name = params['name'];
                 this.jtype = params['jtype'];
+
+                if (this.id == '2') {
+                    this.isTabMortgageStart = true;
+                    this.isTabInsuranceStart = false;
+                    this.isTabRealtorsStart = false;
+                }
+                else if (this.id == '3') {
+                    this.isTabMortgageStart = false;
+                    this.isTabInsuranceStart = true;
+                    this.isTabRealtorsStart = false;
+                }
+                else if (this.id == '5') {
+                    this.isTabMortgageStart = false;
+                    this.isTabInsuranceStart = false;
+                    this.isTabRealtorsStart = true;
+                }
+
                 this.GetSalesAdvListings(this.id, this.zipcode, this.name, this.jtype, this.catName);
 
             });
@@ -90,10 +110,30 @@ export class ServiceProfileComponent implements OnInit {
     }
 
     GetSalesAdvFromTabs(id) {
-
-        this.isloadingIconVisible = true;
+        debugger;
+        if (id == '2') {
+            this.isTabMortgageStart = true;
+            this.isTabInsuranceStart = false;
+            this.isTabRealtorsStart = false;
+        }
+        else if (id == '3') {
+            this.isTabMortgageStart = false;
+            this.isTabInsuranceStart = true;
+            this.isTabRealtorsStart = false;
+        }
+        else if (id == '5') {
+            this.isTabMortgageStart = false;
+            this.isTabInsuranceStart = false;
+            this.isTabRealtorsStart = true;
+        }
+        var html = '';
+        $('#innerHtmlListMortgageId').html(html);
+        $('#innerHtmlListInsuranceId').html(html);
+        $('#innerHtmlListRealtorsId').html(html);
+        this.isDataNotFoundForMortgage = false;
+        this.isDataNotFoundForInsurance = false;
+        this.isDataNotFoundForRealtors = false;
         this.GetSalesAdvListings(id, this.zipcode, this.name, this.jtype, this.catName);
-       
     }
 
 
@@ -127,9 +167,17 @@ export class ServiceProfileComponent implements OnInit {
                                 this.AddListOfServices(this.dataServicesList, id);
                             }
                         }
+
+                        this.isDataNotFoundForMortgage = false;
+                        this.isDataNotFoundForInsurance = false;
+                        this.isDataNotFoundForRealtors = false;
+
                     }
                     else {
-                        this.IsDataFound = false;
+
+                        this.isDataNotFoundForMortgage = true;
+                        this.isDataNotFoundForInsurance = true;
+                        this.isDataNotFoundForRealtors = true;
                         this.isTabMortgageStart = false;
                         this.isTabInsuranceStart = false;
                         this.isTabRealtorsStart = false;
@@ -150,6 +198,12 @@ export class ServiceProfileComponent implements OnInit {
         $('#innerHtmlListServicesId').html('');
         let count = 0;
         var html = '';
+        $('#innerHtmlListMortgageId').html(html);
+        $('#innerHtmlListInsuranceId').html(html);
+        $('#innerHtmlListRealtorsId').html(html);
+        this.isDataNotFoundForMortgage = true;
+        this.isDataNotFoundForInsurance = true;
+        this.isDataNotFoundForRealtors = true;
         var thisStatus = this;
         $.each(dataServicesLst, function (index, item) {
             html += '<div class="listing-item"  >';
@@ -195,11 +249,10 @@ export class ServiceProfileComponent implements OnInit {
             }
             else {
                 if (item.consumerID != null) {
-                    html += '<a class="details button border bookMarked SaveBookmarkId" data-id="' + thisStatus.id + '" data-zipcode="' + item.zipcode +'" > Bookmark </a>';
+                    html += '<a class="details button border bookMarked SaveBookmarkId" data-id="' + thisStatus.id + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
                 }
                 else {
                     html += '<a class="details button border SaveBookmarkId" data-id="' + thisStatus.id + '"  > Bookmark </a>';
-
                 }
             }
             //if (item.description.length > 150)
@@ -231,11 +284,12 @@ export class ServiceProfileComponent implements OnInit {
 
             var strParamContactAssociate = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count;
 
-            if (thisStatus.isLoggedInValue == "0") {
+            if (thisStatus.isLoggedInValue == "0")
+            {
                 html += '<a href="javascript:void(0)" class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '"> Contact Associates </a>';
             }
             else {
-                html += '<a href="javascript:void(0)" class="btn button border bookMarked contactAssociateClass" data-id="' + strParamContactAssociate + '" > Contact Associates </a>';
+                html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '" id="contactAssociateId" > Contact Associates </a>';
             }
             html += '<span> Zip Code: ' + item.zipcode + '</span>';
             html += '</div>';
@@ -246,15 +300,15 @@ export class ServiceProfileComponent implements OnInit {
             count++;
         });
 
-        if (id == 1) {
+        if (id == 2) {
             $('#innerHtmlListMortgageId').html(html);
             this.isTabMortgageStart = false;
         }
-        else if (id == 2) {
+        else if (id == 3) {
             $('#innerHtmlListInsuranceId').html(html);
             this.isTabInsuranceStart = false;
         }
-        else if (id == 3) {
+        else if (id == 5) {
             $('#innerHtmlListRealtorsId').html(html);
             this.isTabRealtorsStart = false;
         }
@@ -262,7 +316,6 @@ export class ServiceProfileComponent implements OnInit {
         this.InitializeEventsDynamicHtml();
         //gridLayoutSwitcher();
     }
-
 
     InitializeEventsDynamicHtml() {
 
@@ -290,7 +343,7 @@ export class ServiceProfileComponent implements OnInit {
                     },
                     err => {
                     }
-            );
+                );
 
             //thisStatus.salesAdvertisements
             //    .ConsumerIsLogin()
@@ -299,7 +352,7 @@ export class ServiceProfileComponent implements OnInit {
             //            debugger;
 
             //            if (data.d > 0) {
-                            
+
             //            }
             //            else {
             //                thisStatus.showToast("danger", "You need to sign in");
@@ -316,6 +369,7 @@ export class ServiceProfileComponent implements OnInit {
 
         $('.contactAssociateClass').click(function () {
 
+            $('#contactAssociateId').addClass('bookMarked');
             var advIdAndAssociateId = $(this).attr('data-id');
             thisStatus.salesAdvertisements
                 .CheckEmailAndPhNo()
@@ -347,7 +401,7 @@ export class ServiceProfileComponent implements OnInit {
 
             //            if (data.d > 0) {
 
-                            
+
             //            }
             //            else {
             //                thisStatus.showToast("danger", "You need to sign in");
@@ -364,48 +418,7 @@ export class ServiceProfileComponent implements OnInit {
         });
     }
 
-    SaveBookmark(advId, zipcode) {
-        
-        let thisStatus = this;
-        thisStatus.salesAdvertisements
-            .UpdateSavedBookmarksService(advId, zipcode)
-            .subscribe(
-                data => {
 
-                    if (data.d == "0") {
-                        $('.SaveBookmarkId').each(function () {
-                            if (advId == $(this).attr('data-id')) {
-                                $(this).addClass("bookMarked");
-                            }
-                        });
-                        thisStatus.showToast('warning', "You have already saved this advertisement.");
-                    }
-                    else {
-                        $('.SaveBookmarkId').each(function () {
-                            if (advId == $(this).attr('data-id')) {
-                                $(this).addClass("bookMarked");
-                            }
-                        }); thisStatus.showToast('success', "Advertisement bookmarked successfully.");
-                    }
-                },
-                err => {
-                }
-            );
-        //thisStatus.salesAdvertisements
-        //    .ConsumerIsLogin()
-        //    .subscribe(
-        //        (data) => {
-        //            debugger;
-
-        //            if (data.d == 0) {
-                        
-        //            }
-        //            else {
-        //                thisStatus.showToast("danger", "You need to sign in");
-        //                thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
-        //            }
-        //        });
-    }
 
     onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId, zipcode): void {
 
@@ -443,6 +456,83 @@ export class ServiceProfileComponent implements OnInit {
             }
         });
 
+    }
+
+    onOpenModalClickAssociate(advIdnAndAssociateId): void {
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        (modal.componentInstance as AuthModalComponent).isContactAssociate = true;
+        const modalComponent: AuthModalComponent = modal.componentInstance;
+
+        modal.componentInstance.dismissParentCall.subscribe((data) => {
+            console.log(data);
+            if (data == "update") {
+                //book
+                this.isLoggedInValue = "1";
+                this.ContactAssociate(advIdnAndAssociateId);
+            }
+            else {
+                this.isLoggedInValue = "0";
+                this.showToast('danger', "Something went wrong. Please try again.");
+            }
+        });
+
+        modal.componentInstance.updateParentCall.subscribe((data) => {
+            debugger;
+            this.showToast('success', 'Purchasing is in process');
+        });
+    }
+
+    showToast(toastrType, text) {
+        const type = toastrType;
+        this.toaster.open({
+            text: text,
+            caption: type + ' notification',
+            type: type,
+            duration: 8000
+        });
+    }
+
+    SaveBookmark(advId, zipcode) {
+
+        let thisStatus = this;
+        thisStatus.salesAdvertisements
+            .UpdateSavedBookmarksService(advId, zipcode)
+            .subscribe(
+                data => {
+
+                    if (data.d == "0") {
+                        $('.SaveBookmarkId').each(function () {
+                            if (advId == $(this).attr('data-id')) {
+                                $(this).addClass("bookMarked");
+                            }
+                        });
+                        thisStatus.showToast('warning', "You have already saved this advertisement.");
+                    }
+                    else {
+                        $('.SaveBookmarkId').each(function () {
+                            if (advId == $(this).attr('data-id')) {
+                                $(this).addClass("bookMarked");
+                            }
+                        }); thisStatus.showToast('success', "Advertisement bookmarked successfully.");
+                    }
+                },
+                err => {
+                }
+            );
+        //thisStatus.salesAdvertisements
+        //    .ConsumerIsLogin()
+        //    .subscribe(
+        //        (data) => {
+        //            debugger;
+
+        //            if (data.d == 0) {
+
+        //            }
+        //            else {
+        //                thisStatus.showToast("danger", "You need to sign in");
+        //                thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
+        //            }
+        //        });
     }
 
     ContactAssociates(advIdAndAssociateId) {
@@ -517,8 +607,7 @@ export class ServiceProfileComponent implements OnInit {
             );
     }
 
-    ContactAssociate(advIdnAndAssociateId)
-    {
+    ContactAssociate(advIdnAndAssociateId) {
         var thisStatus = this;
         //var advIdnAndAssociateId = $(this).attr('data-id');
         thisStatus.salesAdvertisements
@@ -560,43 +649,7 @@ export class ServiceProfileComponent implements OnInit {
         //        });
     }
 
-    onOpenModalClickAssociate(advIdnAndAssociateId): void
-    {
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        (modal.componentInstance as AuthModalComponent).isContactAssociate = true;
-        const modalComponent: AuthModalComponent = modal.componentInstance;
-
-        modal.componentInstance.dismissParentCall.subscribe((data) => {
-            console.log(data);
-            if (data == "update") {
-                //book
-                this.isLoggedInValue = "1";
-                this.ContactAssociate(advIdnAndAssociateId);
-            }
-            else {
-                this.isLoggedInValue = "0";
-                this.showToast('danger', "Something went wrong. Please try again.");
-            }
-        });
-
-        modal.componentInstance.updateParentCall.subscribe((data) => {
-            debugger;
-            this.showToast('success', 'Purchasing is in process');
-        });
-    }
-
-    showToast(toastrType, text) {
-        const type = toastrType;
-        this.toaster.open({
-            text: text,
-            caption: type + ' notification',
-            type: type,
-            duration: 8000
-        });
-    }
-
-    contactAssocistesAndAdvertisement(advIdAndAssociateId)
-    {
+    contactAssocistesAndAdvertisement(advIdAndAssociateId) {
         let l_type = '';
 
         var adverID;
@@ -667,8 +720,7 @@ export class ServiceProfileComponent implements OnInit {
 
     }
 
-    insertionBookmarksinContactAssociates(advId, zipcode)
-    {
+    insertionBookmarksinContactAssociates(advId, zipcode) {
         let thisStatus = this;
         thisStatus.salesAdvertisements
             .ConsumerIsLogin()

@@ -5,6 +5,7 @@
     .row {
         display: block;
     }
+
     .dropdown-loggeduser {
         margin-left: 10px;
     }
@@ -12,17 +13,90 @@
     .dropup, .dropright, .dropdown, .dropleft {
         position: relative;
     }
+
     .dropdown-toggle {
         white-space: nowrap;
     }
+
     .dropdown-menu[x-placement^="top"], .dropdown-menu[x-placement^="right"], .dropdown-menu[x-placement^="bottom"], .dropdown-menu[x-placement^="left"] {
         right: auto;
         bottom: auto;
     }
-    #logo {
-        margin-right: 14%;
+
+    .table {
+        display: table;
+        margin: 0 auto;
+        text-align: center;
+        width: 73%;
     }
+
+    ul#horizontal-list {
+        min-width: 696px;
+        list-style: none;
+        padding-top: 20px;
+    }
+
+    ul#responsive li {
+        display: inline;
+        display: flex !important;
+    }
+
+    .first-list-item {
+        display: flex !important;
+        margin-left: 21%;
+    }
+
+    @media only screen and (min-width: 1580px) {
+        .first-list-item {
+            display: flex !important;
+            margin-left: 28%;
+        }
+    }
+
+
+    @media only screen and (min-width: 2180px) {
+        .first-list-item {
+            display: flex !important;
+            margin-left: 31%;
+        }
+    }
+
+    ul#responsive > li > a:hover, ul#responsive > li > a:focus {
+        text-decoration: none;
+        background-color: #eee;
+    }
+
+    ul#responsive li a {
+        font-size: 0.9em;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 20px;
+        margin-left: 3px;
+        margin-right: 3px;
+        text-transform: uppercase;
+        padding: 10px 15px;
+        cursor: pointer;
+        margin-top: 13px !important;
+    }
+
+    ul#responsive > li > a {
+        border-radius: 4px;
+    }
+
+        ul#responsive > li > a.active {
+            color: #fff;
+            background-color: #0e3a6b;
+            text-align: center;
+            letter-spacing: .5px;
+            transition: background-color .2s ease-out;
+        }
+
+            ul#responsive > li > a.active:hover, ul#responsive > li > a.active:focus {
+                background-color: #386ba4;
+                color: #fff;
+            }
 </style>
+
 <header id="header-container" class="header-style-2">
     <!-- Header -->
     <div id="header">
@@ -54,7 +128,7 @@
                 <ul id="responsive">
 
                     <li>
-                        <a class="current" routerLink="/consumer-dashboard" style="width:260px;">Home</a>
+                        <a class="current" routerLink="/consumer-dashboard"  style="width:260px;">Home</a>
                     </li>
                     <li>
                         <a routerLink="/profile" style="width:260px;">Profile</a>
@@ -70,58 +144,66 @@
             </div>
         </nav>
         <!--Mobile navigation Logged in-->
-
         <!--Desktop navigation Logged in-->
-        <nav id="navigation1" class="style-2" *ngIf="isLoggedIn" style="background:#fff; box-shadow:none;" [style.display]="!isMobileScreen ? 'block':'none'">
+        <nav id="navigation1" class="nav-pills style-2" *ngIf="isLoggedIn" style="background:#fff; box-shadow:none;" [style.display]="!isMobileScreen ? 'block':'none'">
             <div class="container">
-                <ul id="responsive">
+                <div id="logo">
+                    <a href="javascript:void(0)" (click)="onClickGetAds()"><img src="img/wcr-logo.png" alt=""></a>
+                </div>
+                <div class="table">
+                    <ul id="responsive">
 
-                    <div id="logo">
-                        <a href="javascript:void(0)" (click)="onClickGetAds()"><img src="img/wcr-logo.png" alt=""></a>
-                    </div>
-                    <li>
-                        <a class="current" routerLink="/consumer-dashboard">Home</a>
-                    </li>
-                    <li>
-                        <a routerLink="/profile">Profile</a>
-                    </li>
-                    <li>
-                        <a routerLink="/bookmark">Bookmark</a>
-                    </li>
-                    <li>
-                        <a routerLink="/support">Support</a>
-                    </li>
 
-                </ul>
+                        <li class="first-list-item">
+                            <a class="current" routerLink="/consumer-dashboard" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Home <i class="fas fa-home"></i></a>
+                        </li>
+                        <li>
+                            <a routerLink="/profile" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Profile <i class="fas fa-user"></i></a>
+                        </li>
+                        <li>
+                            <a routerLink="/bookmark" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Bookmark <i class="fas fa-bookmark"></i></a>
+                        </li>
+                        <li>
+                            <a routerLink="/support" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Support <i class="fas fa-life-ring"></i></a>
+                        </li>
+
+                    </ul>
+                </div>
+
             </div>
         </nav>
         <!--Desktop navigation Logged in-->
-
         <!-- Logged in Desktop username dropdown -->
         <div class="container" *ngIf="isLoggedIn">
             <div class="row">
                 <div class="user-menu-container mg-xs-l-0">
-                    <div class="user-menu pd-xs-l-0 mg-xs-l-0">
+                    <div class="user-menu pd-xs-l-0 mg-xs-l-0 float-right">
 
                         <div class="dropdown dropdown-loggeduser" ngbDropdown>
-                            <a id="dropdownMenuButton" class="dropdown-link" href="javascript:void(0)" style="float:right;" ngbDropdownToggle>
-                                <div class="col-xs-12 col-sm-1 pd-xs-l-0" style="padding-right: 22px;">
-                                    <span class="font-weight tx-12 tx-sm-18 tx-primary tx-bold">Hi, {{userName}}</span>
+                            <a id="dropdownMenuButton" class="float-right wd-100 dropdown-link" href="javascript:void(0)" style="float:right;" ngbDropdownToggle>
+                                <div class="col-xs-12 col-sm-12 pd-xs-l-0" style="padding-right: 22px;">
+                                    <span class="font-weight tx-17 tx-sm-18 tx-primary tx-bold " style="color: #0e3a6b;">Hi, {{userName}}</span>
 
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <!--<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>-->
+
+                                    <img class="img-rounded wd-35 ht-35 mg-l-5" style="border-radius:50px; border: 2px solid #e2e2e2" src="AssociatePhoto/0.png" />
+
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right " ngbDropdownMenu aria-labelledby="dropdownMenuButton">
                                 <!--<div class="dropdown-menu-header">
-                                <div class="media align-items-center">
-                                    <div class="avatar">
-                                        <img id="profilePicHeader" class="rounded-circle" alt="">
+                                    <div class="media align-items-center">
+                                        <div class="avatar">
+                                            <img id="profilePicHeader" class="rounded-circle" alt="">
+                                        </div>
+                                        <div class="media-body mg-l-10">
+                                            <h6>{{userName}}</h6>
+                                        </div>
                                     </div>
-                                    <div class="media-body mg-l-10">
-                                        <h6>{{userName}}</h6>
-                                    </div>
-                                </div>
-                            </div>-->
+                                </div>-->
 
                                 <div class="dropdown-menu-body">
                                     <a routerLink="/profile" class="dropdown-item tx-16-f" ngbDropdownItem><i data-feather="user"></i> View Profile</a>
@@ -132,16 +214,15 @@
                         </div>
 
                         <!--<div class="user-name"><span><img src="images/agent-03.jpg" alt=""></span>Hi, {{userName}}</div>
-                    <ul>
-                        <li><a routerLink="/associates/profile"><i class="sl sl-icon-user"></i> My Profile</a></li>
-                        <li><a href="javascript:void(0)" (click)="logout()"><i class="sl sl-icon-power"></i> Log Out</a></li>
-                    </ul>-->
+                        <ul>
+                            <li><a routerLink="/associates/profile"><i class="sl sl-icon-user"></i> My Profile</a></li>
+                            <li><a href="javascript:void(0)" (click)="logout()"><i class="sl sl-icon-power"></i> Log Out</a></li>
+                        </ul>-->
                     </div>
                 </div>
             </div>
         </div>
         <!-- Logged in Desktop username dropdown -->
-
         <!-- Not logged in navbar-->
         <div class="container" *ngIf="!isLoggedIn">
 
@@ -176,7 +257,6 @@
         </div>
         <!--Not logged in navbar-->
 
-
         <div class="clearfix"></div>
         <!-- Main Navigation / End -->
 
@@ -186,115 +266,3 @@
 </header>
 <div class="clearfix"></div>
 <!-- Header Container / End -->
-<!-- Main Navigation -->
-<!--<nav id="navigation" class="style-1">
-    <ul id="responsive">
-
-        <li>
-            <a class="current" href="#">Home</a>
-            <ul>
-                <li><a href="index.html">Home 1</a></li>
-                <li><a href="index-2.html">Home 2</a></li>
-                <li><a href="index-3.html">Home 3</a></li>
-                <li><a href="index-4.html">Home 4</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">Listings</a>
-            <ul>
-                <li>
-                    <a href="#">List Layout</a>
-                    <ul>
-                        <li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
-                        <li><a href="listings-list-with-map.html">With Map</a></li>
-                        <li><a href="listings-list-full-width.html">Full Width</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Grid Layout</a>
-                    <ul>
-                        <li><a href="listings-grid-standard-with-sidebar.html">Standard With Sidebar</a></li>
-                        <li><a href="listings-grid-compact-with-sidebar.html">Compact With Sidebar</a></li>
-                        <li><a href="listings-grid-with-map.html">With Map</a></li>
-                        <li><a href="listings-grid-full-width.html">Full Width</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Half Map</a>
-                    <ul>
-                        <li><a href="listings-half-map-list.html">List Layout</a></li>
-                        <li><a href="listings-half-map-grid-standard.html">Grid Standard Layout</a></li>
-                        <li><a href="listings-half-map-grid-compact.html">Grid Compact Layout</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">Features</a>
-            <ul>
-                <li>
-                    <a href="#">Single Properties</a>
-                    <ul>
-                        <li><a href="single-property-page-1.html">Property Style 1</a></li>
-                        <li><a href="single-property-page-2.html">Property Style 2</a></li>
-                        <li><a href="single-property-page-3.html">Property Style 3</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Search Styles</a>
-                    <ul>
-                        <li><a href="index.html">Home Search 1</a></li>
-                        <li><a href="index-2.html">Home Search 2</a></li>
-                        <li><a href="index-3.html">Home Search 3</a></li>
-                        <li><a href="listings-list-full-width.html">Advanced Style</a></li>
-                        <li><a href="listings-list-with-sidebar.html">Sidebar Search</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">My Account</a>
-                    <ul>
-                        <li><a href="my-profile.html">My Profile</a></li>
-                        <li><a href="my-bookmarks.html">Bookmarked Listings</a></li>
-                        <li><a href="my-properties.html">My Properties</a></li>
-                        <li><a href="change-password.html">Change Password</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Agencies & Agents</a>
-                    <ul>
-                        <li><a href="agencies-list.html">Agencies List</a></li>
-                        <li><a href="agency-page.html">Agency Page</a></li>
-                        <li><a href="agents-list.html">Agents List</a></li>
-                        <li><a href="agent-page.html">Agent Page</a></li>
-                    </ul>
-                </li>
-
-                <li><a href="compare-properties.html">Compare Properties</a></li>
-                <li><a href="submit-property.html">Submit Property</a></li>
-            </ul>
-        </li>
-
-        <li>
-            <a href="#">Pages</a>
-            <ul>
-                <li>
-                    <a href="blog.html">Blog</a>
-                    <ul>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="blog-post.html">Blog Post</a></li>
-                    </ul>
-                </li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="elements.html">Elements</a></li>
-                <li><a href="pricing-tables.html">Pricing Tables</a></li>
-                <li><a href="typography.html">Typography</a></li>
-                <li><a href="icons.html">Icons</a></li>
-            </ul>
-        </li>
-
-    </ul>
-</nav>
-<div class="clearfix"></div>-->
-<!-- Main Navigation / End -->
