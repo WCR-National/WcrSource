@@ -12,6 +12,7 @@ namespace ClsLibrary.Dal
     public class DllConsumerRegistration
     {
         readonly ConnectionClass objCon = new ConnectionClass();
+        readonly bool DebugEvironment = System.Configuration.ConfigurationManager.AppSettings["Debug"].ToString().Equals("Yes") ? true : false;
 
         /// <summary>
         /// This Method is used to Post data into tbl_sale table
@@ -30,7 +31,7 @@ namespace ClsLibrary.Dal
             sqlParams.ZipCode = crypto.WcrSimpleEncrypt(objConsumerRegistration.ZipCode);
             sqlParams.Mob = crypto.WcrSimpleEncrypt(objConsumerRegistration.MobileNo);
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
             {
                 resp = client.PostAsJsonAsync("api/AccountCreation/ConsumersAdd", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -85,7 +86,7 @@ namespace ClsLibrary.Dal
             sqlParams.StateId = crypto.WcrSimpleEncrypt(objConsumerRegistration.StateID);
             sqlParams.Id = Convert.ToInt32(objConsumerRegistration.ID);
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objConsumerRegistration.EmailID))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objConsumerRegistration.EmailID))
             {
                 resp = client.PostAsJsonAsync("api/ConsumerTransactions/ConsumersEditConsumer", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -128,7 +129,7 @@ namespace ClsLibrary.Dal
         {
             WcrCryptography crypto = new WcrCryptography();
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(uname))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, uname))
             {
 
                 resp = client.GetAsync(string.Format("api/ConsumerTransactions/consumerDetail?inConsumerId={0}", ID)).Result;
@@ -210,7 +211,7 @@ namespace ClsLibrary.Dal
             sqlParams.ConPhoto = objConsumerRegistration.Photo;
             sqlParams.Id = objConsumerRegistration.ID;
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objConsumerRegistration.EmailID))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objConsumerRegistration.EmailID))
             {
                 resp = client.PostAsJsonAsync("api/ConsumerTransactions/ConsumersUpdatePhoto", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -246,7 +247,7 @@ namespace ClsLibrary.Dal
             ConsumersParameters sqlParams = new ConsumersParameters();
             sqlParams.Id = objConsumerRegistration.ID;
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objConsumerRegistration.EmailID))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objConsumerRegistration.EmailID))
             {
                 resp = client.PostAsJsonAsync("api/ConsumerTransactions/ConsumersDeleteAccount", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -281,7 +282,7 @@ namespace ClsLibrary.Dal
             sqlParams.Name = Name;
             sqlParams.Id = ID;
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(uname))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, uname))
             {
                 resp = client.PostAsJsonAsync("api/ConsumerTransactions/ConsumersUConsumerRcd", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -334,7 +335,7 @@ namespace ClsLibrary.Dal
             int consumerId = consumerID;
             string sMsg = message;
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(uname))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, uname))
             {
                 resp = client.PutAsJsonAsync(string.Format("api/EmailServices/WcrConsumerSupport?inConsumerId={0}&inMessage={1}", consumerId, sMsg), string.Empty).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -356,7 +357,7 @@ namespace ClsLibrary.Dal
             int associateId = associateID;
             string sMsg = message;
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(uname))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, uname))
             {
                 resp = client.PutAsJsonAsync(string.Format("api/EmailServices/WcrAssociateSupport?inAssociateId={0}&inMessage={1}", associateId, sMsg), string.Empty).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);

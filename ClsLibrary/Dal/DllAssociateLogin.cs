@@ -12,6 +12,8 @@ namespace ClsLibrary.Dal
     public class DllAssociateLogin
     {
         readonly ConnectionClass objCon = new ConnectionClass();
+        readonly bool DebugEvironment = System.Configuration.ConfigurationManager.AppSettings["Debug"].ToString().Equals("Yes") ? true : false;
+
         #region Select
         /// <summary>
         /// This Method is used to check authentication of associate
@@ -99,7 +101,7 @@ namespace ClsLibrary.Dal
             sqlParams.EmailId = crypto.WcrSimpleEncrypt(_Email);
             sqlParams.Action = "associate";
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
             {
                 resp = client.PostAsJsonAsync("api/AccountCreation/AssociateAccountExists", sqlParams).Result;
                 UserAccountStatus returnModel = JsonConvert.DeserializeObject<UserAccountStatus>(resp.Content.ReadAsStringAsync().Result);
@@ -135,7 +137,7 @@ namespace ClsLibrary.Dal
             sqlParams.Action = "consumer";
             string ddd = WcrCryptography.SqlPassphrase;
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
             {
                 resp = client.PostAsJsonAsync("api/AccountCreation/ConsumerAccountExists", sqlParams).Result;
                 UserAccountStatus returnModel = JsonConvert.DeserializeObject<UserAccountStatus>(resp.Content.ReadAsStringAsync().Result);
@@ -249,7 +251,7 @@ namespace ClsLibrary.Dal
                     AssociateLogInParameters dataContent = new AssociateLogInParameters();
                     dataContent.Mob = crypt.WcrSimpleEncrypt(username);
                     HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-                    using (WcrHttpClient client = new WcrHttpClient(WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+                    using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
                     {
                         resp = client.PostAsJsonAsync("api/AccountCreation/AssociateActivation", dataContent).Result;
                         int rc = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -377,7 +379,7 @@ namespace ClsLibrary.Dal
             ChangeAssociatePasswordParameters sqlParams = new ChangeAssociatePasswordParameters();
             sqlParams.Email = crypto.EncryptUserName(objassociate.EmailID);
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objassociate.EmailID))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objassociate.EmailID))
             {
                 resp = client.PostAsJsonAsync("api/AssociateTransactions/SendPasswordResetEmail", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -403,7 +405,7 @@ namespace ClsLibrary.Dal
             ChangeConsumerPasswordParameters sqlParams = new ChangeConsumerPasswordParameters();
             sqlParams.Email = crypto.EncryptUserName(objConsumer.EmailID);
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objConsumer.EmailID))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objConsumer.EmailID))
             {
                 resp = client.PostAsJsonAsync("api/ConsumerTransactions/SendPasswordResetEmail", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -430,7 +432,7 @@ namespace ClsLibrary.Dal
             sqlParams.Email = crypto.EncryptUserName(objassociate.EmailID);
             sqlParams.Password = crypto.EncryptPassword(objassociate.Password);
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objassociate.EmailID))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objassociate.EmailID))
             {
                 resp = client.PostAsJsonAsync("api/AssociateTransactions/ChangeAssociatePassword", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -456,7 +458,7 @@ namespace ClsLibrary.Dal
             sqlParams.Email = crypto.EncryptUserName(objassociate.EmailID);
             sqlParams.Password = crypto.EncryptPassword(objassociate.Password);
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objassociate.EmailID))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objassociate.EmailID))
             {
                 resp = client.PostAsJsonAsync("api/ConsumerTransactions/ChangeAssociatePassword", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);
@@ -569,7 +571,7 @@ namespace ClsLibrary.Dal
             ChangeAssociatePasswordParameters sqlParams = new ChangeAssociatePasswordParameters();
             sqlParams.Email = crypto.EncryptUserName(objassociate.EmailID);
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(objassociate.EmailID))
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, objassociate.EmailID))
             {
                 resp = client.PostAsJsonAsync("api/AssociateTransactions/SendPasswordResetEmail", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);

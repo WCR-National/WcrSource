@@ -16,6 +16,8 @@ namespace ClsLibrary.Dal
     public class DllPostComments
     {
         readonly ConnectionClass objCon = new ConnectionClass();
+        readonly bool DebugEvironment = System.Configuration.ConfigurationManager.AppSettings["Debug"].ToString().Equals("Yes") ? true : false;
+
         public string InsertData(int AdvertisementID, string Comments, int ConsumerID, float rateforad)
         {
             SqlCommand cmd = new SqlCommand("proc_ConsumerComments", objCon.Con);
@@ -185,7 +187,7 @@ namespace ClsLibrary.Dal
             sqlParams.JobType = jobtype;
             sqlParams.ZipCode = zipcode;            
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
-            using (WcrHttpClient client = new WcrHttpClient(username))  
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, username))  
             {
                 resp = client.PostAsJsonAsync("api/AssociateTransactions/SendInterestNotifications", sqlParams).Result;
                 int Id = JsonConvert.DeserializeObject<int>(resp.Content.ReadAsStringAsync().Result);

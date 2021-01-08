@@ -60,6 +60,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
     public ZipCode: string;
 
     public advId: string;
+    public location: string;
 
 
     constructor(private _messageService: MessageService, private router: Router, private salesAdvertisements: SalesAdvertisementsService, private xmlToJson: XMLToJSON,
