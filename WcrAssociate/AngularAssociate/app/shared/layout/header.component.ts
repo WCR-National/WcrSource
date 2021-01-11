@@ -25,33 +25,35 @@ export class HeaderComponent implements OnInit {
     public isLoggedIn = false;
     public isMobileScreen = false;
     ngOnInit() {
+        //this._messageService.listen().subscribe((data: any) => {
+        //    debugger;
+        //    if (data != 'updateUserName') {
+        //        this.initializeHeader();
+        //    }
+        //    //if (data == "updateHeader")
+        //    //{
+        //    //    if (this.isLoggedIn) {
+        //    //        this.isLoggedIn = false;
+        //    //    }
+        //    //    else {
+        //    //        this.isLoggedIn = true;
+        //    //    }
+        //    //}
+        //});
+
+
         this.checkWidthOrHeightForMobile();
-        this.initializeHeader();
         this.userService.currentUser.subscribe(
             (userData) => {
                 debugger;
                 this.currentUser = userData;
                 if (this.currentUser !== undefined && this.currentUser != null && Object.keys(this.currentUser).length !== 0 && this.currentUser.constructor !== Object) {
                     this.isLoggedIn = true;
+                    this.initializeHeader();
                 }
             });
 
-        this._messageService.listen().subscribe((data: any) => {
-            debugger;
-            if (data != 'updateUserName')
-            {
-                this.initializeHeader();
-            }
-            //if (data == "updateHeader")
-            //{
-            //    if (this.isLoggedIn) {
-            //        this.isLoggedIn = false;
-            //    }
-            //    else {
-            //        this.isLoggedIn = true;
-            //    }
-            //}
-        });
+
     }
 
     onClickGetAds() {
@@ -99,7 +101,7 @@ export class HeaderComponent implements OnInit {
     }
 
     checkWidthOrHeightForMobile() {
-        debugger;
+
         var ratio = window.devicePixelRatio || 1;
         var w = window.innerWidth;
         var h = window.innerHeight;
@@ -113,10 +115,7 @@ export class HeaderComponent implements OnInit {
 
 
     }
-
-    //mmenuInit() {
-    //}
-
+    
     onClickLogout() {
         this.userService
             .attemptLogout()

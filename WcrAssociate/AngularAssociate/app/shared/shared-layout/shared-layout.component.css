@@ -10380,6 +10380,7 @@ button.btn-floating {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     object-fit: cover;
+    cursor:pointer;
 }
 
 .collapsible {
@@ -49723,7 +49724,7 @@ a:not([href]):not([tabindex]) {
     border-bottom-width: 0;
     position: relative;
     margin-bottom: -1px;
-    padding: 0 20px;
+    padding: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50692,4 +50693,7 @@ tablist a.nav-link {
 }
 a.nav-link b {
     width: 100%;
+}
+agm-map {
+    height: 400px;
 }

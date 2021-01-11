@@ -144,11 +144,12 @@
             </div>
         </nav>
         <!--Mobile navigation Logged in-->
+
         <!--Desktop navigation Logged in-->
         <nav id="navigation1" class="nav-pills style-2" *ngIf="isLoggedIn" style="background:#fff; box-shadow:none;" [style.display]="!isMobileScreen ? 'block':'none'">
             <div class="container">
                 <div id="logo">
-                    <a href="javascript:void(0)" (click)="onClickGetAds()"><img src="img/wcr-logo.png" alt=""></a>
+                    <a routerLink="/" (click)="onClickGetAds()"><img src="img/wcr-logo.png" alt=""></a>
                 </div>
                 <div class="table">
                     <ul id="responsive">

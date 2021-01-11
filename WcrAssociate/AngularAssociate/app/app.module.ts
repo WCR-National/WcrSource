@@ -64,6 +64,7 @@ import { SalesAdvertisementsService } from './services/sales-advertisements/sale
 import { ServiceProfileComponent } from './components/service-profile/service-profile.component';
 import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 import { PropertySalesAdvertisementsComponent } from './components/property-sales-advertisement/property-sales-advertisement.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -98,7 +99,11 @@ import { PropertySalesAdvertisementsComponent } from './components/property-sale
         AppRoutingModule,
         NgbModule,
         NgSelectModule,
-
+        AgmCoreModule.forRoot({
+            // please get your own API key here:
+            // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+            apiKey: 'AIzaSyD8qzg6u0Yh20dcMnAyZ4A8dExFXfzQb_c'
+        })
     ],
     entryComponents: [
         AuthModalComponent
