@@ -243,7 +243,7 @@ export class AuthModalComponent implements OnInit {
 
         // Set a title for the page accordingly
         if (this.authType === 'login') {
-            this.title = 'Sign in';
+            this.title = 'In order to complete this action you must sign-in';
 
             this.authForm.get('email').clearValidators();
             this.authForm.get('email').clearAsyncValidators();

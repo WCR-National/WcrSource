@@ -53,10 +53,12 @@ export class ConsumerDashabordComponent implements OnInit {
     ) {
         this._messageService.listen().subscribe((m: any) => {
             console.log(m);
+
             if (m == 'showAds') {
                 this.GetSalesAdts();
             }
-        })
+        });
+        //this._messageService.filter("updateUserName");
     }
 
     ngOnInit() {

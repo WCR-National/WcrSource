@@ -1152,7 +1152,7 @@ export class AuthComponent implements OnInit {
                             .then(
                                 (data: any) => {
                                     if (data.d.length > 0) {
-                                        this._messageService.filter("updateUserName");
+                                        
                                         //this.router.navigateByUrl('/login');
                                         this.ngZone.run(() => this.router.navigate(['/consumer-dashboard']));
                                         //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);

@@ -635,7 +635,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                     debugger;
                     if (data.d == "0") {
 
-                        $('.saveBookmarkClass').each(function () {
+                        $('.showInterestBookMarkClass').each(function () {
                             if (advId == $(this).attr('data-id')) {
                                 $(this).addClass('bookMarked');
                             }
@@ -643,7 +643,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                         this.showToast('warning', "You have already saved this advertisement.");
                     }
                     else {
-                        $('.saveBookmarkClass').each(function () {
+                        $('.showInterestBookMarkClass').each(function () {
                             if (advId == $(this).attr('data-id')) {
                                 $(this).addClass('bookMarked');
                             }

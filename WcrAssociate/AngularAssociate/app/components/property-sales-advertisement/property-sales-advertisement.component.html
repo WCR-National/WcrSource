@@ -9,7 +9,7 @@
                 <div class="property-title">
                     <h2>{{title}} <span class="property-badge">For Sale</span></h2>
                     <span>
-                        <a href="#location" class="listing-address">
+                        <a href="javascript:void(0)" class="listing-address">
                             <i class="fa fa-map-marker"></i>
                             {{address}}
                         </a>
@@ -30,8 +30,8 @@
 <div class="container-fluid" style="background-color:#fff;">
 
     <div class="row">
-        <div class="col-xs-12 col-sm-12 mg-b-20" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:100px; line-height: 4;">
-            <h4 class="center" style="color: #204876;">Google AdSense</h4>
+        <div class="col-xs-12 col-sm-12 mg-b-20" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:100px; ">
+            <h4 class="center" style="color: #204876; line-height: 4;">Google AdSense</h4>
         </div>
     </div>
 </div>
@@ -90,10 +90,15 @@
                         </ul>
 
                         <!-- Location -->
-                        <h3 *ngIf="location != null && location != ''" class="desc-headline no-border" id="location">Location</h3>
+
+                        <h3 *ngIf="latitude != null && latitude != ''" class="desc-headline no-border" id="location">Location</h3>
                         <div id="propertyMap-container">
-                            <div id="propertyMap" data-latitude="40.7427837" data-longitude="-73.11445617675781"></div>
-                            <a href="#" id="streetView">Street View</a>
+                            <agm-map [latitude]="latitude"
+                                     [longitude]="longitude"
+                                     [zoom]="zoom">
+                                <agm-marker [latitude]="latitude"
+                                            [longitude]="longitude"></agm-marker>
+                            </agm-map>
                         </div>
                     </div>
                 </div>
@@ -134,7 +139,7 @@
 
                             <div class="widget">
                                 <div class="col-xs-12 col-sm-12 mg-t-50 mg-b-100" style="border: 1px solid rgb(0 0 0 / 13%); text-align:center; height:250px; ">
-                                    <h4 class="vertical-center" style="color: #204876; line-height:5;">Google AdSense</h4>
+                                    <h4 class="vertical-center" style="color: #204876;">Google AdSense</h4>
                                 </div>
                             </div>
                             <!-- Booking Widget / End -->

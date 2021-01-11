@@ -12,6 +12,8 @@ import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthModalComponent } from '../auth-modal/auth-modal.component';
 import { Toaster } from 'ngx-toast-notifications';
 
+
+
 declare const gridLayoutSwitcher: any;
 declare const InitializeFullWidthSlider: any;
 
@@ -22,6 +24,11 @@ declare const InitializeFullWidthSlider: any;
 })
 
 export class PropertySalesAdvertisementsComponent implements OnInit {
+
+
+    latitude: number;
+    longitude: number;
+    zoom: number;
 
     isloadingIconVisible: boolean = true;
     count: number = 0;
@@ -189,6 +196,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                     }
 
                     setTimeout(function () {
+                        thisStatus.LoadGoogleMap(thisStatus.ZipCode);
                         InitializeFullWidthSlider();
                     }, 3000);
 
@@ -369,7 +377,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
 
                     if (data.d == "0") {
 
-                        $('.saveBookmarkClass').each(function () {
+                        $('.showInterestBookMarkClass').each(function () {
                             if (advId == $(this).attr('data-id')) {
                                 $(this).addClass('bookMarked');
                             }
@@ -378,7 +386,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                     }
                     else {
 
-                        $('.saveBookmarkClass').each(function () {
+                        $('.showInterestBookMarkClass').each(function () {
                             if (advId == $(this).attr('data-id')) {
                                 $(this).addClass('bookMarked');
                             }
@@ -529,4 +537,46 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
 
     }
 
+    LoadGoogleMap(zipcode)
+    {
+        var thisStatus = this;
+        $.ajax({
+            type: "POST", url: "ws/LatituteValue.asmx/GetLatandLongValues",
+            data: "{'zipcode':'" + zipcode + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (r1:any) {
+                if (r1.d.length > 0) {
+                    var xmlDoc1 = $.parseXML(r1.d);
+                    var xml1 = $(xmlDoc1);
+                    var docs1 = xml1.find("LatituteLong");
+                    var cartd1 = [];
+                    $.each(docs1, function (i, docs1) {
+
+                        thisStatus.latitude = Number($(docs1).find("latvalue").text());
+                        thisStatus.longitude = Number($(docs1).find("longvalue").text());
+                        thisStatus.zoom = 15;
+                        //var myLatlng = new google.maps.LatLng(lat, lon);
+
+                        //var mapOptions = {
+                        //    center: myLatlng,
+                        //    zoom: 6,
+                        //    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        //    marker: true
+                        //};
+
+                        //var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                        //var marker = new google.maps.Marker({
+                        //    position: myLatlng
+                        //});
+                        //marker.setMap(map);
+                    });
+                }
+            },
+            error: function (response:any) {
+                alert(response.d + "Error...");
+            }
+        });
+    }
 }
