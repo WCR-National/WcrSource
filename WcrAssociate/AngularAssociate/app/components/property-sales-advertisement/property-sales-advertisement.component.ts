@@ -26,8 +26,8 @@ declare const InitializeFullWidthSlider: any;
 export class PropertySalesAdvertisementsComponent implements OnInit {
 
 
-    latitude: number;
-    longitude: number;
+    latitude: number = 0;
+    longitude: number = 0;
     zoom: number;
 
     isloadingIconVisible: boolean = true;

@@ -91,7 +91,7 @@
 
                         <!-- Location -->
 
-                        <h3 *ngIf="latitude != null && latitude != ''" class="desc-headline no-border" id="location">Location</h3>
+                        <h3 *ngIf="latitude != 0" class="desc-headline no-border" id="location">Location</h3>
                         <div id="propertyMap-container">
                             <agm-map [latitude]="latitude"
                                      [longitude]="longitude"
