@@ -97,6 +97,10 @@ export class AuthComponent implements OnInit {
         private http: HttpClient, private ngZone: NgZone, private _messageService: MessageService,
     ) { }
 
+    ngOnDestroy() {
+        this._messageService.messageHidden.value = "";
+    }
+
     ngOnInit() {
 
         //this.request = "ali87613@yahoo.com";

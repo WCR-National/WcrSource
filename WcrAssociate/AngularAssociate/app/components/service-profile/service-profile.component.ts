@@ -92,6 +92,10 @@ export class ServiceProfileComponent implements OnInit {
             });
     }
 
+    ngOnDestroy() {
+        this._messageService.messageHidden.value = this.zipcode;
+        this._messageService.messageHidden.type = "zipcode";
+    }
 
     checkUserIsLogin() {
         this.salesAdvertisements
@@ -115,16 +119,19 @@ export class ServiceProfileComponent implements OnInit {
             this.isTabMortgageStart = true;
             this.isTabInsuranceStart = false;
             this.isTabRealtorsStart = false;
+            this.switchTabs('mortgageTabId');
         }
         else if (id == '3') {
             this.isTabMortgageStart = false;
             this.isTabInsuranceStart = true;
             this.isTabRealtorsStart = false;
+            this.switchTabs('insuranceTabId');
         }
         else if (id == '5') {
             this.isTabMortgageStart = false;
             this.isTabInsuranceStart = false;
             this.isTabRealtorsStart = true;
+            this.switchTabs('realtorsTabId');
         }
         var html = '';
         $('#innerHtmlListMortgageId').html(html);
@@ -154,15 +161,17 @@ export class ServiceProfileComponent implements OnInit {
                     if (dataJson.NewDataSet != undefined && dataJson.NewDataSet != null && dataJson.NewDataSet != '') {
                         this.dataServicesList = [];
                         if (dataJson.NewDataSet.GetServicesList != undefined && dataJson.NewDataSet.GetServicesList != null && dataJson.NewDataSet.GetServicesList != '') {
-                            if (typeof (dataJson.NewDataSet.GetServicesList) == "object") { // Returns: "object"
+                            if (!$.isArray(dataJson.NewDataSet.GetServicesList)) { // Returns: "object"
 
                                 this.dataServicesList.push(dataJson.NewDataSet.GetServicesList);
                                 this.AddListOfServices(this.dataServicesList, id);
 
                             }
                             else {
+                                debugger;
+                                var thisStatus = this;
                                 $.each(dataJson.NewDataSet.GetServicesList, function (index, item) {
-                                    this.dataServicesList.push(item);
+                                    thisStatus.dataServicesList.push(item);
                                 });
                                 this.AddListOfServices(this.dataServicesList, id);
                             }
@@ -759,5 +768,9 @@ export class ServiceProfileComponent implements OnInit {
                         thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId, zipcode);
                     }
                 });
+    }
+
+    switchTabs(id) {
+        this.ctdTabset.select(id);
     }
 }

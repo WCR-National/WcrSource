@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
     currentUser: User;
     public isLoggedIn = false;
     public isMobileScreen = false;
+
     ngOnInit() {
         //this._messageService.listen().subscribe((data: any) => {
         //    debugger;
@@ -68,7 +69,11 @@ export class HeaderComponent implements OnInit {
                 data => {
                     debugger;
                     if (data.d.length > 0) {
-                        this.userName = data.d.split('@')[0];
+                        if (data.d.Name !== undefined && data.d.Name != null && data.d.Name != "")
+                        {
+                            this.userName = data.d.Name;
+                        }
+                        //this.userName = data.d.split('@')[0];
 
                         //var xmlDoc = $.parseXML(data.d);
                         //var xml = $(xmlDoc);
@@ -136,5 +141,7 @@ export class HeaderComponent implements OnInit {
             );
     }
 
-
+    onClickNavbar() {
+        this._messageService.messageHidden.value = "";
+    }
 }

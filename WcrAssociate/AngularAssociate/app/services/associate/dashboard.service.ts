@@ -43,7 +43,7 @@ export class DashboardService {
 
     initializeConsumerHeader(): Observable<any> {
 
-        let urlToCountHeader: string = "ws/AssociateRegistration.asmx/ViewConsumerBasicDetails";
+        let urlToCountHeader: string = "ws/ConsumerRegistration.asmx/ConsumerDetail";
         return this.apiService.post(urlToCountHeader, {})
             .pipe(map(
                 data => {

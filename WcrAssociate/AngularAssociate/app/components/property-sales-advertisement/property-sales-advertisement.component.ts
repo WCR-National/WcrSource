@@ -141,6 +141,10 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
             });
     }
 
+    ngOnDestroy() {
+        this._messageService.messageHidden.value = "";
+    }
+
     checkUserIsLogin() {
         this.salesAdvertisements
             .ConsumerIsLogin()

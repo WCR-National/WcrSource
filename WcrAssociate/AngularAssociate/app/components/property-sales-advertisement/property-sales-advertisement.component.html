@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="property-pricing">
-                    <div class="property-price">{{cost}}</div>
+                    <div class="property-price">$ {{cost.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");}}</div>
                     <!--<div class="sub-price">$770 / sq ft</div>-->
                 </div>
             </div>
@@ -84,24 +84,24 @@
                         </ul>
 
                         <!-- Features -->
-                        <h3 *ngIf="features != null && features != ''" class="desc-headline">Features</h3>
-                        <ul class="property-features checkboxes margin-top-0">
-                            {{features}}
-                        </ul>
-
-                        <!-- Location -->
-
-                        <h3 *ngIf="latitude != 0" class="desc-headline no-border" id="location">Location</h3>
-                        <div id="propertyMap-container">
-                            <agm-map [latitude]="latitude"
-                                     [longitude]="longitude"
-                                     [zoom]="zoom">
-                                <agm-marker [latitude]="latitude"
-                                            [longitude]="longitude"></agm-marker>
-                            </agm-map>
+                        <h3 *ngIf="features != null && features != ''" class="desc-headline mg-t-30">Features</h3>
+                        <div class="property-features margin-top-0" [innerHTML]="features">
                         </div>
                     </div>
+
+                    <!-- Location -->
+
+                    <h3 *ngIf="latitude != 0" class="desc-headline no-border mg-t-30" id="location">Location</h3>
+                    <div id="propertyMap-container">
+                        <agm-map [latitude]="latitude"
+                                 [longitude]="longitude"
+                                 [zoom]="zoom">
+                            <agm-marker [latitude]="latitude"
+                                        [longitude]="longitude"></agm-marker>
+                        </agm-map>
+                    </div>
                 </div>
+
                 <!-- Property Description / End -->
                 <!-- Sidebar -->
                 <div class="col-lg-4 col-md-5">
@@ -126,10 +126,10 @@
 
                                     <!-- Book Now -->
                                     <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="showInterestBookMarkId" data-id="{{params}}" class="btn button border margin-top-5 showInterestBookMarkClass">Bookmark</a>
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="saveBookmarkId" data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass" [ngClass]="consumerID != 0 ? 'bookMarked': ''" >Bookmark</a>
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="saveBookmarkId" data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass" [ngClass]="consumerID != 0 ? 'bookMarked': ''">Bookmark</a>
 
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="contactAssociateShowInterestId" data-id="{{strParamContactAssociateShowInterest}}" class="btn button border  margin-top-5 contactAssociateShowInterestClass" >Contact Associate</a>
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="contactAssociateId" data-id="{{strParamContactAssociate}}" class="btn button border margin-top-5 contactAssociateClass" >Contact Associate</a>
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="contactAssociateShowInterestId" data-id="{{strParamContactAssociateShowInterest}}" class="btn button border  margin-top-5 contactAssociateShowInterestClass">Contact Associate</a>
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="contactAssociateId" data-id="{{strParamContactAssociate}}" class="btn button border margin-top-5 contactAssociateClass">Contact Associate</a>
 
                                 </div>
                                 <!-- Book Now / End -->
@@ -179,12 +179,8 @@
 
                 </div>
                 <!-- Sidebar / End -->
-
             </div>
         </div>
-
-
-
     </div>
 </div>
 

@@ -5134,7 +5134,13 @@ small {
         border-radius: 0;
     }
 }
-
+.fullwidth-home-slider .item, .fullwidth-property-slider .item {
+    opacity: 0.2;
+    transition: all 0.6s;
+    border-radius: 0;
+    position: relative;
+    height: 600px;
+}
 .tabs {
     position: relative;
     overflow-x: auto;
@@ -12729,8 +12735,20 @@ button {
         content: "\f24d";
         line-height: 28px;
     }
-
+.fullwidth-property-slider .slick-next {
+    right: 15%;
+}
+.fullwidth-property-slider .slick-prev {
+    left: 15%;
+}
 @media (max-width: 1366px) {
+    .fullwidth-property-slider .slick-prev {
+        left: 9%;
+    }
+
+    .fullwidth-property-slider .slick-next {
+        right: 9%;
+    }
     .pick-price.tip .tip-content {
         transform: translate(-100%, calc(-100% - 10px));
         left: 28px;
@@ -16730,14 +16748,14 @@ button.mfp-close {
     }
 
     .mfp-arrow.mfp-arrow-left:before {
-        content: "\f104";
+        content: "\f359";
         left: -1px;
         top: 0px;
         position: relative;
     }
 
     .mfp-arrow.mfp-arrow-right:before {
-        content: "\f105";
+        content: "\f35a";
         left: 1px;
         top: 0px;
         position: relative;
@@ -22402,30 +22420,7 @@ body .pac-container {
             background: #e0e0e0;
         }
 
-    .fullwidth-home-slider .slick-prev {
-        right: 75px;
-        left: initial;
-    }
-
-    .fullwidth-home-slider .slick-next {
-        right: 20px;
-        left: initial;
-    }
-
-    .fullwidth-home-slider .slick-prev,
-    .fullwidth-home-slider .slick-next {
-        border-radius: 3px;
-        top: 20px;
-        transform: none;
-        opacity: 1;
-        transform: translate(0, 0);
-    }
-
-    .fullwidth-home-slider:hover .slick-prev,
-    .fullwidth-home-slider:hover .slick-next {
-        transform: translate(0, 0);
-    }
-
+    
     .property-slider.default .item {
         height: 500px;
     }
@@ -23084,6 +23079,9 @@ span.icon-right {
 
 .text-xs-left {
     text-align: left;
+}
+.slick-initialized .slick-slide {
+    display: block;
 }
 /* ------------------------------------------- */
 /* ############### 7.7 Padding ############### */
@@ -50069,7 +50067,7 @@ button.mfp-close {
 
 .mfp-gallery .mfp-close:after,
 .mfp-gallery .mfp-close:before {
-    font-family: "FontAwesome";
+    font-family: "Font Awesome 5 Free";
     font-size: 29px;
     top: 4px;
     left: 50%;
@@ -50100,7 +50098,7 @@ button.mfp-close {
     .og-close:before,
     .mfp-close:after,
     .mfp-close:before {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 29px;
         top: 21px;
         left: 50%;
@@ -50117,7 +50115,7 @@ button.mfp-close {
 
     .og-close:after,
     .mfp-close:after {
-        content: "\f106";
+        content: "\f410";
         -webkit-transform: translate(0,0);
         transform: translate(-50%,60%);
     }
@@ -50208,7 +50206,7 @@ button.mfp-close {
 
     .mfp-arrow.mfp-arrow-left,
     .mfp-arrow.mfp-arrow-right {
-        font-family: "FontAwesome";
+        font-family: "Font Awesome 5 Free";
         font-size: 29px;
     }
 
@@ -50217,14 +50215,14 @@ button.mfp-close {
     }
 
     .mfp-arrow.mfp-arrow-left:before {
-        content: "\f104";
+        content: "\f359";
         left: -1px;
         top: 0px;
         position: relative;
     }
 
     .mfp-arrow.mfp-arrow-right:before {
-        content: "\f105";
+        content: "\f35a";
         left: 1px;
         top: 0px;
         position: relative;
@@ -50585,7 +50583,7 @@ img.mfp-img {
             top: -1px;
             position: relative;
             content: "\f00c";
-            font-family: "FontAwesome";
+            font-family: "Font Awesome 5 Free";
             font-size: 12px;
             color: #fff;
             text-align: center;
@@ -50696,4 +50694,120 @@ a.nav-link b {
 }
 agm-map {
     height: 400px;
+}
+.fullwidth-home-slider .item, .fullwidth-property-slider .item, .property-slider .item {
+    height: 600px;
+    position: relative;
+    background-size: cover;
+    background-position: 50%;
+    border-radius: 3px;
+}
+.fullwidth-home-slider .item, .fullwidth-property-slider .item {
+    opacity: 0.2;
+    transition: all 0.6s;
+    border-radius: 0;
+    position: relative;
+    height: 600px;
+}
+    .fullwidth-home-slider .item.slick-center, .fullwidth-property-slider .item.slick-center {
+        opacity: 1;
+    }
+.fullwidth-home-slider .slick-prev {
+    right: 75px;
+    left: initial;
+}
+
+.fullwidth-home-slider .slick-next {
+    right: 20px;
+    left: initial;
+}
+
+.fullwidth-home-slider .slick-prev,
+.fullwidth-home-slider .slick-next {
+    border-radius: 3px;
+    top: 20px;
+    transform: none;
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.fullwidth-home-slider:hover .slick-prev,
+.fullwidth-home-slider:hover .slick-next {
+    transform: translate(0, 0);
+}
+
+.slick-prev:before {
+    content: '\f359';
+    left: -1px;
+}
+
+.slick-next:before {
+    content: "\f35a";
+    right: -1px;
+}
+
+.slick-prev:before, .slick-next:before {
+    font-size: 30px;
+    line-height: 20px;
+    opacity: 1;
+    color: white;
+    position: relative;
+    z-index: 999;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+.slick-prev:after, .slick-next:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    background-color: #66676b;
+    opacity: 0.85;
+    transition: all 0.35s;
+}
+.slick-prev, .slick-next {
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    z-index: 990;
+    font-family: "Font Awesome 5 Free";
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0;
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+}
+
+    .slick-next:after, .slick-prev:after {
+        background-color: #274abb;
+    }
+
+.property-pricing {
+    position: absolute;
+    right: 15px;
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 500;
+    color: #274abb;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: right;
+    line-height: 34px;
 }
