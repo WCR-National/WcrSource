@@ -187,7 +187,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                             thisStatus.LicenseId = $(docs).find("LicenseId").text();
                             thisStatus.description = $(docs).find("description").text();
                             thisStatus.features = $(docs).find("features").text();
-                            thisStatus.cost = $(docs).find("cost").text();
+                            thisStatus.cost = $(docs).find("cost").text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                             thisStatus.categoryName = $(docs).find("categoryName").text();
                             thisStatus.address = $(docs).find("address").text();
                             thisStatus.CityID = $(docs).find("CityID").text();
