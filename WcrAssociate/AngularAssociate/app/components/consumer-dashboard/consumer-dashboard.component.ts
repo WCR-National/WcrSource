@@ -23,6 +23,7 @@ export class ConsumerDashabordComponent implements OnInit {
     resultContent: boolean = false;
     errorMessage: string = "";
     show_check: boolean = false;
+    routedZipcode: string;
     @ViewChild('salesServicesFocus') divSalesServices: ElementRef;
 
     innerHtmlSales: string = '';
@@ -67,8 +68,22 @@ export class ConsumerDashabordComponent implements OnInit {
 
         $('#divLandingPage').focus();
         //this.parallaxBG();
-        this.GetSalesAdts();
+        this.routedZipcode = this._messageService.messageHidden.value;
+        if (this.routedZipcode !== undefined && this.routedZipcode != "") {
+
+            this.searchForm.get('txtSearch').setValue(this.routedZipcode);
+            this.bindSalesCategory(this.routedZipcode);
+            this.bindServiesCategory(this.routedZipcode);
+        }
+        else {
+            this.GetSalesAdts();
+        }
+        
         this.initializeFormsAndEvents();
+    }
+
+    ngOnDestroy() {
+        this._messageService.messageHidden.value = "";
     }
 
     initializeFormsAndEvents() {

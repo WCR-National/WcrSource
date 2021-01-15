@@ -38,7 +38,7 @@ export class SalesAdvertisementsComponent implements OnInit {
     public isDataNotFoundForMultiFamily = false;
     public isDataNotFoundForLand = false;
 
-    public dataServicesList;
+    public dataServicesList = [];
 
     public isTabHomeStart: boolean = true;
     public isTabTownHomeStart: boolean = true;
@@ -98,6 +98,11 @@ export class SalesAdvertisementsComponent implements OnInit {
             });
     }
 
+    ngOnDestroy() {
+        this._messageService.messageHidden.value = this.zipcode;
+        this._messageService.messageHidden.type = "zipcode";
+    }
+
     checkUserIsLogin() {
         this.salesAdvertisements
             .ConsumerIsLogin()
@@ -122,24 +127,28 @@ export class SalesAdvertisementsComponent implements OnInit {
             this.isTabTownHomeStart = false;
             this.isMultiFamilyStartCS = false;
             this.isTabLandStart = false;
+            this.switchTabs('homeTabId');
         }
         else if (id == '2') {
             this.isTabHomeStart = false;
             this.isTabTownHomeStart = true;
             this.isMultiFamilyStartCS = false;
             this.isTabLandStart = false;
+            this.switchTabs('townHomeTabId');
         }
         else if (id == '3') {
             this.isTabHomeStart = false;
             this.isTabTownHomeStart = false;
             this.isMultiFamilyStartCS = true;
             this.isTabLandStart = false;
+            this.switchTabs('multiFamilyTabId');
         }
         else if (id == '4') {
             this.isTabHomeStart = false;
             this.isTabTownHomeStart = false;
             this.isMultiFamilyStartCS = false;
             this.isTabLandStart = true;
+            this.switchTabs('landTabId');
         }
         var html = '';
         $('#innerHtmlListHomeSalesId').html(html);
@@ -226,14 +235,14 @@ export class SalesAdvertisementsComponent implements OnInit {
                         if (dataJson.NewDataSet != undefined && dataJson.NewDataSet != null && dataJson.NewDataSet != '') {
                             this.dataServicesList = [];
                             if (dataJson.NewDataSet.HViewAdvertismentsWithParam != undefined && dataJson.NewDataSet.HViewAdvertismentsWithParam != null && dataJson.NewDataSet.HViewAdvertismentsWithParam != '') {
-                                if (typeof (dataJson.NewDataSet.HViewAdvertismentsWithParam) == "object") { // Returns: "object"
+                                if (!$.isArray(dataJson.NewDataSet.HViewAdvertismentsWithParam)) { // Returns: "object"
                                     this.dataServicesList.push(dataJson.NewDataSet.HViewAdvertismentsWithParam);
                                     this.AddListOfSales(this.dataServicesList, id);
-
                                 }
                                 else {
+                                    var thisStatus = this;
                                     $.each(dataJson.NewDataSet.HViewAdvertismentsWithParam, function (index, item) {
-                                        this.dataServicesList.push(item);
+                                        thisStatus.dataServicesList.push(item);
                                     });
                                     this.AddListOfSales(this.dataServicesList, id);
                                 }
@@ -757,4 +766,8 @@ export class SalesAdvertisementsComponent implements OnInit {
         });
     }
 
+    switchTabs(id)
+    {
+        this.ctdTabset.select(id);
+    }
 }

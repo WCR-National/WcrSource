@@ -23,9 +23,13 @@
                         <h2>Sales Advertisements</h2>
                     </div>
 
+                    <div class="property-title">
+                        <h3>Zip Code: {{zipcode}}</h3>
+                    </div>
+
                     <!--<div class="property-pricing">
-                        <div class="property-price">{{cost}}</div>
-                    </div>-->
+        <div class="property-price">{{cost}}</div>
+    </div>-->
                 </div>
             </div>
         </div>
@@ -44,6 +48,7 @@
         <section id="submitted" class="col-xs-12 col-md-8 ts-block mg-t-50 mg-b-100 pd-t-0-force" >
             <div class="row">
                 <ngb-tabset #ctdTabset="ngbTabset">
+
                     <ngb-tab id="homeTabId">
                         <ng-template ngbTabTitle><b (click)="GetSalesAdvFromTabs('1')">By Home</b></ng-template>
                         <ng-template ngbTabContent>

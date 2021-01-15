@@ -14,6 +14,7 @@ import { map, debounceTime, take, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {  Toaster } from 'ngx-toast-notifications';
+import { MessageService } from 'AngularAssociate/app/services/search';
 
 
 
@@ -103,7 +104,7 @@ export class AuthModalComponent implements OnInit {
     @Output() updateParentCall: EventEmitter<any> = new EventEmitter();
 
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder,
-        private http: HttpClient, private ngZone: NgZone, @Optional() private activeModal: NgbActiveModal, private toaster: Toaster
+        private http: HttpClient, private ngZone: NgZone, @Optional() private activeModal: NgbActiveModal, private toaster: Toaster, private _messageService: MessageService
     ) { }
 
     ngOnInit() {
@@ -119,6 +120,10 @@ export class AuthModalComponent implements OnInit {
 
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
 
+    }
+
+    ngOnDestroy() {
+        this._messageService.messageHidden.value = "";
     }
 
     public dismiss(): void {

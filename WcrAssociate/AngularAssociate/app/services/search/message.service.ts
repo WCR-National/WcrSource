@@ -4,6 +4,7 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class MessageService {
+    public messageHidden = { "value" : "", "type" : "" };
     private _listners = new Subject<any>();
 
     listen(): Observable<any> {

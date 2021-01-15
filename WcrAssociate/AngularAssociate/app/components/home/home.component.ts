@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
     innerHtmlSales: string = '';
     innerHtmlServices: string = '';
     errorExist = false;
-
+    routedZipcode = '';
     //'required': 'Please enter City, State OR Zip Code.',
     //'invalidData': 'Invalid data entered.  Please enter City, State OR Zip Code.',
     //'zipCode': 'Maximum length of zip code is 5 digit',
@@ -57,13 +57,26 @@ export class HomeComponent implements OnInit {
     }
 
     ngOnInit() {
+        debugger;
         //this.show_check = true;
         $('html, body').animate({ scrollTop: $('#header-container').offset().top }, 'slow');
 
         $('#divLandingPage').focus();
         //this.parallaxBG();
-        this.GetSalesAdts();
+        this.routedZipcode = this._messageService.messageHidden.value;
+        if (this.routedZipcode !== undefined && this.routedZipcode != "") {
+            this.searchForm.get('txtSearch').setValue(this.routedZipcode);
+            this.bindSalesCategory(this.routedZipcode);
+            this.bindServiesCategory(this.routedZipcode);
+        }
+        else {
+            this.GetSalesAdts();
+        }
         this.initializeFormsAndEvents();
+    }
+
+    ngOnDestroy() {
+        this._messageService.messageHidden.value = "";
     }
 
     initializeFormsAndEvents() {

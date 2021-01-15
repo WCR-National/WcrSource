@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 import * as CryptoJS from 'crypto-js';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { StickyDirection } from '@angular/cdk/table';
+import { MessageService } from 'AngularAssociate/app/services/search';
 
 
 @Component({
@@ -75,8 +76,12 @@ export class LandingRegistrationComponent implements OnInit {
     };
 
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder,
-        private http: HttpClient, private modalService: NgbModal, private ngZone: NgZone
+        private http: HttpClient, private modalService: NgbModal, private ngZone: NgZone, public _messageService: MessageService
     ) { }
+
+    ngOnDestroy() {
+        this._messageService.messageHidden.value = "";
+    }
 
     ngOnInit() {
         
