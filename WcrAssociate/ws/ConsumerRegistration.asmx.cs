@@ -71,7 +71,10 @@ namespace WcrAssociate.ws
             {
                 BllAssociateLogin objAssociate = new BllAssociateLogin();
                 str = objAssociate.GetConsumerDetail(Convert.ToInt16(Session["consumer"].ToString()));
-
+                if (str == null)
+                {
+                    str = Session["userName"].ToString();
+                }
             }
             return str;
         }

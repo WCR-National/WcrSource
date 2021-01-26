@@ -166,32 +166,40 @@ export class SalesAdvertisementsComponent implements OnInit {
 
     GetSalesAdvListings(id, zipcode, name, jtype, catName) {
         this.isloadingIconVisible = true;
+        var thisStatus = this;
+        setTimeout(function () {
+            if (id == '1') {
+                this.isTabHomeStart = true;
+                this.isTabTownHomeStart = false;
+                this.isMultiFamilyStartCS = false;
+                this.isTabLandStart = false;
+                thisStatus.switchTabs('homeTabId');
 
-        if (id == '1') {
-            this.isTabHomeStart = true;
-            this.isTabTownHomeStart = false;
-            this.isMultiFamilyStartCS = false;
-            this.isTabLandStart = false;
-        }
-        else if (id == '2') {
-            this.isTabHomeStart = false;
-            this.isTabTownHomeStart = true;
-            this.isMultiFamilyStartCS = false;
-            this.isTabLandStart = false;
-        }
-        else if (id == '3') {
-            this.isTabHomeStart = false;
-            this.isTabTownHomeStart = false;
-            this.isMultiFamilyStartCS = true;
-            this.isTabLandStart = false;
-        }
-        else if (id == '4') {
-            this.isTabHomeStart = false;
-            this.isTabTownHomeStart = false;
-            this.isMultiFamilyStartCS = false;
-            this.isTabLandStart = true;
-        }
+            }
+            else if (id == '2') {
+                this.isTabHomeStart = false;
+                this.isTabTownHomeStart = true;
+                this.isMultiFamilyStartCS = false;
+                this.isTabLandStart = false;
+                thisStatus.switchTabs('townHomeTabId');
 
+            }
+            else if (id == '3') {
+                this.isTabHomeStart = false;
+                this.isTabTownHomeStart = false;
+                this.isMultiFamilyStartCS = true;
+                this.isTabLandStart = false;
+                thisStatus.switchTabs('multiFamilyTabId');
+
+            }
+            else if (id == '4') {
+                this.isTabHomeStart = false;
+                this.isTabTownHomeStart = false;
+                this.isMultiFamilyStartCS = false;
+                this.isTabLandStart = true;
+                thisStatus.switchTabs('landTabId');
+            }
+        }, 1500);
         this.ViewAdvertisements(id, zipcode, name, jtype, catName);
     }
 
@@ -722,7 +730,7 @@ export class SalesAdvertisementsComponent implements OnInit {
 
     onOpenModalClickAssociate(advIdnAndAssociateId): void {
 
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
         const modalComponent: AuthModalComponent = modal.componentInstance;
         (modal.componentInstance as AuthModalComponent).isContactAssociate = true;
 
@@ -766,8 +774,7 @@ export class SalesAdvertisementsComponent implements OnInit {
         });
     }
 
-    switchTabs(id)
-    {
+    switchTabs(id) {
         this.ctdTabset.select(id);
     }
 }

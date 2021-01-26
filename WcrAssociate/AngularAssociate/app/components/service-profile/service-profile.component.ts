@@ -70,25 +70,32 @@ export class ServiceProfileComponent implements OnInit {
                 this.zipcode = params['zipcode'];
                 this.name = params['name'];
                 this.jtype = params['jtype'];
+                var thisStatus = this;
 
-                if (this.id == '2') {
-                    this.isTabMortgageStart = true;
-                    this.isTabInsuranceStart = false;
-                    this.isTabRealtorsStart = false;
-                }
-                else if (this.id == '3') {
-                    this.isTabMortgageStart = false;
-                    this.isTabInsuranceStart = true;
-                    this.isTabRealtorsStart = false;
-                }
-                else if (this.id == '5') {
-                    this.isTabMortgageStart = false;
-                    this.isTabInsuranceStart = false;
-                    this.isTabRealtorsStart = true;
-                }
+                setTimeout(function () {
+                    if (this.id == '2') {
+                        this.isTabMortgageStart = true;
+                        this.isTabInsuranceStart = false;
+                        this.isTabRealtorsStart = false;
+                        thisStatus.switchTabs('mortgageTabId');
 
+                    }
+                    else if (this.id == '3') {
+                        this.isTabMortgageStart = false;
+                        this.isTabInsuranceStart = true;
+                        this.isTabRealtorsStart = false;
+                        thisStatus.switchTabs('insuranceTabId');
+
+                    }
+                    else if (this.id == '5') {
+                        this.isTabMortgageStart = false;
+                        this.isTabInsuranceStart = false;
+                        this.isTabRealtorsStart = true;
+                        thisStatus.switchTabs('realtorsTabId');
+
+                    }
+                }, 1500);
                 this.GetSalesAdvListings(this.id, this.zipcode, this.name, this.jtype, this.catName);
-
             });
     }
 
@@ -293,8 +300,7 @@ export class ServiceProfileComponent implements OnInit {
 
             var strParamContactAssociate = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count;
 
-            if (thisStatus.isLoggedInValue == "0")
-            {
+            if (thisStatus.isLoggedInValue == "0") {
                 html += '<a href="javascript:void(0)" class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '"> Contact Associates </a>';
             }
             else {
@@ -468,7 +474,7 @@ export class ServiceProfileComponent implements OnInit {
     }
 
     onOpenModalClickAssociate(advIdnAndAssociateId): void {
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
         (modal.componentInstance as AuthModalComponent).isContactAssociate = true;
         const modalComponent: AuthModalComponent = modal.componentInstance;
 
