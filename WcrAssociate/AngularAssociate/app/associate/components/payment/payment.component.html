@@ -460,7 +460,7 @@
 
 <div class="content-body content-body-profile pd-t-0-f height-payment-body">
     <div class="profile-body">
-        <div class="auth-page mg-b-60-force" >
+        <div class="auth-page mg-b-60-f" >
             <div class="container-cassie page" style="background-color:#fff;">
                 <div class="row">
 
@@ -480,7 +480,7 @@
                     <div class="col-sm-12">
                         <form [formGroup]="cardForm" autocomplete="off" class="pd-t-20" >
                             <fieldset [disabled]="(!isCreditCardFormVisible)">
-                                <!--<div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force">
+                                <!--<div style="color:#a21318 !important" class="col-sm-12 pd-l-0-f">
                                     {{formError}}
                                 </div>-->
                                 <div class="col-xs-12 col-sm-12">
@@ -496,7 +496,7 @@
                                                 <label>
                                                     First Name
                                                 </label>
-                                                <input id="firstName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your first name" formControlName="firstName" (blur)="logValidationErrors()">
+                                                <input id="firstName" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your first name" formControlName="firstName" (blur)="logValidationErrors()">
                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrors.firstName">
                                                     {{formErrors.firstName}}
                                                 </div>
@@ -508,7 +508,7 @@
                                                 <label>
                                                     Last Name
                                                 </label>
-                                                <input id="lastName" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your last name" formControlName="lastName" (blur)="logValidationErrors()">
+                                                <input id="lastName" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your last name" formControlName="lastName" (blur)="logValidationErrors()">
                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrors.lastName">
                                                     {{formErrors.lastName}}
                                                 </div>
@@ -520,7 +520,7 @@
                                                 <label>
                                                     Billing Address
                                                 </label>
-                                                <input id="address" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter your address" formControlName="address" (blur)="logValidationErrors()">
+                                                <input id="address" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your address" formControlName="address" (blur)="logValidationErrors()">
                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrors.address">
                                                     {{formErrors.address}}
                                                 </div>
@@ -533,7 +533,7 @@
                                                 <label>
                                                     City
                                                 </label>
-                                                <input id="city" type="text" (change)="changeCity()" style="margin-top:12px;" class="form-control pd-l-0-force form-control" placeholder="Enter city name" formControlName="city" (blur)="logValidationErrors()">
+                                                <input id="city" type="text" (change)="changeCity()" style="margin-top:12px;" class="form-control pd-l-0-f form-control" placeholder="Enter city name" formControlName="city" (blur)="logValidationErrors()">
                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrors.city">
                                                     {{formErrors.city}}
                                                 </div>
@@ -549,7 +549,7 @@
                                                 <!--<select2 [data]="stateData" [value]="startValueState" [width]="150" (valueChanged)="changeState($event)" formControlName="state"></select2>-->
                                                 <ng-select [style.background]="isCreditCardFormVisible ? 'none' : '#e9ecf1'"  [items]="stateData" [(ngModel)]="startValueState" (ngModelChange)="changeState()" formControlName="state" [searchable]="false"> </ng-select>
 
-                                                <!--<input id="state" type="text" class="form-control pd-l-0-force form-control" placeholder="STATE" formControlName="firstName" (blur)="logValidationErrors()">-->
+                                                <!--<input id="state" type="text" class="form-control pd-l-0-f form-control" placeholder="STATE" formControlName="firstName" (blur)="logValidationErrors()">-->
                                             </div>
                                         </div>
 
@@ -559,7 +559,7 @@
                                                 <label>
                                                     Country
                                                 </label>
-                                                <input id="country" type="text" class="form-control pd-l-0-force form-control" style="margin-top:12px;" placeholder="Enter your country name" formControlName="country" (blur)="logValidationErrors()" disabled>
+                                                <input id="country" type="text" class="form-control pd-l-0-f form-control" style="margin-top:12px;" placeholder="Enter your country name" formControlName="country" (blur)="logValidationErrors()" disabled>
                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrors.country">
                                                     {{formErrors.country}}
                                                 </div>
@@ -574,7 +574,7 @@
                                                 </label>
                                                 <ng-select [style.background]="isCreditCardFormVisible ? 'none' : '#e9ecf1'"  [items]="zipCodeData" [(ngModel)]="startValueZip" (ngModelChange)="changeZipCode()" formControlName="zipCode" [searchable]="false" > </ng-select>
 
-                                                <!--<input id="zipCode" type="text" class="form-control pd-l-0-force form-control" placeholder="ZIP CODE" formControlName="zipCode" (blur)="logValidationErrors()">-->
+                                                <!--<input id="zipCode" type="text" class="form-control pd-l-0-f form-control" placeholder="ZIP CODE" formControlName="zipCode" (blur)="logValidationErrors()">-->
                                             </div>
                                         </div>
 
@@ -588,7 +588,7 @@
                                                 <label>
                                                     Card Number
                                                 </label>
-                                                <input id="cardNumber" type="text" class="form-control pd-l-0-force form-control" (change)="checkCardNumber()" placeholder="Enter card number" formControlName="cardNumber" (blur)="logValidationErrors()">
+                                                <input id="cardNumber" type="text" class="form-control pd-l-0-f form-control" (change)="checkCardNumber()" placeholder="Enter card number" formControlName="cardNumber" (blur)="logValidationErrors()">
                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrors.cardNumber">
                                                     {{formErrors.cardNumber}}
                                                 </div>
@@ -644,7 +644,7 @@
                                                 <label>
                                                     Select Exp.Month
                                                 </label>
-                                                <!--<input id="expMonth" type="text" class="form-control pd-l-0-force form-control" placeholder="MONTH" formControlName="expMonth" (blur)="logValidationErrors()">-->
+                                                <!--<input id="expMonth" type="text" class="form-control pd-l-0-f form-control" placeholder="MONTH" formControlName="expMonth" (blur)="logValidationErrors()">-->
                                                 <ng-select [style.background]="isCreditCardFormVisible ? 'none' : '#e9ecf1'" [items]="expMonthData" [(ngModel)]="startValueMonth" (ngModelChange)="changeExpMonth()" formControlName="expMonth" [searchable]="false"> </ng-select>
                                                 <!--<select2 [data]="expMonthData" [value]="startValueMonth" [width]="150" (valueChanged)="changeExpMonth($event)" formControlName="expMonth"></select2>-->
 
@@ -661,7 +661,7 @@
                                                 <!--<select2 [data]="expYearData" [value]="startValueYear" [width]="150" (valueChanged)="changeExpYear($event)" formControlName="expYear"></select2>-->
                                                 <ng-select [style.background]="isCreditCardFormVisible ? 'none' : '#e9ecf1'"  [items]="expYearData" [(ngModel)]="startValueYear" (ngModelChange)="changeExpYear()" formControlName="expYear" [searchable]="false" > </ng-select>
 
-                                                <!--<input id="expYear" type="text" class="form-control pd-l-0-force form-control" placeholder="YEAR" formControlName="expYear" (blur)="logValidationErrors()">-->
+                                                <!--<input id="expYear" type="text" class="form-control pd-l-0-f form-control" placeholder="YEAR" formControlName="expYear" (blur)="logValidationErrors()">-->
                                             </div>
                                         </div>
 
@@ -670,7 +670,7 @@
                                                 <label>
                                                     CVV / CVC *
                                                 </label>
-                                                <input id="cvv" type="text" class="form-control pd-l-0-force form-control" placeholder="Enter card cvv/cvc " formControlName="CVCNumber" (blur)="logValidationErrors()">
+                                                <input id="cvv" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter card cvv/cvc " formControlName="CVCNumber" (blur)="logValidationErrors()">
                                                 <div class="col-sm-12 pd-l-0" *ngIf="formErrors.CVCNumber">
                                                     {{formErrors.CVCNumber}}
                                                 </div>

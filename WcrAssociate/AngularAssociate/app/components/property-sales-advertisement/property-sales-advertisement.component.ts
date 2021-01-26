@@ -69,6 +69,12 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
     public advId: string;
     public location: string;
 
+    public isSubmittingBookmark: boolean = false;
+    public isSubmittingContactAssociate: boolean = false;
+
+
+    public strParamContactAssociateShowInterest : string;
+    public strParamContactAssociate :string;
 
     constructor(private _messageService: MessageService, private router: Router, private salesAdvertisements: SalesAdvertisementsService, private xmlToJson: XMLToJSON,
         private route: ActivatedRoute, private modalService: NgbModal, private toaster: Toaster) {
@@ -196,6 +202,9 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                             debugger;
                             thisStatus.consumerID = $(docs).find("consumerID").text();
 
+                            thisStatus.strParamContactAssociateShowInterest = thisStatus.advertisementID + "," + thisStatus.associateid + ",1,0,0,1";
+                            thisStatus.strParamContactAssociate = thisStatus.advertisementID + "," + thisStatus.associateid  + ",1,0" + ",0";
+
                         });
                     }
 
@@ -218,6 +227,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
         });
 
         $('.contactAssociateClass').click(function () {
+            thisStatus.isSubmittingContactAssociate = true;
             let advIdAndAssociateId = $(this).attr('data-id');
             thisStatus.salesAdvertisements
                 .CheckEmailAndPhNo()
@@ -228,10 +238,14 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                         }
                         else if (thisStatus.isLoggedInValue == "1") {
                             thisStatus.ContactAssociates(advIdAndAssociateId);
+                            thisStatus.isSubmittingContactAssociate = false;
+
                         }
                         else {
                             thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
                             thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+                            thisStatus.isSubmittingContactAssociate = false;
+
                         }
                     },
                     err => {
@@ -256,11 +270,14 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
         });
 
         $('.showInterestBookMarkClass').click(function () {
+
             var advId = $(this).attr('data-id');
             thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
         });
 
         $('.saveBookmarkClass').click(function () {
+
+            thisStatus.isSubmittingBookmark = true;
             let advId = $(this).attr('data-id');
             let zipcode = 0;
             thisStatus.salesAdvertisements
@@ -271,10 +288,14 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                         if (data.d == "0") {
                             $('.saveBookmarkClass').addClass('bookMarked');
                             thisStatus.showToast('warning', "You have already saved this advertisement.");
+                            thisStatus.isSubmittingBookmark = false;
+
                         }
                         else {
                             $('.saveBookmarkClass').addClass('bookMarked');
                             thisStatus.showToast('success', "Advertisement bookmarked successfully.");
+                            thisStatus.isSubmittingBookmark = false;
+
                         }
                     },
                     err => {
@@ -420,7 +441,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
 
     onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId): void {
 
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
         (modal.componentInstance as AuthModalComponent).isBookmark = true;
 
         const modalComponent: AuthModalComponent = modal.componentInstance;

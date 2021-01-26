@@ -1,5 +1,17 @@
 
-
+<style>
+    @media (min-width: 576px) {
+        .modal-sm {
+            max-width: 450px;
+        }
+    }
+    .preloader-wrapper-button {
+        top:49%;
+    }
+    .spinner-white-layer{
+        border-color:#fff !important;
+    }
+</style>
 <div id="titlebar" class="property-titlebar margin-bottom-0">
     <div class="container">
         <div class="row">
@@ -7,17 +19,13 @@
 
                 <a href="listings-list-with-sidebar.html" class="back-to-listings"></a>
                 <div class="property-title">
+                    <div class="property-price tx-30 tx-bold red-text">$ {{cost}}</div>
                     <h2>{{title}} <span class="property-badge">For Sale</span></h2>
-                    <span>
-                        <a href="javascript:void(0)" class="listing-address">
-                            <i class="fa fa-map-marker"></i>
-                            {{address}}
-                        </a>
-                    </span>
+
                 </div>
 
                 <div class="property-pricing">
-                    <div class="property-price">$ {{cost}}</div>
+
                     <!--<div class="sub-price">$770 / sq ft</div>-->
                 </div>
             </div>
@@ -44,35 +52,33 @@
     <a style="background-size: cover;" *ngIf="image3 != undefined && image3 != null && image3 != ''" href="{{ 'Associate/Adv_img/' + image3 }}" [attr.data-background-image]="'Associate/Adv_img/' + image3" class="item mfp-gallery"></a>
 </div>
 
-<div class="container-fluid" style="background-color:#fff;">
+<div class="container-fluid pd-b-100-f" style="background-color:#fff;">
     <div class="row">
 
         <div class="container">
             <div class="row">
 
                 <!-- Property Description -->
-                <div class="col-lg-8 col-md-7 pd-t-35-force pd-l-25">
+                <div class="col-lg-8 col-md-7 pd-t-35-f pd-l-25">
                     <div class="property-description">
 
                         <!-- Main Features -->
-                        <ul class="property-main-features pd-l-25-force">
+                        <ul class="property-main-features pd-l-25-f">
                             <!--<li>Area <span>1450 sq ft</span></li>-->
-                            <li>State: <span>{{StateID}}</span></li>
+                            <li>
+                                Address
+                                <span>
+                                    <i class="fa fa-map-marker"></i>
+                                    {{address}}
+                                </span>
+                            </li>
                             <li>City: <span>{{CityID}}</span></li>
+                            <li>State: <span>{{StateID}}</span></li>
                             <li>ZipCode: <span>{{ZipCode}}</span></li>
                         </ul>
 
-                        <!-- Description -->
-                        <h3 class="desc-headline">Description</h3>
-                        <div class="show-more">
-                            <p>
-                                {{description}}
-                            </p>
-                            <a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
-                        </div>
-
                         <!-- Details -->
-                        <h3 class="desc-headline">Details</h3>
+                        <h2 class="desc-headline">Details</h2>
                         <ul class="property-features margin-top-0">
 
                             <li>Advertisement Id: <span>{{advertisementID}}</span></li>
@@ -83,15 +89,26 @@
                             <!--<li>Water: <span>City</span></li>-->
                         </ul>
 
+                        <!-- Description -->
+                        <h2 class="desc-headline">Description</h2>
+                        <div class="show-more">
+                            <p>
+                                {{description}}
+                            </p>
+                            <a href="#" class="show-more-button tx-19">Show More <i class="fa fa-angle-down"></i></a>
+                        </div>
+
+
+
                         <!-- Features -->
-                        <h3 *ngIf="features != null && features != ''" class="desc-headline mg-t-30">Features</h3>
-                        <div class="property-features margin-top-0" [innerHTML]="features">
+                        <h2 *ngIf="features != null && features != ''" class="desc-headline mg-t-30">Features</h2>
+                        <div class="tx-19-f margin-top-0" [innerHTML]="features">
                         </div>
                     </div>
 
                     <!-- Location -->
 
-                    <h3 *ngIf="latitude != 0" class="desc-headline no-border mg-t-30" id="location">Location</h3>
+                    <h2 *ngIf="latitude != 0" class="desc-headline no-border mg-t-30" id="location">Location</h2>
                     <div id="propertyMap-container">
                         <agm-map [latitude]="latitude"
                                  [longitude]="longitude"
@@ -125,11 +142,73 @@
                                     <div class="row with-forms  margin-top-0"> </div>
 
                                     <!-- Book Now -->
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="showInterestBookMarkId" data-id="{{params}}" class="btn button border margin-top-5 showInterestBookMarkClass">Bookmark</a>
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="saveBookmarkId" data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass" [ngClass]="consumerID != 0 ? 'bookMarked': ''">Bookmark</a>
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="showInterestBookMarkId" attr.data-id="{{advertisementID}}" class="btn button border margin-top-5 showInterestBookMarkClass">
 
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="contactAssociateShowInterestId" data-id="{{strParamContactAssociateShowInterest}}" class="btn button border  margin-top-5 contactAssociateShowInterestClass">Contact Associate</a>
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="contactAssociateId" data-id="{{strParamContactAssociate}}" class="btn button border margin-top-5 contactAssociateClass">Contact Associate</a>
+                                        <span [style.display]="!isSubmittingBookmark ? 'block': 'none'">Bookmark</span>
+                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingBookmark ? 'inline-block': 'none'">
+                                            <div class="spinner-layer spinner-white-layer spinner-white-only spinner-white">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="saveBookmarkId" attr.data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass" [ngClass]="consumerID != 0 ? 'bookMarked': ''">
+                                        <span [style.display]="!isSubmittingBookmark ? 'block': 'none'">Bookmark</span>
+                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingBookmark ? 'inline-block': 'none'">
+                                            <div class="spinner-layer spinner-white-layer spinner-white-only spinner-white">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="contactAssociateShowInterestId" attr.data-id="{{strParamContactAssociateShowInterest}}" class="btn button border  margin-top-5 contactAssociateShowInterestClass">
+                                        
+                                        <span [style.display]="!isSubmittingContactAssociate ? 'block': 'none'">Contact Associate</span>
+                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingContactAssociate ? 'inline-block': 'none'">
+                                            <div class="spinner-layer spinner-white-layer spinner-white-only spinner-white">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="contactAssociateId" attr.data-id="{{strParamContactAssociate}}" class="btn button border margin-top-5 contactAssociateClass">
+                                        <span [style.display]="!isSubmittingContactAssociate ? 'block': 'none'">Contact Associate</span>
+                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingContactAssociate ? 'inline-block': 'none'">
+                                            <div class="spinner-layer spinner-white-layer spinner-white-only spinner-white">
+                                                <div class="circle-clipper left">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="gap-patch">
+                                                    <div class="circle"></div>
+                                                </div>
+                                                <div class="circle-clipper right">
+                                                    <div class="circle"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
 
                                 </div>
                                 <!-- Book Now / End -->

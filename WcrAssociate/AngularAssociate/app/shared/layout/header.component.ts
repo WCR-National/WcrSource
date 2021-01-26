@@ -8,6 +8,7 @@ import { HomeComponent } from 'AngularAssociate/app/components/home/home.compone
 import { MessageService } from 'AngularAssociate/app/services/search';
 import { DashboardService } from 'AngularAssociate/app/services/associate/dashboard.service';
 import * as $ from 'jquery';
+import { SalesAdvertisementsService } from 'AngularAssociate/app/services/sales-advertisements/sales-advertisements.service';
 
 
 @Component({
@@ -18,8 +19,9 @@ export class HeaderComponent implements OnInit {
     isNavbarCollapsed = true;
 
     constructor(private route: ActivatedRoute, private router: Router, private _messageService: MessageService, private dashboardService: DashboardService,
-        private userService: UserService
-    ) { }
+        private userService: UserService, private salesAdvertisements: SalesAdvertisementsService
+    )
+    { }
     public userName: string;
     currentUser: User;
     public isLoggedIn = false;
@@ -41,20 +43,39 @@ export class HeaderComponent implements OnInit {
         //    //    }
         //    //}
         //});
-
-
+        this.checkUserAuthenticated();
         this.checkWidthOrHeightForMobile();
-        this.userService.currentUser.subscribe(
-            (userData) => {
-                debugger;
-                this.currentUser = userData;
-                if (this.currentUser !== undefined && this.currentUser != null && Object.keys(this.currentUser).length !== 0 && this.currentUser.constructor !== Object) {
-                    this.isLoggedIn = true;
-                    this.initializeHeader();
+        
+
+
+    }
+
+    checkUserAuthenticated()
+    {
+        this.salesAdvertisements
+            .ConsumerIsLogin()
+            .subscribe(
+                (data) => {
+
+                    if (data.d == 0) {
+                        this.userService.purgeAuth();
+                        this.isLoggedIn = false;
+                        this.router.navigateByUrl('/');
+                    }
+                    else {
+                        this.userService.currentUser.subscribe(
+                            (userData) => {
+                                debugger;
+                                this.currentUser = userData;
+                                if (this.currentUser !== undefined && this.currentUser != null && Object.keys(this.currentUser).length !== 0 && this.currentUser.constructor !== Object) {
+                                    this.isLoggedIn = true;
+                                    this.initializeHeader();
+                                }
+                            });
+                    }
                 }
-            });
-
-
+                
+            );
     }
 
     onClickGetAds() {
@@ -68,9 +89,8 @@ export class HeaderComponent implements OnInit {
             .subscribe(
                 data => {
                     debugger;
-                    if (data.d.length > 0) {
-                        if (data.d.Name !== undefined && data.d.Name != null && data.d.Name != "")
-                        {
+                    if (data.d.Name !== undefined) {
+                        if (data.d.Name !== undefined && data.d.Name != null && data.d.Name != "") {
                             this.userName = data.d.Name;
                         }
                         //this.userName = data.d.split('@')[0];
@@ -100,6 +120,9 @@ export class HeaderComponent implements OnInit {
 
                         //$("#profilePicHeader").attr('src', thisStatus.profileImage);
                         //$("#profilePic").attr('src', thisStatus.profileImage);
+                    }
+                    else {
+                        this.userName = data.d;
                     }
                 });
         //../../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails

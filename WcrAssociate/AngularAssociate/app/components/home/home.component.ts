@@ -65,9 +65,15 @@ export class HomeComponent implements OnInit {
         //this.parallaxBG();
         this.routedZipcode = this._messageService.messageHidden.value;
         if (this.routedZipcode !== undefined && this.routedZipcode != "") {
-            this.searchForm.get('txtSearch').setValue(this.routedZipcode);
-            this.bindSalesCategory(this.routedZipcode);
-            this.bindServiesCategory(this.routedZipcode);
+            var thisStatus = this;
+            setTimeout(function () {
+                thisStatus.isSearchingStart = true;
+                thisStatus.isSearchingStartMatIcon = true;
+                thisStatus.searchForm.get('txtSearch').setValue(thisStatus.routedZipcode);
+                thisStatus.bindSalesCategory(thisStatus.routedZipcode);
+                thisStatus.bindServiesCategory(thisStatus.routedZipcode);
+            }, 1000);
+
         }
         else {
             this.GetSalesAdts();
@@ -307,10 +313,10 @@ export class HomeComponent implements OnInit {
                                                 //innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
                                                 //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisementList + "'>View More</a></div></div>";
 
-                                                innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section card-main-image-section' >";
+                                                innerHtmlSales += "     <div class='card-main-content pd-0-f card-main-image-section card-main-image-section' >";
                                                 innerHtmlSales += "         <a class='salesLink' data-id='sales-advertisements'  data-qparam ='" + JSON.stringify(queryToSalesAdvertisementList) + "'><img class='card-main-image-size' src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></a>";
                                                 innerHtmlSales += "     </div>";
-                                                innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-force">';
+                                                innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-f">';
                                                 innerHtmlSales += '         <span class="card-main-title">' + ($(doc).find("name").text()) + '</span>';
                                                 innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(doc).find("detail").text()) + "</p>";
                                                 innerHtmlSales += "     </div>";
@@ -336,10 +342,10 @@ export class HomeComponent implements OnInit {
                                     innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                     innerHtmlSales += "   <div class='card-main white darken-1' >";
 
-                                    innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                    innerHtmlSales += "     <div class='card-main-content pd-0-f card-main-image-section' >";
                                     innerHtmlSales += "         <a class='salesLink'  data-id='sales-advertisements'  data-qparam ='" + JSON.stringify(queryToSalesAdvertisementList) + "'><img  class='image-size-icons-without-ip' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></a>";
                                     innerHtmlSales += "     </div>";
-                                    innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-force">';
+                                    innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-f">';
                                     innerHtmlSales += '         <span class="card-main-title">' + ($(doc).find("name").text()) + '</span>';
                                     innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(doc).find('detail').text()) + "</p>";
                                     innerHtmlSales += "     </div>";
@@ -420,10 +426,10 @@ export class HomeComponent implements OnInit {
                                                 //innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";
                                                 //innerHtmlServices += "<a class='waves-effect waves-light btn' href='" + urlToServiceProfileList + "'>View More</a></div></div>";
 
-                                                innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                                innerHtmlServices += "     <div class='card-main-content pd-0-f card-main-image-section' >";
                                                 innerHtmlServices += "         <a class='servicesLink' data-id='service-profile' data-qparam='" + JSON.stringify(qParamsToServiceProfileList) + "'><img class='card-main-image-size' src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></a>";
                                                 innerHtmlServices += "     </div>";
-                                                innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-force">';
+                                                innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-f">';
                                                 innerHtmlServices += '         <span class="card-main-title">' + ($(docs).find("categoryName").text()) + '</span>';
                                                 innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                                 innerHtmlServices += "     </div>";
@@ -461,10 +467,10 @@ export class HomeComponent implements OnInit {
                                     innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                     innerHtmlServices += "  <div class='card-main white darken-1' >";
 
-                                    innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                    innerHtmlServices += "     <div class='card-main-content pd-0-f card-main-image-section' >";
                                     innerHtmlServices += "         <a class='servicesLink'  data-id='service-profile' data-qparam='" + JSON.stringify(qParamsToServiceProfileList) + "'><img class='image-size-icons-without-ip' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></a>";
                                     innerHtmlServices += "     </div>";
-                                    innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-force">';
+                                    innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-f">';
                                     innerHtmlServices += '         <span class="card-main-title">' + ($(docs).find("categoryName").text()) + '</span>';
                                     innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                     innerHtmlServices += "     </div>";
@@ -557,10 +563,10 @@ export class HomeComponent implements OnInit {
                                                 //innerHtmlSales += "<a class='waves-effect waves-light btn' href='" + urlToSalesAdvertisement + "'>View More</a></div></div>";
 
 
-                                                innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                                innerHtmlSales += "     <div class='card-main-content pd-0-f card-main-image-section' >";
                                                 innerHtmlSales += "         <a class='salesLink'  data-id='sales-advertisements'  data-qparam ='" + JSON.stringify(queryToSalesAdvertisementList) + "'><img class='card-main-image-size' src='../../../Associate/Adv_img/" + ($(docs1).find("advMainImage").text()) + "'  alt=''/></a>";
                                                 innerHtmlSales += "     </div>";
-                                                innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-force">';
+                                                innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-f">';
                                                 innerHtmlSales += '         <span class="card-main-title">' + ($(docs).find("name").text()) + '</span>';
                                                 innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
                                                 innerHtmlSales += "     </div>";
@@ -610,10 +616,10 @@ export class HomeComponent implements OnInit {
                                     innerHtmlSales += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center mg-t-30 pd-sm-r-0'>";
                                     innerHtmlSales += "  <div class='card-main white darken-1' >";
 
-                                    innerHtmlSales += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                    innerHtmlSales += "     <div class='card-main-content pd-0-f card-main-image-section' >";
                                     innerHtmlSales += "         <a class='salesLink'  data-id='sales-advertisements'  data-qparam ='" + JSON.stringify(queryToSalesAdvertisementList) + "'><img  class='image-size-icons-without-ip' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(docs).find("id").text()) + "'  alt=''/></a>";
                                     innerHtmlSales += "     </div>";
-                                    innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-force">';
+                                    innerHtmlSales += '      <div class="card-main-content black-text pd-b-0-f">';
                                     innerHtmlSales += '         <span class="card-main-title">' + ($(docs).find("name").text()) + '</span>';
                                     innerHtmlSales += "         <p class='grey-text elipsis-text'>" + ($(docs).find("detail").text()) + "</p>";
                                     innerHtmlSales += "     </div>";
@@ -705,10 +711,10 @@ export class HomeComponent implements OnInit {
 
 
 
-                                                innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                                innerHtmlServices += "     <div class='card-main-content pd-0-f card-main-image-section' >";
                                                 innerHtmlServices += "         <a  class='servicesLink' data-id='service-profile' data-qparam='" + JSON.stringify(qParamsToServiceProfileList) + "'><img class='card-main-image-size' src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></a>";
                                                 innerHtmlServices += "     </div>";
-                                                innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-force">';
+                                                innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-f">';
                                                 innerHtmlServices += '         <span class="card-main-title">' + ($(docs).find("categoryName").text()) + '</span>';
                                                 innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                                 innerHtmlServices += "     </div>";
@@ -762,10 +768,10 @@ export class HomeComponent implements OnInit {
 
 
                                     innerHtmlServices
-                                    innerHtmlServices += "     <div class='card-main-content pd-0-force card-main-image-section' >";
+                                    innerHtmlServices += "     <div class='card-main-content pd-0-f card-main-image-section' >";
                                     innerHtmlServices += "         <a class='servicesLink'  data-id='service-profile' data-qparam='" + JSON.stringify(qParamsToServiceProfileList) + "'><img class='image-size-icons-without-ip' src='images/icons/" + ($(docs).find("catImages").text()) + "'/></a>";
                                     innerHtmlServices += "     </div>";
-                                    innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-force">';
+                                    innerHtmlServices += '      <div class="card-main-content black-text pd-b-0-f">';
                                     innerHtmlServices += '         <span class="card-main-title">' + ($(docs).find("categoryName").text()) + '</span>';
                                     innerHtmlServices += "         <p class='grey-text elipsis-text'>" + ($(docs).find("Detail").text()) + "</p>";
                                     innerHtmlServices += "     </div>";

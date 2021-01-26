@@ -4,7 +4,7 @@
     </div>
 </div>-->
 
-<div class="auth-page mg-b-60-force">
+<div class="auth-page mg-b-60-f">
     <div class="container page">
         <div class="row mg-t-50">
             <div class="col-md-5 offset-md-3 col-xs-12 card-main pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center" style="border-top: 5px solid #0e3a6b;">
@@ -36,7 +36,7 @@
                                     </p>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 mg-b-20">
-                                    <input placeholder="Activation code" id="activationCode" type="text" class="form-control pd-l-45-force" formControlName="activationCode" (blur)="logValidationErrors()">
+                                    <input placeholder="Activation code" id="activationCode" type="text" class="form-control pd-l-45-f" formControlName="activationCode" (blur)="logValidationErrors()">
                                     <span class="large material-icons form-control-feedback icon">vpn_key</span>
                                     <div class="invalid-data" *ngIf="formErrors.activationCode">
                                         {{formErrors.activationCode}}
@@ -114,7 +114,7 @@
 
                                 <div class="col-xs-12 col-sm-12 mg-b-20">
                                     <!--(blur)="showPreloaderIcon();"-->
-                                    <input id="email" type="text" class="form-control pd-l-45-force" formControlName="email" placeholder="Email" (blur)="logValidationErrors()" />
+                                    <input id="email" type="text" class="form-control pd-l-45-f" formControlName="email" placeholder="Email" (blur)="logValidationErrors()" />
                                     <span class="large material-icons form-control-feedback icon">email</span>
 
 
@@ -131,26 +131,26 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-12 pd-l-0-force" *ngIf="formErrors.email || isEmailTaken()">
+                                    <div class="col-xs-12 col-sm-12 pd-l-0-f" *ngIf="formErrors.email || isEmailTaken()">
                                         {{formErrors.email}}
                                     </div>
-                                    <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force" *ngIf="(authType == 'register')" [style.display]="showEmailVerification ? 'block':'none'">
+                                    <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-f" *ngIf="(authType == 'register')" [style.display]="showEmailVerification ? 'block':'none'">
                                         Email is already in use.
                                     </div>
 
-                                    <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-force" *ngIf="(authType == 'resetPassword')" [style.display]="showEmailVerification ? 'block':'none'">
+                                    <div style="color:#a21318 !important" class="col-sm-12 pd-l-0-f" *ngIf="(authType == 'resetPassword')" [style.display]="showEmailVerification ? 'block':'none'">
                                         Please make sure email is correct.
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-f pd-r-0-f">
                                 <div formGroupName="passwordGroup">
                                    
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.password}"
                                          *ngIf="(authType == 'register' || authType == 'login' ) ">
                                         <div class="col-sm-12  mg-b-20">
-                                            <input id="password" placeholder="Password" type="password" class=" form-control pd-l-45-force" [ngClass]="{'password': (authType == 'register')}" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
+                                            <input id="password" placeholder="Password" type="password" class=" form-control pd-l-45-f" [ngClass]="{'password': (authType == 'register')}" formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
                                                    autocomplete="new-password">
                                             <span class="large material-icons form-control-feedback icon">lock</span>
 
@@ -199,7 +199,7 @@
                                                     </i>
                                                     Must contain at least 1 Special Character!
                                                 </label>
-                                                <!--<div class="col-sm-12 pd-l-0-force" *ngIf="formErrors.password">
+                                                <!--<div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.password">
                             {{formErrors.password}}
                         </div>-->
 
@@ -211,11 +211,11 @@
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.confirmPassword || formErrors.passwordGroup}"
                                          *ngIf="(authType == 'register') ">
                                         <div class="col-sm-12 mg-b-20">
-                                            <input id="confirmPassword" type="password" class="form-control pd-l-45-force"
+                                            <input id="confirmPassword" type="password" class="form-control pd-l-45-f"
                                                    formControlName="confirmPassword" (blur)="logValidationErrors()" placeholder="Confirm Password" autocomplete="new-password">
                                             <span class="large material-icons form-control-feedback icon">lock</span>
 
-                                            <div class="col-sm-12 pd-l-0-force"
+                                            <div class="col-sm-12 pd-l-0-f"
                                                  *ngIf="formErrors.confirmPassword || formErrors.passwordGroup">
 
                                                 {{  formErrors.confirmPassword ? formErrors.confirmPassword : formErrors.passwordGroup  }}
@@ -225,21 +225,21 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-f pd-r-0-f">
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.associate}" *ngIf="authType == 'register'  ">
                                     <div class="col-sm-12 mg-b-20">
                                         <label>
                                             <input type="checkbox" class="filled-in" formControlName="associate" (blur)="logValidationErrors()" checked="checked" />
                                             <span>Yes- I want to advertise</span>
                                         </label>
-                                        <div class="col-sm-12 pd-l-0-force" *ngIf="formErrors.associate">
+                                        <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.associate">
                                             {{formErrors.associate}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-f pd-r-0-f">
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.consumer}" *ngIf="authType == 'register'  ">
                                     <div class="col-sm-12 mg-b-20">
                                         <label>
@@ -253,7 +253,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-f pd-r-0-f">
                                 <div class="form-group" [ngClass]="{'has-error': formErrors.terms}" *ngIf="(authType == 'register') ">
                                     <div class="col-sm-12 mg-b-20">
                                         <label>
@@ -268,7 +268,7 @@
 
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-f pd-r-0-f">
                                 <div class="form-group" *ngIf="authType == 'login'">
                                     <div class="invalid-data" *ngIf="formErrors.credentials">
                                         {{formErrors.loginCredentials}}
@@ -277,7 +277,7 @@
                             </div>
 
 
-                            <div class="col-xs-12 col-sm-12 pd-l-0-force pd-r-0-force">
+                            <div class="col-xs-12 col-sm-12 pd-l-0-f pd-r-0-f">
                                 <div class="form-group">
                                     <div class="col-xs-12 col-sm-12 mg-b-20">
                                         <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button" *ngIf="(authType == 'register')" type="submit" [disabled]="!FormFilledSuccessfully">
@@ -311,7 +311,7 @@
                                         </button>
 
                                         <div class="col-xs-12 col-sm-12 pd-t-20 pd-b-7 center" *ngIf="authType == 'login'">
-                                            <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-4 tx-medium "> <i class="material-icons form-control-feedback pd-b-4-force" style="font-size:15px;">vpn_key</i>Forgot password</a>
+                                            <a [routerLink]="['/resetPassword']" class="text-xs-left blue-text text-darken-4 tx-medium "> <i class="material-icons form-control-feedback pd-b-4-f" style="font-size:15px;">vpn_key</i>Forgot password</a>
                                         </div>
 
 
