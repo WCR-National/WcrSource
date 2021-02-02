@@ -23,4 +23,49 @@ export class ProfilesService {
         private apiService: ApiService = null,
         private http: HttpClient = null,
         private jwtService: JwtService = null) { }
+
+    UpdateConsumer(consumerData:any)
+    {
+        let urlToConsumerData: string = "ws/ConsumerRegistration.asmx/UpdateConsumer";
+        return this.apiService.post(urlToConsumerData, { 'FirstName': consumerData.FirstName, 'Address': consumerData.Address, 'MobileNo': consumerData.MobileNo, 'userName': consumerData.userName, 'password': consumerData.password, 'emailID': consumerData.email, 'ZipCode': consumerData.ZipZode, 'lastName': consumerData.lastName, 'Unit_Apt': consumerData.unitApt, 'city': consumerData.city, 'stateID': consumerData.StateID })
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
+
+    getProfileInfo() {
+        //url: "..,
+
+        let urlToGetProfileInfo: string = "ws/ConsumerRegistration.asmx/SelectConsumerDetail";
+        return this.apiService.post(urlToGetProfileInfo, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
+
+    getBookmarkServicesList()
+    {
+        let urlToGetSavedServices: string = "ws/InnerPage.asmx/ConsumerSavedBookAdvertisementsForServices";
+        return this.apiService.post(urlToGetSavedServices, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+
+    }
+
+    getBookmarkSalesList() {
+        let urlToGetSavedAdvertisement: string = "ws/InnerPage.asmx/ViewConsumerSavedAdvertisements";
+        return this.apiService.post(urlToGetSavedAdvertisement, {})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
 }
