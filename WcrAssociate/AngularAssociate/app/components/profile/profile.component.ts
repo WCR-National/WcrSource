@@ -153,8 +153,6 @@ export class ProfileComponent implements OnInit {
         });
     }
 
-
-
     getProfileDataDetails() {
 
         let thisStatus: any = this;
@@ -169,41 +167,39 @@ export class ProfileComponent implements OnInit {
                         var docs = xml.find("ConsumerDetail");
                         var thisStatus = this;
                         $.each(docs, function (i, docs) {
+                            thisStatus.city = $(docs).find("City").text();
+                            thisStatus.stateID = $(docs).find("StateId").text();
+                            thisStatus.ZipCode = $(docs).find("ZipCode").text();
 
+                            thisStatus.Address = $(docs).find("Address").text();
+                            thisStatus.unitApt = $(docs).find("Unit_Apt").text();
                             thisStatus.FirstName = $(docs).find("Name").text();
                             thisStatus.lastName = $(docs).find("LastName").text();
                             thisStatus.email = $(docs).find("EmailId").text();
                             thisStatus.password = $(docs).find("Password").text();
-                            thisStatus.Address = $(docs).find("Address").text();
-                            thisStatus.unitApt = $(docs).find("Unit_Apt").text();
-                            thisStatus.city = $(docs).find("City").text();
-                            thisStatus.stateID = $(docs).find("StateId").text();
-                            thisStatus.ZipCode = $(docs).find("ZipCode").text();
                             thisStatus.MobileNo = $(docs).find("Mob").text();
                         });
                     }
 
                     if (data != "" && data != undefined && data != null && data != "-1" && data != -1) {
 
-                            //this.profileId = data._crdID;
-                        
-                            //this.userName = data._zip
+                        //this.profileId = data._crdID;
 
+                        //this.userName = data._zip
+                        thisStatus.profileForm.get('ZipCode').setValue(thisStatus.ZipCode);
+                        thisStatus.profileForm.get('MobileNo').setValue(thisStatus.MobileNo);
                         thisStatus.profileForm.get('FirstName').setValue(thisStatus.FirstName);
+
+                        thisStatus.profileForm.get('city').setValue(thisStatus.city);
+                        thisStatus.profileForm.get('stateID').setValue(thisStatus.stateID);
+                        //thisStatus.profileForm.get('userName').setValue(thisStatus.userName);
                         thisStatus.profileForm.get('lastName').setValue(thisStatus.lastName);
                         thisStatus.profileForm.get('password').setValue(thisStatus.password);
                         thisStatus.profileForm.get('Address').setValue(thisStatus.Address);
                         thisStatus.profileForm.get('unitApt').setValue(thisStatus.unitApt);
-                        thisStatus.profileForm.get('city').setValue(thisStatus.city);
-                        thisStatus.profileForm.get('stateID').setValue(thisStatus.stateID);
-                        thisStatus.profileForm.get('ZipCode').setValue(thisStatus.ZipCode);
-                        thisStatus.profileForm.get('MobileNo').setValue(thisStatus.MobileNo);
-                        //thisStatus.profileForm.get('userName').setValue(thisStatus.userName);
+                        this.isAddOrUpdateButton = false;
+                        this.isProfileFormVisible = false;
 
-                            this.isAddOrUpdateButton = false;
-                            this.isProfileFormVisible = false;
-
-                            return false;
                     }
                     else {
                         thisStatus.profileForm.get('userName').setValue("n");
@@ -213,9 +209,7 @@ export class ProfileComponent implements OnInit {
                 });
     }
 
-
-    submitProfileForm()
-    {
+    submitProfileForm() {
         debugger;
         if (this.profileForm.valid) {
             const consumerData = this.profileForm.value;
@@ -231,7 +225,7 @@ export class ProfileComponent implements OnInit {
                             this.isProfileFormVisible = false;
                         }
                         if (data.d == "0") {
-                            this.showToast('success', "Email or mobile no already exists! Please try another one.");
+                            this.showToast('danger', "Email or mobile no already exists! Please try another one.");
                             this.isProfileFormVisible = true;
                         }
                         if (data.d == "-1") {
@@ -239,8 +233,10 @@ export class ProfileComponent implements OnInit {
                             this.isProfileFormVisible = true;
                         }
                     });
+
         }
         else {
+
             this.formErrorMessage = "Please make sure, you entered correct data in all fields.";
             this.logValidationErrors(this.profileForm);
             this.isSubmitting = false;
@@ -265,7 +261,7 @@ export class ProfileComponent implements OnInit {
                             this.isProfileFormVisible = false;
                         }
                         if (data.d == "0") {
-                            this.showToast('success', "This Email Id  or Mobile No Already Exists! Please Try another one.");
+                            this.showToast('danger', "This email or mobile no already exists! Please try another one.");
                             this.isProfileFormVisible = true;
                         }
                         if (data.d == "-1") {

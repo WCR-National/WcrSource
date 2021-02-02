@@ -42,6 +42,7 @@ export class ProfilesService {
         return this.apiService.post(urlToGetProfileInfo, {})
             .pipe(map(
                 data => {
+
                     return data;
                 }
             ));
