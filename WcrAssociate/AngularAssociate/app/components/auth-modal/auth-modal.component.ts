@@ -471,37 +471,6 @@ export class AuthModalComponent implements OnInit {
                     });
                     this.isSubmitting = false;
 
-
-                    //if (data > '0') {
-                    //    //this.router.navigateByUrl('/Associate');
-                    //    $(location).attr('href', 'Associate/ViewProfile.aspx')
-                    //}
-                    //else if (data == '-1') {
-                    //    this.userService
-                    //        .attemptConsumerAuth(this.authType, credentials)
-                    //        .then(
-                    //            (data: any) => {
-                    //                if (data > '0') {
-                    //                    this.isSubmitting = false;
-                    //                    //this.router.navigateByUrl('/Consumer');
-                    //                    $(location).attr('href', '/index.html')
-
-                    //                }
-                    //                else {
-                    //                    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-                    //                    this.isSubmitting = false;
-                    //                }
-                    //            },
-                    //            err => {
-                    //                this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-                    //                this.isSubmitting = false;
-                    //            }
-                    //        );
-                    //}
-                    //else {
-                    //    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-                    //    this.isSubmitting = false;
-                    //}
                 },
                 err => {
                     //this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];

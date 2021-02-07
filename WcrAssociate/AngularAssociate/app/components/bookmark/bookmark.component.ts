@@ -339,7 +339,7 @@ export class BookmarkComponent implements OnInit {
 
         var thisStatus = this;
         $.each(dataServicesList, function (index, item) {
-            html += '<div class="listing-item"  >';
+            html += '<div class="listing-item">';
             html += '<a href="javascript:void(0)" class="listing-img-container">';
             //<!--< div class="listing-badges" >
             //    <span>For Rent < /span>
@@ -354,7 +354,10 @@ export class BookmarkComponent implements OnInit {
             html += '<div class="listing-carousel" >';
             debugger;
             if (item.photo != undefined && item.photo != null && item.photo != "")
-                html += '<div><img class="imageServices" src="../../../../Associate/Adv_img/"' + item.photo + ' alt=""></div>';
+            {
+                    let itemImage = "../../../../Associate/Adv_img/" + item.photo;
+                    html += '<div><img class="imageServices" src="' + itemImage + '" alt=""></div>';
+            }
             //if (item.advImage1 == undefined && item.advImage1 != null && item.advImage1 != "")
             //    html += '<div><img src="../../../../Associate/Adv_img/"' + item.advMainImage + ' alt=""></div>';
             //if (item.advImage2 == undefined && item.advImage2 != null && item.advImage2 != "")
@@ -383,19 +386,7 @@ export class BookmarkComponent implements OnInit {
             html += '<i class="fa fa-map-marker" > </i>';
             html += item.cityID + ". " + item.StateID + ", " + item.zipcode
             html += '</a>';
-            if (thisStatus.isLoggedInValue == "0") {
-
-                var params = item.CategoryID + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
-                html += '<a class="details button border showInterestBookMarkId" data-id="' + params + '" (click)="showInterestBookMark(\'' + params + '\')" > Bookmark </a>';
-            }
-            else {
-                if (item.consumerID != null) {
-                    html += '<a class="details button border bookMarked SaveBookmarkId" data-id="' + item.CategoryID + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
-                }
-                else {
-                    html += '<a class="details button border SaveBookmarkId" data-id="' + item.CategoryID  + '"  > Bookmark </a>';
-                }
-            }
+            
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
             //else if (item.description.length < 150)
@@ -430,7 +421,21 @@ export class BookmarkComponent implements OnInit {
             else {
                 html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '" id="contactAssociateId" > Contact Associates </a>';
             }
-            html += '<span> Zip Code: ' + item.zipcode + '</span>';
+
+            if (thisStatus.isLoggedInValue == "0") {
+
+                var id = item.CategoryID;// + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
+                html += '<a class="btn button border showInterestBookMarkId mg-l-15-f" data-id="' + id + '"  data-zipcode="' + item.zipcode + '" > Bookmark </a>';
+            }
+            else {
+                if (item.consumerID != null) {
+                    html += '<a class="btn button border bookMarked SaveBookmarkId  mg-l-15-f" data-id="' + item.CategoryID + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
+                }
+                else {
+                    html += '<a class="btn button border SaveBookmarkId  mg-l-15-f" data-id="' + item.CategoryID + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
+                }
+            }
+            //html += '<span> Zip Code: ' + item.zipcode + '</span>';
             html += '</div>';
             html += '</div>';
             //{ { count + 1 } }
@@ -550,7 +555,7 @@ export class BookmarkComponent implements OnInit {
 
     onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId): void {
 
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
         (modal.componentInstance as AuthModalComponent).isBookmark = true;
         const modalComponent: AuthModalComponent = modal.componentInstance;
 
