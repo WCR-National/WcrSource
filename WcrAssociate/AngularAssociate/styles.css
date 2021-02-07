@@ -47842,3 +47842,17 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
         left: 70px !important;
     }
 }
+.content-body {
+    font-size:15px !important;
+}
+    .content-body .close-button {
+        font-size: 18px !important;
+    }
+.title.ng-star-inserted {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+}
+.toast-panel {
+    max-width: 40rem !important;
+    padding: 15px !important;
+}

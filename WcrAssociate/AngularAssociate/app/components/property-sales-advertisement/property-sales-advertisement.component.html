@@ -11,6 +11,9 @@
     .spinner-white-layer{
         border-color:#fff !important;
     }
+    .slick-track {
+        height:130px;
+    }
 </style>
 <div id="titlebar" class="property-titlebar margin-bottom-0">
     <div class="container">
@@ -45,11 +48,20 @@
 </div>
 
 <!-- Slider -->
-<div class="fullwidth-property-slider margin-bottom-50">
+<div class="fullwidth-property-slider margin-bottom-20">
     <a style="background-size: cover;" *ngIf="advMainImage != undefined && advMainImage != null && advMainImage != ''" href="{{ 'Associate/Adv_img/' + advMainImage }}" [attr.data-background-image]="'Associate/Adv_img/' + advMainImage" class="item mfp-gallery"></a>
     <a style="background-size: cover;" *ngIf="image1 != undefined && image1 != null && image1 != ''" href="{{ 'Associate/Adv_img/' + image1 }}" [attr.data-background-image]="'Associate/Adv_img/' + image1" class="item mfp-gallery"></a>
     <a style="background-size: cover;" *ngIf="image2 != undefined && image2 != null && image2 != ''" href="{{ 'Associate/Adv_img/' + image2 }}" [attr.data-background-image]="'Associate/Adv_img/' + image2" class="item mfp-gallery"></a>
     <a style="background-size: cover;" *ngIf="image3 != undefined && image3 != null && image3 != ''" href="{{ 'Associate/Adv_img/' + image3 }}" [attr.data-background-image]="'Associate/Adv_img/' + image3" class="item mfp-gallery"></a>
+</div>
+
+<div class="property-slider-nav pd-l-0 pd-r-0 pd-xs-l-20 pd-xs-r-20 pd-sm-r-200 pd-sm-l-200 pd-lg-r-200  pd-lg-l-200">
+
+    <div class="item" *ngIf="advMainImage != undefined && advMainImage != null && advMainImage != ''" ><img style="background-size: cover;"  src="{{ 'Associate/Adv_img/' + advMainImage}}" alt=""></div>
+    <div class="item" *ngIf="image1 != undefined && image1 != null && image1 != ''"><img style="background-size: cover;"  src="{{ 'Associate/Adv_img/' + image1}}" alt=""></div>
+    <div class="item" *ngIf="image2 != undefined && image2 != null && image2 != ''"><img style="background-size: cover;"  src="{{ 'Associate/Adv_img/' + image2}}" alt=""></div>
+    <div class="item" *ngIf="image3 != undefined && image3 != null && image3 != ''"><img style="background-size: cover;"  src="{{ 'Associate/Adv_img/' + image3}}" alt=""></div>
+
 </div>
 
 <div class="container-fluid pd-b-100-f" style="background-color:#fff;">
@@ -195,7 +207,7 @@
                                     </a>
                                     <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="contactAssociateId" attr.data-id="{{strParamContactAssociate}}" class="btn button border margin-top-5 contactAssociateClass">
                                         <span [style.display]="!isSubmittingContactAssociate ? 'block': 'none'">Contact Associate</span>
-                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingContactAssociate ? 'inline-block': 'none'">
+                                        <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingContactAssociate ? 'inline-block': 'none'" style="top: 70.4%;">
                                             <div class="spinner-layer spinner-white-layer spinner-white-only spinner-white">
                                                 <div class="circle-clipper left">
                                                     <div class="circle"></div>

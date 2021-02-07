@@ -227,6 +227,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
         });
 
         $('.contactAssociateClass').click(function () {
+
             thisStatus.isSubmittingContactAssociate = true;
             let advIdAndAssociateId = $(this).attr('data-id');
             thisStatus.salesAdvertisements
@@ -252,21 +253,6 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                         return false;
                     }
                 );
-            //thisStatus.salesAdvertisements
-            //    .ConsumerIsLogin()
-            //    .subscribe(
-            //        (data) => {
-
-            //            if (data.d > 0) {
-
-                          
-            //            }
-            //            else {
-            //                thisStatus.showToast("danger", "You need to sign in");
-            //                thisStatus.onOpenModalClickAssociate(advIdAndAssociateId);
-            //            }
-            //        });
-
         });
 
         $('.showInterestBookMarkClass').click(function () {
@@ -320,6 +306,139 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
         });
     }
 
+
+
+
+    onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId): void {
+
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
+        (modal.componentInstance as AuthModalComponent).isBookmark = true;
+
+        const modalComponent: AuthModalComponent = modal.componentInstance;
+
+        modal.componentInstance.dismissParentCall.subscribe((data) => {
+            console.log(data);
+            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+                if (data == "update") {
+                    this.isLoggedInValue = "1";
+                    this.SaveBookmark(advId);
+                }
+                else {
+                    this.isLoggedInValue = "0";
+                    this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+                }
+            }
+        });
+
+        modal.componentInstance.updateParentCall.subscribe((data) => {
+            debugger;
+            this.showToast('success', 'Property bookmark is in process');
+            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+                if (data == "update") {
+                    this.isLoggedInValue = "1";
+                    this.SaveBookmark(advId);
+                }
+                else {
+                    this.isLoggedInValue = "0";
+                    this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+                }
+            }
+        });
+
+    }
+
+    SaveBookmark(advId) {
+        let zipcode = 0;
+        this.salesAdvertisements
+            .UpdateSavedBookmarksSales(advId, zipcode)
+            .subscribe(
+                data => {
+
+                    if (data.d == "0") {
+
+                        $('.showInterestBookMarkClass').each(function () {
+                            if (advId == $(this).attr('data-id')) {
+                                $(this).addClass('bookMarked');
+                            }
+                        });
+                        this.showToast('warning', "You have already saved this advertisement.");
+                    }
+                    else {
+
+                        $('.showInterestBookMarkClass').each(function () {
+                            if (advId == $(this).attr('data-id')) {
+                                $(this).addClass('bookMarked');
+                            }
+                        }); this.showToast('success', "Advertisement bookmarked successfully.");
+                    }
+                },
+                err => {
+                }
+            );
+
+    }
+
+
+
+    onOpenModalClickAssociate(advIdnAndAssociateId): void {
+
+        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
+        (modal.componentInstance as AuthModalComponent).isContactAssociate = true;
+
+        const modalComponent: AuthModalComponent = modal.componentInstance;
+
+        modal.componentInstance.dismissParentCall.subscribe((data) => {
+            console.log(data);
+
+            if (data == "update") {
+                //book
+                this.isLoggedInValue = "1";
+                this.ContactAssociate(advIdnAndAssociateId);
+            }
+            else {
+                this.isLoggedInValue = "0";
+                this.showToast('danger', "Something went wrong. Please try again.");
+            }
+        });
+
+        modal.componentInstance.updateParentCall.subscribe((data) => {
+            debugger;
+            this.showToast('success', 'Request to Associate is in process');
+            if (data == "update") {
+                //book
+                this.isLoggedInValue = "1";
+                this.ContactAssociate(advIdnAndAssociateId);
+            }
+            else {
+                this.isLoggedInValue = "0";
+                this.showToast('danger', "Something went wrong. Please try again.");
+            }
+        });
+
+    }
+
+    ContactAssociate(advIdAndAssociateId, pnlID = 0) {
+        this.salesAdvertisements
+            .CheckEmailAndPhNo()
+            .subscribe(
+                data => {
+                    if (this.isLoggedInValue == "0") {
+
+                    }
+                    else if (this.isLoggedInValue == "1") {
+                        this.ContactAssociates(advIdAndAssociateId);
+                    }
+                    else {
+                        this.showToast("danger", "You cannot contact this Associate at this time.");
+                        this.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+                    }
+                },
+                err => {
+                    return false;
+                }
+            );
+    }
+
     //Linked with on click event
     ContactAssociates(advIdAndAssociateId) {
         var _returnValue;
@@ -360,7 +479,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
         }
 
         this.salesAdvertisements
-            .InsertConsumerInterest(adverID, associateID, jobtypeID, zipcode)
+            .InsertConsumerInterest(this.advertisementID, this.associateid, jobtypeID, zipcode)
             .subscribe(
                 data => {
 
@@ -391,175 +510,6 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                 err => {
                 }
             );
-    }
-
-    SaveBookmark(advId) {
-        let zipcode = 0;
-        this.salesAdvertisements
-            .UpdateSavedBookmarksSales(advId, zipcode)
-            .subscribe(
-                data => {
-
-                    if (data.d == "0") {
-
-                        $('.showInterestBookMarkClass').each(function () {
-                            if (advId == $(this).attr('data-id')) {
-                                $(this).addClass('bookMarked');
-                            }
-                        });
-                        this.showToast('warning', "You have already saved this advertisement.");
-                    }
-                    else {
-
-                        $('.showInterestBookMarkClass').each(function () {
-                            if (advId == $(this).attr('data-id')) {
-                                $(this).addClass('bookMarked');
-                            }
-                        }); this.showToast('success', "Advertisement bookmarked successfully.");
-                    }
-                },
-                err => {
-                }
-        );
-
-        //this.salesAdvertisements
-        //    .ConsumerIsLogin()
-        //    .subscribe(
-        //        (data) => {
-
-        //            if (data.d == 0) {
-                        
-        //            }
-        //            else {
-        //                this.showToast("danger", "You need to sign in");
-        //                this.onOpenModalClickSaveBookMark("saveBookmark", advId);
-        //            }
-
-        //        }
-        //    );
-    }
-
-    onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId): void {
-
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
-        (modal.componentInstance as AuthModalComponent).isBookmark = true;
-
-        const modalComponent: AuthModalComponent = modal.componentInstance;
-
-        modal.componentInstance.dismissParentCall.subscribe((data) => {
-            console.log(data);
-            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
-                if (data == "update") {
-                    this.isLoggedInValue = "1";
-                    this.SaveBookmark(advId);
-                }
-                else {
-                    this.isLoggedInValue = "0";
-                    this.showToast('danger', "Something went wrong. Please try again. Refresh page");
-                }
-            }
-        });
-
-        modal.componentInstance.updateParentCall.subscribe((data) => {
-            debugger;
-            this.showToast('success', 'Property bookmark is in process');
-            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
-                if (data == "update") {
-                    this.isLoggedInValue = "1";
-                    this.SaveBookmark(advId);
-                }
-                else {
-                    this.isLoggedInValue = "0";
-                    this.showToast('danger', "Something went wrong. Please try again. Refresh page");
-                }
-            }
-        });
-
-    }
-
-    onOpenModalClickAssociate(advIdnAndAssociateId): void {
-
-        const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        (modal.componentInstance as AuthModalComponent).isContactAssociate = true;
-
-        const modalComponent: AuthModalComponent = modal.componentInstance;
-
-        modal.componentInstance.dismissParentCall.subscribe((data) => {
-            console.log(data);
-
-            if (data == "update") {
-                //book
-                this.isLoggedInValue = "1";
-                this.ContactAssociate(advIdnAndAssociateId);
-            }
-            else {
-                this.isLoggedInValue = "0";
-                this.showToast('danger', "Something went wrong. Please try again.");
-            }
-        });
-
-        modal.componentInstance.updateParentCall.subscribe((data) => {
-            debugger;
-            this.showToast('success', 'Request to Associate is in process');
-            if (data == "update") {
-                //book
-                this.isLoggedInValue = "1";
-                this.ContactAssociate(advIdnAndAssociateId);
-            }
-            else {
-                this.isLoggedInValue = "0";
-                this.showToast('danger', "Something went wrong. Please try again.");
-            }
-        });
-
-    }
-
-    showToast(toastrType, text) {
-        const type = toastrType;
-        this.toaster.open({
-            text: text,
-            caption: type + ' notification',
-            type: type,
-            duration: 8000
-        });
-    }
-
-    ContactAssociate(advIdAndAssociateId, pnlID = 0) {
-        this.salesAdvertisements
-            .CheckEmailAndPhNo()
-            .subscribe(
-                data => {
-                    if (this.isLoggedInValue == "0") {
-
-                    }
-                    else if (this.isLoggedInValue == "1") {
-                        this.ContactAssociates(advIdAndAssociateId);
-                    }
-                    else {
-                        this.showToast("danger", "You cannot contact this Associate at this time.");
-                        this.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
-                    }
-                },
-                err => {
-                    return false;
-                }
-            );
-
-        //this.salesAdvertisements
-        //    .ConsumerIsLogin()
-        //    .subscribe(
-        //        (data) => {
-
-        //            if (data.d > 0) {
-
-                       
-        //            }
-        //            else {
-        //                this.showToast("danger", "You need to sign in");
-        //                this.onOpenModalClickAssociate(advIdAndAssociateId);
-        //            }
-        //        });
-
     }
 
     LoadGoogleMap(zipcode)
@@ -604,4 +554,15 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
             }
         });
     }
+
+    showToast(toastrType, text) {
+        const type = toastrType;
+        this.toaster.open({
+            text: text,
+            caption: type + ' notification',
+            type: type,
+            duration: 8000
+        });
+    }
+
 }

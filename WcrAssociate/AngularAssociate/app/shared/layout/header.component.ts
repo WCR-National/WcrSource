@@ -27,22 +27,23 @@ export class HeaderComponent implements OnInit {
     public isMobileScreen = false;
 
     ngOnInit() {
-        //this._messageService.listen().subscribe((data: any) => {
-        //    debugger;
-        //    if (data != 'updateUserName') {
-        //        this.initializeHeader();
-        //    }
-        //    //if (data == "updateHeader")
-        //    //{
-        //    //    if (this.isLoggedIn) {
-        //    //        this.isLoggedIn = false;
-        //    //    }
-        //    //    else {
-        //    //        this.isLoggedIn = true;
-        //    //    }
-        //    //}
-        //});
         this.checkUserAuthenticated();
+
+        this._messageService.listen().subscribe((data: any) => {
+            debugger;
+            if (data != 'updateUserName') {
+                this.initializeHeader();
+            }
+            if (data == "updateHeader")
+            {
+                if (this.isLoggedIn) {
+                    this.isLoggedIn = false;
+                }
+                else {
+                    this.isLoggedIn = true;
+                }
+            }
+        });
         this.checkWidthOrHeightForMobile();
         
 

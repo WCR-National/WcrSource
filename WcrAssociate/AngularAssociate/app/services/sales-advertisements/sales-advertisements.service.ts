@@ -118,7 +118,7 @@ export class SalesAdvertisementsService {
     }
 
     UpdateSavedBookmarksService(advId, zipcode) {
-
+        debugger;
         let urlToInsertSavedAdts: string = "ws/InnerPage.asmx/InsertSavedAdts";
         return this.apiService.post(urlToInsertSavedAdts, { 'AdvertisementID': advId, 'zipCode': zipcode, 'jtype': '2' })
             .pipe(map(
@@ -140,7 +140,7 @@ export class SalesAdvertisementsService {
     }
 
     //Contact to Associate
-    InsertConsumerInterest(associateID, adverID, jobtypeID, zipcode) {
+    InsertConsumerInterest(adverID, associateID, jobtypeID, zipcode) {
         let urlToInsertConsumerInterest: string = "ws/ConsumerComments.asmx/InsertConsumerInterest";
         return this.apiService.post(urlToInsertConsumerInterest, {
             AdvertisementID: adverID, 'AssociateID': associateID, 'jobType': jobtypeID, 'zipcode': zipcode

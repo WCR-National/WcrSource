@@ -7,10 +7,6 @@ function myTest() {
     alert('Welcome to custom js');
 }
 
-//$(function () {
-//    alert('Hello, custom js');
-//});
-
 function mmenuInit() {
 
     var wi = $(window).width();
@@ -131,11 +127,27 @@ function InitializeFullWidthSlider() {
     /*----------------------------------------------------*/
     /*  Slick Carousel
     /*----------------------------------------------------*/
-
+    //$('.property-slider').slick({
+    //    slidesToShow: 1,
+    //    slidesToScroll: 1,
+    //    arrows: true,
+    //    fade: true,
+    //    asNavFor: '.property-slider-nav',
+    //    centerMode: true,
+    //    slide: ".item",
+    //    adaptiveHeight: true
+    //});
     $('.fullwidth-property-slider').slick({
         centerMode: true,
         centerPadding: '20%',
         slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: true,
+        fade: true,
+        centerMode: true,
+        asNavFor: '.property-slider-nav',
+        slide: ".item",
+
         responsive: [
             {
                 breakpoint: 1367,
@@ -151,6 +163,32 @@ function InitializeFullWidthSlider() {
             }
         ]
     });
+
+    $('.property-slider-nav').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        asNavFor: '.property-slider',
+        dots: false,
+        arrows: false,
+        centerMode: false,
+        focusOnSelect: true,
+        responsive: [
+            {
+                breakpoint: 993,
+                settings: {
+                    slidesToShow: 4,
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 3,
+                }
+            }
+        ]
+    });
+
+    
 
     /*----------------------------------------------------*/
     /*  Magnific Popup

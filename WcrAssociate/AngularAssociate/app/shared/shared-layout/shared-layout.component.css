@@ -14074,7 +14074,7 @@ em.mm-counter {
         }
 
         .header-widget .sign-in {
-            top: 9px;
+            top: 18px;
         }
 
     #header-container.header-style-2 .left-side,
@@ -14217,8 +14217,8 @@ em.mm-counter {
 @media (max-width: 360px) {
 
     .header-widget .sign-in {
-        display: block;
-        top: 0;
+        display: inline;
+        top: 20px;
         margin-bottom: 10px;
     }
 
