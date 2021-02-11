@@ -49,9 +49,7 @@
               "AngularAssociate/assets/bootstrap.css",
               "AngularAssociate/assets/style.css",
               "AngularAssociate/assets/color.css",
-              //"./node_modules/ngx-lightbox/lightbox.css",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css"
-              //"node_modules/select2/dist/css/select2.min.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
