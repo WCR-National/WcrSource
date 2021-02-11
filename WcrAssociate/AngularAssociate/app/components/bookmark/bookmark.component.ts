@@ -355,8 +355,8 @@ export class BookmarkComponent implements OnInit {
             debugger;
             if (item.photo != undefined && item.photo != null && item.photo != "")
             {
-                    let itemImage = "../../../../Associate/Adv_img/" + item.photo;
-                    html += '<div><img class="imageServices" src="' + itemImage + '" alt=""></div>';
+                let itemImage = "../../../../AssociatePhoto/" + item.photo;
+                html += '<div><img class="imageServices" src="' + itemImage + '" alt=""></div>';
             }
             //if (item.advImage1 == undefined && item.advImage1 != null && item.advImage1 != "")
             //    html += '<div><img src="../../../../Associate/Adv_img/"' + item.advMainImage + ' alt=""></div>';
@@ -428,7 +428,7 @@ export class BookmarkComponent implements OnInit {
                 html += '<a class="btn button border showInterestBookMarkId mg-l-15-f" data-id="' + id + '"  data-zipcode="' + item.zipcode + '" > Bookmark </a>';
             }
             else {
-                if (item.consumerID != null) {
+                if (item.ConsumerID != null) {
                     html += '<a class="btn button border bookMarked SaveBookmarkId  mg-l-15-f" data-id="' + item.CategoryID + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
                 }
                 else {

@@ -187,7 +187,6 @@ export class ServiceProfileComponent implements OnInit {
             });
     }
 
-
     GetSalesAdvFromTabs(id) {
         debugger;
         if (id == '2') {
@@ -248,7 +247,7 @@ export class ServiceProfileComponent implements OnInit {
             html += '<div class="listing-carousel" >';
             debugger;
             if (item.photo != undefined && item.photo != null && item.photo != "") {
-                let itemImage = "../../../../Associate/Adv_img/" + item.photo;
+                let itemImage = "../../../../AssociatePhoto/" + item.photo;
                 html += '<div><img class="imageServices" src="' + itemImage + '" alt=""></div>';
             }
             //if (item.advImage1 == undefined && item.advImage1 != null && item.advImage1 != "")
@@ -313,7 +312,7 @@ export class ServiceProfileComponent implements OnInit {
                 html += '<a class="btn button border showInterestBookMarkClass showInterestBookMarkId mg-l-15-f" data-id="' + id + '"  data-zipcode="' + thisStatus.zipcode + '" > Bookmark </a>';
             }
             else {
-                if (item.consumerID != null) {
+                if (item.ConsumerID != null) {
                     html += '<a class="btn button border bookMarked SaveBookmarkId   mg-l-15-f" data-id="' + thisStatus.id + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
                 }
                 else {
