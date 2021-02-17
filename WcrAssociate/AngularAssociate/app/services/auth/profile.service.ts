@@ -27,7 +27,7 @@ export class ProfilesService {
     UpdateConsumer(consumerData:any)
     {
         let urlToConsumerData: string = "ws/ConsumerRegistration.asmx/UpdateConsumer";
-        return this.apiService.post(urlToConsumerData, { 'FirstName': consumerData.FirstName, 'Address': consumerData.Address, 'MobileNo': consumerData.MobileNo, 'userName': consumerData.userName, 'password': consumerData.password, 'emailID': consumerData.email, 'ZipCode': consumerData.ZipZode, 'lastName': consumerData.lastName, 'Unit_Apt': consumerData.unitApt, 'city': consumerData.city, 'stateID': consumerData.StateID })
+        return this.apiService.post(urlToConsumerData, { 'FirstName': consumerData.FirstName, 'Address': consumerData.Address, 'MobileNo': consumerData.MobileNo, 'userName': consumerData.userName, 'password': consumerData.password, 'emailID': consumerData.email, 'ZipCode': consumerData.ZipCode, 'lastName': consumerData.lastName, 'Unit_Apt': consumerData.unitApt, 'city': consumerData.city, 'stateID': consumerData.stateID.value })
             .pipe(map(
                 data => {
                     return data;

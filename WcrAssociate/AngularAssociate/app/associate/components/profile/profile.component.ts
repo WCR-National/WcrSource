@@ -78,6 +78,7 @@ export class ProfileComponent implements OnInit {
             'elevenDigits': 'Start with 1, Allowed 11 digits'
         }
     }
+
     formErrors = {
         'firstName': '',
         'lastName': '',
@@ -86,6 +87,7 @@ export class ProfileComponent implements OnInit {
         'licenseId': '',
         'licenseState': ''
     };
+
     @ViewChild('fileInput') el: ElementRef;
     imageUrl: any = 'https://i.pinimg.com/236x/d6/27/d9/d627d9cda385317de4812a4f7bd922e9--man--iron-man.jpg';
     editFile: boolean = false;
@@ -452,8 +454,6 @@ function StateValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
         return valid ? null : error;
     };
 }
-
-
 
 function phoneValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {

@@ -1869,6 +1869,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\customer-support\customer-support.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\profile\profile.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\components\dashboard\dashboard.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\associate\show-authed-associate.directive.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth-modal\auth-modal.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\property-sales-advertisement\property-sales-advertisement.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\sales-advertisements\sales-advertisements.component.ts" />
@@ -1927,6 +1928,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\shared\show-authed.directive.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\encrypt_decrypt.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\error.interceptor.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\_helpers\app.initializer.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\xml-to-json.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\fake-backend.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_helpers\index.ts" />

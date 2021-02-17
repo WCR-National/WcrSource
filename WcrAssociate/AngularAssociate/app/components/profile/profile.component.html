@@ -7,19 +7,26 @@
     input, input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea, select {
         padding: 15px 10px !important;
         height: 44px;
+        opacity: 1;
     }
 
         input:disabled {
             border-color: #eee !important;
             box-shadow: none !important;
             background-color: #e9ecf1;
+            opacity: 0.6;
         }
 
             input:disabled:focus, input:disabled:hover {
                 color: none;
                 border-color: none !important;
                 box-shadow: none !important;
+                opacity: 0.6;
             }
+
+    .ng-select {
+        padding-bottom: 0px;
+    }
 </style>
 <div class="fullrow inner_content pd-t-40 pd-b-100">
     <div class="container" style="">
@@ -73,7 +80,7 @@
                                 <div class="col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15 ht-100-f">
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.email}">
                                         <label> Email<span class=" materialize-red-text">*</span> </label>
-                                        <input id="email" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your email" formControlName="email" (blur)="logValidationErrors()">
+                                        <input id="email" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your email" formControlName="email" (blur)="logValidationErrors()" disabled>
                                         <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.email">
                                             {{formErrors.email}}
                                         </div>
@@ -83,7 +90,7 @@
                                 <div class="col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15 ht-100-f">
                                     <div class="form-group" [ngClass]="{'has-error': formErrors.password}">
                                         <label> Password <span class=" materialize-red-text">*</span></label>
-                                        <input id="password" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your password" formControlName="password" (blur)="logValidationErrors()">
+                                        <input id="password" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your password" formControlName="password" (blur)="logValidationErrors()" disabled>
                                         <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.password">
                                             {{formErrors.password}}
                                         </div>
@@ -121,13 +128,23 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15 ht-100-f">
-                                    <div class="form-group" [ngClass]="{'has-error': formErrors.stateID}">
+
+                                    <div class="form-group" [style.pointer-events]="isProfileFormVisible ? 'all' : 'none'" [ngClass]="{'has-error': formErrors.stateID}">
+                                        <label>
+                                            Select State
+                                        </label>
+                                        <!--<select2 [data]="stateData" [value]="startValueState" [width]="150" (valueChanged)="changeState($event)" formControlName="state"></select2>-->
+                                        <ng-select [style.background]="isProfileFormVisible ? 'none' : '#e9ecf1'" [items]="stateData" [(ngModel)]="startValueState" (ngModelChange)="changeState()" formControlName="stateID" [searchable]="false"> </ng-select>
+                                        <!--<input id="state" type="text" class="form-control pd-l-0-f form-control" placeholder="STATE" formControlName="firstName" (blur)="logValidationErrors()">-->
+                                    </div>
+
+                                    <!--<div class="form-group" [ngClass]="{'has-error': formErrors.stateID}">
                                         <label> State</label>
                                         <input id="stateID" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter state" formControlName="stateID" (blur)="logValidationErrors()">
                                         <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.stateID">
                                             {{formErrors.stateID}}
                                         </div>
-                                    </div>
+                                    </div>-->
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15 ht-100-f">
@@ -141,7 +158,7 @@
                                 </div>
 
                                 <div class="col-xs-12 col-sm-6  pd-l-0 pd-sm-l-15 pd-r-0 pd-sm-r-15 ht-100-f">
-                                    <div class="form-group" [ngClass]="{'has-error': formErrors.unitApt}">
+                                    <div class="form-group" [ngClass]="{'has-error': formErrors.MobileNo}">
                                         <label> Mobile Number<span class=" materialize-red-text">*</span> </label>
                                         <input id="MobileNo" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter mobile no" formControlName="MobileNo" (blur)="logValidationErrors()">
                                         <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.MobileNo">
@@ -153,13 +170,13 @@
                             </div>
                         </div>
 
-                        <div [style.display]="(isProfileFormVisible) ? 'block':'none'" class="col-xs-12 col-sm-12 pd-l-30-f pd-r-0-f pull-xs-right pull-right">
+                        <div [style.display]="(isProfileFormVisible) ? 'block':'none'" class="col-xs-12 col-sm-12 pd-l-30 pd-sm-l-45-f pd-r-0-f pull-xs-right pull-right">
                             <div class="form-group">
                                 <div class="col-xs-6 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddOrUpdateButton ? 'block': 'none'">
-                                    <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit" (click)="submitProfileForm()">
+                                    <button [disabled]=" ( defaultDisableSubmitButton )" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit" (click)="submitProfileForm()">
                                         <span [style.display]="!isSubmitting ? 'block': 'none'">Submit</span>
                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'" style="margin-top:4px;">
-                                            <div class="spinner-layer spinner-white spinner-white-only">
+                                            <div class="spinner-layer spinner-white spinner-white spinner-white-only">
                                                 <div class="circle-clipper left">
                                                     <div class="circle"></div>
                                                 </div><div class="gap-patch">
@@ -173,10 +190,10 @@
 
                                 </div>
                                 <div class="col-xs-6  col-sm-2 mg-b-20 pd-l-0-f pd-r-0-f" [style.display]="!isAddOrUpdateButton ? 'block': 'none'">
-                                    <button style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit">
+                                    <button [disabled]=" ( defaultDisableUpdateButton )" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit">
                                         <span [style.display]="!isSubmitting ? 'block': 'none'" (click)="updateProfileForm()">Update</span>
                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmitting ? 'inline-block': 'none'" style="margin-top:4px;">
-                                            <div class="spinner-layer spinner-white spinner-white-only">
+                                            <div class="spinner-layer spinner-white spinner-white spinner-white-only">
                                                 <div class="circle-clipper left">
                                                     <div class="circle"></div>
                                                 </div><div class="gap-patch">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ import { environment } from 'AngularAssociate/environments/environment';
 import { Observable, of } from 'rxjs';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { Toaster } from 'ngx-toast-notifications';
+import { PaymentService } from 'AngularAssociate/app/services/associate/payment.service';
 
 
 
@@ -22,6 +23,8 @@ import { Toaster } from 'ngx-toast-notifications';
     templateUrl: './profile.component.html'
 })
 export class ProfileComponent implements OnInit {
+    defaultDisableSubmitButton: boolean = true;
+    defaultDisableUpdateButton: boolean = true;
 
     isSubmitting: boolean = false;
     profileForm: FormGroup;
@@ -40,6 +43,11 @@ export class ProfileComponent implements OnInit {
     private ZipCode: string = '';
     private MobileNo: string = '';
     private userName: string = '';
+    private startValueState = null;
+    private selectedState:string = null;
+    public g_selectedState = null;
+
+    public stateData = null;
 
     validationMessages = {
 
@@ -53,26 +61,28 @@ export class ProfileComponent implements OnInit {
         'Address': {
             'alphaNumeric': 'Allowed alphanumeric only.',
             'alphaNumericWithSpace': 'Allowed alphanumeric and spaces only.',
+
         },
         'city': {
             'letterOnly': 'Alphabetical letters only.'
         },
         'stateID': {
-            'letterOnly': 'Alphabetical letters only.'
-        },
+                'required': 'State is required',
+                'letterOnly': 'Alphabetical letters only.'
+       },
         'ZipCode': {
 
             'zipCode': 'Please enter 5 digit zip code.',
-            'numericOnly': 'Allowed digits only.'
+            'numericOnly': 'Allowed digits only like nnnnn or nnnnn-nnnn'
         },
         'unitApt':
         {
-            'letterOnly': 'Allowed alphabeticals letters only.'
+            'alphaNumeric': 'Allowed alphanumeric only.',
+            'alphaNumericWithHash': 'Allowed alphanumeric and hashes only.',
         },
         'MobileNo': {
-            'required': 'CVC number is required',
-            'numericOnly': 'Allowed digits only.',
-            'maxLength': 'Allowed 4 digits only.',
+            'required': 'Mobile no is required',
+            'tenDigits': 'Allowed 10 or 7 digits for mobile No like: XXXXXXXXXX or XXXXXXX.',
         },
         'password': {
             'required': 'Password is required',
@@ -104,10 +114,28 @@ export class ProfileComponent implements OnInit {
     };
 
     constructor(private route: ActivatedRoute, private router: Router, private profileService: ProfilesService, private xmlToJson: XMLToJSON,
-        private fb: FormBuilder, private toaster: Toaster) { }
+        private fb: FormBuilder, private toaster: Toaster, private cdr: ChangeDetectorRef, private paymentService: PaymentService) { }
 
     ngOnInit() {
         this.initializeForm();
+        this.startValueState = { value: '', label: ''};
+        this.selectedState = '';
+
+        this.getProfileDataDetails();
+        var thisStatus = this;
+        setTimeout(function () {
+            thisStatus.profileForm.valueChanges.subscribe(() => {
+                debugger;
+                if (thisStatus.profileForm.valid) {
+                    //thisStatus.cardForm.setErrors({ 'invalid': true });
+                    thisStatus.defaultDisableUpdateButton = false;
+                }
+                else {
+                    thisStatus.defaultDisableUpdateButton = true;
+                }
+            });
+        }, 4000);
+        this.cdr.detectChanges();
     }
 
     initializeForm() {
@@ -117,10 +145,16 @@ export class ProfileComponent implements OnInit {
             lastName: ['', [patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
             Address: ['', [StateValidator(/^[a-zA-Z0-9\-\s]+$/, { alphaNumericWithSpace: true })]],
             city: ['', [StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
-            stateID: ['', [StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
-            unitApt: ['', [StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
-            ZipCode: ['', [Validators.required]],
-            password: ['', [Validators.required, StateValidator(/^[a-zA-Z0-9]+$/, { alphaNumeric: true })]],
+            stateID: [''],
+            unitApt: ['', [StateValidator(/^[a-zA-Z0-9\-\#]+$/, { alphaNumericWithHash: true })]],
+            ZipCode: ['', [StateValidator(/^\d+(-\d+)?$/, { numericOnly: true })] ],
+            password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(20),
+            patternValidator(/\d/, { number: true }),
+            patternValidator(/[A-Z]/, { upperLetter: true }),
+            patternValidator(/[a-z]/, { lowerLetter: true }),
+            patternValidator(/[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, { hasSpecialCharacters: true })
+            
+            ]],
             email: ['', [Validators.required]],
             MobileNo: ['', [Validators.required, phoneValidator(/\d{11}/, { elevenDigits: true })]],
         });
@@ -160,12 +194,13 @@ export class ProfileComponent implements OnInit {
             .getProfileInfo()
             .subscribe(
                 data => {
-
+                    var thisStatus = this;
                     if (data.d.length > 0) {
                         var xmlDoc = $.parseXML(data.d);
                         var xml = $(xmlDoc);
                         var docs = xml.find("ConsumerDetail");
-                        var thisStatus = this;
+                        
+
                         $.each(docs, function (i, docs) {
                             thisStatus.city = $(docs).find("City").text();
                             thisStatus.stateID = $(docs).find("StateId").text();
@@ -179,34 +214,100 @@ export class ProfileComponent implements OnInit {
                             thisStatus.password = $(docs).find("Password").text();
                             thisStatus.MobileNo = $(docs).find("Mob").text();
                         });
+
+                        if (data.FirstName != "" && data.lastName !== "" && data != null && data != "-1" && data != -1) {
+
+                            //this.profileId = data._crdID;
+
+                            //this.userName = data._zip
+                            thisStatus.profileForm.get('email').setValue(thisStatus.email);
+
+
+                            thisStatus.profileForm.get('ZipCode').setValue(thisStatus.ZipCode);
+                            thisStatus.profileForm.get('MobileNo').setValue(thisStatus.MobileNo);
+                            thisStatus.profileForm.get('FirstName').setValue(thisStatus.FirstName);
+
+                            thisStatus.profileForm.get('city').setValue(thisStatus.city);
+                            //thisStatus.profileForm.get('stateID').setValue(thisStatus.stateID);
+                            //thisStatus.profileForm.get('userName').setValue(thisStatus.userName);
+                            thisStatus.profileForm.get('lastName').setValue(thisStatus.lastName);
+                            thisStatus.profileForm.get('password').setValue(thisStatus.password);
+                            thisStatus.profileForm.get('Address').setValue(thisStatus.Address);
+                            thisStatus.profileForm.get('unitApt').setValue(thisStatus.unitApt);
+
+
+                            this.bindState();
+
+                            setTimeout(function () {
+                                thisStatus.startValueState = { value: data._state, label: data._state };
+                            }, 2000);
+
+                            this.isAddOrUpdateButton = false;
+                            this.isProfileFormVisible = false;
+                            this.defaultDisableUpdateButton = true;
+                        }
+                        else {
+                            thisStatus.profileForm.get('email').setValue(thisStatus.email);
+                            thisStatus.profileForm.get('password').setValue(thisStatus.password)
+                            thisStatus.profileForm.get('userName').setValue("n");
+
+                            this.bindState();
+
+
+                            this.isAddOrUpdateButton = true;
+                            this.isProfileFormVisible = true;
+                        }
                     }
 
-                    if (data != "" && data != undefined && data != null && data != "-1" && data != -1) {
-
-                        //this.profileId = data._crdID;
-
-                        //this.userName = data._zip
-                        thisStatus.profileForm.get('ZipCode').setValue(thisStatus.ZipCode);
-                        thisStatus.profileForm.get('MobileNo').setValue(thisStatus.MobileNo);
-                        thisStatus.profileForm.get('FirstName').setValue(thisStatus.FirstName);
-
-                        thisStatus.profileForm.get('city').setValue(thisStatus.city);
-                        thisStatus.profileForm.get('stateID').setValue(thisStatus.stateID);
-                        //thisStatus.profileForm.get('userName').setValue(thisStatus.userName);
-                        thisStatus.profileForm.get('lastName').setValue(thisStatus.lastName);
-                        thisStatus.profileForm.get('password').setValue(thisStatus.password);
-                        thisStatus.profileForm.get('Address').setValue(thisStatus.Address);
-                        thisStatus.profileForm.get('unitApt').setValue(thisStatus.unitApt);
-                        this.isAddOrUpdateButton = false;
-                        this.isProfileFormVisible = false;
-
-                    }
-                    else {
-                        thisStatus.profileForm.get('userName').setValue("n");
-                        this.isAddOrUpdateButton = true;
-                        this.isProfileFormVisible = true;
-                    }
                 });
+    }
+
+    changeState() {
+
+        //let city_value = this.cardForm.get('city').value;
+        //let state_value: any = this.cardForm.get('state').value;
+        //this.bindStateWiseZipCode(state_value.value, city_value);
+    }
+
+    bindState() {
+        const countryId = "US";//this.cardForm.get('country').value;
+        this.paymentService
+            .bindState(countryId)
+            .subscribe(
+                data => {
+                    if (data.d.length > 0) {
+                        var xmlDoc = $.parseXML(data.d);
+                        var xml = $(xmlDoc);
+                        var docs = xml.find("States1");
+                        var arrState = [];
+                        //this.startValueState = '';
+                        var thisStatus = this;
+                        //arrState.push({ "value": "-1", "label": "Select State" })
+                        var val = "";
+                        var label = "";
+                        $.each(docs, function (i, docs) {
+                            if (i == 0) {
+                                val = $(docs).find("stateid").text();
+                                label = $(docs).find("stateid").text();
+                                //thisStatus.startValueState = { "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() };
+                            }
+                            arrState.push({ "value": $(docs).find("stateid").text(), "label": $(docs).find("stateid").text() });
+                        });
+                        this.stateData = arrState;
+
+                        //if (this.state != "" && this.state !== undefined) {
+                        //    this.startValueState = [this.state];//{ value: "1", label: "January" };
+                        //    if (this.city != "" && this.city !== undefined) {
+                        //        this.bindStateWiseZipCode(this.state, this.city);
+                        //    }
+                        //}
+                        //else {
+                        //    this.startValueState = { 'value': val, 'label': label };
+                        //}
+
+                    }
+                }
+            )
     }
 
     submitProfileForm() {
@@ -245,7 +346,7 @@ export class ProfileComponent implements OnInit {
     }
 
     updateProfileForm() {
-
+        debugger;
 
         if (this.profileForm.valid) {
             const consumerData = this.profileForm.value;
@@ -300,6 +401,79 @@ export class ProfileComponent implements OnInit {
     smallLettersToCapitalLetters(value) {
         value.toUpperCase();
     }
+
+    abbrState(input, to) {
+
+        var states = [
+            ['Arizona', 'AZ'],
+            ['Alabama', 'AL'],
+            ['Alaska', 'AK'],
+            ['Arkansas', 'AR'],
+            ['California', 'CA'],
+            ['Colorado', 'CO'],
+            ['Connecticut', 'CT'],
+            ['Delaware', 'DE'],
+            ['Florida', 'FL'],
+            ['Georgia', 'GA'],
+            ['Hawaii', 'HI'],
+            ['Idaho', 'ID'],
+            ['Illinois', 'IL'],
+            ['Indiana', 'IN'],
+            ['Iowa', 'IA'],
+            ['Kansas', 'KS'],
+            ['Kentucky', 'KY'],
+            ['Louisiana', 'LA'],
+            ['Maine', 'ME'],
+            ['Maryland', 'MD'],
+            ['Massachusetts', 'MA'],
+            ['Michigan', 'MI'],
+            ['Minnesota', 'MN'],
+            ['Mississippi', 'MS'],
+            ['Missouri', 'MO'],
+            ['Montana', 'MT'],
+            ['Nebraska', 'NE'],
+            ['Nevada', 'NV'],
+            ['New Hampshire', 'NH'],
+            ['New Jersey', 'NJ'],
+            ['New Mexico', 'NM'],
+            ['New York', 'NY'],
+            ['North Carolina', 'NC'],
+            ['North Dakota', 'ND'],
+            ['Ohio', 'OH'],
+            ['Oklahoma', 'OK'],
+            ['Oregon', 'OR'],
+            ['Pennsylvania', 'PA'],
+            ['Rhode Island', 'RI'],
+            ['South Carolina', 'SC'],
+            ['South Dakota', 'SD'],
+            ['Tennessee', 'TN'],
+            ['Texas', 'TX'],
+            ['Utah', 'UT'],
+            ['Vermont', 'VT'],
+            ['Virginia', 'VA'],
+            ['Washington', 'WA'],
+            ['West Virginia', 'WV'],
+            ['Wisconsin', 'WI'],
+            ['Wyoming', 'WY'],
+        ];
+
+        if (to == 'abbr') {
+            input = input.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+            for (let i = 0; i < states.length; i++) {
+                if (states[i][0] == input) {
+                    return (states[i][1]);
+                }
+            }
+        } else if (to == 'name') {
+            input = input.toUpperCase();
+            for (let i = 0; i < states.length; i++) {
+                if (states[i][1] == input) {
+                    return (states[i][0]);
+                }
+            }
+        }
+    }
+
 }
 
 function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
@@ -347,6 +521,9 @@ function phoneValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
         else if (control.value[0] != "1") {
             if (/\d{10}/.test(control.value)) {
                 // if control is empty return no error
+                return null;
+            }
+            else if (/\d{7}/.test(control.value)) {
                 return null;
             }
             else {
