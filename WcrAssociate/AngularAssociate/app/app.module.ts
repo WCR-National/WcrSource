@@ -65,6 +65,7 @@ import { ServiceProfileComponent } from './components/service-profile/service-pr
 import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 import { PropertySalesAdvertisementsComponent } from './components/property-sales-advertisement/property-sales-advertisement.component';
 import { AgmCoreModule } from '@agm/core';
+import { ShowAuthedAssociateDirective } from './associate/show-authed-associate.directive';
 
 
 @NgModule({
@@ -76,7 +77,6 @@ import { AgmCoreModule } from '@agm/core';
         HeaderComponent,
         AuthComponent,
         TermsComponent,
-        ShowAuthedDirective,
         LandingRegistrationComponent,
         SupportComponent,
         BookmarkComponent,
@@ -85,7 +85,9 @@ import { AgmCoreModule } from '@agm/core';
         SalesAdvertisementsComponent,
         ServiceProfileComponent,
         AuthModalComponent,
-        PropertySalesAdvertisementsComponent
+        PropertySalesAdvertisementsComponent,
+        ShowAuthedDirective,
+        ShowAuthedAssociateDirective
 
     ],
     imports: [

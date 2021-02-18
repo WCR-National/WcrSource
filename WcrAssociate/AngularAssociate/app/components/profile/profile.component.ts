@@ -43,8 +43,8 @@ export class ProfileComponent implements OnInit {
     private ZipCode: string = '';
     private MobileNo: string = '';
     private userName: string = '';
-    private startValueState = null;
-    private selectedState:string = null;
+    public startValueState = null;
+    public selectedState:string = null;
     public g_selectedState = null;
 
     public stateData = null;
@@ -239,7 +239,7 @@ export class ProfileComponent implements OnInit {
                             this.bindState();
 
                             setTimeout(function () {
-                                thisStatus.startValueState = { value: data._state, label: data._state };
+                                thisStatus.startValueState = { value: data.stateID, label: data.stateID };
                             }, 2000);
 
                             this.isAddOrUpdateButton = false;
