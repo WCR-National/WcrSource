@@ -1,4 +1,5 @@
 ﻿@import "~@ng-select/ng-select/themes/material.theme.css";
+
 .modal-open {
     overflow: hidden
 }
@@ -20764,6 +20765,25 @@
     }
 }
 
+.content-body {
+    font-size: 16px !important
+}
+
+    .content-body .close-button {
+        font-size: 18px !important
+    }
+
+.title.ng-star-inserted {
+    font-size: 20px !important;
+    font-weight: 700 !important
+}
+
+.toast-panel {
+    max-width: 50rem !important;
+    padding: 16px !important
+}
+
+
 .pd-0 {
     padding: 0
 }
@@ -25447,6 +25467,23 @@
 }
 
 @media (min-width:576px) {
+    .content-body {
+        font-size: 16px !important
+    }
+
+        .content-body .close-button {
+            font-size: 18px !important
+        }
+
+    .title.ng-star-inserted {
+        font-size: 22px !important;
+        font-weight: 600 !important
+    }
+
+    .toast-panel {
+        max-width: 60rem !important;
+        padding: 22px !important
+    }
     .pd-sm-0 {
         padding: 0
     }
@@ -27789,6 +27826,23 @@
 }
 
 @media (min-width:768px) {
+    .content-body {
+        font-size: 16px !important
+    }
+
+        .content-body .close-button {
+            font-size: 18px !important
+        }
+
+    .title.ng-star-inserted {
+        font-size: 22px !important;
+        font-weight: 600 !important
+    }
+
+    .toast-panel {
+        max-width: 60rem !important;
+        padding: 22px !important
+    }
     .pd-md-0 {
         padding: 0
     }
@@ -30131,6 +30185,25 @@
 }
 
 @media (min-width:992px) {
+
+    .content-body {
+        font-size: 16px !important
+    }
+
+        .content-body .close-button {
+            font-size: 18px !important
+        }
+
+    .title.ng-star-inserted {
+        font-size: 22px !important;
+        font-weight: 600 !important
+    }
+
+    .toast-panel {
+        max-width: 60rem !important;
+        padding: 22px !important
+    }
+
     .pd-lg-0 {
         padding: 0
     }
@@ -32473,6 +32546,25 @@
 }
 
 @media (min-width:1200px) {
+
+    .content-body {
+        font-size: 18px !important
+    }
+
+        .content-body .close-button {
+            font-size: 20px !important
+        }
+
+    .title.ng-star-inserted {
+        font-size: 24px !important;
+        font-weight: 600 !important
+    }
+
+    .toast-panel {
+        max-width: 60rem !important;
+        padding: 22px !important
+    }
+
     .pd-xl-0 {
         padding: 0
     }
@@ -34811,6 +34903,27 @@
 
     .pd-xl-l-200-f {
         padding-left: 200px !important
+    }
+}
+
+@media (min-width:1500px) {
+
+    .content-body {
+        font-size: 22px !important
+    }
+
+        .content-body .close-button {
+            font-size: 22px !important
+        }
+
+    .title.ng-star-inserted {
+        font-size: 28px !important;
+        font-weight: 700 !important
+    }
+
+    .toast-panel {
+        max-width: 100rem !important;
+        padding: 22px !important
     }
 }
 
@@ -48716,6 +48829,7 @@
         right: -8%;
     }
 }
+
 .material-icons {
     text-rendering: optimizeLegibility;
     -webkit-font-feature-settings: 'liga';
@@ -48730,22 +48844,4 @@
 
 .spinner-white, .spinner-white-only {
     color: #fff !important
-}
-
-.content-body {
-    font-size: 16px !important
-}
-
-    .content-body .close-button {
-        font-size: 18px !important
-    }
-
-.title.ng-star-inserted {
-    font-size: 20px !important;
-    font-weight: 700 !important
-}
-
-.toast-panel {
-    max-width: 50rem !important;
-    padding: 16px !important
 }

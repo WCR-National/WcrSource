@@ -63,11 +63,14 @@
                     <div class="col-xs-12 col-sm-12">
                         <h2 class="text-xs-center" [style.text-align]="authType == 'activate' || authType == 'resetPassword' ? 'left':'center'">{{ title }}</h2>
                     </div>
+                    <div class="col-xs-12 col-sm-12 mg-b-20 text-xs-center">
+                        <!--<p class="">-->
 
-                    <p class="text-xs-center">
-                        <a (click)="setSignInOrSignUpOrActivateOrReset('login')" *ngIf="authType == 'login'" class="green-text text-darken-1" style="margin: 0 auto;">Don't have an account? Sign up now!</a>
-                        <a (click)="setSignInOrSignUpOrActivateOrReset('register')" *ngIf="authType == 'register'" class="green-text text-darken-1" style="margin: 0 auto;">Already have an account? Sign in!</a>
-                    </p>
+                        <a *ngIf="authType == 'login'" (click)="setSignInOrSignUpOrActivateOrReset('register')"  class="green-text text-darken-1" style="margin: 0 auto; cursor:pointer;">Don't have an account? Sign up now!</a>
+                        <a *ngIf="authType == 'register'" (click)="setSignInOrSignUpOrActivateOrReset('login')" class="green-text text-darken-1" style="margin: 0 auto; cursor:pointer;">Already have an account? Sign in!</a>
+                        <!--</p>-->
+                    </div>
+                   
                     <form [formGroup]="authForm" autocomplete="off" class="pd-t-20" style="width: 100%">
                         <fieldset [disabled]="isSubmitting">
                             <div class="form-group" *ngIf="authType == 'login'">
@@ -361,8 +364,8 @@
                                             </div>
                                         </button>
 
-                                        <div class="col-xs-12 col-sm-12 pd-t-20 pd-b-7 center" *ngIf="authType == 'login'">
-                                            <a (click)="setSignInOrSignUpOrActivateOrReset('resetPassword')" class="text-xs-left blue-text text-darken-4 tx-medium "> <i class="material-icons form-control-feedback pd-b-4-f" style="font-size:15px;">vpn_key</i>Forgot password</a>
+                                        <div class="col-xs-12 col-sm-12 pd-t-20 pd-b-7 center text-center" *ngIf="authType == 'login'">
+                                            <a (click)="setSignInOrSignUpOrActivateOrReset('resetPassword')" class="text-xs-left blue-text text-darken-4 tx-medium " style="cursor:pointer;"> <i class="material-icons form-control-feedback pd-b-4-f" style="font-size:15px; ">vpn_key</i>Forgot password</a>
                                         </div>
 
 

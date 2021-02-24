@@ -240,7 +240,7 @@ export class AuthModalComponent implements OnInit {
     }
 
     setSignInOrSignUpOrActivateOrReset(type) {
-
+        debugger;
         // Get the last piece of the URL (it's either 'login' or 'register')
 
         this.authType = type;
@@ -537,6 +537,7 @@ export class AuthModalComponent implements OnInit {
                         //this.router.navigate([this.returnUrl]);
 
                         //$(location).attr('href', '/ConsumerDashboard.html');
+                        
                         this.activeModal.close();
                         this.updateParentCall.emit('update');
 

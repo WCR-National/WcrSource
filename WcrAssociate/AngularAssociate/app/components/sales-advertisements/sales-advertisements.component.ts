@@ -543,9 +543,10 @@ export class SalesAdvertisementsComponent implements OnInit {
         modal.componentInstance.updateParentCall.subscribe((data) => {
             debugger;
 
-            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+            //if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
                 if (data == "update") {
                     this.showToast('success', 'Bookmark to property is in process');
+                    this._messageService.filter("updateHeader");
 
                     this.isLoggedInValue = "1";
                     this.SaveBookmark(advId);
@@ -554,7 +555,7 @@ export class SalesAdvertisementsComponent implements OnInit {
                     this.isLoggedInValue = "0";
                     this.showToast('danger', "Something went wrong. Please try again. Refresh page");
                 }
-            }
+            //}
 
         });
 
@@ -633,6 +634,7 @@ export class SalesAdvertisementsComponent implements OnInit {
             if (data == "update") {
                 //book
                 this.showToast('success', 'Request to Associate is in process');
+                this._messageService.filter("updateHeader");
 
                 this.isLoggedInValue = "1";
                 this.ContactAssociate(advIdnAndAssociateId);
