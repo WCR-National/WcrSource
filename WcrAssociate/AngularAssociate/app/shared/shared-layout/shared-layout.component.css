@@ -44,7 +44,9 @@ body {
     text-align: left;
     background-color: #fff;
 }
-
+div, input, button, select, textarea {
+    font-family: "Varela Round", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 
 .materialize-red {
     background-color: #e51c23 !important;

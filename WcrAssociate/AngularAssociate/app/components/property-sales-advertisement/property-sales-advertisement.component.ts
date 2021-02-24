@@ -335,6 +335,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
             this.showToast('success', 'Property bookmark is in process');
             if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
                 if (data == "update") {
+                    this._messageService.filter("updateHeader");
                     this.isLoggedInValue = "1";
                     this.SaveBookmark(advId);
                 }
@@ -406,6 +407,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
             this.showToast('success', 'Request to Associate is in process');
             if (data == "update") {
                 //book
+                this._messageService.filter("updateHeader");
                 this.isLoggedInValue = "1";
                 this.ContactAssociate(advIdnAndAssociateId);
             }

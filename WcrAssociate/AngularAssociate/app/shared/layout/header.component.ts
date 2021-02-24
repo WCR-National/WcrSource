@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
         this._messageService.listen().subscribe((data: any) => {
             debugger;
-            if (data != 'updateUserName') {
+            if (data == 'updateUserName') {
                 this.initializeHeader();
             }
             if (data == "updateHeader")

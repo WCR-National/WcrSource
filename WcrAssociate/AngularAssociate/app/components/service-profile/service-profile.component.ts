@@ -471,6 +471,7 @@ export class ServiceProfileComponent implements OnInit {
             debugger;
             if (data == "update") {
                 this.showToast('success', 'Saving Bookmark is in process');
+                this._messageService.filter("updateHeader");
 
                 this.isLoggedInValue = "1";
                 this.SaveBookmark(advId, zipcode);
@@ -537,6 +538,7 @@ export class ServiceProfileComponent implements OnInit {
             if (data == "update") {
                 //book
                 this.showToast('success', 'Request to Associate is in process');
+                this._messageService.filter("updateHeader");
 
                 this.isLoggedInValue = "1";
                 this.ContactAssociate(advIdnAndAssociateId);

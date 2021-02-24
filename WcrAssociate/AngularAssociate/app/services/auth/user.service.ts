@@ -364,18 +364,16 @@ export class UserService {
     async attemptVerifiedActivationCodeAssociate(type, email) {
 
         let urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
-        return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise();
-            //.pipe(map(
-            //data => {
-            //    if (data.d.length > 0) {
-            //        this.user.token = this.token();
-            //        this.user.email = email;
-            //        this.user.id = "";
-            //        this.user.type = "1";
-            //        this.setAuth(this.user);
-            //    }
-            //}
-            //)
+        return await this.apiService.post(urlToGetActivationCode, { username: email }).pipe(map((data: any) => {
+            if (data.d.length > 0) {
+                this.user.token = this.token();
+                this.user.email = email;
+                this.user.id = "1";
+                this.user.type = "1";
+                this.setAuth(this.user);
+            }
+            return data;
+        })).toPromise();
             
     }
 
@@ -393,7 +391,16 @@ export class UserService {
     async attemptVerifiedActivationCodeConsumer(type, email) {
 
         let urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
-        return await this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()
+        return await this.apiService.post(urlToGetActivationCode, { username: email }).pipe(map((data: any) => {
+            if (data.d.length > 0) {
+                this.user.token = this.token();
+                this.user.email = email;
+                this.user.id = "2";
+                this.user.type = "2";
+                this.setAuth(this.user);
+            }
+            return data;
+        })).toPromise();
     }
 
     attemptResendActivateCode(email): Observable<any> {
