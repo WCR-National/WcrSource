@@ -73,6 +73,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WcrClassLibrary, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WcrClassLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="WcrVault, Version=2.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WcrVault.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bal\Associate\BllMessage.cs" />
@@ -180,8 +188,6 @@
     <Content Include="bin\Release\System.IdentityModel.Tokens.Jwt.dll" />
     <Content Include="bin\Release\System.Net.Http.Formatting.dll" />
     <Content Include="bin\Release\WcrVault.dll" />
-    <Content Include="Dependencies\WcrClassLibrary.dll" />
-    <Content Include="Dependencies\WcrVault.dll" />
     <Content Include="obj\Debug\ClsLibrary.csproj.FileListAbsolute.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +196,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dependencies\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
