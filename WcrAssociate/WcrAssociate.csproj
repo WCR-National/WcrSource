@@ -1161,6 +1161,8 @@
     <Content Include="Dependencies\CkEditor.dll" />
     <Content Include="Dependencies\CKEditor.NET.dll" />
     <Content Include="Dependencies\PayPalKeysLibrary.dll" />
+    <Content Include="Dependencies\WcrClassLibrary.dll" />
+    <Content Include="Dependencies\WcrVault.dll" />
     <Content Include="download.png" />
     <Content Include="faq.html" />
     <Content Include="fonts\fontawesome-webfont.svg" />
