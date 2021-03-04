@@ -319,7 +319,7 @@
         });
         function GetSalesAdts() {
             var _IPAddress;
-            $.getJSON("http://jsonip.com?callback=?", function (data) {
+            $.getJSON("https://jsonip.com?callback=?", function (data) {
                 _IPAddress = data.ip;
                 $.ajax({
                     type: "POST", url: "ws/TopSearch.asmx/GetZipCodeIpAddress",

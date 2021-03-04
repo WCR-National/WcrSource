@@ -828,7 +828,7 @@ export class ConsumerDashabordComponent implements OnInit {
         // $('html, body').animate({ scrollTop: $('#salesServicesDivId').offset().top }, 'slow');
 
         const globalThis = this;
-        $.getJSON("http://jsonip.com?callback=?", function (data) {
+        $.getJSON("https://jsonip.com?callback=?", function (data) {
             var _IPAddress = data.ip;
 
             if (_IPAddress.length > 0) {
