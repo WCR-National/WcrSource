@@ -61,19 +61,22 @@ export class BookmarkComponent implements OnInit {
     }
 
     GetSalesAdvListings(id) {
-
+        debugger;
         var thisStatus = this;
-        if (id == '1') {
-            this.isTabSalesBookmarkStart = true;
-            this.isTabServicesBookmarkStart = false;
-            this.switchTabs('bookmarkSalesTabId');
-        }
-        else if (id == '2') {
-            this.isTabSalesBookmarkStart = false;
-            this.isTabServicesBookmarkStart = true;
-            this.switchTabs('bookmarkServicesTabId');
-        }
-        this.ViewWCRBookmarks(id);
+        setTimeout(function () {
+            if (id == '1') {
+                thisStatus.isTabSalesBookmarkStart = true;
+                thisStatus.isTabServicesBookmarkStart = false;
+                thisStatus.switchTabs('bookmarkSalesTabId');
+            }
+            else if (id == '2') {
+                thisStatus.isTabSalesBookmarkStart = false;
+                thisStatus.isTabServicesBookmarkStart = true;
+                thisStatus.switchTabs('bookmarkServicesTabId');
+            }
+            thisStatus.ViewWCRBookmarks(id);
+        }, 500);
+
     }
 
     GetSalesAdvFromTabs(id) {
@@ -124,8 +127,7 @@ export class BookmarkComponent implements OnInit {
                         if (dataJson.NewDataSet != undefined && dataJson.NewDataSet != null && dataJson.NewDataSet != '') {
                             this.dataBookmarksSalesList = [];
                             if (dataJson.NewDataSet.ConsumerAdvertisments != undefined && dataJson.NewDataSet.ConsumerAdvertisments != null
-                                && dataJson.NewDataSet.ConsumerAdvertisments != '')
-                            {
+                                && dataJson.NewDataSet.ConsumerAdvertisments != '') {
                                 if (!$.isArray(dataJson.NewDataSet.ConsumerAdvertisments)) { // Returns: "object"
                                     this.dataBookmarksSalesList.push(dataJson.NewDataSet.ConsumerAdvertisments);
                                     this.AddSalesBookmarksDynamicHtmlList(this.dataBookmarksSalesList);
@@ -212,7 +214,8 @@ export class BookmarkComponent implements OnInit {
                     }
                     else {
                         this.isTabSalesBookmarkStart = false;
-                        this.isTabServicesBookmarkStart = false;                    }
+                        this.isTabServicesBookmarkStart = false;
+                    }
                 });
     }
 
@@ -316,6 +319,9 @@ export class BookmarkComponent implements OnInit {
                 }
             }
 
+            html += '<a href = "javascript:void(0)" class="btn button border mg-l-15-f red deleteBookmarkSalesId" data-id="' + item.id + '" >Delete Bookmark </a>';
+
+            
             html += '<span> Zip Code: ' + item.ZipCode + '</span>';
             html += '</div>';
             html += '</div>';
@@ -353,8 +359,7 @@ export class BookmarkComponent implements OnInit {
 
             html += '<div class="listing-carousel" >';
             debugger;
-            if (item.photo != undefined && item.photo != null && item.photo != "")
-            {
+            if (item.photo != undefined && item.photo != null && item.photo != "") {
                 let itemImage = "../../../../AssociatePhoto/" + item.photo;
                 html += '<div><img class="imageServices" src="' + itemImage + '" alt=""></div>';
             }
@@ -386,7 +391,7 @@ export class BookmarkComponent implements OnInit {
             html += '<i class="fa fa-map-marker" > </i>';
             html += item.cityID + ". " + item.StateID + ", " + item.zipcode
             html += '</a>';
-            
+
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
             //else if (item.description.length < 150)
@@ -428,6 +433,7 @@ export class BookmarkComponent implements OnInit {
                 html += '<a class="btn button border showInterestBookMarkId mg-l-15-f" data-id="' + id + '"  data-zipcode="' + item.zipcode + '" > Bookmark </a>';
             }
             else {
+                debugger;
                 if (item.ConsumerID != null) {
                     html += '<a class="btn button border bookMarked SaveBookmarkId  mg-l-15-f" data-id="' + item.CategoryID + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
                 }
@@ -435,6 +441,11 @@ export class BookmarkComponent implements OnInit {
                     html += '<a class="btn button border SaveBookmarkId  mg-l-15-f" data-id="' + item.CategoryID + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
                 }
             }
+
+            html += '<a class="btn button border mg-l-15-f red deleteBookmarkServicesId" data-id="' + item.id + '" > Delete Bookmark </a>';
+
+
+
             //html += '<span> Zip Code: ' + item.zipcode + '</span>';
             html += '</div>';
             html += '</div>';
@@ -535,6 +546,22 @@ export class BookmarkComponent implements OnInit {
                     err => {
                     });
         });
+
+        $('.deleteBookmarkSalesId').click(function () {
+
+            var bookmarkId = $(this).attr('data-id');
+            thisStatus.deleteBookmarkSales(bookmarkId);
+
+        });
+
+        $('.deleteBookmarkServicesId').click(function () {
+
+            var bookmarkId =  $(this).attr('data-id');
+            thisStatus.deleteBookmarkServices(bookmarkId);
+
+        });
+
+
     }
 
     InitializeEventsClick() {
@@ -622,6 +649,40 @@ export class BookmarkComponent implements OnInit {
             );
     }
 
+
+    deleteBookmarkSales(bookmarkId)
+    {
+        this.deleteBookMark(bookmarkId, "1");
+
+    }
+
+    deleteBookmarkServices(bookmarkId) {
+
+        this.deleteBookMark(bookmarkId, "2");
+
+    }
+
+    deleteBookMark(bookmarkId, type)
+    {
+        this.profileService
+            .deleteBookmark(bookmarkId)
+            .subscribe(
+                data => {
+                    debugger;
+                    this.showToast('success', "Deleted successfully.");
+                    if (type == "1") {
+                        this.GetSalesAdvListings("1");
+                    }
+                    else {
+                        this.GetSalesAdvListings("2");
+
+                    }
+
+                },
+                err => {
+                }
+            );
+    }
 
     onOpenModalClickAssociate(advIdnAndAssociateId): void {
 
@@ -753,6 +814,7 @@ export class BookmarkComponent implements OnInit {
             );
     }
 
+    
 
     showToast(toastrType, text) {
         const type = toastrType;

@@ -1,7 +1,6 @@
 ﻿/**/
-@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Oswald:300,400,500|Fira+Sans:300,400,500,600|Archivo+Narrow:400,500,600&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Mono|Roboto+Slab:300,400,700|Roboto+Condensed:300,400,700&display=swap");
-/*@import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");*/
+
+
 
 :root {
     --blue: #0e3a6b;
@@ -121,6 +120,7 @@ strong {
 small {
     font-size: 80%;
 }
+
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
     font-weight: inherit;
 }
@@ -3752,7 +3752,7 @@ a.badge-dark:focus, a.badge-dark.focus {
     }
 }
 
-.progress {
+/*.progress {
     display: flex;
     height: 1rem;
     overflow: hidden;
@@ -3791,7 +3791,7 @@ a.badge-dark:focus, a.badge-dark.focus {
     .progress-bar-animated {
         animation: none;
     }
-}
+}*/
 
 .media {
     display: flex;
@@ -15464,6 +15464,7 @@ body {
         .header-right .dropdown-loggeduser .dropdown-item:active svg {
             color: #fff;
         }
+
 @media (max-width: 991.98px) {
     .profile-menu-show {
         overflow-x: hidden;
@@ -18199,6 +18200,7 @@ body {
     border-color: #22d273;
     background-color: #f6fdf9;
 }
+
 .card-project-blue {
     box-shadow: none;
     border-color: #0e3a6b;
@@ -18211,10 +18213,10 @@ body {
         box-shadow: none;
     }
 
-    .card-project-green .avatar img,
-    .card-project-green .avatar-initial {
-        box-shadow: none;
-    }
+.card-project-green .avatar img,
+.card-project-green .avatar-initial {
+    box-shadow: none;
+}
 
 .card-todo .card-header {
     display: flex;
@@ -21098,7 +21100,6 @@ ul.footer-links {
     width: 40px;
     transition: none;
     height: 25px;
-
     /*background: url() no-repeat center;*/
     background-size: 25px auto;
 }
@@ -21211,6 +21212,7 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
     outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
 }
+
 .custom-browse:after {
     content: "Browse";
     position: absolute;
@@ -21220,6 +21222,7 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
     right: 0;
     bottom: 0;
 }
+
 .card-project-green.card-hover:hover, .card-project-green.card-hover:focus {
     border-color: #22d273;
 }
@@ -21259,9 +21262,11 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
 .red-border {
-    border-color:#dc3545;
+    border-color: #dc3545;
 }
+
 .wrapper_image {
     position: relative;
     display: inline-block;

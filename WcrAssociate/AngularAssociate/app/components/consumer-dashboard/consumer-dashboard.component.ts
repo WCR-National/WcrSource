@@ -838,8 +838,8 @@ export class ConsumerDashabordComponent implements OnInit {
                         (data: any) => {
                             if (data.d.length > 0) {
                                 globalThis.searchForm.get('txtSearch').setValue(data.d);
-                                globalThis.bindSalesCategoryByIP(data.d, "ip");
-                                globalThis.bindServiesCategoryByIP(data.d, "ip");
+                                globalThis.bindSalesCategory(data.d, "ip");
+                                globalThis.bindServiesCategory(data.d, "ip");
                             }
                         }
                     )
