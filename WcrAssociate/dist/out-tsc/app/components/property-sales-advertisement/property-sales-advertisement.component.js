@@ -17,8 +17,12 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
         this.route = route;
         this.modalService = modalService;
         this.toaster = toaster;
+        this.latitude = 0;
+        this.longitude = 0;
         this.isloadingIconVisible = true;
         this.count = 0;
+        this.isSubmittingBookmark = false;
+        this.isSubmittingContactAssociate = false;
     }
     PropertySalesAdvertisementsComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -75,6 +79,9 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
             _this.GetSalesAdvertisementData(_this.advId);
         });
     };
+    PropertySalesAdvertisementsComponent.prototype.ngOnDestroy = function () {
+        this._messageService.messageHidden.value = "";
+    };
     PropertySalesAdvertisementsComponent.prototype.checkUserIsLogin = function () {
         var _this = this;
         this.salesAdvertisements
@@ -99,6 +106,7 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
                 var xml = $(xmlDoc);
                 var docs = xml.find("FullDetailsAdvertisments");
                 $.each(docs, function (i, docs) {
+                    debugger;
                     thisStatus.advMainImage = $(docs).find("advMainImage").text();
                     thisStatus.image1 = $(docs).find("advImage1").text();
                     thisStatus.image2 = $(docs).find("advImage2").text();
@@ -110,18 +118,23 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
                     thisStatus.LicenseId = $(docs).find("LicenseId").text();
                     thisStatus.description = $(docs).find("description").text();
                     thisStatus.features = $(docs).find("features").text();
-                    thisStatus.cost = $(docs).find("cost").text();
+                    thisStatus.cost = $(docs).find("cost").text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     thisStatus.categoryName = $(docs).find("categoryName").text();
                     thisStatus.address = $(docs).find("address").text();
                     thisStatus.CityID = $(docs).find("CityID").text();
                     thisStatus.StateID = $(docs).find("StateID").text();
                     thisStatus.ZipCode = $(docs).find("ZipCode").text();
+                    debugger;
                     thisStatus.consumerID = $(docs).find("consumerID").text();
+                    thisStatus.strParamContactAssociateShowInterest = thisStatus.advertisementID + "," + thisStatus.associateid + ",1,0,0,1";
+                    thisStatus.strParamContactAssociate = thisStatus.advertisementID + "," + thisStatus.associateid + ",1,0" + ",0";
                 });
             }
             setTimeout(function () {
+                thisStatus.LoadGoogleMap(thisStatus.ZipCode);
                 InitializeFullWidthSlider();
             }, 3000);
+            _this.InitializeEvents();
         });
     };
     PropertySalesAdvertisementsComponent.prototype.InitializeEvents = function () {
@@ -131,6 +144,7 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
             thisStatus.onOpenModalClickAssociate(advIdnAndAssociateId);
         });
         $('.contactAssociateClass').click(function () {
+            thisStatus.isSubmittingContactAssociate = true;
             var advIdAndAssociateId = $(this).attr('data-id');
             thisStatus.salesAdvertisements
                 .CheckEmailAndPhNo()
@@ -139,42 +153,37 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
                 }
                 else if (thisStatus.isLoggedInValue == "1") {
                     thisStatus.ContactAssociates(advIdAndAssociateId);
+                    thisStatus.isSubmittingContactAssociate = false;
                 }
                 else {
                     thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
                     thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+                    thisStatus.isSubmittingContactAssociate = false;
                 }
             }, function (err) {
                 return false;
             });
-            //thisStatus.salesAdvertisements
-            //    .ConsumerIsLogin()
-            //    .subscribe(
-            //        (data) => {
-            //            if (data.d > 0) {
-            //            }
-            //            else {
-            //                thisStatus.showToast("danger", "You need to sign in");
-            //                thisStatus.onOpenModalClickAssociate(advIdAndAssociateId);
-            //            }
-            //        });
         });
         $('.showInterestBookMarkClass').click(function () {
             var advId = $(this).attr('data-id');
             thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
         });
         $('.saveBookmarkClass').click(function () {
+            thisStatus.isSubmittingBookmark = true;
             var advId = $(this).attr('data-id');
+            var zipcode = 0;
             thisStatus.salesAdvertisements
-                .UpdateSavedBookmarks(advId)
+                .UpdateSavedBookmarksSales(advId, zipcode)
                 .subscribe(function (data) {
                 if (data.d == "0") {
                     $('.saveBookmarkClass').addClass('bookMarked');
                     thisStatus.showToast('warning', "You have already saved this advertisement.");
+                    thisStatus.isSubmittingBookmark = false;
                 }
                 else {
                     $('.saveBookmarkClass').addClass('bookMarked');
                     thisStatus.showToast('success', "Advertisement bookmarked successfully.");
+                    thisStatus.isSubmittingBookmark = false;
                 }
             }, function (err) {
             });
@@ -191,6 +200,116 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
             //            }
             //        }
             //    );
+        });
+    };
+    PropertySalesAdvertisementsComponent.prototype.onOpenModalClickSaveBookMark = function (isSaveBookMarksOrContactAssociate, advId) {
+        var _this = this;
+        var modal = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
+        modal.componentInstance.isBookmark = true;
+        var modalComponent = modal.componentInstance;
+        modal.componentInstance.dismissParentCall.subscribe(function (data) {
+            console.log(data);
+            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+                if (data == "update") {
+                    _this.isLoggedInValue = "1";
+                    _this.SaveBookmark(advId);
+                }
+                else {
+                    _this.isLoggedInValue = "0";
+                    _this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+                }
+            }
+        });
+        modal.componentInstance.updateParentCall.subscribe(function (data) {
+            debugger;
+            _this.showToast('success', 'Property bookmark is in process');
+            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+                if (data == "update") {
+                    _this._messageService.filter("updateHeader");
+                    _this.isLoggedInValue = "1";
+                    _this.SaveBookmark(advId);
+                }
+                else {
+                    _this.isLoggedInValue = "0";
+                    _this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+                }
+            }
+        });
+    };
+    PropertySalesAdvertisementsComponent.prototype.SaveBookmark = function (advId) {
+        var _this = this;
+        var zipcode = 0;
+        this.salesAdvertisements
+            .UpdateSavedBookmarksSales(advId, zipcode)
+            .subscribe(function (data) {
+            if (data.d == "0") {
+                $('.showInterestBookMarkClass').each(function () {
+                    if (advId == $(this).attr('data-id')) {
+                        $(this).addClass('bookMarked');
+                    }
+                });
+                _this.showToast('warning', "You have already saved this advertisement.");
+            }
+            else {
+                $('.showInterestBookMarkClass').each(function () {
+                    if (advId == $(this).attr('data-id')) {
+                        $(this).addClass('bookMarked');
+                    }
+                });
+                _this.showToast('success', "Advertisement bookmarked successfully.");
+            }
+        }, function (err) {
+        });
+    };
+    PropertySalesAdvertisementsComponent.prototype.onOpenModalClickAssociate = function (advIdnAndAssociateId) {
+        var _this = this;
+        var modal = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
+        modal.componentInstance.isContactAssociate = true;
+        var modalComponent = modal.componentInstance;
+        modal.componentInstance.dismissParentCall.subscribe(function (data) {
+            console.log(data);
+            if (data == "update") {
+                //book
+                _this.isLoggedInValue = "1";
+                _this.ContactAssociate(advIdnAndAssociateId);
+            }
+            else {
+                _this.isLoggedInValue = "0";
+                _this.showToast('danger', "Something went wrong. Please try again.");
+            }
+        });
+        modal.componentInstance.updateParentCall.subscribe(function (data) {
+            debugger;
+            _this.showToast('success', 'Request to Associate is in process');
+            if (data == "update") {
+                //book
+                _this._messageService.filter("updateHeader");
+                _this.isLoggedInValue = "1";
+                _this.ContactAssociate(advIdnAndAssociateId);
+            }
+            else {
+                _this.isLoggedInValue = "0";
+                _this.showToast('danger', "Something went wrong. Please try again.");
+            }
+        });
+    };
+    PropertySalesAdvertisementsComponent.prototype.ContactAssociate = function (advIdAndAssociateId, pnlID) {
+        var _this = this;
+        if (pnlID === void 0) { pnlID = 0; }
+        this.salesAdvertisements
+            .CheckEmailAndPhNo()
+            .subscribe(function (data) {
+            if (_this.isLoggedInValue == "0") {
+            }
+            else if (_this.isLoggedInValue == "1") {
+                _this.ContactAssociates(advIdAndAssociateId);
+            }
+            else {
+                _this.showToast("danger", "You cannot contact this Associate at this time.");
+                _this.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+            }
+        }, function (err) {
+            return false;
         });
     };
     //Linked with on click event
@@ -233,7 +352,7 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
             }
         }
         this.salesAdvertisements
-            .InsertConsumerInterest(adverID, associateID, jobtypeID, zipcode)
+            .InsertConsumerInterest(this.advertisementID, this.associateid, jobtypeID, zipcode)
             .subscribe(function (data) {
             _this.salesAdvertisements
                 .SendConsumerDetail(associateID, adverID, jobtypeID, zipcode)
@@ -256,101 +375,41 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
         }, function (err) {
         });
     };
-    PropertySalesAdvertisementsComponent.prototype.SaveBookmark = function (advId) {
-        var _this = this;
-        this.salesAdvertisements
-            .UpdateSavedBookmarks(advId)
-            .subscribe(function (data) {
-            if (data.d == "0") {
-                $('.saveBookmarkClass').each(function () {
-                    if (advId == $(this).attr('data-id')) {
-                        $(this).addClass('bookMarked');
-                    }
-                });
-                _this.showToast('warning', "You have already saved this advertisement.");
-            }
-            else {
-                $('.saveBookmarkClass').each(function () {
-                    if (advId == $(this).attr('data-id')) {
-                        $(this).addClass('bookMarked');
-                    }
-                });
-                _this.showToast('success', "Advertisement bookmarked successfully.");
-            }
-        }, function (err) {
-        });
-        //this.salesAdvertisements
-        //    .ConsumerIsLogin()
-        //    .subscribe(
-        //        (data) => {
-        //            if (data.d == 0) {
-        //            }
-        //            else {
-        //                this.showToast("danger", "You need to sign in");
-        //                this.onOpenModalClickSaveBookMark("saveBookmark", advId);
-        //            }
-        //        }
-        //    );
-    };
-    PropertySalesAdvertisementsComponent.prototype.onOpenModalClickSaveBookMark = function (isSaveBookMarksOrContactAssociate, advId) {
-        var _this = this;
-        var modal = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        var modalComponent = modal.componentInstance;
-        modal.componentInstance.dismissParentCall.subscribe(function (data) {
-            console.log(data);
-            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
-                if (data == "update") {
-                    _this.isLoggedInValue = "1";
-                    _this.SaveBookmark(advId);
+    PropertySalesAdvertisementsComponent.prototype.LoadGoogleMap = function (zipcode) {
+        var thisStatus = this;
+        $.ajax({
+            type: "POST", url: "ws/LatituteValue.asmx/GetLatandLongValues",
+            data: "{'zipcode':'" + zipcode + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (r1) {
+                if (r1.d.length > 0) {
+                    var xmlDoc1 = $.parseXML(r1.d);
+                    var xml1 = $(xmlDoc1);
+                    var docs1 = xml1.find("LatituteLong");
+                    var cartd1 = [];
+                    $.each(docs1, function (i, docs1) {
+                        thisStatus.latitude = Number($(docs1).find("latvalue").text());
+                        thisStatus.longitude = Number($(docs1).find("longvalue").text());
+                        thisStatus.zoom = 15;
+                        //var myLatlng = new google.maps.LatLng(lat, lon);
+                        //var mapOptions = {
+                        //    center: myLatlng,
+                        //    zoom: 6,
+                        //    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        //    marker: true
+                        //};
+                        //var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                        //var marker = new google.maps.Marker({
+                        //    position: myLatlng
+                        //});
+                        //marker.setMap(map);
+                    });
                 }
-                else {
-                    _this.isLoggedInValue = "0";
-                    _this.showToast('danger', "Something went wrong. Please try again. Refresh page");
-                }
-            }
-        });
-        modal.componentInstance.updateParentCall.subscribe(function (data) {
-            debugger;
-            _this.showToast('success', 'Property bookmark is in process');
-            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
-                if (data == "update") {
-                    _this.isLoggedInValue = "1";
-                    _this.SaveBookmark(advId);
-                }
-                else {
-                    _this.isLoggedInValue = "0";
-                    _this.showToast('danger', "Something went wrong. Please try again. Refresh page");
-                }
-            }
-        });
-    };
-    PropertySalesAdvertisementsComponent.prototype.onOpenModalClickAssociate = function (advIdnAndAssociateId) {
-        var _this = this;
-        var modal = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        var modalComponent = modal.componentInstance;
-        modal.componentInstance.dismissParentCall.subscribe(function (data) {
-            console.log(data);
-            if (data == "update") {
-                //book
-                _this.isLoggedInValue = "1";
-                _this.ContactAssociate(advIdnAndAssociateId);
-            }
-            else {
-                _this.isLoggedInValue = "0";
-                _this.showToast('danger', "Something went wrong. Please try again.");
-            }
-        });
-        modal.componentInstance.updateParentCall.subscribe(function (data) {
-            debugger;
-            _this.showToast('success', 'Request to Associate is in process');
-            if (data == "update") {
-                //book
-                _this.isLoggedInValue = "1";
-                _this.ContactAssociate(advIdnAndAssociateId);
-            }
-            else {
-                _this.isLoggedInValue = "0";
-                _this.showToast('danger', "Something went wrong. Please try again.");
+            },
+            error: function (response) {
+                alert(response.d + "Error...");
             }
         });
     };
@@ -362,36 +421,6 @@ var PropertySalesAdvertisementsComponent = /** @class */ (function () {
             type: type,
             duration: 8000
         });
-    };
-    PropertySalesAdvertisementsComponent.prototype.ContactAssociate = function (advIdAndAssociateId, pnlID) {
-        var _this = this;
-        if (pnlID === void 0) { pnlID = 0; }
-        this.salesAdvertisements
-            .CheckEmailAndPhNo()
-            .subscribe(function (data) {
-            if (_this.isLoggedInValue == "0") {
-            }
-            else if (_this.isLoggedInValue == "1") {
-                _this.ContactAssociates(advIdAndAssociateId);
-            }
-            else {
-                _this.showToast("danger", "You cannot contact this Associate at this time.");
-                _this.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
-            }
-        }, function (err) {
-            return false;
-        });
-        //this.salesAdvertisements
-        //    .ConsumerIsLogin()
-        //    .subscribe(
-        //        (data) => {
-        //            if (data.d > 0) {
-        //            }
-        //            else {
-        //                this.showToast("danger", "You need to sign in");
-        //                this.onOpenModalClickAssociate(advIdAndAssociateId);
-        //            }
-        //        });
     };
     PropertySalesAdvertisementsComponent = tslib_1.__decorate([
         Component({

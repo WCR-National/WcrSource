@@ -32,7 +32,7 @@ var DashboardService = /** @class */ (function () {
         }));
     }; //select categories
     DashboardService.prototype.initializeConsumerHeader = function () {
-        var urlToCountHeader = "ws/AssociateRegistration.asmx/ViewConsumerBasicDetails";
+        var urlToCountHeader = "ws/ConsumerRegistration.asmx/ConsumerDetail";
         return this.apiService.post(urlToCountHeader, {})
             .pipe(map(function (data) {
             return data;

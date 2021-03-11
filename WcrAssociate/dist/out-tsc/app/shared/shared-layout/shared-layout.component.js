@@ -1,5 +1,5 @@
 import * as tslib_1 from "tslib";
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/auth';
 import { MessageService } from 'AngularAssociate/app/services/search';
@@ -39,7 +39,6 @@ var SharedLayoutComponent = /** @class */ (function () {
             selector: 'app-shared-layout',
             templateUrl: './shared-layout.component.html',
             styleUrls: ['./shared-layout.component.css'],
-            encapsulation: ViewEncapsulation.None
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, MessageService,
             UserService])

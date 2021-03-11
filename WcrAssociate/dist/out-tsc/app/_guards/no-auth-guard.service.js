@@ -10,10 +10,16 @@ var NoAuthGuard = /** @class */ (function () {
         this.userService = userService;
     }
     NoAuthGuard.prototype.canActivate = function (route, state) {
+        debugger;
         if (localStorage.getItem('jwtToken') != null) {
             var subject = new Subject();
             subject.next(false);
-            this.router.navigate(['associates']);
+            if (this.userService.isConsumer == 1) {
+                this.router.navigate(['/consumer-dashboard']);
+            }
+            else if (this.userService.isAssociate == 1) {
+                this.router.navigate(['associates']);
+            }
             return subject.asObservable();
         }
         return this.userService.isAuthenticated.pipe(take(1), map(function (isAuth) { return !isAuth; }));

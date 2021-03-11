@@ -11,6 +11,7 @@ import * as $ from 'jquery';
     templateUrl: './shared-layout.component.html',
     styleUrls: ['./shared-layout.component.css'],
     encapsulation: ViewEncapsulation.None
+
 })
 export class SharedLayoutComponent implements OnInit {
 

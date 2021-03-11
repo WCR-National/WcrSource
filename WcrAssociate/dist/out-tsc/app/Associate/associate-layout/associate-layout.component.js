@@ -59,7 +59,7 @@ var AssociateLayoutComponent = /** @class */ (function () {
             selector: 'associate-layout',
             templateUrl: './associate-layout.component.html',
             styleUrls: ['./associate-layout.component.css'],
-            encapsulation: ViewEncapsulation.None
+            encapsulation: ViewEncapsulation.Native
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, MessageService,
             UserService])

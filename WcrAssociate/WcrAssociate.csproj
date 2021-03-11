@@ -1287,6 +1287,8 @@
     <Content Include="angular.json" />
     <Content Include="package.json" />
     <Content Include="Associate\ws\UpdateAdvertisementImges.ashx" />
+    <Content Include="AngularAssociate\theme\_associate-layout.scss" />
+    <Content Include="AngularAssociate\theme\_shared-layout.scss" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\PublishProfiles\WcrNational.pubxml" />
@@ -1819,7 +1821,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AngularAssociate\assets\associate\" />
     <Folder Include="Associate\dist\img\credit\" />
     <Folder Include="Associate\img\credit\" />
     <Folder Include="Associate\NewFolder1\" />

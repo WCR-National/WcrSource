@@ -306,6 +306,7 @@ export class ServiceProfileComponent implements OnInit {
             else {
                 html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '" id="contactAssociateId" > Contact Associates </a>';
             }
+
             if (thisStatus.isLoggedInValue == "0") {
 
                 var id = thisStatus.id;// + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
@@ -319,6 +320,7 @@ export class ServiceProfileComponent implements OnInit {
                     html += '<a class="btn button border SaveBookmarkId  mg-l-15-f" data-id="' + thisStatus.id + '" data-zipcode="' + thisStatus.zipcode + '" > Bookmark </a>';
                 }
             }
+
             //html += '<span> Zip Code: ' + item.zipcode + '</span>';
             html += '</div>';
             html += '</div>';

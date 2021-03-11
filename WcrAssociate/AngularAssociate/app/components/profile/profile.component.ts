@@ -53,10 +53,10 @@ export class ProfileComponent implements OnInit {
 
         'FirstName': {
             'required': 'First Name is required',
-            'letterOnly': 'Allowed alphabeticals letters only.'
+            'letterOnly': "Allowed alphabeticals letters with space or with dash like <br> Jean Claude or Jean-Claude or Jean or O'Toole."
         },
         'lastName': {
-            'letterOnly': 'Allowed alphabeticals letters only.'
+            'letterOnly': "Allowed alphabeticals letters with space or with dash like <br> Jean Claude or Jean-Claude or Jean or O'Toole."
         },
         'Address': {
             'alphaNumeric': 'Allowed alphanumeric only.',
@@ -125,7 +125,6 @@ export class ProfileComponent implements OnInit {
         var thisStatus = this;
         setTimeout(function () {
             thisStatus.profileForm.valueChanges.subscribe(() => {
-                debugger;
                 if (thisStatus.profileForm.valid) {
                     //thisStatus.cardForm.setErrors({ 'invalid': true });
                     thisStatus.defaultDisableUpdateButton = false;
@@ -141,8 +140,8 @@ export class ProfileComponent implements OnInit {
     initializeForm() {
         this.profileForm = this.fb.group({
             userName: ['n'],
-            FirstName: ['', [Validators.required, patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
-            lastName: ['', [patternValidator(/^[a-zA-Z]+$/, { letterOnly: true })]],
+            FirstName: ['', [Validators.required, firstLastValidator(/^[a-zA-Z]+(?:['-\s][a-zA-Z]+)?$/, { letterOnly: true })]],
+            lastName: ['', [firstLastValidator(/^[a-zA-Z]+(?:['-\s][a-zA-Z]+)?$/, { letterOnly: true })]],
             Address: ['', [StateValidator(/^[a-zA-Z0-9\-\s]+$/, { alphaNumericWithSpace: true })]],
             city: ['', [StateValidator(/^[a-zA-Z][a-zA-Z\s]*$/, { letterOnly: true })]],
             stateID: [''],
@@ -384,8 +383,46 @@ export class ProfileComponent implements OnInit {
     }
 
     cancelForm() {
+        debugger;
+        //this.profileForm.reset();
+        Object.keys(this.profileForm.controls).forEach(key => {
+            this.profileForm.get(key).markAsUntouched();
+            this.profileForm.get(key).markAsPristine();
 
+
+        });
+        let group: FormGroup = this.profileForm;
+        this.clearValidationErrors(group);
+       
         this.isProfileFormVisible = false;
+    }
+
+    clearValidationErrors(group: FormGroup = this.profileForm)
+    {
+        debugger;
+        Object.keys(group.controls).forEach((key: string) => {
+            const abstractControl = group.get(key);
+            this.formErrors[key] = '';
+
+            if (abstractControl && !abstractControl.valid
+                && (abstractControl.touched || abstractControl.dirty)) {
+                this.formErrors[key] = "";
+                const messages = this.validationMessages[key];
+                if (abstractControl.errors != null) {
+                    for (const errorKey in abstractControl.errors) {
+                        if (errorKey) {
+                            if (messages[errorKey] !== undefined) {
+                                this.formErrors[key] += ' ';
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (abstractControl instanceof FormGroup) {
+                this.clearValidationErrors(abstractControl);
+            }
+        });
     }
 
     showToast(toastrType, text) {
@@ -489,6 +526,22 @@ function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
         return valid ? null : error;
     };
 }
+
+function firstLastValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+
+        if (!control.value) {
+            // if control is empty return no error
+            return null;
+        }
+
+        // test the value of the control against the regexp supplied
+        const valid = regex.test(control.value);
+        // if true, return no error (no error), else return error passed in the second parameter
+        return valid ? null : error;
+    };
+}
+
 
 function StateValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {

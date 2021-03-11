@@ -12,8 +12,8 @@ var AuthGuard = /** @class */ (function () {
     AuthGuard.prototype.canActivate = function (route, state) {
         if (localStorage.getItem('jwtToken') == null) {
             var subject = new Subject();
-            //this.router.navigate(['login'], { queryParams: { returnUrl: state.url } });
-            this.router.navigate(['/']);
+            this.router.navigate(['login'], { queryParams: { returnUrl: state.url } });
+            //this.router.navigate(['/']);
             subject.next(false);
             return subject.asObservable();
         }

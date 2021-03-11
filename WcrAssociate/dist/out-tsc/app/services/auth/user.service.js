@@ -26,12 +26,15 @@ var UserService = /** @class */ (function () {
         this.currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
         this.isAuthenticatedSubject = new ReplaySubject(1);
         this.isAuthenticated = this.isAuthenticatedSubject.asObservable();
+        this.isAssociate = 0;
+        this.isConsumer = 0;
         this.isAuthenticated_extra = false;
     }
     //// Verify JWT in localstorage with server & load user's info.
     //// This runs once on application startup.
     UserService.prototype.populate = function () {
         var _this = this;
+        debugger;
         // If JWT detected, attempt to get & store user's info
         if (localStorage.getItem('jwtToken')) {
             var user = JSON.parse(localStorage.getItem('jwtToken'));
@@ -43,6 +46,7 @@ var UserService = /** @class */ (function () {
                     if (data.d == "1") {
                         _this.returnUrl = _this.route.snapshot.queryParams['returnUrl'] || '';
                         if (_this.returnUrl == '') {
+                            _this.isAssociate = 1;
                             var url = (_this.platformLocation.location.href).replace(location.origin, '');
                             _this.ngZone.run(function () { return _this.router.navigate(['/associates']); });
                             //this.router.navigateByUrl(url);
@@ -55,9 +59,10 @@ var UserService = /** @class */ (function () {
                     else {
                         //this.ngZone.run(() => this.router.navigate(['/']));
                         //this.router.navigateByUrl('/');
+                        _this.isAssociate = 0;
                         _this.purgeAuth();
-                        var url_1 = (_this.platformLocation.location.href).replace(location.origin, '');
-                        _this.ngZone.run(function () { return _this.router.navigate([url_1]); });
+                        //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                        //this.ngZone.run(() => this.router.navigate([url]));
                     }
                 });
             }
@@ -70,10 +75,11 @@ var UserService = /** @class */ (function () {
                 this.consumerLoginSessionActivate("", credentials, user.id)
                     .then(function (data) {
                     if (data.d == "1") {
+                        _this.isConsumer = 1;
                         _this.returnUrl = _this.route.snapshot.queryParams['returnUrl'] || '';
                         if (_this.returnUrl == '') {
-                            var url_2 = (_this.platformLocation.location.href).replace(location.origin, '');
-                            _this.ngZone.run(function () { return _this.router.navigate([url_2]); });
+                            var url_1 = (_this.platformLocation.location.href).replace(location.origin, '');
+                            _this.ngZone.run(function () { return _this.router.navigate([url_1]); });
                             //this.router.navigateByUrl(url);
                         }
                         else {
@@ -86,9 +92,10 @@ var UserService = /** @class */ (function () {
                     else {
                         //this.ngZone.run(() => this.router.navigate(['/consumer-dashboard']));
                         //this.router.navigateByUrl('/');
+                        _this.isConsumer = 0;
                         _this.purgeAuth();
-                        var url_3 = (_this.platformLocation.location.href).replace(location.origin, '');
-                        _this.ngZone.run(function () { return _this.router.navigate([url_3]); });
+                        //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+                        //this.ngZone.run(() => this.router.navigate([url]));
                     }
                 });
             }
@@ -96,8 +103,8 @@ var UserService = /** @class */ (function () {
         else {
             // Remove any potential remnants of previous auth states
             this.purgeAuth();
-            var url_4 = (this.platformLocation.location.href).replace(location.origin, '');
-            this.ngZone.run(function () { return _this.router.navigate([url_4]); });
+            //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+            //this.ngZone.run(() => this.router.navigate([url]));
         }
     };
     UserService.prototype.setAuth = function (user) {
@@ -303,11 +310,21 @@ var UserService = /** @class */ (function () {
     UserService.prototype.attemptVerifiedActivationCodeAssociate = function (type, email) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetActivationCode;
+            var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToGetActivationCode = "ws/AssociateRegistration.asmx/VerifiedAccount";
-                        return [4 /*yield*/, this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()];
+                        return [4 /*yield*/, this.apiService.post(urlToGetActivationCode, { username: email }).pipe(map(function (data) {
+                                if (data.d.length > 0) {
+                                    _this.user.token = _this.token();
+                                    _this.user.email = email;
+                                    _this.user.id = "1";
+                                    _this.user.type = "1";
+                                    _this.setAuth(_this.user);
+                                }
+                                return data;
+                            })).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });
@@ -324,11 +341,21 @@ var UserService = /** @class */ (function () {
     UserService.prototype.attemptVerifiedActivationCodeConsumer = function (type, email) {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
             var urlToGetActivationCode;
+            var _this = this;
             return tslib_1.__generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         urlToGetActivationCode = "ws/ConsumerRegistration.asmx/VerifiedAccount";
-                        return [4 /*yield*/, this.apiService.post(urlToGetActivationCode, { username: email }).toPromise()];
+                        return [4 /*yield*/, this.apiService.post(urlToGetActivationCode, { username: email }).pipe(map(function (data) {
+                                if (data.d.length > 0) {
+                                    _this.user.token = _this.token();
+                                    _this.user.email = email;
+                                    _this.user.id = "2";
+                                    _this.user.type = "2";
+                                    _this.setAuth(_this.user);
+                                }
+                                return data;
+                            })).toPromise()];
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             });

@@ -122,7 +122,7 @@ var SearchService = /** @class */ (function () {
     };
     //For IPAddress
     //async attemptGetSalesAdts() {
-    //    let urlToGetIP: string = "http://jsonip.com?=callback";
+    //    let urlToGetIP: string = "https://jsonip.com?=callback";
     //    return await this.apiService.get<any>(urlToGetIP)
     //        .pipe(map(
     //            data => {

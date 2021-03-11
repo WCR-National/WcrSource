@@ -73,9 +73,17 @@ var SalesAdvertisementsService = /** @class */ (function () {
             return data;
         }));
     }; //select categories
-    SalesAdvertisementsService.prototype.UpdateSavedBookmarks = function (advId) {
+    SalesAdvertisementsService.prototype.UpdateSavedBookmarksSales = function (advId, zipcode) {
         var urlToInsertSavedAdts = "ws/InnerPage.asmx/InsertSavedAdts";
-        return this.apiService.post(urlToInsertSavedAdts, { 'AdvertisementID': advId, 'zipCode': '0', 'jtype': '1' })
+        return this.apiService.post(urlToInsertSavedAdts, { 'AdvertisementID': advId, 'zipCode': zipcode, 'jtype': '1' })
+            .pipe(map(function (data) {
+            return data;
+        }));
+    };
+    SalesAdvertisementsService.prototype.UpdateSavedBookmarksService = function (advId, zipcode) {
+        debugger;
+        var urlToInsertSavedAdts = "ws/InnerPage.asmx/InsertSavedAdts";
+        return this.apiService.post(urlToInsertSavedAdts, { 'AdvertisementID': advId, 'zipCode': zipcode, 'jtype': '2' })
             .pipe(map(function (data) {
             return data;
         }));
@@ -88,7 +96,7 @@ var SalesAdvertisementsService = /** @class */ (function () {
         }));
     };
     //Contact to Associate
-    SalesAdvertisementsService.prototype.InsertConsumerInterest = function (associateID, adverID, jobtypeID, zipcode) {
+    SalesAdvertisementsService.prototype.InsertConsumerInterest = function (adverID, associateID, jobtypeID, zipcode) {
         var urlToInsertConsumerInterest = "ws/ConsumerComments.asmx/InsertConsumerInterest";
         return this.apiService.post(urlToInsertConsumerInterest, {
             AdvertisementID: adverID, 'AssociateID': associateID, 'jobType': jobtypeID, 'zipcode': zipcode

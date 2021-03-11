@@ -4,42 +4,58 @@ import { UserService } from '../../services/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'AngularAssociate/app/services/search';
 import { DashboardService } from 'AngularAssociate/app/services/associate/dashboard.service';
+import { SalesAdvertisementsService } from 'AngularAssociate/app/services/sales-advertisements/sales-advertisements.service';
 var HeaderComponent = /** @class */ (function () {
-    function HeaderComponent(route, router, _messageService, dashboardService, userService) {
+    function HeaderComponent(route, router, _messageService, dashboardService, userService, salesAdvertisements) {
         this.route = route;
         this.router = router;
         this._messageService = _messageService;
         this.dashboardService = dashboardService;
         this.userService = userService;
+        this.salesAdvertisements = salesAdvertisements;
         this.isNavbarCollapsed = true;
         this.isLoggedIn = false;
         this.isMobileScreen = false;
     }
     HeaderComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.checkWidthOrHeightForMobile();
-        this.initializeHeader();
-        this.userService.currentUser.subscribe(function (userData) {
-            debugger;
-            _this.currentUser = userData;
-            if (_this.currentUser !== undefined && _this.currentUser != null && Object.keys(_this.currentUser).length !== 0 && _this.currentUser.constructor !== Object) {
-                _this.isLoggedIn = true;
-            }
-        });
+        this.checkUserAuthenticated();
         this._messageService.listen().subscribe(function (data) {
             debugger;
-            if (data != 'updateUserName') {
+            if (data == 'updateUserName') {
                 _this.initializeHeader();
             }
-            //if (data == "updateHeader")
-            //{
-            //    if (this.isLoggedIn) {
-            //        this.isLoggedIn = false;
-            //    }
-            //    else {
-            //        this.isLoggedIn = true;
-            //    }
-            //}
+            if (data == "updateHeader") {
+                if (_this.isLoggedIn) {
+                    _this.isLoggedIn = false;
+                }
+                else {
+                    _this.isLoggedIn = true;
+                }
+            }
+        });
+        this.checkWidthOrHeightForMobile();
+    };
+    HeaderComponent.prototype.checkUserAuthenticated = function () {
+        var _this = this;
+        this.salesAdvertisements
+            .ConsumerIsLogin()
+            .subscribe(function (data) {
+            if (data.d == 0) {
+                _this.userService.purgeAuth();
+                _this.isLoggedIn = false;
+                _this.router.navigateByUrl('/');
+            }
+            else {
+                _this.userService.currentUser.subscribe(function (userData) {
+                    debugger;
+                    _this.currentUser = userData;
+                    if (_this.currentUser !== undefined && _this.currentUser != null && Object.keys(_this.currentUser).length !== 0 && _this.currentUser.constructor !== Object) {
+                        _this.isLoggedIn = true;
+                        _this.initializeHeader();
+                    }
+                });
+            }
         });
     };
     HeaderComponent.prototype.onClickGetAds = function () {
@@ -52,8 +68,11 @@ var HeaderComponent = /** @class */ (function () {
             .initializeConsumerHeader()
             .subscribe(function (data) {
             debugger;
-            if (data.d.length > 0) {
-                _this.userName = data.d.split('@')[0];
+            if (data.d.Name !== undefined) {
+                if (data.d.Name !== undefined && data.d.Name != null && data.d.Name != "") {
+                    _this.userName = data.d.Name;
+                }
+                //this.userName = data.d.split('@')[0];
                 //var xmlDoc = $.parseXML(data.d);
                 //var xml = $(xmlDoc);
                 //var docs = xml.find("ViewAssociateBasicDetail");
@@ -76,11 +95,13 @@ var HeaderComponent = /** @class */ (function () {
                 //$("#profilePicHeader").attr('src', thisStatus.profileImage);
                 //$("#profilePic").attr('src', thisStatus.profileImage);
             }
+            else {
+                _this.userName = data.d;
+            }
         });
         //../../ws/AssociateRegistration.asmx/ViewAssociateBasicDetails
     };
     HeaderComponent.prototype.checkWidthOrHeightForMobile = function () {
-        debugger;
         var ratio = window.devicePixelRatio || 1;
         var w = window.innerWidth;
         var h = window.innerHeight;
@@ -91,8 +112,6 @@ var HeaderComponent = /** @class */ (function () {
             this.isMobileScreen = false;
         }
     };
-    //mmenuInit() {
-    //}
     HeaderComponent.prototype.onClickLogout = function () {
         var _this = this;
         this.userService
@@ -110,13 +129,16 @@ var HeaderComponent = /** @class */ (function () {
             alert("OOPS Something goes wrong !");
         });
     };
+    HeaderComponent.prototype.onClickNavbar = function () {
+        this._messageService.messageHidden.value = "";
+    };
     HeaderComponent = tslib_1.__decorate([
         Component({
             selector: 'app-layout-header',
             templateUrl: './header.component.html'
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, MessageService, DashboardService,
-            UserService])
+            UserService, SalesAdvertisementsService])
     ], HeaderComponent);
     return HeaderComponent;
 }());

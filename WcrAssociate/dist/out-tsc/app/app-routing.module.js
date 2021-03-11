@@ -88,22 +88,19 @@ var routes = [
             {
                 //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                 path: 'sales-advertisements',
-                component: SalesAdvertisementsComponent,
-                canActivate: [NoAuthGuard]
+                component: SalesAdvertisementsComponent
             },
             {
                 //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                 path: 'service-profile',
                 component: ServiceProfileComponent,
-                canActivate: [NoAuthGuard]
             },
             {
                 //"/sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + $(doc1).find("Zipcode").text() + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
                 path: 'property-sale-advertisement',
                 component: PropertySalesAdvertisementsComponent,
-                canActivate: [NoAuthGuard]
-            },
-            { path: '**', component: HomeComponent }
+            }
+            //{ path: '**', component: HomeComponent }
         ]
     }
 ];

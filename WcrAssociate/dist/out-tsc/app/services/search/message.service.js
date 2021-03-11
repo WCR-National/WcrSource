@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 var MessageService = /** @class */ (function () {
     function MessageService() {
+        this.messageHidden = { "value": "", "type": "" };
         this._listners = new Subject();
     }
     MessageService.prototype.listen = function () {

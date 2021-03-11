@@ -1,6 +1,3 @@
-/*@import "~@ng-select/ng-select/themes/material.theme.css";*/
-/*@import url("https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css");*/
-@import url("https://fonts.googleapis.com/css?family=Varela+Round");
 
 :root {
     --blue: #0e3a6b;
@@ -44,6 +41,7 @@ body {
     text-align: left;
     background-color: #fff;
 }
+
 div, input, button, select, textarea {
     font-family: "Varela Round", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -4954,6 +4952,7 @@ small {
         border-radius: 0;
     }
 }
+
 .fullwidth-home-slider .item, .fullwidth-property-slider .item {
     opacity: 0.2;
     transition: all 0.6s;
@@ -4961,6 +4960,7 @@ small {
     position: relative;
     height: 600px;
 }
+
 .tabs {
     position: relative;
     overflow-x: auto;
@@ -9557,7 +9557,7 @@ button.btn-floating {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     object-fit: cover;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .collapsible {
@@ -9827,134 +9827,6 @@ textarea {
     overflow: auto;
 }
 
-.progress {
-    position: relative;
-    height: 4px;
-    display: block;
-    width: 100%;
-    background-color: #889eb78c;
-    border-radius: 2px;
-    margin: 0.5rem 0 1rem 0;
-    overflow: hidden;
-}
-
-    .progress .determinate {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #26a69a;
-        -webkit-transition: width .3s linear;
-        transition: width .3s linear;
-    }
-
-    .progress .indeterminate {
-        background-color: #0e3a6b;
-    }
-
-        .progress .indeterminate:before {
-            content: '';
-            position: absolute;
-            background-color: inherit;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            will-change: left, right;
-            -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-            animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
-        }
-
-        .progress .indeterminate:after {
-            content: '';
-            position: absolute;
-            background-color: inherit;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            will-change: left, right;
-            -webkit-animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-            animation: indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
-            -webkit-animation-delay: 1.15s;
-            animation-delay: 1.15s;
-        }
-
-@-webkit-keyframes indeterminate {
-    0% {
-        left: -35%;
-        right: 100%;
-    }
-
-    60% {
-        left: 100%;
-        right: -90%;
-    }
-
-    100% {
-        left: 100%;
-        right: -90%;
-    }
-}
-
-@keyframes indeterminate {
-    0% {
-        left: -35%;
-        right: 100%;
-    }
-
-    60% {
-        left: 100%;
-        right: -90%;
-    }
-
-    100% {
-        left: 100%;
-        right: -90%;
-    }
-}
-
-@-webkit-keyframes indeterminate-short {
-    0% {
-        left: -200%;
-        right: 100%;
-    }
-
-    60% {
-        left: 107%;
-        right: -8%;
-    }
-
-    100% {
-        left: 107%;
-        right: -8%;
-    }
-}
-
-@keyframes indeterminate-short {
-    0% {
-        left: -200%;
-        right: 100%;
-    }
-
-    60% {
-        left: 107%;
-        right: -8%;
-    }
-
-    100% {
-        left: 107%;
-        right: -8%;
-    }
-}
-
-/*.ng-valid[required], .ng-valid.required {
-    border-left: 5px solid #42A948; 
-}
-
-.ng-invalid:not(form) {
-    border: 2px solid #a21318 !important;
-    color: #a21318 !important;
-}*/
-
 .has-error {
     color: #a21318 !important;
 }
@@ -9993,9 +9865,9 @@ input, input[type="text"], input[type="password"], input[type="email"], input[ty
     border-radius: 3px;
 }
 
-input, input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea, select {
-    margin-bottom: 0px !important;
-}
+    input, input[type="text"], input[type="password"], input[type="email"], input[type="number"], textarea, select {
+        margin-bottom: 0px !important;
+    }
 
 .form-control:focus, .form-control:hover {
     border-color: #008329 !important;
@@ -11922,12 +11794,15 @@ button {
         content: "\f24d";
         line-height: 28px;
     }
+
 .fullwidth-property-slider .slick-next {
     right: 15%;
 }
+
 .fullwidth-property-slider .slick-prev {
     left: 15%;
 }
+
 @media (max-width: 1366px) {
     .fullwidth-property-slider .slick-prev {
         left: 9%;
@@ -11936,6 +11811,7 @@ button {
     .fullwidth-property-slider .slick-next {
         right: 9%;
     }
+
     .pick-price.tip .tip-content {
         transform: translate(-100%, calc(-100% - 10px));
         left: 28px;
@@ -14686,7 +14562,7 @@ ul.listing-details {
 
 .imageServices {
     width: 100%;
-    min-height: 285px;
+    height: 240px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     -o-object-fit: cover;
@@ -20908,7 +20784,7 @@ body .pac-container {
             background: #e0e0e0;
         }
 
-    
+
     .property-slider.default .item {
         height: 500px;
     }
@@ -21568,6 +21444,7 @@ span.icon-right {
 .text-xs-left {
     text-align: left;
 }
+
 .slick-initialized .slick-slide {
     display: block;
 }
@@ -21711,11 +21588,11 @@ label {
     color: #fff;
 }
 
-.bookMarked:hover, .bookMarked:active, .bookMarked:focus {
-    background-color: #7d7d7db0 !important;
-    border: 1px solid #7d7d7d !important;
-    color: #fff;
-}
+    .bookMarked:hover, .bookMarked:active, .bookMarked:focus {
+        background-color: #7d7d7db0 !important;
+        border: 1px solid #7d7d7d !important;
+        color: #fff;
+    }
 
 .booking-widget .saveBookmarkClass,
 .booking-widget .contactAssociateClass,
@@ -22657,7 +22534,7 @@ img.mfp-img {
     columns: 3;
     -webkit-columns: 3;
     -moz-columns: 3;
-    font-size:19px;
+    font-size: 19px;
 }
 
     .property-features li {
@@ -22665,7 +22542,7 @@ img.mfp-img {
         display: block;
         margin: 0 0 7px 0;
         padding: 0;
-        font-size:18.5px;
+        font-size: 18.5px;
     }
 
         .property-features li:last-child {
@@ -22720,7 +22597,7 @@ img.mfp-img {
     overflow: hidden;
     position: relative;
     transition: max-height 1s;
-    font-size:19px;
+    font-size: 19px;
 }
 
     .show-more:after {
@@ -22795,12 +22672,15 @@ img.mfp-img {
 tablist a.nav-link {
     padding: 0px;
 }
+
 a.nav-link b {
     width: 100%;
 }
+
 agm-map {
     height: 400px;
 }
+
 .fullwidth-home-slider .item, .fullwidth-property-slider .item, .property-slider .item {
     height: 600px;
     position: relative;
@@ -22808,6 +22688,7 @@ agm-map {
     background-position: 50%;
     border-radius: 3px;
 }
+
 .fullwidth-home-slider .item, .fullwidth-property-slider .item {
     opacity: 0.2;
     transition: all 0.6s;
@@ -22815,9 +22696,11 @@ agm-map {
     position: relative;
     height: 600px;
 }
+
     .fullwidth-home-slider .item.slick-center, .fullwidth-property-slider .item.slick-center {
         opacity: 1;
     }
+
 .fullwidth-home-slider .slick-prev {
     right: 75px;
     left: initial;
@@ -22876,6 +22759,7 @@ agm-map {
     opacity: 0.85;
     transition: all 0.35s;
 }
+
 .slick-prev, .slick-next {
     font-size: 0;
     line-height: 0;
@@ -22917,3 +22801,14 @@ agm-map {
     text-align: right;
     line-height: 34px;
 }
+.red {
+    border: 0px !important;
+}
+
+
+
+
+
+
+
+

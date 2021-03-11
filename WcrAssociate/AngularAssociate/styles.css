@@ -1,4 +1,7 @@
 ﻿@import "~@ng-select/ng-select/themes/material.theme.css";
+/*@import url("https://fonts.googleapis.com/css?family=Lato:400,700|Oswald:300,400,500|Fira+Sans:300,400,500,600|Archivo+Narrow:400,500,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Mono|Roboto+Slab:300,400,700|Roboto+Condensed:300,400,700&display=swap");*/
+@import url("https://fonts.googleapis.com/css?family=Varela+Round");
 
 .modal-open {
     overflow: hidden
@@ -23123,6 +23126,7 @@
 .pd-l-200-f {
     padding-left: 200px !important
 }
+
 
 @media (min-width:480px) {
     .pd-xs-0 {

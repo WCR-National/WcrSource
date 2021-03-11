@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-home',
-    templateUrl: './home.component.html'
+    templateUrl: './home.component.html',
 })
 
 export class HomeComponent implements OnInit {
@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
         //this.parallaxBG();
         this.routedZipcode = this._messageService.messageHidden.value;
         if (this.routedZipcode !== undefined && this.routedZipcode != "") {
+
             var thisStatus = this;
             setTimeout(function () {
                 thisStatus.isSearchingStart = true;
@@ -822,8 +823,8 @@ export class HomeComponent implements OnInit {
                         (data: any) => {
                             if (data.d.length > 0) {
                                 globalThis.searchForm.get('txtSearch').setValue(data.d);
-                                globalThis.bindSalesCategoryByIP(data.d, "ip");
-                                globalThis.bindServiesCategoryByIP(data.d, "ip");
+                                globalThis.bindSalesCategory(data.d, "ip");
+                                globalThis.bindServiesCategory(data.d, "ip");
                             }
                         }
                     )
@@ -851,7 +852,6 @@ export class HomeComponent implements OnInit {
         //        }
         //    );
     }
-
 
     async bindSalesCategoryByIP(zipc, searchByIpOrtxtSearch = "txtSearch")
     {

@@ -19,6 +19,11 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
         this.toaster = toaster;
         this.isloadingIconVisible = true;
         this.count = 0;
+        this.isDataNotFoundForHome = false;
+        this.isDataNotFoundForTownHome = false;
+        this.isDataNotFoundForMultiFamily = false;
+        this.isDataNotFoundForLand = false;
+        this.dataServicesList = [];
         this.isTabHomeStart = true;
         this.isTabTownHomeStart = true;
         this.isMultiFamilyStartCS = true;
@@ -38,30 +43,6 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
     SalesAdvertisementsComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.checkUserIsLogin();
-        //this.show_check = true;
-        //$('html, body').animate({ scrollTop: $('#header-container').offset().top }, 'slow');
-        var tabPanes = document.getElementsByClassName("tab-headerr")[0].getElementsByTagName("div");
-        var _loop_1 = function (i) {
-            debugger;
-            $(tabPanes[i]).on("click", function () {
-                document.getElementsByClassName("tab-headerr")[0].getElementsByClassName("active")[0].classList.remove("active");
-                tabPanes[i].classList.add("active");
-                $(".tab-indicatorr").first().css("top", "calc(80px + " + i * 50 + "px)");
-            });
-        };
-        for (var i = 0; i < tabPanes.length; i++) {
-            _loop_1(i);
-        }
-        this.route.url.subscribe(function (data) {
-            if (data.length <= 6) {
-                // Get the last piece of the URL (it's either 'login' or 'register')
-            }
-            else {
-                //page  not found
-                // this.isSubmitting = false;
-                return false;
-            }
-        });
         this.route.queryParams
             .subscribe(function (params) {
             // Defaults to 0 if no query param provided.
@@ -74,6 +55,10 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             _this.jtype = params['jtype'];
             _this.GetSalesAdvListings(_this.id, _this.zipcode, _this.name, _this.jtype, _this.catName);
         });
+    };
+    SalesAdvertisementsComponent.prototype.ngOnDestroy = function () {
+        this._messageService.messageHidden.value = this.zipcode;
+        this._messageService.messageHidden.type = "zipcode";
     };
     SalesAdvertisementsComponent.prototype.checkUserIsLogin = function () {
         var _this = this;
@@ -88,37 +73,81 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             }
         });
     };
-    SalesAdvertisementsComponent.prototype.GetSalesAdvFromTabs = function (id) {
-        this.isloadingIconVisible = true;
-        this.ViewAdvertisements(id, this.zipcode, this.name, this.jtype, this.catName);
-        //if (id == 1) {
-        //    $('#homeId').addClass('active');
-        //    $('#THId').removeClass('active');
-        //    $('#MFId').removeClass('active');
-        //    $('#landId').removeClass('active');
-        //}
-        //else if (id == 2) {
-        //    $('#homeId').removeClass('active');
-        //    $('#THId').addClass('active');
-        //    $('#MFId').removeClass('active');
-        //    $('#landId').removeClass('active');
-        //}
-        //else if (id == 3) {
-        //    $('#homeId').removeClass('active');
-        //    $('#THId').removeClass('active');
-        //    $('#MFId').addClass('active');
-        //    $('#landId').removeClass('active');
-        //}
-        //else if (id == 4) {
-        //    $('#homeId').removeClass('active');
-        //    $('#THId').removeClass('active');
-        //    $('#MFId').removeClass('active');
-        //    $('#landId').addClass('active');
-        //}
-    };
     SalesAdvertisementsComponent.prototype.GetSalesAdvListings = function (id, zipcode, name, jtype, catName) {
         this.isloadingIconVisible = true;
-        this.ViewAdvertisements(id, zipcode, name, jtype, catName);
+        var thisStatus = this;
+        setTimeout(function () {
+            if (id == '1') {
+                thisStatus.isTabHomeStart = true;
+                thisStatus.isTabTownHomeStart = false;
+                thisStatus.isMultiFamilyStartCS = false;
+                thisStatus.isTabLandStart = false;
+                thisStatus.switchTabs('homeTabId');
+            }
+            else if (id == '2') {
+                thisStatus.isTabHomeStart = false;
+                thisStatus.isTabTownHomeStart = true;
+                thisStatus.isMultiFamilyStartCS = false;
+                thisStatus.isTabLandStart = false;
+                thisStatus.switchTabs('townHomeTabId');
+            }
+            else if (id == '3') {
+                thisStatus.isTabHomeStart = false;
+                thisStatus.isTabTownHomeStart = false;
+                thisStatus.isMultiFamilyStartCS = true;
+                thisStatus.isTabLandStart = false;
+                thisStatus.switchTabs('multiFamilyTabId');
+            }
+            else if (id == '4') {
+                thisStatus.isTabHomeStart = false;
+                thisStatus.isTabTownHomeStart = false;
+                thisStatus.isMultiFamilyStartCS = false;
+                thisStatus.isTabLandStart = true;
+                thisStatus.switchTabs('landTabId');
+            }
+            thisStatus.ViewAdvertisements(id, zipcode, name, jtype, catName);
+        }, 500);
+    };
+    SalesAdvertisementsComponent.prototype.GetSalesAdvFromTabs = function (id) {
+        this.isloadingIconVisible = true;
+        if (id == '1') {
+            this.isTabHomeStart = true;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = false;
+            this.switchTabs('homeTabId');
+        }
+        else if (id == '2') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = true;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = false;
+            this.switchTabs('townHomeTabId');
+        }
+        else if (id == '3') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = true;
+            this.isTabLandStart = false;
+            this.switchTabs('multiFamilyTabId');
+        }
+        else if (id == '4') {
+            this.isTabHomeStart = false;
+            this.isTabTownHomeStart = false;
+            this.isMultiFamilyStartCS = false;
+            this.isTabLandStart = true;
+            this.switchTabs('landTabId');
+        }
+        var html = '';
+        $('#innerHtmlListHomeSalesId').html(html);
+        $('#innerHtmlListTownHomeSalesId').html(html);
+        $('#innerHtmlListMultiFamilySalesId').html(html);
+        $('#innerHtmlListLandSalesId').html(html);
+        this.isDataNotFoundForHome = false;
+        this.isDataNotFoundForTownHome = false;
+        this.isDataNotFoundForMultiFamily = false;
+        this.isDataNotFoundForLand = false;
+        this.ViewAdvertisements(id, this.zipcode, this.name, this.jtype, this.catName);
     };
     SalesAdvertisementsComponent.prototype.ViewAdvertisements = function (id, zipcode, name, jtype, catName) {
         var _this = this;
@@ -155,21 +184,34 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
                 if (dataJson.NewDataSet != undefined && dataJson.NewDataSet != null && dataJson.NewDataSet != '') {
                     _this.dataServicesList = [];
                     if (dataJson.NewDataSet.HViewAdvertismentsWithParam != undefined && dataJson.NewDataSet.HViewAdvertismentsWithParam != null && dataJson.NewDataSet.HViewAdvertismentsWithParam != '') {
-                        if (typeof (dataJson.NewDataSet.HViewAdvertismentsWithParam) == "object") { // Returns: "object"
+                        if (!$.isArray(dataJson.NewDataSet.HViewAdvertismentsWithParam)) { // Returns: "object"
                             _this.dataServicesList.push(dataJson.NewDataSet.HViewAdvertismentsWithParam);
                             _this.AddListOfSales(_this.dataServicesList, id);
                         }
                         else {
+                            var thisStatus = _this;
                             $.each(dataJson.NewDataSet.HViewAdvertismentsWithParam, function (index, item) {
-                                this.dataServicesList.push(item);
+                                thisStatus.dataServicesList.push(item);
                             });
                             _this.AddListOfSales(_this.dataServicesList, id);
                         }
                     }
-                    _this.IsDataFound = true;
+                    else {
+                    }
+                    _this.isDataNotFoundForHome = false;
+                    _this.isDataNotFoundForTownHome = false;
+                    _this.isDataNotFoundForMultiFamily = false;
+                    _this.isDataNotFoundForLand = false;
                 }
                 else {
-                    _this.IsDataFound = false;
+                    _this.isDataNotFoundForHome = true;
+                    _this.isDataNotFoundForTownHome = true;
+                    _this.isDataNotFoundForMultiFamily = true;
+                    _this.isDataNotFoundForLand = true;
+                    _this.isTabHomeStart = false;
+                    _this.isTabTownHomeStart = false;
+                    _this.isMultiFamilyStartCS = false;
+                    _this.isTabLandStart = false;
                 }
                 setTimeout(function () {
                     this.isloadingIconVisible = false;
@@ -181,27 +223,30 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
         });
     };
     SalesAdvertisementsComponent.prototype.AddListOfSales = function (dataSalesList, id) {
+        var count = 0;
+        var html = '';
         $('#innerHtmlListHomeSalesId').html(html);
         $('#innerHtmlListTownHomeSalesId').html(html);
         $('#innerHtmlListMultiFamilySalesId').html(html);
         $('#innerHtmlListLandSalesId').html(html);
-        var count = 0;
-        var html = '';
         var thisStatus = this;
         $.each(dataSalesList, function (index, item) {
+            debugger;
             html += '<div class="listing-item"  >';
             html += "<a href='javascript:void(0)' class='listing-img-container salesLink' data-link='property-sale-advertisement'  data-qparam ='" + JSON.stringify({ "id": item.advertisementID }) + "'>";
             //<!--< div class="listing-badges" >
             //    <span>For Rent < /span>
             //        < /div>-->
             html += '<div class="listing-img-content" >';
-            html += '<span class="listing-price" > $ ' + item.cost.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' <i></i></span >';
+            html += '<span class="listing-price" > $ ' + item.cost.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") + ' <i></i></span>';
             //<!--< span class="like-icon with-tip" data - tip - content="Add to Bookmarks" > </span>
             //    < span class="compare-button with-tip" data - tip - content="Add to Compare" > </span>-->
             html += '</div>';
             html += '<div class="listing-carousel" >';
-            if (item.photo != undefined && item.photo != null && item.photo != "")
-                html += '<div><img class="imageServices" src="../../../../Associate/Adv_img/"' + item.photo + ' alt=""></div>';
+            if (item.advMainImage != undefined && item.advMainImage != null && item.advMainImage != "") {
+                var advMainImg = "../../../../Associate/Adv_img/" + item.advMainImage;
+                html += '<div><img class="imageServices" src="' + advMainImg + '" alt=""></div>';
+            }
             //if (item.advImage1 == undefined && item.advImage1 != null && item.advImage1 != "")
             //    html += '<div><img src="../../../../Associate/Adv_img/"' + item.advMainImage + ' alt=""></div>';
             //if (item.advImage2 == undefined && item.advImage2 != null && item.advImage2 != "")
@@ -212,25 +257,13 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             html += '</a>';
             html += '<div class="listing-content">';
             html += '<div class="listing-title" >';
-            html += '<h4><a href="javascript:void(0)" > ' + item.Name;
+            html += '<h4><a href="javascript:void(0)" > ' + item.title;
             html += '</a></h4>';
             //https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom
             html += '<a href="javascript:void(0);" class="listing-address popup-gmaps" >';
             html += '<i class="fa fa-map-marker" > </i>';
-            html += item.cityID + ". " + item.StateID + ", " + item.zipcode;
+            html += item.City + ". " + item.State + ", " + item.ZipCode;
             html += '</a>';
-            if (thisStatus.isLoggedInValue == "0") {
-                var params = item.advertisementID + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
-                html += '<a href = "javascript:void(0)" class="details button border showInterestBookMarkClass" data-id="' + params + '"> Bookmark </a>';
-            }
-            else {
-                if (item.consumerID != null) {
-                    html += '<a href = "javascript:void(0)" class="details button border bookMarked saveBookmarkClass" data-id="' + item.advertisementID + '"> Bookmark </a>';
-                }
-                else {
-                    html += '<a href = "javascript:void(0)" class="details button border saveBookmarkClass" data-id="' + item.advertisementID + '" > Bookmark </a>';
-                }
-            }
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
             //else if (item.description.length < 150)
@@ -238,8 +271,8 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             html += '</div>';
             html += '<ul class="listing-details" >';
             html += '<li><b>License #</b>: ' + item.LicenseId + '</li>';
-            html += '<li><b> Associate ID </b>:' + item.associateid + '</li>';
-            html += '<li><b> Category Name </b>: ' + thisStatus.catName + ' </li>';
+            html += '<li><b> Associate ID </b>:' + item.associateID + '</li>';
+            //html += '<li><b> Category Name </b>: ' + thisStatus.catName + ' </li>';
             //if (item.subcategoryID == '1')
             //    html += '<li> Category Name: Home </li>';
             //if (item.subcategoryID == '2')
@@ -253,13 +286,27 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             //{{  }}
             var strParamContactAssociateShowInterest = item.advertisementID + "," + item.associateID + ",1,0," + count + ",1";
             var strParamContactAssociate = item.advertisementID + "," + item.associateID + ",1,0" + "," + count;
+            //if (thisStatus.isLoggedInValue == "0") {
+            //    html += '<a href="javascript:void(0)" class="btn button border contactAssociateShowInterestClass" data-id="' + strParamContactAssociateShowInterest + '"> Contact Associates </a>';
+            //}
+            //else {
+            //    html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '"> Contact Associates </a>';
+            //}
             if (thisStatus.isLoggedInValue == "0") {
-                html += '<a href="javascript:void(0)" class="btn button border contactAssociateShowInterestClass" data-id="' + strParamContactAssociateShowInterest + '"> Contact Associates </a>';
+                var params = item.advertisementID; // + "," + item.associateID + ",1,0" + count + ",2";
+                //html += '<a href = "javascript:void(0)" class="details button border showInterestBookMarkClass" data-id="' + params + '"> Bookmark </a>';
+                html += '<a href = "javascript:void(0)" class="btn button border showInterestBookMarkClass" data-id="' + params + '"> Bookmark </a>';
             }
             else {
-                html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '"> Contact Associates </a>';
+                debugger;
+                if (item.consumerID != 0) {
+                    html += '<a href = "javascript:void(0)" class="btn button border  bookMarked saveBookmarkClass" data-id="' + item.advertisementID + '"> Bookmark </a>';
+                }
+                else {
+                    html += '<a href = "javascript:void(0)" class="btn button border saveBookmarkClass" data-id="' + item.advertisementID + '" > Bookmark </a>';
+                }
             }
-            html += '<span> Zip Code: ' + item.zipcode + '</span>';
+            html += '<span> Zip Code: ' + item.ZipCode + '</span>';
             html += '</div>';
             html += '</div>';
             //{ { count + 1 } }
@@ -268,15 +315,19 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
         });
         if (id == 1) {
             $('#innerHtmlListHomeSalesId').html(html);
+            this.isTabHomeStart = false;
         }
         else if (id == 2) {
             $('#innerHtmlListTownHomeSalesId').html(html);
+            this.isTabTownHomeStart = false;
         }
         else if (id == 3) {
             $('#innerHtmlListMultiFamilySalesId').html(html);
+            this.isMultiFamilyStartCS = false;
         }
         else if (id == 4) {
             $('#innerHtmlListLandSalesId').html(html);
+            this.isMultiFamilyStartCS = false;
         }
         this.InitializeEvents();
         this.InitializeEventsClick();
@@ -322,9 +373,10 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
         });
         $('.saveBookmarkClass').click(function () {
+            var zipcode = 0;
             var advId = $(this).attr('data-id');
             thisStatus.salesAdvertisements
-                .UpdateSavedBookmarks(advId)
+                .UpdateSavedBookmarksSales(advId, zipcode)
                 .subscribe(function (data) {
                 if (data.d == "0") {
                     $('.saveBookmarkClass').each(function () {
@@ -373,6 +425,109 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             });
         }, 1500);
     };
+    SalesAdvertisementsComponent.prototype.onOpenModalClickSaveBookMark = function (isSaveBookMarksOrContactAssociate, advId) {
+        var _this = this;
+        var modal = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
+        modal.componentInstance.isBookmark = true;
+        var modalComponent = modal.componentInstance;
+        modal.componentInstance.dismissParentCall.subscribe(function (data) {
+            console.log(data);
+            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+                if (data == "update") {
+                    _this.isLoggedInValue = "1";
+                    _this.SaveBookmark(advId);
+                }
+                else {
+                    _this.isLoggedInValue = "0";
+                    _this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+                }
+            }
+        });
+        modal.componentInstance.updateParentCall.subscribe(function (data) {
+            debugger;
+            //if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
+            if (data == "update") {
+                _this.showToast('success', 'Bookmark to property is in process');
+                _this._messageService.filter("updateHeader");
+                _this.isLoggedInValue = "1";
+                _this.SaveBookmark(advId);
+            }
+            else {
+                _this.isLoggedInValue = "0";
+                _this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+            }
+            //}
+        });
+    };
+    SalesAdvertisementsComponent.prototype.SaveBookmark = function (advId) {
+        var _this = this;
+        this.salesAdvertisements
+            .UpdateSavedBookmarksSales(advId, 0)
+            .subscribe(function (data) {
+            debugger;
+            if (data.d == "0") {
+                $('.showInterestBookMarkClass').each(function () {
+                    if (advId == $(this).attr('data-id')) {
+                        $(this).addClass('bookMarked');
+                    }
+                });
+                _this.showToast('warning', "You have already saved this advertisement.");
+            }
+            else {
+                $('.showInterestBookMarkClass').each(function () {
+                    if (advId == $(this).attr('data-id')) {
+                        $(this).addClass('bookMarked');
+                    }
+                });
+                _this.showToast('success', "Advertisement bookmarked successfully.");
+            }
+        }, function (err) {
+        });
+        //this.salesAdvertisements
+        //    .ConsumerIsLogin()
+        //    .subscribe(
+        //        (data) => {
+        //            if (data.d == 0) {
+        //            }
+        //            else {
+        //                this.showToast("danger", "You need to sign in");
+        //                this.onOpenModalClickSaveBookMark("saveBookmark", advId);
+        //            }
+        //        }
+        //    );
+    };
+    SalesAdvertisementsComponent.prototype.onOpenModalClickAssociate = function (advIdnAndAssociateId) {
+        var _this = this;
+        var modal = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
+        var modalComponent = modal.componentInstance;
+        modal.componentInstance.isContactAssociate = true;
+        modal.componentInstance.dismissParentCall.subscribe(function (data) {
+            console.log(data);
+            if (data == "update") {
+                //book
+                _this.isLoggedInValue = "1";
+                _this.ContactAssociate(advIdnAndAssociateId);
+            }
+            else {
+                _this.isLoggedInValue = "0";
+                _this.showToast('danger', "Something went wrong. Please try again.");
+            }
+        });
+        modal.componentInstance.updateParentCall.subscribe(function (data) {
+            debugger;
+            if (data == "update") {
+                //book
+                _this.showToast('success', 'Request to Associate is in process');
+                _this._messageService.filter("updateHeader");
+                _this.isLoggedInValue = "1";
+                _this.ContactAssociate(advIdnAndAssociateId);
+            }
+            else {
+                _this.isLoggedInValue = "0";
+                _this.showToast('danger', "Something went wrong. Please try again.");
+            }
+        });
+    };
     SalesAdvertisementsComponent.prototype.ContactAssociate = function (advIdAndAssociateId, pnlID) {
         var _this = this;
         if (pnlID === void 0) { pnlID = 0; }
@@ -403,7 +558,7 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
         //            }
         //        });
     };
-    //Linked with on click event
+    //Linked with on click event as well
     SalesAdvertisementsComponent.prototype.ContactAssociates = function (advIdAndAssociateId) {
         var _this = this;
         var _returnValue;
@@ -466,105 +621,6 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
         }, function (err) {
         });
     };
-    SalesAdvertisementsComponent.prototype.SaveBookmark = function (advId) {
-        var _this = this;
-        this.salesAdvertisements
-            .UpdateSavedBookmarks(advId)
-            .subscribe(function (data) {
-            debugger;
-            if (data.d == "0") {
-                $('.saveBookmarkClass').each(function () {
-                    if (advId == $(this).attr('data-id')) {
-                        $(this).addClass('bookMarked');
-                    }
-                });
-                _this.showToast('warning', "You have already saved this advertisement.");
-            }
-            else {
-                $('.saveBookmarkClass').each(function () {
-                    if (advId == $(this).attr('data-id')) {
-                        $(this).addClass('bookMarked');
-                    }
-                });
-                _this.showToast('success', "Advertisement bookmarked successfully.");
-            }
-        }, function (err) {
-        });
-        //this.salesAdvertisements
-        //    .ConsumerIsLogin()
-        //    .subscribe(
-        //        (data) => {
-        //            if (data.d == 0) {
-        //            }
-        //            else {
-        //                this.showToast("danger", "You need to sign in");
-        //                this.onOpenModalClickSaveBookMark("saveBookmark", advId);
-        //            }
-        //        }
-        //    );
-    };
-    SalesAdvertisementsComponent.prototype.onOpenModalClickSaveBookMark = function (isSaveBookMarksOrContactAssociate, advId) {
-        var _this = this;
-        var modal = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        var modalComponent = modal.componentInstance;
-        modal.componentInstance.dismissParentCall.subscribe(function (data) {
-            console.log(data);
-            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
-                if (data == "update") {
-                    _this.isLoggedInValue = "1";
-                    _this.SaveBookmark(advId);
-                }
-                else {
-                    _this.isLoggedInValue = "0";
-                    _this.showToast('danger', "Something went wrong. Please try again. Refresh page");
-                }
-            }
-        });
-        modal.componentInstance.updateParentCall.subscribe(function (data) {
-            debugger;
-            _this.showToast('success', 'Bookmark to property is in process');
-            if (isSaveBookMarksOrContactAssociate == "saveBookmark") {
-                if (data == "update") {
-                    _this.isLoggedInValue = "1";
-                    _this.SaveBookmark(advId);
-                }
-                else {
-                    _this.isLoggedInValue = "0";
-                    _this.showToast('danger', "Something went wrong. Please try again. Refresh page");
-                }
-            }
-        });
-    };
-    SalesAdvertisementsComponent.prototype.onOpenModalClickAssociate = function (advIdnAndAssociateId) {
-        var _this = this;
-        var modal = this.modalService.open(AuthModalComponent, { size: 'lg', backdrop: "static" });
-        var modalComponent = modal.componentInstance;
-        modal.componentInstance.dismissParentCall.subscribe(function (data) {
-            console.log(data);
-            if (data == "update") {
-                //book
-                _this.isLoggedInValue = "1";
-                _this.ContactAssociate(advIdnAndAssociateId);
-            }
-            else {
-                _this.isLoggedInValue = "0";
-                _this.showToast('danger', "Something went wrong. Please try again.");
-            }
-        });
-        modal.componentInstance.updateParentCall.subscribe(function (data) {
-            debugger;
-            _this.showToast('success', 'Request to Associate is in process');
-            if (data == "update") {
-                //book
-                _this.isLoggedInValue = "1";
-                _this.ContactAssociate(advIdnAndAssociateId);
-            }
-            else {
-                _this.isLoggedInValue = "0";
-                _this.showToast('danger', "Something went wrong. Please try again.");
-            }
-        });
-    };
     SalesAdvertisementsComponent.prototype.showToast = function (toastrType, text) {
         var type = toastrType;
         this.toaster.open({
@@ -573,6 +629,9 @@ var SalesAdvertisementsComponent = /** @class */ (function () {
             type: type,
             duration: 8000
         });
+    };
+    SalesAdvertisementsComponent.prototype.switchTabs = function (id) {
+        this.ctdTabset.select(id);
     };
     tslib_1.__decorate([
         ViewChild('ctdTabset'),

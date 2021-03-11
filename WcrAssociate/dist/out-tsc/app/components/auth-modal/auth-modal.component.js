@@ -11,8 +11,9 @@ import { map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Toaster } from 'ngx-toast-notifications';
+import { MessageService } from 'AngularAssociate/app/services/search';
 var AuthModalComponent = /** @class */ (function () {
-    function AuthModalComponent(route, router, userService, fb, http, ngZone, activeModal, toaster) {
+    function AuthModalComponent(route, router, userService, fb, http, ngZone, activeModal, toaster, _messageService) {
         this.route = route;
         this.router = router;
         this.userService = userService;
@@ -21,6 +22,7 @@ var AuthModalComponent = /** @class */ (function () {
         this.ngZone = ngZone;
         this.activeModal = activeModal;
         this.toaster = toaster;
+        this._messageService = _messageService;
         this.authType = '';
         this.title = '';
         this.errors = { errors: {} };
@@ -36,6 +38,10 @@ var AuthModalComponent = /** @class */ (function () {
         this.showEmailVerification = false;
         this.encrypted = "";
         this.loginErrorMessage = "";
+        this.showMessageForBookmarkSuccessSignup = false;
+        this.showMessageForContactSuccessSignup = false;
+        this.isBookmark = false;
+        this.isContactAssociate = false;
         this.validationMessages = {
             'email': {
                 'required': 'Email is required',
@@ -93,6 +99,9 @@ var AuthModalComponent = /** @class */ (function () {
         this.setSignInOrSignUpOrActivateOrReset("login");
         this.changeValuesOfFormsEvents();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+    };
+    AuthModalComponent.prototype.ngOnDestroy = function () {
+        this._messageService.messageHidden.value = "";
     };
     AuthModalComponent.prototype.dismiss = function () {
         if (this.activeModal) {
@@ -194,11 +203,12 @@ var AuthModalComponent = /** @class */ (function () {
         });
     };
     AuthModalComponent.prototype.setSignInOrSignUpOrActivateOrReset = function (type) {
+        debugger;
         // Get the last piece of the URL (it's either 'login' or 'register')
         this.authType = type;
         // Set a title for the page accordingly
         if (this.authType === 'login') {
-            this.title = 'Sign in';
+            this.title = 'In order to complete this action you must sign-in';
             this.authForm.get('email').clearValidators();
             this.authForm.get('email').clearAsyncValidators();
             this.authForm.get('email').updateValueAndValidity();
@@ -360,35 +370,6 @@ var AuthModalComponent = /** @class */ (function () {
                 }
             });
             _this.isSubmitting = false;
-            //if (data > '0') {
-            //    //this.router.navigateByUrl('/Associate');
-            //    $(location).attr('href', 'Associate/ViewProfile.aspx')
-            //}
-            //else if (data == '-1') {
-            //    this.userService
-            //        .attemptConsumerAuth(this.authType, credentials)
-            //        .then(
-            //            (data: any) => {
-            //                if (data > '0') {
-            //                    this.isSubmitting = false;
-            //                    //this.router.navigateByUrl('/Consumer');
-            //                    $(location).attr('href', '/index.html')
-            //                }
-            //                else {
-            //                    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-            //                    this.isSubmitting = false;
-            //                }
-            //            },
-            //            err => {
-            //                this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-            //                this.isSubmitting = false;
-            //            }
-            //        );
-            //}
-            //else {
-            //    this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
-            //    this.isSubmitting = false;
-            //}
         }, function (err) {
             //this.formErrors.loginCredentials = this.validationMessages['loginCredentials']['error'];
             _this.isSubmitting = false;
@@ -713,6 +694,20 @@ var AuthModalComponent = /** @class */ (function () {
             .attemptRegisterConsumer(this.authType, credentials)
             .subscribe(function (data) {
             if (data >= 1) {
+                if (_this.isBookmark) {
+                    _this.showMessageForBookmarkSuccessSignup = true;
+                }
+                else {
+                    _this.showMessageForBookmarkSuccessSignup = false;
+                }
+                if (_this.isContactAssociate) {
+                    _this.showMessageForContactSuccessSignup = true;
+                }
+                else {
+                    _this.showMessageForContactSuccessSignup = false;
+                }
+                //this.activeModal.close();
+                _this.updateParentCall.emit('update');
                 _this.isSubmitting = false;
                 _this.request = credentials.email;
                 _this.encryptUsingAES256();
@@ -728,6 +723,12 @@ var AuthModalComponent = /** @class */ (function () {
             }
             else {
                 _this.isSubmitting = false;
+                if (_this.isBookmark) {
+                    _this.showMessageForBookmarkSuccessSignup = true;
+                }
+                else {
+                    _this.showMessageForBookmarkSuccessSignup = false;
+                }
             }
         }, function (err) {
             _this.isSubmitting = false;
@@ -962,7 +963,7 @@ var AuthModalComponent = /** @class */ (function () {
         }),
         tslib_1.__param(6, Optional()),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder,
-            HttpClient, NgZone, NgbActiveModal, Toaster])
+            HttpClient, NgZone, NgbActiveModal, Toaster, MessageService])
     ], AuthModalComponent);
     return AuthModalComponent;
 }());

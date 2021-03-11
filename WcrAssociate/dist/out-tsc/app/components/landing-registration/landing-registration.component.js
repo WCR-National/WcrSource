@@ -9,8 +9,9 @@ import { of } from 'rxjs';
 import * as $ from 'jquery';
 import * as CryptoJS from 'crypto-js';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { MessageService } from 'AngularAssociate/app/services/search';
 var LandingRegistrationComponent = /** @class */ (function () {
-    function LandingRegistrationComponent(route, router, userService, fb, http, modalService, ngZone) {
+    function LandingRegistrationComponent(route, router, userService, fb, http, modalService, ngZone, _messageService) {
         this.route = route;
         this.router = router;
         this.userService = userService;
@@ -18,6 +19,7 @@ var LandingRegistrationComponent = /** @class */ (function () {
         this.http = http;
         this.modalService = modalService;
         this.ngZone = ngZone;
+        this._messageService = _messageService;
         this.showOnValidateEmail = false;
         this.showEmailVerification = false;
         this.formFilledSuccessfully = false;
@@ -65,6 +67,9 @@ var LandingRegistrationComponent = /** @class */ (function () {
             'terms': ''
         };
     }
+    LandingRegistrationComponent.prototype.ngOnDestroy = function () {
+        this._messageService.messageHidden.value = "";
+    };
     LandingRegistrationComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('#header').hide();
@@ -277,7 +282,7 @@ var LandingRegistrationComponent = /** @class */ (function () {
             styleUrls: ['./landing-registration.component.css']
         }),
         tslib_1.__metadata("design:paramtypes", [ActivatedRoute, Router, UserService, FormBuilder,
-            HttpClient, NgbModal, NgZone])
+            HttpClient, NgbModal, NgZone, MessageService])
     ], LandingRegistrationComponent);
     return LandingRegistrationComponent;
 }());

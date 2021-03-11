@@ -69,4 +69,15 @@ export class ProfilesService {
                 }
             ));
     }
+
+    deleteBookmark(bookmarkId) {
+        debugger;
+        let urlToDeleteSavedAdvertisement: string = "ws/InnerPage.asmx/DeleteSavedAdts";
+        return this.apiService.post(urlToDeleteSavedAdvertisement, { 'ID': bookmarkId})
+            .pipe(map(
+                data => {
+                    return data;
+                }
+            ));
+    }
 }

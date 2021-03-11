@@ -37,6 +37,8 @@ import { SalesAdvertisementsService } from './services/sales-advertisements/sale
 import { ServiceProfileComponent } from './components/service-profile/service-profile.component';
 import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 import { PropertySalesAdvertisementsComponent } from './components/property-sales-advertisement/property-sales-advertisement.component';
+import { AgmCoreModule } from '@agm/core';
+import { ShowAuthedAssociateDirective } from './associate/show-authed-associate.directive';
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -50,7 +52,6 @@ var AppModule = /** @class */ (function () {
                 HeaderComponent,
                 AuthComponent,
                 TermsComponent,
-                ShowAuthedDirective,
                 LandingRegistrationComponent,
                 SupportComponent,
                 BookmarkComponent,
@@ -59,7 +60,9 @@ var AppModule = /** @class */ (function () {
                 SalesAdvertisementsComponent,
                 ServiceProfileComponent,
                 AuthModalComponent,
-                PropertySalesAdvertisementsComponent
+                PropertySalesAdvertisementsComponent,
+                ShowAuthedDirective,
+                ShowAuthedAssociateDirective
             ],
             imports: [
                 BrowserModule,
@@ -72,6 +75,11 @@ var AppModule = /** @class */ (function () {
                 AppRoutingModule,
                 NgbModule,
                 NgSelectModule,
+                AgmCoreModule.forRoot({
+                    // please get your own API key here:
+                    // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+                    apiKey: 'AIzaSyD8qzg6u0Yh20dcMnAyZ4A8dExFXfzQb_c'
+                })
             ],
             entryComponents: [
                 AuthModalComponent

@@ -80,6 +80,9 @@ var AuthComponent = /** @class */ (function () {
             //'loginCredentials': ''
         };
     }
+    AuthComponent.prototype.ngOnDestroy = function () {
+        this._messageService.messageHidden.value = "";
+    };
     AuthComponent.prototype.ngOnInit = function () {
         //this.request = "ali87613@yahoo.com";
         //this.encryptUsingAES256();
@@ -910,7 +913,6 @@ var AuthComponent = /** @class */ (function () {
                     .attemptVerifiedActivationCodeConsumer(_this.authType, credentials.email)
                     .then(function (data) {
                     if (data.d.length > 0) {
-                        _this._messageService.filter("updateUserName");
                         //this.router.navigateByUrl('/login');
                         _this.ngZone.run(function () { return _this.router.navigate(['/consumer-dashboard']); });
                         //this.submitLoginForm(credentials.email, credentials.passwordGroup.password);
