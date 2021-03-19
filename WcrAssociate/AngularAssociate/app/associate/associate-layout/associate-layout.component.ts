@@ -12,7 +12,7 @@ import * as $ from 'jquery';
 @Component({
     selector: 'associate-layout',
     templateUrl: './associate-layout.component.html',
-    styleUrls: ['./associate-layout.component.css'],
+    styleUrls: ['./associate-layout.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class AssociateLayoutComponent implements OnInit {

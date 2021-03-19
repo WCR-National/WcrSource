@@ -80,6 +80,7 @@ export class AuthComponent implements OnInit {
         //    'error': 'User Authentication Failed. Please verify your credentials'
         //}
     }
+
     formErrors = {
         'email': '',
         'password': '',
@@ -594,7 +595,7 @@ export class AuthComponent implements OnInit {
                 (data: any) => {
                     if (data.d == "1") {
                         //this.router.navigate([this.returnUrl]);
-
+                        this._messageService.filter("updateHeader");
                         //$(location).attr('href', '/ConsumerDashboard.html');
                         this.ngZone.run(() => this.router.navigate(['/consumer-dashboard']));
 

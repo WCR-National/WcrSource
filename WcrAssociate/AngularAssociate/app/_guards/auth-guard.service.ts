@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<boolean> {
-
+        debugger;
         if (localStorage.getItem('jwtToken') == null)
         {
             var subject = new Subject<boolean>();

@@ -47,22 +47,35 @@
     </div>
 </div>
 
-<!-- Slider -->
-<div class="fullwidth-property-slider margin-bottom-20">
-    <a style="background-size: cover;" *ngIf="advMainImage != undefined && advMainImage != null && advMainImage != ''" href="{{ 'Associate/Adv_img/' + advMainImage }}" [attr.data-background-image]="'Associate/Adv_img/' + advMainImage" class="item mfp-gallery"></a>
-    <a style="background-size: cover;" *ngIf="image1 != undefined && image1 != null && image1 != ''" href="{{ 'Associate/Adv_img/' + image1 }}" [attr.data-background-image]="'Associate/Adv_img/' + image1" class="item mfp-gallery"></a>
-    <a style="background-size: cover;" *ngIf="image2 != undefined && image2 != null && image2 != ''" href="{{ 'Associate/Adv_img/' + image2 }}" [attr.data-background-image]="'Associate/Adv_img/' + image2" class="item mfp-gallery"></a>
-    <a style="background-size: cover;" *ngIf="image3 != undefined && image3 != null && image3 != ''" href="{{ 'Associate/Adv_img/' + image3 }}" [attr.data-background-image]="'Associate/Adv_img/' + image3" class="item mfp-gallery"></a>
+<div style="background-color:#fff;">
+    <div class="container">
+        <div class="row margin-bottom-50">
+            <div class="col-md-12">
+
+                <!-- Slider -->
+                <div class="property-slider default margin-bottom-20">
+                    <a style="background-size: cover;" *ngIf="advMainImage != undefined && advMainImage != null && advMainImage != ''" href="{{ 'Associate/Adv_img/' + advMainImage }}" [attr.data-background-image]="'Associate/Adv_img/' + advMainImage" class="item mfp-gallery"></a>
+                    <a style="background-size: cover;" *ngIf="image1 != undefined && image1 != null && image1 != ''" href="{{ 'Associate/Adv_img/' + image1 }}" [attr.data-background-image]="'Associate/Adv_img/' + image1" class="item mfp-gallery"></a>
+                    <a style="background-size: cover;" *ngIf="image2 != undefined && image2 != null && image2 != ''" href="{{ 'Associate/Adv_img/' + image2 }}" [attr.data-background-image]="'Associate/Adv_img/' + image2" class="item mfp-gallery"></a>
+                    <a style="background-size: cover;" *ngIf="image3 != undefined && image3 != null && image3 != ''" href="{{ 'Associate/Adv_img/' + image3 }}" [attr.data-background-image]="'Associate/Adv_img/' + image3" class="item mfp-gallery"></a>
+                </div>
+
+                <div class="property-slider-nav">
+
+                    <div class="item" *ngIf="advMainImage != undefined && advMainImage != null && advMainImage != ''"><img style="background-size: cover;" src="{{ 'Associate/Adv_img/' + advMainImage}}" alt=""></div>
+                    <div class="item" *ngIf="image1 != undefined && image1 != null && image1 != ''"><img style="background-size: cover;" src="{{ 'Associate/Adv_img/' + image1}}" alt=""></div>
+                    <div class="item" *ngIf="image2 != undefined && image2 != null && image2 != ''"><img style="background-size: cover;" src="{{ 'Associate/Adv_img/' + image2}}" alt=""></div>
+                    <div class="item" *ngIf="image3 != undefined && image3 != null && image3 != ''"><img style="background-size: cover;" src="{{ 'Associate/Adv_img/' + image3}}" alt=""></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="property-slider-nav pd-l-0 pd-r-0 pd-xs-l-20 pd-xs-r-20 pd-sm-r-200 pd-sm-l-200 pd-lg-r-200  pd-lg-l-200">
 
-    <div class="item wd-150" *ngIf="advMainImage != undefined && advMainImage != null && advMainImage != ''" ><img style="background-size: cover;"  src="{{ 'Associate/Adv_img/' + advMainImage}}" alt=""></div>
-    <div class="item wd-150" *ngIf="image1 != undefined && image1 != null && image1 != ''"><img style="background-size: cover;"  src="{{ 'Associate/Adv_img/' + image1}}" alt=""></div>
-    <div class="item wd-150" *ngIf="image2 != undefined && image2 != null && image2 != ''"><img style="background-size: cover;"  src="{{ 'Associate/Adv_img/' + image2}}" alt=""></div>
-    <div class="item wd-150" *ngIf="image3 != undefined && image3 != null && image3 != ''"><img style="background-size: cover;"  src="{{ 'Associate/Adv_img/' + image3}}" alt=""></div>
 
-</div>
 
 <div class="container-fluid pd-b-100-f" style="background-color:#fff;">
     <div class="row">
@@ -133,7 +146,7 @@
 
                 <!-- Property Description / End -->
                 <!-- Sidebar -->
-                <div class="col-lg-4 col-md-5">
+                <div class="col-lg-4 col-md-5 pd-t-35-f pd-l-25">
                     <div class="row">
                         <div class="sidebar sticky right">
 

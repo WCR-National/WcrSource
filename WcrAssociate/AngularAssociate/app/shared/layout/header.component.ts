@@ -19,8 +19,7 @@ export class HeaderComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private router: Router, private _messageService: MessageService, private dashboardService: DashboardService,
         private userService: UserService, private salesAdvertisements: SalesAdvertisementsService
-    )
-    { }
+    ) { }
     public userName: string;
     currentUser: User;
     public isLoggedIn = false;
@@ -34,24 +33,24 @@ export class HeaderComponent implements OnInit {
             if (data == 'updateUserName') {
                 this.initializeHeader();
             }
-            if (data == "updateHeader")
-            {
-                if (this.isLoggedIn) {
-                    this.isLoggedIn = false;
-                }
-                else {
-                    this.isLoggedIn = true;
-                }
+            if (data == "updateHeader") {
+
+                this.isLoggedIn = true;
+                this.initializeHeader();
+
+                //else {
+                //    this.isLoggedIn = true;
+                //    this.initializeHeader();
+                //}
             }
         });
         this.checkWidthOrHeightForMobile();
-        
+
 
 
     }
 
-    checkUserAuthenticated()
-    {
+    checkUserAuthenticated() {
         this.salesAdvertisements
             .ConsumerIsLogin()
             .subscribe(
@@ -74,7 +73,7 @@ export class HeaderComponent implements OnInit {
                             });
                     }
                 }
-                
+
             );
     }
 
@@ -143,7 +142,7 @@ export class HeaderComponent implements OnInit {
 
 
     }
-    
+
     onClickLogout() {
         this.userService
             .attemptLogout()

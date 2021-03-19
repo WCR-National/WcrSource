@@ -307,8 +307,6 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
     }
 
 
-
-
     onOpenModalClickSaveBookMark(isSaveBookMarksOrContactAssociate, advId): void {
 
         const modal: NgbModalRef = this.modalService.open(AuthModalComponent, { size: 'sm', backdrop: "static" });
@@ -378,8 +376,6 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
             );
 
     }
-
-
 
     onOpenModalClickAssociate(advIdnAndAssociateId): void {
 

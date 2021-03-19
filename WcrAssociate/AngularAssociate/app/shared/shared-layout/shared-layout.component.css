@@ -14264,19 +14264,9 @@ body #compare-list li div:last-child .clp-title {
     margin-bottom: 0;
 }
 
-.listing-img-container {
-    position: relative;
-    height: 100%;
-    width: 100%;
-    display: block;
-    height: 0;
-    min-height: 200px;
-    flex: 2;
-    overflow: hidden;
-    border-radius: 3px 0 0 3px;
-    height: 241px;
-    flex: 1.6;
-}
+
+
+
 
 
     .listing-img-container img {
@@ -15077,7 +15067,7 @@ section.fullwidth {
     background-color: #f8f8f8;
     position: relative;
     padding: 70px 0;
-    margin-bottom: 65px;
+    /*margin-bottom: 65px;*/
 }
 
 
@@ -20680,13 +20670,55 @@ body .pac-container {
 /* ------------------------------------------------------------------- */
 /* 06. Media Queries
 ---------------------------------------------------------------------- */
+.listing-img-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: block;
+    height: 0;
+    min-height: 200px;
+    flex: 2;
+    overflow: hidden;
+    border-radius: 3px 0 0 3px;
+    height: 241px;
+    flex: 1;
+}
 
 /* Standard 1180 (devices and browsers) */
 @media only screen and (min-width: 1240px) {
     /* styles here */
+
+    .listing-img-container {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: block;
+        height: 0;
+        min-height: 200px;
+        flex: 2;
+        overflow: hidden;
+        border-radius: 3px 0 0 3px;
+        height: 241px;
+        flex: 1;
+    }
 }
 
 @media only screen and (max-width: 1366px) and (min-width: 1240px) {
+
+
+    .listing-img-container {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: block;
+        height: 0;
+        min-height: 200px;
+        flex: 2;
+        overflow: hidden;
+        border-radius: 3px 0 0 3px;
+        height: 241px;
+        flex: 1.6;
+    }
     .parallax-content {
         padding: 74px 0;
     }
@@ -20719,6 +20751,19 @@ body .pac-container {
 /* Smaller than standard 1180 (devices and browsers) */
 @media (max-width: 1239px) {
 
+    .listing-img-container {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: block;
+        height: 0;
+        min-height: 200px;
+        flex: 2;
+        overflow: hidden;
+        border-radius: 3px 0 0 3px;
+        height: 241px;
+        flex: 1.6;
+    }
     #map-container.homepage-map {
         height: 480px;
     }
@@ -20819,6 +20864,19 @@ body .pac-container {
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media (max-width: 992px) {
 
+    .listing-img-container {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        display: block;
+        height: 0;
+        min-height: 200px;
+        flex: 2;
+        overflow: hidden;
+        border-radius: 3px 0 0 3px;
+        height: 241px;
+        flex: 1.6;
+    }
     .parallax #titlebar {
         padding: 60px 0;
     }
@@ -22805,6 +22863,115 @@ agm-map {
     border: 0px !important;
 }
 
+.property-slider-nav .item.slick-current.slick-active:before {
+    border-color: #274abb;
+}
+
+
+
+/* Slider */
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.slick-list {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+    .slick-list:focus {
+        outline: none;
+    }
+
+    .slick-list.dragging {
+        cursor: pointer;
+        cursor: hand;
+    }
+
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+}
+
+    .slick-track:before,
+    .slick-track:after {
+        display: table;
+        content: '';
+    }
+
+    .slick-track:after {
+        clear: both;
+    }
+
+.slick-loading .slick-track {
+    visibility: hidden;
+}
+
+.slick-slide {
+    display: none;
+    float: left;
+    height: 100%;
+    min-height: 1px;
+}
+
+[dir='rtl'] .slick-slide {
+    float: right;
+}
+
+.slick-slide img {
+    display: block;
+}
+
+.slick-slide.slick-loading img {
+    display: none;
+}
+
+.slick-slide.dragging img {
+    pointer-events: none;
+}
+
+.slick-initialized .slick-slide {
+    display: block;
+}
+
+.slick-loading .slick-slide {
+    visibility: hidden;
+}
+
+.slick-vertical .slick-slide {
+    display: block;
+    height: auto;
+    border: 1px solid transparent;
+}
+
+.slick-arrow.slick-hidden {
+    display: none;
+}
 
 
 
@@ -22812,3 +22979,68 @@ agm-map {
 
 
 
+
+
+
+
+
+.fullwidth-home-slider a.item,
+.fullwidth-property-slider a.item,
+.property-slider a.item {
+    cursor: zoom-in;
+}
+
+.property-slider .item.slick-current.slick-active img {
+    opacity: 1;
+}
+
+.property-slider-nav {
+    margin-top: 10px;
+    width: calc(100% + 8px);
+    position: relative;
+    left: -4px;
+}
+
+    .property-slider-nav .item {
+        cursor: pointer;
+        margin: 0 5px;
+        position: relative;
+        border-radius: 3px;
+        outline: none;
+    }
+
+        .property-slider-nav .item img {
+            border-radius: 3px;
+        }
+
+        .property-slider-nav .item:before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 3px solid transparent;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+.property-slider.default .slick-arrow {
+    display: none !important;
+}
+
+.property-description h3.desc-headline {
+    font-size: 22px;
+    margin: 50px 0 25px 0;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+    .property-description h3.desc-headline.no-border {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+ngb-tabset {
+    width: 100%;
+}

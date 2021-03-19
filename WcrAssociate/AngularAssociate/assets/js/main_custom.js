@@ -76,46 +76,6 @@ function InitializeFullWidthSlider() {
     // Init
     inlineCSS();
 
-
-    /*----------------------------------------------------*/
-    /*  Mortgage Calculator
-    /*----------------------------------------------------*/
-
-    //// Gets property price
-    //var propertyPricing = parseFloat($('.property-price').text().replace(/[^0-9\.]+/g, ""));
-    //if (propertyPricing > 0) {
-    //    $('.pick-price').on('click', function () {
-    //        $('#amount').val(parseInt(propertyPricing));
-    //    });
-    //}
-
-    //// replacing comma with dot
-    //$(document).on('change', function () {
-    //    $("#interest").val($("#interest").val().replace(/,/g, '.'));
-    //});
-
-    //// Calculator
-    //function mortgageCalc() {
-
-    //    var amount = parseFloat($("#amount").val().replace(/[^0-9\.]+/g, "")),
-    //        months = parseFloat($("#years").val().replace(/[^0-9\.]+/g, "") * 12),
-    //        down = parseFloat($("#downpayment").val().replace(/[^0-9\.]+/g, "")),
-    //        annInterest = parseFloat($("#interest").val().replace(/[^0-9\.]+/g, "")),
-    //        monInt = annInterest / 1200,
-    //        calculation = ((monInt + monInt / (Math.pow(1 + monInt, months) - 1)) * (amount - (down || 0))).toFixed(2);
-
-    //    if (calculation > 0) {
-    //        $(".calc-output-container").css({ 'opacity': '1', 'max-height': '200px' });
-    //        $(".calc-output").hide().html(calculation + ' ' + $('.mortgageCalc').attr("data-calc-currency")).fadeIn(300);
-    //    }
-    //}
-
-    //// Calculate
-    //$('.calc-button').on('click', function () {
-    //    mortgageCalc();
-    //});
-
-
     /*----------------------------------------------------*/
     /*  Show More Button
     /*----------------------------------------------------*/
@@ -127,45 +87,21 @@ function InitializeFullWidthSlider() {
     /*----------------------------------------------------*/
     /*  Slick Carousel
     /*----------------------------------------------------*/
-    //$('.property-slider').slick({
-    //    slidesToShow: 1,
-    //    slidesToScroll: 1,
-    //    arrows: true,
-    //    fade: true,
-    //    asNavFor: '.property-slider-nav',
-    //    centerMode: true,
-    //    slide: ".item",
-    //    adaptiveHeight: true
-    //});
-    $('.fullwidth-property-slider').slick({
-        centerMode: true,
-        centerPadding: '20%',
+
+
+    $('.property-slider').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
         fade: true,
-        centerMode: true,
         asNavFor: '.property-slider-nav',
+        centerMode: true,
         slide: ".item",
-
-        responsive: [
-            {
-                breakpoint: 1367,
-                settings: {
-                    centerPadding: '15%'
-                }
-            },
-            {
-                breakpoint: 993,
-                settings: {
-                    centerPadding: '0'
-                }
-            }
-        ]
+        adaptiveHeight: true
     });
 
     $('.property-slider-nav').slick({
-        slidesToShow: 1,
+        slidesToShow: 6,
         slidesToScroll: 1,
         asNavFor: '.property-slider',
         dots: false,
@@ -187,6 +123,70 @@ function InitializeFullWidthSlider() {
             }
         ]
     });
+
+
+    ////$('.property-slider').slick({
+    ////    slidesToShow: 1,
+    ////    slidesToScroll: 1,
+    ////    arrows: true,
+    ////    fade: true,
+    ////    asNavFor: '.property-slider-nav',
+    ////    centerMode: true,
+    ////    slide: ".item",
+    ////    adaptiveHeight: true
+    ////});
+
+
+    //$('.fullwidth-property-slider').slick({
+    //    centerMode: true,
+    //    centerPadding: '20%',
+    //    slidesToShow: 1,
+    //    slidesToScroll: 1,
+    //    arrows: true,
+    //    fade: true,
+    //    centerMode: true,
+    //    asNavFor: '.property-slider-nav',
+    //    slide: ".item",
+
+    //    responsive: [
+    //        {
+    //            breakpoint: 1367,
+    //            settings: {
+    //                centerPadding: '15%'
+    //            }
+    //        },
+    //        {
+    //            breakpoint: 993,
+    //            settings: {
+    //                centerPadding: '0'
+    //            }
+    //        }
+    //    ]
+    //});
+
+    //$('.property-slider-nav').slick({
+    //    slidesToShow: 1,
+    //    slidesToScroll: 1,
+    //    asNavFor: '.property-slider',
+    //    dots: false,
+    //    arrows: false,
+    //    centerMode: false,
+    //    focusOnSelect: true,
+    //    responsive: [
+    //        {
+    //            breakpoint: 993,
+    //            settings: {
+    //                slidesToShow: 4,
+    //            }
+    //        },
+    //        {
+    //            breakpoint: 767,
+    //            settings: {
+    //                slidesToShow: 3,
+    //            }
+    //        }
+    //    ]
+    //});
 
     
 
