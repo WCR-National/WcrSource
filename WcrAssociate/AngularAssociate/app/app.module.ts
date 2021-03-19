@@ -111,7 +111,7 @@ import { ShowAuthedAssociateDirective } from './associate/show-authed-associate.
         AuthModalComponent
     ],
     providers: [
-        AuthGuard,
+        { provide: AuthGuard, useClass: AuthGuard },
         HttpClientModule,
         { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
         ApiService,

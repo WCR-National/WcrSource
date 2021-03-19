@@ -113,6 +113,8 @@ export class BookmarkComponent implements OnInit {
 
 
     GetSavedAdvertisementsBookmarks() {
+        $('#innerHtmlListHomeSalesBookmarksId').html('');
+
         this.profileService
             .getBookmarkSalesList()
             .subscribe(
@@ -165,6 +167,7 @@ export class BookmarkComponent implements OnInit {
     }
 
     GetSavedServicesBookmarks() {
+        $('#innerHtmlListHomeServicesBookmarksId').html('');
 
         this.profileService
             .getBookmarkServicesList()
@@ -222,9 +225,9 @@ export class BookmarkComponent implements OnInit {
 
 
     AddSalesBookmarksDynamicHtmlList(dataSalesList) {
+        debugger;
         let count = 0;
         var html = '';
-        $('#innerHtmlListHomeSalesBookmarksId').html('');
         var thisStatus = this;
         $.each(dataSalesList, function (index, item) {
 
@@ -339,9 +342,10 @@ export class BookmarkComponent implements OnInit {
     }
 
     AddServicesBookmarksDynamicHtmlList(dataServicesList) {
+        debugger;
+
         let count = 0;
         var html = '';
-        $('#innerHtmlListHomeServicesBookmarksId').html('');
 
         var thisStatus = this;
         $.each(dataServicesList, function (index, item) {
@@ -675,7 +679,6 @@ export class BookmarkComponent implements OnInit {
                     }
                     else {
                         this.GetSalesAdvListings("2");
-
                     }
 
                 },

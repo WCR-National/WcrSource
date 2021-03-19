@@ -45,6 +45,7 @@ export class ConsumerDashabordComponent implements OnInit {
         'statePattern': 'Please enter 2 characters for state like "TX".',
         'cityStatePattern': 'Please enter valid format like "Dallas, TX" OR "Dallas, Texas"'
     }
+
     formErrors = {
         'txtSearch': ''
     };
@@ -78,9 +79,7 @@ export class ConsumerDashabordComponent implements OnInit {
                 thisStatus.bindSalesCategory(thisStatus.routedZipcode);
                 thisStatus.bindServiesCategory(thisStatus.routedZipcode);
             }, 1000);
-            
-            
-        }
+                    }
         else {
             this.GetSalesAdts();
         }
