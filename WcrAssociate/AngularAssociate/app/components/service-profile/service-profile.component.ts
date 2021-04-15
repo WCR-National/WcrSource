@@ -465,7 +465,7 @@ export class ServiceProfileComponent implements OnInit {
                 }
                 else {
                     this.isLoggedInValue = "0";
-                    this.showToast('danger', "Something went wrong. Please try again. Refresh page");
+                    //this.showToast('danger', "Something went wrong. Please try again. Refresh page");
                 }
         });
 
