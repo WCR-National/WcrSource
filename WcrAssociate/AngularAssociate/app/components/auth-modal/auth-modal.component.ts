@@ -838,7 +838,7 @@ export class AuthModalComponent implements OnInit {
         this.FormFilledSuccessfully = true;
 
         if (this.authForm.get('associate').value == true) {
-            this.showToast("danger", "Invalid, Please register as consumer");
+            this.showToast("Warning", "Invalid, Please register as consumer");
         }
         else if (this.authForm.get('consumer').value == true) {
 
@@ -991,7 +991,7 @@ export class AuthModalComponent implements OnInit {
             this.consumerActivationCode(credentials);
         }
         else {
-            this.showToast("danger", "Invalid, only conusmer can register");
+            this.showToast("Warning", "Invalid, only conusmer can register");
         }
     }
 
@@ -1190,7 +1190,7 @@ export class AuthModalComponent implements OnInit {
         const type = toastrType;
         this.toaster.open({
             text: text,
-            caption: type + ' notification',
+            caption: type ,
             type: type,
             duration: 8000
         });

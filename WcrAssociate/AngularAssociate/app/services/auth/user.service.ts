@@ -90,6 +90,7 @@ export class UserService {
                     .then((data: any) => {
                         if (data.d == "1")
                         {
+                           
                             this.isConsumer = 1;
                             this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
                             if (this.returnUrl == '') {

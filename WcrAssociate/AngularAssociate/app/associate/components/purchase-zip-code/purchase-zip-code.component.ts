@@ -31,7 +31,7 @@ export class PurchaseZipCodeComponent implements OnInit {
     searchForm: FormGroup;
     isAddOrUpdateButton: boolean = true;
     overlayLoadingOnPurchase: boolean = false;
-
+    toastRef;
     @ViewChild('ctdTabset') ctdTabset;
 
     validationMessages = {
@@ -802,7 +802,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                             this.isSearchingStartCS = false;
                             this.isSearchingStart = false;
 
-                            this.showToast("danger", "Service Categories are no longer available in your selected zip code.Please choose another zip code");
+                            this.showToast("Warning", "Service Categories are no longer available in your selected zip code.Please choose another zip code");
                             this.RemoveSearchedZipCodes();
                             $("#divCategory").css("display", "none");
                         }
@@ -858,14 +858,14 @@ export class PurchaseZipCodeComponent implements OnInit {
                         this.isSearchingStartCS = false;
                         this.isSearchingStart = false;
 
-                        this.showToast("danger", "Service Categories are no longer available in your selected zip code. Please choose another zip code");
+                        this.showToast("Warning", "Service Categories are no longer available in your selected zip code. Please choose another zip code");
                     }
                 },
                 error => {
                     this.isSearchingStartCS = false;
                     this.isSearchingStart = false;
 
-                    this.showToast("danger", "Service Categories are no longer available in your selected zip code. Please choose another zip code");
+                    this.showToast("Warning", "Service Categories are no longer available in your selected zip code. Please choose another zip code");
                 }
             );
 
@@ -887,7 +887,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                             this.divShowSubCategorySearchCS = false;
                             this.isSearchingStartCS = false;
                             this.isSearchingStart = false;
-                            this.showToast("danger", "Service Categories are no longer available in your selected zip code.Please choose another zip code");
+                            this.showToast("Warning", "Service Categories are no longer available in your selected zip code.Please choose another zip code");
                             this.RemoveSearchedZipCodes();
                         }
                         else {
@@ -1174,7 +1174,7 @@ export class PurchaseZipCodeComponent implements OnInit {
                                 thisStatus.ZipCodePurchaseCode(categoryText, subCategoryText, categoryId, subCategoryId, planId, priceValues, zipCode);
                             }
                             else {
-                                thisStatus.showToast('danger', "Maximum Limit is expired. You've reached the maximum allowed number of sales advertisment posts.");
+                                thisStatus.showToast('Warning', "Maximum Limit is expired. You've reached the maximum allowed number of sales advertisment posts.");
                                 return false;
                             }
                         });
@@ -1246,16 +1246,16 @@ export class PurchaseZipCodeComponent implements OnInit {
                                         }
                                         if (subData.d == "0") {
 
-                                            this.showToast('danger', "Failed to buy zip code, already exist.");
+                                            this.showToast('Warning', "Failed to buy zip code, already exist.");
                                             this.overlayLoadingOnPurchase = false;
 
                                         }
                                         if (subData.d == "3") {
-                                            this.showToast('danger', "Error, Something went wrong. Reload page, Try Again!!!");
+                                            this.showToast('Warning', "Error, Something went wrong. Reload page, Try Again!!!");
                                         }
                                     }
                                     else {
-                                        this.showToast('danger', "Error, Something went wrong. Reload page, Try Again!!!");
+                                        this.showToast('Warning', "Error, Something went wrong. Reload page, Try Again!!!");
                                     }
                                     this.cdr.detectChanges();
                                 }));
@@ -1270,8 +1270,8 @@ export class PurchaseZipCodeComponent implements OnInit {
                         else {
                             this._Counter++;
 
-                            this.showToast("danger", "We can not complete this Zip Code Purchase at this time!!");
-                            this.showToast("danger", "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
+                            this.showToastCardError("Warning", "We can not complete this Zip Code Purchase at this time!!");
+                            this.showToastCardError("Warning", "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
                             this.overlayLoadingOnPurchase = false;
                         }
                     }
@@ -1612,10 +1612,24 @@ export class PurchaseZipCodeComponent implements OnInit {
         const type = toastrType;
         this.toaster.open({
             text: text,
-            caption: type + ' notification',
+            caption: type ,
             type: type,
             duration: 8000
         });
+    }
+
+    showToastCardError(toastrType, text)
+    {
+        const type = toastrType;
+        this.toastRef = this.toaster.open({
+            text: text,
+            caption: type,
+            type: type,
+            duration: 8000000
+        });
+
+        //hide manually   this.toastr.clear(this.toastRef.ToastId);
+
     }
 
     ApplyCoponCode(cCode, disc, duration) {
@@ -1642,21 +1656,20 @@ export class PurchaseZipCodeComponent implements OnInit {
                                 this.AssociateAlreadyCategories();
                             }
                             if (subData.d == "0") {
-                                this.showToast('danger', "Failed, Already exist!!!");
+                                this.showToast('Warning', "Failed, Already exist!!!");
                                 //$('#fail_message').modal('show');
                             }
                             if (subData.d == "3") {
-                                this.showToast('danger', "Error, Something went wrong. Try Again!!!");
-
+                                this.showToast('Warning', "Error, Something went wrong. Try Again!!!");
                             }
 
                         });
 
                         if (data.d == "0") {
-                            this.showToast('danger', "Failure, Already. Try Again!!!");
+                            this.showToast('Warning', "Failure, Already. Try Again!!!");
                         }
                         if (data.d == "3") {
-                            this.showToast('danger', "Error, Something went wrong. Try Again!!!");
+                            this.showToast('Warning', "Error, Something went wrong. Try Again!!!");
                         }
                     }
                 }

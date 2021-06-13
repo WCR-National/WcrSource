@@ -429,7 +429,7 @@ export class ProfileComponent implements OnInit {
         const type = toastrType;
         this.toaster.open({
             text: text,
-            caption: type + ' notification',
+            caption: type ,
             type: type,
             duration: 8000
         });

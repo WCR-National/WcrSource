@@ -243,8 +243,8 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
 
                         }
                         else {
-                            thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
-                            thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+                            thisStatus.showToast("Warning", "You cannot contact this Associate at this time.");
+                            thisStatus.showToast("Warning", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
                             thisStatus.isSubmittingContactAssociate = false;
 
                         }
@@ -298,7 +298,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
 
             //            }
             //            else {
-            //                thisStatus.showToast("danger", "You need to sign in");
+            //                thisStatus.showToast("Warning", "You need to sign in");
             //                thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
             //            }
             //        }
@@ -394,7 +394,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
             }
             else {
                 this.isLoggedInValue = "0";
-                this.showToast('danger', "Something went wrong. Please try again.");
+                //this.showToast('danger', "Something went wrong. Please try again.");
             }
         });
 
@@ -427,8 +427,8 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
                         this.ContactAssociates(advIdAndAssociateId);
                     }
                     else {
-                        this.showToast("danger", "You cannot contact this Associate at this time.");
-                        this.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+                        this.showToast("Warning", "You cannot contact this Associate at this time.");
+                        this.showToast("Warning", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
                     }
                 },
                 err => {
@@ -496,10 +496,10 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
 
                                 }
                                 else if (data.d == "0") {
-                                    this.showToast("danger", "Already exist")
+                                    this.showToast("Warning", "Already exist")
                                 }
                                 else if (data.d == "3") {
-                                    this.showToast("danger", "OOPS Error ! Please try again.")
+                                    this.showToast("Warning", "OOPS Error ! Please try again.")
                                 }
                             }
                         );
@@ -557,7 +557,7 @@ export class PropertySalesAdvertisementsComponent implements OnInit {
         const type = toastrType;
         this.toaster.open({
             text: text,
-            caption: type + ' notification',
+            caption: type ,
             type: type,
             duration: 8000
         });

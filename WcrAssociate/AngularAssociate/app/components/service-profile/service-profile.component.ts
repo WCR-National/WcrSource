@@ -364,7 +364,7 @@ export class ServiceProfileComponent implements OnInit {
                         if (data.d == "0") {
                             $(this).addClass('bookMarked');
 
-                            thisStatus.showToast('warning', "You have already saved this advertisement.");
+                            thisStatus.showToast('Warning', "You have already saved this advertisement.");
                         }
                         else {
                             $(this).addClass('bookMarked');
@@ -385,7 +385,7 @@ export class ServiceProfileComponent implements OnInit {
 
             //            }
             //            else {
-            //                thisStatus.showToast("danger", "You need to sign in");
+            //                thisStatus.showToast("Warning", "You need to sign in");
             //                thisStatus.onOpenModalClickSaveBookMark("saveBookmark", advId);
             //            }
             //        });
@@ -414,8 +414,8 @@ export class ServiceProfileComponent implements OnInit {
                             thisStatus.ContactAssociates(advIdAndAssociateId);
                         }
                         else {
-                            thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
-                            thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+                            thisStatus.showToast("Warning", "You cannot contact this Associate at this time.");
+                            thisStatus.showToast("Warning", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
                         }
                     },
                     err => {
@@ -434,7 +434,7 @@ export class ServiceProfileComponent implements OnInit {
 
             //            }
             //            else {
-            //                thisStatus.showToast("danger", "You need to sign in");
+            //                thisStatus.showToast("Warning", "You need to sign in");
             //                thisStatus.onOpenModalClickAssociate(advIdAndAssociateId);
             //            }
             //        });
@@ -531,7 +531,7 @@ export class ServiceProfileComponent implements OnInit {
             }
             else {
                 this.isLoggedInValue = "0";
-                this.showToast('danger', "Something went wrong. Please try again.");
+                //this.showToast('danger', "Something went wrong. Please try again.");
             }
         });
 
@@ -568,8 +568,8 @@ export class ServiceProfileComponent implements OnInit {
                         thisStatus.ContactAssociates(advIdnAndAssociateId);
                     }
                     else {
-                        thisStatus.showToast("danger", "You cannot contact this Associate at this time.");
-                        thisStatus.showToast("danger", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
+                        thisStatus.showToast("Warning", "You cannot contact this Associate at this time.");
+                        thisStatus.showToast("Warning", "Your phone number and email address are required to contact an Associate.Please update your profile and enter your phone number.");
                     }
                 },
                 err => {
@@ -636,10 +636,10 @@ export class ServiceProfileComponent implements OnInit {
                                     this.showToast("success", "Agent has been notified. For Additional Questions, please contact support at 866.456.7331.")
                                 }
                                 else if (data.d == "0") {
-                                    this.showToast("danger", "Already exist")
+                                    this.showToast("Warning", "Already exist")
                                 }
                                 else if (data.d == "3") {
-                                    this.showToast("danger", "OOPS Error ! Please try again.")
+                                    this.showToast("Warning", "OOPS Error ! Please try again.")
                                 }
                             }
                         );
@@ -708,10 +708,10 @@ export class ServiceProfileComponent implements OnInit {
                                     this.showToast("success", "Agent has been notified. For Additional Questions, please contact support at 866.456.7331.")
                                 }
                                 else if (data.d == "0") {
-                                    this.showToast("danger", "Already exist")
+                                    this.showToast("Warning", "Already exist")
                                 }
                                 else if (data.d == "3") {
-                                    this.showToast("danger", "OOPS Error ! Please try again.")
+                                    this.showToast("Warning", "OOPS Error ! Please try again.")
                                 }
                             }
                         );
@@ -758,7 +758,7 @@ export class ServiceProfileComponent implements OnInit {
                             );
                     }
                     else {
-                        thisStatus.showToast("danger", "You need to sign in");
+                        thisStatus.showToast("Warning", "You need to sign in");
                         thisStatus.onOpenModalClickSaveBookMark( advId, zipcode);
                     }
                 });
@@ -772,7 +772,7 @@ export class ServiceProfileComponent implements OnInit {
         const type = toastrType;
         this.toaster.open({
             text: text,
-            caption: type + ' notification',
+            caption: type ,
             type: type,
             duration: 8000
         });

@@ -419,7 +419,7 @@ export class ListPropertiesComponent implements OnInit {
 
             var mimeType = event.target.files[0].type;
             if (mimeType.match(/image\/*/) == null) {
-                this.showToast("danger", "Only images are supported.");
+                this.showToast("Warning", "Only images are supported.");
                 return;
             }
             var imageExist = false;
@@ -2738,7 +2738,7 @@ export class ListPropertiesComponent implements OnInit {
                             });
                         }
                         else {
-                            //this.showToast("danger", "Please choose different zip code, Price are not available for this zip code.")
+                            //this.showToast("Warning", "Please choose different zip code, Price are not available for this zip code.")
                         }
                     });
             //$("#lblsegmentsMessage").text("");
@@ -3021,7 +3021,7 @@ export class ListPropertiesComponent implements OnInit {
         const type = toastrType;
         this.toaster.open({
             text: text,
-            caption: type + ' notification',
+            caption: type,
             type: type,
         });
     }

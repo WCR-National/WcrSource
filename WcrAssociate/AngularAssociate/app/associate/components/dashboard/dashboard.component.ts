@@ -52,14 +52,13 @@ export class DashboardComponent implements OnInit {
 
         this.attemptToInterestedCustomerData();
 
-        this.attemptToCategoriesData();
+        //this.attemptToCategoriesData();
 
         this.attemptToMyPropertyListingsData();
 
         this.attemptToZipcodeData();
 
-        this.attemptToAllAdvertisement();
-
+        //this.attemptToAllAdvertisement();
 
         //this._messageService.listen().subscribe((m: any) => {
         //    if (m == 'hide-info-dashboard') {
@@ -196,7 +195,6 @@ export class DashboardComponent implements OnInit {
     }
 
 
-
     attemptToInterestedCustomerData() {
 
         this.clientDetailsService
@@ -292,7 +290,7 @@ export class DashboardComponent implements OnInit {
         }
         dTable.dataTable({
             data: asyncData,
-
+            
             columns: [
                 {
                     data: "id",
@@ -322,7 +320,7 @@ export class DashboardComponent implements OnInit {
                     defaultContent: '<a href="" class="editor_remove">Delete</a>'
                 }
             ],
-            "autoWidth": true,
+            "autoWidth": false,
             searching: false,
             paging: false,
             info: false,
@@ -422,7 +420,7 @@ export class DashboardComponent implements OnInit {
                 //    }
                 //}
             ],
-            "autoWidth": true,
+            "autoWidth": false,
             searching: false,
             paging: false,
             info: false,
@@ -434,6 +432,8 @@ export class DashboardComponent implements OnInit {
             ]
         });
     }
+
+
 
     attemptToMyPropertyListingsData() {
 
@@ -510,7 +510,7 @@ export class DashboardComponent implements OnInit {
             buttons: [
                 'excel', 'pdf'
             ],
-            "autoWidth": true,
+            "autoWidth": false,
             searching: false,
             paging: false,
             info: false
@@ -545,6 +545,7 @@ export class DashboardComponent implements OnInit {
 
 
     attemptToZipcodeData() {
+
         this.dashboardService
             .attemptToZipcodeData()
             .then((data: any) => {
@@ -571,7 +572,6 @@ export class DashboardComponent implements OnInit {
                     }
                 }
             });
-
     }
 
     initialiseTable(asyncData) {
@@ -624,7 +624,7 @@ export class DashboardComponent implements OnInit {
                 $(api.column(1).footer()).html('');
                 $(api.column(2).footer()).html('$' + amountTotal);
             },
-            "autoWidth": true,
+            "autoWidth": false,
             searching: false,
             paging: false,
             info: false,
