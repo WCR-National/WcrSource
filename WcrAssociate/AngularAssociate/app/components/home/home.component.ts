@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private renderer: Renderer2, private searchService: SearchService, @Inject(PLATFORM_ID) private platformId: Object, private _messageService: MessageService, private router: Router, ) {
         this._messageService.listen().subscribe((m: any) => {
+            debugger;
             console.log(m);
             if (m == 'showAds') {
                 this.GetSalesAdts();

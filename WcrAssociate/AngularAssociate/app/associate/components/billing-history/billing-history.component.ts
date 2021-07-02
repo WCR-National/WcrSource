@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild, Input, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debug } from 'util';
-import { HomeComponent } from 'AngularAssociate/app/components/home/home.component';
-import { MessageService } from 'AngularAssociate/app/services/search';
-import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
+import { ProfileService } from '../../associate-service/Profile.service';
 import * as $ from 'jquery';
 
 

@@ -17,16 +17,19 @@ import { PlatformLocation } from '@angular/common';
 @Injectable()
 export class UserService {
     returnUrl: string;
-    private currentUserSubject = new BehaviorSubject<User>({} as User);
-    public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
+    private currentUserSubject = new ReplaySubject<User>();
+    public currentUser = this.currentUserSubject.asObservable();
+
+    public isAuthenticated_extra = false;
+
+    private isAuthenticatedConsumerSubject = new ReplaySubject<boolean>(1);
+    public isAuthenticatedConsumer = this.isAuthenticatedConsumerSubject.asObservable();
+
+    private isAuthenticatedAssociateSubject = new ReplaySubject<boolean>(1);
+    public isAuthenticatedAssociate = this.isAuthenticatedAssociateSubject.asObservable();
 
     private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
     public isAuthenticated = this.isAuthenticatedSubject.asObservable();
-    public isAssociate = 0;
-    public isConsumer = 0;
-
-
-    public isAuthenticated_extra = false;
 
     constructor(private user: User = null,
         private apiService: ApiService = null,
@@ -39,8 +42,6 @@ export class UserService {
 
     ) { }
 
-    //// Verify JWT in localstorage with server & load user's info.
-    //// This runs once on application startup.
     populate() {
         debugger;
         // If JWT detected, attempt to get & store user's info
@@ -51,31 +52,18 @@ export class UserService {
                 credentials.email = user.email;
 
                 this.associateLoginSessionActivate("", credentials, user.id)
-                    .then((data: any) => {
-                        if (data.d == "1")
-                        {
-                            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
-                            if (this.returnUrl == '') {
-
-                                this.isAssociate = 1;
-                                let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-                                this.ngZone.run(() => this.router.navigate(['/associates']));
-                                //this.router.navigateByUrl(url);
-                            }
-                            else {
-                                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
-                                //this.router.navigateByUrl('');
-                            }
+                    .subscribe((data) => {
+                        debugger;
+                        if (data.d == "1") {
+                            this.router.navigate(['/associates']);
+                            //this.user.token = this.token();
+                            //this.user.email = credentials.email;
+                            //this.user.id = user.id;
+                            //this.user.type = "1";
+                            //this.setAuth(this.user);
                         }
                         else {
-                            //this.ngZone.run(() => this.router.navigate(['/']));
-
-                            //this.router.navigateByUrl('/');
-                            this.isAssociate = 0;
-
                             this.purgeAuth();
-                            //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-                            //this.ngZone.run(() => this.router.navigate([url]));
                         }
                     });
             }
@@ -84,36 +72,18 @@ export class UserService {
 
                 var credentials: any = {};
                 credentials.email = user.email;
-                //window.location.href = "ConsumerDashboard.html";
-                //this.ngZone.run(() => this.router.navigate(['/ConsumerDashboard.html']));
                 this.consumerLoginSessionActivate("", credentials, user.id)
-                    .then((data: any) => {
-                        if (data.d == "1")
-                        {
-                           
-                            this.isConsumer = 1;
-                            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
-                            if (this.returnUrl == '') {
-                                let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-                                this.ngZone.run(() => this.router.navigate([url]));
-                                //this.router.navigateByUrl(url);
-                            }
-                            else {
-                                this.ngZone.run(() => this.router.navigate([this.returnUrl]));
-                                //this.router.navigateByUrl('');
-                            }
-                            //this.ngZone.run(() => this.router.navigate(['/']));
-                            //this.router.navigateByUrl('/');
+                    .subscribe((data: any) => {
+                        if (data.d == "1") {
+                            this.router.navigate(['/consumer-dashboard']);
+                            //this.user.token = this.token();
+                            //this.user.email = credentials.email;
+                            //this.user.id = user.id;
+                            //this.user.type = "2";
+                            //this.setAuth(this.user);
                         }
-                        else
-                        {
-                            //this.ngZone.run(() => this.router.navigate(['/consumer-dashboard']));
-                            //this.router.navigateByUrl('/');
-                            this.isConsumer = 0;
+                        else {
                             this.purgeAuth();
-
-                            //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
-                            //this.ngZone.run(() => this.router.navigate([url]));
                         }
                     });
             }
@@ -127,16 +97,21 @@ export class UserService {
     }
 
     setAuth(user: User) {
-        
+        debugger;
         // Save JWT sent from server in localstorage
         this.jwtService.saveToken(user);
         // Set current user data into observable
         this.currentUserSubject.next(user);
+        //this.startRefreshTokenTimer();
+        debugger;
         // Set isAuthenticated to true
-        this.isAuthenticatedSubject.next(true);
-
-        this.isAuthenticated_extra = true;
-        console.log(this.isAuthenticated_extra);
+        if (user.type == "1") {
+            this.isAuthenticated_extra = true;
+            this.isAuthenticatedAssociateSubject.next(true);
+        }
+        else if (user.type == "2") {
+            this.isAuthenticatedConsumerSubject.next(true);
+        }
     }
 
     purgeAuth() {
@@ -145,9 +120,145 @@ export class UserService {
         // Set current user to an empty object
         this.currentUserSubject.next({} as User);
         // Set auth status to false
+        this.isAuthenticatedAssociateSubject.next(false);
+        this.isAuthenticatedConsumerSubject.next(false);
         this.isAuthenticatedSubject.next(false);
-        this.isAuthenticated_extra = false;
+
+
+        //this.isAuthenticated_extra = false;
     }
+
+
+
+
+    private refreshTokenTimeout;
+
+    //private startRefreshTokenTimer() {
+    //    // parse json object from base64 encoded jwt token
+    //    //const jwtToken = JSON.parse(atob(this.userValue.jwtToken.split('.')[1]));
+
+    //    // set a timeout to refresh the token a minute before it expires
+    //    const expires = new Date(100 * 1000);
+    //    const timeout = expires.getTime() - Date.now() - (20 * 60);
+    //    this.refreshTokenTimeout = setTimeout(() => this.populate(), timeout);
+    //}
+
+    private stopRefreshTokenTimer() {
+        clearTimeout(this.refreshTokenTimeout);
+    }
+
+
+    //// Verify JWT in localstorage with server & load user's info.
+    //// This runs once on application startup.
+    //populate() {
+    //    debugger;
+    //    // If JWT detected, attempt to get & store user's info
+    //    if (localStorage.getItem('jwtToken')) {
+    //        var user: any = JSON.parse(localStorage.getItem('jwtToken'));
+    //        this.isAssociate = 0;
+    //        this.isAssociate = 0;
+    //        if (user.type == "1") { //associate
+    //            var credentials: any = {};
+    //            credentials.email = user.email;
+
+    //            this.associateLoginSessionActivate("", credentials, user.id)
+    //                .then((data: any) => {
+    //                    if (data.d == "1")
+    //                    {
+    //                        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+    //                        if (this.returnUrl == '') {
+
+    //                            this.isAssociate = 1;
+    //                            let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+    //                            this.ngZone.run(() => this.router.navigate(['/associates']));
+    //                            //this.router.navigateByUrl(url);
+    //                        }
+    //                        else {
+    //                            this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+    //                            //this.router.navigateByUrl('');
+    //                        }
+    //                    }
+    //                    else {
+    //                        //this.ngZone.run(() => this.router.navigate(['/']));
+
+    //                        //this.router.navigateByUrl('/');
+    //                        this.isAssociate = 0;
+
+    //                        this.purgeAuth();
+    //                        //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+    //                        //this.ngZone.run(() => this.router.navigate([url]));
+    //                    }
+    //                });
+    //        }
+    //        else if (user.type == "2") {
+    //            debugger;
+
+    //            var credentials: any = {};
+    //            credentials.email = user.email;
+    //            //window.location.href = "ConsumerDashboard.html";
+    //            //this.ngZone.run(() => this.router.navigate(['/ConsumerDashboard.html']));
+    //            this.consumerLoginSessionActivate("", credentials, user.id)
+    //                .then((data: any) => {
+    //                    if (data.d == "1")
+    //                    {
+                           
+    //                        this.isConsumer = 1;
+    //                        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+    //                        if (this.returnUrl == '') {
+    //                            let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+    //                            this.ngZone.run(() => this.router.navigate([url]));
+    //                            //this.router.navigateByUrl(url);
+    //                        }
+    //                        else {
+    //                            this.ngZone.run(() => this.router.navigate([this.returnUrl]));
+    //                            //this.router.navigateByUrl('');
+    //                        }
+    //                        //this.ngZone.run(() => this.router.navigate(['/']));
+    //                        //this.router.navigateByUrl('/');
+    //                    }
+    //                    else
+    //                    {
+    //                        //this.ngZone.run(() => this.router.navigate(['/consumer-dashboard']));
+    //                        //this.router.navigateByUrl('/');
+    //                        this.isConsumer = 0;
+    //                        this.purgeAuth();
+
+    //                        //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+    //                        //this.ngZone.run(() => this.router.navigate([url]));
+    //                    }
+    //                });
+    //        }
+    //    }
+    //    else {
+    //        // Remove any potential remnants of previous auth states
+    //        this.purgeAuth();
+    //        //let url = ((this.platformLocation as any).location.href).replace(location.origin, '');
+    //        //this.ngZone.run(() => this.router.navigate([url]));
+    //    }
+    //}
+
+    //setAuth(user: User) {
+        
+    //    // Save JWT sent from server in localstorage
+    //    this.jwtService.saveToken(user);
+    //    // Set current user data into observable
+    //    this.currentUserSubject.next(user);
+    //    // Set isAuthenticated to true
+    //    this.isAuthenticatedSubject.next(true);
+
+    //    this.isAuthenticated_extra = true;
+    //    console.log(this.isAuthenticated_extra);
+    //}
+
+    //purgeAuth() {
+    //    // Remove JWT from localstorage
+    //    this.jwtService.destroyToken();
+    //    // Set current user to an empty object
+    //    this.currentUserSubject.next({} as User);
+    //    // Set auth status to false
+    //    this.isAuthenticatedSubject.next(false);
+    //    this.isAuthenticated_extra = false;
+    //}
 
     rand() {
         return Math.random().toString(36).substr(2); // remove `0.`
@@ -192,10 +303,10 @@ export class UserService {
         //    ));
     }
 
-    async attempConsumerAccountExists(type, credentials) {
+    attempConsumerAccountExists(type, credentials) {
 
         let urlToSignUp: string = "ws/AssociateRegistration.asmx/ConsumerAccountExists";// + credentials.email + "&Password=" + credentials.passwordGroup.password + ""
-        return await this.apiService.post(urlToSignUp, { EmailID: credentials.email }).toPromise();
+        return this.apiService.post(urlToSignUp, { EmailID: credentials.email }).toPromise();
         //.pipe(map(
         //    data => {
         //        return data;
@@ -203,18 +314,16 @@ export class UserService {
         //));
     }
 
-
-    async attemptAssociateAuth(type, credentials) {
-        
-
+    attemptAssociateAuth(type, credentials) : any {
+       
         let urlToSignIn: string = "ws/AssociateRegistration.asmx/AssociateLogin";
-        return await this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
+        return this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
             .pipe(map(
                 data => {
 
                     return data;
                 }
-            )).toPromise();
+            ));
 
         //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
         //let urlToSignIn: string = "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + credentials.email + "&Password=" + credentials.passwordGroup.password + "";
@@ -231,23 +340,22 @@ export class UserService {
         //    )).toPromise();
     }
 
-    async attemptConsumerAuth(type, credentials) {
+    attemptConsumerAuth(type, credentials): any {
         
         //urlToSignIn "ws/AssociateSignUp.ashx?action=ConsumerLog&EmailID=" + uname + "&Password=" + pass + ""
         let urlToSignIn: string = "ws/AssociateRegistration.asmx/ConsumerLogin";
-        return await this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
+        return this.apiService.post(urlToSignIn, { EmailID: credentials.email, Password: credentials.passwordGroup.password })
             .pipe(map(
                 data => {
                     return data;
                 }
-            )).toPromise();
+            ));
     }
 
-    async consumerLoginSessionActivate(type, credentials, associateID) {
-
+    consumerLoginSessionActivate(type, credentials, associateID): Observable<any> | any{
         
         let urlToSignInSessionActivation: string = "ws/AssociateRegistration.asmx/ConsumerLoginSessionActivate";
-        return await this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
+       return this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
             .pipe(map(
                 data => {
                     if (data.d == "1") {
@@ -256,19 +364,19 @@ export class UserService {
                         this.user.email = credentials.email;
                         this.user.id = associateID;
                         this.user.type = "2";
+                        debugger;
                         this.setAuth(this.user);
-
                     }
                     return data;
                 }
-            )).toPromise();
+            ));
     }
 
-    async associateLoginSessionActivate(type, credentials, associateID) {
+    associateLoginSessionActivate(type, credentials, associateID): Observable<any> | any {
         //{'username':'" + uname + "','assoID':'" + $(docs).find("AssociateId").text() + "
         
         let urlToSignInSessionActivation: string = "ws/AssociateRegistration.asmx/AssociateLoginSessionActivate";
-        return await this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
+       return this.apiService.post(urlToSignInSessionActivation, { username: credentials.email, assoID: associateID })
             .pipe(map(
                 data => {
                     if (data.d == "1") {
@@ -276,11 +384,12 @@ export class UserService {
                         this.user.email = credentials.email;
                         this.user.id = associateID;
                         this.user.type = "1";
+                        debugger;
                         this.setAuth(this.user);
                     }
                     return data;
                 }
-            )).toPromise();
+            ));
     }
 
     attemptLogout() {
@@ -467,9 +576,9 @@ export class UserService {
             ));
     }
 
-    getCurrentUser(): User {
-        return this.currentUserSubject.value;
-    }
+    //getCurrentUser(): User {
+    //    return '';this.currentUserSubject.value;
+    //}
 
     // Update the user on the server (email, pass, etc)
     update(user): Observable<User> {

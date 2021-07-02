@@ -12,9 +12,10 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'AngularAssociate/environments/environment';
 import { map, debounceTime, take, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import {  Toaster } from 'ngx-toast-notifications';
 import { MessageService } from 'AngularAssociate/app/services/search';
+import { TermsModalComponent } from '../terms-modal/terms-modal.component';
 
 
 
@@ -1185,6 +1186,9 @@ export class AuthModalComponent implements OnInit {
         this.showErrorsPassword = false;
 
     }
+
+
+
 
     showToast(toastrType, text) {
         const type = toastrType;

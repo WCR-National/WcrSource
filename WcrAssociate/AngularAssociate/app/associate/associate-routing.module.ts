@@ -13,35 +13,37 @@ import { BillingHistoryComponent } from './components/billing-history/billing-hi
 
 const associateRoutes: Routes = [
     {
-        path: 'associates',
+        path: '',
         component: AssociateLayoutComponent,
         children: [
             {
-                path: '', component: DashboardComponent, canActivate: [AuthGuard]
+                path: '', component: DashboardComponent
             },
             {
-                path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]
+                path: 'profile', component: ProfileComponent
             },
             {
-                path: 'client-details', component: ClientDetailsComponent, canActivate: [AuthGuard]
+                path: 'client-details', component: ClientDetailsComponent
             },
             {
-                path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]
+                path: 'payment', component: PaymentComponent
             },
             {
-                path: 'billing-history', component: BillingHistoryComponent, canActivate: [AuthGuard]
+                path: 'billing-history', component: BillingHistoryComponent
             },
             {
-                path: 'list-properties', component: ListPropertiesComponent, canActivate: [AuthGuard]
+                path: 'list-properties', component: ListPropertiesComponent
             },
             {
-                path: 'purchase-zip-code', component: PurchaseZipCodeComponent, canActivate: [AuthGuard]
+                path: 'purchase-zip-code', component: PurchaseZipCodeComponent
             },
             {
-                path: 'customer-support', component: CustomerSupportComponent, canActivate: [AuthGuard]
+                path: 'customer-support', component: CustomerSupportComponent
             }
         ]
-    }
+
+    },
+    { path: 'dashboard', component: DashboardComponent },
 
 ];
 

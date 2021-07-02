@@ -1,9 +1,13 @@
-import { Component, OnInit, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, HostBinding } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewContainerRef, ComponentFactoryResolver, HostBinding, ViewEncapsulation } from '@angular/core';
 
 import { Subscription, Observable, from, of } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { UserService } from './services/auth';
 import * as $ from 'jquery';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from './services/search';
+import { User } from './entities/user';
+import { DashboardService } from './associate/associate-service/dashboard.service';
 declare const myTest: any;
 declare const mmenuInit: any;
 
@@ -11,21 +15,39 @@ declare const mmenuInit: any;
 @Component({
     selector: 'wcr-Associate-app',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    styleUrls: ['./app.component.css'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements OnInit {
 
     //@HostBinding('className') componentClass: string;
-    constructor(
+
+    constructor(private route: ActivatedRoute, private router: Router, private _messageService: MessageService,
         private userService: UserService
-    ) {
-        //this.componentClass = 'mm-page mm-slideout';
-    }
+    ) { }
+   
+    currentUser: User;
+    routerSubscription: any;
+    location: any;
+    isOn: any = true;
 
     ngOnInit() {
 
+        debugger;
         this.userService.populate();
+
+        this.userService.currentUser.subscribe(
+            (userData) => {
+                if (userData.type == "1") {
+                    this.isOn = false;
+                }
+                else
+                {
+                    this.isOn = true;
+                }
+            }
+        );
 
         /*--------------------------------------------------*/
         /*  Mobile Menu - mmenu.js
@@ -35,14 +57,15 @@ export class AppComponent implements OnInit {
             mmenuInit();
             $(window).resize(function () { mmenuInit(); });
         }, 3000);
-
-
-        /*  User Menu */
-        //$('.user-menu').on('click', function () {
-        //    $(this).toggleClass('active');
-        //});
-        //$(window).resize(function () { mmenuInit(); });
     }
+
+
+
+    onClickGetAds() {
+        this._messageService.filter('Register click');
+    }
+
+
     onClick() {
         //myTest();
     }

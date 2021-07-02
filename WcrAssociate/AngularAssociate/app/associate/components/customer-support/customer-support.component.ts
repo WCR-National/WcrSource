@@ -1,24 +1,9 @@
-import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { UserService, encrypt_decrypt } from '../../../services/auth';
-
-import * as $ from 'jquery';
-import * as CryptoJS from 'crypto-js';
-
-import { Errors } from '../../../entities/errors.model';
-import { HttpClient } from '@angular/common/http';
-import { map, debounceTime, take, switchMap } from 'rxjs/operators';
-import { environment } from 'AngularAssociate/environments/environment';
-import { Observable, of } from 'rxjs';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
-import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { CustomerSupportService } from 'AngularAssociate/app/services/associate/customer-support.service';
-import { debug } from 'util';
-
-
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CustomerSupportService } from '../../associate-service/customer-support.service';
 
 @Component({
     selector: 'associate-customer-support-page',

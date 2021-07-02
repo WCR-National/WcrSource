@@ -2,18 +2,15 @@ import { Component, OnInit, NgZone, ViewChild, ChangeDetectorRef } from '@angula
 import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
-import { PurchaseZipCodeService } from 'AngularAssociate/app/services/associate/purchase-zipcode.service';
-import { PaymentService } from 'AngularAssociate/app/services/associate/payment.service';
-import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { PurchaseZipCodeService } from '../../associate-service/purchase-zipcode.service';
+import { PaymentService } from '../../associate-service/payment.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Toaster } from "ngx-toast-notifications";
+import { PaymentModalComponent } from '../payment-modal/payment-modal.component';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 import * as $ from 'jquery';
 
 import * as moment from 'moment'; // add this 1 of 4
-import { ToastConfig, Toaster, ToastType } from "ngx-toast-notifications";
-import { debug } from 'util';
-import { PaymentComponent } from '../payment/payment.component';
-import { PaymentModalComponent } from '../payment-modal/payment-modal.component';
-import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
-
 
 @Component({
     selector: 'purchase-zip-code',

@@ -1,13 +1,8 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
-
-import * as $ from 'jquery';
-
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, Inject, PLATFORM_ID } from '@angular/core';
+import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import { SearchService, MessageService } from '../../services/search';
-import { debug } from 'util';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DashboardService } from 'AngularAssociate/app/services/associate/dashboard.service';
-
+import { Router } from '@angular/router';
+import * as $ from 'jquery';
 
 
 @Component({
@@ -50,8 +45,8 @@ export class ConsumerDashabordComponent implements OnInit {
         'txtSearch': ''
     };
 
-    constructor(private fb: FormBuilder, private renderer: Renderer2, private searchService: SearchService, @Inject(PLATFORM_ID) private platformId: Object, private _messageService: MessageService, private router: Router,
-        dashboardService: DashboardService
+    constructor(private fb: FormBuilder, private renderer: Renderer2, private searchService: SearchService,
+        @Inject(PLATFORM_ID) private platformId: Object, private _messageService: MessageService, private router: Router
     ) {
         this._messageService.listen().subscribe((m: any) => {
             console.log(m);

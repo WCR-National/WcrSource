@@ -20773,7 +20773,7 @@
 }
 
     .content-body .close-button {
-        font-size: 18px !important
+        font-size: 1px !important
     }
 
 .title.ng-star-inserted {
@@ -32552,7 +32552,7 @@
 @media (min-width:1200px) {
 
     .content-body {
-        font-size: 18px !important
+        font-size: 1.3rem !important
     }
 
         .content-body .close-button {

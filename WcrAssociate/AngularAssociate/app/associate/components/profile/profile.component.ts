@@ -1,24 +1,12 @@
 import { Component, OnInit, ElementRef, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { UserService, encrypt_decrypt } from '../../../services/auth';
-
-import * as $ from 'jquery';
-import * as CryptoJS from 'crypto-js';
-
-import { Errors } from '../../../entities/errors.model';
-import { HttpClient } from '@angular/common/http';
-import { map, debounceTime, take, switchMap } from 'rxjs/operators';
-import { environment } from 'AngularAssociate/environments/environment';
-import { Observable, of } from 'rxjs';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
-import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
+import { ProfileService } from '../../associate-service/Profile.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'AngularAssociate/app/services/search';
-import { debug } from 'util';
 
-
+import * as $ from 'jquery';
 
 @Component({
     selector: 'associate-profile-page',

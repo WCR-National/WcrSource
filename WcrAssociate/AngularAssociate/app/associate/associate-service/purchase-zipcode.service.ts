@@ -3,13 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
 
 import { User } from '../../entities/user';
-import { environment } from '../../../environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
+import {  Router } from '@angular/router';
 
 
-import { map, distinctUntilChanged, delay } from 'rxjs/operators';
-import { RouterModule } from '@angular/router';
-import { JwtService, ApiService } from '../auth';
+import { map, distinctUntilChanged } from 'rxjs/operators';
+import { JwtService, ApiService } from '../../services/auth';
 
 
 @Injectable()

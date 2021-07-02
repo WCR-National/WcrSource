@@ -1,17 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { UserService, encrypt_decrypt } from '../../../services/auth';
-import { Errors } from '../../../entities/errors.model';
-import { HttpClient } from '@angular/common/http';
-import { map, debounceTime, take, switchMap } from 'rxjs/operators';
-import { environment } from 'AngularAssociate/environments/environment';
-import { Observable, of } from 'rxjs';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
-import { PaymentService } from 'AngularAssociate/app/services/associate/payment.service';
-
-
+import { PaymentService } from '../../associate-service/payment.service';
 import * as $ from 'jquery';
 
 @Component({

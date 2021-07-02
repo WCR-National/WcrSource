@@ -13,6 +13,8 @@ import { environment } from 'AngularAssociate/environments/environment';
 import { map, debounceTime, take, switchMap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { MessageService } from 'AngularAssociate/app/services/search';
+import { TermsModalComponent } from '../terms-modal/terms-modal.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -96,6 +98,7 @@ export class AuthComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private router: Router, private userService: UserService, private fb: FormBuilder,
         private http: HttpClient, private ngZone: NgZone, private _messageService: MessageService,
+        private modalService: NgbModal
     ) { }
 
     ngOnDestroy() {
@@ -103,7 +106,7 @@ export class AuthComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        debugger;
         //this.request = "ali87613@yahoo.com";
         //this.encryptUsingAES256();
         //console.log(this.encrypted);
@@ -113,7 +116,7 @@ export class AuthComponent implements OnInit {
         this.setSignInOrSignUpOrActivateOrReset();
         this.changeValuesOfFormsEvents();
 
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+        //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
 
     }
 
@@ -496,12 +499,13 @@ export class AuthComponent implements OnInit {
     }
 
     LoginAssociateOrConsumer(credentials, uType) {
+
         let thisStatus = this;
         if (uType == 1) {
             this.userService
                 .attemptAssociateAuth(this.authType, credentials)
-                .then(
-                    (data: any) => {
+                .subscribe(
+                    (data) => {
 
 
                         if (data.d.length > 0) {
@@ -549,7 +553,7 @@ export class AuthComponent implements OnInit {
         else if (uType == 2) {
             this.userService
                 .attemptConsumerAuth(this.authType, credentials)
-                .then(
+                .subscribe(
                     (data: any) => {
 
                         if (data.d.length > 0) {
@@ -591,7 +595,7 @@ export class AuthComponent implements OnInit {
         const credentials = this.authForm.value;
         this.userService
             .consumerLoginSessionActivate(this.authType, credentials, $(docs).find("Id").text())
-            .then(
+            .subscribe(
                 (data: any) => {
                     if (data.d == "1") {
                         //this.router.navigate([this.returnUrl]);
@@ -739,7 +743,7 @@ export class AuthComponent implements OnInit {
         const credentials = this.authForm.value;
         this.userService
             .associateLoginSessionActivate(this.authType, credentials, $(docs).find("AssociateId").text())
-            .then(
+            .subscribe(
                 (data: any) => {
                     if (data.d == "1") {
 
@@ -1283,7 +1287,7 @@ export class AuthComponent implements OnInit {
                                 .then((data1: any) => {
                                     if (data1 == "0") {
                                         thisStatus.resetPassword = true;
-                                        thisStatus.loginErrorMessage = "Please check your registered emailID for new password.";
+                                        thisStatus.loginErrorMessage = "If your email address is registered then you will recieve a temporary password. <br> Once you have logged in using your temporary password. <br> Please update to a new password in the profile settings.";
                                     }
                                 });
                         }
@@ -1332,6 +1336,24 @@ export class AuthComponent implements OnInit {
 
     hideErrors() {
         this.showErrorsPassword = false;
+
+    }
+
+    clickTermsAndConditions() {
+        debugger;
+        this.onModalClose();
+    }
+
+    onModalClose(): void {
+        debugger;
+        const modal: NgbModalRef = this.modalService.open(TermsModalComponent, { size: 'lg', backdrop: "static" });
+
+        const modalComponent: TermsModalComponent = modal.componentInstance;
+        //Case for cancel
+        modal.componentInstance.dismissParentCall.subscribe((data) => {
+            //console.log('dismiss confirmation');
+            //this.overlayLoadingOnPurchase = false;
+        });
 
     }
 

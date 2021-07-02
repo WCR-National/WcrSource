@@ -106,11 +106,26 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-12 mg-t-40 mg-b-40">
+                                    <div class="green-text text-darken-4 tx-medium" [style.display]="resetPassword ? 'block':'none'">
+                                        <i class="material-icons">  check_circle </i>
+                                        {{loginErrorMessage}}
+                                        <div class="grey-text text-darken-1 tx-medium mg-t-20">
+                                            If you experience problems activating your account,
+                                            please forward your reset password email to support@wcrnational.com
+                                            Our support team will complete your account activation within 24-48 hours.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div id="validateEmailDiv" class="form-group" [ngClass]="{'has-error': formErrors.email}"
                                  *ngIf="(authType == 'register' || authType == 'login' || authType == 'resetPassword')"
                                  [style.display]="resetPassword ? 'none': 'block'">
+
+                                <div style="color:darkred !important" class="col-sm-12 pd-l-0-f" *ngIf="(authType == 'resetPassword')">
+                                    If your email address is registered then you will recieve a password reset email.
+                                </div>
 
                                 <div class="col-xs-12 col-sm-12 mg-b-20">
                                     <!--(blur)="showPreloaderIcon();"-->
@@ -258,7 +273,7 @@
                                     <div class="col-sm-12 mg-b-20">
                                         <label>
                                             <input type="checkbox" class="filled-in" formControlName="terms" (blur)="logValidationErrors()" checked="checked" />
-                                            <span>I agree with <a routerLink="/terms" class="blue-text text-darken-4" style="font-size:13px; font-weight:600; text-decoration: underline;">Terms and Conditions</a></span>
+                                            <span>I agree with <a (click)="clickTermsAndConditions()" class="blue-text text-darken-4" style="font-size:13px; font-weight:600; text-decoration: underline;">Terms and Conditions</a></span>
                                         </label>
                                         <div class="invalid-data" *ngIf="formErrors.terms">
                                             {{formErrors.terms}}

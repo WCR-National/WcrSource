@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { debug } from 'util';
 import { HomeComponent } from 'AngularAssociate/app/components/home/home.component';
 import { MessageService } from 'AngularAssociate/app/services/search';
-import { DashboardService } from 'AngularAssociate/app/services/associate/dashboard.service';
+import { DashboardService } from '../associate-service/dashboard.service';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import * as $ from 'jquery';
 
@@ -28,6 +28,7 @@ export class AssociateHeaderComponent implements OnInit {
     }
 
     ngOnInit() {
+        debugger;
         this.initializeHeader();
     }
 

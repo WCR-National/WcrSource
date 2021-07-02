@@ -1,21 +1,20 @@
 import { Component, OnInit, ViewChild, Input, NgZone, ChangeDetectionStrategy, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { debug } from 'util';
-import { LightboxModule, LightboxEvent, Lightbox, IAlbum } from 'ngx-lightbox';
+import { Lightbox, IAlbum } from 'ngx-lightbox';
 
 import { ValidationErrors, AbstractControl, ValidatorFn, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PaymentService } from 'AngularAssociate/app/services/associate/payment.service';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
-import { ListPropertiesService } from 'AngularAssociate/app/services/associate/list-properties.service';
-import { PurchaseZipCodeService } from 'AngularAssociate/app/services/associate/purchase-zipcode.service';
-import { ToastConfig, Toaster, ToastType } from "ngx-toast-notifications";
+
+import {  Toaster } from "ngx-toast-notifications";
 import * as $ from 'jquery';
-import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment'; // add this 1 of 4
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { PaymentModalComponent } from '../payment-modal/payment-modal.component';
-import { debounce } from 'rxjs/operators';
-
+import { PaymentService } from '../../associate-service/payment.service';
+import { ListPropertiesService } from '../../associate-service/list-properties.service';
+import { PurchaseZipCodeService } from '../../associate-service/purchase-zipcode.service';
 
 @Component({
     selector: 'list-properties',

@@ -1,22 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { UserService, encrypt_decrypt } from '../../../services/auth';
-
-import { Errors } from '../../../entities/errors.model';
-import { HttpClient } from '@angular/common/http';
-import { map, debounceTime, take, switchMap } from 'rxjs/operators';
-import { environment } from 'AngularAssociate/environments/environment';
-import { Observable, of } from 'rxjs';
-import { DashboardService } from 'AngularAssociate/app/services/associate/dashboard.service';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 
 import * as $ from 'jquery';
 import 'datatables.net';
 import { MessageService } from 'AngularAssociate/app/services/search';
-import { ProfileService } from 'AngularAssociate/app/services/associate/Profile.service';
-import { ClientDetailsService } from 'AngularAssociate/app/services/associate/client-details.service';
+import { ProfileService } from '../../associate-service/Profile.service';
+import { ClientDetailsService } from '../../associate-service/client-details.service';
+import { DashboardService } from '../../associate-service/dashboard.service';
 
 
 
