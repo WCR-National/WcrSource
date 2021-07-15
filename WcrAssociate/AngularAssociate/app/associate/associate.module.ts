@@ -67,7 +67,6 @@ import { HttpTokenInterceptor } from '../interceptors';
     imports: [
         CommonModule,
         AssociateRoutingModule,
-        ToastNotificationsModule,
         FormsModule,
         ReactiveFormsModule,
         HttpClientModule,
@@ -85,14 +84,13 @@ import { HttpTokenInterceptor } from '../interceptors';
         { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
         ApiService,
         JwtService,
-        DashboardService,
         ProfileService,
         ClientDetailsService,
         PaymentService,
         CustomerSupportService,
         MessageService,
         PurchaseZipCodeService,
-        ListPropertiesService,
+        ListPropertiesService
 
     ]
 })

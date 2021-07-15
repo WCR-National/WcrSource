@@ -10,7 +10,9 @@
             <div class="col-md-5 offset-md-3 col-xs-12 card-main pd-t-40 pd-b-90 pd-l-20 pd-r-20 mg-t-30 div-center" style="border-top: 5px solid #0e3a6b;">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12">
-                        <h2 class="text-xs-center" [style.text-align]="authType == 'activate' || authType == 'resetPassword' ? 'left':'center'">{{ title }}</h2>
+                        <!--<h2 class="text-xs-center" [style.text-align]="authType == 'activate' || authType == 'resetPassword' ? 'left':'center'">{{ title }}</h2>-->
+                        <h2 class="text-xs-center" >{{ title }}</h2>
+
                     </div>
 
                     <p class="text-xs-center" style="margin: 0 auto;">
@@ -95,7 +97,7 @@
 
 
                             <div class="form-group" *ngIf="authType == 'resetPassword'">
-                                <div class="col-sm-12 mg-t-40 mg-b-40">
+                                <!--<div class="col-sm-12 mg-t-40 mg-b-40">
                                     <div class="green-text text-darken-4 tx-medium" [style.display]="resetPassword ? 'block':'none'">
                                         <i class="material-icons">  check_circle </i>
                                         {{loginErrorMessage}}
@@ -105,13 +107,13 @@
                                             Our support team will complete your account activation within 24-48 hours.
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="col-sm-12 mg-t-40 mg-b-40">
-                                    <div class="green-text text-darken-4 tx-medium" [style.display]="resetPassword ? 'block':'none'">
+                                    <div class="green-text text-darken-4 tx-medium" style="white-space: pre-line" [style.display]="resetPassword ? 'block':'none'">
                                         <i class="material-icons">  check_circle </i>
                                         {{loginErrorMessage}}
                                         <div class="grey-text text-darken-1 tx-medium mg-t-20">
-                                            If you experience problems activating your account,
+                                            If you experience problems activating your account, <br/>
                                             please forward your reset password email to support@wcrnational.com
                                             Our support team will complete your account activation within 24-48 hours.
                                         </div>
@@ -123,7 +125,7 @@
                                  *ngIf="(authType == 'register' || authType == 'login' || authType == 'resetPassword')"
                                  [style.display]="resetPassword ? 'none': 'block'">
 
-                                <div style="color:darkred !important" class="col-sm-12 pd-l-0-f" *ngIf="(authType == 'resetPassword')">
+                                <div class="col-sm-12 red-text tx-18 tx-bold" style="margin-top: -40px;" *ngIf="(authType == 'resetPassword')">
                                     If your email address is registered then you will recieve a password reset email.
                                 </div>
 

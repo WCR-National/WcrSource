@@ -33,7 +33,6 @@ import {
 } from './services/auth';
 import { SearchService, MessageService } from './services/search';
 import { SharedLayoutComponent } from './shared/shared-layout/shared-layout.component';
-import { AssociateModule } from './associate/associate.module';
 import { XMLToJSON } from './_helpers/xml-to-json';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SupportComponent } from './components/support/support.component';
@@ -73,7 +72,6 @@ import { AuthModalComponent } from './components/auth-modal/auth-modal.component
         ShowAuthedDirective,
         ShowAuthedAssociateDirective,
         SharedLayoutComponent
-
     ],
     imports: [
         BrowserModule,

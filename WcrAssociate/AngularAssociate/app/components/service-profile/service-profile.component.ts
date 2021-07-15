@@ -90,14 +90,7 @@ export class ServiceProfileComponent implements OnInit {
                     else if (thisStatus.id == '5') {
                         thisStatus.isTabMortgageStart = false;
                         thisStatus.isTabInsuranceStart = false;
-
-
-
-
-
-
-
-
+                        
                         thisStatus.isTabRealtorsStart = true;
                         thisStatus.switchTabs('realtorsTabId');
 

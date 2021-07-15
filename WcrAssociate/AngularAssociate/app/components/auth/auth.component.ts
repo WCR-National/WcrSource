@@ -748,7 +748,7 @@ export class AuthComponent implements OnInit {
                     if (data.d == "1") {
 
                         if ($(docs).find("Mobile").text() == '') {
-                            if (this.returnUrl != '') {
+                            if (this.returnUrl != '' && this.returnUrl !== undefined) {
                                 this.ngZone.run(() => this.router.navigate([this.returnUrl]));
                                 //this.router.navigate([this.returnUrl]);
                             }
@@ -1270,7 +1270,8 @@ export class AuthComponent implements OnInit {
     }
 
     submitFormResetPassword() {
-        
+
+        this.isSubmitting = true;
         let thisStatus = this;
         const credentials = this.authForm.value;
         this.userService
@@ -1281,13 +1282,14 @@ export class AuthComponent implements OnInit {
                     var xml = $(xmlDoc);
                     var docs = xml.find("associateExists");
                     $.each(docs, function (i, docs) {
+                        debugger;
                         if ($(docs).find("AccountId").text() != "0") {
                             thisStatus.userService
                                 .attemptResetAssociatePassword(credentials.email)
                                 .then((data1: any) => {
                                     if (data1 == "0") {
                                         thisStatus.resetPassword = true;
-                                        thisStatus.loginErrorMessage = "If your email address is registered then you will recieve a temporary password. <br> Once you have logged in using your temporary password. <br> Please update to a new password in the profile settings.";
+                                        thisStatus.loginErrorMessage = "If your email address is registered then you will recieve a temporary password." + '\n' + "Once you have logged in using your temporary password. " +'\n' +" Please update to a new password in the profile settings.";
                                     }
                                 });
                         }
