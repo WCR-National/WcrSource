@@ -144,5 +144,22 @@ namespace ClsLibrary.Bal
                 objTopSearch = null;
             }
         }
+
+        public ServiceAdvertisementObject GetServiceAdvertisementByZipcode(int inConsumerId, int inZipCode, int inCategoryId) {
+            DllTopSearch dllTopSearch = new DllTopSearch();
+            try
+            {
+                return dllTopSearch.GetServiceAdvertisementByZipcode(inConsumerId, inZipCode, inCategoryId).Result;
+            }
+            catch (Exception exc)
+            {
+                throw new Exception("FAILURE:::BllTopSearch - GetServiceAdvertisementByZipcode Error Msg: " + exc.Message);
+            }
+            finally
+            {
+                dllTopSearch = null;
+            }
+
+        }
     }
 }

@@ -154,6 +154,7 @@
     <Compile Include="PropertyLayer\Associate\Sale\PropAdvImages.cs" />
     <Compile Include="PropertyLayer\Associate\Sale\PropSales.cs" />
     <Compile Include="PropertyLayer\Associate\Service\PropService.cs" />
+    <Compile Include="PropertyLayer\ConsumerServicesObjects.cs" />
     <Compile Include="PropertyLayer\PropAssociateLogin.cs" />
     <Compile Include="PropertyLayer\PropAssociateMembership.cs" />
     <Compile Include="PropertyLayer\PropAssociateRegistration.cs" />

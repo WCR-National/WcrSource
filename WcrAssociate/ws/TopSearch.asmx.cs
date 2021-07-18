@@ -176,5 +176,11 @@ namespace WcrAssociate.Associate.ws
             str = objInnerpage.SelectServicesListData(zipcode, Category);
             return str;
         }
+
+        [WebMethod(EnableSession = true)]
+        public ServiceAdvertisementObject GetServiceAdvertisementByZipcode(int inConsumerId, int inZipCode, int inCategoryId) {
+            BllTopSearch bllTopSearch = new BllTopSearch();
+            return bllTopSearch.GetServiceAdvertisementByZipcode(inConsumerId, inZipCode, inCategoryId);
+        }
     }
 }

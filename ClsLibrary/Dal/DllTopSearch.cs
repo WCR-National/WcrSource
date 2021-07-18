@@ -6,12 +6,17 @@ using ClsLibrary.Bal;
 using System.Net;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using System.Net.Http;
 using WcrClassLibrary;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
 namespace ClsLibrary.Dal
 {
     public class DllTopSearch
     {
         readonly ConnectionClass objCon = new ConnectionClass();
+        readonly bool DebugEvironment = System.Configuration.ConfigurationManager.AppSettings["Debug"].ToString().Equals("Yes") ? true : false;
 
         public string SelectTopSearch(int zipCode)
         {
@@ -245,14 +250,31 @@ namespace ClsLibrary.Dal
                 return location.ZipCode;
                    
             }         
-
-           
-
         }
 
-            
-    
-    
+        public async Task<ServiceAdvertisementObject> GetServiceAdvertisementByZipcode(int inConsumerId, int inZipCode, int inCategoryId)
+        {
+            ServiceAdvertisementObject returnObject;
+
+            using (WcrHttpClient client = new WcrHttpClient(DebugEvironment, WcrVault.Gateway.getwcrusername, WcrVault.Gateway.getwcrpassword))
+            {
+                HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.BadRequest);
+                string wcrApiEndpoint = string.Format("api/ConsumerServices/GetServiceAdvertisementByZipcode?inConsumerId={0}&inZipCode={1}&inCategoryId={2}", inConsumerId, inZipCode, inCategoryId);
+
+                resp = await client.GetAsync(wcrApiEndpoint);
+
+                if (resp.IsSuccessStatusCode)
+                {
+                    return returnObject = JsonConvert.DeserializeObject<ServiceAdvertisementObject>(resp.Content.ReadAsStringAsync().Result);
+                }
+                else
+                {
+                    throw new Exception("ERROR: DllTopSearch.cs - GetServiceAdvertisementByZipcode(...) Error");
+                }
+            }
+
+            return null;
+        }
     }
     public class Location
     {
