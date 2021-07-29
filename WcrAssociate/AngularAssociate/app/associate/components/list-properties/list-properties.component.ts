@@ -2683,9 +2683,15 @@ export class ListPropertiesComponent implements OnInit {
     changeCityPA() {
 
         debugger;
-        var state = this.PostAdvertisement.get('statePA').value != null ? this.PostAdvertisement.get('statePA').value.value : null;
-
+        var state = (this.PostAdvertisement.get('statePA').value != null && this.PostAdvertisement.get('statePA').value !== undefined ) ? this.PostAdvertisement.get('statePA').value.value : null;
         var city = this.PostAdvertisement.get('cityPA').value;
+
+        if (city !== undefined && city != '' && city != null) {
+            this.BindCityWiseStatesPA(this.PostAdvertisement.get('cityPA').value);
+        }
+        else {
+            this.BindCityWiseStatesPA(city);
+        }
 
         if (state !== undefined && state != null) {
             this.BindStateWiseZipCodeForSearch(state, city);
