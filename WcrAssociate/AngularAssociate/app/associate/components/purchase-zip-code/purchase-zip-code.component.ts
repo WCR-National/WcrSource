@@ -1483,9 +1483,6 @@ export class PurchaseZipCodeComponent implements OnInit {
             //var index = dTable.fnGetPosition(tr[0]);
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
-
-
-
             thisStatus.ngZone.run(() => {
 
                 thisStatus.onOpenModalConfirmationClick($(this));

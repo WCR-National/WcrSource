@@ -21289,10 +21289,92 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
     .toast-card.Warning{
     background-color : darkred !important;
 }
-.editor_remove.cancel, .editor_remove.cancel:hover {
-    color: darkred;
+.editor_remove.cancel {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    padding: 8px 9px;
+    display: block;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-decoration: none;
+    width: 63px;
+    text-align: center;
+    background-color: #d7d7d7;
+    color : #000;
 }
-.editor_remove.purchaseId, .editor_remove.purchaseId:hover {
-    color: darkgreen;
+.editor_remove.cancel:hover {
+
+    background-color: red;
+    color : #fff;
 }
+.remove {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    padding: 8px 9px;
+    display: block;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-decoration: none;
+    width: 63px;
+        text-align: center;
+    background-color: #d7d7d7;
+    color: #000;
+}
+.remove:hover {
+    background-color: red;
+    color : #fff;
+}
+
+.edit {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    padding: 8px 9px;
+    display: block;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-decoration: none;
+    width: 63px;
+        text-align: center;
+    background-color: #d7d7d7;
+    color: #000;
+}
+.edit:hover {
+    background-color: #0e3a6b;
+    color : #fff;
+}
+
+
+.editor_remove.purchaseId {
+        text-align: center;
+       font-size: 14px;
+    font-weight: 500;
+    line-height: 19px;
+    padding: 8px 9px;
+    display: block;
+    position: relative;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-decoration: none;
+    width: 63px;
+    background-color: #d7d7d7;
+    color : #000;
+}
+
+ .editor_remove.purchaseId:hover {
+
+    background-color: darkgreen;
+    color : #fff;
+}
+    .tx-red{
+        color:#637382;   
+     }
+    .tx-red:hover, tx-red:focus{
+        color: red !important;   
+     }
 }

@@ -95,6 +95,19 @@ export class SalesAdvertisementsService {
             ));
     } //select categories
 
+
+    GetServiceAdvertisementByZipcode(consumerId, zipc, CategoryID): Observable<any> {
+            debugger;
+        let urlToViewserviceAdvertisements: string = "ws/TopSearch.asmx/GetServiceAdvertisementByZipcode";
+        return this.apiService.post(urlToViewserviceAdvertisements, { inConsumerId: consumerId, inZipCode: zipc, inCategoryId: CategoryID })
+                .pipe(map(
+                    data => {
+
+                        return data;
+                    }
+                ));
+        } //select categories
+
     SelectServicesListData(zipc, CategoryID): Observable<any> {
         debugger;
         let urlToViewHomeAdvertisementsWithParam: string = "ws/TopSearch.asmx/SelectServicesListData";

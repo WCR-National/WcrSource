@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 
@@ -8,6 +8,9 @@ import { MessageService } from 'AngularAssociate/app/services/search';
 import { ProfileService } from '../../associate-service/Profile.service';
 import { ClientDetailsService } from '../../associate-service/client-details.service';
 import { DashboardService } from '../../associate-service/dashboard.service';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Toaster } from "ngx-toast-notifications";
 
 
 
@@ -22,11 +25,12 @@ export class DashboardComponent implements OnInit {
     myPropertyListings: string = '';
     myZipCodes: string = '';
     showInformation = false;
+    dTable: any;
 
-
-    constructor(private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private clientDetailsService: ClientDetailsService, private xmlToJson: XMLToJSON, private profileService: ProfileService, private _messageService: MessageService) {
+    constructor(private modalService: NgbModal, private toaster: Toaster, private ngZone: NgZone, private route: ActivatedRoute, private router: Router, private dashboardService: DashboardService, private clientDetailsService: ClientDetailsService, private xmlToJson: XMLToJSON, private profileService: ProfileService, private _messageService: MessageService) {
 
     }
+
     ngOnInit() {
         $.fn.dataTable.ext.errMode = 'none';
 
@@ -267,7 +271,7 @@ export class DashboardComponent implements OnInit {
 
     initialiseInterestedCustomerDataTable(asyncData) {
 
-        let dTable: any = $('#interestedCustomers');
+        this.dTable = $('#interestedCustomers');
         if (asyncData === undefined) {
             asyncData = {
                 'id': '',
@@ -279,7 +283,7 @@ export class DashboardComponent implements OnInit {
                 'SubCategory': ''
             };
         }
-        dTable.dataTable({
+        this.dTable.dataTable({
             data: asyncData,
             
             columns: [
@@ -308,7 +312,7 @@ export class DashboardComponent implements OnInit {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
+                    defaultContent: '<a href="" class="editor_remove delete_btn"><i class="fas fa-fw fa-trash-alt tx-20 tx-red" aria-hidden="true"></i></a>'
                 }
             ],
             "autoWidth": false,
@@ -337,18 +341,16 @@ export class DashboardComponent implements OnInit {
             var tr = $(this).closest('tr');
             console.log($(this).closest('tr').children('td:first').text());
 
+            thisStatus.ngZone.run(() => {
+                thisStatus.onOpenModalConfirmationClick($(this));
+            });
+
+           
+
             ////get the real row index, even if the table is sorted 
             //var index = dTable.fnGetPosition(tr[0]);
             ////alert the content of the hidden first column 
             //console.log(dTable.fnGetData(index)[0]);
-
-            dTable.api().row($(this).parents('tr')).remove().draw(false);
-
-
-            thisStatus.clientDetailsService
-                .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
-                .subscribe(
-                    data => { });
 
         });
 
@@ -534,6 +536,33 @@ export class DashboardComponent implements OnInit {
 
     }
 
+    onOpenModalConfirmationClick(deleteow): void {
+
+        const modal: NgbModalRef = this.modalService.open(ConfirmationModalComponent, { size: 'lg', backdrop: "static" });
+        (<ConfirmationModalComponent>modal.componentInstance).dataToTakeAsInputForZipCode = deleteow.closest('tr').children('td:nth-child(1)').text();
+
+        const modalComponent: ConfirmationModalComponent = modal.componentInstance;
+
+        //Case for cancel
+        modal.componentInstance.dismissConfirmationEvent.subscribe((data) => {
+            console.log('dismiss confirmation');
+            //this.overlayLoadingOnPurchase = false;
+        });
+
+        //Case for confirmation 
+        modal.componentInstance.CancelConfirmationEvent.subscribe((data) => {
+            //this.showToast('success', 'Purchasing is in process');
+            debugger;
+            console.log(deleteow.closest('tr').children('td:first').text());
+            this.clientDetailsService
+                .deleteCustomerRecords(deleteow.closest('tr').children('td:first').text())
+                .subscribe(
+                    data => {
+                        this.dTable.api().row(deleteow.parents('tr')).remove().draw(false);
+                        this.showToast('success', 'Zip Code successfully removed.');
+                    });
+        });
+    }
 
     attemptToZipcodeData() {
 
@@ -634,12 +663,20 @@ export class DashboardComponent implements OnInit {
 
     }
 
-
     attemptToAllAdvertisement() {
 
 
     }
 
+    showToast(toastrType, text) {
+        const type = toastrType;
+        this.toaster.open({
+            text: text,
+            caption: type,
+            type: type,
+            duration: 8000
+        });
+    }
 
 }
 

@@ -1468,7 +1468,7 @@ export class ListPropertiesComponent implements OnInit {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="javascript:void(0)" class="edit tx-info tx-700" style="color:#090bfc;">Edit</a>'
+                    defaultContent: '<a href="javascript:void(0)" class="edit  tx-info tx-700" >Edit</a>'
                 },
                 {
                     data: null,

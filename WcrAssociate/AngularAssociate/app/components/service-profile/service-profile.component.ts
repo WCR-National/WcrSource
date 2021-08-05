@@ -11,6 +11,7 @@ import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Toaster } from 'ngx-toast-notifications';
 import { AuthModalComponent } from '../auth-modal/auth-modal.component';
+import { UserService } from 'AngularAssociate/app/services/auth/user.service';
 
 declare const gridLayoutSwitcher: any;
 
@@ -45,7 +46,8 @@ export class ServiceProfileComponent implements OnInit {
 
     constructor(private fb: FormBuilder, private renderer: Renderer2, private searchService: SearchService, @Inject(PLATFORM_ID) private platformId: Object,
         private _messageService: MessageService, private router: Router, private salesAdvertisements: SalesAdvertisementsService, private xmlToJson: XMLToJSON,
-        private route: ActivatedRoute, private modalService: NgbModal, private toaster: Toaster) {
+        private route: ActivatedRoute, private modalService: NgbModal, private toaster: Toaster,
+        private userService: UserService) {
 
     }
 
@@ -124,37 +126,39 @@ export class ServiceProfileComponent implements OnInit {
 
     GetSalesAdvListings(id, zipcode, name, jtype, catName) {
         debugger;
-        this.salesAdvertisements.SelectServicesListData(zipcode, id).subscribe(
+        let consumerId = 0;
+        if (localStorage.getItem('jwtToken')) {
+            var user: any = JSON.parse(localStorage.getItem('jwtToken'));
+        }
+
+        if (this.isLoggedInValue == "0") {
+            consumerId = 0;
+        }
+        if (user !== undefined)
+            consumerId = Number(user.id);
+
+        this.salesAdvertisements.GetServiceAdvertisementByZipcode(consumerId, zipcode, id).subscribe(
             (data) => {
                 debugger;
-                if (data.d.length > 0) {
-                    debugger;
-                    //var cnt = 1;
-                    //var xmlDoc1 = $.parseXML(data.d);
-                    //var xml1 = $(xmlDoc1);
-                    //var docs = xml1.find("GetServicesList");
-                    var xmlDoc = $.parseXML(data.d);
-                    var json = this.xmlToJson.xml2json(xmlDoc, "");
-                    var dataJson = JSON.parse(json);
-                    if (dataJson.NewDataSet != undefined && dataJson.NewDataSet != null && dataJson.NewDataSet != '') {
+
+                if (data != null && data !== undefined) {
+
+                    if (data.d != undefined && data.d != null && data.d != '') {
                         this.dataServicesList = [];
-                        if (dataJson.NewDataSet.GetServicesList != undefined && dataJson.NewDataSet.GetServicesList != null && dataJson.NewDataSet.GetServicesList != '') {
-                            if (!$.isArray(dataJson.NewDataSet.GetServicesList)) { // Returns: "object"
 
-                                this.dataServicesList.push(dataJson.NewDataSet.GetServicesList);
-                                this.AddListOfServices(this.dataServicesList, id);
+                        if (!$.isArray(data.d)) { // Returns: "object"
 
-                            }
-                            else {
-                                debugger;
-                                var thisStatus = this;
-                                $.each(dataJson.NewDataSet.GetServicesList, function (index, item) {
-                                    thisStatus.dataServicesList.push(item);
-                                });
-                                this.AddListOfServices(this.dataServicesList, id);
-                            }
+                            this.dataServicesList.push(data.d);
+                            this.AddListOfServices(this.dataServicesList, id);
                         }
-
+                        else {
+                            debugger;
+                            var thisStatus = this;
+                            $.each(data.d, function (index, item) {
+                                thisStatus.dataServicesList.push(item);
+                            });
+                            this.AddListOfServices(this.dataServicesList, id);
+                        }
                         this.isDataNotFoundForMortgage = false;
                         this.isDataNotFoundForInsurance = false;
                         this.isDataNotFoundForRealtors = false;
@@ -169,14 +173,60 @@ export class ServiceProfileComponent implements OnInit {
                         this.isTabInsuranceStart = false;
                         this.isTabRealtorsStart = false;
                     }
-
-                    setTimeout(function () {
-                        this.isloadingIconVisible = false;
-                    }, 1000);
                 }
                 else {
 
                 }
+                //if (data.d.length > 0) {
+                //    debugger;
+                //    //var cnt = 1;
+                //    //var xmlDoc1 = $.parseXML(data.d);
+                //    //var xml1 = $(xmlDoc1);
+                //    //var docs = xml1.find("GetServicesList");
+                //    var xmlDoc = $.parseXML(data.d);
+                //    var json = this.xmlToJson.xml2json(xmlDoc, "");
+                //    var dataJson = JSON.parse(json);
+                //    if (dataJson.NewDataSet != undefined && dataJson.NewDataSet != null && dataJson.NewDataSet != '') {
+                //        this.dataServicesList = [];
+                //        if (dataJson.NewDataSet.GetServicesList != undefined && dataJson.NewDataSet.GetServicesList != null && dataJson.NewDataSet.GetServicesList != '') {
+                //            if (!$.isArray(dataJson.NewDataSet.GetServicesList)) { // Returns: "object"
+
+                //                this.dataServicesList.push(dataJson.NewDataSet.GetServicesList);
+                //                this.AddListOfServices(this.dataServicesList, id);
+
+                //            }
+                //            else {
+                //                debugger;
+                //                var thisStatus = this;
+                //                $.each(dataJson.NewDataSet.GetServicesList, function (index, item) {
+                //                    thisStatus.dataServicesList.push(item);
+                //                });
+                //                this.AddListOfServices(this.dataServicesList, id);
+                //            }
+                //        }
+
+                //        this.isDataNotFoundForMortgage = false;
+                //        this.isDataNotFoundForInsurance = false;
+                //        this.isDataNotFoundForRealtors = false;
+
+                //    }
+                //    else {
+
+                //        this.isDataNotFoundForMortgage = true;
+                //        this.isDataNotFoundForInsurance = true;
+                //        this.isDataNotFoundForRealtors = true;
+                //        this.isTabMortgageStart = false;
+                //        this.isTabInsuranceStart = false;
+                //        this.isTabRealtorsStart = false;
+                //    }
+
+                //    setTimeout(function () {
+                //        this.isloadingIconVisible = false;
+                //    }, 1000);
+                //}
+                //else {
+
+                //}
             });
     }
 
@@ -239,8 +289,8 @@ export class ServiceProfileComponent implements OnInit {
 
             html += '<div class="listing-carousel" >';
             debugger;
-            if (item.photo != undefined && item.photo != null && item.photo != "") {
-                let itemImage = "../../../../AssociatePhoto/" + item.photo;
+            if (item.PhotoFileName != undefined && item.PhotoFileName != null && item.PhotoFileName != "") {
+                let itemImage = "../../../../AssociatePhoto/" + item.PhotoFileName;
                 html += '<div><img class="imageServices" src="' + itemImage + '" alt=""></div>';
             }
             //if (item.advImage1 == undefined && item.advImage1 != null && item.advImage1 != "")
@@ -255,13 +305,13 @@ export class ServiceProfileComponent implements OnInit {
 
             html += '<div class="listing-content">';
             html += '<div class="listing-title" >';
-            html += '<h4><a href="javascript:void(0)" > ' + item.Name;
+            html += '<h4><a href="javascript:void(0)" > ' + item.FirstName;
             html += '</a></h4>';
 
             //https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom
             html += '<a href="javascript:void(0);" class="listing-address popup-gmaps" >';
             html += '<i class="fa fa-map-marker" > </i>';
-            html += item.cityID + ". " + item.StateID + ", " + item.zipcode
+            html += item.City + ". " + item.State + ", " + item.ZipCode
             html += '</a>';
 
             //if (item.description.length > 150)
@@ -273,25 +323,17 @@ export class ServiceProfileComponent implements OnInit {
 
 
             html += '<ul class="listing-details" >';
-            html += '<li><b>License #</b>: ' + item.LicenseId + '</li>';
-            html += '<li><b> Associate ID </b>:' + item.associateid + '</li>';
-            html += '<li><b> Category Name </b>: ' + thisStatus.catName + ' </li>';
-            //if (item.subcategoryID == '1')
-            //    html += '<li> Category Name: Home </li>';
-            //if (item.subcategoryID == '2')
-            //    html += '<li> Category Name: Town Home </li>';
-            //if (item.subcategoryID == '3')
-            //    html += '<li> Category Name: Multi Family </li>';
-            //if (item.subcategoryID == '4')
-            //    html += '<li> Category Name: Land </li>';
+            html += '<li><b>License #</b>: ' + item.LicenseId  + '</li>';
+            html += '<li><b> Associate ID </b>:' + item.AssociateId  + '</li>';
+            //html += '<li><b> Category Name </b>: ' + thisStatus.catName + ' </li>';
 
             html += '</ul>';
 
             html += '<div class="listing-footer" >';
             //{{  }}
-            var strParamContactAssociateShowInterest = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
+            var strParamContactAssociateShowInterest = thisStatus.id + "," + item.AssociateId + ",2," + item.ZipCode + "," + count + ",1";
 
-            var strParamContactAssociate = thisStatus.id + "," + item.associateid + ",2," + item.zipcode + "," + count;
+            var strParamContactAssociate = thisStatus.id + "," + item.AssociateId + ",2," + item.ZipCode + "," + count;
 
             if (thisStatus.isLoggedInValue == "0") {
                 html += '<a href="javascript:void(0)" class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '"> Contact Associates </a>';
@@ -301,12 +343,11 @@ export class ServiceProfileComponent implements OnInit {
             }
 
             if (thisStatus.isLoggedInValue == "0") {
-
                 var id = thisStatus.id;// + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
                 html += '<a class="btn button border showInterestBookMarkClass showInterestBookMarkId mg-l-15-f" data-id="' + id + '"  data-zipcode="' + thisStatus.zipcode + '" > Bookmark </a>';
             }
             else {
-                if (item.ConsumerID != null) {
+                if (item.ConsumerId != null) {
                     html += '<a class="btn button border bookMarked SaveBookmarkId   mg-l-15-f" data-id="' + thisStatus.id + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
                 }
                 else {

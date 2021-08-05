@@ -20,12 +20,20 @@ export class ConfirmationModalComponent implements OnInit {
     @Output() CancelConfirmationEvent: EventEmitter<any> = new EventEmitter();
 
     @Input() dataToTakeAsInputForZipCode: any;
-
+    IsShowZipCode = false;
     constructor(private route: ActivatedRoute, private router: Router, private paymentService: PaymentService, private xmlToJson: XMLToJSON,
         private fb: FormBuilder, @Optional() private activeModal: NgbActiveModal, private toaster: Toaster) {
     }
 
-    ngOnInit() {
+    ngOnInit()
+    {
+        if (this.dataToTakeAsInputForZipCode.length >= 4)
+        {
+            this.IsShowZipCode = true;
+        }
+        else {
+            this.IsShowZipCode = false;
+        }
     }
 
     public dismissConfirmation(): void
