@@ -307,7 +307,7 @@ export class HomeComponent implements OnInit {
                                                 let l_zipcode = zipc; //($(doc).find("Zipcode").text());
                                                 let l_name = ($(doc).find("name").text());
                                                 debugger;
-                                                let queryToSalesAdvertisementList = { 'ca': '0', 'id': l_id, 'zipcode': l_zipcode, 'name': l_name, 'jtype': 'Sales', 'catName': 'RealEstate' };
+                                                let queryToSalesAdvertisementList = { 'ca': '0', 'id': l_id, 'zipcode': $(doc1).find("zipcode").text(), 'name': l_name, 'jtype': 'Sales', 'catName': 'RealEstate' };
                                                 ////innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
                                                 //innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
                                                 //innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
@@ -420,7 +420,7 @@ export class HomeComponent implements OnInit {
                                             if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
 
                                                 console.log('entered in ' + searchByIpOrtxtSearch);
-                                                let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcode: zipc, name: ($(docs).find("name").text()), jtype: 'Services', catName: ($(docs).find("categoryName").text()) };
+                                                let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcode: $(docs1).find("zipcode").text(), name: ($(docs).find("name").text()), jtype: 'Services', catName: ($(docs).find("categoryName").text()) };
 
                                                 ////innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
                                                 //innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span>";
@@ -886,7 +886,7 @@ export class HomeComponent implements OnInit {
                             innerHtmlSales += " <div class='fullrow innerblock card-main pd-20 mg-b-30' >";
 
                             //innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
-                            let queryToSalesAdvertisementList = { 'ca': '0', 'id': ($(doc).find("id").text()), 'zipcode': zipc, 'name': ($(doc).find("name").text()), 'jtype': 'Sales', 'catName': 'RealEstate' };
+                            let queryToSalesAdvertisementList = { 'ca': '0', 'id': ($(doc).find("id").text()), 'zipcode': $(doc).find("zipcode").text(), 'name': ($(doc).find("name").text()), 'jtype': 'Sales', 'catName': 'RealEstate' };
                             innerHtmlSales += "<a class='salesLink'  data-id='sales-advertisements'  data-qparam ='" + JSON.stringify(queryToSalesAdvertisementList) + "'><span><i><img class='image-size-icons' src='ws/ShowSubcategoryIcon.ashx?ID=" + ($(doc).find("id").text()) + "'  alt=''/></i></span></a>";
                             innerHtmlSales += "<h3 class='theme-text-color' >" + ($(doc).find("name").text()) + "</h3>";
                             innerHtmlSales += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(doc).find("detail").text()) + "  </p>";
@@ -936,7 +936,7 @@ export class HomeComponent implements OnInit {
 
                             innerHtmlServices += " <div class='col-sm-3 text-center block '>";
                             innerHtmlServices += " <div class='fullrow innerblock card-main pd-20 mg-b-30 pd-t-35'>";
-                            let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcod: zipc, name: ($(docs).find("name").text()), jtype: 'Services', catName: ($(docs).find("categoryName").text()) };
+                            let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcod: $(docs).find("zipcode").text(), name: ($(docs).find("name").text()), jtype: 'Services', catName: ($(docs).find("categoryName").text()) };
                             innerHtmlServices += "<a class='servicesLink'  data-id='service-profile' data-qparam='" + JSON.stringify(qParamsToServiceProfileList) + "'><span><i><img class='image-size-icons' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span></a>";
                             innerHtmlServices += " <h3 class='theme-text-color' >" + ($(docs).find("categoryName").text()) + " </h3>";
                             innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";

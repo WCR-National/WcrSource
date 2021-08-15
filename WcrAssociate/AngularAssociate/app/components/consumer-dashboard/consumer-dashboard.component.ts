@@ -307,7 +307,7 @@ export class ConsumerDashabordComponent implements OnInit {
                                                 let l_zipcode = zipc; //($(doc).find("Zipcode").text());
                                                 let l_name = ($(doc).find("name").text());
 
-                                                let queryToSalesAdvertisementList = { 'ca': '0', 'id': l_id, 'zipcode': l_zipcode, 'name': l_name, 'jtype': 'Sales', 'catName': 'RealEstate' };
+                                                let queryToSalesAdvertisementList = { 'ca': '0', 'id': l_id, 'zipcode': $(doc1).find("zipcode").text() , 'name': l_name, 'jtype': 'Sales', 'catName': 'RealEstate' };
                                                 console.log(queryToSalesAdvertisementList);
                                                 ////innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
                                                 //innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
@@ -342,7 +342,7 @@ export class ConsumerDashabordComponent implements OnInit {
                                 if (flag == 1) { }
                                 else {
 
-                                    let queryToSalesAdvertisementList = { 'ca': '0', 'id': ($(doc).find("id").text()), 'zipcode': zipc, 'name': ($(doc).find("name").text()), 'jtype': 'Sales', 'catName': 'RealEstate' };
+                                    let queryToSalesAdvertisementList = { 'ca': '0', 'id': ($(doc).find("id").text()), 'zipcode': $(doc).find("zipcode").text(), 'name': ($(doc).find("name").text()), 'jtype': 'Sales', 'catName': 'RealEstate' };
                                     // ? ca = 0 & id=" + ($(doc).find("id").text()) + " & zipcode=" + zipc + " & name=" + ($(doc).find("name").text()) + " & jtype=Sales & catName=RealEstate'
                                     console.log(queryToSalesAdvertisementList);
 
@@ -425,7 +425,7 @@ export class ConsumerDashabordComponent implements OnInit {
                                             if ($(docs).find("ID").text() == $(docs1).find("categoryid").text()) {
 
                                                 console.log('entered in ' + searchByIpOrtxtSearch);
-                                                let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcode: zipc, name: ($(docs).find("name").text()), jtype: 'Services', catName: ($(docs).find("categoryName").text()) };
+                                                let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcode: $(docs1).find("zipcode").text(), name: ($(docs).find("name").text()), jtype: 'Services', catName: ($(docs).find("categoryName").text()) };
 
                                                 ////innerHtmlServices += "<a href='" + urlToServiceProfileList + "'>";
                                                 //innerHtmlServices += "<span><i><img src='../../../AssociatePhoto/" + ($(docs1).find("photo").text()) + "'  alt=''/></i></span>";
@@ -763,7 +763,7 @@ export class ConsumerDashabordComponent implements OnInit {
                                     innerHtmlServices += " <div class='grid-item col-lg-3 col-md-4 col-sm-6 col-xs-12 text-center pd-sm-r-0'>";
                                     innerHtmlServices += "  <div class='card-main white darken-1' >";
 
-                                    let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcode: 0, name: ($(docs).find("name").text()), jtype: 'Services', catName:'RealEstate' };
+                                    let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcode: $(docs).find("zipcode").text(), name: ($(docs).find("name").text()), jtype: 'Services', catName:'RealEstate' };
 
                                     //innerHtmlSales += "<a href=''>";
                                     //innerHtmlServices += "<span><i><img src='images/icons/" + ($(docs).find("catImages").text()) + "'/></i></span>";
@@ -894,7 +894,7 @@ export class ConsumerDashabordComponent implements OnInit {
                             innerHtmlSales += " <div class='fullrow innerblock card-main pd-20 mg-b-30' >";
 
                             //innerHtmlSales = "<p>" + ($(doc).find("name").text()) + "  </p>";
-                            let queryToSalesAdvertisementList = { 'ca': '0', 'id': ($(doc).find("id").text()), 'zipcode': zipc, 'name': ($(doc).find("name").text()), 'jtype': 'Sales', 'catName': 'RealEstate' };
+                            let queryToSalesAdvertisementList = { 'ca': '0', 'id': ($(doc).find("id").text()), 'zipcode': $(doc).find("zipcode").text(), 'name': ($(doc).find("name").text()), 'jtype': 'Sales', 'catName': 'RealEstate' };
                             console.log(queryToSalesAdvertisementList);
 
                             //let urlToSalesAdvertisementList: string = "sales-advertisements?ca=0&id=" + ($(doc).find("id").text()) + "&zipcode=" + zipc + "&name=" + ($(doc).find("name").text()) + "&jtype=Sales&catName=RealEstate";
@@ -946,7 +946,7 @@ export class ConsumerDashabordComponent implements OnInit {
 
                             innerHtmlServices += " <div class='col-sm-3 text-center block '>";
                             innerHtmlServices += " <div class='fullrow innerblock card-main pd-20 mg-b-30 pd-t-35'>";
-                            let qParamsToServiceProfileList  = { ca: 0, id: ($(docs).find("ID").text()), zipcod: zipc, name: ($(docs).find("name").text()), jtype:'Services', catName: ($(docs).find("categoryName").text()) };
+                            let qParamsToServiceProfileList = { ca: 0, id: ($(docs).find("ID").text()), zipcod: $(docs).find("zipcode").text(), name: ($(docs).find("name").text()), jtype:'Services', catName: ($(docs).find("categoryName").text()) };
                             innerHtmlServices += "<a class='servicesLink' data-id='service-profile' data-qparam='" + JSON.stringify(qParamsToServiceProfileList) + "'><span><i><img class='image-size-icons' src='images/icons/" + ($(docs).find("catImages").text()) + "'  alt=''/></i></span></a>";
                             innerHtmlServices += " <h3 class='theme-text-color' >" + ($(docs).find("categoryName").text()) + " </h3>";
                             innerHtmlServices += "<p class='grey-text elipsis-text' style='text-align:left;'>" + ($(docs).find("Detail").text()) + "  </p>";

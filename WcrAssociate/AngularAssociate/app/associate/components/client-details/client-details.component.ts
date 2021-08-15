@@ -190,7 +190,7 @@ export class ClientDetailsComponent implements OnInit {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
+                    defaultContent: '<a href="" class="editor_remove"><i class="fas fa-fw fa-trash-alt tx-20 tx-red" aria-hidden="true"></i></a>'
                 }
             ],
             "autoWidth": true,
@@ -306,7 +306,7 @@ export class ClientDetailsComponent implements OnInit {
                 {
                     data: null,
                     className: "center",
-                    defaultContent: '<a href="" class="editor_remove">Delete</a>'
+                    defaultContent: '<a href="" class="editor_remove"><i class="fas fa-fw fa-trash-alt tx-20 tx-red" aria-hidden="true"></i></a>'
                 }
             ],
             "autoWidth": true,
