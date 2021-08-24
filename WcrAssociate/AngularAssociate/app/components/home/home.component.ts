@@ -307,7 +307,7 @@ export class HomeComponent implements OnInit {
                                                 let l_zipcode = zipc; //($(doc).find("Zipcode").text());
                                                 let l_name = ($(doc).find("name").text());
                                                 debugger;
-                                                let queryToSalesAdvertisementList = { 'ca': '0', 'id': l_id, 'zipcode': $(doc1).find("zipcode").text(), 'name': l_name, 'jtype': 'Sales', 'catName': 'RealEstate' };
+                                                let queryToSalesAdvertisementList = { 'ca': '0', 'id': l_id, 'zipcode': $(doc1).find("Zipcode").text(), 'name': l_name, 'jtype': 'Sales', 'catName': 'RealEstate' };
                                                 ////innerHtmlSales += "<a href='" + urlToSalesAdvertisementList + "'>";
                                                 //innerHtmlSales += "<span><i><img src='../../../Associate/Adv_img/" + ($(doc1).find("advMainImage").text()) + "'  alt=''/></i></span></a>";
                                                 //innerHtmlSales += "<h3 class='theme-text-color text-center'>" + ($(doc).find("name").text()) + "</h3>";
