@@ -39,6 +39,7 @@ export class ListPropertiesComponent implements OnInit {
     showSuccessMessage: string = '';
     isAddButtonPA: boolean = true;
     isPostButtonGreen: boolean = true;
+    toastRef;
     config = {
         height: 188,
         removeButtons: 'Image',
@@ -2115,7 +2116,7 @@ export class ListPropertiesComponent implements OnInit {
                         }
                         else {
                             this.isSubmittingPA = false;
-                            this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
+                            this.showToastCardError('Warning', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at 866.456.7331.");
                             this.cdr.detectChanges();
                             this._Counter++;
 
@@ -2171,8 +2172,8 @@ export class ListPropertiesComponent implements OnInit {
                         this.AdvertisementImages(parseInt(data.d), "No");
                     }
                     else {
-                        this.showToast('danger', "We can not complete this sales Advertisement Purchase at this time!!");
-                        this.showToast('danger', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at <b>866.456.7331.</b>");
+                        this.showToastCardError('Warning', "We can not complete this sales Advertisement Purchase at this time!!");
+                        this.showToastCardError('Warning', "Please validate the card information that we have on file.  If you still require additional assistance, please contact customer support at <b>866.456.7331.</b>");
 
                     }
                     this.isSubmittingPA = false;
@@ -3029,6 +3030,17 @@ export class ListPropertiesComponent implements OnInit {
             caption: type,
             type: type,
         });
+    }
+
+    showToastCardError(toastrType, text) {
+        const type = toastrType;
+        this.toastRef = this.toaster.open({
+            text: text,
+            caption: type,
+            type: type,
+            duration: 8000000
+        });
+        //hide manually   this.toastr.clear(this.toastRef.ToastId);
     }
 
     Valid1() {

@@ -78,7 +78,6 @@ export class DashboardComponent implements OnInit {
                         var docs = xml.find("TotalInterestedConsumer");
                         var cartd = [];
                         $.each(docs, function (i, docs) {
-
                             countInterestedCutomers = $(docs).find("TotalCount").text();
                         });
                         //$("#interestedConsumer").html(cartd.join(''));
@@ -559,7 +558,8 @@ export class DashboardComponent implements OnInit {
                 .subscribe(
                     data => {
                         this.dTable.api().row(deleteow.parents('tr')).remove().draw(false);
-                        this.showToast('success', 'Zip Code successfully removed.');
+                        this.attemptToCountInterestedCustomers();
+                        this.showToast('success', 'Successfully removed.');
                     });
         });
     }

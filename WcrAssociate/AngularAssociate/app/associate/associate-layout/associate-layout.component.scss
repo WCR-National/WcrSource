@@ -9254,6 +9254,8 @@ a.badge-danger-light:focus {
 .card-title {
     color: #06072d;
     line-height: 1;
+    font-weight:700;
+    font-size: 14px;
 }
 
 .card-title-uppercase {
@@ -21361,7 +21363,7 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     text-decoration: none;
-    width: 63px;
+    width: 58%;
     background-color: #d7d7d7;
     color : #000;
 }
@@ -21377,4 +21379,10 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
     .tx-red:hover, tx-red:focus{
         color: red !important;   
      }
+    .ng-star-inserted .close-button {
+        font-size: 2rem;
+        top: 1.3rem;
+        right: .4rem;
+        color: #fff;
+    }
 }

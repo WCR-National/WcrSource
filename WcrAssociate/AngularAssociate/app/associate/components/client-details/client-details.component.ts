@@ -4,6 +4,8 @@ import { XMLToJSON } from 'AngularAssociate/app/_helpers/xml-to-json';
 import { ClientDetailsService } from '../../associate-service/client-details.service';
 import * as $ from 'jquery';
 import 'datatables.net';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'associate-client-details-page',
@@ -15,8 +17,10 @@ export class ClientDetailsComponent implements OnInit {
     servicesCount: string = '';
     TotalCount: string = '';
     showSuccessMessage: string = '';
-    constructor(private route: ActivatedRoute, private router: Router, private clientDetailsService: ClientDetailsService, private xmlToJson: XMLToJSON) {
-
+    dTable: any;
+    dTableServices: any
+    constructor(private route: ActivatedRoute, private router: Router, private clientDetailsService: ClientDetailsService,
+        private xmlToJson: XMLToJSON, private modalService: NgbModal) {
     }
 
     ngOnInit() {
@@ -148,7 +152,7 @@ export class ClientDetailsComponent implements OnInit {
 
     initializedDataTableSales(asyncData) {
         console.log(asyncData);
-        let dTable: any = $('#sales');
+        this.dTable = $('#sales');
         let thisStatus: any = this;
         if (asyncData === undefined)
         {
@@ -163,7 +167,7 @@ export class ClientDetailsComponent implements OnInit {
                 'SubCategory': "",
             };
         }
-        dTable.dataTable({
+        this.dTable.dataTable({
             data: asyncData,
             columns: [
                 {
@@ -211,26 +215,9 @@ export class ClientDetailsComponent implements OnInit {
 
         $('#sales').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
-
-            ////get the real row index, even if the table is sorted 
-            //var index = dTable.fnGetPosition(tr[0]);
-            ////alert the content of the hidden first column 
-            //console.log(dTable.fnGetData(index)[0]);
-
-            dTable.api().row($(this).parents('tr')).remove().draw(false);
-
-
-            thisStatus.clientDetailsService
-                .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
-                .subscribe(
-                    data => {
-                        thisStatus.getClientDetailsSalesData();
-                        thisStatus.getSalesCount();
-                        thisStatus.getTotalSalesAndServicesCount();
-                    });
+            thisStatus.ngZone.run(() => {
+                thisStatus.onOpenModalConfirmationClick($(this));
+            });
         });
     }
 
@@ -269,7 +256,7 @@ export class ClientDetailsComponent implements OnInit {
     initializedDataTableServices(asyncData) {
         console.log(asyncData);
 
-        let dTable: any = $('#services');
+        this.dTableServices = $('#services');
         let thisStatus: any = this;
         if (asyncData === undefined) {
             asyncData = {
@@ -282,7 +269,7 @@ export class ClientDetailsComponent implements OnInit {
 
             };
         }
-        dTable.dataTable({
+        this.dTableServices.dataTable({
             data: asyncData,
             columns: [
                 {
@@ -327,29 +314,12 @@ export class ClientDetailsComponent implements OnInit {
 
         $('#services').on('click', 'a.editor_remove', function (e) {
             e.preventDefault();
-            
-            var tr = $(this).closest('tr');
-            console.log($(this).closest('tr').children('td:first').text());
 
-            ////get the real row index, even if the table is sorted 
-            //var index = dTable.fnGetPosition(tr[0]);
-            ////alert the content of the hidden first column 
-            //console.log(dTable.fnGetData(index)[0]);
-
-            dTable.api().row($(this).parents('tr')).remove().draw(false);
-
-
-            thisStatus.clientDetailsService
-                .deleteCustomerRecords($(this).closest('tr').children('td:first').text())
-                .subscribe(
-                    data => {
-                        thisStatus.getClientDetailsServicesData();
-                        thisStatus.getServicesCount();
-                        thisStatus.getTotalSalesAndServicesCount();
-                    });
+            thisStatus.ngZone.run(() => {
+                thisStatus.onOpenModalConfirmationDeleteRowServicesClick($(this));
+            });
         });
     }
-
 
     deleteCustomerRecords(id) {
         //services
@@ -364,4 +334,63 @@ export class ClientDetailsComponent implements OnInit {
                     }, 2000)
                 });
     }
+
+    onOpenModalConfirmationClick(deleteow): void {
+
+        const modal: NgbModalRef = this.modalService.open(ConfirmationModalComponent, { size: 'lg', backdrop: "static" });
+        (<ConfirmationModalComponent>modal.componentInstance).dataToTakeAsInputForZipCode = deleteow.closest('tr').children('td:nth-child(1)').text();
+
+        const modalComponent: ConfirmationModalComponent = modal.componentInstance;
+
+        //Case for cancel
+        modal.componentInstance.dismissConfirmationEvent.subscribe((data) => {
+            console.log('dismiss confirmation');
+            //this.overlayLoadingOnPurchase = false;
+        });
+
+        //Case for confirmation 
+        modal.componentInstance.CancelConfirmationEvent.subscribe((data) => {
+            //this.showToast('success', 'Purchasing is in process');
+            debugger;
+            this.dTable.api().row(deleteow.parents('tr')).remove().draw(false);
+            this.clientDetailsService
+                .deleteCustomerRecords(deleteow.closest('tr').children('td:first').text())
+                .subscribe(
+                    data => {
+                        this.getClientDetailsSalesData();
+                        this.getSalesCount();
+                        this.getTotalSalesAndServicesCount();
+                    });
+        });
+    }
+
+    onOpenModalConfirmationDeleteRowServicesClick(deleteow): void {
+
+        const modal: NgbModalRef = this.modalService.open(ConfirmationModalComponent, { size: 'lg', backdrop: "static" });
+        (<ConfirmationModalComponent>modal.componentInstance).dataToTakeAsInputForZipCode = deleteow.closest('tr').children('td:nth-child(1)').text();
+
+        const modalComponent: ConfirmationModalComponent = modal.componentInstance;
+
+        //Case for cancel
+        modal.componentInstance.dismissConfirmationEvent.subscribe((data) => {
+            console.log('dismiss confirmation');
+            //this.overlayLoadingOnPurchase = false;
+        });
+
+        //Case for confirmation 
+        modal.componentInstance.CancelConfirmationEvent.subscribe((data) => {
+            //this.showToast('success', 'Purchasing is in process');
+            this.dTableServices.api().row(deleteow.parents('tr')).remove().draw(false);
+            this.clientDetailsService
+                .deleteCustomerRecords(deleteow.closest('tr').children('td:first').text())
+                .subscribe(
+                    data => {
+                        this.getClientDetailsServicesData();
+                        this.getServicesCount();
+                        this.getTotalSalesAndServicesCount();
+                    });
+        });
+    }
+
+
 }

@@ -16,7 +16,7 @@
     <AssemblyName>WcrAssociate</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44367</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -142,6 +142,7 @@
     <Content Include="AngularAssociate\app\components\landing-registration\landing-registration.component.html" />
     <Content Include="AngularAssociate\app\components\bookmark\bookmark.component.html" />
     <Content Include="AngularAssociate\app\components\profile\profile.component.html" />
+    <Content Include="AngularAssociate\app\components\mortgage-calculator\mortgage-calculator.component.html" />
     <Content Include="AngularAssociate\app\components\terms-modal\terms-modal.component.html" />
     <Content Include="AngularAssociate\app\components\terms\terms.component.html" />
     <Content Include="AngularAssociate\app\components\auth\auth.component.html" />
@@ -1879,6 +1880,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\components\landing-registration\landing-registration.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\bookmark\bookmark.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\profile\profile.component.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\components\mortgage-calculator\mortgage-calculator.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms-modal\terms-modal.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
@@ -1890,6 +1892,7 @@
     <TypeScriptCompile Include="AngularAssociate\app\associate\associate-service\customer-support.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\associate-service\Profile.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\associate\associate-service\dashboard.service.ts" />
+    <TypeScriptCompile Include="AngularAssociate\app\entities\service-advertisement.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\auth\api.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\services\sales-advertisements\sales-advertisements.service.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\_guards\no-auth-guard.service.ts" />
@@ -1964,7 +1967,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>10422</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:10422/</IISUrl>
+          <IISUrl>https://localhost:44367/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
