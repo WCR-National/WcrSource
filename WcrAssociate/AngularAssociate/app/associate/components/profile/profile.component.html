@@ -338,8 +338,8 @@
             }
 
             #profileImageId + label:after {
-                content: "\f040";
-                font-family: 'FontAwesome';
+                content: "\f044";
+                font-family: "Font Awesome 5 Free";
                 color: #757575;
                 position: absolute;
                 top: 10px;
@@ -427,7 +427,7 @@
                         <!--<button type="button" class="" (click)="()"></button>-->
                         <button style="position:relative; width:100%; color:#fff;" class="btn btn-lg btn-primary pull-xs-right form-submit-button btn btn-lg btn-block bg-green tx-12-f tx-xs-9-f tx-sm-10-f " >
                             <span [style.display]="!isSubmittingImage ? 'block': 'none'" (click)="UploadToServer()" style="color:#fff !important">Upload Image</span>
-                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingImage ? 'inline-block': 'none'" style="margin-top:4px;">
+                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingImage ? 'inline-block': 'none'" style="margin-top:-4px;">
                                 <div class="spinner-layer spinner-white-only">
                                     <div class="circle-clipper left">
                                         <div class="circle"></div>
@@ -510,7 +510,7 @@
                                             <div class="col-sm-6 mg-b-20">
                                                 <label>Firstname</label>
                                                 <input id="firstName" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your firstname" formControlName="firstName" (blur)="logValidationErrors()">
-                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.firstName">
+                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.firstName">
                                                     {{formErrors.firstName}}
                                                 </div>
                                             </div>
@@ -520,7 +520,7 @@
                                             <div class="col-sm-6 mg-b-20">
                                                 <label>Lastname</label>
                                                 <input id="lastName" type="text" class="form-control pd-l-0-f form-control" placeholder="Enter your lastname" formControlName="lastName" (blur)="logValidationErrors()">
-                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.lastName">
+                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.lastName">
                                                     {{formErrors.lastName}}
                                                 </div>
                                             </div>
@@ -534,7 +534,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 pd-l-0-f pd-r-0-f">
+                                        <div class="col-sm-6 pd-l-0-f pd-r-0-f pd-sm-l-15-f pd-sm-r-15-f">
                                             <div class="form-group" [ngClass]="{'has-error': formErrors.password}">
                                                 <div class="mg-b-20">
                                                     <label>Password</label>
@@ -543,7 +543,7 @@
                                                            formControlName="password" (focus)="showErrors()" (focusout)="hideErrors()"
                                                            autocomplete="new-password">
 
-                                                    <div class="col-sm-12 pd-l-0" [style.display]="showErrorsPassword ? 'block':'none'">
+                                                    <div class="col-sm-12 pd-l-0-f" [style.display]="showErrorsPassword ? 'block':'none'">
                                                         <label class="col mg-t-5" [ngClass]="profileForm.controls['password'].hasError('required') || profileForm.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
                                                             <i class="material-icons">
 
@@ -594,7 +594,7 @@
                                             <div class="col-sm-6 mg-b-20">
                                                 <label>Phone number</label>
                                                 <input id="phoneNo" type="text" class="form-control pd-l-0-f" formControlName="phoneNo" placeholder="Enter your phone number" (blur)="logValidationErrors()" />
-                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.phoneNo">
+                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.phoneNo">
                                                     {{formErrors.phoneNo}}
                                                 </div>
                                             </div>
@@ -605,7 +605,7 @@
                                             <div class="col-sm-6 mg-b-20">
                                                 <label>License Id</label>
                                                 <input id="licenseId" type="text" class="form-control pd-l-0-f" formControlName="licenseId" placeholder="Enter your license number" (blur)="logValidationErrors()" />
-                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.licenseId">
+                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.licenseId">
                                                     {{formErrors.licenseId}}
                                                 </div>
                                             </div>
@@ -615,7 +615,7 @@
                                             <div class="col-sm-12 mg-b-20">
                                                 <label>License State</label>
                                                 <input id="licenseState" type="text" class="form-control pd-l-0-f" formControlName="licenseState" placeholder="Enter your license state" (blur)="logValidationErrors()" />
-                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrors.licenseState">
+                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrors.licenseState">
                                                     {{formErrors.licenseState}}
                                                 </div>
                                             </div>
@@ -727,7 +727,7 @@
                             <div class="media-body">
                                 <div class="col-sm-12 col-xl">
                                     <div class="row">
-                                        <div class="col-sm-6 tx-semibold pd-t-7">Mobile Number  (<i class="fa fa-mobile-phone"></i>)</div>
+                                        <div class="col-sm-6 tx-semibold pd-t-7">Mobile Number  (<i class="fa fa-phone-alt"></i>)</div>
                                         <div class="col-sm-6 tx-color-03  tx-17 tx-medium">  <h6 class="mg-b-5 "></h6> {{PhoneNumber}}</div>
                                     </div>
                                 </div>

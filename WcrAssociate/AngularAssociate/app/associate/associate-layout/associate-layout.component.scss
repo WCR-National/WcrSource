@@ -933,20 +933,19 @@ pre code {
     border: 0;
 }
 
-.form-control {
+ .form-control {
     display: block;
     width: 100%;
-    height: calc(1.5em + 0.874rem + 2px);
-    padding: 2rem 0.88rem;
-    font-size: 0.875rem;
-    font-weight: 400;
+    height: calc(1.5em + .874rem + 2px);
+    padding: 2rem .88rem;
+    font-size: 1.2rem;
+    font-weight: 500;
     line-height: 1.5;
-    color: #454f5b;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid #d9dfe7;
     border-radius: 0;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -9383,8 +9382,7 @@ a.badge-danger-light:focus {
 
 .form-control {
     color: #373857;
-    font-size: inherit;
-}
+        }
 
 .form-control::placeholder {
     color: rgba(55, 56, 87, 0.6);
@@ -20323,7 +20321,7 @@ body {
 
 .content-header .breadcrumb {
     box-shadow: none;
-    background-color: none !important;
+    background-color: transparent !important;
     border: 0px;
 }
 
@@ -21279,14 +21277,15 @@ input[type=file]:focus, input[type=checkbox]:focus, input[type=radio]:focus {
 .close_image {
     position: absolute;
     top: -16px;
-    right: -10px;
+    right: -16px;
     cursor: pointer;
     background: #f6f6f6;
     border-radius: 50%;
-    padding: 5px 9px 9px;
-    width: 30px;
-    height: 30px;
-    border: 1px solid #eee;
+    padding-left: 8px;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #c0c0c0;
+    font-size: 22px !important;
 }
     .toast-card.Warning{
     background-color : darkred !important;

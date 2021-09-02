@@ -961,7 +961,7 @@ export class ListPropertiesComponent implements OnInit {
                     data: 'subCategoryID',
                 }
             ],
-            "autoWidth": true,
+            "autoWidth": false,
             searching: false,
             paging: false,
             info: false,
@@ -1107,7 +1107,7 @@ export class ListPropertiesComponent implements OnInit {
                     data: "CategoryID",
                 }
             ],
-            "autoWidth": true,
+            "autoWidth": false,
             searching: false,
             paging: false,
             info: false,
@@ -1304,7 +1304,7 @@ export class ListPropertiesComponent implements OnInit {
                     data: 'subCategoryID',
                 }
             ],
-            "autoWidth": true,
+            "autoWidth": false,
             searching: false,
             paging: false,
             info: false,
@@ -1491,7 +1491,7 @@ export class ListPropertiesComponent implements OnInit {
                 }
             ],
 
-            "autoWidth": true,
+            "autoWidth": false,
             searching: false,
             paging: false,
             info: false,

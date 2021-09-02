@@ -34912,10 +34912,6 @@
 
 @media (min-width:1500px) {
 
-    .content-body {
-        font-size: 22px !important
-    }
-
         .content-body .close-button {
             font-size: 22px !important
         }
@@ -48843,7 +48839,7 @@
 
 .spinner-white, .spinner-white-only {
     color: #ffffff !important;
-    border-color: #fff;
+    border-color: #fff !important;
 }
 
 .spinner-white, .spinner-white-only {

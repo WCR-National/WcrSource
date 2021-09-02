@@ -382,7 +382,7 @@
                                                 </div>
                                                 <div class="form-group" [ngClass]="{'has-error': formErrorsPA.subCat}">
                                                     <input type="hidden" class="form-control" formControlName="subCat" id="lblsubcat" />
-                                                    <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.subCat">
+                                                    <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.subCat">
                                                         {{formErrorsPA.subCat}}
                                                     </div>
                                                 </div>
@@ -482,7 +482,7 @@
                                                         </div>
                                                         <div class="form-group" [ngClass]="{'has-error': formErrorsPA.image}">
                                                             <input type="hidden" class="form-control" formControlName="image" id="img" />
-                                                            <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.image">
+                                                            <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.image">
                                                                 {{formErrorsPA.image}}
                                                             </div>
                                                         </div>
@@ -502,7 +502,7 @@
                                                                     Title
                                                                 </label>
                                                                 <input id="title" type="text" class="form-control  form-control" placeholder="Enter Title" formControlName="titlePA" (blur)="logValidationErrorsPA()">
-                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.titlePA">
+                                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.titlePA">
                                                                     {{formErrorsPA.titlePA}}
                                                                 </div>
                                                             </div>
@@ -515,7 +515,7 @@
                                                                     Price ($)
                                                                 </label>
                                                                 <input id="price" type="text" class="form-control  form-control" placeholder="Enter price as a whole dollar value" formControlName="pricePA" (blur)="logValidationErrorsPA()">
-                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.pricePA">
+                                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.pricePA">
                                                                     {{formErrorsPA.pricePA}}
                                                                 </div>
                                                             </div>
@@ -528,7 +528,7 @@
                                                                     Description
                                                                 </label>
                                                                 <textarea id="desc" type="text" class="form-control  form-control" placeholder="Enter Description" formControlName="descPA" (blur)="logValidationErrorsPA()" rows="5"></textarea>
-                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.descPA">
+                                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.descPA">
                                                                     {{formErrorsPA.descPA}}
                                                                 </div>
                                                             </div>
@@ -542,7 +542,7 @@
                                                                 </label>
                                                                 <ckeditor [editor]="editor" [data]="data" [config]="config" formControlName="additionalFeature"></ckeditor>
                                                                 <!--<textarea id="desc" type="text" class="form-control  form-control" placeholder="Enter Price" formControlName="desc" (blur)="logValidationErrors()" rows="10"></textarea>-->
-                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.additionalFeature">
+                                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.additionalFeature">
                                                                     {{formErrorsPA.additionalFeature}}
                                                                 </div>
                                                             </div>
@@ -569,7 +569,7 @@
                                                                     Contact No
                                                                 </label>
                                                                 <input id="contactNoPA" type="text" class="form-control  form-control" placeholder="Enter Contact No" formControlName="contactNoPA" (blur)="logValidationErrorsPA()">
-                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.contactNoPA">
+                                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.contactNoPA">
                                                                     {{formErrorsPA.contactNoPA}}
                                                                 </div>
                                                             </div>
@@ -582,7 +582,7 @@
                                                                     Street Address
                                                                 </label>
                                                                 <input id="stAddress" type="text" class="form-control  form-control" placeholder="Enter Street Address" formControlName="stAddressPA" (blur)="logValidationErrorsPA()">
-                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.stAddressPA">
+                                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.stAddressPA">
                                                                     {{formErrorsPA.stAddressPA}}
                                                                 </div>
                                                             </div>
@@ -598,7 +598,7 @@
                                                                         </label>
                                                                         <input id="city" type="text" class="form-control  form-control" placeholder="Enter City" formControlName="cityPA" (change)="changeCityPA()" >
 
-                                                                        <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.cityPA">
+                                                                        <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.cityPA">
                                                                             {{formErrorsPA.cityPA}}
                                                                         </div>
                                                                     </div>
@@ -612,7 +612,7 @@
                                                                         </label>
                                                                         <ng-select [items]="stateDataPA" [(ngModel)]="startValueStatePA" (ngModelChange)="changeStatePA()" formControlName="statePA" [searchable]="false"> </ng-select>
 
-                                                                        <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.statePA">
+                                                                        <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.statePA">
                                                                             {{formErrorsPA.statePA}}
                                                                         </div>
                                                                     </div>
@@ -626,7 +626,7 @@
                                                                         </label>
                                                                         <input id="country" type="text" class="form-control  form-control" placeholder="Enter Country" formControlName="countryPA" (blur)="logValidationErrorsPA()" disabled />
 
-                                                                        <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.countryPA">
+                                                                        <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.countryPA">
                                                                             {{formErrorsPA.countryPA}}
                                                                         </div>
                                                                     </div>
@@ -643,7 +643,7 @@
                                                                 </label>
                                                                 <ng-select [items]="zipCodeDataPA" [(ngModel)]="startValueZipCodePA" (ngModelChange)="changeZipCodePA()" formControlName="zipCodePA" [searchable]="false"> </ng-select>
                                                                 <input type="hidden" formControlName="lblzipCodeprice" />
-                                                                <div class="col-sm-12 pd-l-0" *ngIf="formErrorsPA.zipCodePA">
+                                                                <div class="col-sm-12 pd-l-0-f" *ngIf="formErrorsPA.zipCodePA">
                                                                     {{formErrorsPA.zipCodePA}}
                                                                 </div>
                                                             </div>
@@ -661,7 +661,7 @@
                                                     <div class="col-xs-6 col-sm-2 mg-b-20 pd-r-0-f" [style.display]="isAddButtonPA ? 'block': 'none'">
                                                         <button [disabled]="!PostAdvertisement.valid" style="position:relative; width:100%;" class="btn btn-lg btn-primary pull-xs-right form-submit-button tx-sm-14-f  tx-xs-10-f" type="submit" (click)="submitPostForm()">
                                                             <span [style.display]="!isSubmittingPA ? 'block': 'none'">Submit</span>
-                                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingPA ? 'inline-block': 'none'" style="margin-top:4px;">
+                                                            <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingPA ? 'inline-block': 'none'" style="margin-top:-4px;">
                                                                 <div class="spinner-layer spinner-white-only">
                                                                     <div class="circle-clipper left">
                                                                         <div class="circle"></div>
@@ -732,7 +732,7 @@
                     </div>
                     <div class="card-body pd-0">
                         <div class="table-responsive pd-l-0-f pd-r-0-f">
-                            <table id="salesAdvertisement" class="table">
+                            <table id="salesAdvertisement" class="table-responsive-sm table-responsive-md table-responsive-lg pd-l-0-f pd-r-0-f">
                                 <thead>
                                     <tr>
                                         <th>Adv ID </th>
