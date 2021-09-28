@@ -167,7 +167,7 @@
                                     <div class="row with-forms  margin-top-0"> </div>
 
                                     <!-- Book Now -->
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="showInterestBookMarkId" attr.data-id="{{advertisementID}}" class="btn button border margin-top-5 showInterestBookMarkClass">
+                                    <button *ngIf="isLoggedInValue == '0'" id="showInterestBookMarkId" attr.data-id="{{advertisementID}}" class="btn button border margin-top-5 showInterestBookMarkClass">
 
                                         <span [style.display]="!isSubmittingBookmark ? 'block': 'none'">Bookmark</span>
                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingBookmark ? 'inline-block': 'none'">
@@ -183,8 +183,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="saveBookmarkId" attr.data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass" [ngClass]="consumerID != 0 ? 'bookMarked': ''">
+                                    </button>
+                                    <button  *ngIf="isLoggedInValue == '1'" id="saveBookmarkId" attr.data-id="{{advertisementID}}" class="btn button border margin-top-5 saveBookmarkClass" [ngClass]="consumerID != 0 ? 'bookMarked': ''">
                                         <span [style.display]="!isSubmittingBookmark ? 'block': 'none'">Bookmark</span>
                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingBookmark ? 'inline-block': 'none'">
                                             <div class="spinner-layer spinner-white-layer spinner-white-only spinner-white">
@@ -199,9 +199,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    </button>
 
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '0'" id="contactAssociateShowInterestId" attr.data-id="{{strParamContactAssociateShowInterest}}" class="btn button border  margin-top-5 contactAssociateShowInterestClass">
+                                    <button *ngIf="isLoggedInValue == '0'" id="contactAssociateShowInterestId" attr.data-id="{{strParamContactAssociateShowInterest}}" class="btn button border  margin-top-5 contactAssociateShowInterestClass">
                                         
                                         <span [style.display]="!isSubmittingContactAssociate ? 'block': 'none'">Contact Associate</span>
                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingContactAssociate ? 'inline-block': 'none'">
@@ -217,8 +217,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-                                    <a href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="contactAssociateId" attr.data-id="{{strParamContactAssociate}}" class="btn button border margin-top-5 contactAssociateClass">
+                                    </button>
+                                    <button href="javascript:void(0)" *ngIf="isLoggedInValue == '1'" id="contactAssociateId" attr.data-id="{{strParamContactAssociate}}" class="btn button border margin-top-5 contactAssociateClass">
                                         <span [style.display]="!isSubmittingContactAssociate ? 'block': 'none'">Contact Associate</span>
                                         <div class="preloader-wrapper preloader-wrapper-button small active" [style.display]="isSubmittingContactAssociate ? 'inline-block': 'none'" style="top: 70.4%;">
                                             <div class="spinner-layer spinner-white-layer spinner-white-only spinner-white">
@@ -233,7 +233,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
+                                    </button>
 
                                 </div>
                                 <!-- Book Now / End -->

@@ -276,7 +276,7 @@ export class ServiceProfileComponent implements OnInit {
         var thisStatus = this;
         $.each(dataServicesLst, function (index, item) {
             html += '<div class="listing-item"  >';
-            html += '<a href="javascript:void(0)" class="listing-img-container" style="height: 271px;">';
+            html += '<div class="listing-img-container" style="height: 271px;">';
             //<!--< div class="listing-badges" >
             //    <span>For Rent < /span>
             //        < /div>-->
@@ -301,18 +301,18 @@ export class ServiceProfileComponent implements OnInit {
             //    html += '<div><img src="../../../../Associate/Adv_img/"' + item.advImage3 + ' alt=""></div>';
 
             html += '</div>';
-            html += '</a>';
+            html += '</div>';
 
             html += '<div class="listing-content">';
             html += '<div class="listing-title" >';
-            html += '<h4><a href="javascript:void(0)" > ' + item.FirstName;
-            html += '</a></h4>';
+            html += '<h4><div> ' + item.FirstName;
+            html += '</div></h4>';
 
             //https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom
-            html += '<a href="javascript:void(0);" class="listing-address popup-gmaps" >';
+            html += '<div class="listing-address popup-gmaps" >';
             html += '<i class="fa fa-map-marker" > </i>';
             html += item.City + ". " + item.State + ", " + item.ZipCode
-            html += '</a>';
+            html += '</div>';
 
             //if (item.description.length > 150)
             //    html += '<div> ' + item.description.substring(0, 150) + "..." + '</div>';
@@ -336,22 +336,22 @@ export class ServiceProfileComponent implements OnInit {
             var strParamContactAssociate = thisStatus.id + "," + item.AssociateId + ",2," + item.ZipCode + "," + count;
 
             if (thisStatus.isLoggedInValue == "0") {
-                html += '<a href="javascript:void(0)" class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '"> Contact Associates </a>';
+                html += '<button class="btn button border contactAssociateInterestClass"  data-id="' + strParamContactAssociateShowInterest + '"> Contact Associates </button>';
             }
             else {
-                html += '<a href="javascript:void(0)" class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '" id="contactAssociateId" > Contact Associates </a>';
+                html += '<button class="btn button border contactAssociateClass" data-id="' + strParamContactAssociate + '" id="contactAssociateId" > Contact Associates </button>';
             }
 
             if (thisStatus.isLoggedInValue == "0") {
                 var id = thisStatus.id;// + "," + item.associateid + ",2," + item.zipcode + "," + count + ",1";
-                html += '<a class="btn button border showInterestBookMarkClass showInterestBookMarkId mg-l-15-f" data-id="' + id + '"  data-zipcode="' + thisStatus.zipcode + '" > Bookmark </a>';
+                html += '<button class="btn button border showInterestBookMarkClass showInterestBookMarkId mg-l-15-f" data-id="' + id + '"  data-zipcode="' + thisStatus.zipcode + '" > Bookmark </button>';
             }
             else {
                 if (item.ConsumerId != null) {
-                    html += '<a class="btn button border bookMarked SaveBookmarkId   mg-l-15-f" data-id="' + thisStatus.id + '" data-zipcode="' + item.zipcode + '" > Bookmark </a>';
+                    html += '<button class="btn button border bookMarked SaveBookmarkId   mg-l-15-f" data-id="' + thisStatus.id + '" data-zipcode="' + item.zipcode + '" > Bookmark </button>';
                 }
                 else {
-                    html += '<a class="btn button border SaveBookmarkId  mg-l-15-f" data-id="' + thisStatus.id + '" data-zipcode="' + thisStatus.zipcode + '" > Bookmark </a>';
+                    html += '<button class="btn button border SaveBookmarkId  mg-l-15-f" data-id="' + thisStatus.id + '" data-zipcode="' + thisStatus.zipcode + '" > Bookmark </button>';
                 }
             }
 

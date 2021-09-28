@@ -282,7 +282,7 @@ export class SalesAdvertisementsComponent implements OnInit {
         $.each(dataSalesList, function (index, item) {
             debugger;
             html += '<div class="listing-item"  >';
-            html += "<a href='javascript:void(0)' class='listing-img-container salesLink' data-link='property-sale-advertisement'  data-qparam ='" + JSON.stringify({ "id": item.advertisementID }) + "'>";
+            html += "<div class='listing-img-container salesLinkAdvClass' data-link='property-sale-advertisement'  data-qparam ='" + JSON.stringify({ "id": item.advertisementID }) + "'>";
             //<!--< div class="listing-badges" >
             //    <span>For Rent < /span>
             //        < /div>-->
@@ -306,18 +306,18 @@ export class SalesAdvertisementsComponent implements OnInit {
             //    html += '<div><img src="../../../../Associate/Adv_img/"' + item.advImage3 + ' alt=""></div>';
 
             html += '</div>';
-            html += '</a>';
+            html += '</div>';
 
             html += '<div class="listing-content">';
             html += '<div class="listing-title" >';
-            html += '<h4><a href="javascript:void(0)" > ' + item.title;
-            html += '</a></h4>';
+            html += '<h4><div > ' + item.title;
+            html += '</div></h4>';
 
             //https://maps.google.com/maps?q=221B+Baker+Street,+London,+United+Kingdom&hl=en&t=v&hnear=221B+Baker+St,+London+NW1+6XE,+United+Kingdom
-            html += '<a href="javascript:void(0);" class="listing-address popup-gmaps" >';
+            html += '<div class="listing-address popup-gmaps" >';
             html += '<i class="fa fa-map-marker" > </i>';
             html += item.City + ". " + item.State + ", " + item.ZipCode
-            html += '</a>';
+            html += '</div>';
 
 
             //if (item.description.length > 150)
@@ -507,7 +507,7 @@ export class SalesAdvertisementsComponent implements OnInit {
         debugger;
         var thisStatus = this;
         setTimeout(function () {
-            $('.salesLink').click(function () {
+            $('.salesLinkAdvClass').click(function () {
                 debugger;
                 let link = $(this).attr('data-link');
                 let params = JSON.parse($(this).attr('data-qparam'));

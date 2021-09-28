@@ -406,6 +406,7 @@ export class AuthModalComponent implements OnInit {
                     var xmlDoc = $.parseXML(data.d);
                     var xml = $(xmlDoc);
                     var docs = xml.find("associateExists");
+
                     $.each(docs, function (i, docs) {
                         if ($(docs).find("AccountId").text() == "0") {
                             //for associate Login
@@ -481,6 +482,7 @@ export class AuthModalComponent implements OnInit {
     }
 
     LoginAssociateOrConsumer(credentials, uType) {
+
         let thisStatus = this;
         if (uType == 1) {
             this.loginErrorMessage = "Some internal error occurred.";
@@ -490,7 +492,7 @@ export class AuthModalComponent implements OnInit {
         else if (uType == 2) {
             this.userService
                 .attemptConsumerAuth(this.authType, credentials)
-                .then(
+                .subscribe(
                     (data: any) => {
 
                         if (data.d.length > 0) {
@@ -532,7 +534,7 @@ export class AuthModalComponent implements OnInit {
         const credentials = this.authForm.value;
         this.userService
             .consumerLoginSessionActivate(this.authType, credentials, $(docs).find("Id").text())
-            .then(
+            .subscribe(
                 (data: any) => {
                     if (data.d == "1") {
                         //this.router.navigate([this.returnUrl]);
