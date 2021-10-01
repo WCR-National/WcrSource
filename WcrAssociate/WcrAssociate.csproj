@@ -142,7 +142,6 @@
     <Content Include="AngularAssociate\app\components\landing-registration\landing-registration.component.html" />
     <Content Include="AngularAssociate\app\components\bookmark\bookmark.component.html" />
     <Content Include="AngularAssociate\app\components\profile\profile.component.html" />
-    <Content Include="AngularAssociate\app\components\mortgage-calculator\mortgage-calculator.component.html" />
     <Content Include="AngularAssociate\app\components\terms-modal\terms-modal.component.html" />
     <Content Include="AngularAssociate\app\components\terms\terms.component.html" />
     <Content Include="AngularAssociate\app\components\auth\auth.component.html" />
@@ -1880,7 +1879,6 @@
     <TypeScriptCompile Include="AngularAssociate\app\components\landing-registration\landing-registration.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\bookmark\bookmark.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\profile\profile.component.ts" />
-    <TypeScriptCompile Include="AngularAssociate\app\components\mortgage-calculator\mortgage-calculator.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms-modal\terms-modal.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\terms\terms.component.ts" />
     <TypeScriptCompile Include="AngularAssociate\app\components\auth\auth.component.ts" />
